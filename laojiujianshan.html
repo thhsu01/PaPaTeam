@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鷹石之巔，翠湖幽境：內溝山系 O 型全系列縱走 - 爬爬小隊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet Real Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f7f4;
+            color: #44403c;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+        }
+
+        #realMap {
+            width: 100%;
+            height: 480px;
+            border-radius: 1.5rem;
+            z-index: 10;
+            border: 1px solid #e2e8f0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e7e5e4; }
+        ::-webkit-scrollbar-thumb { background: #a8a29e; border-radius: 10px; }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e7e5e4;
+            z-index: 0;
+        }
+
+        .leaflet-container {
+            background: #f1f5f9;
+        }
+
+        .nav-arrow:hover {
+            background-color: #ea580c;
+            color: white;
+        }
+
+        .info-glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(234, 88, 12, 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ea580c;
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-100">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                    <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊候選行程</span>
+                </div>
+                <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">行程總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600">路線圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600">海拔剖面</button>
+                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-orange-600">景點介紹</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600">預估進度</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Header / Meeting Info Area -->
+        <section id="overview" class="text-center space-y-8">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
+                    Pace: Steady 穩定模式 (預計 4.5H 完成)
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">鷹石之巔，翠湖幽境<br><span class="text-stone-500 text-3xl md:text-5xl font-bold">內溝山系 O 型全系列縱走</span></h1>
+                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                    從驚心動魄的鷹石尖，到充滿煤礦往事的翠湖幽徑。這是一場結合視覺衝擊與人文深度的稜線之旅。
+                </p>
+            </div>
+
+            <!-- Meeting Block -->
+            <div class="max-w-xl mx-auto space-y-4">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合地點</span>
+                        <span class="text-xl font-bold text-stone-800">金龍場停車場</span>
+                        <span class="text-xs text-stone-400 mt-1">請準時集合，裝備點檢</span>
+                    </div>
+                    <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">出發時間</span>
+                        <span class="text-xl font-bold text-stone-800">日期時間待定</span>
+                    </div>
+                </div>
+                <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
+                    <span>🗺️ 開啟導航至金龍場停車場</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">修正後總里程</div>
+                    <div class="text-3xl font-black text-stone-800">8.97<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">目標耗時</div>
+                    <div class="text-3xl font-black text-orange-600">4.5<span class="text-sm font-normal text-stone-400 ml-1">hr</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">預計爬升</div>
+                    <div class="text-3xl font-black text-stone-800">~380<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">最高海拔</div>
+                    <div class="text-3xl font-black text-stone-800">193<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real Map Section -->
+        <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+            <div class="mb-8">
+                <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
+                    <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
+                    互動路線圖與地點切換
+                </h2>
+                <p class="text-stone-500 mt-2 text-sm">里程以直線距離之 1.5 倍修正。點擊地圖標記查看航點細節。</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2">
+                    <div id="realMap"></div>
+                </div>
+                <div class="lg:col-span-1">
+                    <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
+                        <div id="card-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div id="wp-pos" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
+                                <div class="flex gap-2">
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                        &lt;
+                                    </button>
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                        &gt;
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">請選擇航點</h3>
+                            <div class="flex items-center gap-5 text-sm font-bold text-stone-400 mb-4">
+                                <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
+                                <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
+                            </div>
+                            <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm">
+                                點擊地圖標記查看行程節點詳細資訊。
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-stone-200">
+                            <span class="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">隊友建議</span>
+                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2">
+                                切換點位以查看建議。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Reference Links -->
+            <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-center gap-4">
+                <span class="text-sm font-bold text-stone-400 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    參考資源
+                </span>
+                <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5193278" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 hover:bg-black text-white rounded-xl text-xs font-bold transition-all shadow-sm">
+                    🔗 參考 GPX 路線 (健行筆記)
+                </a>
+                <a href="https://mtyao-tw.com/mountains-laojiaojian/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm">
+                    📝 老鷲尖/內溝山登山紀錄
+                </a>
+            </div>
+        </section>
+
+        <!-- Elevation Section -->
+        <section id="analysis">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8">
+                <span class="w-2.5 h-8 bg-green-600 rounded-full"></span>
+                海拔高度剖面圖
+            </h2>
+            <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+                <div class="chart-container">
+                    <canvas id="elevationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Spots -->
+        <section id="spots" class="space-y-8 text-left">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
+                <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+                山系亮點導覽
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>學頭坡山 (H94m)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">位於汐止與內湖交界。展望良好，能遠眺國道高速公路，是行程初期熱身的最佳頂點。</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>汐止鷹石尖 (H180m 推估)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">行程中最具震撼力的拍照點。突出的巨岩傲視群山，因神似老鷹啄食而得名。</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>老鷲尖 (H193m)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">此行最高點。山頂平台視野遼闊，是稜線上的重要座標與休息站。</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>內溝山 (H137m)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">展望極佳的獨立山頭，能俯瞰整個翠湖山谷與遠方的內湖市區。</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-blue-600 rounded-full"></span>翠湖 (H45m 推估)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">靜謐的湖泊景觀，承載了北台煤礦的歷史回憶。是下山前沉澱心情的好地方。</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">便利的起訖點，為登山隊提供充足的停車空間與集合便利性。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
+                <div>
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
+                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
+                        預計行程進度 (4.5H)
+                    </h2>
+                    <p class="text-stone-500 mt-2 text-sm text-left">數據基礎：直線距離 × 1.5 修正校準。</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
+                    <span class="text-xl">📊</span>
+                    <div class="text-left">
+                        <p class="text-xs text-amber-800 font-black">計算邏輯：</p>
+                        <p class="text-[10px] text-amber-700 leading-tight">里程 = 直線距離 * 1.5 | 速度 = 2km/hr 穩定推進。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-6 space-y-0" id="timeline-container">
+                <div class="timeline-line"></div>
+            </div>
+        </section>
+
+        <footer class="text-center py-16 border-t border-stone-200">
+            <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 穩定模式 4.5H | 鷹石之巔，翠湖幽境</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function openNavigation() {
+            window.open("https://www.google.com/maps/dir/?api=1&destination=25.071960894394802,121.63322171182692", "_blank");
+        }
+
+        let currentWaypointIndex = 0;
+
+        const schedule = [
+            { lat: 25.071960894394802, lng: 121.63322171182692, time: "08:00", loc: "金龍場停車場 (H20m)", dist: 0.00, ele: 20, pos: "集合起點", desc: "行程起點。此處停車便利，請點擊按鈕開啟導航。", advice: "檢查裝備與水分，準時出發。" },
+            { lat: 25.07713919780438, lng: 121.63419574315985, time: "08:26", loc: "登山口 (H40m)", dist: 0.87, ele: 40, pos: "入山口", desc: "進入步道區。累積里程 0.87 km (1.5倍修正)。", advice: "開始緩爬，調整呼吸頻率。" },
+            { lat: 25.07718121374426, lng: 121.63648883948962, time: "08:36", loc: "學頭坡山 (H94m)", dist: 1.22, ele: 94, pos: "山頭", desc: "標高 94m。視野開闊。累計 1.22 km。", advice: "小休 2 分鐘，觀察對向稜線。" },
+            { lat: 25.0852375127452, lng: 121.63309737103714, time: "09:19", loc: "翠湖東南 (H120m)", dist: 2.66, ele: 120, pos: "山脊點", desc: "位於湖區東南側稜線。累計 2.66 km。", advice: "路段稍窄，注意平衡。" },
+            { lat: 25.08996648301252, lng: 121.63119341001082, time: "09:44", loc: "汐止鷹石尖 (H180m)", dist: 3.50, ele: 180, pos: "亮點", desc: "突出的巨岩景觀。累計 3.50 km。", advice: "注意拍照安全，勿靠近岩石脆弱邊緣。" },
+            { lat: 25.09451096257661, lng: 121.62698718889058, time: "10:13", loc: "老鷲尖南峰 (H157m)", dist: 4.47, ele: 157, pos: "副峰", desc: "攻頂前的緩衝帶。累計 4.47 km。", advice: "保持體力，準備攻向最高點。" },
+            { lat: 25.095557931104427, lng: 121.6261054844135, time: "10:19", loc: "老鷲尖 (H193m)", dist: 4.68, ele: 193, pos: "最高點", desc: "標高 193m，全程最高點。累計 4.68 km。", advice: "大休息 15 分鐘，進行全體大合照。" },
+            { lat: 25.089036575515266, lng: 121.62738378956361, time: "10:52", loc: "內溝山 (H137m)", dist: 5.79, ele: 137, pos: "展望點", desc: "展望極佳的山頭。累計 5.79 km。", advice: "享受山頂徐風，準備下行湖區。" },
+            { lat: 25.088790281950963, lng: 121.62912019048608, time: "11:00", loc: "翠湖 (H45m)", dist: 6.06, ele: 45, pos: "幽境湖區", desc: "抵達寧靜的湖區。累計 6.06 km。", advice: "在此沉澱心情，觀察湖泊生態。" },
+            { lat: 25.0849102876649, lng: 121.63119953348264, time: "11:22", loc: "翠湖步道登山口 (H35m)", dist: 6.78, ele: 35, pos: "出口", desc: "回到步道入口平緩處。累計 6.78 km。", advice: "準備回程街道。" },
+            { lat: 25.071960894394802, lng: 121.63322171182692, time: "12:28", loc: "金龍場停車場", dist: 8.97, ele: 20, pos: "終點", desc: "回到起點，總里程估算 8.97 km。", advice: "清點人數與裝備，互道珍重。" }
+        ];
+
+        let map, chart, markers = [];
+
+        function initRealMap() {
+            map = L.map('realMap', { preferCanvas: true, center: [25.083, 121.631], zoom: 14 });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+            const pathCoords = schedule.map(d => [d.lat, d.lng]);
+            L.polyline(pathCoords, { color: '#ea580c', weight: 4, opacity: 0.8, renderer: L.canvas() }).addTo(map);
+            schedule.forEach((d, i) => {
+                const circle = L.circleMarker([d.lat, d.lng], {
+                    radius: d.pos === "最高點" || d.pos.includes("終點") || d.pos.includes("起點") ? 8 : 6,
+                    fillColor: d.pos === "最高點" ? '#16a34a' : (d.pos.includes("終點") || d.pos.includes("起點") ? '#ea580c' : '#1c1917'),
+                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1, renderer: L.canvas()
+                }).addTo(map);
+                circle.on('click', () => updateCard(i));
+                markers.push(circle);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('elevationChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: schedule.map(d => d.loc.split(' ')[0]),
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#ea580c', borderWidth: 4, pointRadius: 6, fill: true, backgroundColor: 'rgba(234, 88, 12, 0.1)', tension: 0.35 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, title: { display: true, text: '海拔 (m)' } }, x: { display: false } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
+            });
+        }
+
+        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
+        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
+
+        function updateCard(idx) {
+            currentWaypointIndex = idx;
+            const d = schedule[idx];
+            document.getElementById('wp-title').innerText = d.loc;
+            document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
+            document.getElementById('wp-ele').innerText = d.ele;
+            document.getElementById('wp-desc').innerText = d.desc;
+            document.getElementById('wp-pos').innerText = d.pos;
+            document.getElementById('wp-advice').innerText = d.advice;
+            markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("終點") || schedule[i].pos.includes("起點") ? 8 : 6) }));
+            map.panTo([d.lat, d.lng]);
+            const card = document.getElementById('wp-card');
+            card.classList.add('border-orange-200', 'bg-orange-50/30');
+            setTimeout(() => card.classList.remove('border-orange-200', 'bg-orange-50/30'), 500);
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            schedule.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = "relative flex items-start mb-8 group cursor-pointer pl-8";
+                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                let color = item.pos.includes("終點") || item.pos.includes("起點") ? "bg-orange-600" : (item.pos === "最高點" ? "bg-green-600" : "bg-stone-300");
+                div.innerHTML = `
+                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
+                    <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
+                        <div class="flex justify-between items-center mb-1 text-left">
+                            <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
+                            <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
+                        </div>
+                        <h4 class="font-bold text-stone-700 text-sm text-left">${item.loc}</h4>
+                        <p class="text-[10px] text-stone-400 mt-1 text-left">累計里程: ${item.dist.toFixed(2)} km</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function scrollToSection(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initRealMap();
+            initChart();
+            renderTimeline();
+            updateCard(0);
+        });
+    </script>
+</body>
+</html>
