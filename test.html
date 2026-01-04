@@ -113,7 +113,7 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
-        <!-- Header / Meeting Info -->
+        <!-- Header / Meeting Info Area -->
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
@@ -121,10 +121,11 @@
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">梅花山全系列挑戰縱走</h1>
                 <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
-                    探索內雙溪原始森林與五指山系主脊，挑戰六峰連走。
+                    探索內雙溪原始森林與五指山系主脊，體驗一場融合自然與史詩遷徙史的登山之旅。
                 </p>
             </div>
 
+            <!-- Meeting Block -->
             <div class="max-w-xl mx-auto space-y-4">
                 <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
                     <div class="flex flex-col items-center md:items-start gap-1">
@@ -178,7 +179,7 @@
                     <div id="realMap"></div>
                 </div>
                 <div class="lg:col-span-1">
-                    <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden">
+                    <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
                         <div id="card-content">
                             <div class="flex items-center justify-between mb-4">
                                 <div id="wp-pos" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
@@ -210,7 +211,7 @@
                 </div>
             </div>
 
-            <!-- External Reference Links Section -->
+            <!-- External Reference Links -->
             <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-center gap-4">
                 <span class="text-sm font-bold text-stone-400 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
@@ -222,7 +223,6 @@
                 <a href="https://www.youtube.com/watch?v=41gDsFvWB9A" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm">
                     🎥 實景參考影片 (YouTube)
                 </a>
-                <span class="text-[11px] text-stone-400 italic">註：提供 GPX 軌跡與步道實景影像參考</span>
             </div>
         </section>
 
@@ -239,8 +239,8 @@
             </div>
         </section>
 
-        <!-- Detailed Spots -->
-        <section id="spots" class="space-y-8">
+        <!-- Detailed Spots (Expanded Pamir Section) -->
+        <section id="spots" class="space-y-8 text-left">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
                 <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
                 山系景點深度導覽
@@ -248,31 +248,87 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>雙溪山 (H441m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">第一階段陡升的終點。設有「北市三角點第 414 號」。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">第一階段陡升的終點。設有「北市三角點第 414 號」。此處是熱身完成、進入稜線的關鍵點。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山西峰 (H521m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">位於稜線上，路徑兩側充滿原始闊葉林。需小心樹根。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">位於稜線上，路徑兩側充滿原始闊葉林。1月冬季常因霧氣而略顯濕滑。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山北峰 (H584m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">高海拔雲霧林景觀，鳥巢蕨密集附生，林相極佳。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">高海拔雲霧林景觀，鳥巢蕨密集附生，是五指山系林相最豐富的路段之一。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>梅花山 (H643m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">又稱五指山，行程最高點。山頂腹地開闊適合大休息。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">又稱五指山，行程最高點。山頂腹地開闊適合全隊休息，氣氛幽靜。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山南峰 (H629m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">標高 629m。稜線在此區段略有起伏，腳下多落葉。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">標高 629m，緊鄰主峰。稜線在此區段略有起伏，腳下多落葉泥土。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山西南峰 (H511m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">最後的標高小峰。過此點後路徑將明顯下切。</p>
+                    <p class="text-sm text-stone-500 leading-relaxed">最後的標高小峰。過此點後路徑將明顯下切，準備返回帕米爾公園。</p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm lg:col-span-3">
-                    <h3 class="font-bold text-stone-800 mb-4 flex items-center gap-2"><span class="w-2.5 h-2.5 bg-indigo-600 rounded-full"></span>帕米爾公園 (H316m)：世界屋脊的精神遺產</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">1950 年代義民翻越號稱「世界屋脊」的帕米爾高原抵台背景。園內有巨大石刻地圖與烈士塔。</p>
+
+                <!-- SPECIAL FOCUS: MEGA PAMIR SECTION -->
+                <div class="bg-stone-800 text-white p-8 rounded-[2.5rem] shadow-2xl lg:col-span-3 border border-stone-700 relative overflow-hidden">
+                    <div class="absolute top-[-20px] right-[-20px] opacity-10 pointer-events-none">
+                        <svg width="200" height="200" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-10">
+                        <!-- Left: Story & Spirit -->
+                        <div class="lg:w-3/5 space-y-6">
+                            <div class="inline-block px-3 py-1 bg-orange-600 rounded text-[10px] font-black tracking-widest uppercase">文史專題</div>
+                            <h3 class="text-3xl font-black tracking-tight leading-tight">帕米爾公園：<br><span class="text-orange-500">翻越世界屋脊的勇氣史詩</span></h3>
+                            
+                            <div class="space-y-4 text-stone-300 leading-relaxed">
+                                <p>
+                                    <strong class="text-white">【血淚遷徙之路】</strong><br>
+                                    1949 年代末期，一批來自新疆的忠貞義民，為了躲避政治追擊，開啟了一段人類史上極為罕見的高海拔集體遷徙。他們並非選擇平坦道路，而是被迫翻越平均海拔超過 4,000 公尺、被稱為「世界屋脊」的<strong class="text-orange-300">帕米爾高原</strong>。
+                                </p>
+                                <p>
+                                    這群義民歷經了長達數年的艱辛，橫跨了現今的阿富汗、巴基斯坦與印度。他們在稀薄氧氣、嚴寒冰川與斷糧威脅下生存，並在遷徙過程中發展出強大的組織性與生存意志。這段旅程最終於 1953 年左右畫下句點，這群倖存者分批撤退來到台灣。
+                                </p>
+                                <p>
+                                    <strong class="text-white">【內雙溪的故鄉情懷】</strong><br>
+                                    抵台後，這群義民成立了「帕米爾齧草同志會」，並在內雙溪這片山區親手開闢了帕米爾公園。這裡的地形與冷冽的氣候，讓他們想起了家鄉與那段壯烈歲月，於是他們將思念與精神，一字一句刻在園內的巨石上。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right: Visual Landmarks & Advice -->
+                        <div class="lg:w-2/5 space-y-8">
+                            <div class="bg-stone-900/50 p-6 rounded-3xl border border-stone-700">
+                                <h4 class="text-orange-500 font-bold mb-4 flex items-center gap-2">
+                                    <span class="w-1.5 h-4 bg-orange-500 rounded-full"></span> 
+                                    園內三大必看核心
+                                </h4>
+                                <ul class="space-y-5 text-sm">
+                                    <li class="group">
+                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">1. 巨大石刻遷徙地圖</div>
+                                        <div class="text-stone-400 mt-1">步道旁最震撼的遺跡。在一整塊傾斜的巨岩上，刻畫了當年從新疆、塔克拉瑪干沙漠到帕米爾高原的詳細地理路徑。</div>
+                                    </li>
+                                    <li class="group border-t border-stone-700/50 pt-4">
+                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">2. 忠義紀念塔</div>
+                                        <div class="text-stone-400 mt-1">聳立於林間的高塔，牆面鑲嵌著當年在遷徙途中不幸壯烈犧牲者的姓名，是園區內最肅穆的地點。</div>
+                                    </li>
+                                    <li class="group border-t border-stone-700/50 pt-4">
+                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">3. 石壁詩詞與刻字</div>
+                                        <div class="text-stone-400 mt-1">隨處可見由義民親手雕琢的「帕米爾精神」、「浩氣長存」等巨型楷書，將人文歷史與自然岩石完美結合。</div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="p-6 bg-orange-600/10 border border-orange-600/30 rounded-3xl">
+                                <div class="text-orange-500 font-bold text-xs uppercase mb-2 tracking-widest">隊友深度叮嚀</div>
+                                <p class="text-sm text-stone-200 leading-relaxed italic">
+                                    「這不只是一個下山的路經點，建議放慢腳步。在1月份的霧氣中，這些石刻會顯得更加蒼勁。請特別注意：此區石階步道多青苔，請務必踩穩再前進。」
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -281,17 +337,17 @@
         <section id="timeline">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
                 <div>
-                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
                         <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
                         預估行程進度 (預定 5H 完成)
                     </h2>
-                    <p class="text-stone-500 mt-2 text-sm">里程已依據 1.75 倍曲折率修正。預估總里程約 7.60 km。</p>
+                    <p class="text-stone-500 mt-2 text-sm text-left">里程已依據 1.75 倍曲折率修正。總里程約 7.60 km。</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
                     <span class="text-xl">⚠️</span>
-                    <div>
+                    <div class="text-left">
                         <p class="text-xs text-amber-800 font-black">時間為 AI 預估，僅供參考。</p>
-                        <p class="text-[10px] text-amber-700 leading-tight">里程已考量山徑曲折修正，請依實際指標為準。</p>
+                        <p class="text-[10px] text-amber-700 leading-tight">里程考量步道蜿蜒度修正，請依實際指標為準。</p>
                     </div>
                 </div>
             </div>
@@ -384,12 +440,12 @@
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
                     <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-lg font-black text-stone-800">${item.time}</span>
+                        <div class="flex justify-between items-center mb-1 text-left">
+                            <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
                             <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
                         </div>
-                        <h4 class="font-bold text-stone-700 text-sm">${item.loc}</h4>
-                        <p class="text-[10px] text-stone-400 mt-1">累計估算里程: ${item.dist.toFixed(2)} km</p>
+                        <h4 class="font-bold text-stone-700 text-sm text-left">${item.loc}</h4>
+                        <p class="text-[10px] text-stone-400 mt-1 text-left">累計估算里程: ${item.dist.toFixed(2)} km</p>
                     </div>
                 `;
                 container.appendChild(div);
