@@ -1,1 +1,146 @@
 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaPaTeam | 計畫行程導覽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+        .hero-gradient {
+            /* 使用符合郊山林道的背景圖 */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- 導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-emerald-700 tracking-tight">PaPaTeam</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <a href="#" class="hover:text-emerald-600">首頁</a>
+                <a href="#itinerary" class="hover:text-emerald-600">行程列表</a>
+                <a href="#" class="hover:text-emerald-600">關於我們</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄區塊 -->
+    <header class="hero-gradient h-[40vh] flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                山系行程，從這裡啟航
+            </h1>
+            <p class="text-lg text-slate-100 drop-shadow-md">
+                探索每一座山的靈魂，與 PaPaTeam 一起寫下冒險的故事。
+            </p>
+        </div>
+    </header>
+
+    <!-- 行程導覽區塊 -->
+    <main id="itinerary" class="max-w-6xl mx-auto px-4 py-16">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900">計畫行程</h2>
+                <div class="h-1 w-20 bg-emerald-500 mt-2"></div>
+            </div>
+            <p class="text-slate-500 hidden sm:block">目前共有 2 個活躍行程</p>
+        </div>
+
+        <!-- 卡片容器 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- 梅花山卡片 -->
+            <a href="https://thhsu01.github.io/PaPaTeam/meihuashan" class="group">
+                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- 使用原始山林步道圖片 -->
+                        <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1000" 
+                             alt="梅花山原始步道" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                            精選行程
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center text-sm text-emerald-600 font-medium mb-2">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            台北市
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">梅花山全系列挑戰縱走</h3>
+                        <p class="text-slate-600 mb-6 line-clamp-2">
+                            漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐與芬芳。這是放鬆心情、挑戰自我的最佳路徑。
+                        </p>
+                        <div class="flex items-center text-emerald-700 font-bold">
+                            查看詳情 
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 老鷲尖山卡片 -->
+            <a href="https://thhsu01.github.io/PaPaTeam/laojiujianshan" class="group">
+                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- 使用內溝山系步道圖片 -->
+                        <img src="https://images.unsplash.com/photo-1516214577510-729906d26792?auto=format&fit=crop&q=80&w=1000" 
+                             alt="內溝山系步道" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                            熱門行程
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center text-sm text-emerald-600 font-medium mb-2">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            內溝步道
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">內溝山系 O 型全系列縱走</h3>
+                        <p class="text-slate-600 mb-6 line-clamp-2">
+                            老鷲尖山與內溝山步道環繞，是親子與健行愛好者的天堂。在山頭俯瞰東湖與汐止交界的壯麗風景。
+                        </p>
+                        <div class="flex items-center text-emerald-700 font-bold">
+                            查看詳情 
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-2xl font-bold text-white mb-4">PaPaTeam</div>
+            <p class="mb-8">© 2026 PaPaTeam. 所有行程紀錄版權所有。</p>
+            <div class="flex justify-center space-x-6">
+                <span class="text-sm">冒險</span>
+                <span class="text-sm">紀錄</span>
+                <span class="text-sm">共行</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
