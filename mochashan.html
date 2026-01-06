@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爬爬小隊 2026年春季行程：礁溪聖母登山步道（抹茶山）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet Real Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f7f4;
+            color: #44403c;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+        }
+
+        #realMap {
+            width: 100%;
+            height: 480px;
+            border-radius: 1.5rem;
+            z-index: 10;
+            border: 1px solid #e2e8f0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #e7e5e4; }
+        ::-webkit-scrollbar-thumb { background: #a8a29e; border-radius: 10px; }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e7e5e4;
+            z-index: 0;
+        }
+
+        .leaflet-container {
+            background: #f1f5f9;
+        }
+
+        .nav-arrow:hover {
+            background-color: #16a34a;
+            color: white;
+        }
+
+        .info-glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(22, 163, 74, 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #16a34a;
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-green-100">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 bg-green-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                    <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊 2026/04 聖母步道</span>
+                </div>
+                <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-green-700">挑戰總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-green-700">路線圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-green-700">完整剖面</button>
+                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-green-700">深度介紹</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-green-700">預估行程</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Header / Meeting Info Area -->
+        <section id="overview" class="text-center space-y-8">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-700 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-green-200">
+                    Pace: Round Trip (預定往返完成)
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">聖母步道：抹茶山春季挑戰</h1>
+                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                    挑戰抹茶色的視覺盛宴。
+                </p>
+            </div>
+
+            <!-- Meeting Block -->
+            <div class="max-w-xl mx-auto space-y-4">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border border-green-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">集合地點</span>
+                        <span class="text-xl font-bold text-stone-800">五峰旗停車場</span>
+                        <span class="text-xs text-stone-500 mt-1">（標高 65m）</span>
+                    </div>
+                    <div class="w-px h-10 bg-green-100 hidden md:block"></div>
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">出發時間</span>
+                        <span class="text-xl font-bold text-stone-800">08:00</span>
+                    </div>
+                </div>
+                <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
+                    <span>🗺️ 開啟導航至五峰旗停車場</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">總計往返里程</div>
+                    <div class="text-3xl font-black text-stone-800">11.68<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">預估結束時間</div>
+                    <div class="text-3xl font-black text-green-700">14:32</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">山頂休息時間</div>
+                    <div class="text-3xl font-black text-stone-800">60<span class="text-sm font-normal text-stone-400 ml-1">min</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                    <div class="text-stone-400 text-xs font-bold uppercase mb-2">最高標高</div>
+                    <div class="text-3xl font-black text-stone-800">885<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real Map Section -->
+        <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+            <div class="mb-8">
+                <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
+                    <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
+                    全線航點導航
+                </h2>
+                <p class="text-stone-500 mt-2 text-sm">海拔數據已更新。點擊圖示切換點位資訊。</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2">
+                    <div id="realMap"></div>
+                </div>
+                <div class="lg:col-span-1">
+                    <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
+                        <div id="card-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div id="wp-pos" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
+                                <div class="flex gap-2">
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                        &lt;
+                                    </button>
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                        &gt;
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">載入中...</h3>
+                            <div class="flex items-center gap-5 text-sm font-bold text-stone-400 mb-4">
+                                <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
+                                <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
+                            </div>
+                            <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm"></p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-stone-200">
+                            <span class="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">隊友建議</span>
+                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Reference Links -->
+            <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-center gap-4">
+                <span class="text-sm font-bold text-stone-400 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                    參考資源
+                </span>
+                <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5267877" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 hover:bg-black text-white rounded-xl text-xs font-bold transition-all shadow-sm">
+                    🔗 參考路線詳情 (健行筆記)
+                </a>
+            </div>
+        </section>
+
+        <!-- Elevation Section -->
+        <section id="analysis">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8">
+                <span class="w-2.5 h-8 bg-green-600 rounded-full"></span>
+                完整往返海拔剖面
+            </h2>
+            <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+                <div class="chart-container">
+                    <canvas id="elevationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Spots -->
+        <section id="spots" class="space-y-8 text-left">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
+                <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+                抹茶山深度導覽
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1. 停車場 -->
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>1. 五峰旗停車場</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">標高 65m。行程的起終點，設有大型停車場與完善的衛浴設施，是整裝的最佳場域。</p>
+                </div>
+                
+                <!-- 3. 通天橋 -->
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>3. 通天橋休息區</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">標高 449m。這裡是從產業道路轉入原始步道的轉折點，接下來將面臨 1.6km 的階梯陡升挑戰。</p>
+                </div>
+                <!-- 4. 0.7K -->
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>4. 0.7K 休息亭</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">標高 568m。階梯段的中間點。隨著海拔提升，林相會逐漸由林蔭轉變為箭竹灌木林。</p>
+                </div>
+                <!-- 5. 景觀台 -->
+                <div class="bg-green-700 text-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="font-bold mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-white rounded-full"></span>5. 抹茶山景觀台 (峰點)</h3>
+                    <p class="text-sm text-green-100 leading-relaxed">海拔 885m。著名的視覺盛宴所在地，翠綠山稜起伏如抹茶般誘人。本次行程將在此休息 60 分鐘。</p>
+                </div>
+                <!-- 6. 聖母山莊 -->
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>6. 聖母山莊與水池</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">避難山屋與聖母像所在地。此處氣氛寧靜，池水映襯山影，是登山者心靈的安息之所。</p>
+                </div>
+                <!-- 7. 十字架 -->
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>7. 耶穌十字架</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed">位於景觀台正後方最高處。標誌著信仰與攀登的精神終點，在山頂薄霧中更顯肅穆。</p>
+                </div>
+
+                <!-- 2. 聖母堂 - 已移至末尾並簡化標題 -->
+                <div class="bg-stone-800 text-white p-8 rounded-3xl shadow-xl lg:col-span-2 border border-stone-700 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="inline-block px-3 py-1 bg-green-600 rounded text-[10px] font-black tracking-widest uppercase mb-4">重點景點・顯靈奇蹟與宗教建築</div>
+                        <h3 class="text-2xl font-bold mb-4">五峰旗聖母堂</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <p class="text-sm text-stone-300 leading-relaxed">
+                                    <strong class="text-white text-base">【1980 聖母顯靈奇蹟】</strong><br>
+                                    1980 年 11 月 9 日深夜，任其剛等五名「台北市天主教教友登山隊」隊員，自聖母山莊下山時於第二層瀑布上方受困於濃霧與黑暗中。在生死交關之際，隊員跪地祈求聖母保佑。
+                                </p>
+                                <p class="text-sm text-stone-300 leading-relaxed">
+                                    據傳當時聖母瑪利亞顯現出一道慈祥的白色身影，手持明燈指引路徑，引領五人平安脫險抵達現址。為感念此神蹟，各界教友集資於顯靈處興建此堂。
+                                </p>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-sm text-stone-300 leading-relaxed">
+                                    <strong class="text-white text-base">【全台唯一天壇設計】</strong><br>
+                                    此建築最顯著的特色是其圓形的天壇造型，乃仿效北京天壇祈年殿設計，象徵「天圓地方」與上主之圓滿。在綠意環繞的山腹中，這座白色神聖殿宇更顯靜謐脫俗。
+                                </p>
+                                <p class="text-sm text-stone-300 leading-relaxed">
+                                    <strong class="text-white text-base">【朝壓與視野】</strong><br>
+                                    堂前廣大的半圓形平台展望極佳，可將蘭陽平原甚至是龜山島盡收眼底。這裡是登山客進入 1.6km 陡升段前的精神加油站。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 背景裝飾 -->
+                    <div class="absolute bottom-[-20px] right-[-20px] opacity-10 pointer-events-none">
+                        <svg width="150" height="150" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
+                <div>
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
+                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
+                        完整預估行程表 (含一小時休息)
+                    </h2>
+                    <p class="text-stone-500 mt-2 text-sm text-left">數據已根據標高修正。全程約 11.68 km。</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
+                    <span class="text-xl">🏔️</span>
+                    <div class="text-left">
+                        <p class="text-xs text-amber-800 font-black">山頂休息時間：60 分鐘。</p>
+                        <p class="text-[10px] text-amber-700 leading-tight">建議 11:55 前完成午餐與拍照，準時啟程下山。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-6 space-y-0" id="timeline-container">
+                <div class="timeline-line"></div>
+            </div>
+        </section>
+
+        <footer class="text-center py-16 border-t border-stone-200">
+            <p class="text-stone-400 text-sm font-medium tracking-wide">2026 爬爬小隊 聖母登山步道完整往返計畫</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function openNavigation() {
+            window.open("https://www.google.com/maps/dir/?api=1&destination=24.830230219662706,121.74711388053494", "_blank");
+        }
+
+        let currentWaypointIndex = 0;
+
+        const schedule = [
+            { lat: 24.830230219662706, lng: 121.74711388053494, time: "08:00", loc: "五峰旗停車場 (標高 65m)", dist: 0.00, ele: 65, pos: "集合起點", desc: "行程開始。標高 65m，整理裝備。", advice: "確保飲水充足，宜蘭春季易起霧。" },
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "08:11", loc: "登山口 (標高 108m)", dist: 0.35, ele: 108, pos: "入山點", desc: "開始進入碎石產業道路段。", advice: "以此段作為肌肉暖身。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "08:19", loc: "五峰旗聖母堂 (標高 155m)", dist: 0.63, ele: 155, pos: "文化景觀", desc: "圓形天壇建築，展望良好。", advice: "稍微駐足拍照，保持呼吸頻率。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "08:37", loc: "桂林峰休息站 (標高 229m)", dist: 1.22, ele: 229, pos: "休息點", desc: "標高 229m。穩健推進中。", advice: "不需要大休，可小口喝水。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "08:55", loc: "一水休息站 (標高 289m)", dist: 1.82, ele: 289, pos: "休息點", desc: "標高 289m。最後平緩區。", advice: "檢查鞋帶，即將進入陡升段。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "10:05", loc: "通天橋休息區 (標高 449m)", dist: 4.18, ele: 449, pos: "階梯起點", desc: "標高 449m。產業道路終點。正式挑戰開始。", advice: "建議休息 10 分鐘，排空水分。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "10:23", loc: "0.7K休息亭 (標高 568m)", dist: 4.75, ele: 568, pos: "體力點", desc: "標高 568m。階梯段中繼站。", advice: "注意步幅，不要過大以節省體力。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "10:55", loc: "聖母山莊觀景台 (抵達)", dist: 5.84, ele: 885, pos: "最高點", desc: "抵達抹茶山！開始 60 分鐘休息。", advice: "用餐並享受視覺盛宴，注意風大保暖。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "11:55", loc: "預定離開觀景台", dist: 5.84, ele: 885, pos: "開始下山", desc: "休息結束，準時回程。", advice: "下坡注意腳尖，預防受傷。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "12:24", loc: "0.7K休息亭 (回程)", dist: 6.93, ele: 568, pos: "下山段", desc: "下坡體感輕快但衝擊力大。", advice: "步伐輕緩，側身下階梯。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "12:39", loc: "通天橋休息區 (回程)", dist: 7.50, ele: 449, pos: "下山段", desc: "回到步道入口。", advice: "在此放鬆小腿肌。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "13:43", loc: "一水休息站 (回程)", dist: 9.86, ele: 289, pos: "下山段", desc: "進入好走的產業道路。", advice: "維持節奏，保持通訊暢通。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "13:59", loc: "桂林峰休息站 (回程)", dist: 10.46, ele: 229, pos: "下山段", desc: "離停車場不遠了。", advice: "緩步收操。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "14:15", loc: "五峰旗聖母堂 (回程)", dist: 11.05, ele: 155, pos: "下山段", desc: "最後一次展望抹茶山稜線。", advice: "在此向聖母祈謝一路平安。" },
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "14:23", loc: "登山口 (回程)", dist: 11.33, ele: 108, pos: "下山段", desc: "回到產業道路門戶。", advice: "清點人數。" },
+            { lat: 24.830230219662706, lng: 121.74711388053494, time: "14:32", loc: "五峰旗停車場 (終點)", dist: 11.68, ele: 65, pos: "圓滿結束", desc: "回到起點。往返總里程 11.68 km。", advice: "慶功宴預備！注意拉筋。" }
+        ];
+
+        let map, chart, markers = [];
+
+        function initRealMap() {
+            map = L.map('realMap', { preferCanvas: true, center: [24.842, 121.738], zoom: 14 });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+            const pathCoords = schedule.slice(0, 8).map(d => [d.lat, d.lng]);
+            L.polyline(pathCoords, { color: '#16a34a', weight: 4, opacity: 0.8 }).addTo(map);
+            schedule.forEach((d, i) => {
+                const circle = L.circleMarker([d.lat, d.lng], {
+                    radius: d.pos === "最高點" || d.pos.includes("起點") || d.pos.includes("終點") || d.pos === "開始下山" ? 8 : 6,
+                    fillColor: d.pos === "最高點" ? '#ea580c' : (d.pos === "開始下山" ? '#f59e0b' : (d.pos.includes("點") ? '#16a34a' : '#1c1917')),
+                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
+                }).addTo(map);
+                circle.on('click', () => updateCard(i));
+                markers.push(circle);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('elevationChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: schedule.map(d => d.loc.replace(' (回程)', '').split(' ')[0]),
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#16a34a', borderWidth: 4, pointRadius: 4, fill: true, backgroundColor: 'rgba(22, 163, 74, 0.1)', tension: 0.3 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
+            });
+        }
+
+        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
+        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
+
+        function updateCard(idx) {
+            currentWaypointIndex = idx;
+            const d = schedule[idx];
+            document.getElementById('wp-title').innerText = d.loc;
+            document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
+            document.getElementById('wp-ele').innerText = d.ele;
+            document.getElementById('wp-desc').innerText = d.desc;
+            document.getElementById('wp-pos').innerText = d.pos;
+            document.getElementById('wp-advice').innerText = d.advice;
+            markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("點") ? 8 : 6) }));
+            map.panTo([d.lat, d.lng]);
+            const card = document.getElementById('wp-card');
+            card.classList.add('border-green-200', 'bg-green-50/30');
+            setTimeout(() => card.classList.remove('border-green-200', 'bg-green-50/30'), 500);
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            schedule.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = "relative flex items-start mb-8 group cursor-pointer pl-8";
+                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                let color = item.pos.includes("起點") || item.pos.includes("終點") ? "bg-green-700" : (item.pos === "最高點" ? "bg-orange-600" : (item.pos === "開始下山" ? "bg-amber-500" : "bg-stone-300"));
+                div.innerHTML = `
+                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
+                    <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
+                        <div class="flex justify-between items-center mb-1 text-left">
+                            <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
+                            <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
+                        </div>
+                        <h4 class="font-bold text-stone-700 text-sm text-left">${item.loc}</h4>
+                        <p class="text-[10px] text-stone-400 mt-1 text-left">累計里程: ${item.dist.toFixed(2)} km</p>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function scrollToSection(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initRealMap();
+            initChart();
+            renderTimeline();
+            updateCard(0);
+        });
+    </script>
+</body>
+</html>
