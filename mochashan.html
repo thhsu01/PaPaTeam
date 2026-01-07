@@ -97,7 +97,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 bg-green-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                    <a href="index.html" class="w-9 h-9 bg-green-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg hover:bg-green-800 transition-colors">爬</a>
                     <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊 2026/04 聖母步道</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
@@ -126,17 +126,33 @@
             </div>
 
             <!-- Meeting Block -->
-            <div class="max-w-xl mx-auto space-y-4">
+            <div class="max-w-4xl mx-auto space-y-4">
                 <div class="info-glass p-6 rounded-3xl shadow-sm border border-green-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
+                    <!-- 集合地點 -->
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">五峰旗停車場</span>
                         <span class="text-xs text-stone-500 mt-1">（標高 65m）</span>
                     </div>
+                    
                     <div class="w-px h-10 bg-green-100 hidden md:block"></div>
+                    
+                    <!-- 出發時間 -->
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">出發時間</span>
                         <span class="text-xl font-bold text-stone-800">08:00</span>
+                        <span class="text-xs text-stone-500 mt-1">（往返預計約 6.5H）</span>
+                    </div>
+
+                    <div class="w-px h-10 bg-green-100 hidden md:block"></div>
+
+                    <!-- 最新天氣預報 (新增欄位) -->
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">最新天氣預報</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-bold text-stone-400">尚未決議</span>
+                        </div>
+                        <span class="text-xs text-stone-400 mt-1">（待日期決定後啟用）</span>
                     </div>
                 </div>
                 <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
@@ -271,7 +287,7 @@
                     <p class="text-sm text-stone-500 leading-relaxed">位於景觀台正後方最高處。標誌著信仰與攀登的精神終點，在山頂薄霧中更顯肅穆。</p>
                 </div>
 
-                <!-- 2. 聖母堂 - 已移至末尾並簡化標題 -->
+                <!-- 2. 聖母堂 -->
                 <div class="bg-stone-800 text-white p-8 rounded-3xl shadow-xl lg:col-span-2 border border-stone-700 relative overflow-hidden">
                     <div class="relative z-10">
                         <div class="inline-block px-3 py-1 bg-green-600 rounded text-[10px] font-black tracking-widest uppercase mb-4">重點景點・顯靈奇蹟與宗教建築</div>
@@ -292,7 +308,7 @@
                                     此建築最顯著的特色是其圓形的天壇造型，乃仿效北京天壇祈年殿設計，象徵「天圓地方」與上主之圓滿。在綠意環繞的山腹中，這座白色神聖殿宇更顯靜謐脫俗。
                                 </p>
                                 <p class="text-sm text-stone-300 leading-relaxed">
-                                    <strong class="text-white text-base">【朝壓與視野】</strong><br>
+                                    <strong class="text-white text-base">【朝聖與視野】</strong><br>
                                     堂前廣大的半圓形平台展望極佳，可將蘭陽平原甚至是龜山島盡收眼底。這裡是登山客進入 1.6km 陡升段前的精神加油站。
                                 </p>
                             </div>
