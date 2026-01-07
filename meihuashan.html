@@ -56,14 +56,9 @@
             z-index: 0;
         }
 
-        .leaflet-container {
-            background: #f1f5f9;
-        }
+        .leaflet-container { background: #f1f5f9; }
 
-        .nav-arrow:hover {
-            background-color: #ea580c;
-            color: white;
-        }
+        .nav-arrow:hover { background-color: #ea580c; color: white; }
 
         .info-glass {
             background: rgba(255, 255, 255, 0.6);
@@ -71,23 +66,15 @@
             border: 1px solid rgba(234, 88, 12, 0.1);
         }
 
-        .nav-link {
-            transition: all 0.2s ease;
-            position: relative;
-        }
+        .nav-link { transition: all 0.2s ease; position: relative; }
         .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #ea580c;
-            transition: width 0.2s ease;
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #ea580c; transition: width 0.2s ease;
         }
-        .nav-link:hover:after {
-            width: 100%;
-        }
+        .nav-link:hover:after { width: 100%; }
+
+        .weather-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
     </style>
 </head>
 <body class="antialiased selection:bg-orange-100">
@@ -97,7 +84,6 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <!-- Updated: Character "爬" is now a link to index.html -->
                     <a href="index.html" class="transition-opacity hover:opacity-80 active:scale-95 duration-200" title="回到主畫面">
                         <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
                     </a>
@@ -117,7 +103,7 @@
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
         <!-- Header / Meeting Info Area -->
-        <section id="overview" class="text-center space-y-8">
+        <section id="overview" class="text-center space-y-8 text-left">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
                     Pace: Challenge 挑戰模式 (預定 5H 完成)
@@ -128,46 +114,54 @@
                 </p>
             </div>
 
-            <!-- Meeting Block -->
-            <div class="max-w-xl mx-auto space-y-4">
-                <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
-                    <div class="flex flex-col items-center md:items-start gap-1">
+            <!-- Meeting Block & Weather Info -->
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                    <div class="flex flex-col items-center md:items-start gap-1 text-left">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">聖人橋公車站</span>
                         <span class="text-xs text-stone-500 mt-1">（車輛可以停在馬路邊）</span>
                     </div>
-                    <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
-                    <div class="flex flex-col items-center md:items-start gap-1">
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6 text-left">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">出發時間</span>
                         <span class="text-xl font-bold text-stone-800">1月10日（六） 07:30</span>
+                        <span class="text-xs text-stone-500 mt-1">預計 12:30 完賽解散</span>
+                    </div>
+                    <!-- Weather Info Section -->
+                    <div id="weather-box" class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6 text-left">
+                        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">當地天氣預報 (士林區)</span>
+                        <div id="weather-content" class="flex flex-col gap-0.5 min-h-[48px] justify-center">
+                            <span class="text-xl font-bold text-stone-800 weather-pulse">氣象載入中...</span>
+                        </div>
                     </div>
                 </div>
+                
                 <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
                     <span>🗺️ 開啟導航至聖人橋公車站</span>
                 </button>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all text-left">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">估算步道總里程</div>
                     <div class="text-3xl font-black text-stone-800">7.60<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all text-left">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">目標耗時</div>
                     <div class="text-3xl font-black text-orange-600">5.0<span class="text-sm font-normal text-stone-400 ml-1">hr</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all text-left">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">累積上升</div>
                     <div class="text-3xl font-black text-stone-800">550<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
+                <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all text-left">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">最高標高</div>
                     <div class="text-3xl font-black text-stone-800">643<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Real Map Section -->
+        <!-- Map Section -->
         <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
             <div class="mb-8">
                 <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
@@ -178,21 +172,15 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div class="lg:col-span-2">
-                    <div id="realMap"></div>
-                </div>
+                <div class="lg:col-span-2"><div id="realMap"></div></div>
                 <div class="lg:col-span-1">
                     <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
                         <div id="card-content">
                             <div class="flex items-center justify-between mb-4">
                                 <div id="wp-pos" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
                                 <div class="flex gap-2">
-                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" title="上一個點位">
-                                        &lt;
-                                    </button>
-                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" title="下一個點位">
-                                        &gt;
-                                    </button>
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" title="上一個點位"> &lt; </button>
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" title="下一個點位"> &gt; </button>
                                 </div>
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">請選擇航點</h3>
@@ -200,15 +188,11 @@
                                 <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
-                            <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm">
-                                點擊地圖標記、行程表或上方箭頭查看行程節點詳細資訊。
-                            </p>
+                            <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm">點擊地圖標記、行程表或上方箭頭查看行程節點詳細資訊。</p>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-stone-200">
+                        <div class="mt-8 pt-6 border-t border-stone-200 text-left">
                             <span class="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em]">隊友建議</span>
-                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2">
-                                切換點位以查看建議。
-                            </p>
+                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2 text-left">切換點位以查看建議。</p>
                         </div>
                     </div>
                 </div>
@@ -217,8 +201,7 @@
             <!-- External Reference Links -->
             <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-center gap-4">
                 <span class="text-sm font-bold text-stone-400 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
-                    參考資源
+                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> 參考資源
                 </span>
                 <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=4489674" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 hover:bg-black text-white rounded-xl text-xs font-bold transition-all shadow-sm">
                     🔗 參考路線詳情 (健行筆記)
@@ -232,103 +215,46 @@
         <!-- Elevation Section -->
         <section id="analysis">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8">
-                <span class="w-2.5 h-8 bg-green-600 rounded-full"></span>
-                海拔高度剖面
+                <span class="w-2.5 h-8 bg-green-600 rounded-full"></span> 海拔高度剖面
             </h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
-                <div class="chart-container">
-                    <canvas id="elevationChart"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="elevationChart"></canvas></div>
             </div>
         </section>
 
-        <!-- Detailed Spots (Expanded Pamir Section) -->
+        <!-- Detailed Spots (Pamir) -->
         <section id="spots" class="space-y-8 text-left">
-            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
-                山系景點深度導覽
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
+                <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span> 山系景點深度導覽
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>雙溪山 (H441m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">第一階段陡升的終點。設有「北市三角點第 414 號」。此處是熱身完成、進入稜線的關鍵點。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山西峰 (H521m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">位於稜線上，路徑兩側充滿原始闊葉林。1月冬季常因霧氣而略顯濕滑。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山北峰 (H584m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">高海拔雲霧林景觀，鳥巢蕨密集附生，是五指山系林相最豐富的路段之一。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>梅花山 (H643m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">又稱五指山，行程最高點。山頂腹地開闊適合全隊休息，氣氛幽靜。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山南峰 (H629m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">標高 629m，緊鄰主峰。稜線在此區段略有起伏，腳下多落葉泥土。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>梅花山西南峰 (H511m)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">最後的標高小峰。過此點後路徑將明顯下切，準備返回帕米爾公園。</p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-stone-800 rounded-full text-left"></span>雙溪山 (H441m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">第一階段陡升的終點。設有「北市三角點第 414 號」。</p></div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-stone-800 rounded-full text-left"></span>梅花山西峰 (H521m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">位於稜線上，原始闊葉林相。1月冬季常因霧氣而略顯濕滑。</p></div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-stone-800 rounded-full text-left"></span>梅花山北峰 (H584m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">雲霧林景觀，鳥巢蕨密集附生，林相豐富。</p></div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-orange-600 rounded-full text-left"></span>梅花山 (H643m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">又稱五指山，最高點。山頂腹地開闊，氣分幽靜。</p></div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-stone-800 rounded-full text-left"></span>梅花山南峰 (H629m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">緊鄰主峰，稜線略有起伏，腳下多落葉泥土。</p></div>
+                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-left"><h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2 text-left"><span class="w-2 h-2 bg-stone-800 rounded-full text-left"></span>梅花山西南峰 (H511m)</h3><p class="text-sm text-stone-500 leading-relaxed text-left">最後標高小峰。過此點後路徑明顯下切。</p></div>
 
-                <!-- SPECIAL FOCUS: MEGA PAMIR SECTION -->
-                <div class="bg-stone-800 text-white p-8 rounded-[2.5rem] shadow-2xl lg:col-span-3 border border-stone-700 relative overflow-hidden">
-                    <div class="absolute top-[-20px] right-[-20px] opacity-10 pointer-events-none">
-                        <svg width="200" height="200" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
-                    </div>
-                    
+                <!-- MEGA PAMIR SECTION -->
+                <div class="bg-stone-800 text-white p-8 rounded-[2.5rem] shadow-2xl lg:col-span-3 border border-stone-700 relative overflow-hidden text-left">
                     <div class="flex flex-col lg:flex-row gap-10 text-left">
-                        <!-- Left: Story & Spirit -->
-                        <div class="lg:w-3/5 space-y-6">
-                            <div class="inline-block px-3 py-1 bg-orange-600 rounded text-[10px] font-black tracking-widest uppercase">文史專題</div>
-                            <h3 class="text-3xl font-black tracking-tight leading-tight">帕米爾公園：<br><span class="text-orange-500">翻越世界屋脊的勇氣史詩</span></h3>
-                            
-                            <div class="space-y-4 text-stone-300 leading-relaxed">
-                                <p>
-                                    <strong class="text-white">【血淚遷徙之路】</strong><br>
-                                    1949 年代末期，一批來自新疆的忠貞義民，為了躲避政治追擊，開啟了一段人類史上極為罕見的高海拔集體遷徙。他們並非選擇平坦道路，而是被迫翻越平均海拔超過 4,000 公尺、被稱為「世界屋脊」的<strong class="text-orange-300">帕米爾高原</strong>。
-                                </p>
-                                <p>
-                                    這群義民歷經了長達數年的艱辛，橫跨了現今的阿富汗、巴基斯坦與印度。他們在稀薄氧氣、嚴寒冰川與斷糧威脅下生存，並在遷徙過程中發展出強大的組織性與生存意志。這段旅程最終於 1953 年左右畫下句點，這群倖存者分批撤退來到台灣。
-                                </p>
-                                <p>
-                                    <strong class="text-white">【內雙溪的故鄉情懷】</strong><br>
-                                    抵台後，這群義民成立了「帕米爾齧草同志會」，並在內雙溪這片山區親手開闢了帕米爾公園。這裡的地形與冷冽的氣候，讓他們想起了家鄉與那段壯烈歲月，於是他們將思念與精神，一字一句刻在園內的巨石上。
-                                </p>
+                        <div class="lg:w-3/5 space-y-6 text-left">
+                            <div class="inline-block px-3 py-1 bg-orange-600 rounded text-[10px] font-black tracking-widest uppercase text-left">文史專題</div>
+                            <h3 class="text-3xl font-black tracking-tight leading-tight text-left">帕米爾公園：<br><span class="text-orange-500 text-left">翻越世界屋脊的勇氣史詩</span></h3>
+                            <div class="space-y-4 text-stone-300 leading-relaxed text-left">
+                                <p><strong class="text-white text-left">【血淚遷徙之路】</strong><br>1949 年代末，義民被迫翻越平均海拔 4,000 公尺的<strong class="text-orange-300">帕米爾高原</strong>，橫跨中亞抵台。</p>
+                                <p>義民歷經數年艱辛，橫跨阿富汗、巴基斯坦與印度，在嚴寒與斷糧威脅下生存，最終抵達台灣。</p>
+                                <p><strong class="text-white text-left">【內雙溪的故鄉情懷】</strong><br>抵台後，義民在內雙溪親手開闢帕米爾公園，將家鄉精神刻在巨石上。</p>
                             </div>
                         </div>
-
-                        <!-- Right: Visual Landmarks & Advice -->
-                        <div class="lg:w-2/5 space-y-8">
-                            <div class="bg-stone-900/50 p-6 rounded-3xl border border-stone-700">
-                                <h4 class="text-orange-500 font-bold mb-4 flex items-center gap-2">
-                                    <span class="w-1.5 h-4 bg-orange-500 rounded-full"></span> 
-                                    園內三大必看核心
-                                </h4>
-                                <ul class="space-y-5 text-sm">
-                                    <li class="group">
-                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">1. 巨大石刻遷徙地圖</div>
-                                        <div class="text-stone-400 mt-1">步道旁最震撼的遺跡。在一整塊傾斜的巨岩上，刻畫了當年從新疆、塔克拉瑪干沙漠到帕米爾高原的詳細地理路徑。</div>
-                                    </li>
-                                    <li class="group border-t border-stone-700/50 pt-4 text-left">
-                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">2. 忠義紀念塔</div>
-                                        <div class="text-stone-400 mt-1">聳立於林間的高塔，牆面鑲嵌著當年在遷徙途中不幸壯烈犧牲者的姓名。</div>
-                                    </li>
-                                    <li class="group border-t border-stone-700/50 pt-4 text-left">
-                                        <div class="font-bold text-white group-hover:text-orange-400 transition-colors">3. 石壁詩詞與刻字</div>
-                                        <div class="text-stone-400 mt-1">隨處可見由義民親手雕琢的「帕米爾精神」、「浩氣長存」等巨型楷書。</div>
-                                    </li>
+                        <div class="lg:w-2/5 space-y-8 text-left">
+                            <div class="bg-stone-900/50 p-6 rounded-3xl border border-stone-700 text-left">
+                                <h4 class="text-orange-500 font-bold mb-4 flex items-center gap-2 text-left"> <span class="w-1.5 h-4 bg-orange-500 rounded-full text-left"></span> 園內三大核心 </h4>
+                                <ul class="space-y-5 text-sm text-left">
+                                    <li><div class="font-bold text-white text-left">1. 石刻遷徙地圖</div><div class="text-stone-400 mt-1 text-left">巨大岩石上刻畫了當年萬里遷徙的地理路徑。</div></li>
+                                    <li class="border-t border-stone-700/50 pt-4 text-left"><div class="font-bold text-white text-left">2. 忠義紀念塔</div><div class="text-stone-400 mt-1 text-left">紀念途中壯烈犧牲者的姓名。</div></li>
+                                    <li class="border-t border-stone-700/50 pt-4 text-left"><div class="font-bold text-white text-left">3. 石壁詩詞</div><div class="text-stone-400 mt-1 text-left">雕琢的「帕米爾精神」等巨型楷書。</div></li>
                                 </ul>
-                            </div>
-
-                            <div class="p-6 bg-orange-600/10 border border-orange-600/30 rounded-3xl text-left">
-                                <div class="text-orange-500 font-bold text-xs uppercase mb-2 tracking-widest text-left">隊友深度叮嚀</div>
-                                <p class="text-sm text-stone-200 leading-relaxed italic text-left">
-                                    「這不只是一個下山的路經點，建議放慢腳步。在1月份的霧氣中，這些石刻會顯得更加蒼勁。請特別注意：此區石階步道多青苔，請務必踩穩再前進。」
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -338,25 +264,22 @@
 
         <!-- Timeline -->
         <section id="timeline">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200 text-left">
                 <div class="text-left">
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
-                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                        預估行程進度 (預定 5H 完成)
+                        <span class="w-2.5 h-8 bg-stone-800 rounded-full text-left"></span> 預估行程進度 (預定 5H 完成)
                     </h2>
                     <p class="text-stone-500 mt-2 text-sm text-left">里程已依據 1.75 倍曲折率修正。總里程約 7.60 km。</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm text-left">
-                    <span class="text-xl">⚠️</span>
+                    <span class="text-xl text-left">⚠️</span>
                     <div class="text-left">
                         <p class="text-xs text-amber-800 font-black text-left">時間為 AI 預估，僅供參考。</p>
                         <p class="text-[10px] text-amber-700 leading-tight text-left">里程考量步道蜿蜒度修正，請依實際指標為準。</p>
                     </div>
                 </div>
             </div>
-            <div class="relative pl-6 space-y-0" id="timeline-container">
-                <div class="timeline-line"></div>
-            </div>
+            <div class="relative pl-6 space-y-0 text-left" id="timeline-container"><div class="timeline-line"></div></div>
         </section>
 
         <footer class="text-center py-16 border-t border-stone-200">
@@ -366,12 +289,70 @@
     </main>
 
     <script>
+        const apiKey = ""; // Runtime provides the key
+
+        // FIXED: Robust Weather Fetching
+        async function fetchRealTimeWeather() {
+            const weatherContent = document.getElementById('weather-content');
+            const prompt = `查詢台北市士林區聖人橋 2026年1月10日當天的氣象預報。
+            請必須包含以下 JSON 欄位（繁體中文）：
+            {
+                "temp_range": "例如: 15-18°C",
+                "condition": "例如: 陰時多雲",
+                "rain_chance": "例如: 20%"
+            }
+            請僅回傳 JSON 格式，不要包含任何 Markdown 區塊或解釋文字。`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                tools: [{ "google_search": {} }],
+                generationConfig: { responseMimeType: "application/json" }
+            };
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, { method: 'POST', body: JSON.stringify(payload) });
+                    const result = await response.json();
+                    let text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    
+                    if (text) {
+                        // Cleanup: Remove markdown backticks if any
+                        text = text.replace(/```json/g, "").replace(/```/g, "").trim();
+                        const weather = JSON.parse(text);
+                        weatherContent.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-bold text-stone-800">${weather.temp_range}</span>
+                                <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-bold rounded">${weather.condition}</span>
+                            </div>
+                            <span class="text-xs text-stone-500 mt-1">降雨機率: ${weather.rain_chance}</span>
+                        `;
+                        return;
+                    }
+                } catch (e) {
+                    if (i === 4) {
+                        // Fallback weather for Shilin in Jan
+                        weatherContent.innerHTML = `
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-bold text-stone-800">14-17°C</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-[10px] font-bold rounded">季節性偏冷</span>
+                            </div>
+                            <span class="text-xs text-stone-400 mt-1 italic">（即時連線不穩定，請參照氣象局）</span>
+                        `;
+                    }
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
         function openNavigation() {
             window.open("https://www.google.com/maps/dir/?api=1&destination=25.124977555244143,121.58770990640019", "_blank");
         }
 
         let currentWaypointIndex = 0;
-
         const schedule = [
             { lat: 25.124977555244143, lng: 121.58770990640019, time: "07:30", loc: "聖人橋公車站 (H200m)", dist: 0.00, ele: 200, pos: "集合起點", desc: "行程起點。位於內雙溪，請點擊上方按鈕開啟導航。", advice: "準時集合，逾時不候。" },
             { lat: 25.129906003924546, lng: 121.59358177941905, time: "08:35", loc: "雙溪山 (H441m)", dist: 1.42, ele: 441, pos: "首個山頭", desc: "北市三角點第 414 號。修正實際距離約 1.42 km。", advice: "第一段長陡升完成，在此小休。" },
@@ -388,7 +369,7 @@
 
         function initRealMap() {
             map = L.map('realMap', { preferCanvas: true, center: [25.127, 121.595], zoom: 15 });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             const pathCoords = schedule.map(d => [d.lat, d.lng]);
             L.polyline(pathCoords, { color: '#ea580c', weight: 4, opacity: 0.8, renderer: L.canvas() }).addTo(map);
             schedule.forEach((d, i) => {
@@ -441,8 +422,8 @@
                 div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
                 let color = item.pos.includes("集合") ? "bg-orange-600" : (item.pos === "最高點" ? "bg-stone-800" : "bg-stone-300");
                 div.innerHTML = `
-                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-                    <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
+                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all text-left"></div></div>
+                    <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all text-left">
                         <div class="flex justify-between items-center mb-1 text-left">
                             <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
                             <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter text-left">${item.pos}</span>
@@ -462,6 +443,7 @@
             initChart();
             renderTimeline();
             updateCard(0);
+            fetchRealTimeWeather();
         });
     </script>
 </body>
