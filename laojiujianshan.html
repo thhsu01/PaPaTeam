@@ -96,10 +96,11 @@
     <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                <!-- Navigation Logo Linked to index.html -->
+                <a href="index.html" class="flex items-center gap-2 group transition-all duration-300 hover:opacity-80">
+                    <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">爬</div>
                     <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊候選行程</span>
-                </div>
+                </a>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">行程總覽</button>
                     <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600">路線圖</button>
@@ -125,21 +126,35 @@
                 </p>
             </div>
 
-            <!-- Meeting Block -->
-            <div class="max-w-xl mx-auto space-y-4">
+            <!-- Meeting Block (3 Columns) -->
+            <div class="max-w-4xl mx-auto space-y-4">
                 <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
-                    <div class="flex flex-col items-center md:items-start gap-1">
+                    <!-- Column 1: Location -->
+                    <div class="flex flex-col items-center md:items-start gap-1 flex-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">金龍場停車場</span>
                         <span class="text-xs text-stone-400 mt-1">請準時集合，裝備點檢</span>
                     </div>
+                    
                     <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
-                    <div class="flex flex-col items-center md:items-start gap-1">
+                    
+                    <!-- Column 2: Time -->
+                    <div class="flex flex-col items-center md:items-start gap-1 flex-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">出發時間</span>
                         <span class="text-xl font-bold text-stone-800">日期時間待定</span>
+                        <span class="text-xs text-stone-400 mt-1">（待活動發起後確認）</span>
+                    </div>
+
+                    <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
+
+                    <!-- Column 3: Weather Forecast -->
+                    <div class="flex flex-col items-center md:items-start gap-1 flex-1">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">即時天氣預報</span>
+                        <span class="text-xl font-bold text-stone-800">尚未取得</span>
+                        <span class="text-xs text-stone-500 mt-1 italic">（待日期確定後提供資訊）</span>
                     </div>
                 </div>
-                <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
+                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
                     <span>🗺️ 開啟導航至金龍場停車場</span>
                 </button>
             </div>
@@ -263,12 +278,73 @@
                     <p class="text-sm text-stone-500 leading-relaxed">展望極佳的獨立山頭，能俯瞰整個翠湖山谷與遠方的內湖市區。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-blue-600 rounded-full"></span>翠湖 (H45m 推估)</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed">靜謐的湖泊景觀，承載了北台煤礦的歷史回憶。是下山前沉澱心情的好地方。</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-blue-600 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
                     <p class="text-sm text-stone-500 leading-relaxed">便利的起訖點，為登山隊提供充足的停車空間與集合便利性。</p>
+                </div>
+                <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 shadow-sm">
+                    <h3 class="font-bold text-orange-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>翠湖 (H45m 推估)</h3>
+                    <p class="text-sm text-orange-700 leading-relaxed">本行程的核心深度點位。請見下方專題介紹，了解其背後的煤礦歷史與生態。</p>
+                </div>
+
+                <!-- SPECIAL FOCUS: CUIHU DEEP DIVE -->
+                <div class="bg-stone-800 text-white p-8 rounded-[2.5rem] shadow-2xl lg:col-span-3 border border-stone-700 relative overflow-hidden mt-6">
+                    <div class="absolute top-[-20px] right-[-20px] opacity-10 pointer-events-none text-blue-400">
+                        <svg width="240" height="240" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-10">
+                        <!-- Left: Story & History -->
+                        <div class="lg:w-3/5 space-y-6">
+                            <div class="inline-block px-3 py-1 bg-blue-600 rounded text-[10px] font-black tracking-widest uppercase">文史與生態專題</div>
+                            <h3 class="text-3xl font-black tracking-tight leading-tight">翠湖：<br><span class="text-blue-400">黑金歲月與油桐花之眼</span></h3>
+                            
+                            <div class="space-y-4 text-stone-300 leading-relaxed">
+                                <p>
+                                    <strong class="text-white">【人工之美：北台煤礦的記憶】</strong><br>
+                                    翠湖並非天然湖泊，而是早年「北台煤礦」為了洗煤與攔截泥沙而挖掘出的人工堰塞湖。在 1960 年代，這裡曾是汐止與內湖山區最繁忙的採礦據點之一。當我們站在湖畔，四周殘留的紅磚斷垣，正是當年礦場辦公室與宿舍的遺址。
+                                </p>
+                                <p>
+                                    <strong class="text-white">【生態綠洲：藍鵲與螢火蟲的家】</strong><br>
+                                    隨著 1970 年代採礦終止，大自然迅速接管了這片土地。現在的翠湖已成為北台灣極為珍貴的次生林保護區域。每年 4 至 5 月，湖畔的「五月雪」油桐花會落滿水面，形成純白的視覺饗宴；而夏季入夜後的螢火蟲舞動，更是讓翠湖獲得了「山中珍珠」的美譽。
+                                </p>
+                                <p>
+                                    <strong class="text-white">【內溝溪的生命之源】</strong><br>
+                                    翠湖的水源匯入內溝溪，其穩定調節的水量讓內溝溪下游的生態系統得以常年運作。這裡同時也是台灣藍鵲、大冠鷲與多種溪魚的棲息地。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right: Features & Tips -->
+                        <div class="lg:w-2/5 space-y-8">
+                            <div class="bg-stone-900/50 p-6 rounded-3xl border border-stone-700">
+                                <h4 class="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                                    <span class="w-1.5 h-4 bg-blue-400 rounded-full"></span> 
+                                    翠湖必看核心
+                                </h4>
+                                <ul class="space-y-5 text-sm">
+                                    <li class="group">
+                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">1. 北台煤礦紅磚遺址</div>
+                                        <div class="text-stone-400 mt-1">隱藏在湖東南側林間，爬滿青苔的紅磚牆，是見證北台灣黑金歷史的最佳地標。</div>
+                                    </li>
+                                    <li class="group border-t border-stone-700/50 pt-4">
+                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">2. 湖面倒影攝影點</div>
+                                        <div class="text-stone-400 mt-1">內溝山下切至湖畔的出口，是捕捉「翠湖倒影」與稜線對稱之美的黃金機位。</div>
+                                    </li>
+                                    <li class="group border-t border-stone-700/50 pt-4">
+                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">3. 季節性油桐花毯</div>
+                                        <div class="text-stone-400 mt-1">5 月時分，步道交接處會形成厚實的花毯，踩在其上如行走於雲端。</div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="p-6 bg-blue-600/10 border border-blue-600/30 rounded-3xl">
+                                <div class="text-blue-400 font-bold text-xs uppercase mb-2 tracking-widest">領隊深度叮嚀</div>
+                                <p class="text-sm text-stone-200 leading-relaxed italic">
+                                    「這條路線雖然海拔不高，但稜線起伏頻繁，且部分路段土壤乾燥易滑。建議穿著抓地力強的登山鞋。特別注意：翠湖區濕度較高，石階偶有青苔，請放慢步調，靜心感受湖畔的歷史氣息。」
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
