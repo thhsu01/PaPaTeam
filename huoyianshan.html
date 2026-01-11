@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爬爬小隊 2025年12月13日：苗栗火炎山、北鞍古道 O 走</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet Real Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fefaf6;
+            color: #44403c;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+        }
+
+        #realMap {
+            width: 100%;
+            height: 520px;
+            border-radius: 1.5rem;
+            z-index: 10;
+            border: 1px solid #fed7aa;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #ffedd5; }
+        ::-webkit-scrollbar-thumb { background: #fb923c; border-radius: 10px; }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -5px rgba(234, 88, 12, 0.15);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ffedd5;
+            z-index: 0;
+        }
+
+        .leaflet-container { background: #fff7ed; }
+
+        .nav-arrow:hover { background-color: #ea580c; color: white; }
+
+        .info-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(234, 88, 12, 0.2);
+        }
+
+        .nav-link { transition: all 0.2s ease; position: relative; }
+        .nav-link:after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #ea580c; transition: width 0.2s ease;
+        }
+        .nav-link:hover:after { width: 100%; }
+
+        .highlight-canyon {
+            border: 2px solid #ef4444;
+            background: #fff5f5;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-100 text-left">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-orange-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="transition-transform active:scale-95">
+                        <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                    </a>
+                    <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">2025/12/13 火炎山、北鞍古道 O 走紀錄</span>
+                </div>
+                <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">數據總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600">路徑地圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600">海拔剖面</button>
+                    <button onclick="scrollToSection('deep-dive')" class="nav-link hover:text-orange-600 text-orange-600">景點深度導覽</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600">實際行程</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Header Area -->
+        <section id="overview" class="text-center space-y-8">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
+                    O-Loop Completed 完走
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">火炎山、北鞍古道 O 走</h1>
+                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                    本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。
+                </p>
+            </div>
+
+            <!-- Summary Block -->
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合起點</span>
+                        <span class="text-xl font-bold text-stone-800 leading-tight">正松泉收費停車場</span>
+                        <span class="text-xs text-stone-500 mt-1">方便停車，步行即可抵達登山口</span>
+                    </div>
+                    <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6">
+                        <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">活動日期</span>
+                        <span class="text-xl font-bold text-stone-800">2025年12月13日</span>
+                        <span class="text-xs text-stone-500 mt-1">全程費時：5 小時 10 分鐘</span>
+                    </div>
+                    <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6">
+                        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">高度落差</span>
+                        <div class="flex flex-col gap-0.5 min-h-[48px] justify-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-bold text-stone-800">405.5 m</span>
+                                <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-bold rounded">落差</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map Section -->
+        <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+            <div class="mb-8">
+                <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-orange-600 rounded-full"></span> 導覽地圖與重要地標</h2>
+                <p class="text-stone-500 mt-2 text-sm">點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2"><div id="realMap"></div></div>
+                <div class="lg:col-span-1">
+                    <div id="wp-card" class="h-full bg-orange-50/30 rounded-2xl p-6 border border-orange-100 flex flex-col justify-between transition-all duration-300 overflow-y-auto">
+                        <div id="card-content">
+                            <div class="flex items-center justify-between mb-4">
+                                <div id="wp-pos" class="inline-block px-2.5 py-1 bg-orange-200 text-orange-700 text-[10px] font-black rounded tracking-wider uppercase">地點類型</div>
+                                <div class="flex gap-2">
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm">&lt;</button>
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm">&gt;</button>
+                                </div>
+                            </div>
+                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點名稱</h3>
+                            <div class="flex items-center gap-5 text-sm font-bold text-stone-400 mb-4">
+                                <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
+                            </div>
+                            <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elevation Section -->
+        <section id="analysis">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8"><span class="w-2.5 h-8 bg-red-600 rounded-full"></span> 步道坡度剖面圖</h2>
+            <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
+                <div class="chart-container"><canvas id="elevationChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- Deep Dive Introduction Section -->
+        <section id="deep-dive" class="space-y-10">
+            <div class="text-center">
+                <h2 class="text-3xl font-black text-stone-800">各景點深度導覽</h2>
+                <p class="text-stone-500 mt-2 italic">穿越礫岩惡地，探索火炎山的地理密碼</p>
+            </div>
+
+            <!-- Canyon Feature Section -->
+            <div class="bg-gradient-to-br from-red-600 to-orange-700 rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
+                    <svg class="w-64 h-64 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2L9.5 13 6 18h12l-4-12z"/></svg>
+                </div>
+                <div class="relative z-10 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur rounded-lg text-xs font-bold tracking-widest uppercase">
+                        Featured Highlight 重點導覽
+                    </div>
+                    <h3 class="text-3xl md:text-5xl font-black tracking-tight">火炎山大峽谷 (Canyon Deep Dive)</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-orange-50 leading-relaxed">
+                        <div class="space-y-4">
+                            <p class="text-lg font-medium border-l-4 border-white pl-4">火炎山不僅是一座山，更是一座持續變動的「地質博物館」。</p>
+                            <p><strong>地質血脈：</strong> 火炎山主要由「頭嵙山層」的礫岩組成。這些礫石在數百萬年前隨河流堆積，因含鐵量高，在空氣中氧化後呈現出獨特的鐵鏽紅。由於礫石間的膠結力弱，每當豪雨過後，山體就會因劇烈侵蝕而產生大規模剝落。</p>
+                            <p><strong>惡地景觀：</strong> 這種地形在地理學上稱為「惡地 (Badlands)」。由於植物難以在陡峭且鬆動的礫岩坡面上紮根，形成了銳利的鋸齒狀稜線與深不見底的紅土溝壑，這正是大峽谷驚心動魄的視覺來源。</p>
+                        </div>
+                        <div class="bg-black/20 backdrop-blur-md p-6 rounded-3xl space-y-4">
+                            <h4 class="font-bold text-white text-xl">📸 攝影與觀察指南</h4>
+                            <ul class="list-disc list-inside text-sm space-y-2 opacity-90">
+                                <li><strong>黃金時刻：</strong> 選擇清晨或傍晚，低角度光線能勾勒出溝壑的陰影層次。</li>
+                                <li><strong>微觀觀察：</strong> 仔細看山壁，你會發現圓潤的礫石，那是古代大漢溪流域的河床遺跡。</li>
+                                <li><strong>安全警戒：</strong> 崖邊地質極不穩定，切勿跨越拉繩，避免因重力導致的邊坡坍塌。</li>
+                            </ul>
+                            <div class="bg-red-500/30 border border-red-300 p-3 rounded-xl text-xs flex items-start gap-3 mt-4">
+                                <span class="text-xl">⚠️</span>
+                                <p><strong>地質警告：</strong> 火炎山平均每年退縮約 1-3 公分，這意味著您今年看到的風景，與明年將完全不同。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Locations Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Location Item -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 hover:shadow-lg transition-all space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">1</div>
+                        <h4 class="text-xl font-bold text-stone-800">正松泉與起點區</h4>
+                    </div>
+                    <p class="text-stone-500 text-sm leading-relaxed">
+                        位於三義與后里的交界，這裡是進入火炎山自然保留區最重要的補給站。除了充足的車位，沿線的私人茶園與田野風光提供了極佳的緩衝，讓登山者在起登前能先調整呼吸。
+                    </p>
+                </div>
+                <!-- Location Item -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 hover:shadow-lg transition-all space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">2</div>
+                        <h4 class="text-xl font-bold text-stone-800">南鞍線與北鞍古道</h4>
+                    </div>
+                    <p class="text-stone-500 text-sm leading-relaxed">
+                        相對於險峻的稜線，這兩條古道隱沒在茂密的闊葉林中。北鞍古道坡度平緩，是昔日先民往返三義與大甲的聯絡孔道，環境幽靜，常可見到台灣獼猴出沒。
+                    </p>
+                </div>
+                <!-- Location Item -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 hover:shadow-lg transition-all space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">3</div>
+                        <h4 class="text-xl font-bold text-stone-800">三粒石土地公廟</h4>
+                    </div>
+                    <p class="text-stone-500 text-sm leading-relaxed">
+                        這座由簡單三塊巨石搭建而成的土地公，象徵著對土地的謙卑與崇敬。這裡是山友的重要中繼點，廟前的小廣場提供了絕佳的陰涼處，讓疲憊的雙腳能在此得到短暫舒緩。
+                    </p>
+                </div>
+                <!-- Location Item -->
+                <div class="bg-white p-6 rounded-3xl border border-stone-200 hover:shadow-lg transition-all space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">4</div>
+                        <h4 class="text-xl font-bold text-stone-800">火炎山主峰 (三角點)</h4>
+                    </div>
+                    <p class="text-stone-500 text-sm leading-relaxed">
+                        標高 601 公尺，雖然高度在苗栗群山中不算突出，但其作為地理屏障的功能顯著。登頂後的三角點不只是打卡點，更是全方位俯視台中與苗栗交界流域的制高點。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄紀錄</h2>
+                    <p class="text-stone-500 mt-2 text-sm">2025/12/13 08:00 正式出發。</p>
+                </div>
+            </div>
+            <div class="relative pl-6 space-y-0" id="timeline-container">
+                <div class="timeline-line"></div>
+            </div>
+        </section>
+
+        <footer class="text-center py-16 border-t border-stone-200">
+            <p class="text-stone-400 text-sm font-medium tracking-wide">© 2025 爬爬小隊 | 戶外活動視覺化平台</p>
+        </footer>
+    </main>
+
+    <script>
+        function openNavigation() { window.open("https://www.google.com/maps/dir/?api=1&destination=24.358077127978664,120.7361309924151", "_blank"); }
+        let currentWaypointIndex = 0;
+
+        // 行程陣列
+        const schedule = [
+            { 
+                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:00", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
+                desc: "這裡是火炎山最著名的私人收費停車場（一次約 50 元）。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。" 
+            },
+            { 
+                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:15", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
+                desc: "從這裡開始進入森林步道。這段路徑相對於稜線較為平緩，也是回程 O 走下山的主要路徑。" 
+            },
+            { 
+                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:45", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
+                desc: "這是一個簡易的石砌土地公廟，是登山客的精神寄託與重要的折返點/休息處。廟前空地寬廣，適合全隊整隊與補充體力。" 
+            },
+            { 
+                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:15", loc: "火炎山三角點", ele: 601, pos: "最高點", 
+                desc: "標高 601m，設有三等三角點。這裡是整段行程的物理最高點，雖然展望不如稜線開闊，但標誌性的立牌是每位山友必拍的登頂證明。" 
+            },
+            { 
+                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:30", loc: "山頂休息區", ele: 565, pos: "大休息區", 
+                desc: "這裡設有許多木製桌椅，甚至有熱心山友搭建的棚架。全隊在此進行午休，享受山林間的微風。此處海拔約 565 公尺。" 
+            },
+            { 
+                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:30", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
+                desc: "火炎山精華景觀，壯闊的紅土崩壁。地質脆弱請勿靠近邊緣，於拉繩後方欣賞美景。"
+            },
+            { 
+                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:10", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
+                desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，完成這場精彩的 O 型走。" 
+            }
+        ];
+
+        let map, chart, markers = [];
+
+        function initRealMap() {
+            map = L.map('realMap', { preferCanvas: true, center: [24.368, 120.734], zoom: 14 });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            
+            const pathCoords = schedule.map(d => [d.lat, d.lng]);
+            L.polyline(pathCoords, { color: '#ea580c', weight: 5, opacity: 0.8 }).addTo(map);
+            
+            schedule.forEach((d, i) => {
+                const isCanyon = d.loc === "火炎山大峽谷";
+                const circle = L.circleMarker([d.lat, d.lng], {
+                    radius: isCanyon ? 12 : (d.pos === "最高點" ? 9 : 6),
+                    fillColor: isCanyon ? '#ef4444' : (d.pos === "最高點" ? '#ef4444' : '#78716c'),
+                    color: isCanyon ? '#fee2e2' : '#fff', 
+                    weight: isCanyon ? 4 : 2, 
+                    opacity: 1, 
+                    fillOpacity: 1
+                }).addTo(map);
+                circle.bindTooltip(d.loc);
+                circle.on('click', () => updateCard(i));
+                markers.push(circle);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('elevationChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: schedule.map(d => d.loc),
+                    datasets: [{ 
+                        label: '海拔 (m)', 
+                        data: schedule.map(d => d.ele), 
+                        borderColor: '#ea580c', 
+                        borderWidth: 4, 
+                        pointRadius: 6, 
+                        fill: true, 
+                        backgroundColor: 'rgba(234, 88, 12, 0.1)', 
+                        tension: 0.35 
+                    }]
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    plugins: { legend: { display: false } }, 
+                    scales: { 
+                        y: { min: 150 },
+                        x: { ticks: { display: false } }
+                    }, 
+                    onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } 
+                }
+            });
+        }
+
+        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
+        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
+
+        function updateCard(idx) {
+            currentWaypointIndex = idx;
+            const d = schedule[idx];
+            document.getElementById('wp-title').innerText = d.loc;
+            document.getElementById('wp-ele').innerText = d.ele;
+            document.getElementById('wp-desc').innerHTML = d.desc;
+            document.getElementById('wp-pos').innerText = d.pos;
+            
+            const card = document.getElementById('wp-card');
+            if (d.loc === "火炎山大峽谷") {
+                card.classList.add('highlight-canyon');
+            } else {
+                card.classList.remove('highlight-canyon');
+            }
+
+            markers.forEach((m, i) => {
+                const isSelected = i === idx;
+                m.setStyle({ 
+                    radius: isSelected ? 15 : (schedule[i].loc === "火炎山大峽谷" ? 12 : 6),
+                    fillOpacity: isSelected ? 1 : 0.8
+                });
+            });
+            map.panTo([d.lat, d.lng]);
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            schedule.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = "relative flex items-start mb-10 group cursor-pointer pl-8";
+                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                
+                let dotColor = item.loc === "火炎山大峽谷" ? "bg-red-600 animate-pulse" : (item.pos.includes("點") ? "bg-orange-600" : "bg-stone-400");
+                
+                div.innerHTML = `
+                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">
+                        <div class="w-4 h-4 rounded-full ${dotColor} border-2 border-white group-hover:scale-125 transition-all"></div>
+                    </div>
+                    <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all">
+                        <div class="flex flex-wrap justify-between items-center mb-2">
+                            <span class="text-xl font-black text-stone-800">${item.time}</span>
+                            <span class="text-[10px] font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase">${item.pos}</span>
+                        </div>
+                        <h4 class="font-bold text-stone-700 text-base mb-1">${item.loc}</h4>
+                        <div class="text-[11px] text-stone-400 font-bold">海拔: ${item.ele} m</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function scrollToSection(id) { 
+            const el = document.getElementById(id); 
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initRealMap();
+            initChart();
+            renderTimeline();
+            updateCard(0);
+        });
+    </script>
+</body>
+</html>
