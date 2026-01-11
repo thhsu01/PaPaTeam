@@ -38,7 +38,7 @@
                 <div class="flex space-x-4 md:space-x-8 text-xs md:text-sm font-medium text-slate-600">
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-sky-600">總覽</button>
                     <button onclick="scrollToSection('map-section')" class="nav-link hover:text-sky-600">路線</button>
-                    <button onclick="scrollToSection('history')" class="nav-link hover:text-sky-600">古道</button>
+                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-sky-600">景點</button>
                     <button onclick="scrollToSection('timeline')" class="nav-link hover:text-sky-600">時程</button>
                 </div>
             </div>
@@ -89,26 +89,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
-                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">徒步長度</div>
-                    <div class="text-2xl font-black text-slate-800">約 5.2<span class="text-sm font-normal text-slate-400 ml-1">km</span></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
-                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">最高標高</div>
-                    <div class="text-2xl font-black text-sky-600">153<span class="text-sm font-normal text-slate-400 ml-1">m</span></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
-                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">預估耗時</div>
-                    <div class="text-2xl font-black text-slate-800">3.5<span class="text-sm font-normal text-slate-400 ml-1">hr</span></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
-                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">累計上升</div>
-                    <div class="text-2xl font-black text-slate-800">~160<span class="text-sm font-normal text-slate-400 ml-1">m</span></div>
-                </div>
-            </div>
         </section>
 
         <!-- 1. Map Section -->
@@ -147,29 +127,82 @@
             </div>
         </section>
 
-        <!-- 2. Spotlight Section -->
-        <section id="history" class="space-y-8">
+        <!-- 2. Full Spots Guide -->
+        <section id="spots" class="space-y-12">
             <h2 class="text-2xl font-black text-slate-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-amber-500 rounded-full"></span>百年古道焦點
+                <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>行程景點百科
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
-                    <div class="relative z-10 space-y-6">
-                        <div class="inline-block px-3 py-1 bg-amber-600 rounded text-[10px] font-black tracking-widest uppercase">歷史地標</div>
-                        <h3 class="text-3xl font-black tracking-tighter">劉銘傳隧道<br><span class="text-amber-400">台灣首座鐵路隧道</span></h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            完工於 1890 年，又稱「竹仔寮隧道」。此處可觀察清代與日治時期的紅磚工法差異，隧道內部壯觀的天然石壁與通風井，是鐵道迷與歷史愛好者的必經之地。
+            
+            <!-- Quick View Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">八堵車站</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">鐵道咽喉重鎮，見證清領至現代的交通演進，是縱走故事的起點。</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">三角洲嶺北峰</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">擁有一顆二等三角點，是捕捉基隆河 U 型蜿蜒地形的絕佳攝影位。</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">獅球長壽公園</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">充滿在地人情味的社區公園，設有涼亭與石桌椅，適合在此調節呼吸。</p>
+                </div>
+            </div>
+
+            <!-- Deep Dive 1: Lookout -->
+            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <div class="inline-block px-3 py-1 bg-sky-600 rounded text-[10px] font-black tracking-widest uppercase">深度專題 01</div>
+                        <h3 class="text-4xl font-black tracking-tighter">獅球嶺觀景台：<br><span class="text-sky-400">基隆門戶的視覺衝擊</span></h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            這裡是全基隆最具指標性的攝影點。站在海拔 125 公尺的台上，你可以直視中山高速公路從大業隧道鑽出，像銀帶般延伸進基隆港。這份視覺動感結合了後方的基隆嶼與入港巨輪，交織出台灣絕無僅有的工業與港灣景觀。
                         </p>
+                        <div class="flex gap-4 pt-4 text-xs font-bold">
+                            <span class="px-4 py-2 bg-white/10 rounded-xl border border-white/20">📷 最佳取景：國道車流長曝</span>
+                            <span class="px-4 py-2 bg-white/10 rounded-xl border border-white/20">🧭 方位：正北面向港口</span>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 space-y-4 text-sm">
+                        <h4 class="text-sky-300 font-bold italic">💡 歷史小知識</h4>
+                        <p class="text-slate-300">這裡不只是景觀點，更是清代軍事要塞。由於扼守台北與基隆間的唯一缺口，在中法戰爭期間，劉銘傳曾在此親自指揮軍隊抵抗法軍。砲台遺址至今仍靜靜守護著這片港景。</p>
                     </div>
                 </div>
-                <div class="bg-sky-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
-                    <div class="relative z-10 space-y-6">
-                        <div class="inline-block px-3 py-1 bg-sky-600 rounded text-[10px] font-black tracking-widest uppercase">景觀視角</div>
-                        <h3 class="text-3xl font-black tracking-tighter">獅球嶺觀景台<br><span class="text-sky-300">基隆港全景之巔</span></h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">
-                            這裡是俯瞰基隆港、國道一號基隆端起點與繁華市區的絕佳點位。看著大船入港與車流穿梭隧道，感受這座港口城市的動脈跳動。
-                        </p>
+            </div>
+
+            <!-- Deep Dive 2: Tunnel -->
+            <div class="bg-amber-950 rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden">
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div class="order-2 lg:order-1 bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 space-y-4 text-sm">
+                        <h4 class="text-amber-300 font-bold italic">🏗️ 建築工法</h4>
+                        <p class="text-slate-300">隧道全長 235 公尺，有趣的是南北兩端的高度不一，這導致了施工時的銜接困難。隧道頂部設有獨特的排煙井，在蒸汽機車時代負責排煙，現在則是觀察蝙蝠與通風的重要設施。</p>
                     </div>
+                    <div class="order-1 lg:order-2 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-amber-600 rounded text-[10px] font-black tracking-widest uppercase">深度專題 02</div>
+                        <h3 class="text-4xl font-black tracking-tighter">劉銘傳隧道：<br><span class="text-amber-400">穿越百年的鐵道殘影</span></h3>
+                        <p class="text-slate-400 leading-relaxed">
+                            正式名稱為「竹仔寮隧道」，它是台灣首座鐵路隧道。這座隧道見證了清朝時期劉銘傳推動現代化的雄心。穿過隧道時，你可以觀察到混和了紅磚、石塊與日治時期修補的痕跡，每一塊磚石都刻劃著台灣交通近代化的辛酸史。
+                        </p>
+                        <ul class="space-y-2 text-xs text-amber-200/70">
+                            <li>• 1887年動工，1890年完工。</li>
+                            <li>• 列為國定古蹟，近期甫完成結構修復。</li>
+                            <li>• 內部涼爽，是夏日避暑的天然冷氣房。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing Spots -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">獅球嶺北峰</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">環境原始且清幽，是稜線上的生態保留區，常有猛禽在此盤旋上升。</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                    <h4 class="font-bold text-slate-800 mb-2">基隆車站</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">現代化的終點站。走出車站即是海港，為歷史縱走劃下現代感的句點。</p>
                 </div>
             </div>
         </section>
@@ -196,30 +229,30 @@
         </section>
 
         <footer class="text-center py-20 border-t border-slate-100">
-            <p class="text-slate-400 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 獅球稜線歷史縱走</p>
+            <p class="text-slate-400 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 獅球稜線全導覽</p>
         </footer>
     </main>
 
     <script>
         const schedule = [
             { lat: 25.108410, lng: 121.729033, time: "09:00", loc: "八堵車站", dist: 0.00, ele: 24, pos: "起點", 
-              desc: "行程起點。建議在此整理裝備，完成最後補給。", advice: "檢查交通卡餘額。" },
+              desc: "行程起點。位於基隆河谷交通要衝，建議在此整理裝備。", advice: "檢查交通卡餘額。" },
             { lat: 25.116045, lng: 121.730965, time: "09:36", loc: "登山口", dist: 0.90, ele: 32, pos: "出發", 
-              desc: "由柏油路進入山徑，開始緩步爬升。", advice: "調整呼吸，準備上坡。" },
+              desc: "由市區轉入山徑，感受氣溫與景觀的劇烈變化。", advice: "調整呼吸節奏。" },
             { lat: 25.116081, lng: 121.732702, time: "09:44", loc: "三角洲嶺北峰", dist: 1.10, ele: 130, pos: "山頭", 
-              desc: "短距離快速爬升，可在此小歇回頭望向八堵山谷。", advice: "注意路面樹根。" },
+              desc: "擁有開闊視野，可完整觀看基隆河的蛇行之美。", advice: "拍照注意重心。" },
             { lat: 25.118770, lng: 121.734570, time: "10:00", loc: "獅球長壽公園", dist: 1.50, ele: 110, pos: "休閒", 
-              desc: "稜線上的休憩核心，是居民常聚集的社交場域。", advice: "水份補充點。" },
+              desc: "稜線上的核心休息區，兩側皆有豐富的次生林生態。", advice: "水分補充點。" },
             { lat: 25.119095, lng: 121.737462, time: "10:12", loc: "獅球嶺山 (H153m)", dist: 1.80, ele: 153, pos: "最高點", 
-              desc: "抵達此行最高點。附近有古砲台遺跡，歷史感濃厚。", advice: "適合全隊大合照。" },
+              desc: "中法戰爭古戰場。砲台遺跡散落林間，氛圍肅穆。", advice: "適合全隊合照。" },
             { lat: 25.121063, lng: 121.734472, time: "10:28", loc: "獅球嶺觀景台", dist: 2.20, ele: 125, pos: "展望", 
-              desc: "無敵港景。包含觀看展望時間。", advice: "必看：基隆港與國道交織奇景。" },
+              desc: "必看亮點。俯瞰港區大景與國道車流長龍。", advice: "停留時間 15 分鐘看大船。" },
             { lat: 25.121406, lng: 121.733981, time: "10:34", loc: "獅球嶺北峰", dist: 2.35, ele: 116, pos: "稜線", 
-              desc: "延續觀景視角，進入下行段前的最後高地。", advice: "開始準備下山。" },
+              desc: "延續觀景視角，進入下行段前的最後高地。", advice: "準備開始陡降路段。" },
             { lat: 25.125800, lng: 121.731855, time: "11:08", loc: "劉銘傳隧道", dist: 3.20, ele: 50, pos: "古蹟", 
-              desc: "歷史精華區。包含隧道內部觀賞與解說時間。", advice: "隧道涼爽，適合調節體溫。" },
+              desc: "國定古蹟。體驗台灣第一座鐵道隧道的宏偉感。", advice: "隧道內涼爽，適合作為散熱點。" },
             { lat: 25.1315, lng: 121.7390, time: "12:28", loc: "基隆車站 (解散)", dist: 5.20, ele: 10, pos: "終點", 
-              desc: "抵達基隆市區核心，結束豐富的地景縱走。", advice: "可前往廟口夜市享用午餐。" }
+              desc: "抵達基隆港邊。可前往廟口夜市享用慶功午餐。", advice: "行程圓滿完成！" }
         ];
 
         let map, chart, markers = [];
