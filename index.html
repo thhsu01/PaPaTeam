@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>爬爬小隊 | 計畫行程導覽</title>
-    <!-- 修正：移除 Markdown 語法，恢復標準 CDN 連結 -->
+    <!-- 修正：移除所有 Markdown 連結語法，恢復標準 CDN 載入 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -111,7 +111,7 @@
                             </div>
                             <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">內溝山系 O 型全系列縱走</h3>
                             <p class="text-slate-600 mb-6 line-clamp-2">
-                                老鷲尖山以其獨特的地形與視野著稱，是資深山友不容錯過的經典挑戰。準備好迎接壯麗的雲海了嗎？
+                                老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。準備好迎接壯麗的雲海了嗎？
                             </p>
                             <div class="flex items-center text-emerald-700 font-bold">
                                 查看詳情 
@@ -270,19 +270,25 @@
                 </a>
 
                 <!-- 1. 火炎山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="火炎山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年12月13日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">苗栗三義</span>
+                <a href="https://thhsu01.github.io/PaPaTeam/huoyianshan.html" class="group">
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                        <div class="relative h-48 overflow-hidden bg-slate-200">
+                            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="火炎山">
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">火炎山、北鞍古道 O 走</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">體驗台版大峽谷的壯闊地貌，在礫岩與紅土之間感受大自然的鬼斧神工。</p>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2 text-xs font-semibold">
+                                <span class="text-slate-500 font-bold">2025年12月13日</span>
+                                <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">苗栗三義</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">火炎山、北鞍古道 O 走</h3>
+                            <p class="text-sm text-slate-600 line-clamp-2">體驗台版大峽谷的壯闊地貌，在礫岩與紅土之間感受大自然的鬼斧神工。</p>
+                            <div class="mt-4 flex items-center text-emerald-700 text-sm font-bold">
+                                閱讀行程紀錄 
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- 2. 大崙頭尾山 -->
                 <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
