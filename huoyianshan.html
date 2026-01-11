@@ -112,7 +112,8 @@
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">火炎山、北鞍古道 O 走</h1>
                 <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
-                    本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。
+                    本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。<br>
+                    <span class="font-bold text-orange-600 mt-2 block">全程距離約 7.5 公里</span>
                 </p>
             </div>
 
@@ -122,7 +123,7 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合起點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">正松泉收費停車場</span>
-                        <span class="text-xs text-stone-500 mt-1">方便停車，步行即可抵達登山口</span>
+                        <span class="text-xs text-stone-500 mt-1">全程距離約 7.5 公里 / 方便停車</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">活動日期</span>
@@ -207,7 +208,7 @@
                         <div class="bg-black/20 backdrop-blur-md p-6 rounded-3xl space-y-4">
                             <h4 class="font-bold text-white text-xl">📸 攝影與觀察指南</h4>
                             <ul class="list-disc list-inside text-sm space-y-2 opacity-90">
-                                <li><strong>黃金時刻：</strong> 選擇清晨或傍晚，低角度光線能勾勒出溝壑的陰影層次。</li>
+                                <li><strong>黃金時刻：</strong> 選擇清靈或傍晚，低角度光線能勾勒出溝壑的陰影層次。</li>
                                 <li><strong>微觀觀察：</strong> 仔細看山壁，你會發現圓潤的礫石，那是古代大漢溪流域的河床遺跡。</li>
                                 <li><strong>安全警戒：</strong> 崖邊地質極不穩定，切勿跨越拉繩，避免因重力導致的邊坡坍塌。</li>
                             </ul>
@@ -269,8 +270,8 @@
         <section id="timeline">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
-                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄紀錄</h2>
-                    <p class="text-stone-500 mt-2 text-sm">2025/12/13 08:00 正式出發。</p>
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄</h2>
+                    <p class="text-stone-500 mt-2 text-sm">2025/12/13 08:10 正式出發。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0" id="timeline-container">
@@ -287,35 +288,38 @@
         function openNavigation() { window.open("https://www.google.com/maps/dir/?api=1&destination=24.358077127978664,120.7361309924151", "_blank"); }
         let currentWaypointIndex = 0;
 
-        // 行程陣列
         const schedule = [
             { 
-                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:00", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
-                desc: "這裡是火炎山最著名的私人收費停車場（一次約 50 元）。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。" 
+                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:10", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
+                desc: "這裡是火炎山最著名的私人收費停車場。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。" 
             },
             { 
-                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:15", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
+                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:28", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
                 desc: "從這裡開始進入森林步道。這段路徑相對於稜線較為平緩，也是回程 O 走下山的主要路徑。" 
             },
             { 
-                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:45", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
-                desc: "這是一個簡易的石砌土地公廟，是登山客的精神寄託與重要的折返點/休息處。廟前空地寬廣，適合全隊整隊與補充體力。" 
+                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:46", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
+                desc: "這是一個簡易的石砌土地公廟，是登山客的精神寄託與折返點。廟前空地寬廣，適合全隊整隊與補充體力。" 
             },
             { 
-                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:15", loc: "火炎山三角點", ele: 601, pos: "最高點", 
-                desc: "標高 601m，設有三等三角點。這裡是整段行程的物理最高點，雖然展望不如稜線開闊，但標誌性的立牌是每位山友必拍的登頂證明。" 
+                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:05", loc: "火炎山三角點", ele: 601, pos: "最高點", 
+                desc: "標高 601m，設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。" 
             },
             { 
-                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:30", loc: "山頂休息區", ele: 565, pos: "大休息區", 
-                desc: "這裡設有許多木製桌椅，甚至有熱心山友搭建的棚架。全隊在此進行午休，享受山林間的微風。此處海拔約 565 公尺。" 
+                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:15", loc: "山頂休息區", ele: 565, pos: "大休息區", 
+                desc: "這裡設有許多木製桌椅，全隊在此進行短暫休息，享受山林間的微風。此處海拔約 565 公尺。" 
             },
             { 
-                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:30", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
+                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:40", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
                 desc: "火炎山精華景觀，壯闊的紅土崩壁。地質脆弱請勿靠近邊緣，於拉繩後方欣賞美景。"
             },
             { 
-                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:10", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
-                desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，完成這場精彩的 O 型走。" 
+                lat: 24.36132940122552, lng: 120.73345001438366, time: "13:12", loc: "南火炎山", ele: 251, pos: "景點", 
+                desc: "位於下山路段的小山頭，海拔 251 公尺。從此處可以回望剛才走過的峽谷稜線。" 
+            },
+            { 
+                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:20", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
+                desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，順利完成這場精彩的 O 型走。" 
             }
         ];
 
