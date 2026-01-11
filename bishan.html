@@ -42,6 +42,8 @@
                     <button onclick="scrollToSection('map-section')" class="nav-link hover:text-pink-600">路線</button>
                     <button onclick="scrollToSection('videos')" class="nav-link hover:text-pink-600">影片</button>
                     <button onclick="scrollToSection('spots')" class="nav-link hover:text-pink-600">亮點</button>
+                    <!-- NEW: Elevation Section Link -->
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-pink-600">高度</button>
                     <button onclick="scrollToSection('timeline')" class="nav-link hover:text-pink-600">時程</button>
                 </div>
             </div>
@@ -100,12 +102,12 @@
             </div>
             
             <!-- Statistics Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">徒步長度</div>
                     <div class="text-2xl font-black text-stone-800">約 8.00<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">累計上升</div>
                     <div class="text-2xl font-black text-pink-600">~510<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
                 </div>
@@ -279,12 +281,12 @@
                         <div class="space-y-6 text-stone-400 leading-relaxed text-sm">
                             <p><strong class="text-white">【品種之魂：椿寒櫻的幽香】</strong><br>
                             這段被譽為全台最美「櫻花隧道」的路徑，是由早期碧山巖廟方細心照料的「椿寒櫻」構成。這種品種是櫻桃與寒櫻的天然雜交種，花簇密集且呈粉白色。最迷人之處在於其特有的清雅幽香，每年二月下旬滿開時，整段石階都籠罩在淡淡的花香與粉紅迷霧中。</p>
-                            <p><strong class="text-white">【視覺層次：台北 101 的櫻花窗框】</strong><br>
+                            <p><strong class="text-white">【視覺構圖：台北 101 的櫻花窗框】</strong><br>
                             站立在清風亭觀景台（H250m），視野與台北 101 幾乎平行。攝影者能透過層層疊疊的櫻花枝枒，將遠方的摩天大樓框入鏡頭中。由於清風亭面向東南方，清晨的側射光能讓櫻花呈現通透質感，是台北少數能完美捕捉宗教古建築與現代化都會交織的地點。</p>
                         </div>
                     </div>
                     <div class="lg:w-2/5 p-8 bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10">
-                        <h4 class="text-pink-400 font-bold mb-4 italic text-sm">清風亭賞櫻指南</h4>
+                        <h4 class="text-pink-400 font-bold mb-4 italic text-sm">賞櫻與攝影指南</h4>
                         <ul class="space-y-5 text-xs text-stone-300">
                             <li>🌸 花期精確：2/20 - 3/05 為歷史平均滿開期，建議鎖定這兩週。</li>
                             <li>📸 鏡頭選擇：長焦段能縮短 101 與櫻花的視覺距離，創造極強的壓縮感。</li>
@@ -295,7 +297,7 @@
             </div>
         </section>
 
-        <!-- 5. Elevation Section -->
+        <!-- 5. Elevation Section (分析) -->
         <section id="analysis">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
                 <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
@@ -312,7 +314,7 @@
         <section id="timeline">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100 text-left">
                 <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>
-                詳細時程估算 (1.5km/hr校準版)
+                詳細時程估算 (8.00km校準版)
             </h2>
             <div class="relative pl-6" id="timeline-container">
                 <div class="timeline-line"></div>
@@ -333,20 +335,20 @@
               desc: "集合地點。位於內湖核心商業區，建議在此完成最後的物資補給與裝備檢查。", advice: "檢查水份與防曬。" },
             { lat: 25.087463, lng: 121.595667, time: "08:24", loc: "梘頭山 (H80m)", dist: 0.60, ele: 80, pos: "熱身", 
               desc: "緩步爬升的小山頭。路徑開闊且坡度溫和，適合作為縱走初段的調整與熱身。", advice: "穩定呼吸節奏。" },
-            { lat: 25.100548, lng: 121.596898, time: "10:00", loc: "龍船岩 (H294m)", dist: 2.50, ele: 294, pos: "地景", 
-              desc: "白色巨大斜岩如龍船。因岩層傾斜 45 度，在此可拍出具極限視覺感的照片。", advice: "拍照注意重心，岩面略滑。" },
+            { lat: 25.100548, lng: 121.596898, time: "10:00", loc: "龍船岩 (H294m)", dist: 2.50, ele: 294, pos: "奇觀", 
+              desc: "白色巨大石英砂岩如龍船。因岩層傾斜 45 度，在此可拍出具極限運動視覺感，展望極佳。", advice: "拍照注意重心與岩面濕滑。" },
             { lat: 25.104783, lng: 121.599025, time: "10:43", loc: "開眼山 (H401m)", dist: 3.20, ele: 401, pos: "展望", 
-              desc: "稜線重要高峰。由此可飽覽大湖公園與汐止盆地全景，此段林蔭舒適。", advice: "小休補水點。" },
+              desc: "稜線重要高峰。由此可飽覽大湖公園及汐止盆地，林蔭涼爽。", advice: "小休補水點。" },
             { lat: 25.109007, lng: 121.598298, time: "11:15", loc: "白石湖山 (H457m)", dist: 4.00, ele: 457, pos: "森林", 
-              desc: "稜線森林路段。環境原始且清幽，可感受內湖特有的森林芬多精。", advice: "小心落葉路段滑動。" },
+              desc: "稜線森林段。環境清幽且原始，可感受內湖山區特有的次生林芬多精。", advice: "小心落葉路段滑動。" },
             { lat: 25.114160, lng: 121.595617, time: "12:15", loc: "碧山 (H518m)", dist: 5.00, ele: 518, pos: "極點", 
-              desc: "本次行程最高標高 518m。雖然基點無展望，但象徵縱走的挑戰巔峰與體力頂點。", advice: "大休息 20 分鐘，全體合照。" },
+              desc: "本次行程最高標高（518m）。雖然基點無展望，但象徵縱走的挑戰巔峰與體力頂點。", advice: "大休息 20 分鐘，全體合照。" },
             { lat: 25.110812, lng: 121.587821, time: "13:15", loc: "甜水鴛鴦湖 (H430m)", dist: 6.00, ele: 430, pos: "幽境", 
-              desc: "隱身林間的靜謐湖泊。海拔高且常有雲霧籠罩，氛圍如夢似幻。", advice: "在此享受森林靜謐感。" },
+              desc: "隱身林間的靜謐湖泊。海拔極高且人煙罕至，常有雲霧籠罩，彷彿人間仙境。", advice: "在此享受森林靜謐。" },
             { lat: 25.099647, lng: 121.587372, time: "14:15", loc: "白石湖吊橋 (H230m)", dist: 7.50, ele: 230, pos: "文化", 
-              desc: "紫色龍骨吊橋地標。解決了早期兩側山頭通行的困難，是觀光與攝影聖地。", advice: "人潮眾多，請依序過橋。" },
+              desc: "紫色龍骨吊橋。由此回歸休閒農業區，不僅美觀更能感受當地地靈意象。", advice: "人潮眾多，請注意通行。" },
             { lat: 25.096443, lng: 121.588504, time: "14:29", loc: "碧山巖清風亭 (H250m)", dist: 7.85, ele: 250, pos: "櫻紅", 
-              desc: "核心觀景點。櫻花季時石階如粉紅隧道，提供無死角台北盆地視野。", advice: "必看亮點，值得久留拍攝 101。" },
+              desc: "核心觀景點與 460 階櫻花隧道匯集處。提供無死角台北盆地視野，櫻花季美不勝收。", advice: "必看亮點，值得久留拍攝。" },
             { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:35", loc: "碧山巖公車站", dist: 8.00, ele: 240, pos: "終點", 
               desc: "徒步行程終點。在此準備接駁回內湖市區。", advice: "清點裝備，候車回程。" },
             { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", dist: 8.00, ele: 30, pos: "回程", 
@@ -378,10 +380,10 @@
             const walkingCoords = schedule.slice(0, 10).map(d => [d.lat, d.lng]);
             L.polyline(walkingCoords, { color: '#ec4899', weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
             schedule.forEach((d, i) => {
-                const isSakuraNode = d.loc.includes("清風亭");
+                const isSakura = d.loc.includes("清風亭");
                 const circle = L.circleMarker([d.lat, d.lng], {
                     radius: i === 0 || i === schedule.length - 1 || d.pos === "極點" ? 8 : 6,
-                    fillColor: isSakuraNode ? '#db2777' : (i === 0 ? '#ec4899' : '#1c1917'),
+                    fillColor: isSakura ? '#db2777' : (i === 0 ? '#ec4899' : '#1c1917'),
                     color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
