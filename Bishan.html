@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>內湖稜線之巔：全縱走連峰 + 碧山巖櫻紅秘境 - 爬爬小隊</title>
+    <title>內湖稜線之巔：連峰大縱走 + 櫻紅秘境 - 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -11,83 +11,27 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
-        
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #fcfaf7;
-            color: #44403c;
-        }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-        }
-
-        #realMap {
-            width: 100%;
-            height: 480px;
-            border-radius: 1.5rem;
-            z-index: 10;
-            border: 1px solid #e2e8f0;
-        }
-
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fcfaf7; color: #44403c; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: auto; height: 320px; }
+        #realMap { width: 100%; height: 480px; border-radius: 1.5rem; z-index: 10; border: 1px solid #e2e8f0; }
         html { scroll-behavior: smooth; }
-
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f5f5f4; }
         ::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 10px; }
-
-        .card-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -5px rgba(244, 114, 182, 0.1);
-        }
-        
-        .timeline-line {
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #e7e5e4;
-            z-index: 0;
-        }
-
-        .nav-link {
-            transition: all 0.2s ease;
-            position: relative;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #ec4899;
-            transition: width 0.2s ease;
-        }
-        .nav-link:hover:after {
-            width: 100%;
-        }
-
-        .info-glass {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(236, 72, 153, 0.1);
-        }
+        .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(244, 114, 182, 0.1); transition: all 0.3s; }
+        .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background-color: #e7e5e4; z-index: 0; }
+        .info-glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(236, 72, 153, 0.1); }
+        .nav-link { position: relative; transition: all 0.2s; }
+        .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #ec4899; transition: width 0.2s; }
+        .nav-link:hover:after { width: 100%; }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-100">
 
     <!-- Top Navigation -->
-    <nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-stone-200 text-left">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
             <div class="flex justify-between h-16 items-center">
-                <!-- Navigation Logo Linked to index.html -->
                 <a href="index.html" class="flex items-center gap-2 group transition-all duration-300 hover:opacity-80">
                     <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">爬</div>
                     <span class="font-bold text-stone-800 tracking-tight italic hidden sm:inline">爬爬小隊：內湖稜線全縱走+賞櫻</span>
@@ -96,7 +40,7 @@
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-pink-600">總覽</button>
                     <button onclick="scrollToSection('map-section')" class="nav-link hover:text-pink-600">路線</button>
                     <button onclick="scrollToSection('videos')" class="nav-link hover:text-pink-600">影片</button>
-                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-pink-600">亮點</button>
+                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-pink-600">專題</button>
                     <button onclick="scrollToSection('timeline')" class="nav-link hover:text-pink-600">時程</button>
                 </div>
             </div>
@@ -105,58 +49,58 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 text-left">
 
-        <!-- 1. Header Area -->
+        <!-- Header -->
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-100 text-pink-600 rounded-full text-[10px] font-bold tracking-widest uppercase border border-pink-200">
-                    Pace: Leisure 1.5km/hr | 流程優化版
+                    Pace: Leisure 1.5km/hr | 櫻花盛放期計畫
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">龍船奇岩，清風櫻影<br><span class="text-stone-400 text-2xl md:text-4xl font-bold italic">內湖山系悠閒縱走百科</span></h1>
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">龍船奇岩，清風櫻影<br><span class="text-stone-400 text-2xl md:text-4xl font-bold italic">內湖稜線縱走百科</span></h1>
                 <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
-                    包含龍船岩的地質震撼與碧山巖 460 階櫻花隧道的文化專題介紹。
+                    包含龍船岩的地質震撼與碧山巖 460 階櫻花隧道的深度文化導覽。
                 </p>
             </div>
 
-            <!-- Meeting Info Block -->
+            <!-- Meeting Info -->
             <div class="max-w-6xl mx-auto space-y-4">
                 <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left border border-stone-200">
                     <div class="flex flex-col items-center md:items-start gap-1">
-                        <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">集合出發時間</span>
-                        <input type="date" id="departure-date" class="bg-transparent font-bold text-stone-800 focus:outline-none" onchange="updateWeatherForecast(this.value)">
-                        <span class="text-xs text-stone-400 mt-1">預計 08:00 於內湖站集合</span>
+                        <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">預計活動日期</span>
+                        <span class="text-xl font-bold text-stone-800 leading-tight">2月中至2月底期間</span>
+                        <span class="text-xs text-stone-400 mt-1">配合椿寒櫻滿開花期</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
-                        <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">核心節點</span>
-                        <span class="text-xl font-bold text-stone-800 leading-tight">碧山巖清風亭</span>
-                        <span class="text-xs text-stone-400 mt-1">H250m 賞櫻觀景台</span>
+                        <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">集合地點</span>
+                        <span class="text-xl font-bold text-stone-800 leading-tight">捷運內湖站</span>
+                        <span class="text-xs text-stone-400 mt-1">1 號出口廣場</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">下山交通</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">小 2 區間車</span>
-                        <span class="text-xs text-stone-400 mt-1">直達捷運內湖站</span>
+                        <span class="text-xs text-stone-400 mt-1">接駁回內湖捷運站</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 bg-pink-50/50 p-2 rounded-xl">
-                        <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">動態天氣預報</span>
+                        <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">日期限定預報</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight flex items-center gap-2">
-                            <span id="weather-icon">⛅</span>
-                            <span id="weather-temp">--°C</span>
+                            <span id="weather-icon">🌸</span>
+                            <span id="weather-temp">18-22°C</span>
                         </span>
-                        <span class="text-xs text-pink-500 mt-1 font-medium" id="weather-desc">請選日期抓取預報</span>
+                        <span class="text-xs text-pink-500 mt-1 font-medium">適合賞櫻：涼爽舒適</span>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
                     <button onclick="openNavigation()" class="flex-1 py-4 bg-stone-800 text-white rounded-2xl font-bold shadow-xl hover:bg-black transition-all flex items-center justify-center gap-2">
                         <span>🧭 導航至集合點</span>
                     </button>
-                    <a href="https://ebus.gov.taipei/VsSimpleMap?routeid=0151000220&gb=1" target="_blank" class="flex-1 py-4 bg-pink-600 text-white rounded-2xl font-bold shadow-xl hover:bg-pink-700 transition-all flex items-center justify-center gap-2">
-                        <span>🚌 公車即時動態(地圖版)</span>
+                    <a href="https://ebus.gov.taipei/EBus/VsSimpleMap?routeid=0151000220&gb=1" target="_blank" class="flex-1 py-4 bg-pink-600 text-white rounded-2xl font-bold shadow-xl hover:bg-pink-700 transition-all flex items-center justify-center gap-2">
+                        <span>🚌 小2公車即時動態</span>
                     </a>
                 </div>
             </div>
-            
-            <!-- Statistics Cards -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
-                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">徒步長度</div>
                     <div class="text-2xl font-black text-stone-800">約 8.00<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
                 </div>
@@ -164,55 +108,45 @@
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">累計上升</div>
                     <div class="text-2xl font-black text-pink-600">~510<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">預估耗時</div>
                     <div class="text-2xl font-black text-stone-800">6.5<span class="text-sm font-normal text-stone-400 ml-1">hr</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">時速基計</div>
                     <div class="text-2xl font-black text-stone-800">1.5<span class="text-sm font-normal text-stone-400 ml-1">k/h</span></div>
                 </div>
-                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all col-span-2 md:col-span-1">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all col-span-2 md:col-span-1 text-left">
                     <div class="text-stone-400 text-[10px] font-black uppercase mb-2">最高標高</div>
                     <div class="text-2xl font-black text-stone-800">518<span class="text-sm font-normal text-stone-400 ml-1">m</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. Interactive Map Section -->
+        <!-- 1. Map Section -->
         <section id="map-section" class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100 text-left">
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                        <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>
-                        縱走路線百科
+                        <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>縱走百科地圖
                     </h2>
-                    <p class="text-stone-500 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
+                    <p class="text-stone-500 mt-2 text-sm">數據：8km 縱走路徑。碧山巖公車站已校準至最新座標。</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="prevWaypoint()" class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all">&lt;</button>
                     <button onclick="nextWaypoint()" class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all">&gt;</button>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div class="lg:col-span-2">
-                    <div id="realMap"></div>
-                </div>
+                <div class="lg:col-span-2"><div id="realMap"></div></div>
                 <div class="lg:col-span-1">
-                    <div id="wp-card" class="h-full bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between transition-all duration-500 text-left">
+                    <div id="wp-card" class="h-full bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between transition-all duration-500">
                         <div id="card-content">
                             <div id="wp-pos" class="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded mb-6 tracking-widest uppercase">站點資訊</div>
-                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-4 tracking-tight">請選擇站點</h3>
+                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-4">請選擇航點</h3>
                             <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div class="bg-white p-3 rounded-xl border border-stone-100">
-                                    <span class="text-[10px] text-stone-400 block mb-1">里程</span>
-                                    <span class="font-bold text-stone-700"><span id="wp-dist">0.00</span> km</span>
-                                </div>
-                                <div class="bg-white p-3 rounded-xl border border-stone-100">
-                                    <span class="text-[10px] text-stone-400 block mb-1">海拔</span>
-                                    <span class="font-bold text-stone-700"><span id="wp-ele">0</span> m</span>
-                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-400 block mb-1">累積里程</span><span class="font-bold text-stone-700"><span id="wp-dist">0.00</span> km</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-400 block mb-1">海拔</span><span class="font-bold text-stone-700"><span id="wp-ele">0</span> m</span></div>
                             </div>
                             <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm"></p>
                         </div>
@@ -225,20 +159,19 @@
             </div>
         </section>
 
-        <!-- 3. Reference Videos Section -->
+        <!-- 2. Reference Videos Section -->
         <section id="videos" class="space-y-8 text-left">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-red-600 rounded-full"></span>
-                實境影音參考
+                <span class="w-2.5 h-8 bg-red-600 rounded-full"></span>實境影音參考
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <a href="https://www.youtube.com/watch?v=8Cz7rkQLhCo" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
                     <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
                         <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    <div class="md:w-2/3 p-8 space-y-2">
+                    <div class="md:w-2/3 p-8 space-y-2 text-left">
                         <div class="text-[10px] font-black text-pink-600 uppercase tracking-widest">實境導覽 01</div>
-                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-pink-600 transition-colors">內湖連峰縱走：龍船岩、開眼山、碧山實錄</h3>
+                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-pink-600 transition-colors">內湖連峰縱走：龍船岩至碧山全實錄</h3>
                         <p class="text-xs text-stone-400">頻道：Celia Lin 山林記錄</p>
                     </div>
                 </a>
@@ -246,81 +179,65 @@
                     <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
                         <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
-                    <div class="md:w-2/3 p-8 space-y-2">
+                    <div class="md:w-2/3 p-8 space-y-2 text-left">
                         <div class="text-[10px] font-black text-red-600 uppercase tracking-widest">實境導覽 02</div>
-                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月滿開美景與登山攻略</h3>
+                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月賞櫻全攻略</h3>
                         <p class="text-xs text-stone-400">頻道：胡一刀</p>
                     </div>
                 </a>
             </div>
         </section>
 
-        <!-- 4. SPECIAL FOCUS: SAKURA -->
+        <!-- 3. Sakura Special -->
         <section id="spots" class="space-y-8 text-left">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-pink-500 rounded-full"></span>
-                年度核心主題：碧山巖櫻花盛宴
+                <span class="w-2.5 h-8 bg-pink-500 rounded-full"></span>碧山巖櫻花盛宴
             </h2>
-            
             <div class="bg-stone-900 text-white p-10 rounded-[3rem] shadow-2xl border border-stone-800 relative overflow-hidden">
-                <div class="flex flex-col lg:flex-row gap-12 relative z-10 text-left">
+                <div class="flex flex-col lg:flex-row gap-12 relative z-10">
                     <div class="lg:w-3/5 space-y-8">
                         <div class="inline-block px-3 py-1 bg-pink-600 rounded text-[10px] font-black tracking-widest uppercase">碧山巖清風亭專題</div>
                         <h3 class="text-4xl font-black tracking-tighter leading-tight">清風亭櫻花隧道：<br><span class="text-pink-400">一場與 460 階石階的粉紅邂逅</span></h3>
                         <div class="space-y-6 text-stone-400 leading-relaxed text-sm">
-                            <p><strong class="text-white">【粉色隧道的靈魂：椿寒櫻】</strong><br>
-                            碧山巖山門前這段知名的櫻花隧道，是由早期廟方細心照料的「椿寒櫻」所構成。這種品種是櫻桃與寒櫻的雜交種，花期早且花簇密集。最特別的是它帶有一股淡淡的幽香，微風吹過清風亭時，能感受到視覺與嗅覺的雙重療癒。每年二月下旬至三月初，這段約 460 階的梯級會被粉紅花瓣覆蓋，形成如夢似幻的空間。</p>
-                            <p><strong class="text-white">【視覺構圖：台北 101 的櫻花窗框】</strong><br>
-                            站立於清風亭觀景台，視野不僅限於腳下的櫻花，更擁有全內湖最具代表性的視角：透過層層粉色花海的縫隙，可以精準捕捉到遠方矗立的台北 101 大樓。由於清風亭海拔約 250 公尺，此處的高度與盆地對比度極佳，是全台少數能同時拍到宗教文化與繁華都會共存的攝影神位。</p>
+                            <p><strong class="text-white">【品種與香氣】</strong><br>由廟方照料的「椿寒櫻」構成，花期極早且花簇密集。最特別的是它帶有淡淡幽香，微風吹過清風亭時，視覺與嗅覺雙重療癒。每年二月下旬，石階會被粉紅花瓣覆蓋。</p>
+                            <p><strong class="text-white">【視覺構圖】</strong><br>站立於清風亭觀景台，透過層層粉色花海縫隙，可捕捉遠方矗立的台北 101 大樓。此處海拔 250 公尺，是少數能同時拍到宗教文化、粉紅花海與摩天大樓的神位。</p>
                         </div>
                     </div>
                     <div class="lg:w-2/5 p-8 bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10">
                         <h4 class="text-pink-400 font-bold mb-4 italic text-sm">賞櫻與攝影指南</h4>
                         <ul class="space-y-5 text-xs text-stone-300">
-                            <li class="flex gap-3">
-                                <span class="text-pink-500">🌸</span>
-                                <span>花期建議：2/20 - 3/10 為最佳觀賞期。</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <span class="text-pink-500">📸</span>
-                                <span>建議使用長焦段 (85mm以上) 捕捉櫻花簇擁 101 的壓縮感。</span>
-                            </li>
-                            <li class="flex gap-3">
-                                <span class="text-pink-500">🍵</span>
-                                <span>清風亭旁備有公廁與洗手台，是縱走完賽後的最佳整理點。</span>
-                            </li>
+                            <li>🌸 花期：2/15 - 3/05。建議平日 09:00 前抵達。</li>
+                            <li>📸 鏡頭：建議使用長焦段捕捉櫻花簇擁 101 的壓縮感。</li>
+                            <li>🍵 清風亭旁備有洗手台，是縱走後的最佳整理點。</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Elevation Section -->
+        <!-- 4. Elevation Chart -->
         <section id="analysis">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
-                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                海拔高度剖面
+                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>海拔高度剖面
             </h2>
             <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
-                <div class="chart-container">
-                    <canvas id="elevationChart"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="elevationChart"></canvas></div>
             </div>
         </section>
 
-        <!-- 6. Timeline Section -->
+        <!-- 5. Detailed Timeline -->
         <section id="timeline">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100 text-left">
-                <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>
-                詳細時程估算 (8.00km校準版)
+                <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>詳細時程估算 (1.5km/hr)
             </h2>
             <div class="relative pl-6" id="timeline-container">
                 <div class="timeline-line"></div>
+                <!-- JS Inserted -->
             </div>
         </section>
 
         <footer class="text-center py-20 border-t border-stone-100">
-            <p class="text-stone-400 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 內湖稜線連峰縱走百科</p>
+            <p class="text-stone-400 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 數據實證縱走百科</p>
         </footer>
     </main>
 
@@ -329,47 +246,31 @@
 
         const schedule = [
             { lat: 25.083766, lng: 121.594224, time: "08:00", loc: "捷運內湖站 1 號出口", dist: 0.00, ele: 30, pos: "起點", 
-              desc: "集合地點。位於內湖核心商業區，出發前建議先完成物資補給與裝備檢查。", advice: "檢查水份與防曬。" },
+              desc: "集合地點。位於內湖商業區，建議在此完成最後的物資補給與裝備檢查。", advice: "檢查水份與防曬。" },
             { lat: 25.087463, lng: 121.595667, time: "08:24", loc: "梘頭山 (H80m)", dist: 0.60, ele: 80, pos: "熱身", 
-              desc: "緩步爬升的小山頭。路徑開闊且坡度溫和，適合作為縱走初段的熱身訓練。", advice: "穩定呼吸節奏。" },
-            { lat: 25.100548, lng: 121.596898, time: "10:00", loc: "龍船岩 (H294m)", dist: 2.50, ele: 294, pos: "奇觀", 
-              desc: "白色巨大石英砂岩如龍船。因岩層傾斜 45 度，在此可拍出極限運動視覺感，展望極佳。", advice: "拍照注意重心與岩面濕滑。" },
+              desc: "緩步爬升的小山頭。路徑坡度溫和，適合作為縱走初段的調整與熱身。", advice: "穩定呼吸節奏。" },
+            { lat: 25.100548, lng: 121.596898, time: "10:00", loc: "龍船岩 (H294m)", dist: 2.50, ele: 294, pos: "地景", 
+              desc: "白色巨大斜岩如龍船。因岩層傾斜 45 度，在此可拍出具極限視覺感的照片。", advice: "拍照注意重心，岩面略滑。" },
             { lat: 25.104783, lng: 121.599025, time: "10:43", loc: "開眼山 (H401m)", dist: 3.20, ele: 401, pos: "展望", 
-              desc: "稜線重要高峰。由此可飽覽內湖、大湖公園及汐止盆地，林蔭涼爽。", advice: "小休補水點。" },
+              desc: "稜線重要高峰。由此可飽覽大湖公園與汐止盆地全景，此段林蔭舒適。", advice: "小休補水時間。" },
             { lat: 25.109007, lng: 121.598298, time: "11:15", loc: "白石湖山 (H457m)", dist: 4.00, ele: 457, pos: "森林", 
-              desc: "稜線森林段。環境清幽且原始，可感受內湖山區特有的次生林芬多精。", advice: "小心落葉路段滑動。" },
-            { lat: 25.114160, lng: 121.595617, time: "12:15", loc: "碧山 (H518m)", dist: 5.00, ele: 518, pos: "極點", 
-              desc: "本次行程最高標高（518m）。雖然基點無展望，但象徵縱走的挑戰巔峰。", advice: "大休息 20 分鐘，全體合照。" },
+              desc: "稜線森林路段。環境原始且清幽，可感受內湖特有的森林芬多精。", advice: "小心落葉路段滑動。" },
+            { lat: 25.114160, lng: 121.595617, time: "12:15", loc: "碧山 (H518m)", dist: 5.00, ele: 518, pos: "最高點", 
+              desc: "本次行程最高標高 518m。雖無展望，但象徵縱走的挑戰巔峰與體力頂點。", advice: "大休息 20 分鐘，全體合照。" },
             { lat: 25.110812, lng: 121.587821, time: "13:15", loc: "甜水鴛鴦湖 (H430m)", dist: 6.00, ele: 430, pos: "幽境", 
-              desc: "隱身林間的靜謐湖泊。海拔極高且人煙罕至，常有雲霧籠罩，彷彿人間仙境。", advice: "在此享受森林靜謐。" },
+              desc: "隱身林間的靜謐湖泊。海拔高且常有雲霧籠罩，氛圍如夢似幻。", advice: "在此享受森林靜謐感。" },
             { lat: 25.099647, lng: 121.587372, time: "14:15", loc: "白石湖吊橋 (H230m)", dist: 7.50, ele: 230, pos: "文化", 
-              desc: "紫色龍骨吊橋。由此回歸休閒農業區，不僅美觀更能感受當地地靈意象。", advice: "人潮眾多，請注意通行。" },
-            { lat: 25.096443, lng: 121.588504, time: "14:29", loc: "碧山巖清風亭 (H250m)", dist: 7.85, ele: 250, pos: "櫻紅", 
-              desc: "核心觀景點與 460 階櫻花隧道匯集處。提供無死角台北盆地視野，櫻花季美不勝收。", advice: "必看亮點，值得久留拍攝。" },
+              desc: "紫色龍骨吊橋地標。解決了早期兩側山頭通行的困難，是觀光與攝影聖地。", advice: "人潮眾多，請依序過橋。" },
+            { lat: 25.096443, lng: 121.588504, time: "14:29", loc: "碧山巖清風亭 (H250m)", dist: 7.85, ele: 250, pos: "賞櫻", 
+              desc: "核心觀景點。櫻花季時石階如粉紅隧道，提供無死角台北盆地視野。", advice: "必看亮點，值得久留拍攝 101。" },
             { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:35", loc: "碧山巖公車站", dist: 8.00, ele: 240, pos: "終點", 
-              desc: "徒步行程終點。在此準備接駁回內湖市區。", advice: "清點裝備，候車回程。" },
+              desc: "縱走徒步段結束。位於碧山巖入口前方，由此準備接駁回內湖市區。", advice: "清點裝備，候車回程。" },
             { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", dist: 8.00, ele: 30, pos: "回程", 
-              desc: "搭乘公車回到出發點，完成環型大縱走。", advice: "行程圓滿完成。" }
+              desc: "搭乘公車回到出發點，完成環型全縱走挑戰。", advice: "行程圓滿完成。" }
         ];
 
         let map, chart, markers = [];
         let currentWaypointIndex = 0;
-
-        async function updateWeatherForecast(dateString) {
-            const statusLabel = document.getElementById('weather-desc');
-            const tempLabel = document.getElementById('weather-temp');
-            const iconLabel = document.getElementById('weather-icon');
-            statusLabel.innerText = "查詢中...";
-            setTimeout(() => {
-                const date = new Date(dateString);
-                const month = date.getMonth() + 1;
-                if (month === 2 || month === 3) {
-                    tempLabel.innerText = "18°C"; statusLabel.innerText = "適合賞櫻：涼爽微雨"; iconLabel.innerText = "🌸";
-                } else {
-                    tempLabel.innerText = "24°C"; statusLabel.innerText = "適合出行：多雲時晴"; iconLabel.innerText = "⛅";
-                }
-            }, 800);
-        }
 
         function initRealMap() {
             map = L.map('realMap', { preferCanvas: true, center: [25.100, 121.595], zoom: 14 });
@@ -377,10 +278,10 @@
             const walkingCoords = schedule.slice(0, 10).map(d => [d.lat, d.lng]);
             L.polyline(walkingCoords, { color: '#ec4899', weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
             schedule.forEach((d, i) => {
-                const isSakuraNode = d.loc.includes("清風亭");
+                const isSakura = d.loc.includes("清風亭");
                 const circle = L.circleMarker([d.lat, d.lng], {
-                    radius: i === 0 || i === schedule.length - 1 || d.pos === "極點" ? 8 : 6,
-                    fillColor: isSakuraNode ? '#db2777' : (i === 0 ? '#ec4899' : '#1c1917'),
+                    radius: i === 0 || i === schedule.length - 1 || d.pos === "最高點" ? 8 : 6,
+                    fillColor: isSakura ? '#db2777' : (i === 0 ? '#ec4899' : '#1c1917'),
                     color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
@@ -394,10 +295,7 @@
                 type: 'line',
                 data: {
                     labels: schedule.map(d => d.loc.split(' ')[0]),
-                    datasets: [{
-                        label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#ec4899',
-                        borderWidth: 3, pointRadius: 4, fill: true, backgroundColor: 'rgba(236, 72, 153, 0.05)', tension: 0.4
-                    }]
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#ec4899', borderWidth: 3, pointRadius: 4, fill: true, backgroundColor: 'rgba(236, 72, 153, 0.05)', tension: 0.4 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 } } }
             });
@@ -422,13 +320,11 @@
             const container = document.getElementById('timeline-container');
             schedule.forEach((item, i) => {
                 const div = document.createElement('div');
-                div.className = "relative flex items-start mb-10 group cursor-pointer pl-8";
+                div.className = "relative flex items-start mb-12 group cursor-pointer pl-8";
                 div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
-                let color = i === 0 || i === schedule.length - 1 ? "bg-pink-600" : (item.pos === "極點" ? "bg-red-500" : "bg-stone-300");
+                let color = i === 0 || i === schedule.length - 1 ? "bg-pink-600" : (item.pos === "最高點" ? "bg-red-500" : "bg-stone-300");
                 div.innerHTML = `
-                    <div class="absolute left-0 w-12 flex justify-center z-10 pt-1">
-                        <div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div>
-                    </div>
+                    <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div></div>
                     <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all text-left">
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-lg font-black text-stone-800">${item.time}</span>
@@ -442,10 +338,7 @@
         }
 
         function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
-
-        window.onload = () => {
-            initRealMap(); initChart(); renderTimeline(); updateCard(0);
-        };
+        window.onload = () => { initRealMap(); initChart(); renderTimeline(); updateCard(0); };
     </script>
 </body>
 </html>
