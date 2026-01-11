@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獅球稜線：基隆門戶大縱走 - 爬爬小隊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; color: #334155; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: auto; height: 320px; }
+        #realMap { width: 100%; height: 500px; border-radius: 1.5rem; z-index: 10; border: 1px solid #e2e8f0; }
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 10px; }
+        .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -5px rgba(14, 165, 233, 0.1); transition: all 0.3s; }
+        .timeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background-color: #e2e8f0; z-index: 0; }
+        .info-glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.1); }
+        .nav-link { position: relative; transition: all 0.2s; }
+        .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #0ea5e9; transition: width 0.2s; }
+        .nav-link:hover:after { width: 100%; }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-100">
+
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center gap-2 group transition-all duration-300">
+                    <div class="w-9 h-9 bg-sky-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">爬</div>
+                    <span class="font-bold text-slate-800 tracking-tight italic hidden sm:inline">爬爬小隊：獅球嶺縱走百科</span>
+                </a>
+                <div class="flex space-x-4 md:space-x-8 text-xs md:text-sm font-medium text-slate-600">
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-sky-600">總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-sky-600">路線</button>
+                    <button onclick="scrollToSection('history')" class="nav-link hover:text-sky-600">古道</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-sky-600">時程</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Header -->
+        <section id="overview" class="text-center space-y-8">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-sky-100 text-sky-600 rounded-full text-[10px] font-bold tracking-widest uppercase border border-sky-200">
+                    Pace: Leisure 1.5km/hr | 深度歷史縱走
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter">
+                    串聯八堵，俯瞰基隆<br><span class="text-slate-400 text-2xl md:text-4xl font-bold italic">獅球稜線歷史全紀錄</span>
+                </h1>
+                <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                    從八堵車站出發，越過守護港城的獅球嶺要塞，最後穿梭劉銘傳隧道的百年時光。
+                </p>
+            </div>
+
+            <!-- Meeting Info -->
+            <div class="max-w-6xl mx-auto space-y-4">
+                <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left border border-slate-200">
+                    <div class="flex flex-col items-center md:items-start gap-1">
+                        <span class="text-[10px] font-black text-sky-600 uppercase tracking-widest">活動日期</span>
+                        <span class="text-xl font-bold text-slate-800 leading-tight">日期待定</span>
+                        <span class="text-xs text-slate-400 mt-1">建議挑選涼爽多雲日</span>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-slate-200 pt-4 md:pt-0 md:pl-6">
+                        <span class="text-[10px] font-black text-sky-600 uppercase tracking-widest">集合地點</span>
+                        <span class="text-xl font-bold text-slate-800 leading-tight">八堵車站</span>
+                        <span class="text-xs text-slate-400 mt-1">出口大廳處</span>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-slate-200 pt-4 md:pt-0 md:pl-6">
+                        <span class="text-[10px] font-black text-sky-600 uppercase tracking-widest">下山地點</span>
+                        <span class="text-xl font-bold text-slate-800 leading-tight">基隆車站</span>
+                        <span class="text-xs text-slate-400 mt-1">步行解散</span>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-slate-200 pt-4 md:pt-0 md:pl-6 bg-sky-50/50 p-2 rounded-xl">
+                        <span class="text-[10px] font-black text-sky-500 uppercase tracking-widest">路線等級</span>
+                        <span class="text-xl font-bold text-slate-800 leading-tight flex items-center gap-2">
+                            <span>⛰️</span>
+                            <span>輕鬆休閒</span>
+                        </span>
+                        <span class="text-xs text-sky-500 mt-1 font-medium">適合全齡、喜愛古蹟者</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
+                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">徒步長度</div>
+                    <div class="text-2xl font-black text-slate-800">約 5.2<span class="text-sm font-normal text-slate-400 ml-1">km</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
+                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">最高標高</div>
+                    <div class="text-2xl font-black text-sky-600">153<span class="text-sm font-normal text-slate-400 ml-1">m</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
+                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">預估耗時</div>
+                    <div class="text-2xl font-black text-slate-800">3.5<span class="text-sm font-normal text-slate-400 ml-1">hr</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl card-hover border border-slate-100 transition-all text-left">
+                    <div class="text-slate-400 text-[10px] font-black uppercase mb-2">累計上升</div>
+                    <div class="text-2xl font-black text-slate-800">~160<span class="text-sm font-normal text-slate-400 ml-1">m</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Map Section -->
+        <section id="map-section" class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-slate-100">
+            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-800 flex items-center gap-3">
+                        <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>稜線縱走地圖
+                    </h2>
+                    <p class="text-slate-500 mt-2 text-sm">數據基於八堵與獅球嶺座標校準 (速度 1.5km/hr)。</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="prevWaypoint()" class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-sky-600 hover:text-white transition-all">&lt;</button>
+                    <button onclick="nextWaypoint()" class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-sky-600 hover:text-white transition-all">&gt;</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2"><div id="realMap"></div></div>
+                <div class="lg:col-span-1">
+                    <div id="wp-card" class="h-full bg-slate-50 rounded-3xl p-8 border border-slate-200 flex flex-col justify-between transition-all duration-500">
+                        <div id="card-content">
+                            <div id="wp-pos" class="inline-block px-3 py-1 bg-slate-200 text-slate-600 text-[10px] font-black rounded mb-6 tracking-widest uppercase">站點資訊</div>
+                            <h3 id="wp-title" class="text-2xl font-black text-slate-800 mb-4">請選擇航點</h3>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-white p-3 rounded-xl border border-slate-100"><span class="text-[10px] text-slate-400 block mb-1">累積里程</span><span class="font-bold text-slate-700"><span id="wp-dist">0.00</span> km</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-slate-100"><span class="text-[10px] text-slate-400 block mb-1">海拔</span><span class="font-bold text-slate-700"><span id="wp-ele">0</span> m</span></div>
+                            </div>
+                            <p id="wp-desc" class="text-slate-600 leading-relaxed text-sm"></p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-200">
+                            <span class="text-[10px] font-black text-sky-600 uppercase tracking-widest block mb-2">領隊提示</span>
+                            <p id="wp-advice" class="text-sm font-medium text-slate-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Spotlight Section -->
+        <section id="history" class="space-y-8">
+            <h2 class="text-2xl font-black text-slate-800 flex items-center gap-3">
+                <span class="w-2.5 h-8 bg-amber-500 rounded-full"></span>百年古道焦點
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                    <div class="relative z-10 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-amber-600 rounded text-[10px] font-black tracking-widest uppercase">歷史地標</div>
+                        <h3 class="text-3xl font-black tracking-tighter">劉銘傳隧道<br><span class="text-amber-400">台灣首座鐵路隧道</span></h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            完工於 1890 年，又稱「竹仔寮隧道」。此處可觀察清代與日治時期的紅磚工法差異，隧道內部壯觀的天然石壁與通風井，是鐵道迷與歷史愛好者的必經之地。
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-sky-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                    <div class="relative z-10 space-y-6">
+                        <div class="inline-block px-3 py-1 bg-sky-600 rounded text-[10px] font-black tracking-widest uppercase">景觀視角</div>
+                        <h3 class="text-3xl font-black tracking-tighter">獅球嶺觀景台<br><span class="text-sky-300">基隆港全景之巔</span></h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            這裡是俯瞰基隆港、國道一號基隆端起點與繁華市區的絕佳點位。看著大船入港與車流穿梭隧道，感受這座港口城市的動脈跳動。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Elevation Chart -->
+        <section id="analysis">
+            <h2 class="text-2xl font-black text-slate-800 flex items-center gap-3 mb-8">
+                <span class="w-2.5 h-8 bg-slate-800 rounded-full"></span>海拔高度剖面
+            </h2>
+            <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-slate-100">
+                <div class="chart-container"><canvas id="elevationChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- 4. Detailed Timeline -->
+        <section id="timeline">
+            <h2 class="text-2xl font-black text-slate-800 flex items-center gap-3 mb-10 pb-8 border-b border-slate-100">
+                <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>詳細時程預估 (1.5km/hr)
+            </h2>
+            <div class="relative pl-6" id="timeline-container">
+                <div class="timeline-line"></div>
+                <!-- JS Inserted -->
+            </div>
+        </section>
+
+        <footer class="text-center py-20 border-t border-slate-100">
+            <p class="text-slate-400 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 獅球稜線歷史縱走</p>
+        </footer>
+    </main>
+
+    <script>
+        const schedule = [
+            { lat: 25.108410, lng: 121.729033, time: "09:00", loc: "八堵車站", dist: 0.00, ele: 24, pos: "起點", 
+              desc: "行程起點。建議在此整理裝備，完成最後補給。", advice: "檢查交通卡餘額。" },
+            { lat: 25.116045, lng: 121.730965, time: "09:36", loc: "登山口", dist: 0.90, ele: 32, pos: "出發", 
+              desc: "由柏油路進入山徑，開始緩步爬升。", advice: "調整呼吸，準備上坡。" },
+            { lat: 25.116081, lng: 121.732702, time: "09:44", loc: "三角洲嶺北峰", dist: 1.10, ele: 130, pos: "山頭", 
+              desc: "短距離快速爬升，可在此小歇回頭望向八堵山谷。", advice: "注意路面樹根。" },
+            { lat: 25.118770, lng: 121.734570, time: "10:00", loc: "獅球長壽公園", dist: 1.50, ele: 110, pos: "休閒", 
+              desc: "稜線上的休憩核心，是居民常聚集的社交場域。", advice: "水份補充點。" },
+            { lat: 25.119095, lng: 121.737462, time: "10:12", loc: "獅球嶺山 (H153m)", dist: 1.80, ele: 153, pos: "最高點", 
+              desc: "抵達此行最高點。附近有古砲台遺跡，歷史感濃厚。", advice: "適合全隊大合照。" },
+            { lat: 25.121063, lng: 121.734472, time: "10:28", loc: "獅球嶺觀景台", dist: 2.20, ele: 125, pos: "展望", 
+              desc: "無敵港景。包含觀看展望時間。", advice: "必看：基隆港與國道交織奇景。" },
+            { lat: 25.121406, lng: 121.733981, time: "10:34", loc: "獅球嶺北峰", dist: 2.35, ele: 116, pos: "稜線", 
+              desc: "延續觀景視角，進入下行段前的最後高地。", advice: "開始準備下山。" },
+            { lat: 25.125800, lng: 121.731855, time: "11:08", loc: "劉銘傳隧道", dist: 3.20, ele: 50, pos: "古蹟", 
+              desc: "歷史精華區。包含隧道內部觀賞與解說時間。", advice: "隧道涼爽，適合調節體溫。" },
+            { lat: 25.1315, lng: 121.7390, time: "12:28", loc: "基隆車站 (解散)", dist: 5.20, ele: 10, pos: "終點", 
+              desc: "抵達基隆市區核心，結束豐富的地景縱走。", advice: "可前往廟口夜市享用午餐。" }
+        ];
+
+        let map, chart, markers = [];
+        let currentWaypointIndex = 0;
+
+        function initRealMap() {
+            map = L.map('realMap', { preferCanvas: true, center: [25.119, 121.734], zoom: 14 });
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            const walkingCoords = schedule.map(d => [d.lat, d.lng]);
+            L.polyline(walkingCoords, { color: '#0ea5e9', weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
+            schedule.forEach((d, i) => {
+                const circle = L.circleMarker([d.lat, d.lng], {
+                    radius: i === 0 || i === schedule.length - 1 || d.pos === "最高點" ? 8 : 6,
+                    fillColor: i === 0 ? '#0ea5e9' : (d.pos === "最高點" ? '#ef4444' : '#1e293b'),
+                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
+                }).addTo(map);
+                circle.on('click', () => updateCard(i));
+                markers.push(circle);
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('elevationChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: schedule.map(d => d.loc),
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#0ea5e9', borderWidth: 3, pointRadius: 4, fill: true, backgroundColor: 'rgba(14, 165, 233, 0.05)', tension: 0.4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 } } }
+            });
+        }
+
+        function updateCard(idx) {
+            currentWaypointIndex = idx;
+            const d = schedule[idx];
+            document.getElementById('wp-title').innerText = d.loc;
+            document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
+            document.getElementById('wp-ele').innerText = d.ele;
+            document.getElementById('wp-desc').innerText = d.desc;
+            document.getElementById('wp-advice').innerText = d.advice;
+            markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : 6, fillOpacity: i === idx ? 1 : 0.6 }));
+            map.panTo([d.lat, d.lng]);
+        }
+
+        function nextWaypoint() { updateCard((currentWaypointIndex + 1) % schedule.length); }
+        function prevWaypoint() { updateCard((currentWaypointIndex - 1 + schedule.length) % schedule.length); }
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            schedule.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = "relative flex items-start mb-12 group cursor-pointer pl-8";
+                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                let color = i === 0 || i === schedule.length - 1 ? "bg-sky-600" : (item.pos === "最高點" ? "bg-red-500" : "bg-slate-300");
+                div.innerHTML = `
+                    <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div></div>
+                    <div class="w-full bg-white p-5 rounded-[1.5rem] border border-slate-100 card-hover transition-all">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-lg font-black text-slate-800">${item.time}</span>
+                            <span class="text-[9px] font-black text-slate-400 border border-slate-200 px-2 py-0.5 rounded uppercase">${item.pos}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-700 text-sm mb-2">${item.loc}</h4>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">${item.desc}</p>
+                    </div>`;
+                container.appendChild(div);
+            });
+        }
+
+        function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+        window.onload = () => { initRealMap(); initChart(); renderTimeline(); updateCard(0); };
+    </script>
+</body>
+</html>
