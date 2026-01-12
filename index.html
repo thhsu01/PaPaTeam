@@ -1,536 +1,202 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>爬爬小隊 | 計畫行程導覽</title>
-    <!-- 修正：移除所有 Markdown 連結語法，恢復標準 CDN 載入 -->
+    <title>爬爬小隊 | 探索山林之魂</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
-            scroll-behavior: smooth;
+            background-color: #fcfdfd;
         }
-        .hero-gradient {
-            /* 修正：移除 CSS url 中的 Markdown 語法 */
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070');
+        .hero-mesh {
+            background-color: #064e3b;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(161, 72%, 39%, 0.5) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(180, 70%, 45%, 0.3) 0, transparent 50%),
+                url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070');
             background-size: cover;
             background-position: center;
         }
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="text-slate-800 antialiased">
 
     <!-- 導覽列 -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl font-bold text-emerald-700 tracking-tight">爬爬小隊</span>
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-slate-200/50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 font-bold text-xl">
+                    爬
+                </div>
+                <span class="text-2xl font-black text-emerald-900 tracking-tighter">爬爬小隊</span>
             </div>
-            <!-- 導覽標籤 -->
-            <div class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
-                <a href="#" class="hover:text-emerald-600 transition-colors">首頁</a>
-                <a href="#planned" class="hover:text-emerald-600 transition-colors">計畫行程</a>
-                <a href="#candidate" class="hover:text-emerald-600 transition-colors">候選行程</a>
-                <a href="#completed" class="hover:text-emerald-600 transition-colors">已完成行程</a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
+                <a href="#" class="hover:text-emerald-600 transition-all hover:scale-105">首頁</a>
+                <a href="#planned" class="hover:text-emerald-600 transition-all hover:scale-105">計畫行程</a>
+                <a href="#candidate" class="hover:text-emerald-600 transition-all hover:scale-105">候選清單</a>
+                <a href="#completed" class="hover:text-emerald-600 transition-all hover:scale-105">歷史紀錄</a>
             </div>
-            <div class="md:hidden text-slate-600 italic text-xs">Menu</div>
+
+            <button id="menuBtn" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+        
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-4 space-y-4 shadow-xl text-center">
+            <a href="#" class="block font-bold text-slate-700">首頁</a>
+            <a href="#planned" class="block font-bold text-slate-700">計畫行程</a>
+            <a href="#candidate" class="block font-bold text-slate-700">候選清單</a>
+            <a href="#completed" class="block font-bold text-slate-700">歷史紀錄</a>
         </div>
     </nav>
 
-    <!-- 英雄區塊 -->
-    <header class="hero-gradient h-[40vh] flex items-center justify-center text-center px-4">
-        <div class="max-w-3xl">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                爬爬小隊，從這裡啟航
+    <!-- 英雄區塊 (調整字體大小以確保縮放時維持在背景內) -->
+    <header class="hero-mesh h-[50vh] flex items-center justify-center text-center px-6 pt-20">
+        <div class="max-w-4xl">
+            <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs md:text-sm font-bold mb-4 md:mb-6 tracking-widest uppercase">Explore The Wilderness</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-2xl">
+                山就在那裡<br><span class="text-emerald-400">我們出發吧</span>
             </h1>
-            <p class="text-lg text-slate-100 drop-shadow-md">
-                探索每一座山的靈魂，與爬爬小隊一起寫下冒險的故事。
-            </p>
         </div>
     </header>
 
-    <!-- 行程導覽區塊 -->
-    <main id="itinerary" class="max-w-6xl mx-auto px-4 py-16 space-y-20">
+    <main class="max-w-7xl mx-auto px-6 py-24 space-y-32">
         
-        <!-- 計畫行程 -->
-        <section id="planned" class="scroll-mt-20">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="w-2 h-8 bg-emerald-500 mr-4 rounded-full"></span>
-                    計畫行程
-                </h2>
-                <p class="text-slate-500 mt-2 ml-6">即將出發的精彩冒險</p>
+        <section id="planned" class="scroll-mt-32">
+            <div class="flex items-end justify-between mb-12 border-l-4 border-emerald-500 pl-6">
+                <div>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">計畫行程</h2>
+                    <p class="text-slate-500 mt-2 font-medium italic">Ready to Go</p>
+                </div>
             </div>
-            <!-- 目前為空白狀態 -->
-            <div class="border-2 border-dashed border-slate-200 rounded-2xl py-12 flex flex-col items-center justify-center text-slate-400">
-                <svg class="w-12 h-12 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                <p>目前尚無計畫行程，準備規劃下一場冒險！</p>
-            </div>
+            <div id="planned-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
         </section>
 
-        <!-- 候選行程 -->
-        <section id="candidate" class="scroll-mt-20">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="w-2 h-8 bg-amber-400 mr-4 rounded-full"></span>
-                    候選行程
-                </h2>
-                <p class="text-slate-500 mt-2 ml-6">待評估與規劃中的優質路線</p>
+        <section id="candidate" class="scroll-mt-32">
+            <div class="flex items-end justify-between mb-12 border-l-4 border-amber-400 pl-6">
+                <div>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">候選行程</h2>
+                    <p class="text-slate-500 mt-2 font-medium italic">Potential Adventures</p>
+                </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- 老鷲尖山卡片 -->
-                <a href="https://thhsu01.github.io/PaPaTeam/laojiujianshan" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070" 
-                                 alt="老鷲尖山" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                規劃中
-                            </div>
-                        </div>
-                        <div class="p-8">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center text-sm text-emerald-600 font-medium">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    內溝步道
-                                </div>
-                                <div class="text-xs font-semibold px-2 py-1 bg-slate-100 text-slate-500 rounded border border-slate-200">
-                                    候選清單
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">內溝山系 O 型全系列縱走</h3>
-                            <p class="text-slate-600 mb-6 line-clamp-2">
-                                老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。準備好迎接壯麗的雲海了嗎？
-                            </p>
-                            <div class="flex items-center text-emerald-700 font-bold">
-                                查看詳情 
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 抹茶山卡片 -->
-                <a href="https://thhsu01.github.io/PaPaTeam/mochashan" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000" 
-                                 alt="抹茶山" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                規劃中
-                            </div>
-                        </div>
-                        <div class="p-8">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center text-sm text-emerald-600 font-medium">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    宜蘭礁溪
-                                </div>
-                                <div class="flex flex-col items-end gap-1">
-                                    <div class="text-xs font-semibold px-2 py-1 bg-slate-100 text-slate-500 rounded border border-slate-200">
-                                        候選清單
-                                    </div>
-                                    <div class="text-[10px] font-bold px-1.5 py-0.5 bg-amber-50 text-amber-600 rounded border border-amber-100">
-                                        適用於3月至5月期間
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">聖母步道：抹茶山春季挑戰</h3>
-                            <p class="text-slate-600 mb-6 line-clamp-2">
-                                著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。雖然具有一定的挑戰性，但攻頂後的風景絕對值得。
-                            </p>
-                            <div class="flex items-center text-emerald-700 font-bold">
-                                查看詳情 
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 碧山卡片 -->
-                <a href="https://thhsu01.github.io/PaPaTeam/bishan.html" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000" 
-                                 alt="碧山" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                規劃中
-                            </div>
-                        </div>
-                        <div class="p-8">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center text-sm text-emerald-600 font-medium">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    台北內湖
-                                </div>
-                                <div class="flex flex-col items-end gap-1">
-                                    <div class="text-xs font-semibold px-2 py-1 bg-slate-100 text-slate-500 rounded border border-slate-200">
-                                        候選清單
-                                    </div>
-                                    <div class="text-[10px] font-bold px-1.5 py-0.5 bg-amber-50 text-amber-600 rounded border border-amber-100">
-                                        適用於2月中至2月底期間
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">碧山 + 白石湖山：內湖群峰原始縱走</h3>
-                            <p class="text-slate-600 mb-6 line-clamp-2">
-                                碧山為內湖地區最高峰，沿途林蔭茂密且原始感十足，登頂後可俯瞰大台北盆地，是不可多得的經典縱走路線。
-                            </p>
-                            <div class="flex items-center text-emerald-700 font-bold">
-                                查看詳情 
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 獅球嶺卡片 -->
-                <a href="https://thhsu01.github.io/PaPaTeam/shiqiulinling.html" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000" 
-                                 alt="獅球嶺" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                規劃中
-                            </div>
-                        </div>
-                        <div class="p-8">
-                            <div class="flex items-center justify-between mb-2">
-                                <div class="flex items-center text-sm text-emerald-600 font-medium">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    基隆市
-                                </div>
-                                <div class="text-xs font-semibold px-2 py-1 bg-slate-100 text-slate-500 rounded border border-slate-200">
-                                    候選清單
-                                </div>
-                            </div>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">獅球嶺砲台：基隆歷史古蹟</h3>
-                            <p class="text-slate-600 mb-6 line-clamp-2">
-                                走訪基隆的重要軍事堡壘遺址，獅球嶺砲台擁有絕佳的基隆港視野，是俯瞰港都美景與歷史地標的絕佳去處。
-                            </p>
-                            <div class="flex items-center text-emerald-700 font-bold">
-                                查看詳情 
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <div id="candidate-container" class="grid grid-cols-1 md:grid-cols-2 gap-10"></div>
         </section>
 
-        <!-- 已完成行程 -->
-        <section id="completed" class="scroll-mt-20">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-slate-900 flex items-center">
-                    <span class="w-2 h-8 bg-slate-400 mr-4 rounded-full"></span>
-                    已完成行程
-                </h2>
-                <p class="text-slate-500 mt-2 ml-6">曾經留下的足跡與回憶</p>
+        <section id="completed" class="scroll-mt-32">
+            <div class="flex items-center justify-between mb-12 border-l-4 border-slate-400 pl-6">
+                <div>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">歷史紀錄</h2>
+                    <p class="text-slate-500 mt-2 font-medium italic">Full Footprints</p>
+                </div>
             </div>
-            
-            <!-- 歷史紀錄列表 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- 0. 梅花山 (最新完成) -->
-                <a href="https://thhsu01.github.io/PaPaTeam/meihuashan" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-emerald-100 shadow-sm ring-1 ring-emerald-50">
-                        <div class="relative h-48 overflow-hidden bg-slate-200">
-                            <img src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover" alt="梅花山">
-                            <div class="absolute top-4 left-4 bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                                最新紀錄
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                                <span class="text-emerald-700 font-bold">2026年1月10日</span>
-                                <span class="px-2 py-1 bg-emerald-50 text-emerald-600 rounded">台北市</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">梅花山全系列挑戰縱走</h3>
-                            <p class="text-sm text-slate-600 line-clamp-2">漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐與芬芳。這是放鬆心情、挑戰自我的最佳路徑。</p>
-                            <div class="mt-4 flex items-center text-emerald-700 text-sm font-bold">
-                                閱讀行程紀錄 
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 1. 火炎山 -->
-                <a href="https://thhsu01.github.io/PaPaTeam/huoyianshan.html" class="group">
-                    <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                        <div class="relative h-48 overflow-hidden bg-slate-200">
-                            <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="火炎山">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                                <span class="text-slate-500 font-bold">2025年12月13日</span>
-                                <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">苗栗三義</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">火炎山、北鞍古道 O 走</h3>
-                            <p class="text-sm text-slate-600 line-clamp-2">體驗台版大峽谷的壯闊地貌，在礫岩與紅土之間感受大自然的鬼斧神工。</p>
-                            <div class="mt-4 flex items-center text-emerald-700 text-sm font-bold">
-                                閱讀行程紀錄 
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- 2. 大崙頭尾山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="大崙頭尾山親山步道">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年9月29日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北內湖</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">大崙頭尾山親山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">穿梭在內湖林蔭茂密的步道中，享受台北近郊的芬多精與靜謐時光。</p>
-                    </div>
-                </div>
-
-                <!-- 3. 鵝尾山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="鵝尾山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年8月30日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北士林</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">鵝尾山 + 平溪步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">沿著潺潺水聲漫步平溪步道，並登高遠眺士林與北投的山川景色。</p>
-                    </div>
-                </div>
-
-                <!-- 4. 坪頂古圳 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="坪頂古圳">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年6月15日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">古道探幽</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">大崎頭步道 + 鵝尾山 + 坪頂古圳步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">一趟結合古圳文化與原始林道的縱走，在涼爽的水圳邊尋找歷史足跡。</p>
-                    </div>
-                </div>
-
-                <!-- 5. 中正山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="中正山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年4月27日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北北投</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">中正山親山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">挑戰陡升的階梯直登頂端觀景台，俯瞰整個關渡平原與觀音山的絕美展望。</p>
-                    </div>
-                </div>
-
-                <!-- 6. 紗帽山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1516214577510-729906d26792?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="紗帽山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年3月23日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">陽明山系</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">紗帽山步道 + 橫嶺古道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">踏上火山錐形的紗帽山，並經由平緩舒適的橫嶺古道感受竹林之美。</p>
-                    </div>
-                </div>
-
-                <!-- 7. 鯉魚山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="鯉魚山親山步道">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2025年1月1日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">元旦首爬</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">鯉魚山親山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">以鯉魚山的新年登高揭開年度序幕，欣賞精緻的小人國微縮模型景觀。</p>
-                    </div>
-                </div>
-
-                <!-- 8. 草嶺古道 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="草嶺古道">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年11月23日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">東北角</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">草嶺古道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">在芒花盛開的季節走過埡口，望向太平洋上的龜山島，感受古道的滄桑與壯麗。</p>
-                    </div>
-                </div>
-
-                <!-- 9. 白鷺鷥山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1518173946687-a4c8a9be33b0?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="白鷺鷥山親山步道">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年10月27日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北內湖</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">白鷺鷥山親山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">內湖的大湖公園旁，是一條適合午後散步、享受湖光山色的休閒路徑。</p>
-                    </div>
-                </div>
-
-                <!-- 10. 金面山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="金面山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年10月6日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">攀岩挑戰</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">金面山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">挑戰著名的剪刀石，在巨石陣上俯瞰台北市區的繁華景致。</p>
-                    </div>
-                </div>
-
-                <!-- 11. 文間山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="文間山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年8月31日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北大直</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">文間山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">隱藏在大直後山的私房景點，這裡擁有眺望美麗華摩天輪與松山機場的最佳視野。</p>
-                    </div>
-                </div>
-
-                <!-- 12. 劍潭山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="劍潭山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年8月4日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">圓山風景區</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">毋忘在莒步道 + 劍潭山步道 + 圓山步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">走訪軍事歷史留下的痕跡，並在著名的「老地方」觀機平台看飛機起降。</p>
-                    </div>
-                </div>
-
-                <!-- 13. 南港山縱走 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="南港山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年6月30日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">連峰縱走</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">北興宮 + 南港山 + 拇指山 + 象山永春崗</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">一場體力與視野的饗宴，橫跨南港山系，從不同視角欣賞台北 101。</p>
-                    </div>
-                </div>
-
-                <!-- 14. 虎山/豹山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1469521669194-b785a6230560?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="虎山豹山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年5月26日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">台北信義</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">豹山溪步道 + 虎山美的社區步道</h3>
-                        <p class="text-sm text-slate-700">清幽的溪谷步道，是市區中難得一見的避暑勝地，更能與豹山岩石近距離接觸。</p>
-                    </div>
-                </div>
-
-                <!-- 15. 虎山/南港山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1510797215324-95aa89f43c33?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="虎山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年4月20日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">健行紀錄</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">虎山親山步道 + 南港山山腰路線</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">緩步而上，在虎山溪的自然生態伴隨下，探索南港山系隱藏的山腰路徑。</p>
-                    </div>
-                </div>
-
-                <!-- 16. 象山 -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                    <div class="relative h-48 overflow-hidden bg-slate-200">
-                        <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale-[0.2]" alt="象山">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-2 text-xs font-semibold">
-                            <span class="text-slate-500">2024年3月16日</span>
-                            <span class="px-2 py-1 bg-slate-100 text-slate-600 rounded">經典步道</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-2">象山親山步道 + 象山一線天步道</h3>
-                        <p class="text-sm text-slate-600 line-clamp-2">最受國內外遊客歡迎的路線，在一線天的奇岩窄縫中感受大自然的擠壓力量。</p>
-                    </div>
-                </div>
-
-            </div>
+            <div id="completed-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
     </main>
 
-    <!-- 頁尾 -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-4">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="text-2xl font-bold text-white mb-4">爬爬小隊</div>
-            <div class="flex justify-center space-x-6 mt-4">
-                <span class="text-sm">冒險</span>
-                <span class="text-sm">紀錄</span>
-                <span class="text-sm">共行</span>
+    <footer class="bg-slate-950 text-white py-24 px-6 mt-32 relative overflow-hidden text-center">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-3xl font-black text-white mb-6">爬爬小隊</div>
+            <div class="flex justify-center space-x-8 text-sm text-slate-500 mb-12 uppercase tracking-widest font-bold">
+                <a href="#planned" class="hover:text-emerald-400 transition-colors">計畫</a>
+                <a href="#candidate" class="hover:text-emerald-400 transition-colors">候選</a>
+                <a href="#completed" class="hover:text-emerald-400 transition-colors">紀錄</a>
+            </div>
+            <div class="pt-8 border-t border-slate-900 text-slate-600 text-xs">
+                &copy; 2026 爬爬小隊 PaPaTeam. 版權所有.
             </div>
         </div>
     </footer>
 
+    <script>
+        const data = {
+            planned: [],
+            candidate: [
+                { title: "內溝山系 O 型全系列縱走", location: "內溝步道", desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070", url: "https://thhsu01.github.io/PaPaTeam/laojiujianshan", tag: "規劃中" },
+                { title: "聖母步道：抹茶山春季挑戰", location: "宜蘭礁溪", desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/mochashan", tag: "規劃中" },
+                { title: "碧山 + 白石湖山：原始縱走", location: "台北內湖", desc: "碧山為內湖地區最高峰，沿途林蔭茂密且原始感十足。", img: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/bishan.html", tag: "規劃中" },
+                { title: "獅球嶺砲台：基隆歷史古蹟", location: "基隆市", desc: "走訪基隆的重要軍事堡壘遺址，擁有絕佳的基隆港視野。", img: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/shiqiulinling.html", tag: "規劃中" }
+            ],
+            completed: [
+                { title: "梅花山全系列挑戰縱走", date: "2026/01/10", location: "台北市", desc: "漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐。", img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/meihuashan", isLatest: true },
+                { title: "火炎山、北鞍古道 O 走", date: "2025/12/13", location: "苗栗三義", desc: "體驗台版大峽谷的壯闊地貌，在礫岩與紅土之間感受大自然。", img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/huoyianshan.html" },
+                { title: "大崙頭尾山親山步道", date: "2025/09/29", location: "台北內湖", desc: "穿梭在內湖林蔭茂密的步道中，享受台北近郊的芬多精。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "鵝尾山 + 平溪步道", date: "2025/08/30", location: "台北士林", desc: "沿著潺潺水聲漫步平溪步道，並遠眺士林與北投景色。", img: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "大崎頭 + 鵝尾山 + 坪頂古圳", date: "2025/06/15", location: "古道探幽", desc: "一趟結合古圳文化與原始林道的縱走，尋找歷史足跡。", img: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "中正山親山步道", date: "2025/04/27", location: "台北北投", desc: "挑戰陡升的階梯直登頂端觀景台，俯瞰整個關渡平原。", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "紗帽山步道 + 橫嶺古道", date: "2025/03/23", location: "陽明山系", desc: "踏上火山錐形的紗帽山，並經由橫嶺古道感受竹林之美。", img: "https://images.unsplash.com/photo-1516214577510-729906d26792?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "鯉魚山親山步道", date: "2025/01/01", location: "元旦首爬", desc: "以鯉魚山的新年登高揭開年度序幕，欣賞微縮模型景觀。", img: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "草嶺古道", date: "2024/11/23", location: "東北角", desc: "在芒花盛開的季節走過埡口，望向太平洋上的龜山島。", img: "https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "白鷺鷥山親山步道", date: "2024/10/27", location: "台北內湖", desc: "內湖的大湖公園旁，適合午後散步的休閒路徑。", img: "https://images.unsplash.com/photo-1518173946687-a4c8a9be33b0?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "金面山步道", date: "2024/10/06", location: "攀岩挑戰", desc: "挑戰著名的剪刀石，在巨石陣上俯瞰台北市區。", img: "https://images.unsplash.com/photo-1502657877623-f66bf489d236?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "文間山步道", date: "2024/08/31", location: "台北大直", desc: "隱藏在大直後山的私房景點，擁有眺望摩天輪的最佳視野。", img: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "劍潭山 + 圓山步道", date: "2024/08/04", location: "圓山風景區", desc: "走訪軍事歷史痕跡，並在「老地方」觀機平台看飛機。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "南港山 + 拇指山 + 象山", date: "2024/06/30", location: "連峰縱走", desc: "一場體力與視野的饗宴，橫跨南港山系欣賞 101。", img: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "豹山溪 + 虎山步道", date: "2024/05/26", location: "台北信義", desc: "清幽的溪谷步道，是市區中難得一見的避暑勝地。", img: "https://images.unsplash.com/photo-1469521669194-b785a6230560?auto=format&fit=crop&q=80&w=1000", url: "#" },
+                { title: "象山親山步道", date: "2024/03/16", location: "經典步道", desc: "最受歡迎的路線，在一線天的奇岩窄縫中感受力量。", img: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1000", url: "#" }
+            ]
+        };
+
+        function renderUI() {
+            const plannedEl = document.getElementById('planned-container');
+            if (data.planned.length === 0) {
+                plannedEl.innerHTML = `
+                    <div class="col-span-full border-2 border-dashed border-slate-200 rounded-3xl py-20 flex flex-col items-center justify-center text-slate-400 bg-slate-50/50">
+                        <svg class="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <p class="font-bold">目前尚無計畫行程</p>
+                    </div>`;
+            }
+
+            const candidateEl = document.getElementById('candidate-container');
+            candidateEl.innerHTML = data.candidate.map(item => `
+                <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full text-[10px] font-black text-slate-600 uppercase tracking-widest">${item.tag}</div>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-xs font-bold text-emerald-600 mb-2">${item.location}</div>
+                        <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">${item.title}</h3>
+                        <p class="text-slate-500 text-sm line-clamp-2">${item.desc}</p>
+                    </div>
+                </a>
+            `).join('');
+
+            const completedEl = document.getElementById('completed-container');
+            completedEl.innerHTML = data.completed.map(item => `
+                <a href="${item.url}" class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all hover:bg-emerald-50/30">
+                    <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
+                        <!-- 已移除 grayscale，保持原圖色彩 -->
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500">
+                        ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>` : ''}
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[10px] font-bold text-slate-400 mb-1">
+                            <span>${item.date}</span>
+                            <span>${item.location}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 group-hover:text-emerald-800 transition-colors line-clamp-1">${item.title}</h4>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        window.onload = renderUI;
+    </script>
 </body>
 </html>
