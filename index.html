@@ -60,7 +60,7 @@
         </div>
     </nav>
 
-    <!-- 英雄區塊 (調整字體大小以確保縮放時維持在背景內) -->
+    <!-- 英雄區塊 -->
     <header class="hero-mesh h-[50vh] flex items-center justify-center text-center px-6 pt-20">
         <div class="max-w-4xl">
             <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs md:text-sm font-bold mb-4 md:mb-6 tracking-widest uppercase">Explore The Wilderness</span>
@@ -72,6 +72,7 @@
 
     <main class="max-w-7xl mx-auto px-6 py-24 space-y-32">
         
+        <!-- 計畫行程 -->
         <section id="planned" class="scroll-mt-32">
             <div class="flex items-end justify-between mb-12 border-l-4 border-emerald-500 pl-6">
                 <div>
@@ -82,6 +83,7 @@
             <div id="planned-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8"></div>
         </section>
 
+        <!-- 候選行程 -->
         <section id="candidate" class="scroll-mt-32">
             <div class="flex items-end justify-between mb-12 border-l-4 border-amber-400 pl-6">
                 <div>
@@ -92,6 +94,7 @@
             <div id="candidate-container" class="grid grid-cols-1 md:grid-cols-2 gap-10"></div>
         </section>
 
+        <!-- 歷史紀錄 -->
         <section id="completed" class="scroll-mt-32">
             <div class="flex items-center justify-between mb-12 border-l-4 border-slate-400 pl-6">
                 <div>
@@ -121,10 +124,20 @@
 
     <script>
         const data = {
-            planned: [],
+            // 已更新：將抹茶山移動到計畫行程
+            planned: [
+                { 
+                    title: "聖母步道：抹茶山春季挑戰", 
+                    location: "宜蘭礁溪", 
+                    date: "2026/03/14",
+                    desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。雖然具有挑戰性，但攻頂後的風景絕對值得。", 
+                    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", 
+                    url: "https://thhsu01.github.io/PaPaTeam/mochashan", 
+                    tag: "3/14 正式出發" 
+                }
+            ],
             candidate: [
                 { title: "內溝山系 O 型全系列縱走", location: "內溝步道", desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070", url: "https://thhsu01.github.io/PaPaTeam/laojiujianshan", tag: "規劃中" },
-                { title: "聖母步道：抹茶山春季挑戰", location: "宜蘭礁溪", desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/mochashan", tag: "規劃中" },
                 { title: "碧山 + 白石湖山：原始縱走", location: "台北內湖", desc: "碧山為內湖地區最高峰，沿途林蔭茂密且原始感十足。", img: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/bishan.html", tag: "規劃中" },
                 { title: "獅球嶺砲台：基隆歷史古蹟", location: "基隆市", desc: "走訪基隆的重要軍事堡壘遺址，擁有絕佳的基隆港視野。", img: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/shiqiulinling.html", tag: "規劃中" }
             ],
@@ -149,6 +162,7 @@
         };
 
         function renderUI() {
+            // 渲染計畫行程 (已更新)
             const plannedEl = document.getElementById('planned-container');
             if (data.planned.length === 0) {
                 plannedEl.innerHTML = `
@@ -156,8 +170,26 @@
                         <svg class="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         <p class="font-bold">目前尚無計畫行程</p>
                     </div>`;
+            } else {
+                plannedEl.innerHTML = data.planned.map(item => `
+                    <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border-2 border-emerald-100 shadow-lg shadow-emerald-50 transition-all hover:shadow-2xl hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute top-4 right-4 px-4 py-1.5 bg-emerald-600 text-white rounded-full text-xs font-black uppercase tracking-widest shadow-lg">${item.tag}</div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="text-xs font-bold text-emerald-600">${item.location}</div>
+                                <div class="text-[10px] font-black text-slate-400 tracking-widest">${item.date}</div>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">${item.title}</h3>
+                            <p class="text-slate-500 text-sm line-clamp-2">${item.desc}</p>
+                        </div>
+                    </a>
+                `).join('');
             }
 
+            // 渲染候選清單
             const candidateEl = document.getElementById('candidate-container');
             candidateEl.innerHTML = data.candidate.map(item => `
                 <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
@@ -173,11 +205,11 @@
                 </a>
             `).join('');
 
+            // 渲染歷史紀錄
             const completedEl = document.getElementById('completed-container');
             completedEl.innerHTML = data.completed.map(item => `
                 <a href="${item.url}" class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all hover:bg-emerald-50/30">
                     <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
-                        <!-- 已移除 grayscale，保持原圖色彩 -->
                         <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500">
                         ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>` : ''}
                     </div>
