@@ -124,25 +124,26 @@
 
     <script>
         const data = {
-            // 已更新：將抹茶山移動到計畫行程
+            // 已搬移：內溝山系由候選轉為計畫
             planned: [
                 { 
-                    title: "聖母步道：抹茶山春季挑戰", 
-                    location: "宜蘭礁溪", 
-                    date: "2026/03/14",
-                    desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。雖然具有挑戰性，但攻頂後的風景絕對值得。", 
-                    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", 
-                    url: "https://thhsu01.github.io/PaPaTeam/mochashan", 
-                    tag: "3/14 正式出發" 
+                    title: "內溝山系 O 型全系列縱走", 
+                    location: "內溝步道", 
+                    date: "2026/05/01",
+                    desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。準備好迎接壯麗的雲海了嗎？", 
+                    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070", 
+                    url: "https://thhsu01.github.io/PaPaTeam/laojiujianshan", 
+                    tag: "5/1 正式出發" 
                 }
             ],
             candidate: [
-                { title: "內溝山系 O 型全系列縱走", location: "內溝步道", desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的經典挑戰。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070", url: "https://thhsu01.github.io/PaPaTeam/laojiujianshan", tag: "規劃中" },
                 { title: "碧山 + 白石湖山：原始縱走", location: "台北內湖", desc: "碧山為內湖地區最高峰，沿途林蔭茂密且原始感十足。", img: "https://images.unsplash.com/photo-1544198365-f5d60b6d8190?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/bishan.html", tag: "規劃中" },
                 { title: "獅球嶺砲台：基隆歷史古蹟", location: "基隆市", desc: "走訪基隆的重要軍事堡壘遺址，擁有絕佳的基隆港視野。", img: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/shiqiulinling.html", tag: "規劃中" }
             ],
             completed: [
-                { title: "梅花山全系列挑戰縱走", date: "2026/01/10", location: "台北市", desc: "漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐。", img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/meihuashan", isLatest: true },
+                // 已搬移：聖母步道正式歸檔至歷史紀錄
+                { title: "聖母步道：抹茶山春季挑戰", date: "2026/03/14", location: "宜蘭礁溪", desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。攻頂後的風景絕對值得。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/mochashan", isLatest: true },
+                { title: "梅花山全系列挑戰縱走", date: "2026/01/10", location: "台北市", desc: "漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐。", img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/meihuashan" },
                 { title: "火炎山、北鞍古道 O 走", date: "2025/12/13", location: "苗栗三義", desc: "體驗台版大峽谷的壯闊地貌，在礫岩與紅土之間感受大自然。", img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1000", url: "https://thhsu01.github.io/PaPaTeam/huoyianshan.html" },
                 { title: "大崙頭尾山親山步道", date: "2025/09/29", location: "台北內湖", desc: "穿梭在內湖林蔭茂密的步道中，享受台北近郊的芬多精。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1000", url: "#" },
                 { title: "鵝尾山 + 平溪步道", date: "2025/08/30", location: "台北士林", desc: "沿著潺潺水聲漫步平溪步道，並遠眺士林與北投景色。", img: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1000", url: "#" },
@@ -162,7 +163,7 @@
         };
 
         function renderUI() {
-            // 渲染計畫行程 (已更新)
+            // 計畫行程
             const plannedEl = document.getElementById('planned-container');
             if (data.planned.length === 0) {
                 plannedEl.innerHTML = `
@@ -189,7 +190,7 @@
                 `).join('');
             }
 
-            // 渲染候選清單
+            // 候選清單
             const candidateEl = document.getElementById('candidate-container');
             candidateEl.innerHTML = data.candidate.map(item => `
                 <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
@@ -205,7 +206,7 @@
                 </a>
             `).join('');
 
-            // 渲染歷史紀錄
+            // 歷史紀錄
             const completedEl = document.getElementById('completed-container');
             completedEl.innerHTML = data.completed.map(item => `
                 <a href="${item.url}" class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all hover:bg-emerald-50/30">
