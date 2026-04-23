@@ -88,6 +88,12 @@
         .nav-link:hover:after {
             width: 100%;
         }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     </style>
 </head>
 <body class="antialiased selection:bg-orange-100">
@@ -96,7 +102,6 @@
     <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <!-- Navigation Logo Linked to index.html -->
                 <a href="index.html" class="flex items-center gap-2 group transition-all duration-300 hover:opacity-80">
                     <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">爬</div>
                     <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊候選行程</span>
@@ -118,7 +123,7 @@
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
-                    Pace: Steady 穩定模式 (預計 4.5H 完成)
+                    Pace: Steady 穩定模式 (預計 4.0H 完成)
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">鷹石之巔，翠湖幽境<br><span class="text-stone-500 text-3xl md:text-5xl font-bold">內溝山系 O 型全系列縱走</span></h1>
                 <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
@@ -126,10 +131,9 @@
                 </p>
             </div>
 
-            <!-- Meeting Block (3 Columns) -->
+            <!-- Meeting Block -->
             <div class="max-w-4xl mx-auto space-y-4">
                 <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
-                    <!-- Column 1: Location -->
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">金龍場停車場</span>
@@ -138,20 +142,21 @@
                     
                     <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
                     
-                    <!-- Column 2: Time -->
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">出發時間</span>
-                        <span class="text-xl font-bold text-stone-800">日期時間待定</span>
-                        <span class="text-xs text-stone-400 mt-1">（待活動發起後確認）</span>
+                        <span class="text-xl font-bold text-stone-800">5月1日 07:30</span>
+                        <span class="text-xs text-stone-400 mt-1">（請提前 10 分鐘抵達）</span>
                     </div>
 
                     <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
 
-                    <!-- Column 3: Weather Forecast -->
+                    <!-- Dynamic Weather Column -->
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">即時天氣預報</span>
-                        <span class="text-xl font-bold text-stone-800">尚未取得</span>
-                        <span class="text-xs text-stone-500 mt-1 italic">（待日期確定後提供資訊）</span>
+                        <div id="weather-container" class="flex flex-col items-center md:items-start">
+                            <span id="weather-main" class="text-xl font-bold text-stone-800 loading-pulse">獲取中...</span>
+                            <span id="weather-sub" class="text-xs text-stone-500 mt-1 italic">正在連線氣象觀測站</span>
+                        </div>
                     </div>
                 </div>
                 <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
@@ -162,11 +167,11 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">修正後總里程</div>
-                    <div class="text-3xl font-black text-stone-800">8.97<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
+                    <div class="text-3xl font-black text-stone-800">7.77<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">目標耗時</div>
-                    <div class="text-3xl font-black text-orange-600">4.5<span class="text-sm font-normal text-stone-400 ml-1">hr</span></div>
+                    <div class="text-3xl font-black text-orange-600">4.0<span class="text-sm font-normal text-stone-400 ml-1">hr</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">預計爬升</div>
@@ -186,7 +191,7 @@
                     <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
                     互動路線圖與地點切換
                 </h2>
-                <p class="text-stone-500 mt-2 text-sm">里程以直線距離之 1.5 倍修正。點擊地圖標記查看航點細節。</p>
+                <p class="text-stone-500 mt-2 text-sm">里程以直線距離之 1.3 倍修正。點擊地圖標記查看航點細節。</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -278,7 +283,7 @@
                     <p class="text-sm text-stone-500 leading-relaxed">展望極佳的獨立山頭，能俯瞰整個翠湖山谷與遠方的內湖市區。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-blue-600 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
                     <p class="text-sm text-stone-500 leading-relaxed">便利的起訖點，為登山隊提供充足的停車空間與集合便利性。</p>
                 </div>
                 <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 shadow-sm">
@@ -293,55 +298,22 @@
                     </div>
                     
                     <div class="flex flex-col lg:flex-row gap-10">
-                        <!-- Left: Story & History -->
                         <div class="lg:w-3/5 space-y-6">
                             <div class="inline-block px-3 py-1 bg-blue-600 rounded text-[10px] font-black tracking-widest uppercase">文史與生態專題</div>
                             <h3 class="text-3xl font-black tracking-tight leading-tight">翠湖：<br><span class="text-blue-400">黑金歲月與油桐花之眼</span></h3>
-                            
                             <div class="space-y-4 text-stone-300 leading-relaxed">
-                                <p>
-                                    <strong class="text-white">【人工之美：北台煤礦的記憶】</strong><br>
-                                    翠湖並非天然湖泊，而是早年「北台煤礦」為了洗煤與攔截泥沙而挖掘出的人工堰塞湖。在 1960 年代，這裡曾是汐止與內湖山區最繁忙的採礦據點之一。當我們站在湖畔，四周殘留的紅磚斷垣，正是當年礦場辦公室與宿舍的遺址。
-                                </p>
-                                <p>
-                                    <strong class="text-white">【生態綠洲：藍鵲與螢火蟲的家】</strong><br>
-                                    隨著 1970 年代採礦終止，大自然迅速接管了這片土地。現在的翠湖已成為北台灣極為珍貴的次生林保護區域。每年 4 至 5 月，湖畔的「五月雪」油桐花會落滿水面，形成純白的視覺饗宴；而夏季入夜後的螢火蟲舞動，更是讓翠湖獲得了「山中珍珠」的美譽。
-                                </p>
-                                <p>
-                                    <strong class="text-white">【內溝溪的生命之源】</strong><br>
-                                    翠湖的水源匯入內溝溪，其穩定調節的水量讓內溝溪下游的生態系統得以常年運作。這裡同時也是台灣藍鵲、大冠鷲與多種溪魚的棲息地。
-                                </p>
+                                <p><strong class="text-white">【人工之美：北台煤礦的記憶】</strong><br>翠湖並非天然湖泊，而是早年「北台煤礦」為了洗煤而挖掘的人工堰塞湖。1960 年代曾是汐止山區繁忙的據點，現存紅磚遺址訴說著當年風華。</p>
+                                <p><strong class="text-white">【生態綠洲：藍鵲與螢火蟲的家】</strong><br>採礦終止後，大自然重新接管。每年 4-5 月油桐花落滿湖面，夏季螢火蟲舞動，讓其獲得「山中珍珠」的美譽。</p>
                             </div>
                         </div>
-
-                        <!-- Right: Features & Tips -->
                         <div class="lg:w-2/5 space-y-8">
                             <div class="bg-stone-900/50 p-6 rounded-3xl border border-stone-700">
-                                <h4 class="text-blue-400 font-bold mb-4 flex items-center gap-2">
-                                    <span class="w-1.5 h-4 bg-blue-400 rounded-full"></span> 
-                                    翠湖必看核心
-                                </h4>
+                                <h4 class="text-blue-400 font-bold mb-4 flex items-center gap-2"><span class="w-1.5 h-4 bg-blue-400 rounded-full"></span> 翠湖必看核心</h4>
                                 <ul class="space-y-5 text-sm">
-                                    <li class="group">
-                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">1. 北台煤礦紅磚遺址</div>
-                                        <div class="text-stone-400 mt-1">隱藏在湖東南側林間，爬滿青苔的紅磚牆，是見證北台灣黑金歷史的最佳地標。</div>
-                                    </li>
-                                    <li class="group border-t border-stone-700/50 pt-4">
-                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">2. 湖面倒影攝影點</div>
-                                        <div class="text-stone-400 mt-1">內溝山下切至湖畔的出口，是捕捉「翠湖倒影」與稜線對稱之美的黃金機位。</div>
-                                    </li>
-                                    <li class="group border-t border-stone-700/50 pt-4">
-                                        <div class="font-bold text-white group-hover:text-blue-400 transition-colors">3. 季節性油桐花毯</div>
-                                        <div class="text-stone-400 mt-1">5 月時分，步道交接處會形成厚實的花毯，踩在其上如行走於雲端。</div>
-                                    </li>
+                                    <li class="group"><div class="font-bold text-white group-hover:text-blue-400 transition-colors">1. 北台煤礦紅磚遺址</div></li>
+                                    <li class="group border-t border-stone-700/50 pt-4"><div class="font-bold text-white group-hover:text-blue-400 transition-colors">2. 湖面倒影攝影點</div></li>
+                                    <li class="group border-t border-stone-700/50 pt-4"><div class="font-bold text-white group-hover:text-blue-400 transition-colors">3. 季節性油桐花毯</div></li>
                                 </ul>
-                            </div>
-
-                            <div class="p-6 bg-blue-600/10 border border-blue-600/30 rounded-3xl">
-                                <div class="text-blue-400 font-bold text-xs uppercase mb-2 tracking-widest">領隊深度叮嚀</div>
-                                <p class="text-sm text-stone-200 leading-relaxed italic">
-                                    「這條路線雖然海拔不高，但稜線起伏頻繁，且部分路段土壤乾燥易滑。建議穿著抓地力強的登山鞋。特別注意：翠湖區濕度較高，石階偶有青苔，請放慢步調，靜心感受湖畔的歷史氣息。」
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -354,17 +326,9 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
-                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                        預計行程進度 (4.5H)
+                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>預計行程進度 (4.0H)
                     </h2>
-                    <p class="text-stone-500 mt-2 text-sm text-left">數據基礎：直線距離 × 1.5 修正校準。</p>
-                </div>
-                <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
-                    <span class="text-xl">📊</span>
-                    <div class="text-left">
-                        <p class="text-xs text-amber-800 font-black">計算邏輯：</p>
-                        <p class="text-[10px] text-amber-700 leading-tight">里程 = 直線距離 * 1.5 | 速度 = 2km/hr 穩定推進。</p>
-                    </div>
+                    <p class="text-stone-500 mt-2 text-sm text-left">數據基礎：直線距離 × 1.3 修正校準。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0" id="timeline-container">
@@ -373,9 +337,8 @@
         </section>
 
         <footer class="text-center py-16 border-t border-stone-200">
-            <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 穩定模式 4.5H | 鷹石之巔，翠湖幽境</p>
+            <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 穩定模式 4.0H | 5月1日 行程</p>
         </footer>
-
     </main>
 
     <script>
@@ -383,34 +346,66 @@
             window.open("https://www.google.com/maps/dir/?api=1&destination=25.071960894394802,121.63322171182692", "_blank");
         }
 
-        let currentWaypointIndex = 0;
-
         const schedule = [
-            { lat: 25.071960894394802, lng: 121.63322171182692, time: "08:00", loc: "金龍場停車場 (H20m)", dist: 0.00, ele: 20, pos: "集合起點", desc: "行程起點。此處停車便利，請點擊按鈕開啟導航。", advice: "檢查裝備與水分，準時出發。" },
-            { lat: 25.07713919780438, lng: 121.63419574315985, time: "08:26", loc: "登山口 (H40m)", dist: 0.87, ele: 40, pos: "入山口", desc: "進入步道區。累積里程 0.87 km (1.5倍修正)。", advice: "開始緩爬，調整呼吸頻率。" },
-            { lat: 25.07718121374426, lng: 121.63648883948962, time: "08:36", loc: "學頭坡山 (H94m)", dist: 1.22, ele: 94, pos: "山頭", desc: "標高 94m。視野開闊。累計 1.22 km。", advice: "小休 2 分鐘，觀察對向稜線。" },
-            { lat: 25.0852375127452, lng: 121.63309737103714, time: "09:19", loc: "翠湖東南 (H120m)", dist: 2.66, ele: 120, pos: "山脊點", desc: "位於湖區東南側稜線。累計 2.66 km。", advice: "路段稍窄，注意平衡。" },
-            { lat: 25.08996648301252, lng: 121.63119341001082, time: "09:44", loc: "汐止鷹石尖 (H180m)", dist: 3.50, ele: 180, pos: "亮點", desc: "突出的巨岩景觀。累計 3.50 km。", advice: "注意拍照安全，勿靠近岩石脆弱邊緣。" },
-            { lat: 25.09451096257661, lng: 121.62698718889058, time: "10:13", loc: "老鷲尖南峰 (H157m)", dist: 4.47, ele: 157, pos: "副峰", desc: "攻頂前的緩衝帶。累計 4.47 km。", advice: "保持體力，準備攻向最高點。" },
-            { lat: 25.095557931104427, lng: 121.6261054844135, time: "10:19", loc: "老鷲尖 (H193m)", dist: 4.68, ele: 193, pos: "最高點", desc: "標高 193m，全程最高點。累計 4.68 km。", advice: "大休息 15 分鐘，進行全體大合照。" },
-            { lat: 25.089036575515266, lng: 121.62738378956361, time: "10:52", loc: "內溝山 (H137m)", dist: 5.79, ele: 137, pos: "展望點", desc: "展望極佳的山頭。累計 5.79 km。", advice: "享受山頂徐風，準備下行湖區。" },
-            { lat: 25.088790281950963, lng: 121.62912019048608, time: "11:00", loc: "翠湖 (H45m)", dist: 6.06, ele: 45, pos: "幽境湖區", desc: "抵達寧靜的湖區。累計 6.06 km。", advice: "在此沉澱心情，觀察湖泊生態。" },
-            { lat: 25.0849102876649, lng: 121.63119953348264, time: "11:22", loc: "翠湖步道登山口 (H35m)", dist: 6.78, ele: 35, pos: "出口", desc: "回到步道入口平緩處。累計 6.78 km。", advice: "準備回程街道。" },
-            { lat: 25.071960894394802, lng: 121.63322171182692, time: "12:28", loc: "金龍場停車場", dist: 8.97, ele: 20, pos: "終點", desc: "回到起點，總里程估算 8.97 km。", advice: "清點人數與裝備，互道珍重。" }
+            { lat: 25.071960894394802, lng: 121.63322171182692, time: "07:30", loc: "金龍場停車場 (H20m)", dist: 0.00, ele: 20, pos: "集合起點", desc: "行程起點。07:30 準時出發。", advice: "檢查裝備與水分。" },
+            { lat: 25.07713919780438, lng: 121.63419574315985, time: "07:53", loc: "登山口 (H40m)", dist: 0.75, ele: 40, pos: "入山口", desc: "累積里程 0.75 km (1.3倍修正)。", advice: "開始暖身。" },
+            { lat: 25.07718121374426, lng: 121.63648883948962, time: "08:02", loc: "學頭坡山 (H94m)", dist: 1.06, ele: 94, pos: "山頭", desc: "累計 1.06 km。", advice: "觀察對向稜線。" },
+            { lat: 25.0852375127452, lng: 121.63309737103714, time: "08:39", loc: "翠湖東南 (H120m)", dist: 2.30, ele: 120, pos: "山脊點", desc: "累計 2.30 km。", advice: "注意平衡。" },
+            { lat: 25.08996648301252, lng: 121.63119341001082, time: "09:01", loc: "汐止鷹石尖 (H180m)", dist: 3.03, ele: 180, pos: "亮點", desc: "累計 3.03 km。", advice: "拍照注意安全。" },
+            { lat: 25.09451096257661, lng: 121.62698718889058, time: "09:26", loc: "老鷲尖南峰 (H157m)", dist: 3.87, ele: 157, pos: "副峰", desc: "累計 3.87 km。", advice: "攻頂準備。" },
+            { lat: 25.095557931104427, lng: 121.6261054844135, time: "09:46", loc: "老鷲尖 (H193m)", dist: 4.05, ele: 193, pos: "最高點", desc: "累計 4.05 km。休息 15 分鐘。", advice: "全體大合照。" },
+            { lat: 25.089036575515266, lng: 121.62738378956361, time: "10:15", loc: "內溝山 (H137m)", dist: 5.01, ele: 137, pos: "展望點", desc: "累計 5.01 km。", advice: "準備下行。" },
+            { lat: 25.088790281950963, lng: 121.62912019048608, time: "10:23", loc: "翠湖 (H45m)", dist: 5.25, ele: 45, pos: "湖區", desc: "累計 5.25 km。", advice: "觀察生態。" },
+            { lat: 25.0849102876649, lng: 121.63119953348264, time: "10:41", loc: "翠湖步道登山口 (H35m)", dist: 5.87, ele: 35, pos: "出口", desc: "累計 5.87 km。", advice: "回程平坦段。" },
+            { lat: 25.071960894394802, lng: 121.63322171182692, time: "11:38", loc: "金龍場停車場", dist: 7.77, ele: 20, pos: "終點", desc: "總里程 7.77 km。", advice: "行程圓滿結束。" }
         ];
 
         let map, chart, markers = [];
+
+        async function fetchWeather() {
+            const lat = 25.0719, lng = 121.6332;
+            const targetDate = "2026-05-01";
+            const weatherMain = document.getElementById('weather-main');
+            const weatherSub = document.getElementById('weather-sub');
+
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei`);
+                const data = await response.json();
+                
+                // 檢查 API 返回的日期中是否有 5/1
+                const dateIndex = data.daily.time.indexOf(targetDate);
+                
+                if (dateIndex !== -1) {
+                    const code = data.daily.weathercode[dateIndex];
+                    const maxT = Math.round(data.daily.temperature_2m_max[dateIndex]);
+                    const minT = Math.round(data.daily.temperature_2m_min[dateIndex]);
+                    
+                    const weatherMap = { 0: "晴朗", 1: "晴時多雲", 2: "多雲", 3: "陰天", 45: "霧", 51: "毛毛雨", 61: "小雨", 80: "陣雨" };
+                    weatherMain.innerText = `${weatherMap[code] || "多雲"} ${minT}° - ${maxT}°`;
+                    weatherSub.innerText = "5/1 即時氣象預報";
+                    weatherMain.classList.remove('loading-pulse');
+                } else {
+                    weatherMain.innerText = "尚無預報";
+                    weatherSub.innerText = "預報範圍約為 7-14 天內";
+                    weatherMain.classList.remove('loading-pulse');
+                }
+            } catch (error) {
+                weatherMain.innerText = "連線失敗";
+                weatherSub.innerText = "請稍後再試";
+                weatherMain.classList.remove('loading-pulse');
+            }
+        }
 
         function initRealMap() {
             map = L.map('realMap', { preferCanvas: true, center: [25.083, 121.631], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
             const pathCoords = schedule.map(d => [d.lat, d.lng]);
-            L.polyline(pathCoords, { color: '#ea580c', weight: 4, opacity: 0.8, renderer: L.canvas() }).addTo(map);
+            L.polyline(pathCoords, { color: '#ea580c', weight: 4, opacity: 0.8 }).addTo(map);
             schedule.forEach((d, i) => {
                 const circle = L.circleMarker([d.lat, d.lng], {
                     radius: d.pos === "最高點" || d.pos.includes("終點") || d.pos.includes("起點") ? 8 : 6,
                     fillColor: d.pos === "最高點" ? '#16a34a' : (d.pos.includes("終點") || d.pos.includes("起點") ? '#ea580c' : '#1c1917'),
-                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1, renderer: L.canvas()
+                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
                 markers.push(circle);
@@ -425,7 +420,7 @@
                     labels: schedule.map(d => d.loc.split(' ')[0]),
                     datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#ea580c', borderWidth: 4, pointRadius: 6, fill: true, backgroundColor: 'rgba(234, 88, 12, 0.1)', tension: 0.35 }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, title: { display: true, text: '海拔 (m)' } }, x: { display: false } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 }, x: { display: false } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
             });
         }
 
@@ -458,12 +453,12 @@
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
                     <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
-                        <div class="flex justify-between items-center mb-1 text-left">
-                            <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
-                            <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-lg font-black text-stone-800">${item.time}</span>
+                            <span class="text-[10px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase">${item.pos}</span>
                         </div>
-                        <h4 class="font-bold text-stone-700 text-sm text-left">${item.loc}</h4>
-                        <p class="text-[10px] text-stone-400 mt-1 text-left">累計里程: ${item.dist.toFixed(2)} km</p>
+                        <h4 class="font-bold text-stone-700 text-sm">${item.loc}</h4>
+                        <p class="text-[10px] text-stone-400 mt-1">累計里程: ${item.dist.toFixed(2)} km</p>
                     </div>
                 `;
                 container.appendChild(div);
@@ -477,6 +472,7 @@
             initChart();
             renderTimeline();
             updateCard(0);
+            fetchWeather();
         });
     </script>
 </body>
