@@ -149,13 +149,13 @@
                     <!-- 出發時間 -->
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">出發時間</span>
-                        <span class="text-xl font-bold text-stone-800">3月14日 (六) 08:00</span>
-                        <span class="text-xs text-stone-500 mt-1">（往返預計約 6.5H）</span>
+                        <span class="text-xl font-bold text-stone-800">08:00</span>
+                        <span class="text-xs text-stone-500 mt-1">（往返預計約 8H）</span>
                     </div>
 
                     <div class="w-px h-10 bg-green-100 hidden md:block"></div>
 
-                    <!-- 最新天氣預報 (優化載入狀態) -->
+                    <!-- 最新天氣預報 -->
                     <div class="flex flex-col items-center md:items-start gap-1 min-w-[120px]">
                         <span class="text-[10px] font-black text-green-700 uppercase tracking-widest">3月14日 礁溪預報</span>
                         <div class="flex items-center gap-2" id="weather-container">
@@ -172,15 +172,15 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">總計往返里程</div>
-                    <div class="text-3xl font-black text-stone-800">11.68<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
+                    <div class="text-3xl font-black text-stone-800">12.45<span class="text-sm font-normal text-stone-400 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">預估結束時間</div>
-                    <div class="text-3xl font-black text-green-700">14:32</div>
+                    <div class="text-3xl font-black text-green-700">15:55</div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">山頂休息時間</div>
-                    <div class="text-3xl font-black text-stone-800">60<span class="text-sm font-normal text-stone-400 ml-1">min</span></div>
+                    <div class="text-3xl font-black text-stone-800">130<span class="text-sm font-normal text-stone-400 ml-1">min</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl text-center card-hover border border-stone-200 transition-all">
                     <div class="text-stone-400 text-xs font-bold uppercase mb-2">最高標高</div>
@@ -196,7 +196,7 @@
                     <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
                     全線航點導航
                 </h2>
-                <p class="text-stone-500 mt-2 text-sm">海拔數據已更新。點擊圖示切換點位資訊。</p>
+                <p class="text-stone-500 mt-2 text-sm">行程時間已校準，總往返里程修正為 12.45 km。</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -283,7 +283,7 @@
                 <!-- 5. 景觀台 -->
                 <div class="bg-green-700 text-white p-6 rounded-2xl shadow-sm">
                     <h3 class="font-bold mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-white rounded-full"></span>5. 抹茶山景觀台 (峰點)</h3>
-                    <p class="text-sm text-green-100 leading-relaxed">海拔 885m。著名的視覺盛宴所在地，翠綠山稜起伏如抹茶般誘人。本次行程將在此休息 60 分鐘。</p>
+                    <p class="text-sm text-green-100 leading-relaxed">海拔 885m。著名的視覺盛宴所在地，翠綠山稜起伏如抹茶般誘人。本次行程將在此大休 130 分鐘。</p>
                 </div>
                 <!-- 6. 聖母山莊 -->
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -296,7 +296,7 @@
                     <p class="text-sm text-stone-500 leading-relaxed">位於景觀台正後方最高處。標誌著信仰與攀登的精神終點，在山頂薄霧中更顯肅穆。</p>
                 </div>
 
-                <!-- 2. 聖母堂 (導覽壓軸) -->
+                <!-- 2. 聖母堂 -->
                 <div class="bg-stone-800 text-white p-8 rounded-3xl shadow-xl lg:col-span-2 border border-stone-700 relative overflow-hidden">
                     <div class="relative z-10">
                         <div class="inline-block px-3 py-1 bg-green-600 rounded text-[10px] font-black tracking-widest uppercase mb-4">重點景點・顯靈奇蹟與宗教建築</div>
@@ -333,15 +333,15 @@
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
                         <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                        完整預估行程表 (含一小時休息)
+                        完整預估行程表 (12.45 km 修正)
                     </h2>
-                    <p class="text-stone-500 mt-2 text-sm text-left">數據已根據標高修正。全程約 11.68 km。</p>
+                    <p class="text-stone-500 mt-2 text-sm text-left">數據已根據里程碑時間校準。往返全程約 12.45 km。</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 px-5 py-3 rounded-xl flex items-center gap-3 shadow-sm">
                     <span class="text-xl">🏔️</span>
                     <div class="text-left">
-                        <p class="text-xs text-amber-800 font-black">山頂休息時間：60 分鐘。</p>
-                        <p class="text-[10px] text-amber-700 leading-tight">建議 11:55 前完成午餐與拍照，準時啟程下山。</p>
+                        <p class="text-xs text-amber-800 font-black">山頂休息時間：130 分鐘。</p>
+                        <p class="text-[10px] text-amber-700 leading-tight">建議 13:40 離開觀景台，15:55 返回停車場。</p>
                     </div>
                 </div>
             </div>
@@ -363,34 +363,33 @@
 
         let currentWaypointIndex = 0;
 
+        // 里程已從 11.68km 修正為 12.45km (單程約 6.225km)
         const schedule = [
             { lat: 24.830230219662706, lng: 121.74711388053494, time: "08:00", loc: "五峰旗停車場 (標高 65m)", dist: 0.00, ele: 65, pos: "集合起點", desc: "行程開始。標高 65m，整理裝備。", advice: "確保飲水充足，宜蘭春季易起霧。" },
-            { lat: 24.831387311728044, lng: 121.7455079158638, time: "08:11", loc: "登山口 (標高 108m)", dist: 0.35, ele: 108, pos: "入山點", desc: "開始進入碎石產業道路段。", advice: "以此段作為肌肉暖身。" },
-            { lat: 24.83287200030701, lng: 121.74505711006371, time: "08:19", loc: "五峰旗聖母堂 (標高 155m)", dist: 0.63, ele: 155, pos: "文化景觀", desc: "圓形天壇建築，展望良好。", advice: "稍微駐足拍照，保持呼吸頻率。" },
-            { lat: 24.83240151992008, lng: 121.74155394385959, time: "08:37", loc: "桂林峰休息站 (標高 229m)", dist: 1.22, ele: 229, pos: "休息點", desc: "標高 229m。穩健推進中。", advice: "不需要大休，可小口喝水。" },
-            { lat: 24.83562269053575, lng: 121.74077804035333, time: "08:55", loc: "一水休息站 (標高 289m)", dist: 1.82, ele: 289, pos: "休息點", desc: "標高 289m。最後平緩區。", advice: "檢查鞋帶，即將進入陡升段。" },
-            { lat: 24.847423338662402, lng: 121.73513524230518, time: "10:05", loc: "通天橋休息區 (標高 449m)", dist: 4.18, ele: 449, pos: "階梯起點", desc: "標高 449m。產業道路終點。正式挑戰開始。", advice: "建議休息 10 分鐘，排空水分。" },
-            { lat: 24.85013454422171, lng: 121.7333991031425, time: "10:23", loc: "0.7K休息亭 (標高 568m)", dist: 4.75, ele: 568, pos: "體力點", desc: "標高 568m。階梯段中繼站。", advice: "注意步幅，不要過大以節省體力。" },
-            { lat: 24.855539057028622, lng: 121.73070883621736, time: "10:55", loc: "聖母山莊觀景台 (抵達)", dist: 5.84, ele: 885, pos: "最高點", desc: "抵達抹茶山！開始 60 分鐘休息。", advice: "用餐並享受視覺盛宴，注意風大保暖。" },
-            { lat: 24.855539057028622, lng: 121.73070883621736, time: "11:55", loc: "預定離開觀景台", dist: 5.84, ele: 885, pos: "開始下山", desc: "休息結束，準時回程。", advice: "下坡注意腳尖，預防受傷。" },
-            { lat: 24.85013454422171, lng: 121.7333991031425, time: "12:24", loc: "0.7K休息亭 (回程)", dist: 6.93, ele: 568, pos: "下山段", desc: "下坡體感輕快但衝擊力大。", advice: "步伐輕緩，側身下階梯。" },
-            { lat: 24.847423338662402, lng: 121.73513524230518, time: "12:39", loc: "通天橋休息區 (回程)", dist: 7.50, ele: 449, pos: "下山段", desc: "回到步道入口。", advice: "在此放鬆小腿肌。" },
-            { lat: 24.83562269053575, lng: 121.74077804035333, time: "13:43", loc: "一水休息站 (回程)", dist: 9.86, ele: 289, pos: "下山段", desc: "進入好走的產業道路。", advice: "維持節奏，保持通訊暢通。" },
-            { lat: 24.83240151992008, lng: 121.74155394385959, time: "13:59", loc: "桂林峰休息站 (回程)", dist: 10.46, ele: 229, pos: "下山段", desc: "離停車場不遠了。", advice: "緩步收操。" },
-            { lat: 24.83287200030701, lng: 121.74505711006371, time: "14:15", loc: "五峰旗聖母堂 (回程)", dist: 11.05, ele: 155, pos: "下山段", desc: "最後一次展望抹茶山稜線。", advice: "在此向聖母祈謝一路平安。" },
-            { lat: 24.831387311728044, lng: 121.7455079158638, time: "14:23", loc: "登山口 (回程)", dist: 11.33, ele: 108, pos: "下山段", desc: "回到產業道路門戶。", advice: "清點人數。" },
-            { lat: 24.830230219662706, lng: 121.74711388053494, time: "14:32", loc: "五峰旗停車場 (終點)", dist: 11.68, ele: 65, pos: "圓滿結束", desc: "回到起點。往返總里程 11.68 km。", advice: "慶功宴預備！注意拉筋。" }
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "08:25", loc: "登山口 (標高 108m)", dist: 0.37, ele: 108, pos: "入山點", desc: "修正里程約 0.37 km。", advice: "以此段作為肌肉暖身。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "08:45", loc: "五峰旗聖母堂 (標高 155m)", dist: 0.67, ele: 155, pos: "文化景觀", desc: "修正累計里程 0.67 km。", advice: "稍微駐足拍照，保持呼吸頻率。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "09:04", loc: "桂林峰休息站 (標高 229m)", dist: 1.30, ele: 229, pos: "休息點", desc: "修正累計 1.30 km。", advice: "維持頻率，緩步推進。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "09:23", loc: "一水休息站 (標高 289m)", dist: 1.94, ele: 289, pos: "休息點", desc: "修正累計 1.94 km。", advice: "檢查補給，即將進入陡升段。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "10:37", loc: "通天橋休息區 (標高 449m)", dist: 4.46, ele: 449, pos: "階梯起點", desc: "修正累計 4.46 km。挑戰開始。", advice: "建議休息，準備 1.6k 的考驗。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "10:55", loc: "0.7K休息亭 (標高 568m)", dist: 5.06, ele: 568, pos: "體力點", desc: "修正累計 5.06 km。", advice: "呼吸調整，步伐踩穩。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "11:30", loc: "聖母山莊觀景台 (抵達)", dist: 6.225, ele: 885, pos: "最高點", desc: "單程修正里程 6.225 km。大休開始。", advice: "大休時間充足，盡情享受美景。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "13:40", loc: "預定離開觀景台", dist: 6.225, ele: 885, pos: "開始下山", desc: "指定 13:40 離開，啟動回程。", advice: "收起相機，注意下坡膝蓋負擔。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "14:05", loc: "0.7K休息亭 (回程)", dist: 7.39, ele: 568, pos: "下山段", desc: "累計里程 7.39 km。", advice: "側身下階梯，預防受傷。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "14:18", loc: "通天橋休息區 (回程)", dist: 8.00, ele: 449, pos: "下山段", desc: "累計里程 8.00 km。", advice: "此處可休息洗滌。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "15:12", loc: "一水休息站 (回程)", dist: 10.51, ele: 289, pos: "下山段", desc: "累計里程 10.51 km。", advice: "放鬆小腿肚。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "15:26", loc: "桂林峰休息站 (回程)", dist: 11.15, ele: 229, pos: "下山段", desc: "累計里程 11.15 km。", advice: "快到聖母堂了。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "15:40", loc: "五峰旗聖母堂 (回程)", dist: 11.78, ele: 155, pos: "下山段", desc: "累計里程 11.78 km。", advice: "最後一段產業道路。" },
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "15:46", loc: "登山口 (回程)", dist: 12.08, ele: 108, pos: "下山段", desc: "累計里程 12.08 km。", advice: "即將完成挑戰。" },
+            { lat: 24.830230219662706, lng: 121.74711388053494, time: "15:55", loc: "五峰旗停車場 (終點)", dist: 12.45, ele: 65, pos: "圓滿結束", desc: "回抵終點。總往返里程 12.45 km。", advice: "慶功宴預備！注意拉筋伸展。" }
         ];
 
         let map, chart, markers = [];
 
-        // 優化後的氣象抓取函數
         async function getLiveWeather() {
             const apiKey = "";
             const weatherSummaryEl = document.getElementById('weather-summary');
             const weatherDetailEl = document.getElementById('weather-detail');
 
-            // 初始化狀態
             weatherSummaryEl.innerText = "搜尋中...";
             weatherSummaryEl.classList.add('weather-pulse');
             weatherDetailEl.innerText = "正在調用即時氣象雷達";
@@ -399,12 +398,12 @@
             const systemPrompt = "你是一位專業氣象預報員。請提供宜蘭礁溪 2026/03/14 的極簡數據。格式強制為：'天氣 / 溫度 / 降雨率' (如：晴時多雲 / 18-24°C / 10%)。嚴禁其餘描述。";
             
             let attempts = 0;
-            const maxAttempts = 3; // 縮短重試次數，增加超時容錯
+            const maxAttempts = 3;
 
             while (attempts < maxAttempts) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒超時限制
+                    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
                     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                         method: 'POST',
@@ -433,12 +432,10 @@
                     }
                 } catch (err) {
                     attempts++;
-                    // 指數退避：500ms, 1000ms...
                     await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 500));
                 }
             }
 
-            // 失敗後的最終處理
             weatherSummaryEl.innerText = "載入超時";
             weatherSummaryEl.classList.remove('weather-pulse');
             weatherDetailEl.innerHTML = "<span class='text-red-500 font-bold'>⚠️ 點擊此處手動重試</span>";
@@ -520,7 +517,7 @@
             initChart();
             renderTimeline();
             updateCard(0);
-            getLiveWeather(); // 初始載入氣象
+            getLiveWeather();
         });
     </script>
 </body>
