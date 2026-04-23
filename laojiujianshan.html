@@ -369,26 +369,37 @@
             const weatherSub = document.getElementById('weather-sub');
 
             try {
-                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei`);
+                // 擴展預報範圍至 16 天，確保能涵蓋 5/1
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei&forecast_days=16`);
                 const data = await response.json();
                 
-                // 檢查 API 返回的日期中是否有 5/1
                 const dateIndex = data.daily.time.indexOf(targetDate);
+                const todayIndex = 0; // 備援：今日預報
                 
+                let code, maxT, minT, subText;
+
                 if (dateIndex !== -1) {
-                    const code = data.daily.weathercode[dateIndex];
-                    const maxT = Math.round(data.daily.temperature_2m_max[dateIndex]);
-                    const minT = Math.round(data.daily.temperature_2m_min[dateIndex]);
-                    
-                    const weatherMap = { 0: "晴朗", 1: "晴時多雲", 2: "多雲", 3: "陰天", 45: "霧", 51: "毛毛雨", 61: "小雨", 80: "陣雨" };
-                    weatherMain.innerText = `${weatherMap[code] || "多雲"} ${minT}° - ${maxT}°`;
-                    weatherSub.innerText = "5/1 即時氣象預報";
-                    weatherMain.classList.remove('loading-pulse');
+                    code = data.daily.weathercode[dateIndex];
+                    maxT = Math.round(data.daily.temperature_2m_max[dateIndex]);
+                    minT = Math.round(data.daily.temperature_2m_min[dateIndex]);
+                    subText = "5/1 行程日預報";
                 } else {
-                    weatherMain.innerText = "尚無預報";
-                    weatherSub.innerText = "預報範圍約為 7-14 天內";
-                    weatherMain.classList.remove('loading-pulse');
+                    // 若目標日期太遠，顯示今日天氣
+                    code = data.daily.weathercode[todayIndex];
+                    maxT = Math.round(data.daily.temperature_2m_max[todayIndex]);
+                    minT = Math.round(data.daily.temperature_2m_min[todayIndex]);
+                    subText = "今日即時天氣 (目標日尚遠)";
                 }
+                
+                const weatherMap = { 
+                    0: "晴朗", 1: "晴時多雲", 2: "多雲", 3: "陰天", 
+                    45: "霧", 48: "霧", 51: "毛毛雨", 61: "小雨", 
+                    80: "陣雨", 95: "雷雨" 
+                };
+                weatherMain.innerText = `${weatherMap[code] || "多雲"} ${minT}° - ${maxT}°`;
+                weatherSub.innerText = subText;
+                weatherMain.classList.remove('loading-pulse');
+                
             } catch (error) {
                 weatherMain.innerText = "連線失敗";
                 weatherSub.innerText = "請稍後再試";
