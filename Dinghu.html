@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爬爬小隊 | 頂湖O型行程</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #fcfdfd; }
+    .hero-mesh {
+      background-color: #064e3b;
+      background-image:
+        radial-gradient(at 0% 0%, hsla(161, 72%, 39%, 0.5) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(180, 70%, 45%, 0.3) 0, transparent 50%),
+        url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=2070');
+      background-size: cover;
+      background-position: center;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+<!-- 導覽列 -->
+<nav class="fixed top-0 w-full z-50 glass-card border-b border-slate-200/50">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 font-bold text-xl">爬</div>
+        <span class="text-2xl font-black text-emerald-900 tracking-tighter">爬爬小隊</span>
+      </a>
+    </div>
+    <a href="index.html" class="text-sm font-bold text-slate-600 hover:text-emerald-600 transition-colors">← 返回首頁</a>
+  </div>
+</nav>
+
+<!-- 英雄區塊 -->
+<header class="hero-mesh h-[50vh] flex items-center justify-center text-center px-6 pt-20">
+  <div class="max-w-4xl">
+    <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs md:text-sm font-bold mb-4 md:mb-6 tracking-widest uppercase">Yangmingshan · O-Type Route</span>
+    <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-2xl">
+      頂湖O型<br><span class="text-emerald-400">猴崁水圳 × 青楓步道</span>
+    </h1>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-6 py-24 space-y-20">
+
+  <!-- 行程資訊卡 -->
+  <section>
+    <div class="border-l-4 border-emerald-500 pl-6 mb-10">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">行程資訊</h2>
+      <p class="text-slate-500 mt-1 font-medium italic">Trip Overview</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 text-lg">📅</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">出發日期</p>
+            <p class="text-slate-700 font-bold">TBD（待定）</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 text-lg">🗺️</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">路線類型</p>
+            <p class="text-slate-700 font-bold">O型環狀路線</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 text-lg">📍</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">地區</p>
+            <p class="text-slate-700 font-bold">陽明山 · 頂湖地區</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center text-amber-700 text-lg">⏱️</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">預計時間</p>
+            <p class="text-slate-700 font-bold">約 4–6 小時</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center text-amber-700 text-lg">💪</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">難度</p>
+            <p class="text-slate-700 font-bold">中等</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center text-amber-700 text-lg">🌸</div>
+          <div>
+            <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">亮點</p>
+            <p class="text-slate-700 font-bold">水圳、繡球花、吊橋、瀑布</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 路線說明 -->
+  <section>
+    <div class="border-l-4 border-emerald-500 pl-6 mb-10">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">路線說明</h2>
+      <p class="text-slate-500 mt-1 font-medium italic">Route Details</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+      <ol class="space-y-5">
+        <li class="flex items-start space-x-4">
+          <span class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-black text-sm">1</span>
+          <div>
+            <p class="font-bold text-slate-900">猴崁水圳步道</p>
+            <p class="text-slate-500 text-sm mt-1">全新完工的陽明山秘境步道，沿著水圳行走，景色幽靜怡人。</p>
+          </div>
+        </li>
+        <li class="flex items-start space-x-4">
+          <span class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-black text-sm">2</span>
+          <div>
+            <p class="font-bold text-slate-900">青楓步道</p>
+            <p class="text-slate-500 text-sm mt-1">串聯水圳步道，沿途可見繡球花盛開，景緻優美。</p>
+          </div>
+        </li>
+        <li class="flex items-start space-x-4">
+          <span class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-black text-sm">3</span>
+          <div>
+            <p class="font-bold text-slate-900">頂湖山</p>
+            <p class="text-slate-500 text-sm mt-1">沿途登頂頂湖山，可俯瞰周遭山林與谷地景色。</p>
+          </div>
+        </li>
+        <li class="flex items-start space-x-4">
+          <span class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-black text-sm">4</span>
+          <div>
+            <p class="font-bold text-slate-900">無尾崙</p>
+            <p class="text-slate-500 text-sm mt-1">經過無尾崙，繼續沿O型路線前行。</p>
+          </div>
+        </li>
+        <li class="flex items-start space-x-4">
+          <span class="flex-shrink-0 w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center font-black text-sm">✓</span>
+          <div>
+            <p class="font-bold text-slate-900">頂湖（回到起點）</p>
+            <p class="text-slate-500 text-sm mt-1">完成O型環狀路線，回到頂湖起點。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 交通方式 -->
+  <section>
+    <div class="border-l-4 border-amber-400 pl-6 mb-10">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">交通方式</h2>
+      <p class="text-slate-500 mt-1 font-medium italic">Transportation</p>
+    </div>
+    <div class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-xl">🚌</div>
+          <h3 class="text-xl font-black text-slate-900">大眾運輸</h3>
+        </div>
+        <div class="space-y-4 text-slate-700">
+          <div class="bg-blue-50 rounded-xl p-4">
+            <p class="font-bold text-blue-900 mb-1">路線一｜捷運 + 公車</p>
+            <p class="text-sm text-blue-800">捷運紅線 → 劍潭站 出站後，搭乘 皇家客運 109 路，至頂湖站下車即為步道入口。</p>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4">
+            <p class="font-bold text-blue-900 mb-1">路線二｜捷運 + 公車</p>
+            <p class="text-sm text-blue-800">捷運 → 北投站，轉乘 小19路公車（往菁山）至終點站後，步行約 15 分鐘可抵達步道入口。</p>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">※ 假日建議搭乘大眾運輸，山區停車位有限。</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-xl">🚗</div>
+          <h3 class="text-xl font-black text-slate-900">自行開車</h3>
+        </div>
+        <div class="space-y-3 text-slate-700">
+          <div class="bg-emerald-50 rounded-xl p-4">
+            <p class="font-bold text-emerald-900 mb-1">建議導航至</p>
+            <p class="text-sm text-emerald-800">「頂湖」或「猴崁水圳步道入口」，沿陽金公路（台2甲）行駛後依指標轉入頂湖產業道路。</p>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4">
+            <p class="font-bold text-slate-700 mb-1">⚠️ 停車注意事項</p>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• 假日山區路窄，停車位十分有限，建議早出發（08:00 前）。</li>
+              <li>• 可停在頂湖附近路邊合法停車區，勿堵塞農用道路。</li>
+              <li>• 部分路段為單線道，會車需禮讓。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center text-xl">🚕</div>
+          <h3 class="text-xl font-black text-slate-900">計程車 / 共乘</h3>
+        </div>
+        <div class="bg-yellow-50 rounded-xl p-4 text-sm text-yellow-900">
+          <p>從士林或天母搭計程車前往頂湖約 20–30 分鐘，車資約 NT$300–500。可與隊友共乘分攤費用。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 參考影片 -->
+  <section>
+    <div class="border-l-4 border-slate-400 pl-6 mb-10">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">路線參考影片</h2>
+      <p class="text-slate-500 mt-1 font-medium italic">Reference Video</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+      <div class="aspect-video rounded-xl overflow-hidden">
+        <iframe
+          src="https://www.youtube.com/embed/EFOR7Zw4C1w"
+          title="陽明山全新完工｜猴崁水圳步道｜青楓步道｜頂湖山｜無尾崙｜頂湖O型"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="w-full h-full">
+        </iframe>
+      </div>
+      <p class="text-xs text-slate-400 mt-3 text-center">影片來源：樂活玩童 NO.262｜2026/05/21</p>
+    </div>
+  </section>
+
+  <!-- 注意事項 -->
+  <section>
+    <div class="border-l-4 border-red-400 pl-6 mb-10">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">注意事項</h2>
+      <p class="text-slate-500 mt-1 font-medium italic">Important Notes</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+      <ul class="space-y-4 text-slate-700">
+        <li class="flex items-start space-x-3">
+          <span class="text-red-500 mt-0.5 flex-shrink-0">⚠️</span>
+          <p><span class="font-bold">雨天路況：</span>水圳步道及山路在雨天時較濕滑，請穿著防滑登山鞋，並注意地面狀況。</p>
+        </li>
+        <li class="flex items-start space-x-3">
+          <span class="text-amber-500 mt-0.5 flex-shrink-0">🎒</span>
+          <p><span class="font-bold">裝備建議：</span>登山鞋、登山杖（選配）、雨具、充足飲水（至少 1.5L）、行動糧食、防曬。</p>
+        </li>
+        <li class="flex items-start space-x-3">
+          <span class="text-emerald-500 mt-0.5 flex-shrink-0">🌿</span>
+          <p><span class="font-bold">環境維護：</span>請自行帶走垃圾，愛護山林環境，不採摘野生植物。</p>
+        </li>
+        <li class="flex items-start space-x-3">
+          <span class="text-blue-500 mt-0.5 flex-shrink-0">📱</span>
+          <p><span class="font-bold">通訊：</span>山區部分路段手機訊號較弱，建議事先下載離線地圖（如 Gaia GPS、AllTrails）。</p>
+        </li>
+        <li class="flex items-start space-x-3">
+          <span class="text-purple-500 mt-0.5 flex-shrink-0">🕗</span>
+          <p><span class="font-bold">時間掌控：</span>建議上午出發，避免摸黑下山，保留充裕時間享受沿途景色。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-slate-950 text-white py-16 px-6 mt-20 relative overflow-hidden text-center">
+  <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500"></div>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-3xl font-black text-white mb-4">爬爬小隊</div>
+    <p class="text-slate-500 text-sm mb-8">頂湖O型 · 陽明山</p>
+    <a href="index.html" class="inline-block px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors">← 返回首頁</a>
+    <div class="pt-8 mt-8 border-t border-slate-900 text-slate-600 text-xs">
+      &copy; 2026 爬爬小隊 PaPaTeam. 版權所有.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
