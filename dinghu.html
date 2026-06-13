@@ -69,7 +69,7 @@
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
             <div class="text-xs text-stone-400 mb-1">出發時間</div>
-            <div class="font-bold text-stone-800">6月20日 07:30</div>
+            <div class="font-bold text-stone-800">6月20日 07:00</div>
             <div class="text-xs text-stone-400 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
@@ -127,7 +127,7 @@
             <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">385</strong> m</span>
           </div>
-          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點。07:30 準時出發。</p>
+          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點。07:00 準時出發。</p>
           <div class="bg-amber-50 border border-amber-100 rounded-xl p-3">
             <div class="text-xs font-medium text-amber-700 mb-1">隊友建議</div>
             <p class="text-xs text-amber-600" id="wp-advice">檢查裝備與水分。</p>
@@ -243,16 +243,16 @@
     }
 
     const schedule = [
-      { lat: 25.154635, lng: 121.539265, time: "07:30", loc: "陽明山立體停車場 (H385m)", dist: 0.00, ele: 385, pos: "集合起點", desc: "行程起點。07:30 準時出發。", advice: "檢查裝備與水分，確認小9路公車時刻表。" },
-      { lat: 25.159762, lng: 121.531915, time: "07:55", loc: "圳內站 (H350m)", dist: 0.80, ele: 350, pos: "入山口", desc: "累計里程: 0.80 km", advice: "步行約25分鐘或搭小9路公車抵達。出發走猴崁水圳步道。" },
-      { lat: 25.161868, lng: 121.532491, time: "08:27", loc: "草山觀瀑吊橋 (H310m)", dist: 1.60, ele: 310, pos: "景觀亮點", desc: "累計里程: 1.60 km", advice: "吊橋附近有瀑布，是絕佳拍照點，請注意吊橋承重限制。" },
-      { lat: 25.166356, lng: 121.533108, time: "09:19", loc: "滾水頭 (H420m)", dist: 2.70, ele: 420, pos: "歷史遺跡", desc: "累計里程: 2.70 km", advice: "日治水源頭，可稍作休息補充水分，欣賞歷史遺跡。" },
-      { lat: 25.172038, lng: 121.532190, time: "10:04", loc: "青楓步道登山口 (H490m)", dist: 3.50, ele: 490, pos: "轉換路段", desc: "累計里程: 3.50 km", advice: "由此轉入青楓步道，開始爬升段，坡度較陡請注意腳步。" },
-      { lat: 25.16723, lng: 121.52935, time: "10:55", loc: "項湖山東北峰 (H685m)", dist: 4.60, ele: 685, pos: "副峰", desc: "累計里程: 4.60 km", advice: "稜線視野良好，可眺望竹子湖方向，繼續沿稜線前進。" },
-      { lat: 25.16572, lng: 121.52475, time: "11:25", loc: "頂湖山北峰 (H691m)", dist: 5.10, ele: 691, pos: "最高點", desc: "累計里程: 5.10 km；休息 15 分鐘", advice: "此行最高點！補充能量，欣賞大台北全景後繼續下山。" },
-      { lat: 25.16238, lng: 121.52647, time: "11:52", loc: "頂湖山 (H662m)", dist: 5.60, ele: 662, pos: "山頂", desc: "累計里程: 5.60 km", advice: "主峰三角點，確認往頂湖站的下山路線。" },
-      { lat: 25.15616, lng: 121.53008, time: "12:25", loc: "頂湖站 (H380m)", dist: 7.00, ele: 380, pos: "終點", desc: "累計里程: 7.00 km", advice: "O型完成！步行至陽明山立體停車場約15分鐘，或搭小9路公車返回。" },
-      { lat: 25.154635, lng: 121.539265, time: "12:45", loc: "陽明山立體停車場 (H385m)", dist: 7.80, ele: 385, pos: "回程終點", desc: "累計里程: 7.80 km", advice: "搭乘公車或步行回到停車場，完成今日行程！" }
+      { lat: 25.154635, lng: 121.539265, time: "07:00", loc: "陽明山立體停車場 (H385m)", dist: 0.00, ele: 385, pos: "集合起點", desc: "行程起點。07:00 準時出發。", advice: "檢查裝備與水分，確認小9路公車時刻表。" },
+      { lat: 25.159762, lng: 121.531915, time: "07:25", loc: "圳內站 (H350m)", dist: 0.80, ele: 350, pos: "入山口", desc: "累計里程: 0.80 km", advice: "步行約25分鐘或搭小9路公車抵達。出發走猴崁水圳步道。" },
+      { lat: 25.161868, lng: 121.532491, time: "07:57", loc: "草山觀瀑吊橋 (H310m)", dist: 1.60, ele: 310, pos: "景觀亮點", desc: "累計里程: 1.60 km", advice: "吊橋附近有瀑布，是絕佳拍照點，請注意吊橋承重限制。" },
+      { lat: 25.166356, lng: 121.533108, time: "08:49", loc: "滾水頭 (H420m)", dist: 2.70, ele: 420, pos: "歷史遺跡", desc: "累計里程: 2.70 km", advice: "日治水源頭，可稍作休息補充水分，欣賞歷史遺跡。" },
+      { lat: 25.172038, lng: 121.532190, time: "09:34", loc: "青楓步道登山口 (H490m)", dist: 3.50, ele: 490, pos: "轉換路段", desc: "累計里程: 3.50 km", advice: "由此轉入青楓步道，開始爬升段，坡度較陡請注意腳步。" },
+      { lat: 25.16723, lng: 121.52935, time: "10:25", loc: "項湖山東北峰 (H685m)", dist: 4.60, ele: 685, pos: "副峰", desc: "累計里程: 4.60 km", advice: "稜線視野良好，可眺望竹子湖方向，繼續沿稜線前進。" },
+      { lat: 25.16572, lng: 121.52475, time: "10:55", loc: "頂湖山北峰 (H691m)", dist: 5.10, ele: 691, pos: "最高點", desc: "累計里程: 5.10 km；休息 15 分鐘", advice: "此行最高點！補充能量，欣賞大台北全景後繼續下山。" },
+      { lat: 25.16238, lng: 121.52647, time: "11:22", loc: "頂湖山 (H662m)", dist: 5.60, ele: 662, pos: "山頂", desc: "累計里程: 5.60 km", advice: "主峰三角點，確認往頂湖站的下山路線。" },
+      { lat: 25.15616, lng: 121.53008, time: "11:55", loc: "頂湖站 (H380m)", dist: 7.00, ele: 380, pos: "終點", desc: "累計里程: 7.00 km", advice: "O型完成！步行至陽明山立體停車場約15分鐘，或搭小9路公車返回。" },
+      { lat: 25.154635, lng: 121.539265, time: "12:15", loc: "陽明山立體停車場 (H385m)", dist: 7.80, ele: 385, pos: "回程終點", desc: "累計里程: 7.80 km", advice: "搭乘公車或步行回到停車場，完成今日行程！" }
     ];
 
     let map, chart, markers = [];
