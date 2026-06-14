@@ -92,7 +92,7 @@
           <span class="text-2xl mt-0.5">🏛️</span>
           <div>
             <div class="font-bold text-amber-900 text-base mb-1">行前提醒：全程以大眾運輸為主</div>
-            <p class="text-sm text-amber-800 leading-relaxed">起終點皆為捷運南勢角站，步行距離即可抵達各登山口，無需開車。建議攜帶悠遊卡備用（圓通寺停車場附近有公車可利用）。</p>
+            <p class="text-sm text-amber-800 leading-relaxed">起終點皆為捷運南勢角站，步行距離即可抵達各登山口。開車的隊友可停於站旁的<strong>南勢角站轉乘停車場</strong>，再搭乘捷運或步行集合。</p>
           </div>
         </div>
 
@@ -102,10 +102,11 @@
             <div class="text-xs text-stone-400 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
             <div class="text-xs text-stone-400 mt-1">捷運中和新蘆線，1 號出口集合</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:#9a6030;">🚗 開車可停於<br>南勢角站轉乘停車場</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-400 mb-1">出發時間</div>
-            <div class="font-bold text-stone-800">日期未定 07:00</div>
+            <div class="font-bold text-stone-800">日期未定 07:30</div>
             <div class="text-xs text-stone-400 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -161,7 +162,7 @@
             <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-500">
-            <span>預計時間 <strong class="text-stone-800" id="wp-time">07:00</strong></span>
+            <span>預計時間 <strong class="text-stone-800" id="wp-time">07:30</strong></span>
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
           </div>
@@ -282,7 +283,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           預計行程進度
         </h2>
-        <p class="text-sm text-stone-400 mb-2">出發時間 07:00 · 輕鬆步調 · 全程約 6.5 小時</p>
+        <p class="text-sm text-stone-400 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
         <p class="text-xs text-stone-400 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -293,7 +294,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 日期未定 · 07:00 出發 · 預計 13:25 返抵</p>
+    <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 日期未定 · 07:30 出發 · 預計 14:00 返抵</p>
   </footer>
 
   <script>
@@ -319,59 +320,59 @@
     // 總計：約 314 min + 緩衝 = 約 6.5H
 
     const schedule = [
-      { lat: 24.990128, lng: 121.509104, time: "07:00", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20, pos: "集合起點",
-        desc: "行程起點，07:00 準時出發。搭乘中和新蘆線至南勢角站，1 號出口集合。",
-        advice: "在站內超商補充飲食。確認大家到齊後步行約 5 分鐘前往登山口。" },
+      { lat: 24.990128, lng: 121.509104, time: "07:30", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20, pos: "集合起點",
+        desc: "行程起點，07:30 準時出發。搭乘中和新蘆線至南勢角站，1 號出口集合。",
+        advice: "在站內超商補充飲食。確認大家到齊後步行約 5 分鐘前往登山口。開車的隊友可停於南勢角站轉乘停車場。" },
 
-      { lat: 24.987603, lng: 121.503566, time: "07:05", loc: "登山口", dist: 0.35, ele: 50, pos: "入山口",
+      { lat: 24.987603, lng: 121.503566, time: "07:35", loc: "登山口", dist: 0.35, ele: 50, pos: "入山口",
         desc: "累計 0.35 km。正式進入山區步道，離開市區道路，開始爬升。",
         advice: "確認登山鞋鞋帶緊好，手機導航開啟。沿步道階梯持續往上爬升至國旗嶺。" },
 
-      { lat: 24.986920, lng: 121.503219, time: "07:35", loc: "國旗嶺 (H160m)", dist: 1.45, ele: 160, pos: "展望台",
+      { lat: 24.986920, lng: 121.503219, time: "08:05", loc: "國旗嶺 (H160m)", dist: 1.45, ele: 160, pos: "展望台",
         desc: "累計 1.45 km。稜線上的展望點，可俯瞰中永和市區，設有健身器材。",
         advice: "可短暫停留拍照，但不宜久留，接下來繼續沿稜線前往外南勢角山。" },
 
-      { lat: 24.984378, lng: 121.498137, time: "07:53", loc: "外南勢角山 (H255m)", dist: 1.95, ele: 255, pos: "稜線衛峰",
+      { lat: 24.984378, lng: 121.498137, time: "08:23", loc: "外南勢角山 (H255m)", dist: 1.95, ele: 255, pos: "稜線衛峰",
         desc: "累計 1.95 km。南勢角山系的衛峰，林相原始，路徑較窄，注意路標。",
         advice: "山頂無展望，稍作確認方向後往東下山前往圓通禪寺，下坡路段注意腳步。" },
 
-      { lat: 24.982593, lng: 121.492786, time: "08:12", loc: "圓通禪寺 (H100m)", dist: 2.80, ele: 100, pos: "歷史廟宇",
+      { lat: 24.982593, lng: 121.492786, time: "08:42", loc: "圓通禪寺 (H100m)", dist: 2.80, ele: 100, pos: "歷史廟宇",
         desc: "累計 2.80 km。近 300 年歷史的仿唐式佛寺，廟前視野開闊可遠眺市區。",
         advice: "可入寺參觀，廟方允許登山客借用洗手間。一線天入口在寺廟右後方，步行 2 分鐘。" },
 
-      { lat: 24.982811, lng: 121.491651, time: "08:30", loc: "一線天 (H100m)", dist: 2.95, ele: 100, pos: "地質奇觀",
+      { lat: 24.982811, lng: 121.491651, time: "09:00", loc: "一線天 (H100m)", dist: 2.95, ele: 100, pos: "地質奇觀",
         desc: "累計 2.95 km。天然岩縫，僅容一人通過，仰望天空如一線。建議停留 15 分鐘拍照。",
         advice: "側身通過，背包過大需先取下。岩壁濕滑請注意腳步，勿推擠。通過後沿稜線往西爬升。" },
 
-      { lat: 24.967635, lng: 121.479370, time: "09:55", loc: "牛埔頭山 (H271m)", dist: 5.45, ele: 271, pos: "稜線山頭",
+      { lat: 24.967635, lng: 121.479370, time: "10:25", loc: "牛埔頭山 (H271m)", dist: 5.45, ele: 271, pos: "稜線山頭",
         desc: "累計 5.45 km。中和、土城交界，設省政府地籍測量三角點，林中無展望。",
         advice: "此段路徑較原始，注意路繩指引。此為行程中路況最野的一段，請跟緊隊伍。" },
 
-      { lat: 24.964477, lng: 121.479864, time: "10:30", loc: "五尖山 (H320m)", dist: 5.75, ele: 320, pos: "最高點",
+      { lat: 24.964477, lng: 121.479864, time: "11:00", loc: "五尖山 (H320m)", dist: 5.75, ele: 320, pos: "最高點",
         desc: "累計 5.75 km。全程最高點！設四等三角點，路段原始，需翻越多個假山頭。大休 20 分鐘。",
         advice: "制高點！值得停留享用午餐補充能量。接下來轉向東，往石龍洞方向下坡。" },
 
-      { lat: 24.967173, lng: 121.490148, time: "11:18", loc: "石龍洞觀音佛祖", dist: 7.15, ele: 240, pos: "天然岩洞",
+      { lat: 24.967173, lng: 121.490148, time: "11:48", loc: "石龍洞觀音佛祖", dist: 7.15, ele: 240, pos: "天然岩洞",
         desc: "累計 7.15 km。天然岩洞中的觀音寺廟，洞內陰涼，是難得的天然休息點。",
         advice: "洞內清涼，適合補充水分、整頓裝備。從這裡往東爬升約 25 分鐘即達南勢角山。" },
 
-      { lat: 24.969195, lng: 121.495829, time: "11:45", loc: "南勢角山 (H302m)", dist: 8.25, ele: 302, pos: "小百岳 #16",
+      { lat: 24.969195, lng: 121.495829, time: "12:15", loc: "南勢角山 (H302m)", dist: 8.25, ele: 302, pos: "小百岳 #16",
         desc: "累計 8.25 km。小百岳第 16 名，標高 302m。山頂平坦開闊，展望極佳！",
         advice: "360° 展望點，晴天可看到台北 101！適合拍照留念，稍作休息後前往烘爐地。" },
 
-      { lat: 24.971790, lng: 121.497645, time: "12:10", loc: "烘爐地南山福德宮", dist: 8.55, ele: 280, pos: "信仰地標",
+      { lat: 24.971790, lng: 121.497645, time: "12:40", loc: "烘爐地南山福德宮", dist: 8.55, ele: 280, pos: "信仰地標",
         desc: "累計 8.55 km。建於清乾隆 20 年，北部最知名土地公廟，俗稱「土地公王」。",
         advice: "可入廟參拜祈福，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。最後一個補給點！" },
 
-      { lat: 24.973264, lng: 121.504064, time: "12:30", loc: "光明頂 (H225m)", dist: 9.05, ele: 225, pos: "三角點",
+      { lat: 24.973264, lng: 121.504064, time: "13:00", loc: "光明頂 (H225m)", dist: 9.05, ele: 225, pos: "三角點",
         desc: "累計 9.05 km。設有台北縣政府四等三角點，可俯瞰雙和地區。",
         advice: "此處無明顯標示，需留意手機導航確認位置。接下來下坡前往華夏登山口，約 20 分鐘。" },
 
-      { lat: 24.978326, lng: 121.510666, time: "12:52", loc: "圓通寺烘爐地步道（華夏登山口）", dist: 10.05, ele: 120, pos: "下山出口",
+      { lat: 24.978326, lng: 121.510666, time: "13:22", loc: "圓通寺烘爐地步道（華夏登山口）", dist: 10.05, ele: 120, pos: "下山出口",
         desc: "累計 10.05 km。圓通寺烘爐地登山步道的華夏技術學院端出口，重返市區道路。",
         advice: "步道出口接華夏路，沿路步行往北約 35 分鐘可回到捷運南勢角站，或視情況搭公車。" },
 
-      { lat: 24.990128, lng: 121.509104, time: "13:30", loc: "捷運南勢角站 (H20m)", dist: 11.76, ele: 20, pos: "回程終點",
+      { lat: 24.990128, lng: 121.509104, time: "14:00", loc: "捷運南勢角站 (H20m)", dist: 11.76, ele: 20, pos: "回程終點",
         desc: "累計 11.76 km。沿華夏路步行返回捷運站，完成今日 O 型大縱走！",
         advice: "搭乘捷運返家，附近有多家餐廳可慶功！" }
     ];
