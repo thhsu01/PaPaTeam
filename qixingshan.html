@@ -116,12 +116,12 @@
           <div class="text-xs text-stone-400 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&lt;</button>
-            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">陽明山第二停車場 (H585m)</h3>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">陽明山第二停車場 (H590m)</h3>
             <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-500">
             <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
-            <span>海拔 <strong class="text-stone-800" id="wp-ele">585</strong> m</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">590</strong> m</span>
           </div>
           <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
           <div class="bg-amber-50 border border-amber-100 rounded-xl p-3">
@@ -163,7 +163,7 @@
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>苗圃登山口 (H552m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>七星山苗圃登山口 (H550m)</h3>
             <p class="text-sm text-stone-500 leading-relaxed">七星山三條登山口中路程最長、落差最大的選擇，位於陽明山遊客中心旁。沿途闊葉林相茂密，可見松鼠穿梭、竹雞跳躍，生態豐富，是進入七星山最有野趣的路徑。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -183,8 +183,8 @@
             <p class="text-sm text-stone-500 leading-relaxed">七星山南麓的廣闊草坪，設有廁所，視野開闊，是 O 型路線回程段的大休點。秋季芒草盛開時，金黃色浪濤此處最為壯觀。也是野餐與欣賞台北盆地全景的絕佳位置。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-teal-500 rounded-full"></span>夢幻湖腰繞步道 (H740m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">銜接七星公園與苗圃登山口的腰繞步道，O 型回程的最後段。步道在闊葉林中蜿蜒，平緩好走，約 30–40 分鐘。鄰近夢幻湖，是台灣水韭的珍稀棲地，生態極具特色。</p>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-teal-500 rounded-full"></span>七星山夢幻湖登山口 (H860m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">七星山苗圃 O 型回程的關鍵節點，為進出夢幻湖的官方登山口。從七星公園步行約 5 分鐘可抵達，接腰繞步道約 45 分鐘回到苗圃登山口。夢幻湖為台灣特有植物——台灣水韭的唯一棲地，生態極具珍稀特色。</p>
           </div>
         </div>
 
@@ -225,20 +225,20 @@
 
   <script>
     function openNavigation() {
-      window.open("https://www.google.com/maps/dir/?api=1&destination=25.1620,121.5368", "_blank");
+      window.open("https://www.google.com/maps/dir/?api=1&destination=25.155339,121.545874", "_blank");
     }
 
     const schedule = [
-      { lat: 25.1620, lng: 121.5368, time: "07:00", loc: "陽明山第二停車場 (H585m)", dist: 0.00, ele: 585, pos: "集合起點", desc: "行程起點。07:00 準時出發，步行約 10 分鐘至苗圃登山口。", advice: "檢查裝備、備足飲水（建議 2.5L 以上）。山頂無補給點，請務必自備。" },
-      { lat: 25.1703, lng: 121.5391, time: "07:10", loc: "苗圃登山口 (H552m)", dist: 0.30, ele: 552, pos: "入山口", desc: "正式起登。陽明山遊客中心旁，童軍站附近，有明顯登山口標誌。", advice: "三條登山口中最長最陡。初段闊葉林蔭涼，後半段進入箭竹林持續陡升。建議做好暖身再起登。" },
-      { lat: 25.1712, lng: 121.5398, time: "08:00", loc: "冷苗叉路口 (H780m)", dist: 1.60, ele: 780, pos: "轉換路段", desc: "冷水坑與苗圃步道的岔路口，取直繼續往主峰方向前進。累計里程 1.6 km。", advice: "可短暫休息。此後進入箭竹林，海拔持續爬升。視野逐漸開闊，可俯瞰七星公園翠綠草坪。" },
-      { lat: 25.1720, lng: 121.5417, time: "08:45", loc: "主東叉路口 (H1,060m)", dist: 2.40, ele: 1060, pos: "轉換路段", desc: "主峰與東峰的分叉口，也是 O 型路線的關鍵節點。去程取左往主峰，回程由此右轉往七星公園。累計里程 2.4 km。", advice: "最陡的石階段已過！箭竹林與芒草相間，視野大開。先去主峰再折返來東峰。" },
-      { lat: 25.1733, lng: 121.5413, time: "08:50", loc: "七星山主峰 (H1,120m)", dist: 2.60, ele: 1120, pos: "最高點", desc: "台北市最高峰！小百岳 No.2，一等三角點。360度環視台北盆地、大屯山系、北海岸。累計里程 2.6 km。", advice: "「登七星而小台北」！風強請注意保暖，帽子容易被吹走。拍照後折返主東叉，接往東峰。" },
-      { lat: 25.1710, lng: 121.5468, time: "09:00", loc: "七星山東峰 (H1,107m)", dist: 2.80, ele: 1107, pos: "副峰", desc: "小百岳，三等三角點 1104 號，海拔 1,107m，與主峰距離僅 300 公尺。同樣視野遼闊。累計里程 2.8 km。", advice: "兩座小百岳一次集點！打卡後確認往七星公園方向的下山路徑，O 型回程正式開始。" },
-      { lat: 25.1670, lng: 121.5443, time: "09:25", loc: "七星公園 (H870m)", dist: 3.90, ele: 870, pos: "景觀亮點", desc: "七星山南麓的廣闊草坪，設有廁所與休憩設施。O 型回程段的大休點。累計里程 3.9 km。", advice: "在此大休 10–15 分鐘，補充食物與水分。視野開闊，絕佳野餐地點。往苗圃方向接夢幻湖腰繞步道。" },
-      { lat: 25.1655, lng: 121.5428, time: "09:55", loc: "夢幻湖步道口 (H740m)", dist: 4.80, ele: 740, pos: "轉換路段", desc: "進入七星山南麓腰繞步道，銜接七星公園與苗圃登山口，是 O 型回程的最後段。累計里程 4.8 km。", advice: "腰繞步道平緩好走，在闊葉林中涼爽舒適，約 40 分鐘可回到苗圃登山口。" },
-      { lat: 25.1703, lng: 121.5391, time: "10:40", loc: "苗圃登山口 (H552m)", dist: 6.30, ele: 552, pos: "終點", desc: "O 型完成！回到起點苗圃登山口。累計里程 6.3 km。", advice: "步行約 10 分鐘可返回陽明山第二停車場。恭喜完成七星山苗圃 O 型！" },
-      { lat: 25.1620, lng: 121.5368, time: "10:50", loc: "陽明山第二停車場 (H585m)", dist: 6.60, ele: 585, pos: "回程終點", desc: "行程圓滿結束！全程 6.6 km，兩座小百岳一次完成。", advice: "補充水分慶祝，也可至附近陽明山餐廳用餐。" }
+      { lat: 25.155339, lng: 121.545874, time: "07:00", loc: "陽明山第二停車場 (H590m)", dist: 0.00, ele: 590, pos: "集合起點", desc: "行程起點。07:00 準時出發，步行約 10 分鐘至七星山苗圃登山口。", advice: "檢查裝備、備足飲水（建議 2.5L 以上）。山頂無補給點，請務必自備。" },
+      { lat: 25.156600, lng: 121.546697, time: "07:10", loc: "七星山苗圃登山口 (H550m)", dist: 0.20, ele: 550, pos: "入山口", desc: "正式起登。陽明山遊客中心旁，有明顯登山口標誌。累計里程 0.20 km。", advice: "三條登山口中最長最陡。初段闊葉林蔭涼，後半段進入箭竹林持續陡升。建議做好暖身再起登。" },
+      { lat: 25.163292, lng: 121.554397, time: "08:00", loc: "冷苗叉路口 (H820m)", dist: 1.60, ele: 820, pos: "轉換路段", desc: "冷水坑與苗圃步道的岔路口，取直繼續往主峰方向前進。累計里程 1.60 km。", advice: "可短暫休息 5 分鐘。此後進入箭竹林，海拔持續爬升，視野逐漸開闊。" },
+      { lat: 25.169818, lng: 121.554406, time: "08:45", loc: "主東叉路口 (H1,060m)", dist: 2.55, ele: 1060, pos: "轉換路段", desc: "主峰與東峰的分叉口，O 型路線的關鍵節點。去程取左往主峰，回程由此右轉往七星公園下山。累計里程 2.55 km。", advice: "最陡的石階段已過！箭竹林與芒草相間，視野大開。先去主峰再折返來東峰。" },
+      { lat: 25.170788, lng: 121.553529, time: "08:53", loc: "七星山主峰 (H1,120m)", dist: 2.75, ele: 1120, pos: "最高點", desc: "台北市最高峰！小百岳 No.2，一等三角點。360 度環視台北盆地、大屯山系、北海岸。累計里程 2.75 km。", advice: "「登七星而小台北」！風強請注意保暖，帽子容易被吹走。拍照後折返主東叉，接往東峰。" },
+      { lat: 25.169682, lng: 121.555571, time: "09:10", loc: "七星山東峰 (H1,107m)", dist: 3.15, ele: 1107, pos: "副峰", desc: "小百岳，三等三角點 1104 號，海拔 1,107m，距主峰折返含計約 0.40 km。視野遼闊。累計里程 3.15 km。", advice: "兩座小百岳一次集點！打卡後確認往七星公園方向的下山路徑，O 型回程正式開始。" },
+      { lat: 25.163915, lng: 121.556866, time: "09:45", loc: "七星公園 (H870m)", dist: 4.00, ele: 870, pos: "景觀亮點", desc: "七星山南麓的廣闊草坪，設有廁所與休憩設施。O 型回程段的大休點。累計里程 4.00 km。", advice: "在此大休 15 分鐘，補充食物與水分。視野開闊，絕佳野餐地點。往苗圃方向接七星山夢幻湖登山口腰繞步道。" },
+      { lat: 25.165180, lng: 121.558504, time: "10:05", loc: "七星山夢幻湖登山口 (H860m)", dist: 4.30, ele: 860, pos: "轉換路段", desc: "進入七星山腰繞步道，銜接夢幻湖與苗圃登山口，是 O 型回程的最後段。累計里程 4.30 km。", advice: "腰繞步道在闊葉林中蜿蜒，約 45 分鐘可回到苗圃登山口。鄰近夢幻湖，是台灣水韭的唯一棲地。" },
+      { lat: 25.156600, lng: 121.546697, time: "10:50", loc: "七星山苗圃登山口 (H550m)", dist: 6.35, ele: 550, pos: "終點", desc: "O 型完成！回到起點苗圃登山口。累計里程 6.35 km。", advice: "步行約 10 分鐘可返回陽明山第二停車場。恭喜完成七星山苗圃 O 型！" },
+      { lat: 25.155339, lng: 121.545874, time: "11:00", loc: "陽明山第二停車場 (H590m)", dist: 6.60, ele: 590, pos: "回程終點", desc: "行程圓滿結束！全程 6.60 km，兩座小百岳一次完成。", advice: "補充水分慶祝，也可至附近陽明山餐廳用餐。" }
     ];
 
     let map, chart, markers = [];
@@ -248,7 +248,7 @@
       const weatherMain = document.getElementById('weather-main');
       const weatherSub = document.getElementById('weather-sub');
       try {
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=25.1733&longitude=121.5413&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1`);
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=25.1708&longitude=121.5535&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1`);
         const data = await res.json();
         const code = data.daily.weathercode[0];
         const maxT = Math.round(data.daily.temperature_2m_max[0]);
@@ -263,7 +263,7 @@
     }
 
     function initMap() {
-      map = L.map('map').setView([25.1700, 121.5420], 14);
+      map = L.map('map').setView([25.163, 121.552], 14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
       L.polyline(schedule.map(w => [w.lat, w.lng]), { color:'#0284c7', weight:4, opacity:0.85 }).addTo(map);
       schedule.forEach((wp, i) => {
