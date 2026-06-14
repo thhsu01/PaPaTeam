@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微笑山線 × 南勢角山 × 一線天 — 爬爬小隊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    body { font-family: "Noto Sans TC", sans-serif; background-color: #f5f3ef; color: #3a3632; }
+    .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; height: 300px; }
+    #elevation-chart { width: 100% !important; height: 100% !important; }
+    #map { height: 420px; border-radius: 16px; }
+    .waypoint-card { transition: all 0.25s ease; }
+    .nav-btn { transition: background 0.2s; }
+    .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #c77c3e, #7c9e52); }
+
+    /* Hero stripe pattern evoking trail markers */
+    .hero-accent { background: repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 12px,
+      rgba(199,124,62,0.06) 12px,
+      rgba(199,124,62,0.06) 24px
+    ); }
+
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+
+    /* Stamp badge */
+    .stamp {
+      display: inline-block;
+      border: 3px solid #c77c3e;
+      color: #c77c3e;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      padding: 4px 10px;
+      border-radius: 3px;
+      transform: rotate(-1.5deg);
+      text-transform: uppercase;
+    }
+
+    .section-bar-orange { background: #c77c3e; }
+    .section-bar-green  { background: #7c9e52; }
+    .section-bar-stone  { background: #a09080; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Back button -->
+  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm">← 返回首頁</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">預估進度</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">日期未定</span>
+          <span class="text-xs text-stone-500 tracking-widest uppercase">PACE: 輕鬆慢走模式 · 預計 6H 完成</span>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          微笑山線，南勢角縱走<br>
+          <span style="color:#c77c3e;">一線天 × 烘爐地 × 五尖山</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">從捷運南勢角站出發，穿越圓通禪寺一線天奇景，沿稜線縱走外南勢角山、南勢角山（小百岳 302m），再向西挺進牛埔頭山與五尖山，串連中和、土城兩區的天上山系精華。</p>
+
+        <!-- 注意事項橫幅 -->
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:#c77c3e;">
+          <span class="text-2xl mt-0.5">🏛️</span>
+          <div>
+            <div class="font-bold text-amber-900 text-base mb-1">行前提醒：全程以大眾運輸為主</div>
+            <p class="text-sm text-amber-800 leading-relaxed">起終點皆為捷運南勢角站，步行距離即可抵達各登山口，無需開車。建議攜帶悠遊卡備用（圓通寺停車場附近有公車可利用）。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-400 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">捷運南勢角站</div>
+            <div class="text-xs text-stone-400 mt-1">捷運中和新蘆線，1 號出口集合</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-400 mb-1">出發時間</div>
+            <div class="font-bold text-stone-800">日期未定 07:00</div>
+            <div class="text-xs text-stone-400 mt-1">（請提前 10 分鐘抵達）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-400 mb-1">即時天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-400 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#c77c3e;">
+              🗺️ 導航至南勢角站
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">11.76</div>
+            <div class="text-xs text-stone-400">GPX 總里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~6.0</div>
+            <div class="text-xs text-stone-400">目標耗時 hr（輕鬆）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">674</div>
+            <div class="text-xs text-stone-400">總爬升高度 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:#c77c3e;">320</div>
+            <div class="text-xs text-stone-400">最高海拔 m（五尖山）</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-400 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
+
+        <div id="map" class="mb-6 shadow-md"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-400 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">捷運南勢角站</h3>
+            <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-500">
+            <span>預計時間 <strong class="text-stone-800" id="wp-time">07:00</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
+          <div class="rounded-xl p-3" style="background:#fef9f0; border:1px solid #f5dfc0;">
+            <div class="text-xs font-medium mb-1" style="color:#9a6030;">隊友建議</div>
+            <p class="text-xs" style="color:#b07040;" id="wp-advice">在站內小7補充飲食，確認大家到齊後出發。</p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-500 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline" style="color:#c77c3e;">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=105" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 烘爐地登山步道資訊 (健行筆記)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=106" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 圓通寺登山步道資訊 (健行筆記)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=2077" target="_blank" class="text-sm text-blue-600 hover:underline">📝 微笑山線：天上山系 烘爐地土地公段</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
+          <canvas id="elevation-chart"></canvas>
+        </div>
+        <p class="text-xs text-stone-400 mt-3 text-center">行程整體起伏平穩，最高點五尖山 320m，由南勢角站（20m）出發後持續爬升，尾段翻越牛埔頭山後下降返回。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          山系亮點導覽
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>國旗嶺 (H160m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">中和稜線上的視野展望點，設有健身器材與涼亭。居高臨下，可俯瞰中和、永和市區，是進入圓通寺步道前的熱身緩坡。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓通禪寺 (H100m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">建於 1920 年代（清雍正至乾隆年間擴建），近 300 年歷史，略具日式風味的仿唐式建築。廟前俯瞰中和市區視野開闊，是香客與山友的共同聖地。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:#e8d5b5;">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>一線天 (H100m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">圓通禪寺後方的天然岩縫步道，僅容一人側身通過。昏暗岩縫中仰望天光，是全程最具震撼感的地質奇觀，也是路線上最上鏡的打卡點。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>外南勢角山 (H255m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">南勢角山系稜線上的衛峰，森林路徑清幽。相較主峰較少人跡，原始林相豐富，是縱走行程中享受山林靜謐的好時刻。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>光明頂 (H225m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，實為行程中重要的稜線觀景台。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:#fef9f0; border-color:#e8d5b5;">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:#9a6030;"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>南勢角山 302m ⭐ 小百岳 #16</h3>
+            <p class="text-sm leading-relaxed" style="color:#7a5030;">全程最高展望點之一，小百岳第 16 名。山頂平坦開闊，可 360° 俯瞰台北盆地、大漢溪、新店溪，遠眺觀音山、大屯火山群及淡水出海口。入夜後更是大台北夜景名所。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>烘爐地南山福德宮</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>石龍洞觀音佛祖</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">天然岩洞中的觀音寺廟，環境清幽。洞內終年陰涼，是山途中絕佳的休息納涼點，也是信仰與自然融為一體的特殊景致。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>牛埔頭山 (H271m)</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">中和、土城交界的稜線山頭，設有省政府地籍測量三角點。山頂藏於林中無展望，但作為縱走里程碑，是邁向五尖山前的重要銜接點。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:#6d8940;"><span class="w-2 h-2 rounded-full" style="background:#7c9e52; display:inline-block;"></span>五尖山 (H320m) 🏔 全程制高</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">全程最高點，海拔 320m，設四等三角點。位於天上山縱走路線上，是中和至天上山系最冷門卻最原始的路段，翻越五座假山頭後豁然開朗。</p>
+          </div>
+
+        </div>
+
+        <!-- Special focus: 一線天 -->
+        <div class="mt-4 rounded-2xl p-6 border" style="background:#1c1c1c; border-color:#333; color:#e8e0d4;">
+          <div class="text-xs font-medium mb-2 tracking-widest uppercase" style="color:#c77c3e;">地質景觀專題</div>
+          <h3 class="text-xl font-black mb-3" style="color:#f5e8d0;">一線天：<span class="font-normal" style="color:#c09060;">圓通寺後山的岩縫奇境</span></h3>
+          <p class="text-sm leading-relaxed mb-3" style="color:#b0a090;"><strong style="color:#e0c8a0;">【成因】</strong> 由堅硬砂岩受構造應力沿垂直節理裂開，歷經長期風化侵蝕，形成這道僅容一人通過的天然狹縫。仰望上方，天空被壓縮成一條細線，「一線天」之名由此而來。</p>
+          <p class="text-sm leading-relaxed" style="color:#b0a090;"><strong style="color:#e0c8a0;">【攻略】</strong> 入口在圓通禪寺後方右側，步行約 2 分鐘可達。身形較寬者需側身通過，建議不要攜帶過大背包。岩壁常年濕潤，請注意腳步防滑。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
+          預計行程進度
+        </h2>
+        <p class="text-sm text-stone-400 mb-2">出發時間 07:00 · 輕鬆步調 · 全程約 6 小時</p>
+        <p class="text-xs text-stone-400 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角縱走 | 日期未定 · 07:00 出發</p>
+  </footer>
+
+  <script>
+    function openNavigation() {
+      window.open("https://www.google.com/maps/dir/?api=1&destination=24.990128,121.509104", "_blank");
+    }
+
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 時間估算：
+    //   捷運站→國旗嶺 (1.2km, +140m): ~28 min
+    //   國旗嶺→圓通禪寺 (0.6km): ~12 min
+    //   圓通禪寺→一線天 (0.1km): ~8 min（含拍照）
+    //   一線天→外南勢角山 (0.8km, +155m): ~22 min
+    //   外南勢角山→光明頂 (0.7km): ~14 min
+    //   光明頂→南勢角山 (0.5km, +80m): ~15 min
+    //   南勢角山→烘爐地福德宮 (0.3km): ~15 min（大休）
+    //   烘爐地→石龍洞 (0.4km): ~12 min
+    //   石龍洞→牛埔頭山 (1.5km, +50m): ~35 min
+    //   牛埔頭山→五尖山 (0.3km, +50m): ~15 min
+    //   五尖山→捷運南勢角站 (5.1km, -320m): ~75 min（含休息）
+    // 總計：約 251 min + 緩衝 = 6H
+
+    const schedule = [
+      { lat: 24.990128, lng: 121.509104, time: "07:00", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20,  pos: "集合起點",
+        desc: "行程起點，07:00 準時出發。搭乘中和新蘆線至南勢角站，1 號出口集合。",
+        advice: "在站內超商補充飲食。確認大家到齊後沿興南路往山區步行出發。" },
+
+      { lat: 24.984391, lng: 121.498118, time: "07:38", loc: "國旗嶺 (H160m)", dist: 1.50, ele: 160, pos: "展望台",
+        desc: "累計 1.50 km。稜線上的展望點，可俯瞰中永和市區，設有健身器材。",
+        advice: "可短暫停留拍照，但不宜久留，保留體力給後段。" },
+
+      { lat: 24.982593, lng: 121.492786, time: "07:55", loc: "圓通禪寺 (H100m)", dist: 2.10, ele: 100, pos: "歷史廟宇",
+        desc: "累計 2.10 km。近 300 年歷史的仿唐式佛寺，廟前視野開闊可遠眺市區。",
+        advice: "可入寺參觀，廟方允許登山客借用洗手間。一線天入口在寺廟右後方。" },
+
+      { lat: 24.982811, lng: 121.491651, time: "08:10", loc: "一線天 (H100m)", dist: 2.25, ele: 100, pos: "地質奇觀",
+        desc: "累計 2.25 km。天然岩縫，僅容一人通過，仰望天空如一線。建議停留 15 分鐘拍照。",
+        advice: "側身通過，背包過大需先取下。岩壁濕滑請注意腳步，勿推擠。" },
+
+      { lat: 24.979500, lng: 121.491500, time: "08:40", loc: "外南勢角山 (H255m)", dist: 3.00, ele: 255, pos: "稜線衛峰",
+        desc: "累計 3.00 km。南勢角山系的衛峰，林相原始，路徑較窄，注意路標。",
+        advice: "山頂無展望，稍作確認方向後繼續前進往光明頂。" },
+
+      { lat: 24.973264, lng: 121.504064, time: "09:00", loc: "光明頂 (H225m)", dist: 3.70, ele: 225, pos: "三角點",
+        desc: "累計 3.70 km。設有台北縣政府四等三角點，附近樹叢稍微開闊，可小憩。",
+        advice: "此處無標示，需留意手機導航確認位置。距南勢角山約 15 分鐘。" },
+
+      { lat: 24.969195, lng: 121.495829, time: "09:20", loc: "南勢角山 (H302m)", dist: 4.20, ele: 302, pos: "小百岳 #16",
+        desc: "累計 4.20 km。小百岳第 16 名，標高 302m。山頂平坦開闊，展望極佳！",
+        advice: "此為第一個制高展望點，適合大休 10 分鐘。晴天可看到 101 大樓。" },
+
+      { lat: 24.971790, lng: 121.497645, time: "09:45", loc: "烘爐地南山福德宮", dist: 4.60, ele: 280, pos: "信仰地標",
+        desc: "累計 4.60 km。建於清乾隆 20 年，北部最知名土地公廟，俗稱「土地公王」。",
+        advice: "可入廟參拜，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。" },
+
+      { lat: 24.970600, lng: 121.493300, time: "10:05", loc: "石龍洞觀音佛祖", dist: 5.00, ele: 260, pos: "天然岩洞",
+        desc: "累計 5.00 km。天然岩洞中的觀音寺廟，洞內陰涼，是難得的天然休息點。",
+        advice: "洞內清涼，適合補充水分、整頓裝備，為後段進入土城山區做準備。" },
+
+      { lat: 24.967635, lng: 121.479370, time: "10:55", loc: "牛埔頭山 (H271m)", dist: 6.60, ele: 271, pos: "稜線山頭",
+        desc: "累計 6.60 km。中和、土城交界，設省政府地籍測量三角點，林中無展望。",
+        advice: "此段路徑較原始，注意路繩指引。翻過牛埔頭山後即接近五尖山。" },
+
+      { lat: 24.964477, lng: 121.479864, time: "11:20", loc: "五尖山 (H320m)", dist: 6.90, ele: 320, pos: "最高點",
+        desc: "累計 6.90 km。全程最高點！設四等三角點，路段原始，需翻越多個假山頭。大休 20 分鐘。",
+        advice: "制高點開闊，值得停留享用午餐。下山路段約 5 km，保留腿力注意膝蓋。" },
+
+      { lat: 24.990128, lng: 121.509104, time: "13:00", loc: "捷運南勢角站 (H20m)", dist: 11.76, ele: 20, pos: "回程終點",
+        desc: "累計 11.76 km。沿稜線下山，回到南勢角捷運站，完成今日縱走！",
+        advice: "搭乘捷運返家，附近有多家餐廳可慶功！" }
+    ];
+
+    let map, chart, markers = [];
+    let currentWpIndex = 0;
+
+    // ── 天氣 ──────────────────────────────────────────────────
+    async function fetchWeather() {
+      const lat = 24.9719, lng = 121.4976; // 烘爐地附近
+      const weatherMain = document.getElementById('weather-main');
+      const weatherSub   = document.getElementById('weather-sub');
+      try {
+        const res  = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=3`);
+        const data = await res.json();
+        const code = data.daily.weathercode[0];
+        const maxT = Math.round(data.daily.temperature_2m_max[0]);
+        const minT = Math.round(data.daily.temperature_2m_min[0]);
+        const weatherMap = {
+          0:"☀️ 晴天",1:"🌤 大致晴",2:"⛅ 部分多雲",3:"☁️ 陰天",
+          45:"🌫 霧",48:"🌫 霧淞",51:"🌦 小毛毛雨",53:"🌦 毛毛雨",
+          61:"🌧 小雨",63:"🌧 中雨",65:"🌧 大雨",80:"🌦 陣雨",
+          81:"🌧 陣雨",82:"⛈ 強陣雨",95:"⛈ 雷雨",99:"⛈ 強雷雨"
+        };
+        weatherMain.textContent = `${weatherMap[code] || '天氣代碼'+code} ${minT}°–${maxT}°`;
+        weatherSub.textContent  = "今日中和區即時天氣";
+      } catch {
+        weatherMain.textContent = "天氣資料暫無法取得";
+        weatherSub.textContent  = "請稍後再試";
+      }
+    }
+
+    // ── 地圖 ──────────────────────────────────────────────────
+    function initMap() {
+      map = L.map('map').setView([24.977, 121.494], 14);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Leaflet | © OpenStreetMap'
+      }).addTo(map);
+
+      const pathCoords = schedule.map(wp => [wp.lat, wp.lng]);
+      L.polyline(pathCoords, { color: '#c77c3e', weight: 4, opacity: 0.85 }).addTo(map);
+
+      schedule.forEach((wp, i) => {
+        const isStartEnd = i === 0 || i === schedule.length - 1;
+        const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
+        const isTemple   = wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
+        const color = isStartEnd ? '#c77c3e' : isPeak ? '#7c9e52' : isTemple ? '#8060b0' : '#888';
+
+        const marker = L.circleMarker([wp.lat, wp.lng], {
+          radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+          fillColor: color,
+          color: '#fff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.92
+        }).addTo(map);
+
+        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
+        marker.on('click', () => updateWaypointCard(i));
+        markers.push(marker);
+      });
+
+      updateWaypointCard(0);
+    }
+
+    function updateWaypointCard(index) {
+      currentWpIndex = index;
+      const wp = schedule[index];
+      document.getElementById('wp-pos-label').textContent = wp.pos;
+      document.getElementById('wp-title').textContent     = wp.loc;
+      document.getElementById('wp-time').textContent      = wp.time;
+      document.getElementById('wp-dist').textContent      = wp.dist.toFixed(2);
+      document.getElementById('wp-ele').textContent       = wp.ele;
+      document.getElementById('wp-desc').textContent      = wp.desc;
+      document.getElementById('wp-advice').textContent    = wp.advice;
+      if (markers[index]) markers[index].openPopup();
+    }
+
+    function prevWaypoint() { if (currentWpIndex > 0) updateWaypointCard(currentWpIndex - 1); }
+    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) updateWaypointCard(currentWpIndex + 1); }
+
+    // ── 海拔剖面圖 ────────────────────────────────────────────
+    function initChart() {
+      const ctx = document.getElementById('elevation-chart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: schedule.map(wp => wp.loc.replace(/ \(H.*\)/, '')),
+          datasets: [{
+            label: '海拔 (m)',
+            data: schedule.map(wp => wp.ele),
+            borderColor: '#c77c3e',
+            backgroundColor: 'rgba(199,124,62,0.10)',
+            borderWidth: 2.5,
+            pointBackgroundColor: schedule.map(wp =>
+              wp.ele >= 300 ? '#7c9e52' :
+              wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? '#8060b0' :
+              wp.pos === "集合起點" || wp.pos === "回程終點" ? '#c77c3e' : '#a09080'
+            ),
+            pointRadius: 5,
+            tension: 0.35,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => `海拔: ${ctx.parsed.y} m`,
+                title: ctx => ctx[0].label
+              }
+            }
+          },
+          scales: {
+            y: {
+              title: { display: true, text: '海拔 (m)' },
+              min: 0, max: 360,
+              grid: { color: '#f0ede8' }
+            },
+            x: {
+              ticks: { maxRotation: 35, font: { size: 10 } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // ── 時間軸 ────────────────────────────────────────────────
+    function renderTimeline() {
+      const container = document.getElementById('timeline-container');
+      const posEmoji = {
+        "集合起點":"🚇", "展望台":"🏙️", "歷史廟宇":"🏛️",
+        "地質奇觀":"🪨", "稜線衛峰":"🌲", "三角點":"📍",
+        "小百岳 #16":"⭐", "信仰地標":"🙏", "天然岩洞":"🕌",
+        "稜線山頭":"🌿", "最高點":"🏔️", "回程終點":"🚇"
+      };
+
+      schedule.forEach((wp, i) => {
+        const div = document.createElement('div');
+        div.className = 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all';
+        div.onclick = () => {
+          document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
+          updateWaypointCard(i);
+        };
+
+        const isHighlight = wp.pos === "最高點" || wp.pos === "小百岳 #16";
+        const isStart = i === 0 || i === schedule.length - 1;
+        const dotColor = isHighlight ? '#7c9e52' : isStart ? '#c77c3e' : '#a09080';
+        const emoji = posEmoji[wp.pos] || '📍';
+
+        div.innerHTML = `
+          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+               style="background:${dotColor};"></div>
+          <div class="flex items-center gap-3 mb-1">
+            <span class="font-mono font-bold text-sm" style="color:#c77c3e;">${wp.time}</span>
+            <span class="text-xs text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+          </div>
+          <div class="font-bold text-stone-800">${wp.loc}</div>
+          <div class="text-xs text-stone-500 mt-0.5">${wp.desc}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ── 初始化 ────────────────────────────────────────────────
+    fetchWeather();
+    window.addEventListener('load', () => {
+      initMap();
+      initChart();
+      renderTimeline();
+    });
+  </script>
+</body>
+</html>
