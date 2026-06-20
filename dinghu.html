@@ -86,8 +86,8 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-2xl font-black text-stone-900">6.00</div>
-            <div class="text-xs text-stone-400">修正後總里程 km</div>
+            <div class="text-2xl font-black text-stone-900">7.79</div>
+            <div class="text-xs text-stone-400">GPS實測里程 km</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">4.0</div>
@@ -112,7 +112,7 @@
           <span class="w-2.5 h-8 bg-emerald-600 rounded-full"></span>
           互動路線圖與地點切換
         </h2>
-        <p class="text-sm text-stone-400 mb-6">里程以直線距離之 1.3 倍修正。點擊地圖標記查看航點細節。</p>
+        <p class="text-sm text-stone-400 mb-6">里程依 GPS 實測軌跡計算。點擊地圖標記查看航點細節。</p>
 
         <div id="map" class="mb-6 shadow-md"></div>
 
@@ -229,7 +229,7 @@
           <span class="w-2.5 h-8 bg-emerald-600 rounded-full"></span>
           預計行程進度 (4H)
         </h2>
-        <p class="text-sm text-stone-400 mb-8">數據基礎：直線距離 × 1.3 修正校準。</p>
+        <p class="text-sm text-stone-400 mb-8">數據基礎：GPS 實測軌跡（2026-06-20）。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -249,15 +249,15 @@
     const schedule = [
       { lat: 25.154635, lng: 121.539265, time: "07:00", loc: "陽明山立體停車場 (H385m)", dist: 0.00, ele: 385, pos: "集合起點", desc: "行程起點。07:00 準時出發。", advice: "檢查裝備與水分，確認小9路公車時刻表。" },
       { lat: 25.159762, lng: 121.531915, time: "07:25", loc: "圳內站 (H350m)", dist: 0.00, ele: 350, pos: "入山口", desc: "登山起點，累計里程: 0.00 km", advice: "步行約25分鐘或搭小9路公車抵達。出發走猴崁水圳步道。" },
-      { lat: 25.161868, lng: 121.532491, time: "07:57", loc: "草山觀瀑吊橋 (H310m)", dist: 0.80, ele: 310, pos: "景觀亮點", desc: "累計里程: 0.80 km", advice: "吊橋附近有瀑布，是絕佳拍照點，請注意吊橋承重限制。" },
-      { lat: 25.166356, lng: 121.533108, time: "08:37", loc: "滾水頭 (H420m)", dist: 1.80, ele: 420, pos: "歷史遺跡", desc: "累計里程: 1.80 km", advice: "日治水源頭，可稍作休息補充水分，欣賞歷史遺跡。" },
-      { lat: 25.171708969554984, lng: 121.53166921364031, time: "09:05", loc: "青楓步道登山口 (H490m)", dist: 2.50, ele: 490, pos: "轉換路段", desc: "累計里程: 2.50 km", advice: "由此轉入青楓步道，開始爬升段，坡度較陡請注意腳步。" },
-      { lat: 25.17103388602272, lng: 121.52934428936435, time: "09:21", loc: "青楓步道出口 (H500m)", dist: 2.90, ele: 500, pos: "轉換路段", desc: "累計里程: 2.90 km", advice: "青楓步道出口，繼續往稜線方向前進。" },
-      { lat: 25.164375745740944, lng: 121.52325603119678, time: "09:45", loc: "中正山第一登山口 (H580m)", dist: 3.50, ele: 580, pos: "轉換路段", desc: "累計里程: 3.50 km", advice: "中正山第一登山口，可選擇繞行或繼續主線前進。" },
-      { lat: 25.16238, lng: 121.52647, time: "10:25", loc: "頂湖山 (H662m)", dist: 4.50, ele: 662, pos: "山頂", desc: "累計里程: 4.50 km", advice: "主峰三角點，確認往頂湖站的下山路線。" },
-      { lat: 25.15922, lng: 121.52486, time: "10:49", loc: "無尾崙 (H660m)", dist: 5.10, ele: 660, pos: "副峰", desc: "累計里程: 5.10 km", advice: "海拔660公尺，稜線景觀優美，稍作休息後繼續下山。" },
-      { lat: 25.15616, lng: 121.53008, time: "11:25", loc: "頂湖站 (H380m)", dist: 6.00, ele: 380, pos: "終點", desc: "登山終點，累計里程: 6.00 km", advice: "O型完成！步行至陽明山立體停車場約15分鐘，或搭小9路公車返回。" },
-      { lat: 25.154635, lng: 121.539265, time: "11:45", loc: "陽明山立體停車場 (H385m)", dist: 6.00, ele: 385, pos: "回程終點", desc: "回程終點，累計里程: 6.00 km", advice: "搭乘公車或步行回到停車場，完成今日行程！" }
+      { lat: 25.161868, lng: 121.532491, time: "07:43", loc: "草山觀瀑吊橋 (H310m)", dist: 0.84, ele: 310, pos: "景觀亮點", desc: "累計里程: 0.84 km", advice: "吊橋附近有瀑布，是絕佳拍照點，請注意吊橋承重限制。" },
+      { lat: 25.166356, lng: 121.533108, time: "08:28", loc: "滾水頭 (H420m)", dist: 2.43, ele: 420, pos: "歷史遺跡", desc: "累計里程: 2.43 km", advice: "日治水源頭，可稍作休息補充水分，欣賞歷史遺跡。" },
+      { lat: 25.171708969554984, lng: 121.53166921364031, time: "08:50", loc: "青楓步道登山口 (H490m)", dist: 3.34, ele: 490, pos: "轉換路段", desc: "累計里程: 3.34 km", advice: "由此轉入青楓步道，開始爬升段，坡度較陡請注意腳步。" },
+      { lat: 25.17103388602272, lng: 121.52934428936435, time: "09:22", loc: "青楓步道出口 (H500m)", dist: 3.88, ele: 500, pos: "轉換路段", desc: "累計里程: 3.88 km", advice: "青楓步道出口，繼續往稜線方向前進。" },
+      { lat: 25.164375745740944, lng: 121.52325603119678, time: "09:49", loc: "中正山第一登山口 (H580m)", dist: 5.24, ele: 580, pos: "轉換路段", desc: "累計里程: 5.24 km", advice: "中正山第一登山口，可選擇繞行或繼續主線前進。" },
+      { lat: 25.16238, lng: 121.52647, time: "10:02", loc: "頂湖山 (H662m)", dist: 5.79, ele: 662, pos: "山頂", desc: "累計里程: 5.79 km", advice: "主峰三角點，確認往頂湖站的下山路線。" },
+      { lat: 25.15922, lng: 121.52486, time: "10:17", loc: "無尾崙 (H660m)", dist: 6.28, ele: 660, pos: "副峰", desc: "累計里程: 6.28 km", advice: "海拔660公尺，稜線景觀優美，稍作休息後繼續下山。" },
+      { lat: 25.15616, lng: 121.53008, time: "11:25", loc: "頂湖站 (H380m)", dist: 7.79, ele: 380, pos: "終點", desc: "登山終點，累計里程: 7.79 km", advice: "O型完成！步行至陽明山立體停車場約15分鐘，或搭小9路公車返回。" },
+      { lat: 25.154635, lng: 121.539265, time: "11:45", loc: "陽明山立體停車場 (H385m)", dist: 7.79, ele: 385, pos: "回程終點", desc: "回程終點，累計里程: 7.79 km", advice: "搭乘公車或步行回到停車場，完成今日行程！" }
     ];
 
     let map, chart, markers = [];
