@@ -85,11 +85,12 @@
     <nav class="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-orange-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <a href="index.html" class="transition-transform active:scale-95">
-                        <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
-                    </a>
-                    <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">2025/12/13 火炎山、北鞍古道 O 走紀錄</span>
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" title="回到主頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+      </a>
+                    <span class="text-stone-400 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">數據總覽</button>
@@ -108,7 +109,7 @@
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-600 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
-                    O-Loop Completed 完走
+                    Mission Accomplished 任務完成
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">火炎山、北鞍古道 O 走</h1>
                 <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
@@ -290,35 +291,35 @@
 
         const schedule = [
             { 
-                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:22", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
+                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:10", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
                 desc: "這裡是火炎山最著名的私人收費停車場。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。" 
             },
             { 
-                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:42", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
+                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:28", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
                 desc: "從這裡開始進入森林步道。這段路徑相對於稜線較為平緩，也是回程 O 走下山的主要路徑。" 
             },
             { 
-                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:42", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
+                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:46", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
                 desc: "這是一個簡易的石砌土地公廟，是登山客的精神寄託與折返點。廟前空地寬廣，適合全隊整隊與補充體力。" 
             },
             { 
-                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:07", loc: "火炎山三角點", ele: 601, pos: "最高點", 
+                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:05", loc: "火炎山三角點", ele: 601, pos: "最高點", 
                 desc: "標高 601m，設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。" 
             },
             { 
-                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:36", loc: "山頂休息區", ele: 565, pos: "大休息區", 
+                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:15", loc: "山頂休息區", ele: 565, pos: "大休息區", 
                 desc: "這裡設有許多木製桌椅，全隊在此進行短暫休息，享受山林間的微風。此處海拔約 565 公尺。" 
             },
             { 
-                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:47", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
+                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:40", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
                 desc: "火炎山精華景觀，壯闊的紅土崩壁。地質脆弱請勿靠近邊緣，於拉繩後方欣賞美景。"
             },
             { 
-                lat: 24.36132940122552, lng: 120.73345001438366, time: "12:59", loc: "南火炎山", ele: 251, pos: "景點", 
+                lat: 24.36132940122552, lng: 120.73345001438366, time: "13:12", loc: "南火炎山", ele: 251, pos: "景點", 
                 desc: "位於下山路段的小山頭，海拔 251 公尺。從此處可以回望剛才走過的峽谷稜線。" 
             },
             { 
-                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:23", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
+                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:20", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
                 desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，順利完成這場精彩的 O 型走。" 
             }
         ];
