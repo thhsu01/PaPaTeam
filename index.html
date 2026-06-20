@@ -126,25 +126,25 @@
         const data = {
             planned: [
                 {
-                    title: "猴崁水圳 × 青楓步道 × 頂湖O型",
-                    date: "2026/06/20",
-                    location: "台北陽明山",
-                    desc: "穿越全新完工的猴崁水圳古道，沿青楓步道登頂頂湖山，俯瞰陽明山翠谷，O型完整體驗陽明山北麓山水之美。",
-                    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800",
+                    title: "微笑山線 × 南勢角山 × 一線天",
+                    location: "新北市中和",
+                    desc: "O 型大縱走串聯圓通禪寺一線天奇景、小百岳南勢角山、烘爐地土地公，向西深入土城五尖山制高點，是中和山系最完整的路線。",
+                    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800",
                     tag: "PLANNED",
-                    url: "dinghu.html"
+                    url: "nanshijiao.html"
                 }
             ],
             candidate: [
                 { title: "七星山主東峰 苗圃O型", location: "台北陽明山", desc: "從苗圃登山口直攻台北市最高峰七星山主峰（1,120m），連走東峰後繞七星公園草坪 O 型回程。一次集滿兩座小百岳，去回路線景色完全不重複。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800", tag: "候選", url: "qixingshan.html" },
                 { title: "大屯山連峰四峰 O 型縱走", location: "台北陽明山", desc: "搭 108 公車上鞍部，沿大屯連峰依序攻克小百岳 #001 主峰、南峰、西峰與面天山四座火山峰頭，下至二子坪後 O 型回鞍部。全程 7.9 km，爬升 690m。", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800", tag: "候選", url: "datunshan.html" },
-                { title: "微笑山線 × 南勢角山 × 一線天", location: "新北市中和", desc: "O 型大縱走串聯圓通禪寺一線天奇景、小百岳南勢角山、烘爐地土地公，向西深入土城五尖山制高點，是中和山系最完整的路線。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800", tag: "候選", url: "nanshijiao.html" },
                 { title: "碧山 + 白石湖山：原始縱走", location: "台北內湖", desc: "碧山為內湖地區最高峰，沿途林蔭茂密且原始感十足。", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800", tag: "候選", url: "bishan.html" },
                 { title: "獅球嶺砲台：基隆歷史古蹟", location: "基隆市", desc: "走訪基隆的重要軍事堡壘遺址，擁有絕佳的基隆港視野。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800", tag: "候選", url: "shiqiulinling.html" },
             ],
             completed: [
+                // 已搬移：頂湖O型由計畫轉入歷史紀錄
+                { title: "猴崁水圳 × 青楓步道 × 頂湖O型", date: "2026/06/20", location: "台北陽明山", desc: "穿越全新完工的猴崁水圳古道，沿青楓步道登頂頂湖山，俯瞰陽明山翠谷，O型完整體驗陽明山北麓山水之美。", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800", isLatest: true, url: "dinghu.html" },
                 // 已搬移：內溝山系由計畫轉入歷史紀錄
-                { title: "內溝山系 O 型全系列縱走", date: "2026/05/01", location: "台北內湖 × 新北汐止", desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的路線。", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800", isLatest: true, url: "laojiujianshan.html" },
+                { title: "內溝山系 O 型全系列縱走", date: "2026/05/01", location: "台北內湖 × 新北汐止", desc: "老鷲尖山以其獨特的地形與視野著稱，是資深山友不容過過的路線。", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "laojiujianshan.html" },
                 // 已搬移：聖母步道正式歸檔至歷史紀錄
                 { title: "聖母步道：抹茶山春季挑戰", date: "2026/03/14", location: "宜蘭礁溪", desc: "著名的抹茶山美景，嫩綠的山頭宛如抹茶粉般鋪撒。攻頂視野壯闊。", img: "https://images.unsplash.com/photo-1511316695145-4992006ffddb?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "mochashan.html" },
                 { title: "梅花山全系列挑戰縱走", date: "2026/01/10", location: "台北市", desc: "漫步在梅花山的山嶺與林蔭之間，感受大自然的靜謐。", img: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "meihuashan.html" },
