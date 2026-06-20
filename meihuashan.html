@@ -80,11 +80,12 @@
     <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <a href="index.html" class="transition-opacity hover:opacity-80 active:scale-95 duration-200" title="回到主畫面">
-                        <div class="w-9 h-9 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">爬</div>
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" title="回到主頁">
+                        <div class="w-9 h-9 bg-emerald-700 rounded-lg flex items-center justify-center text-white font-bold shadow-md">爬</div>
+                        <span class="font-bold text-stone-800 tracking-tight text-sm md:text-base">爬爬小隊</span>
                     </a>
-                    <span class="font-bold text-stone-800 tracking-tight italic text-sm md:text-base hidden sm:inline">爬爬小隊 2026/1/10 活動紀錄</span>
+                    <span class="text-stone-400 text-xs hidden sm:inline font-medium">2026/1/10 活動紀錄</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">數據總覽</button>
@@ -288,17 +289,17 @@
         let currentWaypointIndex = 0;
 
         const schedule = [
-            { lat: 25.124977, lng: 121.587709, actual: "07:45", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。實際於 07:45 正式出發。" },
-            { lat: 25.129906, lng: 121.593581, actual: "08:40", loc: "雙溪山", dist: 1.30, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。" },
-            { lat: 25.125953, lng: 121.596262, actual: "09:38", loc: "梅花山西峰", dist: 2.64, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。" },
-            { lat: 25.130616, lng: 121.598606, actual: "10:22", loc: "大石展望點", dist: 3.95, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。" },
-            { lat: 25.130752, lng: 121.599868, actual: "10:39", loc: "梅花山北峰", dist: 4.20, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。" },
-            { lat: 25.125390, lng: 121.604578, actual: "11:32", loc: "清心亭", dist: 5.90, ele: 617, pos: "休息點", desc: "停留大休息 50 分鐘補充體力。" },
-            { lat: 25.125736, lng: 121.601721, actual: "12:40", loc: "梅花山 (主峰)", dist: 7.09, ele: 643, pos: "最高點", desc: "標高 643m。" },
-            { lat: 25.124682, lng: 121.601430, actual: "12:44", loc: "梅花山南峰", dist: 7.28, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。" },
-            { lat: 25.120990, lng: 121.597671, actual: "13:25", loc: "梅花山西南峰", dist: 8.80, ele: 511, pos: "下切點", desc: "準備大幅度下坡。" },
-            { lat: 25.122079, lng: 121.593057, actual: "14:44", loc: "帕米爾公園", dist: 10.47, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。" },
-            { lat: 25.124977, lng: 121.587710, actual: "15:36", loc: "終點 (聖人橋)", dist: 12.18, ele: 217, pos: "終點解散", desc: "平安回到終點解散。" }
+            { lat: 25.124977, lng: 121.587709, actual: "07:40", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。實際於 07:40 正式出發。" },
+            { lat: 25.129906, lng: 121.593581, actual: "08:36", loc: "雙溪山", dist: 1.42, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。" },
+            { lat: 25.125953, lng: 121.596262, actual: "09:35", loc: "梅花山西峰", dist: 2.31, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。" },
+            { lat: 25.130616, lng: 121.598606, actual: "10:18", loc: "大石展望點", dist: 3.29, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。" },
+            { lat: 25.130752, lng: 121.599868, actual: "10:37", loc: "梅花山北峰", dist: 3.50, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。" },
+            { lat: 25.125390, lng: 121.604578, actual: "11:37", loc: "清心亭", dist: 4.80, ele: 617, pos: "休息點", desc: "停留大休息 50 分鐘補充體力。" },
+            { lat: 25.125736, lng: 121.601721, actual: "12:39", loc: "梅花山 (主峰)", dist: 5.29, ele: 643, pos: "最高點", desc: "標高 643m。" },
+            { lat: 25.124682, lng: 121.601430, actual: "12:42", loc: "梅花山南峰", dist: 5.50, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。" },
+            { lat: 25.120990, lng: 121.597671, actual: "13:30", loc: "梅花山西南峰", dist: 6.48, ele: 511, pos: "下切點", desc: "準備大幅度下坡。" },
+            { lat: 25.122079, lng: 121.593057, actual: "14:50", loc: "帕米爾公園", dist: 7.32, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。" },
+            { lat: 25.124977, lng: 121.587710, actual: "15:30", loc: "終點 (聖人橋)", dist: 8.42, ele: 217, pos: "終點解散", desc: "平安回到終點解散。" }
         ];
 
         let map, chart, markers = [];
