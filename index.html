@@ -38,17 +38,17 @@
     <nav class="fixed top-0 w-full z-50 glass-card border-b border-slate-200/50">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 font-bold text-xl">
+                <div class="w-10 h-10 bg-emerald-700 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-200 font-bold text-xl">
                     爬
                 </div>
                 <span class="text-2xl font-black text-emerald-900 tracking-tighter">爬爬小隊</span>
             </div>
             
             <div class="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
-                <a href="#" class="hover:text-emerald-600 transition-all hover:scale-105">首頁</a>
-                <a href="#planned" class="hover:text-emerald-600 transition-all hover:scale-105">計畫行程</a>
-                <a href="#candidate" class="hover:text-emerald-600 transition-all hover:scale-105">候選清單</a>
-                <a href="#completed" class="hover:text-emerald-600 transition-all hover:scale-105">歷史紀錄</a>
+                <a href="#" class="hover:text-emerald-700 transition-all hover:scale-105">首頁</a>
+                <a href="#planned" class="hover:text-emerald-700 transition-all hover:scale-105">計畫行程</a>
+                <a href="#candidate" class="hover:text-emerald-700 transition-all hover:scale-105">候選清單</a>
+                <a href="#completed" class="hover:text-emerald-700 transition-all hover:scale-105">歷史紀錄</a>
             </div>
 
             <button id="menuBtn" class="md:hidden p-3 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="開啟導覽菜單" aria-expanded="false" aria-controls="mobileMenu">
@@ -115,12 +115,12 @@
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500"></div>
         <div class="max-w-7xl mx-auto">
             <div class="text-3xl font-black text-white mb-6">爬爬小隊</div>
-            <div class="flex justify-center space-x-8 text-sm text-slate-500 mb-12 uppercase tracking-widest font-bold">
+            <div class="flex justify-center space-x-8 text-sm text-slate-400 mb-12 uppercase tracking-widest font-bold">
                 <a href="#planned" class="hover:text-emerald-400 transition-colors">計畫</a>
                 <a href="#candidate" class="hover:text-emerald-400 transition-colors">候選</a>
                 <a href="#completed" class="hover:text-emerald-400 transition-colors">紀錄</a>
             </div>
-            <div class="pt-8 border-t border-slate-900 text-slate-600 text-xs">
+            <div class="pt-8 border-t border-slate-900 text-slate-400 text-xs">
                 &copy; 2026 爬爬小隊 PaPaTeam. 版權所有.
             </div>
         </div>
@@ -176,7 +176,7 @@
             const plannedEl = document.getElementById('planned-container');
             if (data.planned.length === 0) {
                 plannedEl.innerHTML = `
-                    <div class="col-span-full border-2 border-dashed border-slate-200 rounded-3xl py-20 flex flex-col items-center justify-center text-slate-400 bg-slate-50/50">
+                    <div class="col-span-full border-2 border-dashed border-slate-200 rounded-3xl py-20 flex flex-col items-center justify-center text-slate-500 bg-slate-50/50">
                         <svg class="w-12 h-12 mb-4 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4v2m0 4v2M7.08 6.47A9 9 0 1119 12a9 9 0 01-11.92 6.47"/></svg>
                         <p class="font-bold">目前尚無計畫行程</p>
                     </div>`;
@@ -185,12 +185,12 @@
                     <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border-2 border-emerald-100 shadow-lg shadow-emerald-50 transition-all hover:shadow-2xl hover:-translate-y-1">
                         <div class="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}" title="${item.location}">
-                            <div class="absolute top-4 right-4 px-4 py-1.5 bg-emerald-600 text-white rounded-full text-xs font-black uppercase tracking-widest shadow-lg">${item.tag}</div>
+                            <div class="absolute top-4 right-4 px-4 py-1.5 bg-emerald-700 text-white rounded-full text-xs font-black uppercase tracking-widest shadow-lg">${item.tag}</div>
                         </div>
                         <div class="p-8">
                             <div class="flex justify-between items-center mb-2">
-                                <div class="text-xs font-bold text-emerald-600">${item.location}</div>
-                                <div class="text-[10px] font-black text-slate-400 tracking-widest">${item.date || ''}</div>
+                                <div class="text-xs font-bold text-emerald-700">${item.location}</div>
+                                <div class="text-[10px] font-black text-slate-500 tracking-widest">${item.date || ''}</div>
                             </div>
                             <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">${item.title}</h3>
                             <p class="text-slate-500 text-sm line-clamp-2">${item.desc}</p>
@@ -208,7 +208,7 @@
                         <div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full text-[10px] font-black text-slate-600 uppercase tracking-widest">${item.tag}</div>
                     </div>
                     <div class="p-8">
-                        <div class="text-xs font-bold text-emerald-600 mb-2">${item.location}</div>
+                        <div class="text-xs font-bold text-emerald-700 mb-2">${item.location}</div>
                         <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">${item.title}</h3>
                         <p class="text-slate-500 text-sm line-clamp-2">${item.desc}</p>
                     </div>
@@ -226,11 +226,11 @@
                 <${tag} ${attrs} class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all ${lockedClass}" title="${isLocked ? '詳情頁待補充' : ''}">
                     <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
                         <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500 ${isLocked ? 'grayscale' : ''}" alt="${item.title}" title="${item.date} · ${item.location}">
-                        ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded" aria-label="最新行程">NEW</span>` : ''}
-                        ${isLocked ? `<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-white text-xs font-bold bg-black/40 px-2 py-1 rounded">詳情待補充</span></div>` : ''}
+                        ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded" aria-label="最新行程">NEW</span>` : ''}
+                        ${isLocked ? `<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-white text-xs font-bold bg-black/60 px-2 py-1 rounded">詳情待補充</span></div>` : ''}
                     </div>
                     <div>
-                        <div class="flex justify-between text-[10px] font-bold text-slate-400 mb-1">
+                        <div class="flex justify-between text-[10px] font-bold text-slate-500 mb-1">
                             <span>${item.date}</span>
                             <span>${item.location}</span>
                         </div>

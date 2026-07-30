@@ -98,3 +98,9 @@ body {
   backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
 }
+
+/* Leaflet 彈出視窗的關閉鍵，其預設 #757575 配 #ddd 只有 3.39:1。
+   這是 Leaflet 自帶樣式，於此覆寫以達 4.5:1。 */
+.leaflet-popup-close-button {
+  color: #404040 !important;
+}
