@@ -99,20 +99,20 @@
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-400 mb-1">集合地點</div>
+            <div class="text-xs text-stone-500 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
-            <div class="text-xs text-stone-400 mt-1">捷運中和新蘆線，1 號出口集合</div>
+            <div class="text-xs text-stone-500 mt-1">捷運中和新蘆線，1 號出口集合</div>
             <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:#9a6030;">🚗 開車可停於<br>南勢角站轉乘停車場</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-400 mb-1">出發時間</div>
+            <div class="text-xs text-stone-500 mb-1">出發時間</div>
             <div class="font-bold text-stone-800">8月2日 07:30</div>
-            <div class="text-xs text-stone-400 mt-1">（請提前 10 分鐘抵達）</div>
+            <div class="text-xs text-stone-500 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-400 mb-1">8/2 天氣預報</div>
+            <div class="text-xs text-stone-500 mb-1">8/2 天氣預報</div>
             <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
-            <div class="text-xs text-stone-400 mt-1" id="weather-sub">正在取得資料</div>
+            <div class="text-xs text-stone-500 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
             <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#c77c3e;" aria-label="在地圖應用中導航至南勢角站">
@@ -125,19 +125,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">11.76</div>
-            <div class="text-xs text-stone-400">GPX 總里程 km</div>
+            <div class="text-xs text-stone-500">GPX 總里程 km</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">~6.5</div>
-            <div class="text-xs text-stone-400">目標耗時 hr（輕鬆）</div>
+            <div class="text-xs text-stone-500">目標耗時 hr（輕鬆）</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">674</div>
-            <div class="text-xs text-stone-400">總爬升高度 m</div>
+            <div class="text-xs text-stone-500">總爬升高度 m</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black" style="color:#c77c3e;">320</div>
-            <div class="text-xs text-stone-400">最高海拔 m（五尖山）</div>
+            <div class="text-xs text-stone-500">最高海拔 m（五尖山）</div>
           </div>
         </div>
       </div>
@@ -150,23 +150,23 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-400 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
+        <p class="text-sm text-stone-500 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-400 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="text-xs text-stone-500 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
-            <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
             <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">捷運南勢角站</h3>
-            <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-500">
             <span>預計時間 <strong class="text-stone-800" id="wp-time">07:30</strong></span>
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
           </div>
-          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
           <div class="rounded-xl p-3" style="background:#fef9f0; border:1px solid #f5dfc0;">
             <div class="text-xs font-medium mb-1" style="color:#9a6030;">隊友建議</div>
             <p class="text-xs" style="color:#b07040;" id="wp-advice">在站內小7補充飲食，確認大家到齊後出發。</p>
@@ -196,7 +196,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-400 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
+        <p class="text-xs text-stone-500 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
       </div>
     </section>
 
@@ -283,8 +283,8 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           預計行程進度
         </h2>
-        <p class="text-sm text-stone-400 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
-        <p class="text-xs text-stone-400 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
+        <p class="text-sm text-stone-500 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
+        <p class="text-xs text-stone-500 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -294,7 +294,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-400 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 8月2日 · 07:30 出發 · 預計 14:00 返抵</p>
+    <p class="text-stone-500 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 8月2日 · 07:30 出發 · 預計 14:00 返抵</p>
   </footer>
 
   <script>
@@ -532,7 +532,7 @@
                style="background:${dotColor};"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="font-mono font-bold text-sm" style="color:#c77c3e;">${wp.time}</span>
-            <span class="text-xs text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            <span class="text-xs text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
           <div class="text-xs text-stone-500 mt-0.5">${wp.desc}</div>
