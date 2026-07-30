@@ -81,8 +81,11 @@
 </head>
 <body class="antialiased selection:bg-orange-100 text-left">
 
+    <!-- Back button -->
+    <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
+
     <!-- Top Navigation -->
-    <nav class="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-orange-100">
+    <nav class="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-orange-100" aria-label="頁面導覽">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
@@ -93,11 +96,11 @@
                     <span class="text-stone-400 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
-                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">數據總覽</button>
-                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600">路徑地圖</button>
-                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600">海拔剖面</button>
-                    <button onclick="scrollToSection('deep-dive')" class="nav-link hover:text-orange-600 text-orange-600">景點深度導覽</button>
-                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600">實際行程</button>
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600" aria-label="滾動到行程總覽">數據總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600" aria-label="滾動到路線圖">路徑地圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600" aria-label="滾動到海拔剖面">海拔剖面</button>
+                    <button onclick="scrollToSection('deep-dive')" class="nav-link hover:text-orange-600 text-orange-600" aria-label="滾動到景點介紹">景點深度導覽</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600" aria-label="滾動到預估進度">實際行程</button>
                 </div>
             </div>
         </div>
@@ -180,8 +183,8 @@
                             <div class="flex items-center justify-between mb-4">
                                 <div id="wp-pos" class="inline-block px-2.5 py-1 bg-orange-200 text-orange-700 text-[10px] font-black rounded tracking-wider uppercase">地點類型</div>
                                 <div class="flex gap-2">
-                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm">&lt;</button>
-                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm">&gt;</button>
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm" aria-label="上一個航點">&lt;</button>
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm" aria-label="下一個航點">&gt;</button>
                                 </div>
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點名稱</h3>

@@ -98,8 +98,11 @@
 </head>
 <body class="antialiased selection:bg-orange-100">
 
+    <!-- Back button -->
+    <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
+
     <!-- Top Navigation -->
-    <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200">
+    <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200" aria-label="頁面導覽">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
@@ -110,11 +113,11 @@
                     <span class="text-stone-400 text-xs hidden sm:inline font-medium">2026/5/1 活動紀錄</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
-                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600">行程總覽</button>
-                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600">路線圖</button>
-                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600">海拔剖面</button>
-                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-orange-600">景點介紹</button>
-                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600">實際行程</button>
+                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600" aria-label="滾動到行程總覽">行程總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-orange-600" aria-label="滾動到路線圖">路線圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-orange-600" aria-label="滾動到海拔剖面">海拔剖面</button>
+                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-orange-600" aria-label="滾動到景點介紹">景點介紹</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-orange-600" aria-label="滾動到預估進度">實際行程</button>
                 </div>
             </div>
         </div>
@@ -162,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg">
+                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至金龍場停車場">
                     <span>🗺️ 開啟導航至金龍場停車場</span>
                 </button>
             </div>
@@ -209,10 +212,10 @@
                             <div class="flex items-center justify-between mb-4">
                                 <div id="wp-pos" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
                                 <div class="flex gap-2">
-                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                    <button onclick="prevWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" aria-label="上一個航點">
                                         &lt;
                                     </button>
-                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm">
+                                    <button onclick="nextWaypoint()" class="nav-arrow w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" aria-label="下一個航點">
                                         &gt;
                                     </button>
                                 </div>
