@@ -213,11 +213,17 @@
 
             // 歷史紀錄
             const completedEl = document.getElementById('completed-container');
-            completedEl.innerHTML = data.completed.map(item => `
-                <a href="${item.url}" class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all hover:bg-emerald-50/30">
+            completedEl.innerHTML = data.completed.map(item => {
+                const isLocked = item.url === '#';
+                const tag = isLocked ? 'div' : 'a';
+                const attrs = isLocked ? '' : `href="${item.url}"`;
+                const lockedClass = isLocked ? 'opacity-60 cursor-not-allowed' : 'hover:bg-emerald-50/30';
+                return `
+                <${tag} ${attrs} class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all ${lockedClass}" title="${isLocked ? '詳情頁待補充' : ''}">
                     <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500 ${isLocked ? 'grayscale' : ''}">
                         ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>` : ''}
+                        ${isLocked ? `<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-white text-xs font-bold bg-black/40 px-2 py-1 rounded">詳情待補充</span></div>` : ''}
                     </div>
                     <div>
                         <div class="flex justify-between text-[10px] font-bold text-slate-400 mb-1">
@@ -226,8 +232,8 @@
                         </div>
                         <h4 class="font-bold text-slate-900 group-hover:text-emerald-800 transition-colors line-clamp-1">${item.title}</h4>
                     </div>
-                </a>
-            `).join('');
+                </${tag}>
+            `}).join('');
         }
 
         document.getElementById('menuBtn').addEventListener('click', () => {
