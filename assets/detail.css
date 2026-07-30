@@ -1,0 +1,117 @@
+/* 行程詳情頁共用樣式（10 頁，不含 index.html）
+ *
+ * 這些頁面出自兩套模板世代，class 詞彙不同（家族 A 用 .nav-link / .info-glass /
+ * .card-hover / #realMap；家族 B 用 .nav-btn / #map / #elevation-chart /
+ * .waypoint-card），但結構相同的規則其實只差色值與尺寸。本檔收結構，各頁以
+ * :root 自訂屬性提供自己的值，因此外觀完全不變。
+ *
+ * 載入順序：各頁 inline <style> → 本檔 → assets/site.css
+ * 本檔在 inline <style> 之後，故同名規則以本檔為準；各頁不應再重複宣告，
+ * 要調整請改該頁的 :root 變數。
+ *
+ * 刻意不收進本檔的規則：
+ *   ::-webkit-scrollbar*  對所有頁生效，家族 B 原本沒有自訂滾動條
+ *   .leaflet-container    Leaflet 自行加上的 class，家族 B 也有地圖
+ *   html{scroll-behavior} 家族 B 原本沒有，加上會讓 skip link 變成平滑滾動
+ */
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: var(--page-bg);
+  color: var(--page-fg);
+}
+
+/* ── 圖表 ────────────────────────────────────────────── */
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: var(--chart-max-w);
+  margin-left: auto;
+  margin-right: auto;
+  height: var(--chart-h);
+  overflow-x: var(--chart-overflow-x, visible);
+}
+
+#elevation-chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── 地圖 ────────────────────────────────────────────── */
+
+#map {
+  height: 420px;
+  border-radius: var(--map-radius);
+  max-width: var(--map-max-w, none);
+  width: var(--map-w, auto);
+}
+
+#realMap {
+  width: 100%;
+  height: var(--realmap-h);
+  border-radius: 1.5rem;
+  z-index: 10;
+  border: var(--realmap-border);
+}
+
+/* ── 航點與導覽 ──────────────────────────────────────── */
+
+.waypoint-card {
+  transition: var(--waypoint-transition);
+}
+
+.nav-btn {
+  transition: background 0.2s;
+}
+
+.nav-arrow:hover {
+  background-color: var(--nav-arrow-bg);
+  color: #fff;
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+/* ── 卡片與時間軸 ────────────────────────────────────── */
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow);
+  /* 兩頁原本在 :hover 上宣告 transition（只有滑入會動、滑出不會）。
+     為維持現狀而保留，未一併移到基態。 */
+  transition: var(--card-hover-transition, 0s);
+}
+
+.timeline-line {
+  position: absolute;
+  left: var(--timeline-left);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--timeline-bg);
+  z-index: var(--timeline-z, auto);
+}
+
+.info-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+}

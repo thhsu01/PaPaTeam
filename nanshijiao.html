@@ -10,43 +10,36 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
-    body { font-family: "Noto Sans TC", sans-serif; background-color: #f5f3ef; color: #3a3632; }
-    .chart-container { position: relative; width: 100%; max-width: 100%; margin: 0 auto; height: 300px; overflow-x: auto; }
-    #elevation-chart { width: 100% !important; height: 100% !important; }
-    #map { height: 420px; border-radius: 16px; max-width: 100%; width: 100%; }
-    .waypoint-card { transition: all 0.25s ease; }
-    .nav-btn { transition: background 0.2s; }
-    .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #c77c3e, #7c9e52); }
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #c77c3e, #7c9e52);
+    }
 
-    /* Hero stripe pattern evoking trail markers */
-    .hero-accent { background: repeating-linear-gradient(
-      -55deg,
-      transparent,
-      transparent 12px,
-      rgba(199,124,62,0.06) 12px,
-      rgba(199,124,62,0.06) 24px
-    ); }
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+
+    /* 步道標記意象的斜紋底 */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, rgba(199,124,62,0.06) 12px, rgba(199,124,62,0.06) 24px ); }
 
     .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
 
-    /* Stamp badge */
-    .stamp {
-      display: inline-block;
-      border: 3px solid #9a6030;
-      color: #9a6030;
-      font-weight: 900;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      padding: 4px 10px;
-      border-radius: 3px;
-      transform: rotate(-1.5deg);
-      text-transform: uppercase;
-    }
+    /* 日期戳章。文字與框線用 #9a6030（4.63:1）而非品牌色 #c77c3e（2.97:1），見 READABILITY_AUDIT.md */
+    .stamp { display: inline-block; border: 3px solid #9a6030; color: #9a6030; font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
 
+    /* 區段標題色條（非文字，不受對比度門檻約束，保留品牌色） */
     .section-bar-orange { background: #c77c3e; }
-    .section-bar-green  { background: #7c9e52; }
-    .section-bar-stone  { background: #a09080; }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
   </style>
+  <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js" defer></script>
 </head>

@@ -96,15 +96,31 @@
 - **鍵盤焦點指示**：新增 `:focus-visible` 雙環樣式（深色 outline + 白色 halo），同時涵蓋淺色頁面與 index.html 的深色頁腳。此前 Tailwind preflight 移除了預設 outline 而全站無替代樣式。
 - **減少動態**：`@media (prefers-reduced-motion: reduce)` 關閉轉場與動畫；因 `scrollIntoView({behavior:'smooth'})` 依規範會覆蓋 CSS，另以 `assets/site.js` 在該偏好啟用時改寫為 `auto`。
 
-### 共用檔的取捨
+### 共用檔（第一輪）
 
-新增 `assets/site.css` 與 `assets/site.js`，但**只收上述三項全新規則**，未收各頁既有 CSS。原因是這些頁面實為兩套模板世代，class 詞彙與數值本就不一致：
+新增 `assets/site.css` 與 `assets/site.js`，只收 skip link、`:focus-visible`、`prefers-reduced-motion` 三項全新規則，未動各頁既有 CSS。
 
-- 6 個檔案用 `.nav-link` / `.info-glass` / `.card-hover` / `#realMap`
-- 4 個檔案用 `.nav-btn` / `#map` / `#elevation-chart` / `.waypoint-card`
-- 連唯一三個共通選擇器的值也不同（`.timeline-line` 有 `left:20px` vs `24px`、漸層 vs 純色；`.chart-container` 有 `max-width:800px` vs `100%`）
+### 各頁 CSS 統一（第三輪，已完成）
 
-因此「抽出共用 CSS」實質上是**統一各頁現有差異**，會改動多頁視覺呈現，須另案評估。本次只加入原本一條都不存在的規則，確保不影響既有外觀。
+第一輪判斷「抽出共用 CSS 等於統一各頁差異、會改動視覺」，這個判斷不完全正確。實際盤點後發現：**多數規則的結構完全相同，只差色值與尺寸**，因此可用 CSS 自訂屬性把結構抽出、把差異保留成各頁 `:root` 變數，外觀完全不變。
+
+新增 `assets/detail.css`（10 個詳情頁共用，`index.html` 不載入 —— 它設計不同，且共用 `body` 規則會覆蓋掉它自己的背景色）。抽出 14 條規則：`body`、`.chart-container`、`#elevation-chart`、`#map`、`#realMap`、`.waypoint-card`、`.nav-btn`、`.card-hover:hover`、`.timeline-line`、`.nav-arrow:hover`、`.info-glass`、`.nav-link`、`.nav-link:after`、`.nav-link:hover:after`。
+
+**刻意不抽出的 3 條**，因為會改變行為：
+
+| 規則 | 原因 |
+|---|---|
+| `::-webkit-scrollbar*` | 對所有頁生效。家族 B 原本沒有自訂滾動條，抽出會讓它們從瀏覽器預設變成 6px 自訂樣式 |
+| `.leaflet-container` | 由 Leaflet 自行加在地圖容器上，家族 B 也有地圖。抽出後變數未定義會讓背景變透明 |
+| `html { scroll-behavior: smooth }` | 家族 B 原本沒有。加上會讓我新增的 skip link 變成平滑滾動 —— 對「跳過導覽」這個用途，瞬間跳轉才是正確行為 |
+
+抽出安全性的判準：一條規則只在「所有 10 頁都有它」或「缺少它的頁面其 markup 根本沒有該 class/id」時才抽出。後者經逐頁清查確認 —— 9 個 class/id 選擇器全部符合「有 CSS 就有用到、有用到就有 CSS」。
+
+順帶修正的等價寫法差異（原本看似不同、實際效果相同）：`margin: auto` 與 `margin-left/right: auto`；`transition: all 0.2s` 與 `all 0.2s ease`（`ease` 是預設值）；字型宣告的單引號與雙引號。
+
+**成效**：各頁 inline CSS 由 16,095 降到 9,768 字元，加上 3,273 字元的共用檔（10 頁只需下載一次），淨減 3,054 字元。更重要的是後續調整只需改一處，不必再靠跨檔 sed —— 而 sed 正是本專案先前造成錯誤的手段。
+
+**外觀不變的驗證方式**：先用像素比對，發現 10 頁都有 0.01–0.12% 差異；再以「同一版本連拍兩次」做對照組，測出雜訊底線同為 0.003–0.08%，證實那是 Leaflet 標記與 Chart.js canvas 的渲染非決定性。改以決定性方法複驗 —— 逐元素比對 `getBoundingClientRect` 與 19 項 computed style（`backgroundColor`、`color`、`backgroundImage`、`boxShadow`、`transition`、`backdropFilter`、`zIndex`、`maxWidth`、`overflowX`、`fontFamily`、`transform` 等），在 390px 與 1280px 兩種視窗下涵蓋 10 頁共 5,900 餘個元素快照，**全部一致**。
 
 ### 天氣 API 日期處理（第二輪）
 
@@ -134,9 +150,13 @@
 
 ## 4. 尚未處理的缺口
 
-1. **各頁 CSS 統一** —— 見上節「共用檔的取捨」。屬較大重構，會改動多頁視覺。
-2. **`bishan.html` 的 `.text-gradient` 為死碼** —— 定義了漸層文字樣式（`#ec4899` → `#8b5cf6`）但 markup 中從未使用。因此無對比度問題，但可刪除。附帶說明：漸層文字的對比度無法用單一比值評估，WCAG 未明確涵蓋，若日後啟用需個別判斷。
-3. **行程日已過時的頁面其他部分** —— 天氣卡片已能退回今日資料並標示「行程日已過」，但卡片標題「8/2 天氣預報」及頁面其他日期敘述（出發時間、預計返抵時刻）仍是靜態文字。整頁本質上是單次行程紀錄，行程結束後應整頁歸檔而非只更新天氣。
+1. **行程日已過時的頁面其他部分** —— 天氣卡片已能退回今日資料並標示「行程日已過」，但卡片標題「8/2 天氣預報」及頁面其他日期敘述（出發時間、預計返抵時刻）仍是靜態文字。整頁本質上是單次行程紀錄，行程結束後應整頁歸檔（如 `dinghu.html`、`mochashan.html`）而非只更新天氣。
+2. **兩套模板世代仍並存** —— `detail.css` 已讓兩者共用同一份結構，但 class 詞彙的分歧（`.nav-link` vs `.nav-btn`、`#realMap` vs `#map`）未統一。統一命名需同步改動 markup 與 JS，且無無障礙或功能上的必要性，故未進行。
+
+### 已於第三輪完成
+
+- **各頁 CSS 統一** —— 見上節。
+- **`bishan.html` 的 `.text-gradient` 死碼** —— 已刪除。該規則定義了漸層文字樣式（`#ec4899` → `#8b5cf6`）但 markup 中從未使用。附帶說明：漸層文字的對比度無法用單一比值評估，WCAG 未明確涵蓋，若日後要啟用需個別判斷。
 
 ---
 
