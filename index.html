@@ -47,12 +47,12 @@
                 <a href="#completed" class="hover:text-emerald-600 transition-all hover:scale-105">歷史紀錄</a>
             </div>
 
-            <button id="menuBtn" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+            <button id="menuBtn" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" aria-label="開啟導覽菜單" aria-expanded="false" aria-controls="mobileMenu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
         
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-4 space-y-4 shadow-xl text-center">
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-4 space-y-4 shadow-xl text-center" role="navigation" aria-label="行動裝置導覽">
             <a href="#" class="block font-bold text-slate-700">首頁</a>
             <a href="#planned" class="block font-bold text-slate-700">計畫行程</a>
             <a href="#candidate" class="block font-bold text-slate-700">候選清單</a>
@@ -178,9 +178,9 @@
                     </div>`;
             } else {
                 plannedEl.innerHTML = data.planned.map(item => `
-                    <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border-2 border-emerald-100 shadow-lg shadow-emerald-50 transition-all hover:shadow-2xl hover:-translate-y-1">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border-2 border-emerald-100 shadow-lg shadow-emerald-50 transition-all hover:shadow-2xl hover:-translate-y-1" role="article">
+                        <div class="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                            <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}" title="${item.location}">
                             <div class="absolute top-4 right-4 px-4 py-1.5 bg-emerald-600 text-white rounded-full text-xs font-black uppercase tracking-widest shadow-lg">${item.tag}</div>
                         </div>
                         <div class="p-8">
@@ -198,9 +198,9 @@
             // 候選清單
             const candidateEl = document.getElementById('candidate-container');
             candidateEl.innerHTML = data.candidate.map(item => `
-                <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <a href="${item.url}" class="group block bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1" role="article">
+                    <div class="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}" title="${item.location}">
                         <div class="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full text-[10px] font-black text-slate-600 uppercase tracking-widest">${item.tag}</div>
                     </div>
                     <div class="p-8">
@@ -219,10 +219,10 @@
                 const attrs = isLocked ? '' : `href="${item.url}"`;
                 const lockedClass = isLocked ? 'opacity-60 cursor-not-allowed' : 'hover:bg-emerald-50/30';
                 return `
-                <${tag} ${attrs} class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all ${lockedClass}" title="${isLocked ? '詳情頁待補充' : ''}">
+                <${tag} ${attrs} class="group block bg-white border border-slate-100 p-4 rounded-2xl transition-all ${lockedClass}" role="article" title="${isLocked ? '詳情頁待補充' : ''}">
                     <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
-                        <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500 ${isLocked ? 'grayscale' : ''}">
-                        ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>` : ''}
+                        <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500 ${isLocked ? 'grayscale' : ''}" alt="${item.title}" title="${item.date} · ${item.location}">
+                        ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded" aria-label="最新行程">NEW</span>` : ''}
                         ${isLocked ? `<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-white text-xs font-bold bg-black/40 px-2 py-1 rounded">詳情待補充</span></div>` : ''}
                     </div>
                     <div>
@@ -237,7 +237,10 @@
         }
 
         document.getElementById('menuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.getElementById('menuBtn');
+            menu.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true');
         });
 
         window.onload = renderUI;

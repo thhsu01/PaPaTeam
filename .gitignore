@@ -1,0 +1,47 @@
+# 編輯器與 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# 系統文件
+.DS_Store
+.AppleDouble
+.LSOverride
+Desktop.ini
+
+# 環境配置
+.env
+.env.local
+.env.*.local
+
+# 構建與依賴（若將來添加構建工具）
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 臨時文件
+*.tmp
+*.bak
+*~
+.tmp/
+temp/
+
+# OS 特定文件
+.DS_Store
+.AppleDouble
+.LSOverride
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+ehthumbs.db
+Thumbs.db

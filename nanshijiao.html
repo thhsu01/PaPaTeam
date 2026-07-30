@@ -11,9 +11,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
     body { font-family: "Noto Sans TC", sans-serif; background-color: #f5f3ef; color: #3a3632; }
-    .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; height: 300px; }
-    #elevation-chart { width: 100% !important; height: 100% !important; }
-    #map { height: 420px; border-radius: 16px; }
+    .chart-container { position: relative; width: 100%; max-width: 100%; margin: 0 auto; height: 300px; overflow-x: auto; }
+    #elevation-chart { width: 100% !important; height: 100% !important; min-width: 500px; }
+    #map { height: 420px; border-radius: 16px; max-width: 100%; width: 100%; }
     .waypoint-card { transition: all 0.25s ease; }
     .nav-btn { transition: background 0.2s; }
     .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #c77c3e, #7c9e52); }
@@ -51,21 +51,21 @@
 <body class="antialiased">
 
   <!-- Back button -->
-  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm">← 返回首頁</a>
+  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
 
   <!-- NAV -->
-  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50">
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
     <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <span class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
-        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">行程總覽</button>
-        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">路線圖</button>
-        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">海拔剖面</button>
-        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">景點介紹</button>
-        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">預估進度</button>
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap" aria-label="滾動到預估進度">預估進度</button>
       </div>
     </div>
   </nav>
@@ -115,7 +115,7 @@
             <div class="text-xs text-stone-400 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#c77c3e;">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#c77c3e;" aria-label="在地圖應用中導航至南勢角站">
               🗺️ 導航至南勢角站
             </button>
           </div>
@@ -152,14 +152,14 @@
         </h2>
         <p class="text-sm text-stone-400 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
 
-        <div id="map" class="mb-6 shadow-md"></div>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
           <div class="text-xs text-stone-400 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
-            <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&lt;</button>
+            <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
             <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">捷運南勢角站</h3>
-            <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm">&gt;</button>
+            <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-500">
             <span>預計時間 <strong class="text-stone-800" id="wp-time">07:30</strong></span>
@@ -193,8 +193,8 @@
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
           海拔高度剖面圖
         </h2>
-        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
-          <canvas id="elevation-chart"></canvas>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
         <p class="text-xs text-stone-400 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
       </div>
@@ -430,7 +430,7 @@
           fillOpacity: 0.92
         }).addTo(map);
 
-        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
+        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`, { 'aria-label': `${wp.loc} 航點標記` });
         marker.on('click', () => updateWaypointCard(i));
         markers.push(marker);
       });
@@ -451,8 +451,8 @@
       if (markers[index]) markers[index].openPopup();
     }
 
-    function prevWaypoint() { if (currentWpIndex > 0) updateWaypointCard(currentWpIndex - 1); }
-    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) updateWaypointCard(currentWpIndex + 1); }
+    function prevWaypoint() { if (currentWpIndex > 0) { updateWaypointCard(currentWpIndex - 1); document.querySelector('button:has-text("&lt")').focus(); } }
+    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) { updateWaypointCard(currentWpIndex + 1); document.querySelector('button:has-text("&gt")').focus(); } }
 
     // ── 海拔剖面圖 ────────────────────────────────────────────
     function initChart() {
