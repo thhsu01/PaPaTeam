@@ -16,8 +16,11 @@
       --page-fg: #44403c;
       --chart-max-w: 800px;
       --chart-h: 320px;
-      --realmap-h: 520px;
-      --realmap-border: 1px solid #fed7aa;
+      --map-w: 100%;
+      --map-radius: 1.5rem;
+      --map-z: 10;
+      --map-h: 520px;
+      --map-border: 1px solid #fed7aa;
       --card-shadow: 0 12px 20px -5px rgba(234, 88, 12, 0.15);
       --timeline-left: 24px;
       --timeline-bg: #ffedd5;
@@ -140,7 +143,7 @@
                 <p class="text-stone-600 mt-2 text-sm">點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <div class="lg:col-span-2"><div id="realMap"></div></div>
+                <div class="lg:col-span-2"><div id="map"></div></div>
                 <div class="lg:col-span-1">
                     <div id="wp-card" class="h-full bg-orange-50/30 rounded-2xl p-6 border border-orange-100 flex flex-col justify-between transition-all duration-300 overflow-y-auto">
                         <div id="card-content">
@@ -168,7 +171,7 @@
         <section id="analysis">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8"><span class="w-2.5 h-8 bg-red-600 rounded-full"></span> 步道坡度剖面圖</h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
-                <div class="chart-container"><canvas id="elevationChart"></canvas></div>
+                <div class="chart-container"><canvas id="elevation-chart"></canvas></div>
             </div>
         </section>
 
@@ -316,7 +319,7 @@
         let map, chart, markers = [];
 
         function initRealMap() {
-            map = L.map('realMap', { preferCanvas: true, center: [24.368, 120.734], zoom: 14 });
+            map = L.map('map', { preferCanvas: true, center: [24.368, 120.734], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             
             const pathCoords = schedule.map(d => [d.lat, d.lng]);
@@ -339,7 +342,7 @@
         }
 
         function initChart() {
-            const ctx = document.getElementById('elevationChart').getContext('2d');
+            const ctx = document.getElementById('elevation-chart').getContext('2d');
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {

@@ -16,8 +16,11 @@
       --page-fg: #44403c;
       --chart-max-w: 800px;
       --chart-h: 320px;
-      --realmap-h: 480px;
-      --realmap-border: 1px solid #e2e8f0;
+      --map-w: 100%;
+      --map-radius: 1.5rem;
+      --map-z: 10;
+      --map-h: 480px;
+      --map-border: 1px solid #e2e8f0;
       --card-shadow: 0 12px 20px -5px rgba(244, 114, 182, 0.1);
       --card-hover-transition: all 0.3s;
       --timeline-left: 24px;
@@ -161,7 +164,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 <div class="lg:col-span-2">
-                    <div id="realMap"></div>
+                    <div id="map"></div>
                 </div>
                 <div class="lg:col-span-1">
                     <div id="wp-card" class="h-full bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between transition-all duration-500 text-left">
@@ -322,7 +325,7 @@
             </h2>
             <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
                 <div class="chart-container">
-                    <canvas id="elevationChart"></canvas>
+                    <canvas id="elevation-chart"></canvas>
                 </div>
             </div>
         </section>
@@ -392,7 +395,7 @@
         }
 
         function initRealMap() {
-            map = L.map('realMap', { preferCanvas: true, center: [25.100, 121.595], zoom: 14 });
+            map = L.map('map', { preferCanvas: true, center: [25.100, 121.595], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             const walkingCoords = schedule.slice(0, 10).map(d => [d.lat, d.lng]);
             L.polyline(walkingCoords, { color: '#ec4899', weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
@@ -409,7 +412,7 @@
         }
 
         function initChart() {
-            const ctx = document.getElementById('elevationChart').getContext('2d');
+            const ctx = document.getElementById('elevation-chart').getContext('2d');
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {

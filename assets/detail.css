@@ -1,9 +1,13 @@
 /* 行程詳情頁共用樣式（10 頁，不含 index.html）
  *
- * 這些頁面出自兩套模板世代，class 詞彙不同（家族 A 用 .nav-link / .info-glass /
- * .card-hover / #realMap；家族 B 用 .nav-btn / #map / #elevation-chart /
- * .waypoint-card），但結構相同的規則其實只差色值與尺寸。本檔收結構，各頁以
- * :root 自訂屬性提供自己的值，因此外觀完全不變。
+ * 這些頁面出自兩套模板世代，但結構相同的規則其實只差色值與尺寸。本檔收結構，
+ * 各頁以 :root 自訂屬性提供自己的值，因此外觀完全不變。
+ *
+ * 指涉同一元件的 id 已統一：地圖容器一律 #map（原家族 A 用 #realMap），
+ * 圖表 canvas 一律 #elevation-chart（原家族 A 用 #elevationChart）。
+ * 兩套模板各自獨有的 class 仍並存（家族 A 的 .nav-link / .info-glass /
+ * .card-hover，家族 B 的 .nav-btn / .waypoint-card）—— 那是設計差異而非命名差異，
+ * 統一名稱等於統一外觀，須另行決定。
  *
  * 載入順序：各頁 inline <style> → 本檔 → assets/site.css
  * 本檔在 inline <style> 之後，故同名規則以本檔為準；各頁不應再重複宣告，
@@ -40,19 +44,18 @@ body {
 
 /* ── 地圖 ────────────────────────────────────────────── */
 
+/* 兩套模板原本用 #map 與 #realMap 指涉同一個 Leaflet 容器，已統一為 #map。
+   未宣告的變數其預設值等同原本「不宣告該屬性」的計算結果。 */
 #map {
-  height: 420px;
-  border-radius: var(--map-radius);
-  max-width: var(--map-max-w, none);
+  height: var(--map-h);
   width: var(--map-w, auto);
-}
-
-#realMap {
-  width: 100%;
-  height: var(--realmap-h);
-  border-radius: 1.5rem;
-  z-index: 10;
-  border: var(--realmap-border);
+  max-width: var(--map-max-w, none);
+  border-radius: var(--map-radius);
+  /* 未設 --map-border 的頁面沿用 Tailwind preflight 的預設（寬度 0、solid、gray-200）。
+     若這裡寫 none，computed border-style 會由 solid 變成 none —— 兩者都不顯示邊框，
+     但為了讓「外觀零變化」的保證連 computed 值都成立，此處明確重述 preflight 的值。 */
+  border: var(--map-border, 0 solid #e5e7eb);
+  z-index: var(--map-z, auto);
 }
 
 /* ── 航點與導覽 ──────────────────────────────────────── */

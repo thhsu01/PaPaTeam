@@ -16,8 +16,11 @@
       --page-fg: #44403c;
       --chart-max-w: 800px;
       --chart-h: 320px;
-      --realmap-h: 480px;
-      --realmap-border: 1px solid #e2e8f0;
+      --map-w: 100%;
+      --map-radius: 1.5rem;
+      --map-z: 10;
+      --map-h: 480px;
+      --map-border: 1px solid #e2e8f0;
       --card-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
       --timeline-left: 24px;
       --timeline-bg: #e7e5e4;
@@ -156,7 +159,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 <div class="lg:col-span-2">
-                    <div id="realMap"></div>
+                    <div id="map"></div>
                 </div>
                 <div class="lg:col-span-1">
                     <div id="wp-card" class="h-full bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
@@ -207,7 +210,7 @@
             </h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
                 <div class="chart-container">
-                    <canvas id="elevationChart"></canvas>
+                    <canvas id="elevation-chart"></canvas>
                 </div>
             </div>
         </section>
@@ -391,7 +394,7 @@
         }
 
         function initRealMap() {
-            map = L.map('realMap', { preferCanvas: true, center: [24.842, 121.738], zoom: 14 });
+            map = L.map('map', { preferCanvas: true, center: [24.842, 121.738], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
             const pathCoords = schedule.slice(0, 8).map(d => [d.lat, d.lng]);
             L.polyline(pathCoords, { color: '#16a34a', weight: 4, opacity: 0.8 }).addTo(map);
@@ -407,7 +410,7 @@
         }
 
         function initChart() {
-            const ctx = document.getElementById('elevationChart').getContext('2d');
+            const ctx = document.getElementById('elevation-chart').getContext('2d');
             chart = new Chart(ctx, {
                 type: 'line',
                 data: {

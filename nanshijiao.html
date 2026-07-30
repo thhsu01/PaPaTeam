@@ -17,6 +17,7 @@
       --chart-h: 300px;
       --chart-overflow-x: auto;
       --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
       --map-radius: 16px;
       --map-max-w: 100%;
       --map-w: 100%;
@@ -78,6 +79,15 @@
           <span class="text-xs text-stone-600 tracking-widest uppercase">PACE: 輕鬆慢走模式 · 預計 6.5H 完成</span>
         </div>
 
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷），避免頁面看起來仍是即將出發 -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已結束</div>
+            <p class="text-sm text-stone-700 leading-relaxed">以下內容為當初的行前規劃，時刻與天氣皆為預估值，保留作為紀錄。</p>
+          </div>
+        </div>
+
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           微笑山線，南勢角縱走<br>
           <span style="color:#9a6030;">一線天 × 烘爐地 × 五尖山</span>
@@ -107,7 +117,7 @@
             <div class="text-xs text-stone-600 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">8/2 天氣預報</div>
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
             <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
@@ -377,28 +387,43 @@
     let map, chart, markers = [];
     let currentWpIndex = 0;
 
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    // 天氣查詢、天氣卡標題、行程結束提示都由此推導，避免多處寫死日期而彼此不一致。
+    const TRIP_DATE = "2026-08-02";
+    const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+d}`; })();
+
+    // 行程日已過就顯示歸檔提示，讓頁面不會看起來仍是即將出發的行程
+    function markTripPast(todayISO) {
+      if (todayISO && TRIP_DATE < todayISO) {
+        document.getElementById('trip-past-notice')?.classList.remove('hidden');
+      }
+    }
+
     // ── 天氣 ──────────────────────────────────────────────────
     async function fetchWeather() {
       const lat = 24.9719, lng = 121.4976; // 烘爐地附近
-      const targetDate = "2026-08-02";     // 行程日
-      const weatherMain = document.getElementById('weather-main');
+      const weatherMain  = document.getElementById('weather-main');
       const weatherSub   = document.getElementById('weather-sub');
+      const weatherLabel = document.getElementById('weather-label');
       try {
         // 取 16 天預報視窗後查行程日；不指定 start_date，行程日過期時才能退回今日資料
         const res  = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=16`);
         const data = await res.json();
 
-        const dateIndex = data.daily.time.indexOf(targetDate);
+        const dateIndex = data.daily.time.indexOf(TRIP_DATE);
         const idx = dateIndex !== -1 ? dateIndex : 0;
-        let subText;
+        markTripPast(data.daily.time[0]);   // 視窗第一天即為今日
+
+        // 標題與內文必須指同一天，否則會出現「8/2 預報」配今日天氣的矛盾
+        let label, subText;
         if (dateIndex !== -1) {
-          const [, m, d] = targetDate.split('-');
-          subText = `${+m}/${+d} 行程日預報`;
+          label   = `${tripMD} 天氣預報`;
+          subText = `${tripMD} 行程日預報`;
         } else {
-          // 視窗內查不到：行程日已過，或仍在 16 天之外
-          subText = targetDate < data.daily.time[0]
-            ? "今日即時天氣（行程日已過）"
-            : "今日即時天氣（行程日尚遠）";
+          label   = "今日天氣";
+          subText = TRIP_DATE < data.daily.time[0]
+            ? "行程日已過，顯示今日天氣"
+            : "行程日尚遠，顯示今日天氣";
         }
 
         const code = data.daily.weathercode[idx];
@@ -410,9 +435,13 @@
           61:"🌧 小雨",63:"🌧 中雨",65:"🌧 大雨",80:"🌦 陣雨",
           81:"🌧 陣雨",82:"⛈ 強陣雨",95:"⛈ 雷雨",99:"⛈ 強雷雨"
         };
+        if (weatherLabel) weatherLabel.textContent = label;
         weatherMain.textContent = `${weatherMap[code] || '天氣代碼'+code} ${minT}°–${maxT}°`;
         weatherSub.textContent  = subText;
       } catch {
+        // 天氣取不到時仍要判斷行程是否已過，故用本地日期作為後備
+        markTripPast(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }));
+        if (weatherLabel) weatherLabel.textContent = `${tripMD} 天氣預報`;
         weatherMain.textContent = "天氣資料暫無法取得";
         weatherSub.textContent  = "請稍後再試";
       }
