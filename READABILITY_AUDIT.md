@@ -150,8 +150,40 @@
 
 ## 4. 尚未處理的缺口
 
-1. **`.nav-link` 與 `.nav-btn` 未統一** —— 這兩者不是同物異名，而是兩種設計：`.nav-link` 是帶動畫底線的文字鍵（家族 A，6 頁），`.nav-btn` 是藥丸狀背景鍵（家族 B，4 頁）。給它們同一個名稱就必須同時統一樣式，否則會出現「同名不同貌」，比現況更難維護。因此這是設計決定而非重構，需先選定保留哪一種外觀。`.card-hover`（通用卡片浮起）與 `.waypoint-card`（僅轉場）同理，用途本就不同。
+1. **Tailwind 強調色 class 用於小字**（第五輪新發現，範圍最大的一項）—— 見下節。
 2. **`index.html` 的行程歸檔** —— 8/2 之後應把 `data.planned` 中的南勢角行程移到 `data.completed`，並將 `isLatest` 轉移。這是內容操作（需知道實際完成情況），非程式能代為判斷。
+
+### 新發現：Tailwind 強調色 class 的對比度
+
+先前幾輪的對比度檢查只看 inline `style="color:#..."` 與 `<style>` 內的規則，**漏掉了 Tailwind 的文字顏色 utility class**。以 `text-xs` / `text-sm` / `text-[10px]` 等小字級搭配強調色 class 掃描全站，發現 25 組（檔案 × 色彩）中有 16 組未達 4.5:1：
+
+| 色彩 class | 白底對比度 | 出現於 |
+|---|---|---|
+| `text-sky-500` | 2.77:1 | shiqiulinling |
+| `text-amber-600` | 3.19:1 | datunshan, dinghu, qixingshan |
+| `text-pink-500` | 3.53:1 | bishan |
+| `text-orange-600` | 3.56:1 | datunshan, dinghu, huoyianshan, laojiujianshan, meihuashan |
+| `text-teal-600` | 3.74:1 | dinghu |
+| `text-emerald-600` | 3.77:1 | datunshan, index, qixingshan |
+| `text-sky-600` | 4.10:1 | qixingshan, shiqiulinling |
+
+已達標而無需改動的：`text-pink-600`（4.60:1）、`text-red-600`（4.83:1）、`text-green-700`（5.02:1）、`text-blue-600`（5.17:1）。
+
+這批未處理，因為每一色都用在多處、且多為各頁的識別色，逐一加深會較大幅改動全站視覺，屬設計決定。修法方向是各色改用 Tailwind 的 700／800 階（例如 `text-orange-600` → `text-orange-700` 為 4.83:1），或僅在小字場合改階、大標題維持原色。
+
+### 已於第五輪完成
+
+**導覽鍵統一為藥丸樣式**
+
+原本兩套設計：家族 A（6 頁）用 `.nav-link` 文字鍵配動畫底線，家族 B（4 頁）用 `.nav-btn` 藥丸配背景 hover。已全部統一為藥丸，`.nav-link` 相關的三條規則與 `--accent` 變數隨之移除。
+
+實作時發現一個直接沿用家族 B 樣式會失敗的問題：家族 B 的 `hover:bg-stone-100`（`#f5f5f4`）在它自己的白色導覽列上只有 1.09:1，而家族 A 有三頁的導覽列底色是 `bg-[#f8f7f4]/90`——與 `stone-100` 幾乎同色（**1.018:1，藥丸等於看不見**）。因此全 10 頁改用 200 階（`hover:bg-stone-200` / shiqiulinling 用 `hover:bg-slate-200`），在白色與米色導覽列上分別為 1.256:1 與 1.172:1，兩者都能辨識；藥丸上的文字對比度為 6.08:1（stone）與 6.15:1（slate），均達標。
+
+`huoyianshan` 有一顆「當前項目」鍵原本是 `text-orange-600`（3.56:1，小字不合格），改為填滿式藥丸 `bg-stone-200 text-stone-800`，兼顧狀態表達與對比度。三頁的藥丸鍵原本缺少 `whitespace-nowrap`，一併補上，避免標籤在窄螢幕的橫向滾動容器裡折行。
+
+各頁的中性色仍依自身調色盤（shiqiulinling 為 slate，其餘為 stone）—— 統一的是藥丸形狀、內距與 hover 行為，而非把每頁的色系也一併抹平。
+
+**驗證**：逐元素比對幾何與 13 項 computed style，10 頁 × 2 視窗，並判定每處差異是否位於 `<nav>` 內。結果為 nav 內 110 處、**nav 外 0 處** —— 證明改動完全侷限於導覽列。
 
 ### 已於第四輪完成
 

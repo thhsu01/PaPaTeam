@@ -29,7 +29,6 @@
       --glass-bg: rgba(255, 255, 255, 0.6);
       --glass-blur: blur(8px);
       --glass-border: 1px solid rgba(22, 163, 74, 0.1);
-      --accent: #16a34a;
     }
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
@@ -64,12 +63,12 @@
       </a>
                     <span class="text-stone-600 text-xs hidden sm:inline font-medium">2026/3/14 活動紀錄</span>
                 </div>
-                <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
-                    <button onclick="scrollToSection('overview')" class="nav-link hover:text-green-700" aria-label="滾動到行程總覽">挑戰總覽</button>
-                    <button onclick="scrollToSection('map-section')" class="nav-link hover:text-green-700" aria-label="滾動到路線圖">路線圖</button>
-                    <button onclick="scrollToSection('analysis')" class="nav-link hover:text-green-700" aria-label="滾動到海拔剖面">完整剖面</button>
-                    <button onclick="scrollToSection('spots')" class="nav-link hover:text-green-700" aria-label="滾動到景點介紹">深度介紹</button>
-                    <button onclick="scrollToSection('timeline')" class="nav-link hover:text-green-700" aria-label="滾動到預估進度">實際行程</button>
+                <div class="flex gap-1 overflow-x-auto">
+                    <button onclick="scrollToSection('overview')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">挑戰總覽</button>
+                    <button onclick="scrollToSection('map-section')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+                    <button onclick="scrollToSection('analysis')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">完整剖面</button>
+                    <button onclick="scrollToSection('spots')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">深度介紹</button>
+                    <button onclick="scrollToSection('timeline')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">實際行程</button>
                 </div>
             </div>
         </div>

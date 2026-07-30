@@ -3,11 +3,11 @@
  * 這些頁面出自兩套模板世代，但結構相同的規則其實只差色值與尺寸。本檔收結構，
  * 各頁以 :root 自訂屬性提供自己的值，因此外觀完全不變。
  *
- * 指涉同一元件的 id 已統一：地圖容器一律 #map（原家族 A 用 #realMap），
- * 圖表 canvas 一律 #elevation-chart（原家族 A 用 #elevationChart）。
- * 兩套模板各自獨有的 class 仍並存（家族 A 的 .nav-link / .info-glass /
- * .card-hover，家族 B 的 .nav-btn / .waypoint-card）—— 那是設計差異而非命名差異，
- * 統一名稱等於統一外觀，須另行決定。
+ * 指涉同一元件的名稱已統一：地圖容器一律 #map（原家族 A 用 #realMap），
+ * 圖表 canvas 一律 #elevation-chart（原 #elevationChart），區段導覽鍵一律
+ * .nav-btn 藥丸樣式（原家族 A 用 .nav-link 動畫底線，已於第五輪改為藥丸）。
+ * 仍各自獨有的是 .info-glass / .card-hover（家族 A）與 .waypoint-card（家族 B），
+ * 用途本就不同，非同物異名。
  *
  * 載入順序：各頁 inline <style> → 本檔 → assets/site.css
  * 本檔在 inline <style> 之後，故同名規則以本檔為準；各頁不應再重複宣告，
@@ -71,26 +71,6 @@ body {
 .nav-arrow:hover {
   background-color: var(--nav-arrow-bg);
   color: #fff;
-}
-
-.nav-link {
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.nav-link:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--accent);
-  transition: width 0.2s ease;
-}
-
-.nav-link:hover:after {
-  width: 100%;
 }
 
 /* ── 卡片與時間軸 ────────────────────────────────────── */
