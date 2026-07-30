@@ -12,7 +12,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
     body { font-family: "Noto Sans TC", sans-serif; background-color: #f5f3ef; color: #3a3632; }
     .chart-container { position: relative; width: 100%; max-width: 100%; margin: 0 auto; height: 300px; overflow-x: auto; }
-    #elevation-chart { width: 100% !important; height: 100% !important; min-width: 500px; }
+    #elevation-chart { width: 100% !important; height: 100% !important; }
     #map { height: 420px; border-radius: 16px; max-width: 100%; width: 100%; }
     .waypoint-card { transition: all 0.25s ease; }
     .nav-btn { transition: background 0.2s; }
@@ -430,7 +430,7 @@
           fillOpacity: 0.92
         }).addTo(map);
 
-        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`, { 'aria-label': `${wp.loc} 航點標記` });
+        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
         marker.on('click', () => updateWaypointCard(i));
         markers.push(marker);
       });
@@ -451,8 +451,8 @@
       if (markers[index]) markers[index].openPopup();
     }
 
-    function prevWaypoint() { if (currentWpIndex > 0) { updateWaypointCard(currentWpIndex - 1); document.querySelector('button:has-text("&lt")').focus(); } }
-    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) { updateWaypointCard(currentWpIndex + 1); document.querySelector('button:has-text("&gt")').focus(); } }
+    function prevWaypoint() { if (currentWpIndex > 0) updateWaypointCard(currentWpIndex - 1); }
+    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) updateWaypointCard(currentWpIndex + 1); }
 
     // ── 海拔剖面圖 ────────────────────────────────────────────
     function initChart() {
