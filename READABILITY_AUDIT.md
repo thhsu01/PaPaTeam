@@ -32,9 +32,11 @@
 | `#f5f3ef` | nanshijiao | **4.33:1 ❌** | 6.88:1 ✅ |
 | `#e7e5e4` | 部分卡片區塊 | **3.82:1 ❌** | 6.08:1 ✅ |
 
-**結論**：`text-stone-500` 在 7 種背景中有 3 種未達 4.5:1，影響 7 個檔案的 `text-xs` 小字標籤（12px，屬一般文字，不適用 3:1 放寬）。改用 `text-stone-600` 可讓全部背景達 6.08:1 以上。
+**已修正**：`text-stone-500` 在 7 種背景中有 3 種未達 4.5:1（影響 8 個檔案的 `text-xs` 小字標籤 —— 12px 屬一般文字，不適用 3:1 放寬）。已將 9 個 stone 家族詳情頁共 255 處全部改為 `text-stone-600`，所有背景現達 6.08:1 以上。
 
-> 註：本專案原先使用 `text-stone-400`（白底僅 2.52:1，明確不合格），已於 commit `80ecb77` 起改為 `stone-500`。該次調整方向正確但幅度不足。
+`text-slate-500`（index.html 6 處 4.67:1、shiqiulinling.html 18 處 4.55:1）**兩者均已通過**，故未改動 —— 避免無無障礙理由的視覺變更。
+
+> 沿革：原先使用 `text-stone-400`（白底僅 2.52:1，明確不合格），commit `80ecb77` 改為 `stone-500` 方向正確但幅度不足（未考慮詳情頁是米色底而非白底），本次補足。
 
 ### 品牌色（白底）— 均未達一般文字標準
 
@@ -68,6 +70,19 @@
 - `<nav>`：補 `aria-label`。
 - 圖表與地圖容器：補 `role="region"` + `aria-label`。
 - 觸控目標放大至 44×44px。
+- **skip link**：11 頁均加入「跳至主要內容」，預設移出畫面、鍵盤聚焦時滑入；`<main>` 補 `id="main-content"` 作為跳轉目標。
+- **鍵盤焦點指示**：新增 `:focus-visible` 雙環樣式（深色 outline + 白色 halo），同時涵蓋淺色頁面與 index.html 的深色頁腳。此前 Tailwind preflight 移除了預設 outline 而全站無替代樣式。
+- **減少動態**：`@media (prefers-reduced-motion: reduce)` 關閉轉場與動畫；因 `scrollIntoView({behavior:'smooth'})` 依規範會覆蓋 CSS，另以 `assets/site.js` 在該偏好啟用時改寫為 `auto`。
+
+### 共用檔的取捨
+
+新增 `assets/site.css` 與 `assets/site.js`，但**只收上述三項全新規則**，未收各頁既有 CSS。原因是這些頁面實為兩套模板世代，class 詞彙與數值本就不一致：
+
+- 6 個檔案用 `.nav-link` / `.info-glass` / `.card-hover` / `#realMap`
+- 4 個檔案用 `.nav-btn` / `#map` / `#elevation-chart` / `.waypoint-card`
+- 連唯一三個共通選擇器的值也不同（`.timeline-line` 有 `left:20px` vs `24px`、漸層 vs 純色；`.chart-container` 有 `max-width:800px` vs `100%`）
+
+因此「抽出共用 CSS」實質上是**統一各頁現有差異**，會改動多頁視覺呈現，須另案評估。本次只加入原本一條都不存在的規則，確保不影響既有外觀。
 
 ### 已撤回的錯誤改動
 
@@ -83,13 +98,9 @@
 
 ## 4. 尚未處理的缺口
 
-按影響排序：
-
-1. **焦點可見性** —— 全站無 `:focus-visible` 樣式，鍵盤操作看不出焦點位置。目前最實質的缺口，比既有的 `aria-label` 更關鍵。
-2. **`stone-500` 對比度** —— 7 個檔案未達 AA（見上表）。
-3. **skip link** —— 詳情頁固定導覽有 5–6 個按鈕，鍵盤使用者每頁都須逐一 tab 才能進入內容。
-4. **`prefers-reduced-motion`** —— 大量 `transition-all`、`duration-700`、`scroll-smooth`，無退場機制。
-5. **品牌色小字用法** —— `.stamp` 等處 3.29:1，須加深或放大。
+1. **品牌色用於小字仍不合格** —— `.stamp`（`font-size: 11px`，前景 `#c77c3e`）為 3.29:1；導航按鈕白字配 `#c77c3e` 底（`text-sm`，14px）同為 3.29:1。須加深色值或放大字級至大文字門檻。未一併處理是因為調整品牌色會影響全站視覺識別，屬設計決策。
+2. **各頁 CSS 統一** —— 見上節「共用檔的取捨」。屬較大重構，會改動多頁視覺。
+3. **天氣 API 日期寫死** —— `nanshijiao.html` 的 `start_date=2026-08-02`，過期後將永久顯示舊資料。
 
 ---
 

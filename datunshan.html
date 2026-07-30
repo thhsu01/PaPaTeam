@@ -18,8 +18,12 @@
     .nav-btn { transition: background 0.2s; }
     .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #d97706, #fbbf24); }
   </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
 
   <!-- Back button -->
   <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
@@ -41,7 +45,7 @@
     </div>
   </nav>
 
-  <main class="pt-14">
+  <main id="main-content" class="pt-14">
     <!-- HERO -->
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-red-100">
       <div class="max-w-4xl mx-auto w-full">
@@ -72,19 +76,19 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">集合地點</div>
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">陽明山第二停車場</div>
-            <div class="text-xs text-stone-500 mt-1">搭 108 公車至鞍部站後步行至登山口（約 35 分鐘車程）</div>
+            <div class="text-xs text-stone-600 mt-1">搭 108 公車至鞍部站後步行至登山口（約 35 分鐘車程）</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">集合時間</div>
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
             <div class="font-bold text-stone-800">07:00（日期未定）</div>
-            <div class="text-xs text-stone-500 mt-1">請提前 10 分鐘抵達</div>
+            <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">即時天氣參考</div>
+            <div class="text-xs text-stone-600 mb-1">即時天氣參考</div>
             <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
-            <div class="text-xs text-stone-500 mt-1" id="weather-sub">大屯山頂今日天氣</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">大屯山頂今日天氣</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
             <button onclick="openNavigation()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
@@ -96,19 +100,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">7.9</div>
-            <div class="text-xs text-stone-500">總里程 km</div>
+            <div class="text-xs text-stone-600">總里程 km</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">4–4.5</div>
-            <div class="text-xs text-stone-500">目標耗時 hr</div>
+            <div class="text-xs text-stone-600">目標耗時 hr</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">~690</div>
-            <div class="text-xs text-stone-500">預計爬升 m</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">1,092</div>
-            <div class="text-xs text-stone-500">最高海拔 m（小百岳 #001）</div>
+            <div class="text-xs text-stone-600">最高海拔 m（小百岳 #001）</div>
           </div>
         </div>
       </div>
@@ -121,16 +125,16 @@
           <span class="w-2.5 h-8 bg-amber-600 rounded-full"></span>
           互動路線圖與航點切換
         </h2>
-        <p class="text-sm text-stone-500 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
         <div id="map" class="mb-6 shadow-md"></div>
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-500 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
             <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">陽明山第二停車場 (H585m)</h3>
             <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
           </div>
-          <div class="flex gap-4 mb-3 text-sm text-stone-500">
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
             <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">585</strong> m</span>
           </div>
@@ -141,7 +145,7 @@
           </div>
         </div>
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
-          <div class="text-xs font-medium text-stone-500 mb-3">參考資源</div>
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=69" target="_blank" class="text-sm text-amber-700 hover:underline">🔗 大屯主峰連峰步道資料（健行筆記）</a>
             <a href="https://mtyao-tw.com/little-100-mountains-datun-multi-peak-trail/" target="_blank" class="text-sm text-amber-700 hover:underline">🔗 大屯山連峰四峰 O 型路線紀錄（7.9 km）</a>
@@ -175,27 +179,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>鞍部登山口 (H829m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">位於百拉卡公路，108 公車鞍部站下車後跨越公路即達。有廁所設施，是大屯山連峰最主要的登山口。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">位於百拉卡公路，108 公車鞍部站下車後跨越公路即達。有廁所設施，是大屯山連峰最主要的登山口。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>大屯山主峰 (H1,092m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">台灣小百岳 No.1！二等三角點所在，但三角點位於民航局助航站內不開放，一般遊客以大縱走木樁作為登頂標的。觀景台以夕陽、雲海、秋芒景觀聞名，是大台北賞夕陽的聖地。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">台灣小百岳 No.1！二等三角點所在，但三角點位於民航局助航站內不開放，一般遊客以大縱走木樁作為登頂標的。觀景台以夕陽、雲海、秋芒景觀聞名，是大台北賞夕陽的聖地。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-red-500 rounded-full"></span>大屯山南峰 (H959m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">錐形火山體外型顯著的大屯第二峰。由主峰陡降至南峰有多段拉繩輔助路段，是全程最具挑戰性的地形，需手腳並用攀繩下降。建議佩戴手套並謹慎踩穩每一步。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">錐形火山體外型顯著的大屯第二峰。由主峰陡降至南峰有多段拉繩輔助路段，是全程最具挑戰性的地形，需手腳並用攀繩下降。建議佩戴手套並謹慎踩穩每一步。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-500 rounded-full"></span>大屯山西峰 (H985m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">大屯連峰第三峰，南峰至西峰間仍有拉繩路段，通過後地形趨緩。視野遼闊，可遠眺北海岸線。西峰是拉繩段的最後一峰，過後地形變得友善，是全程轉折的心理分水嶺。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">大屯連峰第三峰，南峰至西峰間仍有拉繩路段，通過後地形趨緩。視野遼闊，可遠眺北海岸線。西峰是拉繩段的最後一峰，過後地形變得友善，是全程轉折的心理分水嶺。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-yellow-600 rounded-full"></span>面天山 (H977m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">外型圓潤的標準鐘狀火山體，山頂設有兩座民航導航反射板為特色，遠從台北市區便可辨認。有三角點，是本次路線第四座、也是最後一座山頭，意義非凡。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">外型圓潤的標準鐘狀火山體，山頂設有兩座民航導航反射板為特色，遠從台北市區便可辨認。有三角點，是本次路線第四座、也是最後一座山頭，意義非凡。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>二子坪遊客服務站 (H820m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">全台首個山野型無障礙步道的遊客服務站，設有人工生態池、廁所、涼亭與解說牌。從面天坪下山後接此平緩步道，是 O 型路線收尾前最舒適的緩衝段，可在此補充最後的水分。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">全台首個山野型無障礙步道的遊客服務站，設有人工生態池、廁所、涼亭與解說牌。從面天坪下山後接此平緩步道，是 O 型路線收尾前最舒適的緩衝段，可在此補充最後的水分。</p>
           </div>
         </div>
 
@@ -222,7 +226,7 @@
           <span class="w-2.5 h-8 bg-amber-600 rounded-full"></span>
           預計行程進度（4–4.5H 健行段）
         </h2>
-        <p class="text-sm text-stone-500 mb-8">候選行程，日期未定。不含搭乘公車前往鞍部的時間（約 35 分鐘）。</p>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。不含搭乘公車前往鞍部的時間（約 35 分鐘）。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -231,7 +235,7 @@
   </main>
 
   <footer class="text-center py-16 border-t border-stone-200">
-    <p class="text-stone-500 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 大屯山連峰四峰 O 型 7.9 KM ｜ 日期未定</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 大屯山連峰四峰 O 型 7.9 KM ｜ 日期未定</p>
   </footer>
 
   <script>
@@ -333,10 +337,10 @@
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dot} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="text-amber-700 font-mono font-bold text-sm">${wp.time}</span>
-            <span class="text-xs text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
+            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-500 mt-0.5">${wp.desc}</div>`;
+          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`;
         c.appendChild(d);
       });
     }

@@ -26,8 +26,12 @@
         .nav-link:hover:after { width: 100%; }
         .text-gradient { background: linear-gradient(to right, #ec4899, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="antialiased selection:bg-pink-100 text-left">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
 
     <!-- Back button -->
     <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
@@ -53,7 +57,7 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
         <!-- 1. Header Area -->
         <section id="overview" class="text-center space-y-8">
@@ -61,8 +65,8 @@
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-pink-100 text-pink-600 rounded-full text-[10px] font-bold tracking-widest uppercase border border-pink-200">
                     Pace: Leisure 1.5km/hr | 櫻花季縱走百科
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter leading-tight">龍船奇岩，清風櫻影<br><span class="text-stone-500 text-2xl md:text-4xl font-bold italic">內湖山系悠閒縱走計畫</span></h1>
-                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter leading-tight">龍船奇岩，清風櫻影<br><span class="text-stone-600 text-2xl md:text-4xl font-bold italic">內湖山系悠閒縱走計畫</span></h1>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     探訪內湖最壯闊的石英巨岩，沉浸在碧山巖 460 階粉紅櫻花隧道。這是一場結合地質與人文的慢活之旅。
                 </p>
             </div>
@@ -73,17 +77,17 @@
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">預計活動日期</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">2月中至2月底期間</span>
-                        <span class="text-xs text-stone-500 mt-1">配合椿寒櫻滿開期</span>
+                        <span class="text-xs text-stone-600 mt-1">配合椿寒櫻滿開期</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">捷運內湖站</span>
-                        <span class="text-xs text-stone-500 mt-1">1 號出口廣場</span>
+                        <span class="text-xs text-stone-600 mt-1">1 號出口廣場</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">下山交通</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">小 2 區間車</span>
-                        <span class="text-xs text-stone-500 mt-1">直達捷運內湖站</span>
+                        <span class="text-xs text-stone-600 mt-1">直達捷運內湖站</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 bg-pink-50/50 p-2 rounded-xl">
                         <span class="text-[10px] font-black text-pink-500 uppercase tracking-widest">日期限定預報</span>
@@ -107,24 +111,24 @@
             <!-- Statistics Cards -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-500 text-[10px] font-black uppercase mb-2">徒步長度</div>
-                    <div class="text-2xl font-black text-stone-800">約 8.00<span class="text-sm font-normal text-stone-500 ml-1">km</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">徒步長度</div>
+                    <div class="text-2xl font-black text-stone-800">約 8.00<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
-                    <div class="text-stone-500 text-[10px] font-black uppercase mb-2">累計上升</div>
-                    <div class="text-2xl font-black text-pink-600">~510<span class="text-sm font-normal text-stone-500 ml-1">m</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">累計上升</div>
+                    <div class="text-2xl font-black text-pink-600">~510<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-500 text-[10px] font-black uppercase mb-2">預估耗時</div>
-                    <div class="text-2xl font-black text-stone-800">6.5<span class="text-sm font-normal text-stone-500 ml-1">hr</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">預估耗時</div>
+                    <div class="text-2xl font-black text-stone-800">6.5<span class="text-sm font-normal text-stone-600 ml-1">hr</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-500 text-[10px] font-black uppercase mb-2">時速基計</div>
-                    <div class="text-2xl font-black text-stone-800">1.5<span class="text-sm font-normal text-stone-500 ml-1">k/h</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">時速基計</div>
+                    <div class="text-2xl font-black text-stone-800">1.5<span class="text-sm font-normal text-stone-600 ml-1">k/h</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all col-span-2 md:col-span-1">
-                    <div class="text-stone-500 text-[10px] font-black uppercase mb-2">最高標高</div>
-                    <div class="text-2xl font-black text-stone-800">518<span class="text-sm font-normal text-stone-500 ml-1">m</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">最高標高</div>
+                    <div class="text-2xl font-black text-stone-800">518<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
         </section>
@@ -137,7 +141,7 @@
                         <span class="w-2.5 h-8 bg-pink-600 rounded-full"></span>
                         縱走路線百科
                     </h2>
-                    <p class="text-stone-500 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
+                    <p class="text-stone-600 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="prevWaypoint()" class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all" aria-label="上一個航點">&lt;</button>
@@ -156,11 +160,11 @@
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-4 tracking-tight">請選擇站點</h3>
                             <div class="grid grid-cols-2 gap-4 mb-6">
                                 <div class="bg-white p-3 rounded-xl border border-stone-100">
-                                    <span class="text-[10px] text-stone-500 block mb-1">里程</span>
+                                    <span class="text-[10px] text-stone-600 block mb-1">里程</span>
                                     <span class="font-bold text-stone-700"><span id="wp-dist">0.00</span> km</span>
                                 </div>
                                 <div class="bg-white p-3 rounded-xl border border-stone-100">
-                                    <span class="text-[10px] text-stone-500 block mb-1">海拔</span>
+                                    <span class="text-[10px] text-stone-600 block mb-1">海拔</span>
                                     <span class="font-bold text-stone-700"><span id="wp-ele">0</span> m</span>
                                 </div>
                             </div>
@@ -189,7 +193,7 @@
                     <div class="md:w-2/3 p-8 space-y-2">
                         <div class="text-[10px] font-black text-pink-600 uppercase tracking-widest">實境導覽 01</div>
                         <h3 class="font-black text-stone-800 leading-tight group-hover:text-pink-600 transition-colors">內湖連峰縱走：龍船岩、開眼山、碧山實錄</h3>
-                        <p class="text-xs text-stone-500">頻道：Celia Lin 山林記錄</p>
+                        <p class="text-xs text-stone-600">頻道：Celia Lin 山林記錄</p>
                     </div>
                 </a>
                 <a href="https://www.youtube.com/watch?v=H_LCBuT86Gc" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
@@ -199,7 +203,7 @@
                     <div class="md:w-2/3 p-8 space-y-2">
                         <div class="text-[10px] font-black text-red-600 uppercase tracking-widest">實境導覽 02</div>
                         <h3 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月滿開美景與登山攻略</h3>
-                        <p class="text-xs text-stone-500">頻道：胡一刀</p>
+                        <p class="text-xs text-stone-600">頻道：胡一刀</p>
                     </div>
                 </a>
             </div>
@@ -212,42 +216,42 @@
                     <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
                     縱走點地景百科
                 </h2>
-                <p class="text-stone-500 mt-2 text-sm italic">點擊下方卡片了解所有經過地點的精簡介紹。</p>
+                <p class="text-stone-600 mt-2 text-sm italic">點擊下方卡片了解所有經過地點的精簡介紹。</p>
             </div>
             
             <!-- Checkpoints Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 捷運內湖站</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">行程起點。位於捷運文湖線核心，交通與補給極為便利，是登山客進入內湖山系的關鍵門戶。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">行程起點。位於捷運文湖線核心，交通與補給極為便利，是登山客進入內湖山系的關鍵門戶。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 梘頭山 (H80m)</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">位於捷運站後方的親山步道，是縱走初期的緩坡熱身段，路徑明朗，適合調整體感頻率。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">位於捷運站後方的親山步道，是縱走初期的緩坡熱身段，路徑明朗，適合調整體感頻率。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 開眼山 (H401m)</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">內湖稜線上的重要展望點。此處視野開闊，可俯瞰大湖公園，山頂涼風宜人，是重要的補水點。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">內湖稜線上的重要展望點。此處視野開闊，可俯瞰大湖公園，山頂涼風宜人，是重要的補水點。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 白石湖山 (H457m)</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">內湖區名山之一，路徑多為泥土與原始林，可深度觀察台北近郊的次生林與蕨類生態。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">內湖區名山之一，路徑多為泥土與原始林，可深度觀察台北近郊的次生林與蕨類生態。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 碧山 (H518m)</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">此行最高標高。內湖區第一高峰，雖然基點無展望，但作為登頂標誌，是挑戰者的必經之地。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">此行最高標高。內湖區第一高峰，雖然基點無展望，但作為登頂標誌，是挑戰者的必經之地。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 甜水鴛鴦湖</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">隱身在稜線森林下方的靜謐湖泊。海拔極高，常有雲霧籠罩，彷彿人間仙境，是心靈放鬆的秘境。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">隱身在稜線森林下方的靜謐湖泊。海拔極高，常有雲霧籠罩，彷彿人間仙境，是心靈放鬆的秘境。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 白石湖吊橋</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">淡紫色「龍骨吊橋」。全長 116 公尺，是白石湖農業區的象徵，設計上融入了特殊的地理龍形概念。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">淡紫色「龍骨吊橋」。全長 116 公尺，是白石湖農業區的象徵，設計上融入了特殊的地理龍形概念。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-pink-500 rounded-full"></span> 碧山巖公車站</h4>
-                    <p class="text-[11px] text-stone-500 leading-relaxed">徒步段終點。位於開漳聖王廟門前，由此可搭乘小 2 區間車迅速返回捷運站，節省下坡體力。</p>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">徒步段終點。位於開漳聖王廟門前，由此可搭乘小 2 區間車迅速返回捷運站，節省下坡體力。</p>
                 </div>
             </div>
 
@@ -257,7 +261,7 @@
                     <div class="lg:w-3/5 space-y-8">
                         <div class="inline-block px-3 py-1 bg-purple-600 rounded text-[10px] font-black tracking-widest uppercase">地質深度專題</div>
                         <h3 class="text-4xl font-black tracking-tighter leading-tight">龍船岩：<br><span class="text-purple-400">大地的傾斜巨艦 (H294m)</span></h3>
-                        <div class="space-y-6 text-stone-500 leading-relaxed text-sm">
+                        <div class="space-y-6 text-stone-600 leading-relaxed text-sm">
                             <p><strong class="text-white">【億萬年的地層側向運動】</strong><br>
                             龍船岩主要由「五指山層」的石英砂岩構成。因板塊強烈推擠，原本地平的沉積岩層發生了劇烈側向傾斜，形成現今約 45 度的巨岩斜面。由於砂岩材質極為堅硬抗侵蝕，當周邊土層受風雨掏空後，這艘「石船」才得以突顯於稜線之上，形成驚心動魄的視覺景致。</p>
                             <p><strong class="text-white">【視覺與勇氣的攝影神位】</strong><br>
@@ -281,7 +285,7 @@
                     <div class="lg:w-3/5 space-y-8">
                         <div class="inline-block px-3 py-1 bg-pink-600 rounded text-[10px] font-black tracking-widest uppercase">人文與花卉專題</div>
                         <h3 class="text-4xl font-black tracking-tighter leading-tight">清風亭櫻花隧道：<br><span class="text-pink-400">460 階粉紅石階的芬芳饗宴</span></h3>
-                        <div class="space-y-6 text-stone-500 leading-relaxed text-sm">
+                        <div class="space-y-6 text-stone-600 leading-relaxed text-sm">
                             <p><strong class="text-white">【品種之魂：椿寒櫻的幽香】</strong><br>
                             這段被譽為全台最美「櫻花隧道」的路徑，是由早期碧山巖廟方細心照料的「椿寒櫻」構成。這種品種是櫻桃與寒櫻的天然雜交種，花簇密集且呈粉白色。最迷人之處在於其特有的清雅幽香，每年二月下旬滿開時，整段石階都籠罩在淡淡的花香與粉紅迷霧中。</p>
                             <p><strong class="text-white">【視覺構圖：台北 101 的櫻花窗框】</strong><br>
@@ -326,7 +330,7 @@
         </section>
 
         <footer class="text-center py-20 border-t border-stone-100">
-            <p class="text-stone-500 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 內湖稜線連峰縱走百科</p>
+            <p class="text-stone-600 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 內湖稜線連峰縱走百科</p>
         </footer>
     </main>
 
@@ -433,10 +437,10 @@
                     <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all text-left">
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-lg font-black text-stone-800">${item.time}</span>
-                            <span class="text-[9px] font-black text-stone-500 border border-stone-200 px-2 py-0.5 rounded uppercase">${item.pos}</span>
+                            <span class="text-[9px] font-black text-stone-600 border border-stone-200 px-2 py-0.5 rounded uppercase">${item.pos}</span>
                         </div>
                         <h4 class="font-bold text-stone-700 text-sm mb-2">${item.loc}</h4>
-                        <p class="text-[11px] text-stone-500 leading-relaxed">${item.desc}</p>
+                        <p class="text-[11px] text-stone-600 leading-relaxed">${item.desc}</p>
                     </div>`;
                 container.appendChild(div);
             });

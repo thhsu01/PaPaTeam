@@ -1,0 +1,75 @@
+/* ============================================================
+   爬爬小隊 — 全站共用無障礙樣式
+   ------------------------------------------------------------
+   本檔只包含「新增」規則：skip link、鍵盤焦點指示、減少動態。
+   刻意不收各頁既有的 CSS —— 各頁的 .timeline-line、.chart-container、
+   body 背景等數值本來就不一致（兩套模板世代），統一它們會改動視覺，
+   須另案處理。此處只放原本一條都不存在的規則，因此不影響現有外觀。
+   ============================================================ */
+
+/* ── Skip link ────────────────────────────────────────────────
+   預設移出畫面，鍵盤聚焦時才滑入左上角。
+   用 top 位移而非 display:none，後者會讓元素無法被聚焦。 */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: top 0.15s ease-in;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── 鍵盤焦點指示 ─────────────────────────────────────────────
+   Tailwind 的 preflight 移除了瀏覽器預設 outline，全站原本沒有任何
+   替代樣式，鍵盤使用者看不出焦點位置。
+
+   採雙環設計以同時涵蓋淺色與深色底：深色 outline 在淺色底上可見，
+   外圈白色 halo 在深色底（例如 index 的 bg-slate-950 頁腳）上可見。
+   用 :focus-visible 而非 :focus，滑鼠點擊不會觸發。 */
+:focus-visible {
+  outline: 3px solid #0f172a;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+}
+
+/* Leaflet 自身的互動元素已有樣式，避免雙重外框造成錯位 */
+.leaflet-container :focus-visible {
+  box-shadow: none;
+}
+
+/* ── 減少動態 ─────────────────────────────────────────────────
+   對前庭功能敏感的使用者關閉轉場與動畫。
+   本站大量使用 transition-all / duration-700 / scroll-smooth。
+
+   註：JS 的 scrollIntoView({behavior:'smooth'}) 依規範會覆蓋 CSS 的
+   scroll-behavior，無法在此攔截 —— 該部分由 assets/site.js 處理。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* skip link 仍須能滑入，但改為即時顯示 */
+  .skip-link {
+    transition: none !important;
+  }
+}

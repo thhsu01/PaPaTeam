@@ -47,8 +47,12 @@
     .section-bar-green  { background: #7c9e52; }
     .section-bar-stone  { background: #a09080; }
   </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
 
   <!-- Back button -->
   <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
@@ -70,7 +74,7 @@
     </div>
   </nav>
 
-  <main class="pt-14">
+  <main id="main-content" class="pt-14">
 
     <!-- ═══ HERO / OVERVIEW ═══ -->
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100 hero-accent">
@@ -78,7 +82,7 @@
 
         <div class="mb-5 flex items-center gap-3">
           <span class="stamp">8月2日</span>
-          <span class="text-xs text-stone-500 tracking-widest uppercase">PACE: 輕鬆慢走模式 · 預計 6.5H 完成</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">PACE: 輕鬆慢走模式 · 預計 6.5H 完成</span>
         </div>
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
@@ -99,20 +103,20 @@
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">集合地點</div>
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
-            <div class="text-xs text-stone-500 mt-1">捷運中和新蘆線，1 號出口集合</div>
+            <div class="text-xs text-stone-600 mt-1">捷運中和新蘆線，1 號出口集合</div>
             <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:#9a6030;">🚗 開車可停於<br>南勢角站轉乘停車場</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">出發時間</div>
+            <div class="text-xs text-stone-600 mb-1">出發時間</div>
             <div class="font-bold text-stone-800">8月2日 07:30</div>
-            <div class="text-xs text-stone-500 mt-1">（請提前 10 分鐘抵達）</div>
+            <div class="text-xs text-stone-600 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">8/2 天氣預報</div>
+            <div class="text-xs text-stone-600 mb-1">8/2 天氣預報</div>
             <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
-            <div class="text-xs text-stone-500 mt-1" id="weather-sub">正在取得資料</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
             <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#c77c3e;" aria-label="在地圖應用中導航至南勢角站">
@@ -125,19 +129,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">11.76</div>
-            <div class="text-xs text-stone-500">GPX 總里程 km</div>
+            <div class="text-xs text-stone-600">GPX 總里程 km</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">~6.5</div>
-            <div class="text-xs text-stone-500">目標耗時 hr（輕鬆）</div>
+            <div class="text-xs text-stone-600">目標耗時 hr（輕鬆）</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">674</div>
-            <div class="text-xs text-stone-500">總爬升高度 m</div>
+            <div class="text-xs text-stone-600">總爬升高度 m</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black" style="color:#c77c3e;">320</div>
-            <div class="text-xs text-stone-500">最高海拔 m（五尖山）</div>
+            <div class="text-xs text-stone-600">最高海拔 m（五尖山）</div>
           </div>
         </div>
       </div>
@@ -150,18 +154,18 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-500 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-500 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
             <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">捷運南勢角站</h3>
             <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
           </div>
-          <div class="flex gap-4 mb-3 text-sm text-stone-500">
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
             <span>預計時間 <strong class="text-stone-800" id="wp-time">07:30</strong></span>
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
@@ -175,7 +179,7 @@
 
         <!-- Resources -->
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
-          <div class="text-xs font-medium text-stone-500 mb-3">參考資源</div>
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
             <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline" style="color:#c77c3e;">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=105" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 烘爐地登山步道資訊 (健行筆記)</a>
@@ -196,7 +200,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-500 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
       </div>
     </section>
 
@@ -211,32 +215,32 @@
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>國旗嶺 (H160m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">中和稜線上的視野展望點，設有健身器材與涼亭。居高臨下，可俯瞰中和、永和市區，是進入圓通寺步道前的熱身緩坡。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">中和稜線上的視野展望點，設有健身器材與涼亭。居高臨下，可俯瞰中和、永和市區，是進入圓通寺步道前的熱身緩坡。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓通禪寺 (H100m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">建於 1920 年代（清雍正至乾隆年間擴建），近 300 年歷史，略具日式風味的仿唐式建築。廟前俯瞰中和市區視野開闊，是香客與山友的共同聖地。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">建於 1920 年代（清雍正至乾隆年間擴建），近 300 年歷史，略具日式風味的仿唐式建築。廟前俯瞰中和市區視野開闊，是香客與山友的共同聖地。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:#e8d5b5;">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>一線天 (H100m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">圓通禪寺後方的天然岩縫步道，僅容一人側身通過。昏暗岩縫中仰望天光，是全程最具震撼感的地質奇觀，也是路線上最上鏡的打卡點。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">圓通禪寺後方的天然岩縫步道，僅容一人側身通過。昏暗岩縫中仰望天光，是全程最具震撼感的地質奇觀，也是路線上最上鏡的打卡點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>外南勢角山 (H255m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">南勢角山系稜線上的衛峰，森林路徑清幽。相較主峰較少人跡，原始林相豐富，是縱走行程中享受山林靜謐的好時刻。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">南勢角山系稜線上的衛峰，森林路徑清幽。相較主峰較少人跡，原始林相豐富，是縱走行程中享受山林靜謐的好時刻。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>光明頂 (H225m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，實為行程中重要的稜線觀景台。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，實為行程中重要的稜線觀景台。</p>
           </div>
 
           <div class="p-6 rounded-2xl border shadow-sm" style="background:#fef9f0; border-color:#e8d5b5;">
@@ -246,22 +250,22 @@
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>烘爐地南山福德宮</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。【預備撤退點：如果判斷下午天氣將轉變，將直接在此搭乘公車F512副下山回到南勢角站】</p>
+            <p class="text-sm text-stone-600 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。【預備撤退點：如果判斷下午天氣將轉變，將直接在此搭乘公車F512副下山回到南勢角站】</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>石龍洞觀音佛祖</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">天然岩洞中的觀音寺廟，環境清幽。洞內終年陰涼，是山途中絕佳的休息納涼點，也是信仰與自然融為一體的特殊景致。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">天然岩洞中的觀音寺廟，環境清幽。洞內終年陰涼，是山途中絕佳的休息納涼點，也是信仰與自然融為一體的特殊景致。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>牛埔頭山 (H271m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">中和、土城交界的稜線山頭，設有省政府地籍測量三角點。山頂藏於林中無展望，但作為縱走里程碑，是邁向五尖山前的重要銜接點。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">中和、土城交界的稜線山頭，設有省政府地籍測量三角點。山頂藏於林中無展望，但作為縱走里程碑，是邁向五尖山前的重要銜接點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold mb-2 flex items-center gap-2" style="color:#6d8940;"><span class="w-2 h-2 rounded-full" style="background:#7c9e52; display:inline-block;"></span>五尖山 (H320m) 🏔 全程制高</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">全程最高點，海拔 320m，設四等三角點。位於天上山縱走路線上，是中和至天上山系最冷門卻最原始的路段，翻越五座假山頭後豁然開朗。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">全程最高點，海拔 320m，設四等三角點。位於天上山縱走路線上，是中和至天上山系最冷門卻最原始的路段，翻越五座假山頭後豁然開朗。</p>
           </div>
 
         </div>
@@ -283,8 +287,8 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           預計行程進度
         </h2>
-        <p class="text-sm text-stone-500 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
-        <p class="text-xs text-stone-500 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
+        <p class="text-sm text-stone-600 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
+        <p class="text-xs text-stone-600 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -294,7 +298,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-500 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 8月2日 · 07:30 出發 · 預計 14:00 返抵</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 8月2日 · 07:30 出發 · 預計 14:00 返抵</p>
   </footer>
 
   <script>
@@ -532,10 +536,10 @@
                style="background:${dotColor};"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="font-mono font-bold text-sm" style="color:#c77c3e;">${wp.time}</span>
-            <span class="text-xs text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-500 mt-0.5">${wp.desc}</div>
+          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
         `;
         container.appendChild(div);
       });

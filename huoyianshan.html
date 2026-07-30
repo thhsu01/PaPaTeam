@@ -78,8 +78,12 @@
             background: #fff5f5;
         }
     </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="antialiased selection:bg-orange-100 text-left">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
 
     <!-- Back button -->
     <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
@@ -93,7 +97,7 @@
         <span class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
       </a>
-                    <span class="text-stone-500 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
+                    <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
                 </div>
                 <div class="flex space-x-3 md:space-x-6 text-[12px] md:text-sm font-medium text-stone-600">
                     <button onclick="scrollToSection('overview')" class="nav-link hover:text-orange-600" aria-label="滾動到行程總覽">數據總覽</button>
@@ -106,7 +110,7 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
         <!-- Header Area -->
         <section id="overview" class="text-center space-y-8">
@@ -115,7 +119,7 @@
                     Mission Accomplished 任務完成
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">火炎山、北鞍古道 O 走</h1>
-                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。<br>
                     <span class="font-bold text-orange-600 mt-2 block">全程距離約 7.5 公里</span>
                 </p>
@@ -127,12 +131,12 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">集合起點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">正松泉收費停車場</span>
-                        <span class="text-xs text-stone-500 mt-1">全程距離約 7.5 公里 / 方便停車</span>
+                        <span class="text-xs text-stone-600 mt-1">全程距離約 7.5 公里 / 方便停車</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-orange-600 uppercase tracking-widest">活動日期</span>
                         <span class="text-xl font-bold text-stone-800">2025年12月13日</span>
-                        <span class="text-xs text-stone-500 mt-1">全程費時：5 小時 10 分鐘</span>
+                        <span class="text-xs text-stone-600 mt-1">全程費時：5 小時 10 分鐘</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-orange-100 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">高度落差</span>
@@ -149,22 +153,22 @@
             <!-- Metrics Card -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-500 text-xs font-bold uppercase mb-2">實測步道總里程</div>
-                    <div class="text-3xl font-black text-stone-800">8.23<span class="text-sm font-normal text-stone-500 ml-1">km</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">實測步道總里程</div>
+                    <div class="text-3xl font-black text-stone-800">8.23<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-500 text-xs font-bold uppercase mb-2">實際總耗時</div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
                     <div class="text-xl md:text-2xl font-black text-orange-600 leading-tight">
-                        5<span class="text-sm font-normal text-stone-500 mx-1">小時</span>01<span class="text-sm font-normal text-stone-500 ml-1">分鐘</span>
+                        5<span class="text-sm font-normal text-stone-600 mx-1">小時</span>01<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-500 text-xs font-bold uppercase mb-2">累計上升</div>
-                    <div class="text-3xl font-black text-stone-800">406<span class="text-sm font-normal text-stone-500 ml-1">m</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升</div>
+                    <div class="text-3xl font-black text-stone-800">406<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-500 text-xs font-bold uppercase mb-2">最高標高</div>
-                    <div class="text-3xl font-black text-stone-800">601<span class="text-sm font-normal text-stone-500 ml-1">m</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">最高標高</div>
+                    <div class="text-3xl font-black text-stone-800">601<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
         </section>
@@ -173,7 +177,7 @@
         <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
             <div class="mb-8">
                 <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-orange-600 rounded-full"></span> 導覽地圖與重要地標</h2>
-                <p class="text-stone-500 mt-2 text-sm">點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。</p>
+                <p class="text-stone-600 mt-2 text-sm">點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 <div class="lg:col-span-2"><div id="realMap"></div></div>
@@ -188,7 +192,7 @@
                                 </div>
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點名稱</h3>
-                            <div class="flex items-center gap-5 text-sm font-bold text-stone-500 mb-4">
+                            <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
                             <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
@@ -212,7 +216,7 @@
         <section id="deep-dive" class="space-y-10">
             <div class="text-center">
                 <h2 class="text-3xl font-black text-stone-800">各景點深度導覽</h2>
-                <p class="text-stone-500 mt-2 italic">穿越礫岩惡地，探索火炎山的地理密碼</p>
+                <p class="text-stone-600 mt-2 italic">穿越礫岩惡地，探索火炎山的地理密碼</p>
             </div>
 
             <!-- Canyon Feature Section -->
@@ -255,7 +259,7 @@
                         <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">1</div>
                         <h4 class="text-xl font-bold text-stone-800">正松泉與起點區</h4>
                     </div>
-                    <p class="text-stone-500 text-sm leading-relaxed">
+                    <p class="text-stone-600 text-sm leading-relaxed">
                         位於三義與后里的交界，這裡是進入火炎山自然保留區最重要的補給站。除了充足的車位，沿線的私人茶園與田野風光提供了極佳的緩衝，讓登山者在起登前能先調整呼吸。
                     </p>
                 </div>
@@ -265,7 +269,7 @@
                         <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">2</div>
                         <h4 class="text-xl font-bold text-stone-800">南鞍線與北鞍古道</h4>
                     </div>
-                    <p class="text-stone-500 text-sm leading-relaxed">
+                    <p class="text-stone-600 text-sm leading-relaxed">
                         相對於險峻的稜線，這兩條古道隱沒在茂密的闊葉林中。北鞍古道坡度平緩，是昔日先民往返三義與大甲的聯絡孔道，環境幽靜，常可見到台灣獼猴出沒。
                     </p>
                 </div>
@@ -275,7 +279,7 @@
                         <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">3</div>
                         <h4 class="text-xl font-bold text-stone-800">三粒石土地公廟</h4>
                     </div>
-                    <p class="text-stone-500 text-sm leading-relaxed">
+                    <p class="text-stone-600 text-sm leading-relaxed">
                         這座由簡單三塊巨石搭建而成的土地公，象徵著對土地的謙卑與崇敬。這裡是山友的重要中繼點，廟前的小廣場提供了絕佳的陰涼處，讓疲憊的雙腳能在此得到短暫舒緩。
                     </p>
                 </div>
@@ -285,7 +289,7 @@
                         <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center font-bold">4</div>
                         <h4 class="text-xl font-bold text-stone-800">火炎山主峰 (三角點)</h4>
                     </div>
-                    <p class="text-stone-500 text-sm leading-relaxed">
+                    <p class="text-stone-600 text-sm leading-relaxed">
                         標高 601 公尺，雖然高度在苗栗群山中不算突出，但其作為地理屏障的功能顯著。登頂後的三角點不只是打卡點，更是全方位俯視台中與苗栗交界流域的制高點。
                     </p>
                 </div>
@@ -297,7 +301,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄</h2>
-                    <p class="text-stone-500 mt-2 text-sm">2025/12/13 08:10 正式出發。</p>
+                    <p class="text-stone-600 mt-2 text-sm">2025/12/13 08:10 正式出發。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0" id="timeline-container">
@@ -306,7 +310,7 @@
         </section>
 
         <footer class="text-center py-16 border-t border-stone-200">
-            <p class="text-stone-500 text-sm font-medium tracking-wide">© 2025 爬爬小隊 | 戶外活動視覺化平台</p>
+            <p class="text-stone-600 text-sm font-medium tracking-wide">© 2025 爬爬小隊 | 戶外活動視覺化平台</p>
         </footer>
     </main>
 
@@ -451,7 +455,7 @@
                             <span class="text-[10px] font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase">${item.pos}</span>
                         </div>
                         <h4 class="font-bold text-stone-700 text-base mb-1">${item.loc}</h4>
-                        <div class="text-[11px] text-stone-500 font-bold">海拔: ${item.ele} m</div>
+                        <div class="text-[11px] text-stone-600 font-bold">海拔: ${item.ele} m</div>
                     </div>
                 `;
                 container.appendChild(div);

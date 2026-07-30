@@ -18,8 +18,12 @@
     .nav-btn { transition: background 0.2s; }
     .timeline-line { position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #0284c7, #38bdf8); }
   </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
 </head>
 <body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
 
   <!-- Back button -->
   <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
@@ -41,7 +45,7 @@
     </div>
   </nav>
 
-  <main class="pt-14">
+  <main id="main-content" class="pt-14">
     <!-- HERO -->
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
       <div class="max-w-4xl mx-auto w-full">
@@ -64,19 +68,19 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">集合地點</div>
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">陽明山第二停車場</div>
-            <div class="text-xs text-stone-500 mt-1">步行約 10 分鐘可抵苗圃登山口（陽明山遊客中心旁）</div>
+            <div class="text-xs text-stone-600 mt-1">步行約 10 分鐘可抵苗圃登山口（陽明山遊客中心旁）</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">集合時間</div>
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
             <div class="font-bold text-stone-800">07:00（日期未定）</div>
-            <div class="text-xs text-stone-500 mt-1">請提前 10 分鐘抵達</div>
+            <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-500 mb-1">即時天氣參考</div>
+            <div class="text-xs text-stone-600 mb-1">即時天氣參考</div>
             <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
-            <div class="text-xs text-stone-500 mt-1" id="weather-sub">山頂氣溫較山下低 10–15°C</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">山頂氣溫較山下低 10–15°C</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
             <button onclick="openNavigation()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
@@ -88,19 +92,19 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">6.6</div>
-            <div class="text-xs text-stone-500">總里程 km</div>
+            <div class="text-xs text-stone-600">總里程 km</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">3.5–4</div>
-            <div class="text-xs text-stone-500">目標耗時 hr</div>
+            <div class="text-xs text-stone-600">目標耗時 hr</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">~568</div>
-            <div class="text-xs text-stone-500">預計爬升 m</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
           </div>
           <div class="text-center">
             <div class="text-2xl font-black text-stone-900">1,120</div>
-            <div class="text-xs text-stone-500">最高海拔 m（台北市最高峰）</div>
+            <div class="text-xs text-stone-600">最高海拔 m（台北市最高峰）</div>
           </div>
         </div>
       </div>
@@ -113,16 +117,16 @@
           <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>
           互動路線圖與航點切換
         </h2>
-        <p class="text-sm text-stone-500 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
         <div id="map" class="mb-6 shadow-md"></div>
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-500 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
             <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">陽明山第二停車場 (H590m)</h3>
             <button onclick="nextWaypoint()" class="w-8 h-8 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
           </div>
-          <div class="flex gap-4 mb-3 text-sm text-stone-500">
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
             <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">590</strong> m</span>
           </div>
@@ -133,7 +137,7 @@
           </div>
         </div>
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
-          <div class="text-xs font-medium text-stone-500 mb-3">參考資源</div>
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=1169" target="_blank" class="text-sm text-sky-700 hover:underline">🔗 七星山主東峰苗圃線步道資料（健行筆記）</a>
             <a href="https://hiking.biji.co/index.php?q=review&act=info&review_id=20845" target="_blank" class="text-sm text-sky-700 hover:underline">🔗 苗圃O型 6.6km 路線紀錄（健行筆記）</a>
@@ -167,27 +171,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>七星山苗圃登山口 (H550m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">七星山三條登山口中路程最長、落差最大的選擇，位於陽明山遊客中心旁。沿途闊葉林相茂密，可見松鼠穿梭、竹雞跳躍，生態豐富，是進入七星山最有野趣的路徑。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">七星山三條登山口中路程最長、落差最大的選擇，位於陽明山遊客中心旁。沿途闊葉林相茂密，可見松鼠穿梭、竹雞跳躍，生態豐富，是進入七星山最有野趣的路徑。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-sky-500 rounded-full"></span>主東叉路口 (H1,060m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">O 型路線的關鍵分岔口。去程取左攻主峰，回程由此右轉往七星公園下山，是讓去回程完全不重複的核心節點。抵達此處代表最陡的石階段已過，視野豁然開朗。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">O 型路線的關鍵分岔口。去程取左攻主峰，回程由此右轉往七星公園下山，是讓去回程完全不重複的核心節點。抵達此處代表最陡的石階段已過，視野豁然開朗。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>七星山主峰 (H1,120m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">台北市最高峰，台灣小百岳No.2，設有一等三角點。晴天可360度俯瞰台北盆地、眺望大屯山系群峰、北海岸地形與觀音山。「登七星而小台北」正是此地最佳寫照。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">台北市最高峰，台灣小百岳No.2，設有一等三角點。晴天可360度俯瞰台北盆地、眺望大屯山系群峰、北海岸地形與觀音山。「登七星而小台北」正是此地最佳寫照。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-400 rounded-full"></span>七星山東峰 (H1,107m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">小百岳，三等三角點 1104 號，海拔 1,107m，距主峰僅 300 公尺。視野同樣遼闊，可眺望磺嘴山系群山與北海岸。與主峰合稱「主東峰」，是七星山最經典的連走組合。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">小百岳，三等三角點 1104 號，海拔 1,107m，距主峰僅 300 公尺。視野同樣遼闊，可眺望磺嘴山系群山與北海岸。與主峰合稱「主東峰」，是七星山最經典的連走組合。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>七星公園 (H870m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">七星山南麓的廣闊草坪，設有廁所，視野開闊，是 O 型路線回程段的大休點。秋季芒草盛開時，金黃色浪濤此處最為壯觀。也是野餐與欣賞台北盆地全景的絕佳位置。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">七星山南麓的廣闊草坪，設有廁所，視野開闊，是 O 型路線回程段的大休點。秋季芒草盛開時，金黃色浪濤此處最為壯觀。也是野餐與欣賞台北盆地全景的絕佳位置。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-teal-500 rounded-full"></span>七星山夢幻湖登山口 (H860m)</h3>
-            <p class="text-sm text-stone-500 leading-relaxed">七星山苗圃 O 型回程的關鍵節點，為進出夢幻湖的官方登山口。從七星公園步行約 5 分鐘可抵達，接腰繞步道約 45 分鐘回到苗圃登山口。夢幻湖為台灣特有植物——台灣水韭的唯一棲地，生態極具珍稀特色。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">七星山苗圃 O 型回程的關鍵節點，為進出夢幻湖的官方登山口。從七星公園步行約 5 分鐘可抵達，接腰繞步道約 45 分鐘回到苗圃登山口。夢幻湖為台灣特有植物——台灣水韭的唯一棲地，生態極具珍稀特色。</p>
           </div>
         </div>
 
@@ -214,7 +218,7 @@
           <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>
           預計行程進度（3.5–4H）
         </h2>
-        <p class="text-sm text-stone-500 mb-8">候選行程，日期未定，預計時間供規劃參考。</p>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定，預計時間供規劃參考。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -223,7 +227,7 @@
   </main>
 
   <footer class="text-center py-16 border-t border-stone-200">
-    <p class="text-stone-500 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 七星山主東峰苗圃 O 型 6.6 KM ｜ 日期未定</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 七星山主東峰苗圃 O 型 6.6 KM ｜ 日期未定</p>
   </footer>
 
   <script>
@@ -323,10 +327,10 @@
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dot} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="text-sky-700 font-mono font-bold text-sm">${wp.time}</span>
-            <span class="text-xs text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
+            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-500 mt-0.5">${wp.desc}</div>`;
+          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`;
         c.appendChild(d);
       });
     }
