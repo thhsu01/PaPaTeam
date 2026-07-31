@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -251,14 +252,7 @@
   </footer>
 
   <script>
-      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
-      // 免得換主色時只改了一邊。
-      const rootStyle = getComputedStyle(document.documentElement);
-      const ACCENT_DEEP = rootStyle.getPropertyValue('--accent-deep').trim();
 
-    function openNavigation() {
-      window.open("https://www.google.com/maps/dir/?api=1&destination=25.155339,121.545874", "_blank");
-    }
 
     const schedule = [
       { lat: 25.155339, lng: 121.545874, time: "07:00", loc: "陽明山第二停車場 (H590m)", dist: 0.00, ele: 590, pos: "集合起點", desc: "行程起點。07:00 準時出發，步行約 10 分鐘至七星山苗圃登山口。", advice: "檢查裝備、備足飲水（建議 2.5L 以上）。山頂無補給點，請務必自備。" },
@@ -272,96 +266,62 @@
       { lat: 25.156600, lng: 121.546697, time: "10:50", loc: "七星山苗圃登山口 (H550m)", dist: 6.35, ele: 550, pos: "終點", desc: "O 型完成！回到起點苗圃登山口。累計里程 6.35 km。", advice: "步行約 10 分鐘可返回陽明山第二停車場。恭喜完成七星山苗圃 O 型！" },
       { lat: 25.155339, lng: 121.545874, time: "11:00", loc: "陽明山第二停車場 (H590m)", dist: 6.60, ele: 590, pos: "回程終點", desc: "行程圓滿結束！全程 6.60 km，兩座小百岳一次完成。", advice: "補充水分慶祝，也可至附近陽明山餐廳用餐。" }
     ];
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ACCENT = cssVar('--accent-deep');
+    const HIGH = '#f59e0b';   // 主東峰一帶（語意色：琥珀）
+    const LOW  = '#16a34a';   // 起訖點（語意色：綠）
 
-    let map, chart, markers = [];
-    let currentWpIndex = 0;
+    const ICONS = { "集合起點":"🅿️","入山口":"🥾","景觀亮點":"🌿","轉換路段":"↔️","副峰":"⛰️","最高點":"🏔️","山頂":"🗻","終點":"🏁","回程終點":"✅" };
 
-    async function fetchWeather() {
-      const weatherMain = document.getElementById('weather-main');
-      const weatherSub = document.getElementById('weather-sub');
-      try {
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=25.1708&longitude=121.5535&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1`);
-        const data = await res.json();
-        const code = data.daily.weathercode[0];
-        const maxT = Math.round(data.daily.temperature_2m_max[0]);
-        const minT = Math.round(data.daily.temperature_2m_min[0]);
-        weatherMain.textContent = `${PaPaWeather.text(code)} ${minT}°–${maxT}°C`;
-        weatherSub.textContent = "七星山頂今日參考（山頂較低 10–15°C）";
-      } catch(e) {
-        weatherMain.textContent = "暫無法取得";
-        weatherSub.textContent = "請稍後再試";
-      }
-    }
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      nav: [25.163,121.552],
+      weather: { lat: 25.1708, lng: 121.5535,
+                 subText: '七星山頂今日參考（山頂較低 10–15°C）',
+                 unit: '°C', errorMain: '暫無法取得' },
 
-    function initMap() {
-      map = L.map('map').setView([25.163, 121.552], 14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-      L.polyline(schedule.map(w => [w.lat, w.lng]), { color:ACCENT_DEEP, weight:4, opacity:0.85 }).addTo(map);
-      schedule.forEach((wp, i) => {
-        const isEnd = i === 0 || i === schedule.length - 1;
-        const isPeak = wp.ele >= 1000;
-        const color = isEnd ? '#16a34a' : isPeak ? '#f59e0b' : ACCENT_DEEP;
-        const m = L.circleMarker([wp.lat, wp.lng], { radius: isEnd ? 9 : isPeak ? 8 : 6, fillColor: color, color:'#fff', weight:2, fillOpacity:0.9 }).addTo(map);
-        m.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
-        m.on('click', () => updateWaypointCard(i));
-        markers.push(m);
-      });
-      updateWaypointCard(0);
-    }
-
-    function updateWaypointCard(i) {
-      currentWpIndex = i;
-      const wp = schedule[i];
-      document.getElementById('wp-pos-label').textContent = wp.pos;
-      document.getElementById('wp-time').textContent = wp.time;
-      document.getElementById('wp-title').textContent = wp.loc;
-      document.getElementById('wp-dist').textContent = wp.dist.toFixed(2);
-      document.getElementById('wp-ele').textContent = wp.ele;
-      document.getElementById('wp-desc').textContent = wp.desc;
-      document.getElementById('wp-advice').textContent = wp.advice;
-    }
-
-    function prevWaypoint() { if (currentWpIndex > 0) updateWaypointCard(currentWpIndex - 1); }
-    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) updateWaypointCard(currentWpIndex + 1); }
-
-    function initChart() {
-      const ctx = document.getElementById('elevation-chart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: schedule.map(w => w.loc.replace(/ \(H.*\)/, '')),
-          datasets: [{ label:'海拔 (m)', data: schedule.map(w => w.ele), borderColor:ACCENT_DEEP, backgroundColor:'rgba(2,132,199,0.1)', borderWidth:2.5, pointBackgroundColor: schedule.map(w => w.ele >= 1000 ? '#f59e0b' : ACCENT_DEEP), pointRadius:5, tension:0.3, fill:true }]
-        },
-        options: {
-          responsive:true, maintainAspectRatio:false,
-          plugins: { legend:{display:false}, tooltip:{callbacks:{label:c=>`海拔: ${c.parsed.y} m`}} },
-          scales: { y:{title:{display:true,text:'海拔 (m)'},min:450,grid:{color:'#f0f0f0'}}, x:{ticks:{maxRotation:30,font:{size:11}},grid:{display:false}} }
+      map: {
+        setView: [[25.163, 121.552], 14],
+        attribution: '© OpenStreetMap',
+        track: { weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isEnd = i === 0 || i === n - 1;
+          const isPeak = wp.ele >= 1000;
+          return { radius: isEnd ? 9 : isPeak ? 8 : 6,
+                   fillColor: isEnd ? LOW : isPeak ? HIGH : ACCENT, fillOpacity: 0.9 };
         }
-      });
-    }
+      },
 
-    function renderTimeline() {
-      const c = document.getElementById('timeline-container');
-      const icons = { "集合起點":"🅿️","入山口":"🥾","景觀亮點":"🌿","轉換路段":"↔️","副峰":"⛰️","最高點":"🏔️","山頂":"🗻","終點":"🏁","回程終點":"✅" };
-      schedule.forEach((wp, i) => {
-        const d = document.createElement('div');
-        d.className = 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all';
-        d.onclick = () => { document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); updateWaypointCard(i); };
-        const dot = wp.ele >= 1000 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'accent-mark-light';
-        d.innerHTML = `
-          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dot} border-2 border-white shadow-sm"></div>
+      chart: {
+        label: wp => wp.loc.replace(/ \(H.*\)/, ''),
+        fillAlpha: 0.1,
+        dataset: { borderColor: ACCENT, borderWidth: 2.5, pointRadius: 5, tension: 0.3,
+                   pointBackgroundColor: schedule.map(wp => wp.ele >= 1000 ? HIGH : ACCENT) },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 450, grid: { color: '#f0f0f0' } },
+            x: { ticks: { maxRotation: 30, font: { size: 11 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => `
+          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${wp.ele >= 1000 ? 'bg-amber-400' : i === 0 || i === n - 1 ? 'bg-emerald-500' : 'accent-mark-light'} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
-            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
+            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${ICONS[wp.pos] || '📍'} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`;
-        c.appendChild(d);
-      });
-    }
-
-    fetchWeather();
-    window.addEventListener('load', () => { initMap(); initChart(); renderTimeline(); });
+          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`
+      }
+    });
   </script>
 </body>
 </html>
