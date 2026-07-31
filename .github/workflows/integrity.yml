@@ -1,0 +1,67 @@
+name: 更新 integrity.json
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'integrity.json'   # 避免本 workflow 自己的 commit 再次觸發自己
+  workflow_dispatch:        # 也可在 Actions 頁面手動執行
+
+permissions:
+  contents: write
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出程式碼
+        uses: actions/checkout@v4
+
+      - name: 產生 integrity.json
+        run: |
+          python3 - <<'EOF'
+          import subprocess, json, datetime
+
+          def git(*args):
+              return subprocess.check_output(['git', *args], text=True)
+
+          files = []
+          for line in git('ls-files', '-s').strip().splitlines():
+              meta, path = line.split('\t', 1)
+              _mode, sha, _stage = meta.split()
+              if path == 'integrity.json':
+                  continue          # 自己無法記錄自己的 sha
+              size = int(git('cat-file', '-s', sha).strip())
+              files.append({'path': path, 'size': size, 'sha': sha})
+          files.sort(key=lambda f: f['path'])
+
+          tst = datetime.timezone(datetime.timedelta(hours=8))
+          data = {
+              'manifest_version': 'D-integrity',
+              'repo': 'thhsu01/PaPaTeam',
+              'branch': 'main',
+              'generated': datetime.datetime.now(tst).strftime('%Y-%m-%d %H:%M'),
+              'generated_tz': 'UTC+8',
+              'commit': git('rev-parse', 'HEAD').strip(),
+              'file_count': len(files),
+              'note': '本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。',
+              'files': files,
+          }
+
+          with open('integrity.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+              f.write('\n')
+          print(f'已列出 {len(files)} 個檔案')
+          EOF
+
+      - name: 有變動才 commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add integrity.json
+          if git diff --staged --quiet; then
+            echo "integrity.json 無變動，略過"
+          else
+            git commit -m "chore: 更新 integrity.json [skip ci]"
+            git push
+          fi
