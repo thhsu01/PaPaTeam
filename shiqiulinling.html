@@ -289,7 +289,7 @@
             schedule.forEach((d, i) => {
                 const circle = L.circleMarker([d.lat, d.lng], {
                     radius: i === 0 || i === schedule.length - 1 || d.pos === "最高點" ? 8 : 6,
-                    fillColor: i === 0 ? '#0ea5e9' : (d.pos === "最高點" ? '#ef4444' : '#1e293b'),
+                    fillColor: i === 0 ? '#0ea5e9' : (d.pos === "最高點" ? '#ef4444' : '#292524'),
                     color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
