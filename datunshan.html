@@ -20,6 +20,21 @@
       --map-radius: 12px;
       --timeline-left: 20px;
       --timeline-bg: linear-gradient(to bottom, #d97706, #fbbf24);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent-fill:            #b45309;                    /* amber-700 */
+      --accent-border:          #fef3c7;                    /* amber-100 */
+      --accent-border-deep:     #fde68a;                    /* amber-200 */
+      --accent:                 #f59e0b;                    /* amber-500 */
+      --accent-deep:            #d97706;                    /* amber-600 */
+      --accent-light:           #fbbf24;                    /* amber-400 */
+      --accent-soft:            #fef3c7;                    /* amber-100 */
+      --accent-strong:          #b45309;                    /* amber-700 */
+      --accent-strong-deep:     #92400e;                    /* amber-800 */
+      --accent-strong-deeper:   #78350f;                    /* amber-900 */
+      --accent-tint:            #fffbeb;                    /* amber-50 */
+
     }
   </style>
   <link rel="stylesheet" href="assets/detail.css">
@@ -55,11 +70,11 @@
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-red-100">
       <div class="max-w-4xl mx-auto w-full">
         <div class="mb-4">
-          <span class="text-xs font-medium tracking-widest text-amber-700 uppercase bg-amber-100 px-3 py-1 rounded-full">候選行程 · 日期未定 · 7.9 KM O型環走 · 小百岳 #001</span>
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 7.9 KM O型環走 · 小百岳 #001</span>
         </div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           大屯群峰連走<br>
-          <span class="text-amber-700">大屯山四峰 O 型縱走</span>
+          <span class="accent-text">大屯山四峰 O 型縱走</span>
         </h1>
         <p class="text-lg text-stone-600 mb-6 max-w-2xl">搭乘 108 公車上鞍部，沿大屯連峰步道依序攻克主峰、南峰、西峰與面天山四座火山峰頭，下至二子坪後循巴拉卡人車分道 O 型回到鞍部。台北郊山中最完整的火山連峰體驗。</p>
 
@@ -71,11 +86,11 @@
           </div>
         </div>
 
-        <div class="mb-4 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+        <div class="mb-4 max-w-2xl accent-tint border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
           <span class="text-2xl mt-0.5">🚌</span>
           <div>
-            <div class="font-bold text-amber-800 text-base mb-1">交通提醒：請備好悠遊卡搭乘 108 遊園公車</div>
-            <p class="text-sm text-amber-700 leading-relaxed">07:00 於陽明山第二停車場集合後，步行至附近 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。回程同樣於鞍部站搭 108 返回第二停車場。</p>
+            <div class="font-bold accent-text-deep text-base mb-1">交通提醒：請備好悠遊卡搭乘 108 遊園公車</div>
+            <p class="text-sm accent-text leading-relaxed">07:00 於陽明山第二停車場集合後，步行至附近 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。回程同樣於鞍部站搭 108 返回第二停車場。</p>
           </div>
         </div>
 
@@ -96,7 +111,7 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">大屯山頂今日天氣</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:bg-amber-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
               🗺️ 導航至陽明山第二停車場
             </button>
           </div>
@@ -127,7 +142,7 @@
     <section id="map-section" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-amber-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           互動路線圖與航點切換
         </h2>
         <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
@@ -145,16 +160,16 @@
             <span>海拔 <strong class="text-stone-800" id="wp-ele">585</strong> m</span>
           </div>
           <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點，07:00 準時集合搭乘公車。</p>
-          <div class="bg-amber-50 border border-amber-100 rounded-xl p-3">
-            <div class="text-xs font-medium text-amber-700 mb-1">隊友建議</div>
-            <p class="text-xs text-amber-700" id="wp-advice">備好悠遊卡與手套。</p>
+          <div class="accent-tint border accent-line rounded-xl p-3">
+            <div class="text-xs font-medium accent-text mb-1">隊友建議</div>
+            <p class="text-xs accent-text" id="wp-advice">備好悠遊卡與手套。</p>
           </div>
         </div>
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=69" target="_blank" class="text-sm text-amber-700 hover:underline">🔗 大屯主峰連峰步道資料（健行筆記）</a>
-            <a href="https://mtyao-tw.com/little-100-mountains-datun-multi-peak-trail/" target="_blank" class="text-sm text-amber-700 hover:underline">🔗 大屯山連峰四峰 O 型路線紀錄（7.9 km）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=69" target="_blank" class="text-sm accent-text hover:underline">🔗 大屯主峰連峰步道資料（健行筆記）</a>
+            <a href="https://mtyao-tw.com/little-100-mountains-datun-multi-peak-trail/" target="_blank" class="text-sm accent-text hover:underline">🔗 大屯山連峰四峰 O 型路線紀錄（7.9 km）</a>
             <a href="https://shotrip.com/attractions/5828/datun-mountain" target="_blank" class="text-sm text-orange-700 hover:underline">📝 大屯山 O 型詳細路線（拉拉桑旅遊足跡）</a>
             <a href="https://www.ymsnp.gov.tw/YMSNP_com_linemap_m.aspx?id=1&uid=1394&pid=16&eid=13459&aid=13456&sid=13460&n=17941&sms=13458" target="_blank" class="text-sm text-emerald-700 hover:underline">🌿 陽明山國家公園大屯山系官方步道資訊</a>
           </div>
@@ -166,7 +181,7 @@
     <section id="elevation" class="py-16 px-6 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-amber-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           海拔高度剖面圖
         </h2>
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
@@ -188,7 +203,7 @@
             <p class="text-sm text-stone-600 leading-relaxed">位於百拉卡公路，108 公車鞍部站下車後跨越公路即達。有廁所設施，是大屯山連峰最主要的登山口。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>大屯山主峰 (H1,092m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>大屯山主峰 (H1,092m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">台灣小百岳 No.1！二等三角點所在，但三角點位於民航局助航站內不開放，一般遊客以大縱走木樁作為登頂標的。觀景台以夕陽、雲海、秋芒景觀聞名，是大台北賞夕陽的聖地。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -209,13 +224,13 @@
           </div>
         </div>
 
-        <div class="mt-8 bg-amber-50 p-6 rounded-2xl border border-amber-200">
-          <div class="text-xs font-medium text-amber-700 mb-2">本次行程亮點</div>
-          <h3 class="text-lg font-bold text-amber-900 mb-3">陽明山大屯火山群：<span class="font-normal text-amber-700">台北最完整的高山火山連峰體驗</span></h3>
-          <p class="text-sm text-amber-800 leading-relaxed mb-3"><strong>【大屯火山地質】</strong><br>大屯山約在 70 萬年前的噴發形成了今日的主峰、西峰和南峰三峰，是台灣仍具噴發潛力的活火山群。大屯山四峰 O 型路線串連四座大屯火山群山頭，完整體驗這片火山地形的壯麗與多樣——從主峰箭竹芒草的蒼涼北坡，到南峰、西峰的陡峭岩稜，再到面天山的鐘形火山體，最後在二子坪的平緩生態池結束，每一段都有完全不同的地景風貌。</p>
-          <p class="text-sm text-amber-800 leading-relaxed"><strong>【賞景最佳季節】</strong><br>秋季（10–12 月）芒草盛開時為最推薦的造訪時機，山頂觀景台一望無際的金黃芒海是台北最知名的秋景之一。春季天氣清朗時展望最佳，夏季需特別注意午後雷陣雨。</p>
-          <h4 class="font-bold text-amber-800 mt-4 mb-2">行程四大特色</h4>
-          <ul class="text-sm text-amber-700 space-y-1">
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">本次行程亮點</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">陽明山大屯火山群：<span class="font-normal accent-text">台北最完整的高山火山連峰體驗</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【大屯火山地質】</strong><br>大屯山約在 70 萬年前的噴發形成了今日的主峰、西峰和南峰三峰，是台灣仍具噴發潛力的活火山群。大屯山四峰 O 型路線串連四座大屯火山群山頭，完整體驗這片火山地形的壯麗與多樣——從主峰箭竹芒草的蒼涼北坡，到南峰、西峰的陡峭岩稜，再到面天山的鐘形火山體，最後在二子坪的平緩生態池結束，每一段都有完全不同的地景風貌。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【賞景最佳季節】</strong><br>秋季（10–12 月）芒草盛開時為最推薦的造訪時機，山頂觀景台一望無際的金黃芒海是台北最知名的秋景之一。春季天氣清朗時展望最佳，夏季需特別注意午後雷陣雨。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text space-y-1">
             <li>• 台灣小百岳 #001 大屯山主峰，大台北最佳夕陽觀景點</li>
             <li>• 四座火山峰頭連走：主峰→南峰→西峰→面天山</li>
             <li>• O 型路線：去程攀稜，回程繞二子坪，景色完全不重複</li>
@@ -229,7 +244,7 @@
     <section id="timeline" class="py-16 px-6 bg-stone-50">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-amber-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           預計行程進度（4–4.5H 健行段）
         </h2>
         <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。不含搭乘公車前往鞍部的時間（約 35 分鐘）。</p>
@@ -245,6 +260,12 @@
   </footer>
 
   <script>
+      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
+      // 免得換主色時只改了一邊。
+      const rootStyle = getComputedStyle(document.documentElement);
+      const ACCENT_DEEP = rootStyle.getPropertyValue('--accent-deep').trim();
+      const ACCENT = rootStyle.getPropertyValue('--accent').trim();
+
     function openNavigation() {
       window.open("https://www.google.com/maps/dir/?api=1&destination=25.1620,121.5368", "_blank");
     }
@@ -288,11 +309,11 @@
       map = L.map('map').setView([25.1760, 121.5185], 14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
       // Draw hiking path only (skip the transit/bus portion at start)
-      L.polyline(schedule.map(w => [w.lat, w.lng]), { color:'#d97706', weight:4, opacity:0.85 }).addTo(map);
+      L.polyline(schedule.map(w => [w.lat, w.lng]), { color:ACCENT_DEEP, weight:4, opacity:0.85 }).addTo(map);
       schedule.forEach((wp, i) => {
         const isEnd = i === 0 || i === schedule.length - 1;
         const isPeak = wp.ele >= 950;
-        const color = isEnd ? '#16a34a' : isPeak ? '#f59e0b' : '#d97706';
+        const color = isEnd ? '#16a34a' : isPeak ? ACCENT : ACCENT_DEEP;
         const m = L.circleMarker([wp.lat, wp.lng], { radius: isEnd ? 9 : isPeak ? 8 : 6, fillColor: color, color:'#fff', weight:2, fillOpacity:0.9 }).addTo(map);
         m.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
         m.on('click', () => updateWaypointCard(i));
@@ -322,7 +343,7 @@
         type: 'line',
         data: {
           labels: schedule.map(w => w.loc.replace(/ \(H.*\)/, '')),
-          datasets: [{ label:'海拔 (m)', data: schedule.map(w => w.ele), borderColor:'#d97706', backgroundColor:'rgba(217,119,6,0.1)', borderWidth:2.5, pointBackgroundColor: schedule.map(w => w.ele >= 950 ? '#f59e0b' : w.ele <= 650 ? '#16a34a' : '#d97706'), pointRadius:5, tension:0.3, fill:true }]
+          datasets: [{ label:'海拔 (m)', data: schedule.map(w => w.ele), borderColor:ACCENT_DEEP, backgroundColor:'rgba(217,119,6,0.1)', borderWidth:2.5, pointBackgroundColor: schedule.map(w => w.ele >= 950 ? ACCENT : w.ele <= 650 ? '#16a34a' : ACCENT_DEEP), pointRadius:5, tension:0.3, fill:true }]
         },
         options: {
           responsive:true, maintainAspectRatio:false,
@@ -339,11 +360,11 @@
         const d = document.createElement('div');
         d.className = 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all';
         d.onclick = () => { document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); updateWaypointCard(i); };
-        const dot = wp.ele >= 950 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'bg-orange-400';
+        const dot = wp.ele >= 950 ? 'accent-mark-light' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'bg-orange-400';
         d.innerHTML = `
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dot} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
-            <span class="text-amber-700 font-mono font-bold text-sm">${wp.time}</span>
+            <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
             <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>

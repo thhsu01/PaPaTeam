@@ -28,6 +28,19 @@
       --glass-bg: rgba(255, 255, 255, 0.9);
       --glass-blur: blur(12px);
       --glass-border: 1px solid rgba(14, 165, 233, 0.1);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent-fill:            #0369a1;                    /* sky-700 */
+      --accent-border-deep:     #bae6fd;                    /* sky-200 */
+      --accent:                 #0284c7;                    /* sky-600 */
+      --accent-soft:            #e0f2fe;                    /* sky-100 */
+      --accent-strong:          #0369a1;                    /* sky-700 */
+      --accent-on-dark:         #38bdf8;                    /* sky-400 */
+      --accent-on-dark-soft:    #7dd3fc;                    /* sky-300 */
+      --accent-tint:            rgba(240, 249, 255, 0.5);   /* sky-50/50 */
+      --accent-light:           #0ea5e9;                    /* sky-500（僅腳本使用） */
+
     }
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
@@ -70,7 +83,7 @@
         <!-- Header -->
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-sky-100 text-sky-700 rounded-full text-[10px] font-bold tracking-widest uppercase border border-sky-200">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 accent-soft accent-text rounded-full text-[10px] font-bold tracking-widest uppercase border accent-line-deep">
                     Pace: Leisure 1.5km/hr | 深度歷史縱走
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-900 tracking-tighter">
@@ -85,27 +98,27 @@
             <div class="max-w-6xl mx-auto space-y-4">
                 <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left border border-stone-200">
                     <div class="flex flex-col items-center md:items-start gap-1">
-                        <span class="text-[10px] font-black text-sky-700 uppercase tracking-widest">活動日期</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">活動日期</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">日期待定</span>
                         <span class="text-xs text-stone-500 mt-1">建議挑選涼爽多雲日</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
-                        <span class="text-[10px] font-black text-sky-700 uppercase tracking-widest">集合地點</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">八堵車站</span>
                         <span class="text-xs text-stone-500 mt-1">出口大廳處</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
-                        <span class="text-[10px] font-black text-sky-700 uppercase tracking-widest">下山地點</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">下山地點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">基隆車站</span>
                         <span class="text-xs text-stone-500 mt-1">步行解散</span>
                     </div>
-                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 bg-sky-50/50 p-2 rounded-xl">
-                        <span class="text-[10px] font-black text-sky-700 uppercase tracking-widest">路線等級</span>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 accent-tint p-2 rounded-xl">
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">路線等級</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight flex items-center gap-2">
                             <span>⛰️</span>
                             <span>輕鬆休閒</span>
                         </span>
-                        <span class="text-xs text-sky-700 mt-1 font-medium">適合全齡、喜愛古蹟者</span>
+                        <span class="text-xs accent-text mt-1 font-medium">適合全齡、喜愛古蹟者</span>
                     </div>
                 </div>
             </div>
@@ -116,13 +129,13 @@
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                        <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>稜線縱走地圖
+                        <span class="w-2.5 h-8 accent-mark rounded-full"></span>稜線縱走地圖
                     </h2>
                     <p class="text-stone-500 mt-2 text-sm">數據基於八堵與獅球嶺座標校準 (速度 1.5km/hr)。</p>
                 </div>
                 <div class="flex gap-2">
-                    <button onclick="prevWaypoint()" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-100 flex items-center justify-center hover:bg-sky-700 hover:text-white transition-all" aria-label="上一個航點">&lt;</button>
-                    <button onclick="nextWaypoint()" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-100 flex items-center justify-center hover:bg-sky-700 hover:text-white transition-all" aria-label="下一個航點">&gt;</button>
+                    <button onclick="prevWaypoint()" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-100 flex items-center justify-center hover:accent-fill hover:text-white transition-all" aria-label="上一個航點">&lt;</button>
+                    <button onclick="nextWaypoint()" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-100 flex items-center justify-center hover:accent-fill hover:text-white transition-all" aria-label="下一個航點">&gt;</button>
                 </div>
             </div>
             <div class="space-y-8">
@@ -140,7 +153,7 @@
                             <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm"></p>
                         </div>
                         <div class="mt-8 pt-6 border-t border-stone-200">
-                            <span class="text-[10px] font-black text-sky-700 uppercase tracking-widest block mb-2">領隊提示</span>
+                            <span class="text-[10px] font-black accent-text uppercase tracking-widest block mb-2">領隊提示</span>
                             <p id="wp-advice" class="text-sm font-medium text-stone-700"></p>
                         </div>
                     </div>
@@ -161,7 +174,7 @@
         <!-- 2. Full Spots Guide -->
         <section id="spots" class="space-y-12">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>行程景點百科
+                <span class="w-2.5 h-8 accent-mark rounded-full"></span>行程景點百科
             </h2>
             
             <!-- Quick View Grid -->
@@ -185,8 +198,8 @@
                 <div class="absolute top-0 right-0 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div class="space-y-6">
-                        <div class="inline-block px-3 py-1 bg-sky-700 rounded text-[10px] font-black tracking-widest uppercase">深度專題 01</div>
-                        <h3 class="text-4xl font-black tracking-tighter">獅球嶺觀景台：<br><span class="text-sky-400">基隆門戶的視覺衝擊</span></h3>
+                        <div class="inline-block px-3 py-1 accent-fill rounded text-[10px] font-black tracking-widest uppercase">深度專題 01</div>
+                        <h3 class="text-4xl font-black tracking-tighter">獅球嶺觀景台：<br><span class="accent-text-inv">基隆門戶的視覺衝擊</span></h3>
                         <p class="text-stone-400 leading-relaxed">
                             這裡是全基隆最具指標性的攝影點。站在海拔 125 公尺的台上，你可以直視中山高速公路從大業隧道鑽出，像銀帶般延伸進基隆港。這份視覺動感結合了後方的基隆嶼與入港巨輪，交織出台灣絕無僅有的工業與港灣景觀。
                         </p>
@@ -196,7 +209,7 @@
                         </div>
                     </div>
                     <div class="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 space-y-4 text-sm">
-                        <h4 class="text-sky-300 font-bold italic">💡 歷史小知識</h4>
+                        <h4 class="accent-text-inv-soft font-bold italic">💡 歷史小知識</h4>
                         <p class="text-stone-300">這裡不只是景觀點，更是清代軍事要塞。由於扼守台北與基隆間的唯一缺口，在中法戰爭期間，劉銘傳曾在此親自指揮軍隊抵抗法軍。砲台遺址至今仍靜靜守護著這片港景。</p>
                     </div>
                 </div>
@@ -241,7 +254,7 @@
         <!-- 4. Detailed Timeline -->
         <section id="timeline">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100">
-                <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>詳細時程預估 (1.5km/hr)
+                <span class="w-2.5 h-8 accent-mark rounded-full"></span>詳細時程預估 (1.5km/hr)
             </h2>
             <div class="relative pl-6" id="timeline-container">
                 <div class="timeline-line"></div>
@@ -257,6 +270,11 @@
 
 
     <script>
+      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
+      // 免得換主色時只改了一邊。
+      const rootStyle = getComputedStyle(document.documentElement);
+      const ACCENT_LIGHT = rootStyle.getPropertyValue('--accent-light').trim();
+
         const schedule = [
             { lat: 25.108410, lng: 121.729033, time: "09:00", loc: "八堵車站", dist: 0.00, ele: 24, pos: "起點", 
               desc: "行程起點。位於基隆河谷交通要衝，建議在此整理裝備。", advice: "檢查交通卡餘額。" },
@@ -285,11 +303,11 @@
             map = L.map('map', { preferCanvas: true, center: [25.119, 121.734], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             const walkingCoords = schedule.map(d => [d.lat, d.lng]);
-            L.polyline(walkingCoords, { color: '#0ea5e9', weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
+            L.polyline(walkingCoords, { color: ACCENT_LIGHT, weight: 4, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
             schedule.forEach((d, i) => {
                 const circle = L.circleMarker([d.lat, d.lng], {
                     radius: i === 0 || i === schedule.length - 1 || d.pos === "最高點" ? 8 : 6,
-                    fillColor: i === 0 ? '#0ea5e9' : (d.pos === "最高點" ? '#ef4444' : '#292524'),
+                    fillColor: i === 0 ? ACCENT_LIGHT : (d.pos === "最高點" ? '#ef4444' : '#292524'),
                     color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
@@ -303,7 +321,7 @@
                 type: 'line',
                 data: {
                     labels: schedule.map(d => d.loc),
-                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#0ea5e9', borderWidth: 3, pointRadius: 4, fill: true, backgroundColor: 'rgba(14, 165, 233, 0.05)', tension: 0.4 }]
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: ACCENT_LIGHT, borderWidth: 3, pointRadius: 4, fill: true, backgroundColor: 'rgba(14, 165, 233, 0.05)', tension: 0.4 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 } } }
             });
@@ -332,7 +350,7 @@
                 const div = document.createElement('div');
                 div.className = "relative flex items-start mb-12 group cursor-pointer pl-8";
                 div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                let color = i === 0 || i === schedule.length - 1 ? "bg-sky-600" : (item.pos === "最高點" ? "bg-red-500" : "bg-stone-300");
+                let color = i === 0 || i === schedule.length - 1 ? "accent-mark" : (item.pos === "最高點" ? "bg-red-500" : "bg-stone-300");
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div></div>
                     <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all">

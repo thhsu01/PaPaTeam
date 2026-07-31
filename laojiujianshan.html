@@ -29,6 +29,20 @@
       --glass-bg: rgba(255, 255, 255, 0.6);
       --glass-blur: blur(8px);
       --glass-border: 1px solid rgba(234, 88, 12, 0.1);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent-fill:            #c2410c;                    /* orange-700 */
+      --accent-border:          #ffedd5;                    /* orange-100 */
+      --accent-border-deep:     #fed7aa;                    /* orange-200 */
+      --accent:                 #ea580c;                    /* orange-600 */
+      --accent-light:           #f97316;                    /* orange-500 */
+      --accent-soft:            #ffedd5;                    /* orange-100 */
+      --accent-strong:          #c2410c;                    /* orange-700 */
+      --accent-strong-deep:     #9a3412;                    /* orange-800 */
+      --accent-tint:            #fff7ed;                    /* orange-50 */
+      --accent-tint-weak:       rgba(255, 247, 237, 0.3);   /* orange-50/30 */
+
     }
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
@@ -45,7 +59,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js" defer></script>
 </head>
-<body class="antialiased selection:bg-orange-100">
+<body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
 
 
@@ -78,7 +92,7 @@
         <!-- Header / Meeting Info Area -->
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-orange-700 text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 accent-fill text-white rounded-full text-xs font-bold tracking-widest uppercase shadow-md shadow-orange-200">
                     Mission Accomplished 任務完成
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">鷹石之巔，翠湖幽境<br><span class="text-stone-600 text-3xl md:text-5xl font-bold">內溝山系 O 型全系列縱走</span></h1>
@@ -89,26 +103,26 @@
 
             <!-- Meeting Block -->
             <div class="max-w-4xl mx-auto space-y-4">
-                <div class="info-glass p-6 rounded-3xl shadow-sm border border-orange-100 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border accent-line flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
-                        <span class="text-[10px] font-black text-orange-700 uppercase tracking-widest">集合地點</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">金龍場停車場</span>
                         <span class="text-xs text-stone-600 mt-1">請準時集合，裝備點檢</span>
                     </div>
                     
-                    <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
+                    <div class="w-px h-10 accent-soft hidden md:block"></div>
                     
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
-                        <span class="text-[10px] font-black text-orange-700 uppercase tracking-widest">出發時間</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">出發時間</span>
                         <span class="text-xl font-bold text-stone-800">5月1日 07:30</span>
                         <span class="text-xs text-stone-600 mt-1">（請提前 10 分鐘抵達）</span>
                     </div>
 
-                    <div class="w-px h-10 bg-orange-100 hidden md:block"></div>
+                    <div class="w-px h-10 accent-soft hidden md:block"></div>
 
                     <!-- Dynamic Weather Column -->
                     <div class="flex flex-col items-center md:items-start gap-1 flex-1">
-                        <span class="text-[10px] font-black text-orange-700 uppercase tracking-widest">即時天氣預報</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">即時天氣預報</span>
                         <div id="weather-container" class="flex flex-col items-center md:items-start">
                             <span id="weather-main" class="text-xl font-bold text-stone-800 loading-pulse">獲取中...</span>
                             <span id="weather-sub" class="text-xs text-stone-600 mt-1 italic">正在連線氣象觀測站</span>
@@ -127,7 +141,7 @@
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
-                    <div class="text-xl md:text-2xl font-black text-orange-700 leading-tight">
+                    <div class="text-xl md:text-2xl font-black accent-text leading-tight">
                         4<span class="text-sm font-normal text-stone-600 mx-1">小時</span>46<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
@@ -193,7 +207,7 @@
             <!-- External Reference Links -->
             <div class="mt-8 pt-6 border-t border-stone-100 flex flex-col sm:flex-row flex-wrap items-center gap-4">
                 <span class="text-sm font-bold text-stone-600 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>
+                    <span class="w-1.5 h-1.5 accent-mark-light rounded-full"></span>
                     參考資源
                 </span>
                 <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5193278" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-800 hover:bg-black text-white rounded-xl text-xs font-bold transition-all shadow-sm">
@@ -230,7 +244,7 @@
                     <p class="text-sm text-stone-600 leading-relaxed">位於汐止與內湖交界。展望良好，能遠眺國道高速公路，是行程初期熱身的最佳頂點。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>汐止鷹石尖 (H180m 推估)</h3>
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>汐止鷹石尖 (H180m 推估)</h3>
                     <p class="text-sm text-stone-600 leading-relaxed">行程中最具震撼力的拍照點。突出的巨岩傲視群山，因神似老鷹啄食而得名。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -245,9 +259,9 @@
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
                     <p class="text-sm text-stone-600 leading-relaxed">便利的起訖點，為登山隊提供充足的停車空間與集合便利性。</p>
                 </div>
-                <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 shadow-sm">
-                    <h3 class="font-bold text-orange-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-orange-600 rounded-full"></span>翠湖 (H45m 推估)</h3>
-                    <p class="text-sm text-orange-700 leading-relaxed">本行程的核心深度點位。請見下方專題介紹，了解其背後的煤礦歷史與生態。</p>
+                <div class="accent-tint p-6 rounded-2xl border accent-line-deep shadow-sm">
+                    <h3 class="font-bold accent-text-deep mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>翠湖 (H45m 推估)</h3>
+                    <p class="text-sm accent-text leading-relaxed">本行程的核心深度點位。請見下方專題介紹，了解其背後的煤礦歷史與生態。</p>
                 </div>
 
                 <!-- SPECIAL FOCUS: CUIHU DEEP DIVE -->
@@ -303,6 +317,11 @@
 
 
     <script>
+      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
+      // 免得換主色時只改了一邊。
+      const rootStyle = getComputedStyle(document.documentElement);
+      const ACCENT = rootStyle.getPropertyValue('--accent').trim();
+
         function openNavigation() {
             window.open("https://www.google.com/maps/dir/?api=1&destination=25.071960894394802,121.63322171182692", "_blank");
         }
@@ -376,11 +395,11 @@
             map = L.map('map', { preferCanvas: true, center: [25.083, 121.631], zoom: 14 });
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
             const pathCoords = schedule.map(d => [d.lat, d.lng]);
-            L.polyline(pathCoords, { color: '#ea580c', weight: 4, opacity: 0.8 }).addTo(map);
+            L.polyline(pathCoords, { color: ACCENT, weight: 4, opacity: 0.8 }).addTo(map);
             schedule.forEach((d, i) => {
                 const circle = L.circleMarker([d.lat, d.lng], {
                     radius: d.pos === "最高點" || d.pos.includes("終點") || d.pos.includes("起點") ? 8 : 6,
-                    fillColor: d.pos === "最高點" ? '#16a34a' : (d.pos.includes("終點") || d.pos.includes("起點") ? '#ea580c' : '#1c1917'),
+                    fillColor: d.pos === "最高點" ? '#16a34a' : (d.pos.includes("終點") || d.pos.includes("起點") ? ACCENT : '#1c1917'),
                     color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
                 }).addTo(map);
                 circle.on('click', () => updateCard(i));
@@ -394,7 +413,7 @@
                 type: 'line',
                 data: {
                     labels: schedule.map(d => d.loc.split(' ')[0]),
-                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: '#ea580c', borderWidth: 4, pointRadius: 6, fill: true, backgroundColor: 'rgba(234, 88, 12, 0.1)', tension: 0.35 }]
+                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: ACCENT, borderWidth: 4, pointRadius: 6, fill: true, backgroundColor: 'rgba(234, 88, 12, 0.1)', tension: 0.35 }]
                 },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 }, x: { display: false } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
             });
@@ -416,8 +435,8 @@
             markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("終點") || schedule[i].pos.includes("起點") ? 8 : 6) }));
             map.panTo([d.lat, d.lng]);
             const card = document.getElementById('wp-card');
-            card.classList.add('border-orange-200', 'bg-orange-50/30');
-            setTimeout(() => card.classList.remove('border-orange-200', 'bg-orange-50/30'), 500);
+            card.classList.add('accent-line-deep', 'accent-tint-weak');
+            setTimeout(() => card.classList.remove('accent-line-deep', 'accent-tint-weak'), 500);
         }
 
         function renderTimeline() {
@@ -426,7 +445,7 @@
                 const div = document.createElement('div');
                 div.className = "relative flex items-start mb-8 group cursor-pointer pl-8";
                 div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                let color = item.pos.includes("終點") || item.pos.includes("起點") ? "bg-orange-600" : (item.pos === "最高點" ? "bg-green-600" : "bg-stone-300");
+                let color = item.pos.includes("終點") || item.pos.includes("起點") ? "accent-mark" : (item.pos === "最高點" ? "bg-green-600" : "bg-stone-300");
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
                     <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">

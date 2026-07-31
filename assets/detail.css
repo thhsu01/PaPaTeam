@@ -80,51 +80,6 @@ main section[id] {
   color: #fff;
 }
 
-/* ── 主色語意層 ──────────────────────────────────────── */
-
-/* 各頁在 :root 宣告 --accent 系列的值，此處只定義「用在哪」。
- *
- * 分成四個 token 不是為了好看，是因為同一個顏色在不同位置的對比度門檻不同。
- * 以碧山粉為例（頁底 #fcfaf7、深底 stone-900）：
- *
- *   pink-500  白底 3.53  →  只能當裝飾，當文字一定不合格
- *   pink-600  白底 4.60、頁底 4.41、粉底 3.91
- *             →  當文字會在淺色卡片上失敗（先前實測 4.39:1 就是這樣來的），
- *                但白字壓在它上面是 4.60，所以它是「底色」不是「字色」
- *   pink-700  白底 6.04、頁底 5.80、粉底 5.14  →  到哪都安全，這才是字色
- *   pink-400  壓在 stone-900 上 6.60  →  深底專用；淺底上只有 2.5，方向相反
- *
- * 所以：要改主色，改 :root 那四個值；要檢查對比度，只需驗那四個值，
- * 不必再掃過 markup 裡三十幾處色階。
- */
-
-/* 淺底上的文字 */
-.accent-text { color: var(--accent-strong); }
-
-/* 深底上的文字（深淺方向與上面相反，不可混用） */
-.accent-text-inv { color: var(--accent-on-dark); }
-
-/* 色條、圓點、軌跡等純裝飾，不受對比門檻約束。
-   分兩個深淺是因為原設計本來就有：大面積的段落色條與時間軸端點用深的，
-   卡片內的小圓點用淺的。混用會讓頁面看起來變淡。 */
-.accent-mark      { background: var(--accent); }
-.accent-mark-deep { background: var(--accent-fill); }
-
-/* 實心底配白字 */
-.accent-fill { background: var(--accent-fill); color: #fff; }
-
-/* 可互動的實心元件：hover 時加深，白字仍安全 */
-.accent-btn { background: var(--accent-fill); color: #fff; }
-.accent-btn:hover { background: var(--accent-strong); }
-
-/* 中性底的元件，hover 時才轉為主色 */
-.accent-hover:hover { background: var(--accent-fill); color: #fff; }
-
-/* 淡底與淡框線 */
-.accent-soft { background: var(--accent-soft); }
-.accent-tint { background: var(--accent-tint); }
-.accent-line { border-color: var(--accent-border); }
-
 /* ── 卡片與時間軸 ────────────────────────────────────── */
 
 .card-hover:hover {
@@ -156,3 +111,61 @@ main section[id] {
 .leaflet-popup-close-button {
   color: #404040 !important;
 }
+
+/* ── 主色語意層 ──────────────────────────────────────── */
+
+/* 各頁在 :root 宣告 --accent 系列的值，此處只定義「用在哪」。
+ *
+ * 分成四個 token 不是為了好看，是因為同一個顏色在不同位置的對比度門檻不同。
+ * 以碧山粉為例（頁底 #fcfaf7、深底 stone-900）：
+ *
+ *   pink-500  白底 3.53  →  只能當裝飾，當文字一定不合格
+ *   pink-600  白底 4.60、頁底 4.41、粉底 3.91
+ *             →  當文字會在淺色卡片上失敗（先前實測 4.39:1 就是這樣來的），
+ *                但白字壓在它上面是 4.60，所以它是「底色」不是「字色」
+ *   pink-700  白底 6.04、頁底 5.80、粉底 5.14  →  到哪都安全，這才是字色
+ *   pink-400  壓在 stone-900 上 6.60  →  深底專用；淺底上只有 2.5，方向相反
+ *
+ * 所以：要改主色，改 :root 那四個值；要檢查對比度，只需驗那四個值，
+ * 不必再掃過 markup 裡三十幾處色階。
+ */
+
+/* 淺底上的文字 */
+.accent-text { color: var(--accent-strong); }
+
+/* 深底上的文字（深淺方向與上面相反，不可混用） */
+.accent-text-inv { color: var(--accent-on-dark); }
+
+/* 色條、圓點、軌跡等純裝飾，不受對比門檻約束。
+   分兩個深淺是因為原設計本來就有：大面積的段落色條與時間軸端點用深的，
+   卡片內的小圓點用淺的。混用會讓頁面看起來變淡。 */
+.accent-mark      { background: var(--accent); }
+.accent-mark-deep { background: var(--accent-deep); }
+
+/* 實心底配白字 */
+.accent-fill { background: var(--accent-fill); color: #fff; }
+
+/* 可互動的實心元件：hover 時加深，白字仍安全 */
+.accent-btn { background: var(--accent-fill); color: #fff; }
+.accent-btn:hover { background: var(--accent-strong); }
+
+/* 其餘頁面用到的變體。命名一致，各頁在 :root 給自己的值。 */
+.accent-line-deep { border-color: var(--accent-border-deep); }
+.accent-mark-light { background: var(--accent-light); }
+.accent-soft-deep { background: var(--accent-soft-deep); }
+.accent-text-deep { color: var(--accent-strong-deep); }
+.accent-text-deeper { color: var(--accent-strong-deeper); }
+.accent-text-inv-soft { color: var(--accent-on-dark-soft); }
+.accent-text-light { color: var(--accent-strong-light); }
+.accent-tint-weak { background: var(--accent-tint-weak); }
+
+/* 中性底的元件，hover 時才轉為主色 */
+.accent-hover:hover { background: var(--accent-fill); color: #fff; }
+
+/* 淡底與淡框線 */
+.accent-soft { background: var(--accent-soft); }
+.accent-tint { background: var(--accent-tint); }
+.accent-line { border-color: var(--accent-border); }
+
+/* 本區塊刻意排在 .info-glass 之後：後者用 border 簡寫，
+   而簡寫與 border-color longhand 之間只看先後、不看特異性。 */

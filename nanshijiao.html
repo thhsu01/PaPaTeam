@@ -23,20 +23,31 @@
       --map-w: 100%;
       --timeline-left: 20px;
       --timeline-bg: linear-gradient(to bottom, #c77c3e, #7c9e52);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent:                 #c77c3e;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線、斜紋底 */
+      --accent-strong:          #9a6030;                  /* 淺底上的文字（頁底 4.63:1） */
+      --accent-strong-deep:     #7a5030;                  /* 淡底卡片上的內文，再深一階 */
+      --accent-on-dark:         #c09060;                  /* 深色專題面板上的文字 */
+      --accent-tint:            #fef9f0;                  /* 淡底 */
+      --accent-border:          #f5dfc0;                  /* 淡框線 */
+      --accent-border-deep:     #e8d5b5;                  /* 深一階的框線 */
+
     }
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
 
     /* 步道標記意象的斜紋底 */
-    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, rgba(199,124,62,0.06) 12px, rgba(199,124,62,0.06) 24px ); }
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
 
     .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
 
-    /* 日期戳章。文字與框線用 #9a6030（4.63:1）而非品牌色 #c77c3e（2.97:1），見 READABILITY_AUDIT.md */
-    .stamp { display: inline-block; border: 3px solid #9a6030; color: #9a6030; font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    /* 日期戳章。文字與框線用 var(--accent-strong)（4.63:1）而非品牌色 var(--accent)（2.97:1），見 READABILITY_AUDIT.md */
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
 
     /* 區段標題色條（非文字，不受對比度門檻約束，保留品牌色） */
-    .section-bar-orange { background: #c77c3e; }
+    .section-bar-orange { background: var(--accent); }
     .section-bar-green { background: #7c9e52; }
     .section-bar-stone { background: #a09080; }
   </style>
@@ -90,12 +101,12 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           微笑山線，南勢角縱走<br>
-          <span style="color:#9a6030;">一線天 × 烘爐地 × 五尖山</span>
+          <span style="color:var(--accent-strong);">一線天 × 烘爐地 × 五尖山</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">從捷運南勢角站出發，穿越圓通禪寺一線天奇景，沿稜線縱走外南勢角山、南勢角山（小百岳 302m），再向西挺進牛埔頭山與五尖山，串連中和、土城兩區的天上山系精華。</p>
 
         <!-- 注意事項橫幅 -->
-        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:#c77c3e;">
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
           <span class="text-2xl mt-0.5">🏛️</span>
           <div>
             <div class="font-bold text-amber-900 text-base mb-1">行前提醒：全程以大眾運輸為主</div>
@@ -109,7 +120,7 @@
             <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
             <div class="text-xs text-stone-600 mt-1">捷運中和新蘆線，1 號出口集合</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:#9a6030;">🚗 開車可停於<br>南勢角站轉乘停車場</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🚗 開車可停於<br>南勢角站轉乘停車場</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">出發時間</div>
@@ -122,7 +133,7 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:#9a6030;" aria-label="在地圖應用中導航至南勢角站">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至南勢角站">
               🗺️ 導航至南勢角站
             </button>
           </div>
@@ -143,7 +154,7 @@
             <div class="text-xs text-stone-600">總爬升高度 m</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:#9a6030;">320</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">320</div>
             <div class="text-xs text-stone-600">最高海拔 m（五尖山）</div>
           </div>
         </div>
@@ -174,9 +185,9 @@
             <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
           </div>
           <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
-          <div class="rounded-xl p-3" style="background:#fef9f0; border:1px solid #f5dfc0;">
-            <div class="text-xs font-medium mb-1" style="color:#9a6030;">隊友建議</div>
-            <p class="text-xs" style="color:#9a6030;" id="wp-advice">在站內小7補充飲食，確認大家到齊後出發。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice">在站內小7補充飲食，確認大家到齊後出發。</p>
           </div>
         </div>
 
@@ -184,7 +195,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline" style="color:#9a6030;">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=105" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 烘爐地登山步道資訊 (健行筆記)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=106" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 圓通寺登山步道資訊 (健行筆記)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=2077" target="_blank" class="text-sm text-blue-600 hover:underline">📝 微笑山線：天上山系 烘爐地土地公段</a>
@@ -217,7 +228,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
           </div>
 
@@ -231,8 +242,8 @@
             <p class="text-sm text-stone-600 leading-relaxed">建於 1920 年代（清雍正至乾隆年間擴建），近 300 年歷史，略具日式風味的仿唐式建築。廟前俯瞰中和市區視野開闊，是香客與山友的共同聖地。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:#e8d5b5;">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>一線天 (H100m)</h3>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>一線天 (H100m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">圓通禪寺後方的天然岩縫步道，僅容一人側身通過。昏暗岩縫中仰望天光，是全程最具震撼感的地質奇觀，也是路線上最上鏡的打卡點。</p>
           </div>
 
@@ -246,9 +257,9 @@
             <p class="text-sm text-stone-600 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，實為行程中重要的稜線觀景台。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:#fef9f0; border-color:#e8d5b5;">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:#9a6030;"><span class="w-2 h-2 rounded-full" style="background:#c77c3e; display:inline-block;"></span>南勢角山 302m ⭐ 小百岳 #16</h3>
-            <p class="text-sm leading-relaxed" style="color:#7a5030;">全程最高展望點之一，小百岳第 16 名。山頂平坦開闊，可 360° 俯瞰台北盆地、大漢溪、新店溪，遠眺觀音山、大屯火山群及淡水出海口。入夜後更是大台北夜景名所。</p>
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>南勢角山 302m ⭐ 小百岳 #16</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程最高展望點之一，小百岳第 16 名。山頂平坦開闊，可 360° 俯瞰台北盆地、大漢溪、新店溪，遠眺觀音山、大屯火山群及淡水出海口。入夜後更是大台北夜景名所。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -275,8 +286,8 @@
 
         <!-- Special focus: 一線天 -->
         <div class="mt-4 rounded-2xl p-6 border" style="background:#1c1c1c; border-color:#333; color:#e8e0d4;">
-          <div class="text-xs font-medium mb-2 tracking-widest uppercase" style="color:#c77c3e;">地質景觀專題</div>
-          <h3 class="text-xl font-black mb-3" style="color:#f5e8d0;">一線天：<span class="font-normal" style="color:#c09060;">圓通寺後山的岩縫奇境</span></h3>
+          <div class="text-xs font-medium mb-2 tracking-widest uppercase" style="color:var(--accent);">地質景觀專題</div>
+          <h3 class="text-xl font-black mb-3" style="color:#f5e8d0;">一線天：<span class="font-normal" style="color:var(--accent-on-dark);">圓通寺後山的岩縫奇境</span></h3>
           <p class="text-sm leading-relaxed mb-3" style="color:#b0a090;"><strong style="color:#e0c8a0;">【成因】</strong> 由堅硬砂岩受構造應力沿垂直節理裂開，歷經長期風化侵蝕，形成這道僅容一人通過的天然狹縫。仰望上方，天空被壓縮成一條細線，「一線天」之名由此而來。</p>
           <p class="text-sm leading-relaxed" style="color:#b0a090;"><strong style="color:#e0c8a0;">【攻略】</strong> 入口在圓通禪寺後方右側，步行約 2 分鐘可達。身形較寬者需側身通過，建議不要攜帶過大背包。岩壁常年濕潤，請注意腳步防滑。</p>
         </div>
@@ -384,6 +395,12 @@
         advice: "搭乘捷運返家，附近有多家餐廳可慶功！" }
     ];
 
+
+      // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+      // 所以要先從 :root 取出實際值，才能與 CSS 共用同一份設定。
+      const ACCENT = getComputedStyle(document.documentElement)
+                       .getPropertyValue('--accent').trim();
+
     let map, chart, markers = [];
     let currentWpIndex = 0;
 
@@ -455,13 +472,13 @@
       }).addTo(map);
 
       const pathCoords = schedule.map(wp => [wp.lat, wp.lng]);
-      L.polyline(pathCoords, { color: '#c77c3e', weight: 4, opacity: 0.85 }).addTo(map);
+      L.polyline(pathCoords, { color: ACCENT, weight: 4, opacity: 0.85 }).addTo(map);
 
       schedule.forEach((wp, i) => {
         const isStartEnd = i === 0 || i === schedule.length - 1;
         const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
         const isTemple   = wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
-        const color = isStartEnd ? '#c77c3e' : isPeak ? '#7c9e52' : isTemple ? '#8060b0' : '#888';
+        const color = isStartEnd ? ACCENT : isPeak ? '#7c9e52' : isTemple ? '#8060b0' : '#888';
 
         const marker = L.circleMarker([wp.lat, wp.lng], {
           radius: isStartEnd ? 9 : isPeak ? 8 : 6,
@@ -506,13 +523,13 @@
           datasets: [{
             label: '海拔 (m)',
             data: schedule.map(wp => wp.ele),
-            borderColor: '#c77c3e',
+            borderColor: ACCENT,
             backgroundColor: 'rgba(199,124,62,0.10)',
             borderWidth: 2.5,
             pointBackgroundColor: schedule.map(wp =>
               wp.ele >= 300 ? '#7c9e52' :
               wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? '#8060b0' :
-              wp.pos === "集合起點" || wp.pos === "回程終點" ? '#c77c3e' : '#a09080'
+              wp.pos === "集合起點" || wp.pos === "回程終點" ? ACCENT : '#a09080'
             ),
             pointRadius: 5,
             tension: 0.35,
@@ -566,14 +583,14 @@
 
         const isHighlight = wp.pos === "最高點" || wp.pos === "小百岳 #16";
         const isStart = i === 0 || i === schedule.length - 1;
-        const dotColor = isHighlight ? '#7c9e52' : isStart ? '#c77c3e' : '#a09080';
+        const dotColor = isHighlight ? '#7c9e52' : isStart ? ACCENT : '#a09080';
         const emoji = posEmoji[wp.pos] || '📍';
 
         div.innerHTML = `
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
                style="background:${dotColor};"></div>
           <div class="flex items-center gap-3 mb-1">
-            <span class="font-mono font-bold text-sm" style="color:#9a6030;">${wp.time}</span>
+            <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
             <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>

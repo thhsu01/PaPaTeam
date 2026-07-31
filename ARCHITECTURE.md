@@ -294,8 +294,13 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
   改色時務必確認該元素的實際背景，不要跨頁做全域字串替換——
   第三輪就是這樣一次改壞 136 處，詳見 `READABILITY_AUDIT.md`。
 
-主色目前寫死在 markup 的 Tailwind class（`text-pink-700`、`bg-sky-600`…）。
-待辦是收成 `--accent` 系列變數，讓換色與對比檢查變成改一個值的事。
+主色已全數收成 `--accent` 系列變數。各頁在 `:root` 給值，markup 用語意 class
+（`.accent-text` / `.accent-fill` / `.accent-mark` …），腳本以 `getComputedStyle`
+讀同一份值。換色與對比檢查因此只需面對 `:root` 的幾個值。
+
+**腳本裡的顏色不能寫 `var(--accent)`**：那些值最終進到 canvas 的 `fillStyle`，
+canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.js。
+（行內 `style` 字串裡的 `var()` 沒問題，瀏覽器會解析。）
 
 ### 收斂狀態
 
@@ -314,19 +319,16 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 | 站徽（綠圓 + 爬爬小隊） | ✅ 10/10 |
 | 段落 `scroll-margin-top` | ✅ 集中於 `detail.css` |
 | 小字對比 ≥ 4.5:1 | ✅ 0 筆失敗 |
+| 主色收成 `--accent` token | ✅ 10/10 |
 
-### 尚未收斂的三件事
+### 尚未收斂的兩件事
 
 **一、內容寬度**（結構待辦）
 正規頁與 3 頁同世代者，各段自帶 `max-w-4xl`；家族 A 出身的 6 頁靠
 `<main class="max-w-6xl">`。地圖實寬因此是 896px 對 1006px。
 統一它會重排那 6 頁的每一段，比先前任何一步都大，故單獨列為待辦。
 
-**二、主色寫死在 markup**（10 頁共同）
-`text-pink-700`、`bg-sky-600` 之類散在各頁。待辦是收成 `--accent` 系列變數，
-讓換色與對比檢查變成改一個值的事。這是每頁主色能真正「制度化」的前提。
-
-**三、內容缺口**（不是結構問題，需要實地資料才能補）
+**二、內容缺口**（不是結構問題，需要實地資料才能補）
 
 | 頁面 | 缺什麼 |
 |---|---|
@@ -334,6 +336,10 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 | `meihuashan` | schedule 沒有 `advice`，該區塊在有資料前自動隱藏 |
 
 里程與建議都是實走才知道的東西，不應為了填滿欄位而編造。
+
+另有兩處**次要色**未納入主色層，是刻意的：語意色（紅=警告、綠=山頂、藍=外部連結、
+琥珀=注意）跨頁共用同一套意義，不屬於任何單頁的識別色；`nanshijiao` 的深色專題面板
+自成一套配色。兩者若要制度化，該是另一組 token，不是 `--accent`。
 
 **改 id 的代價**：`bishan.html#analysis` 這類舊錨點連結會失效。本站規模小、對外連結少，
 判斷為可接受，但收斂時要一併更新頁內所有 `onclick` 的 `getElementById`。

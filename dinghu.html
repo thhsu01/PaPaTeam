@@ -20,6 +20,14 @@
       --map-radius: 12px;
       --timeline-left: 20px;
       --timeline-bg: linear-gradient(to bottom, #16a34a, #84cc16);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent:                 #059669;                    /* emerald-600 */
+      --accent-light:           #10b981;                    /* emerald-500 */
+      --accent-strong:          #047857;                    /* emerald-700 */
+      --accent-strong-light:    #059669;                    /* emerald-600 */
+
     }
   </style>
   <link rel="stylesheet" href="assets/detail.css">
@@ -61,7 +69,7 @@
         </div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           猴崁水圳，青楓疊翠<br>
-          <span class="text-emerald-600">頂湖山系 O 型縱走</span>
+          <span class="accent-text-light">頂湖山系 O 型縱走</span>
         </h1>
         <p class="text-lg text-stone-600 mb-6 max-w-2xl">從日治水道遺跡出發，穿越猴崁水圳古道，沿青楓步道登頂頂湖山，俯瞰陽明山翠谷，O 型完整體驗陽明山北麓山水之美。</p>
 
@@ -105,7 +113,7 @@
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
             <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
-            <div class="text-xl md:text-2xl font-black text-emerald-600 leading-tight">
+            <div class="text-xl md:text-2xl font-black accent-text-light leading-tight">
               4<span class="text-sm font-normal text-stone-600 mx-1">小時</span>45<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
             </div>
           </div>
@@ -125,7 +133,7 @@
     <section id="map-section" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-emerald-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark rounded-full"></span>
           互動路線圖與地點切換
         </h2>
         <p class="text-sm text-stone-600 mb-6">里程以直線距離之 1.3 倍修正。點擊地圖標記查看航點細節。</p>
@@ -155,8 +163,8 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5622864" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 參考 GPX 路線 (健行筆記 #5622864)</a>
-            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5604449" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 猴崁水圳古道・青楓步道 GPX (健行筆記 #5604449)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5622864" target="_blank" class="text-sm accent-text hover:underline">🔗 參考 GPX 路線 (健行筆記 #5622864)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5604449" target="_blank" class="text-sm accent-text hover:underline">🔗 猴崁水圳古道・青楓步道 GPX (健行筆記 #5604449)</a>
             <a href="https://www.youtube.com/watch?v=EFOR7Zw4C1w" target="_blank" class="text-sm text-red-600 hover:underline">🎬 陽明山全新完工｜猴崁水圳步道｜青楓步道｜頂湖O型 (YouTube)</a>
             <a href="https://ballenf.pixnet.net/blog/posts/4045797963" target="_blank" class="text-sm text-blue-600 hover:underline">📝 圳內-猴崁古道-草山觀瀑吊橋-滾水頭登山紀錄 (痞客邦)</a>
           </div>
@@ -168,7 +176,7 @@
     <section id="elevation" class="py-16 px-6 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-emerald-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark rounded-full"></span>
           海拔高度剖面圖
         </h2>
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
@@ -218,7 +226,7 @@
             <p class="text-sm text-stone-600 leading-relaxed">頂湖山主峰，北投區最高山之一。稜線寬闊，林木茂密，山頂有路標指示往無尾崙方向下山，是O型路線的轉折核心。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-600 rounded-full"></span>頂湖站 (H380m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>頂湖站 (H380m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">O型路線終點的公車站，位於陽投公路旁。由此步行至陽明山立體停車場約15分鐘，或搭乘小9路公車返回，完成圓滿的環型行程。</p>
           </div>
         </div>
@@ -243,7 +251,7 @@
     <section id="timeline" class="py-16 px-6 bg-stone-50">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-emerald-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark rounded-full"></span>
           實際行程紀錄 (2026/6/20)
         </h2>
         <p class="text-sm text-stone-600 mb-8">GPS 實測總里程 7.75 km（圳內站至頂湖站，含估算起點段 0.80 km）。</p>
@@ -437,12 +445,12 @@
           document.getElementById('map-section').scrollIntoView({behavior:'smooth'});
           updateWaypointCard(i);
         };
-        const dotColor = wp.ele >= 650 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'bg-stone-400';
+        const dotColor = wp.ele >= 650 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'accent-mark-light' : 'bg-stone-400';
         const emoji = posLabels[wp.pos] || '📍';
         div.innerHTML = `
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dotColor} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
-            <span class="text-emerald-700 font-mono font-bold text-sm">${wp.time}</span>
+            <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
             <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>

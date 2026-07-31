@@ -20,6 +20,20 @@
       --map-radius: 12px;
       --timeline-left: 20px;
       --timeline-bg: linear-gradient(to bottom, #0284c7, #38bdf8);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。 */
+      --accent-fill:            #0369a1;                    /* sky-700 */
+      --accent-border-deep:     #bae6fd;                    /* sky-200 */
+      --accent:                 #0ea5e9;                    /* sky-500 */
+      --accent-deep:            #0284c7;                    /* sky-600 */
+      --accent-light:           #38bdf8;                    /* sky-400 */
+      --accent-soft:            #e0f2fe;                    /* sky-100 */
+      --accent-strong:          #0369a1;                    /* sky-700 */
+      --accent-strong-deep:     #075985;                    /* sky-800 */
+      --accent-strong-deeper:   #0c4a6e;                    /* sky-900 */
+      --accent-tint:            #f0f9ff;                    /* sky-50 */
+
     }
   </style>
   <link rel="stylesheet" href="assets/detail.css">
@@ -55,11 +69,11 @@
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
       <div class="max-w-4xl mx-auto w-full">
         <div class="mb-4">
-          <span class="text-xs font-medium tracking-widest text-sky-700 uppercase bg-sky-100 px-3 py-1 rounded-full">候選行程 · 日期未定 · 6.6 KM O型環走</span>
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 6.6 KM O型環走</span>
         </div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           登七星而小台北<br>
-          <span class="text-sky-700">七星山主東峰 苗圃O型</span>
+          <span class="accent-text">七星山主東峰 苗圃O型</span>
         </h1>
         <p class="text-lg text-stone-600 mb-6 max-w-2xl">從苗圃登山口起登，沿最長最陡的石階步道直攻台北市最高峰——七星山主峰（1,120m），連走東峰後繞七星公園草坪 O 型回程。一次集滿兩座小百岳，去回路線景色完全不重複。</p>
 
@@ -88,7 +102,7 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">山頂氣溫較山下低 10–15°C</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full bg-sky-700 hover:bg-sky-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:bg-sky-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
               🗺️ 導航至陽明山第二停車場
             </button>
           </div>
@@ -119,7 +133,7 @@
     <section id="map-section" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           互動路線圖與航點切換
         </h2>
         <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。黃色圓點為山頂高點。</p>
@@ -145,8 +159,8 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=1169" target="_blank" class="text-sm text-sky-700 hover:underline">🔗 七星山主東峰苗圃線步道資料（健行筆記）</a>
-            <a href="https://hiking.biji.co/index.php?q=review&act=info&review_id=20845" target="_blank" class="text-sm text-sky-700 hover:underline">🔗 苗圃O型 6.6km 路線紀錄（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=1169" target="_blank" class="text-sm accent-text hover:underline">🔗 七星山主東峰苗圃線步道資料（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=review&act=info&review_id=20845" target="_blank" class="text-sm accent-text hover:underline">🔗 苗圃O型 6.6km 路線紀錄（健行筆記）</a>
             <a href="https://en-us.hikingbook.net/posts/%E7%99%BB%E4%B8%8A%E8%87%BA%E5%8C%97%E5%B8%82%E6%9C%80%E9%AB%98%E5%B3%B0-%E4%B8%83%E6%98%9F%E5%B1%B1%E8%B7%AF%E7%B7%9A%E5%85%A8%E6%94%BB%E7%95%A5" target="_blank" class="text-sm text-blue-600 hover:underline">📝 七星山路線全攻略（Hikingbook）</a>
             <a href="https://www.ymsnp.gov.tw/YMSNP_com_linemap_m.aspx?id=6&uid=1395&pid=16&eid=13459&aid=13456&sid=13460&n=17942&sms=13458" target="_blank" class="text-sm text-emerald-700 hover:underline">🌿 陽明山國家公園七星山系官方步道資訊</a>
           </div>
@@ -158,7 +172,7 @@
     <section id="elevation" class="py-16 px-6 bg-stone-50">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           海拔高度剖面圖
         </h2>
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
@@ -180,7 +194,7 @@
             <p class="text-sm text-stone-600 leading-relaxed">七星山三條登山口中路程最長、落差最大的選擇，位於陽明山遊客中心旁。沿途闊葉林相茂密，可見松鼠穿梭、竹雞跳躍，生態豐富，是進入七星山最有野趣的路徑。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-sky-500 rounded-full"></span>主東叉路口 (H1,060m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>主東叉路口 (H1,060m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">O 型路線的關鍵分岔口。去程取左攻主峰，回程由此右轉往七星公園下山，是讓去回程完全不重複的核心節點。抵達此處代表最陡的石階段已過，視野豁然開朗。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -201,13 +215,13 @@
           </div>
         </div>
 
-        <div class="mt-8 bg-sky-50 p-6 rounded-2xl border border-sky-200">
-          <div class="text-xs font-medium text-sky-700 mb-2">本次行程亮點</div>
-          <h3 class="text-lg font-bold text-sky-900 mb-3">小百岳雙拼：<span class="font-normal text-sky-700">一次集點兩座小百岳</span></h3>
-          <p class="text-sm text-sky-800 leading-relaxed mb-3"><strong>【七星山主峰 × 七星山東峰】</strong><br>小百岳 No.2（七星主峰）與另一座小百岳（七星東峰）相距僅 300 公尺，本次苗圃 O 型路線兩者皆可順路收集，是台北郊山中性價比最高的「雙百岳連走」之一。</p>
-          <p class="text-sm text-sky-800 leading-relaxed"><strong>【火山地質景觀】</strong><br>七星山為大屯火山群中活動最頻繁的火山。山頂七個大小不一的火成岩山頭因侵蝕而成，宛如北斗七星因而得名。北麓受東北季風吹拂以壯闊芒草草原為主，南麓背風面則是濃密闊葉森林，O 型路線恰好讓你體驗兩種截然不同的山林風貌。</p>
-          <h4 class="font-bold text-sky-800 mt-4 mb-2">行程四大特色</h4>
-          <ul class="text-sm text-sky-700 space-y-1">
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">本次行程亮點</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">小百岳雙拼：<span class="font-normal accent-text">一次集點兩座小百岳</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【七星山主峰 × 七星山東峰】</strong><br>小百岳 No.2（七星主峰）與另一座小百岳（七星東峰）相距僅 300 公尺，本次苗圃 O 型路線兩者皆可順路收集，是台北郊山中性價比最高的「雙百岳連走」之一。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【火山地質景觀】</strong><br>七星山為大屯火山群中活動最頻繁的火山。山頂七個大小不一的火成岩山頭因侵蝕而成，宛如北斗七星因而得名。北麓受東北季風吹拂以壯闊芒草草原為主，南麓背風面則是濃密闊葉森林，O 型路線恰好讓你體驗兩種截然不同的山林風貌。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text space-y-1">
             <li>• 台北市最高峰，360度鳥瞰台北盆地</li>
             <li>• 單次行程收集兩座小百岳</li>
             <li>• O 型路線：去程石階稜線，回程草坪腰繞，景色完全不重複</li>
@@ -221,7 +235,7 @@
     <section id="timeline" class="py-16 px-6 bg-stone-50">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-sky-600 rounded-full"></span>
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           預計行程進度（3.5–4H）
         </h2>
         <p class="text-sm text-stone-600 mb-8">候選行程，日期未定，預計時間供規劃參考。</p>
@@ -237,6 +251,11 @@
   </footer>
 
   <script>
+      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
+      // 免得換主色時只改了一邊。
+      const rootStyle = getComputedStyle(document.documentElement);
+      const ACCENT_DEEP = rootStyle.getPropertyValue('--accent-deep').trim();
+
     function openNavigation() {
       window.open("https://www.google.com/maps/dir/?api=1&destination=25.155339,121.545874", "_blank");
     }
@@ -278,11 +297,11 @@
     function initMap() {
       map = L.map('map').setView([25.163, 121.552], 14);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-      L.polyline(schedule.map(w => [w.lat, w.lng]), { color:'#0284c7', weight:4, opacity:0.85 }).addTo(map);
+      L.polyline(schedule.map(w => [w.lat, w.lng]), { color:ACCENT_DEEP, weight:4, opacity:0.85 }).addTo(map);
       schedule.forEach((wp, i) => {
         const isEnd = i === 0 || i === schedule.length - 1;
         const isPeak = wp.ele >= 1000;
-        const color = isEnd ? '#16a34a' : isPeak ? '#f59e0b' : '#0284c7';
+        const color = isEnd ? '#16a34a' : isPeak ? '#f59e0b' : ACCENT_DEEP;
         const m = L.circleMarker([wp.lat, wp.lng], { radius: isEnd ? 9 : isPeak ? 8 : 6, fillColor: color, color:'#fff', weight:2, fillOpacity:0.9 }).addTo(map);
         m.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
         m.on('click', () => updateWaypointCard(i));
@@ -312,7 +331,7 @@
         type: 'line',
         data: {
           labels: schedule.map(w => w.loc.replace(/ \(H.*\)/, '')),
-          datasets: [{ label:'海拔 (m)', data: schedule.map(w => w.ele), borderColor:'#0284c7', backgroundColor:'rgba(2,132,199,0.1)', borderWidth:2.5, pointBackgroundColor: schedule.map(w => w.ele >= 1000 ? '#f59e0b' : '#0284c7'), pointRadius:5, tension:0.3, fill:true }]
+          datasets: [{ label:'海拔 (m)', data: schedule.map(w => w.ele), borderColor:ACCENT_DEEP, backgroundColor:'rgba(2,132,199,0.1)', borderWidth:2.5, pointBackgroundColor: schedule.map(w => w.ele >= 1000 ? '#f59e0b' : ACCENT_DEEP), pointRadius:5, tension:0.3, fill:true }]
         },
         options: {
           responsive:true, maintainAspectRatio:false,
@@ -329,11 +348,11 @@
         const d = document.createElement('div');
         d.className = 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all';
         d.onclick = () => { document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); updateWaypointCard(i); };
-        const dot = wp.ele >= 1000 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'bg-sky-400';
+        const dot = wp.ele >= 1000 ? 'bg-amber-400' : i === 0 || i === schedule.length-1 ? 'bg-emerald-500' : 'accent-mark-light';
         d.innerHTML = `
           <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${dot} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
-            <span class="text-sky-700 font-mono font-bold text-sm">${wp.time}</span>
+            <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
             <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${icons[wp.pos]||'📍'} ${wp.pos}</span>
           </div>
           <div class="font-bold text-stone-800">${wp.loc}</div>
