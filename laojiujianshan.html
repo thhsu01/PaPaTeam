@@ -172,6 +172,7 @@
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">請選擇航點</h3>
                             <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
+                                <div>實際時間 <span id="wp-time" class="text-stone-700">07:30</span></div>
                                 <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
@@ -319,13 +320,17 @@
             { lat: 25.0849102876649, lng: 121.63119953348264, time: "10:41", loc: "翠湖步道登山口 (H35m)", dist: 5.87, ele: 35, pos: "出口", desc: "累計 5.87 km。", advice: "回程平坦段。" },
             { lat: 25.071960894394802, lng: 121.63322171182692, time: "11:38", loc: "金龍場停車場", dist: 7.77, ele: 20, pos: "終點", desc: "總里程 7.77 km。", advice: "行程圓滿結束。" }
         ];
+        // ── 行程日（頁面唯一來源）────────────────────────────────
+        // 天氣查詢與所有日期字串都由此推導，避免同一個日期寫在多處而彼此不一致。
+        const TRIP_DATE = "2026-05-01";
+        const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+d}`; })();
+
 
         let map, chart, markers = [];
 
         async function fetchWeather() {
             const lat = 25.0719, lng = 121.6332;
-            const targetDate = "2026-05-01";
-            const weatherMain = document.getElementById('weather-main');
+                        const weatherMain = document.getElementById('weather-main');
             const weatherSub = document.getElementById('weather-sub');
 
             try {
@@ -333,7 +338,7 @@
                 const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTaipei&forecast_days=16`);
                 const data = await response.json();
                 
-                const dateIndex = data.daily.time.indexOf(targetDate);
+                const dateIndex = data.daily.time.indexOf(TRIP_DATE);
                 const todayIndex = 0; // 備援：今日預報
                 
                 let code, maxT, minT, subText;
@@ -342,13 +347,13 @@
                     code = data.daily.weathercode[dateIndex];
                     maxT = Math.round(data.daily.temperature_2m_max[dateIndex]);
                     minT = Math.round(data.daily.temperature_2m_min[dateIndex]);
-                    subText = "5/1 行程日預報";
+                    subText = `${tripMD} 行程日預報`;
                 } else {
                     // 若目標日期太遠，顯示今日天氣
                     code = data.daily.weathercode[todayIndex];
                     maxT = Math.round(data.daily.temperature_2m_max[todayIndex]);
                     minT = Math.round(data.daily.temperature_2m_min[todayIndex]);
-                    subText = "今日即時天氣 (目標日尚遠)";
+                    subText = TRIP_DATE < data.daily.time[0] ? "行程日已過，顯示今日天氣" : "行程日尚遠，顯示今日天氣";
                 }
                 
                 const weatherMap = { 
@@ -401,12 +406,13 @@
         function updateCard(idx) {
             currentWaypointIndex = idx;
             const d = schedule[idx];
+            document.getElementById('wp-time').innerText = d.time;
             document.getElementById('wp-title').innerText = d.loc;
             document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
             document.getElementById('wp-ele').innerText = d.ele;
             document.getElementById('wp-desc').innerText = d.desc;
             document.getElementById('wp-pos-label').innerText = d.pos;
-            document.getElementById('wp-advice').innerText = '實際到達時間：' + d.time;
+            document.getElementById('wp-advice').innerText = d.advice;
             markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("終點") || schedule[i].pos.includes("起點") ? 8 : 6) }));
             map.panTo([d.lat, d.lng]);
             const card = document.getElementById('wp-card');

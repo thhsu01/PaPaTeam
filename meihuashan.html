@@ -154,6 +154,7 @@
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點明細</h3>
                             <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
+                                <div>實際時間 <span id="wp-time" class="text-stone-700">07:40</span></div>
                                 <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
@@ -312,12 +313,15 @@
         function updateCard(idx) {
             currentWaypointIndex = idx;
             const d = schedule[idx];
+            document.getElementById('wp-time').innerText = d.actual;
             document.getElementById('wp-title').innerText = d.loc;
             document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
             document.getElementById('wp-ele').innerText = d.ele;
             document.getElementById('wp-desc').innerText = d.desc;
             document.getElementById('wp-pos-label').innerText = d.pos;
-            document.getElementById('wp-advice').innerText = "實際到達時間：" + d.actual;
+            const adviceEl = document.getElementById('wp-advice');
+            adviceEl.innerText = d.advice || '';
+            adviceEl.parentElement.classList.toggle('hidden', !d.advice);
             markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 14 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("集合") ? 9 : 6) }));
             map.panTo([d.lat, d.lng]);
             const card = document.getElementById('wp-card');

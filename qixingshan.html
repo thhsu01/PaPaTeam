@@ -132,6 +132,7 @@
             <button onclick="nextWaypoint()" class="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>預計時間 <strong class="text-stone-800" id="wp-time">07:00</strong></span>
             <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">590</strong> m</span>
           </div>
@@ -294,6 +295,7 @@
       currentWpIndex = i;
       const wp = schedule[i];
       document.getElementById('wp-pos-label').textContent = wp.pos;
+      document.getElementById('wp-time').textContent = wp.time;
       document.getElementById('wp-title').textContent = wp.loc;
       document.getElementById('wp-dist').textContent = wp.dist.toFixed(2);
       document.getElementById('wp-ele').textContent = wp.ele;

@@ -154,6 +154,7 @@
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點名稱</h3>
                             <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
+                                <div>實際時間 <span id="wp-time" class="text-stone-700">08:10</span></div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
                             <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
@@ -377,6 +378,7 @@
         function updateCard(idx) {
             currentWaypointIndex = idx;
             const d = schedule[idx];
+            document.getElementById('wp-time').innerText = d.time;
             document.getElementById('wp-title').innerText = d.loc;
             document.getElementById('wp-ele').innerText = d.ele;
             document.getElementById('wp-desc').innerHTML = d.desc;
