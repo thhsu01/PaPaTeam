@@ -104,8 +104,11 @@ main section[id] {
 /* 深底上的文字（深淺方向與上面相反，不可混用） */
 .accent-text-inv { color: var(--accent-on-dark); }
 
-/* 色條、圓點、軌跡等純裝飾，不受對比門檻約束 */
-.accent-mark { background: var(--accent); }
+/* 色條、圓點、軌跡等純裝飾，不受對比門檻約束。
+   分兩個深淺是因為原設計本來就有：大面積的段落色條與時間軸端點用深的，
+   卡片內的小圓點用淺的。混用會讓頁面看起來變淡。 */
+.accent-mark      { background: var(--accent); }
+.accent-mark-deep { background: var(--accent-fill); }
 
 /* 實心底配白字 */
 .accent-fill { background: var(--accent-fill); color: #fff; }

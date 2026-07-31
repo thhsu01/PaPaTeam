@@ -157,7 +157,7 @@
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 text-left">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                        <span class="w-2.5 h-8 accent-mark rounded-full"></span>
+                        <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
                         縱走路線百科
                     </h2>
                     <p class="text-stone-600 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
@@ -338,7 +338,7 @@
         <!-- 6. Timeline Section -->
         <section id="timeline">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100 text-left">
-                <span class="w-2.5 h-8 accent-mark rounded-full"></span>
+                <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
                 詳細時程估算 (8.00km校準版)
             </h2>
             <div class="relative pl-6" id="timeline-container">
@@ -463,7 +463,7 @@
                 const div = document.createElement('div');
                 div.className = "relative flex items-start mb-12 group cursor-pointer pl-8";
                 div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                let color = i === 0 || i === schedule.length - 1 ? "accent-mark" : (item.pos === "極點" ? "bg-red-500" : "bg-stone-300");
+                let color = i === 0 || i === schedule.length - 1 ? "accent-mark-deep" : (item.pos === "極點" ? "bg-red-500" : "bg-stone-300");
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div></div>
                     <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all text-left">
