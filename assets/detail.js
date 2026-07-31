@@ -170,10 +170,6 @@ window.PaPaDetail = (function () {
     var container = $('timeline-container');
     if (!t || !container) return;
 
-    // meihuashan 原本在渲染前清空容器，連帶把 .timeline-line 那條直線也清掉，
-    // 所以該頁本來就沒有時間軸直線。此處照原樣保留，改不改是另一個決定。
-    if (t.clear) container.innerHTML = '';
-
     cfg.schedule.forEach(function (wp, i) {
       var div = document.createElement('div');
       div.className = t.className;

@@ -242,6 +242,8 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 外層 `.chart-container`，並帶 `role="img"` 與 `aria-label`。
 
 **時間軸**：`<div id="timeline-container">` 內含一個 `.timeline-line`，其餘由 JS 生成。
+渲染前不要清空容器——那會連同直線一起清掉。meihuashan 先前就是這樣，
+因此十頁裡只有它沒有時間軸直線。
 
 ### 頁面腳本規格
 
