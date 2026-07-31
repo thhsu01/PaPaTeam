@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -316,10 +317,6 @@
   </footer>
 
   <script>
-    function openNavigation() {
-      window.open("https://www.google.com/maps/dir/?api=1&destination=24.990128,121.509104", "_blank");
-    }
-
     // ── 行程數據 ──────────────────────────────────────────────
     // O型大縱走，含修正後座標與新增地標：
     //   南勢角站→登山口 (0.35km): ~5 min（步行）
@@ -395,211 +392,100 @@
         advice: "搭乘捷運返家，附近有多家餐廳可慶功！" }
     ];
 
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。PEAK/TEMPLE/STONE 是次要語意色，
+    // 不屬本頁主色，維持字面值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 山頂
+    const TEMPLE = '#8060b0';   // 廟宇與岩洞
+    const STONE  = '#a09080';   // 一般航點
 
-      // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
-      // 所以要先從 :root 取出實際值，才能與 CSS 共用同一份設定。
-      const ACCENT = getComputedStyle(document.documentElement)
-                       .getPropertyValue('--accent').trim();
-
-    let map, chart, markers = [];
-    let currentWpIndex = 0;
+    const POS_EMOJI = {
+      "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
+      "地質奇觀":"🪨", "稜線衛峰":"🌲", "三角點":"📍",
+      "小百岳 #16":"⭐", "信仰地標":"🙏", "天然岩洞":"🕌",
+      "稜線山頭":"🌿", "最高點":"🏔️", "下山出口":"🚪", "回程終點":"🚇"
+    };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    // 天氣查詢、天氣卡標題、行程結束提示都由此推導，避免多處寫死日期而彼此不一致。
+    // 天氣查詢、天氣卡標題、行程結束提示都由此推導。
     const TRIP_DATE = "2026-08-02";
-    const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+d}`; })();
 
-    // 行程日已過就顯示歸檔提示，讓頁面不會看起來仍是即將出發的行程
-    function markTripPast(todayISO) {
-      if (todayISO && TRIP_DATE < todayISO) {
-        document.getElementById('trip-past-notice')?.classList.remove('hidden');
-      }
-    }
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 地圖、圖表、航點卡、天氣的機制都在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [24.990128, 121.509104],
 
-    // ── 天氣 ──────────────────────────────────────────────────
-    async function fetchWeather() {
-      const lat = 24.9719, lng = 121.4976; // 烘爐地附近
-      const weatherMain  = document.getElementById('weather-main');
-      const weatherSub   = document.getElementById('weather-sub');
-      const weatherLabel = document.getElementById('weather-label');
-      try {
-        // 取 16 天預報視窗後查行程日；不指定 start_date，行程日過期時才能退回今日資料
-        const res  = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=16`);
-        const data = await res.json();
+      card: { follow: 'popup', wrap: 'clamp' },
 
-        const dateIndex = data.daily.time.indexOf(TRIP_DATE);
-        const idx = dateIndex !== -1 ? dateIndex : 0;
-        markTripPast(data.daily.time[0]);   // 視窗第一天即為今日
+      weather: { lat: 24.9719, lng: 121.4976 },   // 烘爐地附近
 
-        // 標題與內文必須指同一天，否則會出現「8/2 預報」配今日天氣的矛盾
-        let label, subText;
-        if (dateIndex !== -1) {
-          label   = `${tripMD} 天氣預報`;
-          subText = `${tripMD} 行程日預報`;
-        } else {
-          label   = "今日天氣";
-          subText = TRIP_DATE < data.daily.time[0]
-            ? "行程日已過，顯示今日天氣"
-            : "行程日尚遠，顯示今日天氣";
+      map: {
+        setView: [[24.977, 121.494], 14],
+        attribution: 'Leaflet | © OpenStreetMap',
+        track: { weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
+          const isTemple   = wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : isTemple ? TEMPLE : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
         }
+      },
 
-        const code = data.daily.weathercode[idx];
-        const maxT = Math.round(data.daily.temperature_2m_max[idx]);
-        const minT = Math.round(data.daily.temperature_2m_min[idx]);
-        if (weatherLabel) weatherLabel.textContent = label;
-        weatherMain.textContent = `${PaPaWeather.text(code)} ${minT}°–${maxT}°`;
-        weatherSub.textContent  = subText;
-      } catch {
-        // 天氣取不到時仍要判斷行程是否已過，故用本地日期作為後備
-        markTripPast(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }));
-        if (weatherLabel) weatherLabel.textContent = `${tripMD} 天氣預報`;
-        weatherMain.textContent = "天氣資料暫無法取得";
-        weatherSub.textContent  = "請稍後再試";
-      }
-    }
-
-    // ── 地圖 ──────────────────────────────────────────────────
-    function initMap() {
-      map = L.map('map').setView([24.977, 121.494], 14);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Leaflet | © OpenStreetMap'
-      }).addTo(map);
-
-      const pathCoords = schedule.map(wp => [wp.lat, wp.lng]);
-      L.polyline(pathCoords, { color: ACCENT, weight: 4, opacity: 0.85 }).addTo(map);
-
-      schedule.forEach((wp, i) => {
-        const isStartEnd = i === 0 || i === schedule.length - 1;
-        const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
-        const isTemple   = wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
-        const color = isStartEnd ? ACCENT : isPeak ? '#7c9e52' : isTemple ? '#8060b0' : '#888';
-
-        const marker = L.circleMarker([wp.lat, wp.lng], {
-          radius: isStartEnd ? 9 : isPeak ? 8 : 6,
-          fillColor: color,
-          color: '#fff',
-          weight: 2,
-          opacity: 1,
-          fillOpacity: 0.92
-        }).addTo(map);
-
-        marker.bindPopup(`<strong>${wp.loc}</strong><br>⏱ ${wp.time}<br>📏 ${wp.dist} km<br>⛰ ${wp.ele} m`);
-        marker.on('click', () => updateWaypointCard(i));
-        markers.push(marker);
-      });
-
-      updateWaypointCard(0);
-    }
-
-    function updateWaypointCard(index) {
-      currentWpIndex = index;
-      const wp = schedule[index];
-      document.getElementById('wp-pos-label').textContent = wp.pos;
-      document.getElementById('wp-title').textContent     = wp.loc;
-      document.getElementById('wp-time').textContent      = wp.time;
-      document.getElementById('wp-dist').textContent      = wp.dist.toFixed(2);
-      document.getElementById('wp-ele').textContent       = wp.ele;
-      document.getElementById('wp-desc').textContent      = wp.desc;
-      document.getElementById('wp-advice').textContent    = wp.advice;
-      if (markers[index]) markers[index].openPopup();
-    }
-
-    function prevWaypoint() { if (currentWpIndex > 0) updateWaypointCard(currentWpIndex - 1); }
-    function nextWaypoint() { if (currentWpIndex < schedule.length - 1) updateWaypointCard(currentWpIndex + 1); }
-
-    // ── 海拔剖面圖 ────────────────────────────────────────────
-    function initChart() {
-      const ctx = document.getElementById('elevation-chart').getContext('2d');
-      chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: schedule.map(wp => wp.loc.replace(/ \(H.*\)/, '')),
-          datasets: [{
-            label: '海拔 (m)',
-            data: schedule.map(wp => wp.ele),
-            borderColor: ACCENT,
-            backgroundColor: 'rgba(199,124,62,0.10)',
-            borderWidth: 2.5,
-            pointBackgroundColor: schedule.map(wp =>
-              wp.ele >= 300 ? '#7c9e52' :
-              wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? '#8060b0' :
-              wp.pos === "集合起點" || wp.pos === "回程終點" ? ACCENT : '#a09080'
-            ),
-            pointRadius: 5,
-            tension: 0.35,
-            fill: true
-          }]
+      chart: {
+        label: wp => wp.loc.replace(/ \(H.*\)/, ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.ele >= 300 ? PEAK :
+            wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? TEMPLE :
+            wp.pos === "集合起點" || wp.pos === "回程終點" ? ACCENT : STONE)
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
-            tooltip: {
-              callbacks: {
-                label: ctx => `海拔: ${ctx.parsed.y} m`,
-                title: ctx => ctx[0].label
-              }
-            }
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
           },
           scales: {
-            y: {
-              title: { display: true, text: '海拔 (m)' },
-              min: 0, max: 360,
-              grid: { color: '#f0ede8' }
-            },
-            x: {
-              ticks: { maxRotation: 35, font: { size: 10 } },
-              grid: { display: false }
-            }
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 360,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
           }
         }
-      });
-    }
+      },
 
-    // ── 時間軸 ────────────────────────────────────────────────
-    function renderTimeline() {
-      const container = document.getElementById('timeline-container');
-      const posEmoji = {
-        "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
-        "地質奇觀":"🪨", "稜線衛峰":"🌲", "三角點":"📍",
-        "小百岳 #16":"⭐", "信仰地標":"🙏", "天然岩洞":"🕌",
-        "稜線山頭":"🌿", "最高點":"🏔️", "下山出口":"🚪", "回程終點":"🚇"
-      };
-
-      schedule.forEach((wp, i) => {
-        const div = document.createElement('div');
-        div.className = 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all';
-        div.onclick = () => {
-          document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
-          updateWaypointCard(i);
-        };
-
-        const isHighlight = wp.pos === "最高點" || wp.pos === "小百岳 #16";
-        const isStart = i === 0 || i === schedule.length - 1;
-        const dotColor = isHighlight ? '#7c9e52' : isStart ? ACCENT : '#a09080';
-        const emoji = posEmoji[wp.pos] || '📍';
-
-        div.innerHTML = `
-          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
-               style="background:${dotColor};"></div>
-          <div class="flex items-center gap-3 mb-1">
-            <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
-            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
-          </div>
-          <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    // ── 初始化 ────────────────────────────────────────────────
-    fetchWeather();
-    window.addEventListener('load', () => {
-      initMap();
-      initChart();
-      renderTimeline();
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isHighlight = wp.pos === "最高點" || wp.pos === "小百岳 #16";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isHighlight ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-3 mb-1">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
     });
   </script>
 </body>
