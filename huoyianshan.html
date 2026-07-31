@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -293,12 +294,7 @@
 
 
     <script>
-      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
-      // 免得換主色時只改了一邊。
-      const rootStyle = getComputedStyle(document.documentElement);
-      const ACCENT = rootStyle.getPropertyValue('--accent').trim();
 
-        function openNavigation() { window.open("https://www.google.com/maps/dir/?api=1&destination=24.358077127978664,120.7361309924151", "_blank"); }
         let currentWaypointIndex = 0;
 
         const schedule = [
@@ -335,124 +331,79 @@
                 desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，順利完成這場精彩的 O 型走。" 
             }
         ];
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ACCENT = cssVar('--accent');
+    const CANYON = '#ef4444';   // 大峽谷與最高點（語意色：紅）
+    const PLAIN  = '#78716c';   // 一般航點
 
-        let map, chart, markers = [];
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    // 本頁 schedule 沒有 dist 與 advice，航點卡因此無此兩欄。
+    PaPaDetail.init({
+      schedule,
+      nav: [24.358077127978664, 120.7361309924151],
 
-        function initRealMap() {
-            map = L.map('map', { preferCanvas: true, center: [24.368, 120.734], zoom: 14 });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            
-            const pathCoords = schedule.map(d => [d.lat, d.lng]);
-            L.polyline(pathCoords, { color: ACCENT, weight: 5, opacity: 0.8 }).addTo(map);
-            
-            schedule.forEach((d, i) => {
-                const isCanyon = d.loc === "火炎山大峽谷";
-                const circle = L.circleMarker([d.lat, d.lng], {
-                    radius: isCanyon ? 12 : (d.pos === "最高點" ? 9 : 6),
-                    fillColor: isCanyon ? '#ef4444' : (d.pos === "最高點" ? '#ef4444' : '#78716c'),
-                    color: isCanyon ? '#fee2e2' : '#fff', 
-                    weight: isCanyon ? 4 : 2, 
-                    opacity: 1, 
-                    fillOpacity: 1
-                }).addTo(map);
-                circle.bindTooltip(d.loc);
-                circle.on('click', () => updateCard(i));
-                markers.push(circle);
-            });
+      card: {
+        follow: 'pan', wrap: 'cycle',
+        // 大峽谷那一站的卡片加一圈紅框
+        onUpdate: (wp) => {
+          const card = document.getElementById('wp-card');
+          card.classList.toggle('highlight-canyon', wp.loc === "火炎山大峽谷");
         }
+      },
 
-        function initChart() {
-            const ctx = document.getElementById('elevation-chart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: schedule.map(d => d.loc),
-                    datasets: [{ 
-                        label: '海拔 (m)', 
-                        data: schedule.map(d => d.ele), 
-                        borderColor: ACCENT, 
-                        borderWidth: 4, 
-                        pointRadius: 6, 
-                        fill: true, 
-                        backgroundColor: 'rgba(234, 88, 12, 0.1)', 
-                        tension: 0.35 
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { legend: { display: false } }, 
-                    scales: { 
-                        y: { min: 150 },
-                        x: { ticks: { display: false } }
-                    }, 
-                    onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } 
-                }
-            });
+      map: {
+        preferCanvas: true,
+        center: [24.368, 120.734], zoom: 14,
+        track: { weight: 5, opacity: 0.8 },
+        marker: (wp) => {
+          const isCanyon = wp.loc === "火炎山大峽谷";
+          return {
+            radius: isCanyon ? 12 : (wp.pos === "最高點" ? 9 : 6),
+            fillColor: isCanyon || wp.pos === "最高點" ? CANYON : PLAIN,
+            color: isCanyon ? '#fee2e2' : '#fff',
+            weight: isCanyon ? 4 : 2,
+            fillOpacity: 1
+          };
+        },
+        selected: (wp, i, n, sel) => ({
+          radius: sel ? 15 : (wp.loc === "火炎山大峽谷" ? 12 : 6),
+          fillOpacity: sel ? 1 : 0.8
+        })
+      },
+
+      chart: {
+        label: wp => wp.loc,
+        fillAlpha: 0.1,
+        dataset: { borderWidth: 4, pointRadius: 6, tension: 0.35 },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { min: 150 }, x: { ticks: { display: false } } },
+          onHover: (e, el) => { if (el.length > 0) updateWaypointCard(el[0].index); }
         }
+      },
 
-        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
-        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
-
-        function updateCard(idx) {
-            currentWaypointIndex = idx;
-            const d = schedule[idx];
-            document.getElementById('wp-time').innerText = d.time;
-            document.getElementById('wp-title').innerText = d.loc;
-            document.getElementById('wp-ele').innerText = d.ele;
-            document.getElementById('wp-desc').innerHTML = d.desc;
-            document.getElementById('wp-pos-label').innerText = d.pos;
-            
-            const card = document.getElementById('wp-card');
-            if (d.loc === "火炎山大峽谷") {
-                card.classList.add('highlight-canyon');
-            } else {
-                card.classList.remove('highlight-canyon');
-            }
-
-            markers.forEach((m, i) => {
-                const isSelected = i === idx;
-                m.setStyle({ 
-                    radius: isSelected ? 15 : (schedule[i].loc === "火炎山大峽谷" ? 12 : 6),
-                    fillOpacity: isSelected ? 1 : 0.8
-                });
-            });
-            map.panTo([d.lat, d.lng]);
+      timeline: {
+        className: 'relative flex items-start mb-10 group cursor-pointer pl-8',
+        item: (wp) => {
+          const dot = wp.loc === "火炎山大峽谷" ? 'bg-red-600 animate-pulse'
+                    : wp.pos.includes("點") ? 'accent-mark' : 'bg-stone-400';
+          return `
+            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">
+              <div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div>
+            </div>
+            <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all">
+              <div class="flex flex-wrap justify-between items-center mb-2">
+                <span class="text-xl font-black text-stone-800">${wp.time}</span>
+                <span class="text-[10px] font-black accent-text accent-tint px-2 py-0.5 rounded uppercase">${wp.pos}</span>
+              </div>
+              <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
+              <div class="text-[11px] text-stone-600 font-bold">海拔: ${wp.ele} m</div>
+            </div>`;
         }
-
-        function renderTimeline() {
-            const container = document.getElementById('timeline-container');
-            schedule.forEach((item, i) => {
-                const div = document.createElement('div');
-                div.className = "relative flex items-start mb-10 group cursor-pointer pl-8";
-                div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                
-                let dotColor = item.loc === "火炎山大峽谷" ? "bg-red-600 animate-pulse" : (item.pos.includes("點") ? "accent-mark" : "bg-stone-400");
-                
-                div.innerHTML = `
-                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">
-                        <div class="w-4 h-4 rounded-full ${dotColor} border-2 border-white group-hover:scale-125 transition-all"></div>
-                    </div>
-                    <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all">
-                        <div class="flex flex-wrap justify-between items-center mb-2">
-                            <span class="text-xl font-black text-stone-800">${item.time}</span>
-                            <span class="text-[10px] font-black accent-text accent-tint px-2 py-0.5 rounded uppercase">${item.pos}</span>
-                        </div>
-                        <h4 class="font-bold text-stone-700 text-base mb-1">${item.loc}</h4>
-                        <div class="text-[11px] text-stone-600 font-bold">海拔: ${item.ele} m</div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initRealMap();
-            initChart();
-            renderTimeline();
-            updateCard(0);
-        });
+      }
+    });
     </script>
 </body>
 </html>

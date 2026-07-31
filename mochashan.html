@@ -58,6 +58,7 @@
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -124,11 +125,11 @@
 
                     <!-- 最新天氣預報 -->
                     <div class="flex flex-col items-center md:items-start gap-1 min-w-[120px]">
-                        <span class="text-[10px] font-black accent-text uppercase tracking-widest">3月14日 礁溪預報</span>
+                        <span class="text-[10px] font-black accent-text uppercase tracking-widest" id="weather-label">3月14日 礁溪預報</span>
                         <div class="flex items-center gap-2" id="weather-container">
                             <span class="text-xl font-bold text-stone-600 weather-pulse" id="weather-summary">載入中...</span>
                         </div>
-                        <span class="text-xs text-stone-600 mt-1 cursor-pointer hover:text-green-600 transition-colors" id="weather-detail" onclick="getLiveWeather()">正在同步氣象數據</span>
+                        <span class="text-xs text-stone-600 mt-1 cursor-pointer hover:text-green-600 transition-colors" id="weather-detail">正在同步氣象數據</span>
                     </div>
                 </div>
                 <button onclick="openNavigation()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至五峰旗停車場">
@@ -323,14 +324,7 @@
 
 
     <script>
-      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
-      // 免得換主色時只改了一邊。
-      const rootStyle = getComputedStyle(document.documentElement);
-      const ACCENT = rootStyle.getPropertyValue('--accent').trim();
 
-        function openNavigation() {
-            window.open("https://www.google.com/maps/dir/?api=1&destination=24.830230219662706,121.74711388053494", "_blank");
-        }
 
         let currentWaypointIndex = 0;
 
@@ -353,143 +347,77 @@
             { lat: 24.831387311728044, lng: 121.7455079158638, time: "15:46", loc: "登山口 (回程)", dist: 12.08, ele: 108, pos: "下山段", desc: "累計里程 12.08 km。", advice: "即將完成挑戰。" },
             { lat: 24.830230219662706, lng: 121.74711388053494, time: "15:55", loc: "五峰旗停車場 (終點)", dist: 12.45, ele: 65, pos: "圓滿結束", desc: "回抵終點。總往返里程 12.45 km。", advice: "慶功宴預備！注意拉筋伸展。" }
         ];
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ACCENT  = cssVar('--accent');
+    const SUMMIT  = '#ea580c';   // 最高點（語意色：橘）
+    const DESCENT = '#f59e0b';   // 開始下山（語意色：琥珀）
+    const PLAIN   = '#1c1917';   // 一般航點
 
-        let map, chart, markers = [];
+    const TRIP_DATE = "2026-03-14";
 
-        async function getLiveWeather() {
-            const apiKey = "";
-            const weatherSummaryEl = document.getElementById('weather-summary');
-            const weatherDetailEl = document.getElementById('weather-detail');
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [24.830230219662706, 121.74711388053494],
+      weather: { lat: 24.8302, lng: 121.7471,
+                 mainId: 'weather-summary', subId: 'weather-detail' },
 
-            weatherSummaryEl.innerText = "搜尋中...";
-            weatherSummaryEl.classList.add('weather-pulse');
-            weatherDetailEl.innerText = "正在調用即時氣象雷達";
+      card: {
+        follow: 'pan', wrap: 'cycle',
+        flash: ['accent-line-deep', 'accent-tint-weak']
+      },
 
-            const query = "宜蘭礁溪 2026/03/14 精確天氣預報：狀態、溫度、降雨率";
-            const systemPrompt = "你是一位專業氣象預報員。請提供宜蘭礁溪 2026/03/14 的極簡數據。格式強制為：'天氣 / 溫度 / 降雨率' (如：晴時多雲 / 18-24°C / 10%)。嚴禁其餘描述。";
-            
-            let attempts = 0;
-            const maxAttempts = 3;
+      map: {
+        preferCanvas: true,
+        center: [24.842, 121.738], zoom: 14,
+        // 只畫去程，回程與去程重疊
+        track: { slice: [0, 8], weight: 4, opacity: 0.8 },
+        marker: (wp) => ({
+          radius: wp.pos === "最高點" || wp.pos.includes("起點") ||
+                  wp.pos.includes("終點") || wp.pos === "開始下山" ? 8 : 6,
+          fillColor: wp.pos === "最高點" ? SUMMIT
+                   : wp.pos === "開始下山" ? DESCENT
+                   : (wp.pos.includes("點") ? ACCENT : PLAIN),
+          opacity: 1, fillOpacity: 1
+        }),
+        selected: (wp, i, n, sel) => ({
+          radius: sel ? 12 : (wp.pos === "最高點" || wp.pos.includes("點") ? 8 : 6)
+        })
+      },
 
-            while (attempts < maxAttempts) {
-                try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        signal: controller.signal,
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: query }] }],
-                            systemInstruction: { parts: [{ text: systemPrompt }] },
-                            tools: [{ "google_search": {} }]
-                        })
-                    });
-
-                    clearTimeout(timeoutId);
-
-                    if (!response.ok) throw new Error('API 請求失敗');
-                    
-                    const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    
-                    if (text && text.length > 3) {
-                        weatherSummaryEl.innerText = text.trim();
-                        weatherSummaryEl.classList.remove('weather-pulse', 'text-stone-600');
-                        weatherSummaryEl.classList.add('text-stone-800');
-                        weatherDetailEl.innerText = "數據已即時同步 (點擊更新)";
-                        return;
-                    }
-                } catch (err) {
-                    attempts++;
-                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 500));
-                }
-            }
-
-            weatherSummaryEl.innerText = "載入超時";
-            weatherSummaryEl.classList.remove('weather-pulse');
-            weatherDetailEl.innerHTML = "<span class='text-red-500 font-bold'>⚠️ 點擊此處手動重試</span>";
+      chart: {
+        label: wp => wp.loc.replace(' (回程)', '').split(' ')[0],
+        fillAlpha: 0.1,
+        dataset: { borderWidth: 4, pointRadius: 4, tension: 0.3 },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { min: 0 } },
+          onHover: (e, el) => { if (el.length > 0) updateWaypointCard(el[0].index); }
         }
+      },
 
-        function initRealMap() {
-            map = L.map('map', { preferCanvas: true, center: [24.842, 121.738], zoom: 14 });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
-            const pathCoords = schedule.slice(0, 8).map(d => [d.lat, d.lng]);
-            L.polyline(pathCoords, { color: ACCENT, weight: 4, opacity: 0.8 }).addTo(map);
-            schedule.forEach((d, i) => {
-                const circle = L.circleMarker([d.lat, d.lng], {
-                    radius: d.pos === "最高點" || d.pos.includes("起點") || d.pos.includes("終點") || d.pos === "開始下山" ? 8 : 6,
-                    fillColor: d.pos === "最高點" ? '#ea580c' : (d.pos === "開始下山" ? '#f59e0b' : (d.pos.includes("點") ? ACCENT : '#1c1917')),
-                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
-                }).addTo(map);
-                circle.on('click', () => updateCard(i));
-                markers.push(circle);
-            });
+      timeline: {
+        className: 'relative flex items-start mb-8 group cursor-pointer pl-8',
+        item: (wp) => {
+          const dot = wp.pos.includes("起點") || wp.pos.includes("終點") ? 'accent-mark-deep'
+                    : wp.pos === "最高點" ? 'bg-orange-600'
+                    : wp.pos === "開始下山" ? 'bg-amber-500' : 'bg-stone-300';
+          return `
+            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
+            <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
+              <div class="flex justify-between items-center mb-1 text-left">
+                <span class="text-lg font-black text-stone-800 text-left">${wp.time}</span>
+                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${wp.pos}</span>
+              </div>
+              <h4 class="font-bold text-stone-700 text-sm text-left">${wp.loc}</h4>
+              <p class="text-[10px] text-stone-600 mt-1 text-left">累計里程: ${wp.dist.toFixed(2)} km</p>
+            </div>`;
         }
-
-        function initChart() {
-            const ctx = document.getElementById('elevation-chart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: schedule.map(d => d.loc.replace(' (回程)', '').split(' ')[0]),
-                    datasets: [{ label: '海拔 (m)', data: schedule.map(d => d.ele), borderColor: ACCENT, borderWidth: 4, pointRadius: 4, fill: true, backgroundColor: 'rgba(22, 163, 74, 0.1)', tension: 0.3 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0 } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
-            });
-        }
-
-        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
-        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
-
-        function updateCard(idx) {
-            currentWaypointIndex = idx;
-            const d = schedule[idx];
-            document.getElementById('wp-time').innerText = d.time;
-            document.getElementById('wp-title').innerText = d.loc;
-            document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
-            document.getElementById('wp-ele').innerText = d.ele;
-            document.getElementById('wp-desc').innerText = d.desc;
-            document.getElementById('wp-pos-label').innerText = d.pos;
-            document.getElementById('wp-advice').innerText = d.advice;
-            markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 12 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("點") ? 8 : 6) }));
-            map.panTo([d.lat, d.lng]);
-            const card = document.getElementById('wp-card');
-            card.classList.add('accent-line-deep', 'accent-tint-weak');
-            setTimeout(() => card.classList.remove('accent-line-deep', 'accent-tint-weak'), 500);
-        }
-
-        function renderTimeline() {
-            const container = document.getElementById('timeline-container');
-            schedule.forEach((item, i) => {
-                const div = document.createElement('div');
-                div.className = "relative flex items-start mb-8 group cursor-pointer pl-8";
-                div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                let color = item.pos.includes("起點") || item.pos.includes("終點") ? "accent-mark-deep" : (item.pos === "最高點" ? "bg-orange-600" : (item.pos === "開始下山" ? "bg-amber-500" : "bg-stone-300"));
-                div.innerHTML = `
-                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-                    <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
-                        <div class="flex justify-between items-center mb-1 text-left">
-                            <span class="text-lg font-black text-stone-800 text-left">${item.time}</span>
-                            <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
-                        </div>
-                        <h4 class="font-bold text-stone-700 text-sm text-left">${item.loc}</h4>
-                        <p class="text-[10px] text-stone-600 mt-1 text-left">累計里程: ${item.dist.toFixed(2)} km</p>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initRealMap();
-            initChart();
-            renderTimeline();
-            updateCard(0);
-            getLiveWeather();
-        });
+      }
+    });
     </script>
 </body>
 </html>

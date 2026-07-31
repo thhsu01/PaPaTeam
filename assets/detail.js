@@ -238,13 +238,13 @@ window.PaPaDetail = (function () {
       main.textContent = text + ' ' + lo + (w.sep || '°–') + hi + (w.unit || '°');
       if (sub && subText) sub.textContent = subText;
       if (label && labelText) label.textContent = labelText;
-      main.classList.remove('loading-pulse');
+      main.classList.remove('loading-pulse', 'weather-pulse');
     } catch (e) {
       // 天氣取不到時仍要判斷行程是否已過，故以本地日期作為後備
       markTripPast(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }));
       main.textContent = w.errorMain || '天氣資料暫無法取得';
       if (sub) sub.textContent = '請稍後再試';
-      main.classList.remove('loading-pulse');
+      main.classList.remove('loading-pulse', 'weather-pulse');
     }
   }
 
