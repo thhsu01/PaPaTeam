@@ -61,9 +61,6 @@
                     <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
                     <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
                     <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">預估進度</button>
-<!-- NEW: Elevation Section Link -->
-                    <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">高度</button>
-                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">時程</button>
                 </div>
         </div>
     </nav>
@@ -191,33 +188,16 @@
             </div>
         </section>
 
-        <!-- 3. Reference Videos Section -->
-        <section id="videos" class="space-y-8 text-left">
-            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-red-600 rounded-full"></span>
-                實境影音參考
+        <!-- 5. Elevation Section (分析) -->
+        <section id="elevation">
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
+                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
+                海拔高度剖面
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <a href="https://www.youtube.com/watch?v=8Cz7rkQLhCo" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
-                    <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
-                        <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="md:w-2/3 p-8 space-y-2">
-                        <div class="text-[10px] font-black text-pink-700 uppercase tracking-widest">實境導覽 01</div>
-                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-pink-700 transition-colors">內湖連峰縱走：龍船岩、開眼山、碧山實錄</h3>
-                        <p class="text-xs text-stone-600">頻道：Celia Lin 山林記錄</p>
-                    </div>
-                </a>
-                <a href="https://www.youtube.com/watch?v=H_LCBuT86Gc" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
-                    <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
-                        <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="md:w-2/3 p-8 space-y-2">
-                        <div class="text-[10px] font-black text-red-600 uppercase tracking-widest">實境導覽 02</div>
-                        <h3 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月滿開美景與登山攻略</h3>
-                        <p class="text-xs text-stone-600">頻道：胡一刀</p>
-                    </div>
-                </a>
+            <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
+                <div class="chart-container">
+                    <canvas id="elevation-chart"></canvas>
+                </div>
             </div>
         </section>
 
@@ -314,17 +294,32 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- 5. Elevation Section (分析) -->
-        <section id="elevation">
-            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
-                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                海拔高度剖面
-            </h2>
-            <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
-                <div class="chart-container">
-                    <canvas id="elevation-chart"></canvas>
+            <div class="space-y-8 text-left pt-4">
+                <h3 class="text-xl font-black text-stone-800 flex items-center gap-3">
+                    <span class="w-2.5 h-8 bg-red-600 rounded-full"></span>
+                    實境影音參考
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <a href="https://www.youtube.com/watch?v=8Cz7rkQLhCo" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
+                        <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
+                            <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="md:w-2/3 p-8 space-y-2">
+                            <div class="text-[10px] font-black text-pink-700 uppercase tracking-widest">實境導覽 01</div>
+                            <h4 class="font-black text-stone-800 leading-tight group-hover:text-pink-700 transition-colors">內湖連峰縱走：龍船岩、開眼山、碧山實錄</h4>
+                            <p class="text-xs text-stone-600">頻道：Celia Lin 山林記錄</p>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=H_LCBuT86Gc" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
+                        <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
+                            <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <div class="md:w-2/3 p-8 space-y-2">
+                            <div class="text-[10px] font-black text-red-600 uppercase tracking-widest">實境導覽 02</div>
+                            <h4 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月滿開美景與登山攻略</h4>
+                            <p class="text-xs text-stone-600">頻道：胡一刀</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
