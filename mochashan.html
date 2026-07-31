@@ -53,9 +53,8 @@
     <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
 
     <!-- Top Navigation -->
-    <nav class="sticky top-0 z-[1000] bg-[#f8f7f4]/90 backdrop-blur-md border-b border-stone-200" aria-label="頁面導覽">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" title="回到主頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
@@ -70,11 +69,11 @@
                     <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
                     <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實際行程">實際行程</button>
                 </div>
-            </div>
         </div>
     </nav>
 
-    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 space-y-16">
 
         <!-- Header / Meeting Info Area -->
         <section id="overview" class="text-center space-y-8">
@@ -301,11 +300,12 @@
             </div>
         </section>
 
-        <footer class="text-center py-16 border-t border-stone-200">
+    </main>
+
+<footer class="text-center py-16 border-t border-stone-200">
             <p class="text-stone-600 text-sm font-medium tracking-wide">© 2026 爬爬小隊 | 聖母步道 2026/3/14 活動紀錄</p>
         </footer>
 
-    </main>
 
     <script>
         function openNavigation() {

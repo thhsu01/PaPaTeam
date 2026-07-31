@@ -49,9 +49,8 @@
     <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
 
     <!-- Top Navigation -->
-    <nav class="sticky top-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-stone-200" aria-label="頁面導覽">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-2 group transition-all duration-300 hover:opacity-80">
                     <div class="w-9 h-9 bg-orange-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">爬</div>
                     <span class="font-bold text-stone-800 tracking-tight italic hidden sm:inline">爬爬小隊：內湖稜線全縱走+賞櫻</span>
@@ -66,11 +65,11 @@
                     <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">高度</button>
                     <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">時程</button>
                 </div>
-            </div>
         </div>
     </nav>
 
-    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 space-y-16">
 
         <!-- 1. Header Area -->
         <section id="overview" class="text-center space-y-8">
@@ -342,10 +341,12 @@
             </div>
         </section>
 
-        <footer class="text-center py-20 border-t border-stone-100">
+    </main>
+
+<footer class="text-center py-20 border-t border-stone-100">
             <p class="text-stone-600 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 內湖稜線連峰縱走百科</p>
         </footer>
-    </main>
+
 
     <script>
         function openNavigation() { window.open("https://www.google.com/maps/dir/?api=1&destination=25.083766,121.594224", "_blank"); }
