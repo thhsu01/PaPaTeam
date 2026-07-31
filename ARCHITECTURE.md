@@ -191,7 +191,25 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 **導覽列**：`fixed`，搭配 `<main class="pt-14">` 讓出高度。不用 `sticky`——
 `sticky` 版本另外需要 `z-[1000]` 才不會被 Leaflet 蓋住，是多餘的複雜度。
 
-**導覽鍵**：五顆一致的藥丸，`onclick` 直接寫 `scrollIntoView`，不要包 `scrollToSection()` 輔助函式。
+**站徽**：綠色圓形 `爬` 配「爬爬小隊」，**全站一律相同**，不隨頁面主色變。
+站徽是識別標誌，每頁換一個就失去作用。
+
+```html
+<a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+  <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+  <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+</a>
+```
+
+紀錄頁在站名右側加一個副標，行前頁不加（尚無日期可寫）：
+
+```html
+<span class="text-stone-600 text-xs hidden sm:inline font-medium">2026/6/20 活動紀錄</span>
+```
+
+**導覽鍵**：五顆一致的藥丸，容器一律 `flex gap-1 overflow-x-auto`
+（少了 `overflow-x-auto`，窄螢幕上五顆鍵會被擠壓而不是橫向捲動）。
+`onclick` 直接寫 `scrollIntoView`，不要包 `scrollToSection()` 輔助函式。
 
 ```html
 <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})"
@@ -200,6 +218,8 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 ```
 
 平滑滾動由 `assets/site.js` 統一處理 `prefers-reduced-motion`，各頁不必也不該自行判斷。
+段落的 `scroll-margin-top` 在 `assets/detail.css`，用來讓捲動終點避開固定導覽列，
+否則捲過去之後 `<h2>` 會躲在導覽列後面。改導覽列高度時要一起改。
 
 **地圖與航點卡**：地圖在上、航點卡在下的**單欄堆疊**，不可並排。
 （內容寬度尚未統一：正規頁各段自帶 `max-w-4xl`，家族 A 出身的 6 頁則靠
@@ -291,6 +311,8 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 | 地圖單欄堆疊 | ✅ 10/10 |
 | 灰階用 stone | ✅ 10/10 |
 | 無 `scrollToSection()` | ✅ 10/10 |
+| 站徽（綠圓 + 爬爬小隊） | ✅ 10/10 |
+| 段落 `scroll-margin-top` | ✅ 集中於 `detail.css` |
 | 小字對比 ≥ 4.5:1 | ✅ 0 筆失敗 |
 
 ### 尚未收斂的三件事

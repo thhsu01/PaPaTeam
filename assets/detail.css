@@ -60,6 +60,13 @@ body {
 
 /* ── 航點與導覽 ──────────────────────────────────────── */
 
+/* 導覽鍵以 scrollIntoView 捲到段落上緣，但固定導覽列高 56px，會把標題蓋住。
+   讓捲動終點往下讓開導覽列再加一點餘裕，標題才看得見。
+   直接寫進 detail.css 而非各頁，因為導覽列高度是全站共用的規格。 */
+main section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
 .waypoint-card {
   transition: var(--waypoint-transition);
 }
