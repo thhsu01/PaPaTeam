@@ -159,7 +159,7 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
   <!-- 順序固定：inline style → detail.css → site.css -->
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -276,6 +276,14 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 
 **候選行程沒有 `TRIP_DATE`**，因為它們本來就還沒定日期。這類頁面的天氣以
 `forecast_days=1` 顯示今日天氣即可，不要為了湊規格而編一個日期出來。
+
+天氣代碼一律用 `assets/site.js` 的 `PaPaWeather.text(code)`，**不要在頁面裡自己寫對照表**。
+Open-Meteo 回傳的 WMO 代碼有 28 種，先前五個頁面各寫一份、每份只涵蓋 10–17 種，
+結果使用者看到「天氣代碼96」這種原始值（96 是雷雨伴冰雹）。
+查不到時據實顯示未知，不要猜一個天氣填上去。
+
+`assets/site.js` **不可加 `defer`**：各頁在 `await` 網路回應之後才查表，
+但回應夠快時（快取命中）續行會搶在 defer 腳本之前執行，`PaPaWeather` 尚未定義。
 
 必要函式：`initMap()`、`initChart()`、`renderTimeline()`、`updateWaypointCard(i)`、
 `prevWaypoint()`、`nextWaypoint()`、`openNavigation()`。

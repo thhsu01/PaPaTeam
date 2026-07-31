@@ -39,7 +39,7 @@
   </style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -296,8 +296,7 @@
         const code = data.daily.weathercode[0];
         const maxT = Math.round(data.daily.temperature_2m_max[0]);
         const minT = Math.round(data.daily.temperature_2m_min[0]);
-        const wMap = { 0:"☀️ 晴天",1:"🌤 大致晴",2:"⛅ 部分多雲",3:"☁️ 陰天",45:"🌫 霧",51:"🌦 毛毛雨",61:"🌧 小雨",63:"🌧 中雨",80:"🌦 陣雨",95:"⛈ 雷雨" };
-        weatherMain.textContent = `${wMap[code]||`代碼${code}`} ${minT}°–${maxT}°C`;
+        weatherMain.textContent = `${PaPaWeather.text(code)} ${minT}°–${maxT}°C`;
         weatherSub.textContent = "大屯山頂今日參考（雨後請勿前往）";
       } catch(e) {
         weatherMain.textContent = "暫無法取得";

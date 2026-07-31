@@ -57,7 +57,7 @@
   </style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -374,13 +374,7 @@
                     minT = Math.round(data.daily.temperature_2m_min[todayIndex]);
                     subText = TRIP_DATE < data.daily.time[0] ? "行程日已過，顯示今日天氣" : "行程日尚遠，顯示今日天氣";
                 }
-                
-                const weatherMap = { 
-                    0: "晴朗", 1: "晴時多雲", 2: "多雲", 3: "陰天", 
-                    45: "霧", 48: "霧", 51: "毛毛雨", 61: "小雨", 
-                    80: "陣雨", 95: "雷雨" 
-                };
-                weatherMain.innerText = `${weatherMap[code] || "多雲"} ${minT}° - ${maxT}°`;
+                weatherMain.innerText = `${PaPaWeather.text(code)} ${minT}° - ${maxT}°`;
                 weatherSub.innerText = subText;
                 weatherMain.classList.remove('loading-pulse');
                 

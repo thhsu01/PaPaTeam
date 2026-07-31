@@ -53,7 +53,7 @@
   </style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
-  <script src="assets/site.js" defer></script>
+  <script src="assets/site.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -446,14 +446,8 @@
         const code = data.daily.weathercode[idx];
         const maxT = Math.round(data.daily.temperature_2m_max[idx]);
         const minT = Math.round(data.daily.temperature_2m_min[idx]);
-        const weatherMap = {
-          0:"☀️ 晴天",1:"🌤 大致晴",2:"⛅ 部分多雲",3:"☁️ 陰天",
-          45:"🌫 霧",48:"🌫 霧淞",51:"🌦 小毛毛雨",53:"🌦 毛毛雨",
-          61:"🌧 小雨",63:"🌧 中雨",65:"🌧 大雨",80:"🌦 陣雨",
-          81:"🌧 陣雨",82:"⛈ 強陣雨",95:"⛈ 雷雨",99:"⛈ 強雷雨"
-        };
         if (weatherLabel) weatherLabel.textContent = label;
-        weatherMain.textContent = `${weatherMap[code] || '天氣代碼'+code} ${minT}°–${maxT}°`;
+        weatherMain.textContent = `${PaPaWeather.text(code)} ${minT}°–${maxT}°`;
         weatherSub.textContent  = subText;
       } catch {
         // 天氣取不到時仍要判斷行程是否已過，故用本地日期作為後備
