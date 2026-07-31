@@ -57,13 +57,14 @@
                     <span class="font-bold text-stone-800 tracking-tight italic hidden sm:inline">爬爬小隊：內湖稜線全縱走+賞櫻</span>
                 </a>
                 <div class="flex gap-1 overflow-x-auto">
-                    <button onclick="scrollToSection('overview')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">總覽</button>
-                    <button onclick="scrollToSection('map-section')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線</button>
-                    <button onclick="scrollToSection('videos')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到影片">影片</button>
-                    <button onclick="scrollToSection('spots')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">亮點</button>
-                    <!-- NEW: Elevation Section Link -->
-                    <button onclick="scrollToSection('analysis')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">高度</button>
-                    <button onclick="scrollToSection('timeline')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">時程</button>
+                    <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+                    <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+                    <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+                    <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">預估進度</button>
+<!-- NEW: Elevation Section Link -->
+                    <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">高度</button>
+                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">時程</button>
                 </div>
             </div>
         </div>
@@ -102,12 +103,12 @@
                         <span class="text-xs text-stone-600 mt-1">直達捷運內湖站</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 bg-pink-50/50 p-2 rounded-xl">
-                        <span class="text-[10px] font-black text-pink-600 uppercase tracking-widest">日期限定預報</span>
+                        <span class="text-[10px] font-black text-pink-700 uppercase tracking-widest">日期限定預報</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight flex items-center gap-2">
                             <span id="weather-icon">🌸</span>
                             <span id="weather-temp">18-22°C</span>
                         </span>
-                        <span class="text-xs text-pink-600 mt-1 font-medium">賞櫻期：涼爽舒適</span>
+                        <span class="text-xs text-pink-700 mt-1 font-medium">賞櫻期：涼爽舒適</span>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
@@ -168,7 +169,7 @@
                 <div class="lg:col-span-1">
                     <div id="wp-card" class="h-full bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between transition-all duration-500 text-left">
                         <div id="card-content">
-                            <div id="wp-pos" class="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded mb-6 tracking-widest uppercase">站點資訊</div>
+                            <div id="wp-pos-label" class="inline-block px-3 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded mb-6 tracking-widest uppercase">站點資訊</div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-4 tracking-tight">請選擇站點</h3>
                             <div class="grid grid-cols-2 gap-4 mb-6">
                                 <div class="bg-white p-3 rounded-xl border border-stone-100">
@@ -317,7 +318,7 @@
         </section>
 
         <!-- 5. Elevation Section (分析) -->
-        <section id="analysis">
+        <section id="elevation">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
                 <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
                 海拔高度剖面
@@ -425,6 +426,7 @@
         function updateCard(idx) {
             currentWaypointIndex = idx;
             const d = schedule[idx];
+            document.getElementById('wp-pos-label').innerText = d.pos;
             document.getElementById('wp-title').innerText = d.loc;
             document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
             document.getElementById('wp-ele').innerText = d.ele;
@@ -442,7 +444,7 @@
             schedule.forEach((item, i) => {
                 const div = document.createElement('div');
                 div.className = "relative flex items-start mb-12 group cursor-pointer pl-8";
-                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
                 let color = i === 0 || i === schedule.length - 1 ? "bg-pink-600" : (item.pos === "極點" ? "bg-red-500" : "bg-stone-300");
                 div.innerHTML = `
                     <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white transition-transform group-hover:scale-125"></div></div>
@@ -458,7 +460,6 @@
             });
         }
 
-        function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
         window.onload = () => { initRealMap(); initChart(); renderTimeline(); updateCard(0); };
     </script>
 </body>

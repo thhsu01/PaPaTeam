@@ -62,11 +62,11 @@
                     <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
                 </div>
                 <div class="flex gap-1 overflow-x-auto">
-                    <button onclick="scrollToSection('overview')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">數據總覽</button>
-                    <button onclick="scrollToSection('map-section')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路徑地圖</button>
-                    <button onclick="scrollToSection('analysis')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
-                    <button onclick="scrollToSection('deep-dive')" class="nav-btn text-xs px-3 py-1.5 rounded-full bg-stone-200 text-stone-800 hover:bg-stone-300 whitespace-nowrap" aria-label="滾動到景點介紹">景點深度導覽</button>
-                    <button onclick="scrollToSection('timeline')" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">實際行程</button>
+                    <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+                    <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+                    <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+                    <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實際行程">實際行程</button>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                     <div id="wp-card" class="h-full bg-orange-50/30 rounded-2xl p-6 border border-orange-100 flex flex-col justify-between transition-all duration-300 overflow-y-auto">
                         <div id="card-content">
                             <div class="flex items-center justify-between mb-4">
-                                <div id="wp-pos" class="inline-block px-2.5 py-1 bg-orange-200 text-orange-800 text-[10px] font-black rounded tracking-wider uppercase">地點類型</div>
+                                <div id="wp-pos-label" class="inline-block px-2.5 py-1 bg-orange-200 text-orange-800 text-[10px] font-black rounded tracking-wider uppercase">地點類型</div>
                                 <div class="flex gap-2">
                                     <button onclick="prevWaypoint()" class="nav-arrow w-10 h-10 min-w-[44px] min-h-[44px] rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm" aria-label="上一個航點">&lt;</button>
                                     <button onclick="nextWaypoint()" class="nav-arrow w-10 h-10 min-w-[44px] min-h-[44px] rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white shadow-sm" aria-label="下一個航點">&gt;</button>
@@ -167,7 +167,7 @@
         </section>
 
         <!-- Elevation Section -->
-        <section id="analysis">
+        <section id="elevation">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8"><span class="w-2.5 h-8 bg-red-600 rounded-full"></span> 步道坡度剖面圖</h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
                 <div class="chart-container"><canvas id="elevation-chart"></canvas></div>
@@ -175,7 +175,7 @@
         </section>
 
         <!-- Deep Dive Introduction Section -->
-        <section id="deep-dive" class="space-y-10">
+        <section id="spots" class="space-y-10">
             <div class="text-center">
                 <h2 class="text-3xl font-black text-stone-800">各景點深度導覽</h2>
                 <p class="text-stone-600 mt-2 italic">穿越礫岩惡地，探索火炎山的地理密碼</p>
@@ -379,7 +379,7 @@
             document.getElementById('wp-title').innerText = d.loc;
             document.getElementById('wp-ele').innerText = d.ele;
             document.getElementById('wp-desc').innerHTML = d.desc;
-            document.getElementById('wp-pos').innerText = d.pos;
+            document.getElementById('wp-pos-label').innerText = d.pos;
             
             const card = document.getElementById('wp-card');
             if (d.loc === "火炎山大峽谷") {
@@ -403,7 +403,7 @@
             schedule.forEach((item, i) => {
                 const div = document.createElement('div');
                 div.className = "relative flex items-start mb-10 group cursor-pointer pl-8";
-                div.onclick = () => { updateCard(i); scrollToSection('map-section'); };
+                div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
                 
                 let dotColor = item.loc === "火炎山大峽谷" ? "bg-red-600 animate-pulse" : (item.pos.includes("點") ? "bg-orange-600" : "bg-stone-400");
                 
@@ -424,10 +424,6 @@
             });
         }
 
-        function scrollToSection(id) { 
-            const el = document.getElementById(id); 
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-        }
 
         document.addEventListener('DOMContentLoaded', () => {
             initRealMap();
