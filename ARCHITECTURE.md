@@ -104,6 +104,8 @@ const data = {
 **它自己的已知偏離**（複製時不要跟著抄）：主色以 `style="color:#9a6030"` 之類的
 行內樣式散在 markup 各處，尚未收成 CSS 變數。這是全站待辦，不是正規做法。
 
+收斂已完成，10 頁的結構現在都符合本規格；仍未統一的三項見文末「尚未收斂的三件事」。
+
 ### 段落規格
 
 id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
@@ -199,19 +201,20 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 
 平滑滾動由 `assets/site.js` 統一處理 `prefers-reduced-motion`，各頁不必也不該自行判斷。
 
-**地圖與航點卡**：地圖在上、航點卡在下的**單欄堆疊**，外層 `max-w-4xl mx-auto`。
-（家族 A 的 6 頁目前是 `lg:grid-cols-3` 地圖與卡片並排，這是全站最大的一處版面差異，
-也是收斂成本最高的一項。）航點卡欄位 id 固定如下，`updateWaypointCard()` 只認這些名字：
+**地圖與航點卡**：地圖在上、航點卡在下的**單欄堆疊**，不可並排。
+（內容寬度尚未統一：正規頁各段自帶 `max-w-4xl`，家族 A 出身的 6 頁則靠
+`<main class="max-w-6xl">`，因此地圖實寬 896px 對 1006px。見下方待辦。）
+航點卡欄位 id 固定如下，`updateWaypointCard()` 只認這些名字：
 
 | id | 內容 | 備註 |
 |---|---|---|
 | `wp-pos-label` | 位置類型（集合起點、最高點…） | 不叫 `wp-pos` |
 | `wp-title` | 地點名稱 | |
-| `wp-time` | 預計／實際到達時間 | |
+| `wp-time` | 預計／實際到達時間 | 行前頁標「預計時間」，紀錄頁標「實際時間」 |
 | `wp-dist` | 累計里程 km | `toFixed(2)` |
 | `wp-ele` | 海拔 m | |
 | `wp-desc` | 該點描述 | |
-| `wp-advice` | 隊友建議 | |
+| `wp-advice` | 隊友建議 | 僅此欄位放建議，不要拿來塞到達時間 |
 
 上/下一個航點鍵必要，`min-w-[44px] min-h-[44px]`，帶 `aria-label="上一個航點"` / `"下一個航點"`。
 
@@ -241,13 +244,18 @@ const schedule = [
 ];
 ```
 
-行程日只寫一次，其餘全部由它推導——天氣查詢日期、天氣卡標題、行程結束提示。
-日期散寫在多處是先前實際發生過的 bug 來源。
+有確定日期的頁面，行程日只寫一次，其餘全部由它推導——天氣查詢日期、
+天氣卡標題、行程結束提示。日期散寫在多處是先前實際發生過的 bug 來源：
+`dinghu` 與 `laojiujianshan` 各把日期寫死兩次，結果行程過了以後，
+天氣卡仍顯示「今日即時天氣 (目標日尚遠)」。
 
 ```javascript
 const TRIP_DATE = "2026-08-02";
 const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+d}`; })();
 ```
+
+**候選行程沒有 `TRIP_DATE`**，因為它們本來就還沒定日期。這類頁面的天氣以
+`forecast_days=1` 顯示今日天氣即可，不要為了湊規格而編一個日期出來。
 
 必要函式：`initMap()`、`initChart()`、`renderTimeline()`、`updateWaypointCard(i)`、
 `prevWaypoint()`、`nextWaypoint()`、`openNavigation()`。
@@ -259,7 +267,7 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 每頁有自己的主色（碧山粉、七星藍、火炎山橘），**這是刻意的辨識設計，要保留**。
 需要一致的是使用方式：
 
-- 灰階一律用 **stone**，不用 slate（`shiqiulinling.html` 目前是 slate，屬偏離）
+- 灰階一律用 **stone**，不用 slate
 - 主色不可直接當小字顏色。品牌橙 `#c77c3e` 配淺底只有 2.97:1，
   文字要用加深版 `#9a6030`（4.63:1）。非文字的色條、圓點不受此限。
 - 深色區塊上的文字方向相反：`stone-600` 在深底會掉到 2:1 以下，該用 `stone-300/400`。
@@ -269,29 +277,41 @@ const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+
 主色目前寫死在 markup 的 Tailwind class（`text-pink-700`、`bg-sky-600`…）。
 待辦是收成 `--accent` 系列變數，讓換色與對比檢查變成改一個值的事。
 
-### 各頁目前的偏離
+### 收斂狀態
 
-| 頁面 | 海拔 id | 景點 id | 段落順序 | 航點類型 id | nav | footer | 灰階 | 地圖版面 |
-|---|---|---|---|---|---|---|---|---|
-| `nanshijiao` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `qixingshan` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `datunshan` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `dinghu` | ✅ | ✅ | ✅ | ✅ | sticky | ✅ | ✅ | ✅ |
-| `bishan` | `analysis` | ✅ | 多 `videos`，景點在海拔前 | `wp-pos` | sticky | 在 main 內 | ✅ | 並排 |
-| `huoyianshan` | `analysis` | `deep-dive` | ✅ | `wp-pos` | sticky | 在 main 內 | ✅ | 並排 |
-| `laojiujianshan` | `analysis` | ✅ | ✅ | `wp-pos` | sticky | 在 main 內 | ✅ | 並排 |
-| `meihuashan` | `analysis` | ✅ | ✅ | `wp-pos` | sticky | 在 main 內 | ✅ | 並排 |
-| `mochashan` | `analysis` | ✅ | ✅ | `wp-pos` | sticky | 在 main 內 | ✅ | 並排 |
-| `shiqiulinling` | `analysis` | ✅ | 景點在海拔前 | `wp-pos` | sticky | 在 main 內 | slate | 並排 |
+10 頁已全數符合本規格的結構部分。以瀏覽器實測（10 頁 × 手機/桌機兩種視窗）逐項確認：
 
-表中打勾只代表該欄合規，不代表整頁合規。三項全頁性的落差另計：
+| 項目 | 狀態 |
+|---|---|
+| 段落 id 與順序 | ✅ 10/10 為 `overview` → `map-section` → `elevation` → `spots` → `timeline` |
+| 導覽鍵（五顆、規格文字） | ✅ 10/10 |
+| 航點卡欄位 id | ✅ 10/10（含新增的 `wp-time`） |
+| 導覽列 `fixed` | ✅ 10/10 |
+| `<footer>` 在 `<main>` 外 | ✅ 10/10 |
+| 地圖單欄堆疊 | ✅ 10/10 |
+| 灰階用 stone | ✅ 10/10 |
+| 無 `scrollToSection()` | ✅ 10/10 |
+| 小字對比 ≥ 4.5:1 | ✅ 0 筆失敗 |
 
-- **導覽鍵文字**：10 頁各自為政（總覽／行程總覽／數據總覽／挑戰總覽等），全數需按段落規格表收斂
-- **`wp-time` 與 `TRIP_DATE`**：目前只有 `nanshijiao` 有。其餘 9 頁的日期仍散寫在
-  markup 與腳本多處，航點卡也看不到到達時間
-- **`scrollToSection()` 輔助函式**：6 個家族 A 頁面有，應移除並改為 `onclick` 直接呼叫
+### 尚未收斂的三件事
 
-**主色寫死在 markup** 是 10 頁共同的問題，不列入本表——那要等 `--accent` 變數層做完才談得上收斂。
+**一、內容寬度**（結構待辦）
+正規頁與 3 頁同世代者，各段自帶 `max-w-4xl`；家族 A 出身的 6 頁靠
+`<main class="max-w-6xl">`。地圖實寬因此是 896px 對 1006px。
+統一它會重排那 6 頁的每一段，比先前任何一步都大，故單獨列為待辦。
+
+**二、主色寫死在 markup**（10 頁共同）
+`text-pink-700`、`bg-sky-600` 之類散在各頁。待辦是收成 `--accent` 系列變數，
+讓換色與對比檢查變成改一個值的事。這是每頁主色能真正「制度化」的前提。
+
+**三、內容缺口**（不是結構問題，需要實地資料才能補）
+
+| 頁面 | 缺什麼 |
+|---|---|
+| `huoyianshan` | schedule 沒有 `dist`（累計里程）與 `advice`，故航點卡無此兩欄 |
+| `meihuashan` | schedule 沒有 `advice`，該區塊在有資料前自動隱藏 |
+
+里程與建議都是實走才知道的東西，不應為了填滿欄位而編造。
 
 **改 id 的代價**：`bishan.html#analysis` 這類舊錨點連結會失效。本站規模小、對外連結少，
 判斷為可接受，但收斂時要一併更新頁內所有 `onclick` 的 `getElementById`。
@@ -531,5 +551,5 @@ open http://localhost:8000
 
 ---
 
-**最後更新**：2026-07-31（新增詳情頁正規規格，正規頁定為 `nanshijiao.html`）  
+**最後更新**：2026-07-31（詳情頁正規規格；10 頁結構已全數收斂）  
 如有疑問，參考 CONTRIBUTING.md 提出 issue。
