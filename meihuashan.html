@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -274,12 +275,7 @@
 
 
     <script>
-      // 地圖與圖表的顏色讀自 :root，與 CSS 共用同一份值，
-      // 免得換主色時只改了一邊。
-      const rootStyle = getComputedStyle(document.documentElement);
-      const ACCENT = rootStyle.getPropertyValue('--accent').trim();
 
-        function openNavigation() { window.open("https://www.google.com/maps/dir/?api=1&destination=25.124977555244143,121.58770990640019", "_blank"); }
         let currentWaypointIndex = 0;
 
         const schedule = [
@@ -295,92 +291,71 @@
             { lat: 25.122079, lng: 121.593057, actual: "14:50", loc: "帕米爾公園", dist: 7.32, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。" },
             { lat: 25.124977, lng: 121.587710, actual: "15:30", loc: "終點 (聖人橋)", dist: 8.42, ele: 217, pos: "終點解散", desc: "平安回到終點解散。" }
         ];
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ACCENT = cssVar('--accent');
 
-        let map, chart, markers = [];
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      nav: [25.124977555244143, 121.58770990640019],
 
-        function initRealMap() {
-            map = L.map('map', { preferCanvas: true, center: [25.1275, 121.596], zoom: 15 });
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            const pathCoords = schedule.map(d => [d.lat, d.lng]);
-            L.polyline(pathCoords, { color: ACCENT, weight: 5, opacity: 0.8 }).addTo(map);
-            schedule.forEach((d, i) => {
-                const circle = L.circleMarker([d.lat, d.lng], {
-                    radius: d.pos === "最高點" || d.pos.includes("集合") ? 9 : 6,
-                    fillColor: d.pos === "最高點" ? '#16a34a' : (d.pos.includes("集合") ? ACCENT : '#1c1917'),
-                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
-                }).addTo(map);
-                circle.on('click', () => updateCard(i));
-                markers.push(circle);
-            });
+      card: {
+        timeField: 'actual',        // 本頁是活動紀錄，欄位名為實際到達時間
+        follow: 'pan', wrap: 'cycle',
+        hideEmptyAdvice: true,      // 本頁 schedule 尚無 advice 資料
+        flash: ['accent-line-deep', 'accent-tint-weak']
+      },
+
+      map: {
+        preferCanvas: true,
+        center: [25.1275, 121.596], zoom: 15,
+        track: { weight: 5, opacity: 0.8 },
+        marker: (wp) => ({
+          radius: wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6,
+          fillColor: wp.pos === "最高點" ? '#16a34a'
+                   : (wp.pos.includes("集合") ? ACCENT : '#1c1917'),
+          opacity: 1, fillOpacity: 1
+        }),
+        selected: (wp, i, n, sel) => ({
+          radius: sel ? 14 : (wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6)
+        })
+      },
+
+      chart: {
+        label: wp => wp.loc,
+        fillAlpha: 0.1,
+        dataset: { label: '實測海拔 (m)', borderWidth: 4, pointRadius: 6, tension: 0.35 },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { min: 200 } },
+          onHover: (e, el) => { if (el.length > 0) updateWaypointCard(el[0].index); }
         }
+      },
 
-        function initChart() {
-            const ctx = document.getElementById('elevation-chart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: schedule.map(d => d.loc),
-                    datasets: [{ label: '實測海拔 (m)', data: schedule.map(d => d.ele), borderColor: ACCENT, borderWidth: 4, pointRadius: 6, fill: true, backgroundColor: 'rgba(234, 88, 12, 0.1)', tension: 0.35 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 200 } }, onHover: (e, el) => { if (el.length > 0) updateCard(el[0].index); } }
-            });
+      timeline: {
+        clear: true,   // 見 detail.js 的說明：本頁原本就沒有時間軸直線
+        className: 'relative flex items-start mb-10 group cursor-pointer pl-8',
+        item: (wp) => {
+          const dot = wp.pos.includes("集合") ? 'accent-mark'
+                    : wp.pos === "最高點" ? 'bg-stone-800' : 'bg-stone-300';
+          return `
+            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
+            <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">
+              <div class="flex flex-wrap justify-between items-center mb-2">
+                <span class="text-xl font-black text-stone-800">${wp.actual}</span>
+                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${wp.pos}</span>
+              </div>
+              <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
+              <div class="flex gap-4 text-[11px] text-stone-600 font-bold">
+                <span>累計里程: ${wp.dist.toFixed(2)} km</span>
+                <span>海拔: ${wp.ele} m</span>
+              </div>
+            </div>`;
         }
-
-        function nextWaypoint() { currentWaypointIndex = (currentWaypointIndex + 1) % schedule.length; updateCard(currentWaypointIndex); }
-        function prevWaypoint() { currentWaypointIndex = (currentWaypointIndex - 1 + schedule.length) % schedule.length; updateCard(currentWaypointIndex); }
-
-        function updateCard(idx) {
-            currentWaypointIndex = idx;
-            const d = schedule[idx];
-            document.getElementById('wp-time').innerText = d.actual;
-            document.getElementById('wp-title').innerText = d.loc;
-            document.getElementById('wp-dist').innerText = d.dist.toFixed(2);
-            document.getElementById('wp-ele').innerText = d.ele;
-            document.getElementById('wp-desc').innerText = d.desc;
-            document.getElementById('wp-pos-label').innerText = d.pos;
-            const adviceEl = document.getElementById('wp-advice');
-            adviceEl.innerText = d.advice || '';
-            adviceEl.parentElement.classList.toggle('hidden', !d.advice);
-            markers.forEach((m, i) => m.setStyle({ radius: i === idx ? 14 : (schedule[i].pos === "最高點" || schedule[i].pos.includes("集合") ? 9 : 6) }));
-            map.panTo([d.lat, d.lng]);
-            const card = document.getElementById('wp-card');
-            card.classList.add('accent-line-deep', 'accent-tint-weak');
-            setTimeout(() => card.classList.remove('accent-line-deep', 'accent-tint-weak'), 500);
-        }
-
-        function renderTimeline() {
-            const container = document.getElementById('timeline-container');
-            container.innerHTML = '';
-            schedule.forEach((item, i) => {
-                const div = document.createElement('div');
-                div.className = "relative flex items-start mb-10 group cursor-pointer pl-8";
-                div.onclick = () => { updateCard(i); document.getElementById('map-section').scrollIntoView({behavior:'smooth'}); };
-                let color = item.pos.includes("集合") ? "accent-mark" : (item.pos === "最高點" ? "bg-stone-800" : "bg-stone-300");
-                div.innerHTML = `
-                    <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${color} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-                    <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">
-                        <div class="flex flex-wrap justify-between items-center mb-2">
-                            <span class="text-xl font-black text-stone-800">${item.actual}</span>
-                            <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${item.pos}</span>
-                        </div>
-                        <h4 class="font-bold text-stone-700 text-base mb-1">${item.loc}</h4>
-                        <div class="flex gap-4 text-[11px] text-stone-600 font-bold">
-                            <span>累計里程: ${item.dist.toFixed(2)} km</span>
-                            <span>海拔: ${item.ele} m</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initRealMap();
-            initChart();
-            renderTimeline();
-            updateCard(0);
-        });
+      }
+    });
     </script>
 </body>
 </html>
