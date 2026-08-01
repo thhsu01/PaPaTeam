@@ -197,6 +197,12 @@ window.PaPaDetail = (function () {
     return (+p[1]) + '/' + (+p[2]);
   }
 
+  function val(arr, i) {
+    if (!arr) return null;
+    var v = arr[i];
+    return (v == null || (typeof v === 'number' && isNaN(v))) ? null : v;
+  }
+
   async function fetchWeather() {
     var w = cfg.weather;
     if (!w) return;
@@ -206,9 +212,20 @@ window.PaPaDetail = (function () {
     if (!main) return;
 
     var days = cfg.tripDate ? 16 : 1;
+
+    // 只給經緯度時，Open-Meteo 用它自己地形網格的高度，山區常常差很多。
+    // 傳實際海拔可讓它做高度降尺度，拿到的才是那個高度的預報。
+    // 預設取行程最高點——那是最冷、風最大的地方，對行前判斷是保守的一側。
+    var elev = w.elevation;
+    if (elev == null && cfg.schedule) {
+      elev = Math.max.apply(null, cfg.schedule.map(function (x) { return x.ele; }));
+    }
+
     var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + w.lat + '&longitude=' + w.lng +
-              '&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei' +
-              '&forecast_days=' + days;
+              (elev != null ? '&elevation=' + elev : '') +
+              '&daily=weathercode,temperature_2m_max,temperature_2m_min' +
+              ',apparent_temperature_max,apparent_temperature_min,precipitation_probability_max' +
+              '&timezone=Asia/Taipei&forecast_days=' + days;
     try {
       var data = await (await fetch(url)).json();
       var idx = 0, subText = w.subText || '', labelText = null;
@@ -232,7 +249,23 @@ window.PaPaDetail = (function () {
       var lo = Math.round(data.daily.temperature_2m_min[idx]);
       var hi = Math.round(data.daily.temperature_2m_max[idx]);
       main.textContent = text + ' ' + lo + (w.sep || '°–') + hi + (w.unit || '°');
-      if (sub && subText) sub.textContent = subText;
+
+      // 體感與降雨機率是附加資訊，接在副標後面。
+      // 實測 16 天視窗內兩者都有值，但仍逐項確認才顯示——欄位若因模型或
+      // 參數組合而缺席，寧可整項不出現，也不要讓 null 變成畫面上的 NaN。
+      var extra = [];
+      var fl = val(data.daily.apparent_temperature_min, idx);
+      var fh = val(data.daily.apparent_temperature_max, idx);
+      if (fl != null && fh != null) {
+        extra.push('體感 ' + Math.round(fl) + (w.sep || '°–') + Math.round(fh) + (w.unit || '°'));
+      }
+      var pop = val(data.daily.precipitation_probability_max, idx);
+      if (pop != null) extra.push('降雨 ' + Math.round(pop) + '%');
+
+      if (sub) {
+        var line = [subText].concat(extra).filter(Boolean).join(' · ');
+        if (line) sub.textContent = line;
+      }
       if (label && labelText) label.textContent = labelText;
       main.classList.remove('loading-pulse', 'weather-pulse');
     } catch (e) {
