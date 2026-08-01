@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-07-31 16:59",
+  "generated": "2026-08-01 22:59",
   "generated_tz": "UTC+8",
-  "commit": "7a14565ab0463a143e5a0738f3c3c3623e8f12bd",
+  "commit": "531c5537759192db22bdaf4ae88c7b098b3e688b",
   "file_count": 23,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -20,8 +20,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 23330,
-      "sha": "3b7e0f6eab1d3cb6b8ceb0aeef2fb09954af8839"
+      "size": 24058,
+      "sha": "bc77c0ea1fbd588c7147d061a64d6c3765230242"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -50,8 +50,8 @@
     },
     {
       "path": "assets/detail.js",
-      "size": 11082,
-      "sha": "fa15582006fdb81f6d8a5696f8ddeb8a9251ac8f"
+      "size": 12653,
+      "sha": "5aff462abe4697f351bf49b6c703ad0322cd16fe"
     },
     {
       "path": "assets/site.css",
@@ -115,8 +115,8 @@
     },
     {
       "path": "qixingshan.html",
-      "size": 25159,
-      "sha": "8c2d21c61a5a3dc226d385da615f93e5b0fe0eee"
+      "size": 25130,
+      "sha": "aedb05b6d82d3a814dd73c63cfc7dcba6852461e"
     },
     {
       "path": "shiqiulinling.html",
