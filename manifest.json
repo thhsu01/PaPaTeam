@@ -153,13 +153,6 @@
       "blocking": false,
       "desc": "README.md 的「檔案結構」區塊未列 assets/ 與 4 份 md，需補",
       "source": "2026-07-31 稽核"
-    },
-    {
-      "id": "nanshijiao-guoqiling-coords",
-      "due": null,
-      "blocking": false,
-      "desc": "nanshijiao 的國旗嶺座標存疑：與登山口僅隔 84 m 卻標著相距 1.1 km 的里程，8/2 軌跡在該處的 GPS 高程只有 60 m（條目寫 160 m）。需實地或圖資確認，不得臆測改寫",
-      "source": "2026-08-02 GPX 比對"
     }
   ],
   "conventions": {

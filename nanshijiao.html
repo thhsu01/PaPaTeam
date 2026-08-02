@@ -236,10 +236,6 @@
             <p class="text-sm text-stone-600 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>國旗嶺 (H160m)</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">中和稜線上的視野展望點，設有健身器材與涼亭。居高臨下，可俯瞰中和、永和市區，是進入圓通寺步道前的熱身緩坡。</p>
-          </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓通禪寺 (H100m)</h3>
@@ -252,8 +248,8 @@
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>外南勢角山 (H255m)</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">南勢角山系稜線上的衛峰，森林路徑清幽。相較主峰較少人跡，原始林相豐富，是縱走行程中享受山林靜謐的好時刻。</p>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>外南勢角山（國旗嶺）(H160m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">南勢角山系稜線上的衛峰，山友多以山頭上的國旗稱它國旗嶺。設有健身器材與涼亭，居高臨下可俯瞰中和、永和市區，是全程第一個歇腳的展望點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -332,9 +328,11 @@
     // 原計畫的最後三點（光明頂、華夏登山口、步行回南勢角站）不在紀錄
     // 裡：軌跡 15:11 止於烘爐地。沒走到的路段不列入實走時間軸。
     //
-    // 待查證：國旗嶺的座標與軌跡只差 40 m，但軌跡在該處的高程讀數是
-    // 60 m，與條目上的 160 m 差了 100 m；且它與登山口只隔 84 m，卻標
-    // 著相距 1.1 km 的累計里程。座標本身存疑，此處僅照座標如實取值。
+    // 國旗嶺與外南勢角山原本各佔一列，其實是同一個地方（隊友確認）。
+    // 軌跡也是這樣說的：舊「國旗嶺」座標離登山口只有 84 m、高程讀數
+    // 60 m，根本不是山頭；舊「外南勢角山」座標與軌跡差 1 m，隊伍在
+    // 那裡停了十分鐘，高程穩定讀 158–163 m——正好是國旗嶺標的 160 m。
+    // 兩列已合併，取這個座標與 160 m；另一列的 255 m 全程沒有佐證。
     const schedule = [
       { lat: 24.990128, lng: 121.509104, time: "07:50", plan: "07:30", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20, pos: "集合起點",
         desc: "行程起點。實際 07:50 出發，比原訂晚了 20 分鐘。",
@@ -344,13 +342,9 @@
         desc: "累計 0.66 km。11 分鐘走完市區路段，正式進入山區步道開始爬升。",
         advice: "確認登山鞋鞋帶緊好，手機導航開啟。沿步道階梯持續往上爬升至國旗嶺。" },
 
-      { lat: 24.986920, lng: 121.503219, time: "08:06", plan: "08:05", loc: "國旗嶺 (H160m)", dist: 0.80, ele: 160, pos: "展望台",
-        desc: "累計 0.80 km。稜線上的展望點，可俯瞰中永和市區，設有健身器材。",
-        advice: "可短暫停留拍照，但不宜久留，接下來繼續沿稜線前往外南勢角山。" },
-
-      { lat: 24.984378, lng: 121.498137, time: "08:42", plan: "08:23", loc: "外南勢角山 (H255m)", dist: 1.63, ele: 255, pos: "稜線衛峰",
-        desc: "累計 1.63 km。南勢角山系的衛峰，林相原始，路徑較窄。在此停了 10 分鐘。",
-        advice: "山頂無展望，稍作確認方向後往東下山前往圓通禪寺，下坡路段注意腳步。" },
+      { lat: 24.984378, lng: 121.498137, time: "08:42", plan: "08:23", loc: "外南勢角山（國旗嶺）(H160m)", dist: 1.63, ele: 160, pos: "展望台",
+        desc: "累計 1.63 km。南勢角山系的衛峰，稜線上的展望點，可俯瞰中永和市區，設有健身器材。在此停了 10 分鐘。",
+        advice: "可短暫停留拍照，接著往東下山前往圓通禪寺，下坡路段注意腳步。" },
 
       { lat: 24.982593, lng: 121.492786, time: "09:21", plan: "08:42", loc: "圓通禪寺 (H100m)", dist: 2.65, ele: 100, pos: "歷史廟宇",
         desc: "累計 2.65 km。近 300 年歷史的仿唐式佛寺，廟前視野開闊可遠眺市區。",
@@ -392,8 +386,8 @@
 
     const POS_EMOJI = {
       "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
-      "地質奇觀":"🪨", "稜線衛峰":"🌲", "小百岳 #16":"⭐",
-      "天然岩洞":"🕌", "稜線山頭":"🌿", "最高點":"🏔️", "終點":"🏁"
+      "地質奇觀":"🪨", "小百岳 #16":"⭐", "天然岩洞":"🕌",
+      "稜線山頭":"🌿", "最高點":"🏔️", "終點":"🏁"
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
