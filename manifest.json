@@ -5,7 +5,7 @@
   "branch": "main",
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
-  "manifest_updated": "2026-07-31",
+  "manifest_updated": "2026-08-02",
   "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
@@ -34,7 +34,7 @@
     {
       "path": "nanshijiao.html",
       "title": "微笑山線 × 南勢角山 × 一線天",
-      "status": "planned",
+      "status": "completed",
       "date": "2026-08-02"
     },
     {
@@ -104,6 +104,10 @@
     {
       "path": "assets/detail.js",
       "purpose": "10 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染"
+    },
+    {
+      "path": "assets/tracks/nanshijiao-2026-08-02.js",
+      "purpose": "南勢角山 8/2 實走 GPS 軌跡（Douglas–Peucker 簡化至 352 點），供地圖畫實際路線"
     }
   ],
   "docs": [
@@ -130,13 +134,6 @@
   ],
   "open_items": [
     {
-      "id": "archive-nanshijiao",
-      "due": "2026-08-02",
-      "blocking": false,
-      "desc": "8/2 行程結束後，把 index.html 的 data.planned 中南勢角行程移到 data.completed，並把 isLatest 從 dinghu 轉移過去",
-      "source": "READABILITY_AUDIT.md §4"
-    },
-    {
       "id": "huoyianshan-missing-data",
       "due": null,
       "blocking": false,
@@ -156,6 +153,13 @@
       "blocking": false,
       "desc": "README.md 的「檔案結構」區塊未列 assets/ 與 4 份 md，需補",
       "source": "2026-07-31 稽核"
+    },
+    {
+      "id": "nanshijiao-guoqiling-coords",
+      "due": null,
+      "blocking": false,
+      "desc": "nanshijiao 的國旗嶺座標存疑：與登山口僅隔 84 m 卻標著相距 1.1 km 的里程，8/2 軌跡在該處的 GPS 高程只有 60 m（條目寫 160 m）。需實地或圖資確認，不得臆測改寫",
+      "source": "2026-08-02 GPX 比對"
     }
   ],
   "conventions": {
@@ -177,6 +181,7 @@
     "elevation_source": "地形圖資料，非 GPS（GPS 高程誤差較大）",
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
-    "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造"
+    "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造",
+    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線"
   }
 }

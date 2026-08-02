@@ -103,8 +103,11 @@ window.PaPaDetail = (function () {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 m.attribution ? { attribution: m.attribution } : {}).addTo(map);
 
+    // 候選／計畫行程只有航點，軌跡就是航點連成的直線；已走過的行程若留下
+    // GPS 紀錄，就改畫實際軌跡——那條線會繞過航點之間看不出來的髮夾彎。
     var track = m.track || {};
-    var pts = (track.slice ? cfg.schedule.slice(track.slice[0], track.slice[1]) : cfg.schedule)
+    var pts = track.points ||
+              (track.slice ? cfg.schedule.slice(track.slice[0], track.slice[1]) : cfg.schedule)
                 .map(function (w) { return [w.lat, w.lng]; });
     var line = { color: track.color || cssVar('--accent'), weight: track.weight || 4,
                  opacity: track.opacity == null ? 0.85 : track.opacity };

@@ -150,7 +150,7 @@
 
 ## 4. 尚未處理的缺口
 
-1. **`index.html` 的行程歸檔** —— 8/2 之後應把 `data.planned` 中的南勢角行程移到 `data.completed`，並將 `isLatest` 轉移。這是內容操作（需知道實際完成情況），非程式能代為判斷。
+1. ~~**`index.html` 的行程歸檔** —— 8/2 之後應把 `data.planned` 中的南勢角行程移到 `data.completed`，並將 `isLatest` 轉移。~~ 2026-08-02 完成：依當天的 GPS 軌跡歸檔，`data.planned` 現為空陣列（渲染「目前尚無計畫行程」佔位卡），`isLatest` 已從 `dinghu` 轉移。
 
 ### 第六輪：全站對比度歸零
 

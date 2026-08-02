@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
+  <script src="assets/tracks/nanshijiao-2026-08-02.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -75,7 +76,7 @@
         <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
         <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
         <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">預估進度</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
     </div>
     </div>
   </nav>
@@ -88,15 +89,15 @@
 
         <div class="mb-5 flex items-center gap-3">
           <span class="stamp">8月2日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">PACE: 輕鬆慢走模式 · 預計 6.5H 完成</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 11.09 KM · 7 小時 21 分</span>
         </div>
 
         <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷），避免頁面看起來仍是即將出發 -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
-            <div class="font-bold text-stone-800 text-base mb-1">此行程已結束</div>
-            <p class="text-sm text-stone-700 leading-relaxed">以下內容為當初的行前規劃，時刻與天氣皆為預估值，保留作為紀錄。</p>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">頁面已改寫為實走紀錄：時刻與里程來自 8/2 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -108,25 +109,25 @@
 
         <!-- 注意事項橫幅 -->
         <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
-          <span class="text-2xl mt-0.5">🏛️</span>
+          <span class="text-2xl mt-0.5">🏁</span>
           <div>
-            <div class="font-bold text-amber-900 text-base mb-1">行前提醒：全程以大眾運輸為主</div>
-            <p class="text-sm text-amber-800 leading-relaxed">起終點皆為捷運南勢角站，步行距離即可抵達各登山口。開車的隊友可停於站旁的<strong>南勢角站轉乘停車場</strong>，再搭乘捷運或步行集合。</p>
+            <div class="font-bold text-amber-900 text-base mb-1">實走與計畫的差異</div>
+            <p class="text-sm text-amber-800 leading-relaxed">原訂 O 型自烘爐地經<strong>光明頂、華夏登山口</strong>步行回捷運站，GPS 軌跡在 15:11 止於烘爐地南山福德宮，最後這段沒有紀錄。此外一線天到牛埔頭山實走 3.75 km，比原估的 2.5 km 多出不少，全程也比計畫慢了約 1 小時。</p>
           </div>
         </div>
 
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="text-xs text-stone-600 mb-1">起點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
-            <div class="text-xs text-stone-600 mt-1">捷運中和新蘆線，1 號出口集合</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🚗 開車可停於<br>南勢角站轉乘停車場</div>
+            <div class="text-xs text-stone-600 mt-1">捷運中和新蘆線，1 號出口</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>烘爐地南山福德宮</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">出發時間</div>
-            <div class="font-bold text-stone-800">8月2日 07:30</div>
-            <div class="text-xs text-stone-600 mt-1">（請提前 10 分鐘抵達）</div>
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">8月2日 07:50–15:11</div>
+            <div class="text-xs text-stone-600 mt-1">（原訂 07:30 出發）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
@@ -141,24 +142,26 @@
         </div>
 
         <!-- Stats row -->
+        <!-- 里程與耗時取自 8/2 的 GPS 軌跡；爬升仍用地形圖估算值，理由見下方註記。 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">11.76</div>
-            <div class="text-xs text-stone-600">GPX 總里程 km</div>
+            <div class="text-3xl font-black text-stone-900">11.09</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">~6.5</div>
-            <div class="text-xs text-stone-600">目標耗時 hr（輕鬆）</div>
+            <div class="text-3xl font-black text-stone-900">7:21</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">674</div>
-            <div class="text-xs text-stone-600">總爬升高度 m</div>
+            <div class="text-xs text-stone-600">總爬升 m（地形圖估）</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black" style="color:var(--accent-strong);">320</div>
             <div class="text-xs text-stone-600">最高海拔 m（五尖山）</div>
           </div>
         </div>
+        <p class="text-xs text-stone-500 mt-3 max-w-2xl">爬升沿用地形圖估算：GPS 高程在這份紀錄裡雜訊達 ±20 m（同一座五尖山前後讀到 281 與 316 m），依平滑程度可推出 400 至 550 m 的任一數字，沒有一個比地形圖可靠。</p>
       </div>
     </section>
 
@@ -169,7 +172,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-600 mb-6">點擊地圖上的標記可切換各航點細節。路線由北往南，從中和圓通寺向西延伸至土城五尖山。</p>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 8/2 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
@@ -181,14 +184,14 @@
             <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-600">
-            <span>預計時間 <strong class="text-stone-800" id="wp-time">07:30</strong></span>
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:50</strong></span>
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
           </div>
-          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點，07:00 準時出發。</p>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點，07:50 出發。</p>
           <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
-            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
-            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice">在站內小7補充飲食，確認大家到齊後出發。</p>
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">行前建議（當初規劃）</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice">在站內超商補充飲食，確認大家到齊後出發。</p>
           </div>
         </div>
 
@@ -215,7 +218,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-600 mt-3 text-center">O 型大縱走：先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，最後由烘爐地光明頂下山返抵南勢角站。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，於烘爐地結束。海拔取自地形圖，非 GPS 高程。</p>
       </div>
     </section>
 
@@ -254,8 +257,8 @@
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>光明頂 (H225m)</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，實為行程中重要的稜線觀景台。</p>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400" style="display:inline-block;"></span>光明頂 (H225m)<span class="text-[10px] font-medium text-stone-500 bg-stone-100 px-1.5 py-0.5 rounded">本次未行經</span></h3>
+            <p class="text-sm text-stone-600 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，原是計畫中回程的稜線觀景台，8/2 未走到，留待下次。</p>
           </div>
 
           <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
@@ -265,7 +268,7 @@
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>烘爐地南山福德宮</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。【預備撤退點：如果判斷下午天氣將轉變，將直接在此搭乘公車F512副下山回到南勢角站】</p>
+            <p class="text-sm text-stone-600 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。原列為預備撤退點，實際上 8/2 的行程就在這裡畫下句點——15:05 抵達，GPS 軌跡在 15:11 結束。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -300,10 +303,10 @@
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
-          預計行程進度
+          實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">出發時間 07:30 · 輕鬆步調 · 全程約 6.5 小時</p>
-        <p class="text-xs text-stone-600 mb-8">時間估算基準：平路 3 km/hr，爬升段 250 m/hr，含適當拍照休息。</p>
+        <p class="text-sm text-stone-600 mb-2">07:50 出發 · 15:11 於烘爐地結束 · 全程 7 小時 21 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻為 GPS 軌跡最接近各航點的時間，含沿途休息；括號內為當初的預估時間。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -313,83 +316,69 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程紀錄 | 微笑山線·南勢角大縱走 O 型 | 8月2日 · 07:30 出發 · 預計 14:00 返抵</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 微笑山線·南勢角大縱走 | 2026 年 8 月 2 日 · 07:50–15:11 · 11.09 km</p>
   </footer>
 
   <script>
     // ── 行程數據 ──────────────────────────────────────────────
-    // O型大縱走，含修正後座標與新增地標：
-    //   南勢角站→登山口 (0.35km): ~5 min（步行）
-    //   登山口→國旗嶺 (1.1km, +140m): ~28 min
-    //   國旗嶺→外南勢角山 (0.5km, +70m): ~15 min
-    //   外南勢角山→圓通禪寺 (0.85km, -155m): ~18 min
-    //   圓通禪寺→一線天 (0.15km): ~15 min（含拍照）
-    //   一線天→牛埔頭山 (2.5km, +170m): ~55 min（稜線爬升）
-    //   牛埔頭山→五尖山 (0.3km, +50m): ~15 min（午餐大休20min）
-    //   五尖山→石龍洞 (1.4km, -60m): ~28 min
-    //   石龍洞→南勢角山 (1.1km, +60m): ~25 min
-    //   南勢角山→烘爐地 (0.3km, -22m): ~20 min（補給大休）
-    //   烘爐地→光明頂 (0.5km, -55m): ~15 min
-    //   光明頂→華夏登山口 (1.0km, -100m): ~20 min
-    //   華夏登山口→南勢角站 (1.8km, -105m): ~35 min（道路）
-    // 總計：約 314 min + 緩衝 = 約 6.5H
-
+    // 8/2 實走紀錄。time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，
+    // 1851 點）：對每個航點座標找軌跡上最近的一點，取該點的時間與累計
+    // 里程。plan 保留當初的預估時刻，時間軸並排顯示，落差一眼可見。
+    //
+    // ele 一律維持地形圖數值，不改採 GPS 高程——這份紀錄的高程雜訊達
+    // ±20 m（五尖山前後讀到 281 與 316），見 manifest.json 的
+    // conventions.elevation_source。
+    //
+    // 原計畫的最後三點（光明頂、華夏登山口、步行回南勢角站）不在紀錄
+    // 裡：軌跡 15:11 止於烘爐地。沒走到的路段不列入實走時間軸。
+    //
+    // 待查證：國旗嶺的座標與軌跡只差 40 m，但軌跡在該處的高程讀數是
+    // 60 m，與條目上的 160 m 差了 100 m；且它與登山口只隔 84 m，卻標
+    // 著相距 1.1 km 的累計里程。座標本身存疑，此處僅照座標如實取值。
     const schedule = [
-      { lat: 24.990128, lng: 121.509104, time: "07:30", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20, pos: "集合起點",
-        desc: "行程起點，07:30 準時出發。搭乘中和新蘆線至南勢角站，1 號出口集合。",
+      { lat: 24.990128, lng: 121.509104, time: "07:50", plan: "07:30", loc: "捷運南勢角站 (H20m)", dist: 0.00, ele: 20, pos: "集合起點",
+        desc: "行程起點。實際 07:50 出發，比原訂晚了 20 分鐘。",
         advice: "在站內超商補充飲食。確認大家到齊後步行約 5 分鐘前往登山口。開車的隊友可停於南勢角站轉乘停車場。" },
 
-      { lat: 24.987603, lng: 121.503566, time: "07:35", loc: "登山口", dist: 0.35, ele: 50, pos: "入山口",
-        desc: "累計 0.35 km。正式進入山區步道，離開市區道路，開始爬升。",
+      { lat: 24.987603, lng: 121.503566, time: "08:01", plan: "07:35", loc: "登山口", dist: 0.66, ele: 50, pos: "入山口",
+        desc: "累計 0.66 km。11 分鐘走完市區路段，正式進入山區步道開始爬升。",
         advice: "確認登山鞋鞋帶緊好，手機導航開啟。沿步道階梯持續往上爬升至國旗嶺。" },
 
-      { lat: 24.986920, lng: 121.503219, time: "08:05", loc: "國旗嶺 (H160m)", dist: 1.45, ele: 160, pos: "展望台",
-        desc: "累計 1.45 km。稜線上的展望點，可俯瞰中永和市區，設有健身器材。",
+      { lat: 24.986920, lng: 121.503219, time: "08:06", plan: "08:05", loc: "國旗嶺 (H160m)", dist: 0.80, ele: 160, pos: "展望台",
+        desc: "累計 0.80 km。稜線上的展望點，可俯瞰中永和市區，設有健身器材。",
         advice: "可短暫停留拍照，但不宜久留，接下來繼續沿稜線前往外南勢角山。" },
 
-      { lat: 24.984378, lng: 121.498137, time: "08:23", loc: "外南勢角山 (H255m)", dist: 1.95, ele: 255, pos: "稜線衛峰",
-        desc: "累計 1.95 km。南勢角山系的衛峰，林相原始，路徑較窄，注意路標。",
+      { lat: 24.984378, lng: 121.498137, time: "08:42", plan: "08:23", loc: "外南勢角山 (H255m)", dist: 1.63, ele: 255, pos: "稜線衛峰",
+        desc: "累計 1.63 km。南勢角山系的衛峰，林相原始，路徑較窄。在此停了 10 分鐘。",
         advice: "山頂無展望，稍作確認方向後往東下山前往圓通禪寺，下坡路段注意腳步。" },
 
-      { lat: 24.982593, lng: 121.492786, time: "08:42", loc: "圓通禪寺 (H100m)", dist: 2.80, ele: 100, pos: "歷史廟宇",
-        desc: "累計 2.80 km。近 300 年歷史的仿唐式佛寺，廟前視野開闊可遠眺市區。",
+      { lat: 24.982593, lng: 121.492786, time: "09:21", plan: "08:42", loc: "圓通禪寺 (H100m)", dist: 2.65, ele: 100, pos: "歷史廟宇",
+        desc: "累計 2.65 km。近 300 年歷史的仿唐式佛寺，廟前視野開闊可遠眺市區。",
         advice: "可入寺參觀，廟方允許登山客借用洗手間。一線天入口在寺廟右後方，步行 2 分鐘。" },
 
-      { lat: 24.982811, lng: 121.491651, time: "09:00", loc: "一線天 (H100m)", dist: 2.95, ele: 100, pos: "地質奇觀",
-        desc: "累計 2.95 km。天然岩縫，僅容一人通過，仰望天空如一線。建議停留 15 分鐘拍照。",
+      { lat: 24.982811, lng: 121.491651, time: "09:46", plan: "09:00", loc: "一線天 (H100m)", dist: 3.16, ele: 100, pos: "地質奇觀",
+        desc: "累計 3.16 km。天然岩縫，僅容一人通過，仰望天空如一線。含前後拍照在寺廟一帶待了近 40 分鐘。",
         advice: "側身通過，背包過大需先取下。岩壁濕滑請注意腳步，勿推擠。通過後沿稜線往西爬升。" },
 
-      { lat: 24.967635, lng: 121.479370, time: "10:25", loc: "牛埔頭山 (H271m)", dist: 5.45, ele: 271, pos: "稜線山頭",
-        desc: "累計 5.45 km。中和、土城交界，設省政府地籍測量三角點，林中無展望。",
+      { lat: 24.967635, lng: 121.479370, time: "11:38", plan: "10:25", loc: "牛埔頭山 (H271m)", dist: 6.91, ele: 271, pos: "稜線山頭",
+        desc: "累計 6.91 km。中和、土城交界，設省政府地籍測量三角點，林中無展望。這段稜線實走 3.75 km，比原估的 2.5 km 長了一半。",
         advice: "此段路徑較原始，注意路繩指引。此為行程中路況最野的一段，請跟緊隊伍。" },
 
-      { lat: 24.964477, lng: 121.479864, time: "11:00", loc: "五尖山 (H320m)", dist: 5.75, ele: 320, pos: "最高點",
-        desc: "累計 5.75 km。全程最高點！設四等三角點，路段原始，需翻越多個假山頭。大休 20 分鐘。",
+      { lat: 24.964477, lng: 121.479864, time: "12:04", plan: "11:00", loc: "五尖山 (H320m)", dist: 7.31, ele: 320, pos: "最高點",
+        desc: "累計 7.31 km。全程最高點，設四等三角點，需翻越多個假山頭。在山頂一帶午餐大休，前後停留約 45 分鐘。",
         advice: "制高點！值得停留享用午餐補充能量。接下來轉向東，往石龍洞方向下坡。" },
 
-      { lat: 24.967173, lng: 121.490148, time: "11:48", loc: "石龍洞觀音佛祖", dist: 7.15, ele: 240, pos: "天然岩洞",
-        desc: "累計 7.15 km。天然岩洞中的觀音寺廟，洞內陰涼，是難得的天然休息點。",
+      { lat: 24.967173, lng: 121.490148, time: "13:58", plan: "11:48", loc: "石龍洞觀音佛祖", dist: 9.42, ele: 240, pos: "天然岩洞",
+        desc: "累計 9.42 km。天然岩洞中的觀音寺廟，洞內陰涼，是難得的天然休息點。",
         advice: "洞內清涼，適合補充水分、整頓裝備。從這裡往東爬升約 25 分鐘即達南勢角山。" },
 
-      { lat: 24.969195, lng: 121.495829, time: "12:15", loc: "南勢角山 (H302m)", dist: 8.25, ele: 302, pos: "小百岳 #16",
-        desc: "累計 8.25 km。小百岳第 16 名，標高 302m。山頂平坦開闊，展望極佳！",
+      { lat: 24.969195, lng: 121.495829, time: "14:46", plan: "12:15", loc: "南勢角山 (H302m)", dist: 10.45, ele: 302, pos: "小百岳 #16",
+        desc: "累計 10.45 km。小百岳第 16 名，標高 302m。山頂平坦開闊，展望極佳！",
         advice: "360° 展望點，晴天可看到台北 101！適合拍照留念，稍作休息後前往烘爐地。" },
 
-      { lat: 24.971790, lng: 121.497645, time: "12:40", loc: "烘爐地南山福德宮", dist: 8.55, ele: 280, pos: "信仰地標",
-        desc: "累計 8.55 km。建於清乾隆 20 年，北部最知名土地公廟，俗稱「土地公王」。",
-        advice: "可入廟參拜祈福，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。最後一個補給點！" },
-
-      { lat: 24.973264, lng: 121.504064, time: "13:00", loc: "光明頂 (H225m)", dist: 9.05, ele: 225, pos: "三角點",
-        desc: "累計 9.05 km。設有台北縣政府四等三角點，可俯瞰雙和地區。",
-        advice: "此處無明顯標示，需留意手機導航確認位置。接下來下坡前往華夏登山口，約 20 分鐘。" },
-
-      { lat: 24.978326, lng: 121.510666, time: "13:22", loc: "圓通寺烘爐地步道（華夏登山口）", dist: 10.05, ele: 120, pos: "下山出口",
-        desc: "累計 10.05 km。圓通寺烘爐地登山步道的華夏技術學院端出口，重返市區道路。",
-        advice: "步道出口接華夏路，沿路步行往北約 35 分鐘可回到捷運南勢角站，或視情況搭公車。" },
-
-      { lat: 24.990128, lng: 121.509104, time: "14:00", loc: "捷運南勢角站 (H20m)", dist: 11.76, ele: 20, pos: "回程終點",
-        desc: "累計 11.76 km。沿華夏路步行返回捷運站，完成今日 O 型大縱走！",
-        advice: "搭乘捷運返家，附近有多家餐廳可慶功！" }
+      { lat: 24.971790, lng: 121.497645, time: "15:05", plan: "12:40", loc: "烘爐地南山福德宮", dist: 10.96, ele: 280, pos: "終點",
+        desc: "累計 10.96 km。北部最知名土地公廟。GPS 軌跡在此結束於 15:11，原訂再走光明頂、華夏登山口回捷運站的回程沒有紀錄。",
+        advice: "可入廟參拜祈福，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。" }
     ];
 
     // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
@@ -403,9 +392,8 @@
 
     const POS_EMOJI = {
       "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
-      "地質奇觀":"🪨", "稜線衛峰":"🌲", "三角點":"📍",
-      "小百岳 #16":"⭐", "信仰地標":"🙏", "天然岩洞":"🕌",
-      "稜線山頭":"🌿", "最高點":"🏔️", "下山出口":"🚪", "回程終點":"🚇"
+      "地質奇觀":"🪨", "稜線衛峰":"🌲", "小百岳 #16":"⭐",
+      "天然岩洞":"🕌", "稜線山頭":"🌿", "最高點":"🏔️", "終點":"🏁"
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
@@ -426,12 +414,13 @@
       map: {
         setView: [[24.977, 121.494], 14],
         attribution: 'Leaflet | © OpenStreetMap',
-        track: { weight: 4, opacity: 0.85 },
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['nanshijiao-2026-08-02'], weight: 4, opacity: 0.85 },
         popup: true,
         marker: (wp, i, n) => {
           const isStartEnd = i === 0 || i === n - 1;
           const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
-          const isTemple   = wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
+          const isTemple   = wp.pos === "歷史廟宇" || wp.pos === "天然岩洞";
           return {
             radius: isStartEnd ? 9 : isPeak ? 8 : 6,
             fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : isTemple ? TEMPLE : '#888',
@@ -448,8 +437,8 @@
           pointRadius: 5,
           pointBackgroundColor: schedule.map(wp =>
             wp.ele >= 300 ? PEAK :
-            wp.pos === "信仰地標" || wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? TEMPLE :
-            wp.pos === "集合起點" || wp.pos === "回程終點" ? ACCENT : STONE)
+            wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" ? TEMPLE :
+            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
         },
         options: {
           plugins: {
@@ -477,8 +466,10 @@
           return `
             <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
                  style="background:${dot};"></div>
-            <div class="flex items-center gap-3 mb-1">
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
               <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              ${wp.plan && wp.plan !== wp.time
+                ? `<span class="font-mono text-xs text-stone-500">(原估 ${wp.plan})</span>` : ''}
               <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
             </div>
             <div class="font-bold text-stone-800">${wp.loc}</div>
