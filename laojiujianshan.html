@@ -254,8 +254,8 @@
                     <p class="text-sm text-stone-600 leading-relaxed">此行最高點。山頂平台視野遼闊，是稜線上的重要座標與休息站。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>內溝山 (H137m)</h3>
-                    <p class="text-sm text-stone-600 leading-relaxed">展望極佳的獨立山頭，能俯瞰整個翠湖山谷與遠方的內湖市區。</p>
+                    <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-400 rounded-full"></span>內溝山 (H137m)<span class="text-[10px] font-medium text-stone-500 bg-stone-100 px-1.5 py-0.5 rounded ml-1">本次未登頂</span></h3>
+                    <p class="text-sm text-stone-600 leading-relaxed">展望極佳的獨立山頭，能俯瞰整個翠湖山谷與遠方的內湖市區。5/1 這趟下老鷲尖後直接切往翠湖，沒有登頂，留待下次。</p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
                     <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-800 rounded-full"></span>金龍場停車場 (H20m 推估)</h3>
@@ -325,9 +325,10 @@
         // GPX，1358 點）。原本的里程是「直線 × 1.3 倍修正」估的（見舊
         // 註記），實測 8.50 km 而非 7.77 km。
         //
-        // 內溝山沒有登頂：軌跡最近只到 129 m，且該處的 GPS 高程是 48 m
-        // ——那是翠湖的高度，不是山頭的 137 m。條目保留並如實標註，因為
-        // 無法判斷是繞過山頭還是座標本身有誤。
+        // 內溝山不在清單裡：本次沒有登頂，下老鷲尖後直接切往翠湖（隊友
+        // 確認）。軌跡也是這樣說的——最近只到山頭外 129 m，該處的 GPS
+        // 高程讀 48 m，那是翠湖的高度而不是山頭的 137 m。沒走到的地方
+        // 不列入實走航點，但景點卡保留並標註，作為山系導覽的一部分。
         const schedule = [
             { lat: 25.071960894394802, lng: 121.63322171182692, time: "07:50", loc: "金龍場停車場 (H20m)", dist: 0.00, ele: 20, pos: "集合起點", desc: "行程起點。GPS 於 07:50 開始記錄。", advice: "檢查裝備與水分。" },
             { lat: 25.07713919780438, lng: 121.63419574315985, time: "08:00", loc: "登山口 (H40m)", dist: 0.65, ele: 40, pos: "入山口", desc: "累計 0.65 km。", advice: "開始暖身。" },
@@ -336,8 +337,7 @@
             { lat: 25.08996648301252, lng: 121.63119341001082, time: "09:16", loc: "汐止鷹石尖 (H180m)", dist: 3.18, ele: 180, pos: "亮點", desc: "累計 3.18 km。在此一帶停留近 40 分鐘（09:19–09:59）。", advice: "拍照注意安全。" },
             { lat: 25.09451096257661, lng: 121.62698718889058, time: "10:22", loc: "老鷲尖南峰 (H157m)", dist: 4.08, ele: 157, pos: "副峰", desc: "累計 4.08 km。", advice: "攻頂準備。" },
             { lat: 25.095557931104427, lng: 121.6261054844135, time: "10:33", loc: "老鷲尖 (H193m)", dist: 4.32, ele: 193, pos: "最高點", desc: "累計 4.32 km。10:36–10:58 大休 22 分鐘。", advice: "全體大合照。" },
-            { lat: 25.089036575515266, lng: 121.62738378956361, time: "11:43", loc: "內溝山 (H137m)", dist: 5.87, ele: 137, pos: "展望點", desc: "累計 5.87 km。軌跡最近只到山頭外 129 m，本次應未登頂。", advice: "準備下行。" },
-            { lat: 25.088790281950963, lng: 121.62912019048608, time: "11:45", loc: "翠湖 (H45m)", dist: 5.97, ele: 45, pos: "湖區", desc: "累計 5.97 km。", advice: "觀察生態。" },
+            { lat: 25.088790281950963, lng: 121.62912019048608, time: "11:43", loc: "翠湖 (H45m)", dist: 5.85, ele: 45, pos: "湖區", desc: "累計 5.85 km。下老鷲尖後不登內溝山，直接切往翠湖。", advice: "觀察生態。" },
             { lat: 25.0849102876649, lng: 121.63119953348264, time: "12:02", loc: "翠湖步道登山口 (H35m)", dist: 6.48, ele: 35, pos: "出口", desc: "累計 6.48 km。", advice: "回程平坦段。" },
             { lat: 25.071960894394802, lng: 121.63322171182692, time: "12:37", loc: "金龍場停車場", dist: 8.38, ele: 20, pos: "終點", desc: "累計 8.38 km，軌跡於 12:39 收錄於 8.50 km。", advice: "行程圓滿結束。" }
         ];
