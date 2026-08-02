@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-02 21:01",
+  "generated": "2026-08-03 07:59",
   "generated_tz": "UTC+8",
-  "commit": "5c11aeca1f4bf7bf289780686a6982a65cc23cec",
-  "file_count": 29,
+  "commit": "d6cbbec77b41c454d0cd3a231aeff02941b0a030",
+  "file_count": 31,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -20,8 +20,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 26256,
-      "sha": "85d7ddf44c2ee51b073d95eeca07a69de47b825c"
+      "size": 26321,
+      "sha": "33d1b3dc5558e16d876585305c86016df604c382"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -30,8 +30,8 @@
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "size": 21023,
-      "sha": "2b58fc45bfa4e31bcb423cddd2e777a16e6a5daa"
+      "size": 22873,
+      "sha": "e0efe8ef17e01686377d91406df77def2eb076ab"
     },
     {
       "path": "README.md",
@@ -74,6 +74,11 @@
       "sha": "df14d4226c5642ee6880d906a1e3987b886630f4"
     },
     {
+      "path": "assets/tracks/hushan-2024-04-20.js",
+      "size": 3291,
+      "sha": "df2e4f0fd63de8f9716462119d5ffdc1c1805cf5"
+    },
+    {
       "path": "assets/tracks/laojiujianshan-2026-05-01.js",
       "size": 6131,
       "sha": "ebd49dd118d8dcb66c1bafcac6b434d9ae1effcf"
@@ -111,27 +116,32 @@
     {
       "path": "huoyianshan.html",
       "size": 29331,
-      "sha": "f089698bc5bce36d2f3d98e9cb9d222895dec81d"
+      "sha": "8d18cc6fb3d3f8fb4408382c7674512ee739d7a9"
+    },
+    {
+      "path": "hushan.html",
+      "size": 25214,
+      "sha": "b910ed57bbb996ea2fcd4685d51d75860694a2a9"
     },
     {
       "path": "index.html",
-      "size": 22744,
-      "sha": "ae742f169db615b09025c55a5a2b5d28f1581549"
+      "size": 22811,
+      "sha": "f91da26dbbe4ff85e99ffb95ddbb28b572ec6aff"
     },
     {
       "path": "laojiujianshan.html",
       "size": 29162,
-      "sha": "a9f772e8bd6b4a67d1e5f2f64a17491566182ede"
+      "sha": "3d268acce35b85f5586d38cb66ef97c4625d49af"
     },
     {
       "path": "manifest.json",
-      "size": 6491,
-      "sha": "fe4123ddea92f3bb8ba529b00cc9367a0332b974"
+      "size": 6793,
+      "sha": "e5988148ab783149aa9a7007e390dfbc49a1d7ce"
     },
     {
       "path": "meihuashan.html",
       "size": 28619,
-      "sha": "04a15fd82db09c797df668d76da384a043c04f1b"
+      "sha": "d3f8567b30046312e55bf2eb4950199092d1b058"
     },
     {
       "path": "mochashan.html",
@@ -141,7 +151,7 @@
     {
       "path": "nanshijiao.html",
       "size": 42408,
-      "sha": "f93d653c766cb6655009980078d766f14957642d"
+      "sha": "e66b9ee85a2dfb196653028da11db0c1e5673af2"
     },
     {
       "path": "qixingshan.html",
