@@ -59,6 +59,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
+  <script src="assets/tracks/mochashan-2026-03-14.js"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -140,18 +141,18 @@
             <!-- Metrics Card -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">實測步道總里程</div>
-                    <div class="text-3xl font-black text-stone-800">13.14<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">GPS 實測總里程</div>
+                    <div class="text-3xl font-black text-stone-800">14.02<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
                     <div class="text-xl md:text-2xl font-black accent-text leading-tight">
-                        7<span class="text-sm font-normal text-stone-600 mx-1">小時</span>52<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
+                        8<span class="text-sm font-normal text-stone-600 mx-1">小時</span>17<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升</div>
-                    <div class="text-3xl font-black text-stone-800">820<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升（GPS 推估）</div>
+                    <div class="text-3xl font-black text-stone-800">900<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">最高標高</div>
@@ -167,7 +168,7 @@
                     <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
                     全線航點導航
                 </h2>
-                <p class="text-stone-600 mt-2 text-sm">行程時間已校準，總往返里程修正為 12.45 km。</p>
+                <p class="text-stone-600 mt-2 text-sm">GPS 實測往返 14.02 km，07:57–16:14 共 8 小時 17 分。時刻為軌跡最接近各航點的時間，去程與回程各取一次通過。</p>
             </div>
 
             <div class="space-y-8">
@@ -329,23 +330,30 @@
         let currentWaypointIndex = 0;
 
         // 里程已從 11.68km 修正為 12.45km (單程約 6.225km)
+        // 2026/3/14 實走紀錄。time 與 dist 取自當天的 GPS 軌跡（健行筆記
+        // GPX，2338 點）。往返路線，各休息站在去程與回程各對到一次通過。
+        // 原本的里程標著「修正累計」，實測 14.02 km 而非 12.45 km。
+        //
+        // 起點的落差：軌跡起錄處離頁面標的五峰旗停車場 526 m、收錄處
+        // 161 m。可能是停在較外側後才開始記錄，兩端都照軌跡自身的
+        // 0.00 與 14.02 記，不去猜中間那段。
         const schedule = [
-            { lat: 24.830230219662706, lng: 121.74711388053494, time: "08:00", loc: "五峰旗停車場 (標高 65m)", dist: 0.00, ele: 65, pos: "集合起點", desc: "行程開始。標高 65m，整理裝備。", advice: "確保飲水充足，宜蘭春季易起霧。" },
-            { lat: 24.831387311728044, lng: 121.7455079158638, time: "08:25", loc: "登山口 (標高 108m)", dist: 0.37, ele: 108, pos: "入山點", desc: "修正里程約 0.37 km。", advice: "以此段作為肌肉暖身。" },
-            { lat: 24.83287200030701, lng: 121.74505711006371, time: "08:45", loc: "五峰旗聖母堂 (標高 155m)", dist: 0.67, ele: 155, pos: "文化景觀", desc: "修正累計里程 0.67 km。", advice: "稍微駐足拍照，保持呼吸頻率。" },
-            { lat: 24.83240151992008, lng: 121.74155394385959, time: "09:04", loc: "桂林峰休息站 (標高 229m)", dist: 1.30, ele: 229, pos: "休息點", desc: "修正累計 1.30 km。", advice: "維持頻率，緩步推進。" },
-            { lat: 24.83562269053575, lng: 121.74077804035333, time: "09:23", loc: "一水休息站 (標高 289m)", dist: 1.94, ele: 289, pos: "休息點", desc: "修正累計 1.94 km。", advice: "檢查補給，即將進入陡升段。" },
-            { lat: 24.847423338662402, lng: 121.73513524230518, time: "10:37", loc: "通天橋休息區 (標高 449m)", dist: 4.46, ele: 449, pos: "階梯起點", desc: "修正累計 4.46 km。挑戰開始。", advice: "建議休息，準備 1.6k 的考驗。" },
-            { lat: 24.85013454422171, lng: 121.7333991031425, time: "10:55", loc: "0.7K休息亭 (標高 568m)", dist: 5.06, ele: 568, pos: "體力點", desc: "修正累計 5.06 km。", advice: "呼吸調整，步伐踩穩。" },
-            { lat: 24.855539057028622, lng: 121.73070883621736, time: "11:30", loc: "聖母山莊觀景台 (抵達)", dist: 6.225, ele: 885, pos: "最高點", desc: "單程修正里程 6.225 km。大休開始。", advice: "大休時間充足，盡情享受美景。" },
-            { lat: 24.855539057028622, lng: 121.73070883621736, time: "13:40", loc: "預定離開觀景台", dist: 6.225, ele: 885, pos: "開始下山", desc: "指定 13:40 離開，啟動回程。", advice: "收起相機，注意下坡膝蓋負擔。" },
-            { lat: 24.85013454422171, lng: 121.7333991031425, time: "14:05", loc: "0.7K休息亭 (回程)", dist: 7.39, ele: 568, pos: "下山段", desc: "累計里程 7.39 km。", advice: "側身下階梯，預防受傷。" },
-            { lat: 24.847423338662402, lng: 121.73513524230518, time: "14:18", loc: "通天橋休息區 (回程)", dist: 8.00, ele: 449, pos: "下山段", desc: "累計里程 8.00 km。", advice: "此處可休息洗滌。" },
-            { lat: 24.83562269053575, lng: 121.74077804035333, time: "15:12", loc: "一水休息站 (回程)", dist: 10.51, ele: 289, pos: "下山段", desc: "累計里程 10.51 km。", advice: "放鬆小腿肚。" },
-            { lat: 24.83240151992008, lng: 121.74155394385959, time: "15:26", loc: "桂林峰休息站 (回程)", dist: 11.15, ele: 229, pos: "下山段", desc: "累計里程 11.15 km。", advice: "快到聖母堂了。" },
-            { lat: 24.83287200030701, lng: 121.74505711006371, time: "15:40", loc: "五峰旗聖母堂 (回程)", dist: 11.78, ele: 155, pos: "下山段", desc: "累計里程 11.78 km。", advice: "最後一段產業道路。" },
-            { lat: 24.831387311728044, lng: 121.7455079158638, time: "15:46", loc: "登山口 (回程)", dist: 12.08, ele: 108, pos: "下山段", desc: "累計里程 12.08 km。", advice: "即將完成挑戰。" },
-            { lat: 24.830230219662706, lng: 121.74711388053494, time: "15:55", loc: "五峰旗停車場 (終點)", dist: 12.45, ele: 65, pos: "圓滿結束", desc: "回抵終點。總往返里程 12.45 km。", advice: "慶功宴預備！注意拉筋伸展。" }
+            { lat: 24.830230219662706, lng: 121.74711388053494, time: "07:57", loc: "五峰旗停車場 (標高 65m)", dist: 0.00, ele: 65, pos: "集合起點", desc: "行程開始。GPS 於 07:57 起錄，07:57–08:11 整裝 14 分鐘。", advice: "確保飲水充足，宜蘭春季易起霧。" },
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "08:36", loc: "登山口 (標高 108m)", dist: 1.43, ele: 108, pos: "入山點", desc: "累計 1.43 km。", advice: "以此段作為肌肉暖身。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "08:42", loc: "五峰旗聖母堂 (標高 155m)", dist: 1.80, ele: 155, pos: "文化景觀", desc: "累計 1.80 km。", advice: "稍微駐足拍照，保持呼吸頻率。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "08:56", loc: "桂林峰休息站 (標高 229m)", dist: 2.58, ele: 229, pos: "休息點", desc: "累計 2.58 km。", advice: "維持頻率，緩步推進。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "09:09", loc: "一水休息站 (標高 289m)", dist: 2.98, ele: 289, pos: "休息點", desc: "累計 2.98 km。", advice: "檢查補給，即將進入陡升段。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "09:50", loc: "通天橋休息區 (標高 449m)", dist: 4.92, ele: 449, pos: "階梯起點", desc: "累計 4.92 km。挑戰開始。", advice: "建議休息，準備 1.6k 的考驗。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "10:16", loc: "0.7K休息亭 (標高 568m)", dist: 5.54, ele: 568, pos: "體力點", desc: "累計 5.54 km。", advice: "呼吸調整，步伐踩穩。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "11:22", loc: "聖母山莊觀景台 (抵達)", dist: 6.73, ele: 885, pos: "最高點", desc: "單程 6.73 km。在山莊一帶待到 13:48，其中 11:33–12:28 連續大休 55 分鐘。", advice: "大休時間充足，盡情享受美景。" },
+            { lat: 24.855539057028622, lng: 121.73070883621736, time: "13:48", loc: "離開觀景台", dist: 8.48, ele: 885, pos: "開始下山", desc: "13:48 離開山莊一帶啟動回程；含在山上的來回走動，此時累計 8.48 km。", advice: "收起相機，注意下坡膝蓋負擔。" },
+            { lat: 24.85013454422171, lng: 121.7333991031425, time: "14:14", loc: "0.7K休息亭 (回程)", dist: 9.05, ele: 568, pos: "下山段", desc: "累計 9.05 km。", advice: "側身下階梯，預防受傷。" },
+            { lat: 24.847423338662402, lng: 121.73513524230518, time: "14:35", loc: "通天橋休息區 (回程)", dist: 9.66, ele: 449, pos: "下山段", desc: "累計 9.66 km。14:38–14:55 在此休息 17 分鐘。", advice: "此處可休息洗滌。" },
+            { lat: 24.83562269053575, lng: 121.74077804035333, time: "15:24", loc: "一水休息站 (回程)", dist: 11.83, ele: 289, pos: "下山段", desc: "累計 11.83 km。", advice: "放鬆小腿肚。" },
+            { lat: 24.83240151992008, lng: 121.74155394385959, time: "15:30", loc: "桂林峰休息站 (回程)", dist: 12.28, ele: 229, pos: "下山段", desc: "累計 12.28 km。", advice: "快到聖母堂了。" },
+            { lat: 24.83287200030701, lng: 121.74505711006371, time: "15:37", loc: "五峰旗聖母堂 (回程)", dist: 12.68, ele: 155, pos: "下山段", desc: "累計 12.68 km。15:40–15:51 在此停留 11 分鐘。", advice: "最後一段產業道路。" },
+            { lat: 24.831387311728044, lng: 121.7455079158638, time: "15:52", loc: "登山口 (回程)", dist: 13.11, ele: 108, pos: "下山段", desc: "累計 13.11 km。", advice: "即將完成挑戰。" },
+            { lat: 24.830230219662706, lng: 121.74711388053494, time: "16:14", loc: "五峰旗停車場 (終點)", dist: 14.02, ele: 65, pos: "圓滿結束", desc: "回抵終點。GPS 實測往返 14.02 km。", advice: "慶功宴預備！注意拉筋伸展。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -374,7 +382,10 @@
         preferCanvas: true,
         center: [24.842, 121.738], zoom: 14,
         // 只畫去程，回程與去程重疊
-        track: { slice: [0, 8], weight: 4, opacity: 0.8 },
+        // 實走軌跡（assets/tracks/）。往返路線，去回程幾乎重疊。
+        // 原本用 slice 只畫去程的八個航點，避免直線來回疊成一條；
+        // 換成真實軌跡後不需要這個權宜作法。
+        track: { points: PaPaTracks['mochashan-2026-03-14'], weight: 4, opacity: 0.8 },
         marker: (wp) => ({
           radius: wp.pos === "最高點" || wp.pos.includes("起點") ||
                   wp.pos.includes("終點") || wp.pos === "開始下山" ? 8 : 6,
