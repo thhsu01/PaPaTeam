@@ -383,7 +383,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 
 | 頁面 | 缺什麼 |
 |---|---|
-| `huoyianshan` | schedule 沒有 `dist`（累計里程）與 `advice`，故航點卡無此兩欄 |
+| `huoyianshan` | schedule 沒有 `advice`；航點卡也還沒有建議框的 markup，補資料時要一併加回（`dist` 已於 2026-08-02 由 GPX 補齊）|
 | `meihuashan` | schedule 沒有 `advice`，該區塊在有資料前自動隱藏 |
 
 里程與建議都是實走才知道的東西，不應為了填滿欄位而編造；座標對不上時同樣如實留著

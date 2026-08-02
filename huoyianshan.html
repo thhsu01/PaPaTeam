@@ -57,6 +57,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
+  <script src="assets/tracks/huoyianshan-2025-12-13.js"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -97,7 +98,7 @@
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">火炎山、北鞍古道 O 走</h1>
                 <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。<br>
-                    <span class="font-bold accent-text mt-2 block">全程距離約 7.5 公里</span>
+                    <span class="font-bold accent-text mt-2 block">GPS 實測 8.34 公里</span>
                 </p>
             </div>
 
@@ -107,12 +108,12 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合起點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">正松泉收費停車場</span>
-                        <span class="text-xs text-stone-600 mt-1">全程距離約 7.5 公里 / 方便停車</span>
+                        <span class="text-xs text-stone-600 mt-1">全程 8.34 公里 / 方便停車</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">活動日期</span>
                         <span class="text-xl font-bold text-stone-800">2025年12月13日</span>
-                        <span class="text-xs text-stone-600 mt-1">全程費時：5 小時 10 分鐘</span>
+                        <span class="text-xs text-stone-600 mt-1">全程費時：5 小時 07 分鐘</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">高度落差</span>
@@ -129,24 +130,25 @@
             <!-- Metrics Card -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">實測步道總里程</div>
-                    <div class="text-3xl font-black text-stone-800">8.23<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">GPS 實測總里程</div>
+                    <div class="text-3xl font-black text-stone-800">8.34<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
                     <div class="text-xl md:text-2xl font-black accent-text leading-tight">
-                        5<span class="text-sm font-normal text-stone-600 mx-1">小時</span>01<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
+                        5<span class="text-sm font-normal text-stone-600 mx-1">小時</span>07<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升</div>
-                    <div class="text-3xl font-black text-stone-800">406<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升（GPS 推估）</div>
+                    <div class="text-3xl font-black text-stone-800">440<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">最高標高</div>
                     <div class="text-3xl font-black text-stone-800">601<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
+            <p class="text-xs text-stone-500 mt-3 text-left max-w-4xl mx-auto">里程與耗時取自 12/13 的 GPS 軌跡。累計上升原本寫 406 m，那其實是最高與最低點的落差（601−195），不是累計爬升；改為由軌跡推估，依平滑程度介於 395 至 440 m。各航點海拔仍採地形圖數值。</p>
         </section>
 
         <!-- Interactive Map Section -->
@@ -170,6 +172,7 @@
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點名稱</h3>
                             <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
                                 <div>實際時間 <span id="wp-time" class="text-stone-700">08:10</span></div>
+                                <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
                             <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
@@ -278,7 +281,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄</h2>
-                    <p class="text-stone-600 mt-2 text-sm">2025/12/13 08:10 正式出發。</p>
+                    <p class="text-stone-600 mt-2 text-sm">2025/12/13 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。時刻為軌跡最接近各航點的時間。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0" id="timeline-container">
@@ -297,38 +300,52 @@
 
         let currentWaypointIndex = 0;
 
+        // 2025/12/13 實走紀錄。time 與 dist 取自當天的 GPS 軌跡（健行筆記
+        // GPX，1269 點）：對每個航點座標找軌跡上最近的一點，取該點的時間
+        // 與累計里程。dist 是本頁先前缺的欄位——沒有軌跡時無從得知，
+        // 只能留空；現在補齊了，航點卡的里程欄也跟著出現。
+        //
+        // 八個航點裡六個落在軌跡 20 m 內。兩個例外：
+        //   正松泉停車場 —— 離軌跡 93 m。GPX 是從馬路端的登山口開始錄的，
+        //     停車場到登山口那段沒有紀錄，所以它的 dist 記 0.00、time 維持
+        //     原本的 08:10（早於 GPS 起錄的 08:21，無從以軌跡佐證）。
+        //   南火炎山 —— 離軌跡 126 m，軌跡在該處讀到 265 m 而非條目的 251 m。
+        //     下山路徑可能沒有正好切過山頭，座標存疑但無從確認，照座標取值。
+        //
+        // ele 維持地形圖數值。與軌跡高程中位數比對，六個航點差在 10 m 內，
+        // 只有三角點（601/583）與南火炎山（251/265）差得多一些。
         const schedule = [
             { 
-                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:10", loc: "正松泉收費停車場", ele: 195, pos: "起點", 
+                lat: 24.358077127978664, lng: 120.7361309924151, time: "08:10", loc: "正松泉收費停車場", dist: 0.00, ele: 195, pos: "起點", 
                 desc: "這裡是火炎山最著名的私人收費停車場。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。" 
             },
             { 
-                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:28", loc: "南鞍線登山口", ele: 265, pos: "古道起點", 
-                desc: "從這裡開始進入森林步道。這段路徑相對於稜線較為平緩，也是回程 O 走下山的主要路徑。" 
+                lat: 24.366610032001827, lng: 120.74089019919104, time: "08:42", loc: "南鞍線登山口", dist: 1.16, ele: 265, pos: "古道起點", 
+                desc: "累計 1.16 km。從這裡開始進入森林步道。這段路徑相對於稜線較為平緩，也是回程 O 走下山的主要路徑。" 
             },
             { 
-                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:46", loc: "三粒石土地公", ele: 565, pos: "信仰點", 
-                desc: "這是一個簡易的石砌土地公廟，是登山客的精神寄託與折返點。廟前空地寬廣，適合全隊整隊與補充體力。" 
+                lat: 24.379043468768185, lng: 120.73071801592032, time: "09:50", loc: "三粒石土地公", dist: 3.53, ele: 565, pos: "信仰點", 
+                desc: "累計 3.53 km。這是一個簡易的石砌土地公廟，是登山客的精神寄託與折返點。廟前空地寬廣，適合全隊整隊與補充體力。" 
             },
             { 
-                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:05", loc: "火炎山三角點", ele: 601, pos: "最高點", 
-                desc: "標高 601m，設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。" 
+                lat: 24.37731783512261, lng: 120.7301450753535, time: "10:07", loc: "火炎山三角點", dist: 3.84, ele: 601, pos: "最高點", 
+                desc: "累計 3.84 km。標高 601m，設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。" 
             },
             { 
-                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:15", loc: "山頂休息區", ele: 565, pos: "大休息區", 
-                desc: "這裡設有許多木製桌椅，全隊在此進行短暫休息，享受山林間的微風。此處海拔約 565 公尺。" 
+                lat: 24.377094953079457, lng: 120.72883315302555, time: "10:36", loc: "山頂休息區", dist: 4.08, ele: 565, pos: "大休息區", 
+                desc: "累計 4.08 km。這裡設有許多木製桌椅。全隊在此大休 30 分鐘（10:14–10:44），是全程停留最久的一站。" 
             },
             { 
-                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:40", loc: "火炎山大峽谷", ele: 517, pos: "深度導覽區", 
-                desc: "火炎山精華景觀，壯闊的紅土崩壁。地質脆弱請勿靠近邊緣，於拉繩後方欣賞美景。"
+                lat: 24.367779027845124, lng: 120.72881707772414, time: "11:47", loc: "火炎山大峽谷", dist: 5.61, ele: 517, pos: "深度導覽區", 
+                desc: "累計 5.61 km。火炎山精華景觀，壯闊的紅土崩壁。地質脆弱請勿靠近邊緣，於拉繩後方欣賞美景。"
             },
             { 
-                lat: 24.36132940122552, lng: 120.73345001438366, time: "13:12", loc: "南火炎山", ele: 251, pos: "景點", 
-                desc: "位於下山路段的小山頭，海拔 251 公尺。從此處可以回望剛才走過的峽谷稜線。" 
+                lat: 24.36132940122552, lng: 120.73345001438366, time: "13:08", loc: "南火炎山", dist: 7.77, ele: 251, pos: "景點", 
+                desc: "累計 7.77 km。位於下山路段的小山頭，海拔 251 公尺。從此處可以回望剛才走過的峽谷稜線。" 
             },
             { 
-                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:20", loc: "火炎山登山口 (返抵)", ele: 205, pos: "終點", 
-                desc: "順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，順利完成這場精彩的 O 型走。" 
+                lat: 24.358853511611976, lng: 120.73639267211453, time: "13:23", loc: "火炎山登山口 (返抵)", dist: 8.34, ele: 205, pos: "終點", 
+                desc: "累計 8.34 km。順著北鞍古道或產業道路緩緩而下，最終回到馬路端的登山口，順利完成這場精彩的 O 型走。" 
             }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
@@ -339,7 +356,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
-    // 本頁 schedule 沒有 dist 與 advice，航點卡因此無此兩欄。
+    // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，航點卡因此加回
+    // 里程欄。advice 仍缺，而本頁的航點卡根本沒有建議框那塊 markup，
+    // 所以不需要 hideEmptyAdvice——哪天補了 advice，要先把區塊加回來。
     PaPaDetail.init({
       schedule,
       nav: [24.358077127978664, 120.7361309924151],
@@ -356,7 +375,8 @@
       map: {
         preferCanvas: true,
         center: [24.368, 120.734], zoom: 14,
-        track: { weight: 5, opacity: 0.8 },
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['huoyianshan-2025-12-13'], weight: 5, opacity: 0.8 },
         marker: (wp) => {
           const isCanyon = wp.loc === "火炎山大峽谷";
           return {
@@ -399,7 +419,7 @@
                 <span class="text-[10px] font-black accent-text accent-tint px-2 py-0.5 rounded uppercase">${wp.pos}</span>
               </div>
               <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
-              <div class="text-[11px] text-stone-600 font-bold">海拔: ${wp.ele} m</div>
+              <div class="text-[11px] text-stone-600 font-bold">累計 ${wp.dist.toFixed(2)} km · 海拔 ${wp.ele} m</div>
             </div>`;
         }
       }

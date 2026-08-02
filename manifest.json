@@ -112,6 +112,10 @@
     {
       "path": "assets/tracks/meihuashan-2026-01-10.js",
       "purpose": "梅花山系 1/10 實走 GPS 軌跡（Douglas–Peucker 簡化至 435 點），供地圖畫實際路線"
+    },
+    {
+      "path": "assets/tracks/huoyianshan-2025-12-13.js",
+      "purpose": "火炎山 12/13 實走 GPS 軌跡（Douglas–Peucker 簡化至 232 點），供地圖畫實際路線"
     }
   ],
   "docs": [
@@ -138,17 +142,17 @@
   ],
   "open_items": [
     {
-      "id": "huoyianshan-missing-data",
-      "due": null,
-      "blocking": false,
-      "desc": "huoyianshan schedule 缺 dist（累計里程）與 advice。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的一件事"
-    },
-    {
       "id": "meihuashan-missing-advice",
       "due": null,
       "blocking": false,
       "desc": "meihuashan schedule 缺 advice，該區塊在有資料前自動隱藏。需實走資料，不得編造",
+      "source": "ARCHITECTURE.md §尚未收斂的一件事"
+    },
+    {
+      "id": "huoyianshan-missing-advice",
+      "due": null,
+      "blocking": false,
+      "desc": "huoyianshan schedule 缺 advice（dist 已於 2026-08-02 由 GPX 補齊）。需實走資料，不得編造",
       "source": "ARCHITECTURE.md §尚未收斂的一件事"
     }
   ],
