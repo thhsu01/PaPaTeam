@@ -129,7 +129,7 @@
     },
     {
       "path": "README.md",
-      "purpose": "專案說明（註：檔案結構區塊已過時，未列 assets/ 與其他 md）"
+      "purpose": "專案說明：快速開始、檔案結構、常見問題"
     }
   ],
   "open_items": [
@@ -146,13 +146,6 @@
       "blocking": false,
       "desc": "meihuashan schedule 缺 advice，該區塊在有資料前自動隱藏。需實走資料，不得編造",
       "source": "ARCHITECTURE.md §尚未收斂的一件事"
-    },
-    {
-      "id": "readme-file-structure-stale",
-      "due": null,
-      "blocking": false,
-      "desc": "README.md 的「檔案結構」區塊未列 assets/ 與 4 份 md，需補",
-      "source": "2026-07-31 稽核"
     }
   ],
   "conventions": {

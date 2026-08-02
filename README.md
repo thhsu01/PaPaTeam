@@ -42,7 +42,8 @@ npx http-server
 
 ### 編輯內容
 
-所有行程資訊位在各 HTML 頁面的 `<script>` 標籤內 `data` 物件中。
+首頁的行程清單放在 `index.html` 的 `data` 物件；各詳情頁的航點資料則在該頁底部的
+`schedule` 陣列。兩者都在頁面自己的 `<script>` 標籤內，沒有資料庫。
 
 **編輯計畫行程：** `index.html` → `data.planned` 陣列
 
@@ -50,25 +51,51 @@ npx http-server
 
 **編輯歷史紀錄：** `index.html` → `data.completed` 陣列
 
-**編輯山峰詳情：** 修改對應 HTML 檔案（如 `nanshijiao.html`）的 JavaScript 資料區塊
+**編輯山峰詳情：** 修改對應 HTML 檔案（如 `nanshijiao.html`）底部的 `schedule` 陣列。
+詳情頁用的是 `schedule`，不是首頁的 `data` 物件；地圖、圖表、時間軸都由它推導。
 
 ## 檔案結構
 
 ```
 PaPaTeam/
-├── index.html              # 主首頁（行程總覽）
-├── nanshijiao.html         # 微笑山線 × 南勢角山 × 一線天
-├── qixingshan.html         # 七星山主東峰
-├── datunshan.html          # 大屯山連峰
-├── bishan.html             # 碧山 + 白石湖山
-├── shiqiulinling.html      # 獅球嶺砲台
-├── dinghu.html             # 頂湖O型
-├── laojiujianshan.html     # 老鷲尖山
-├── mochashan.html          # 聖母步道（抹茶山）
-├── meihuashan.html         # 梅花山
-├── huoyianshan.html        # 火炎山
-└── README.md               # 本檔案
+├── index.html                  # 主首頁：計畫／候選／歷史三區
+│
+├── nanshijiao.html             # 微笑山線 × 南勢角山 × 一線天（已完成 2026-08-02）
+├── dinghu.html                 # 猴崁水圳 × 青楓步道 × 頂湖O型（已完成）
+├── laojiujianshan.html         # 內溝山系 O 型全系列縱走（已完成）
+├── mochashan.html              # 聖母步道：抹茶山（已完成）
+├── meihuashan.html             # 梅花山全系列挑戰縱走（已完成）
+├── huoyianshan.html            # 火炎山、北鞍古道 O 走（已完成）
+├── qixingshan.html             # 七星山主東峰 苗圃O型（候選）
+├── datunshan.html              # 大屯山連峰四峰 O 型縱走（候選）
+├── bishan.html                 # 碧山 + 白石湖山（候選）
+├── shiqiulinling.html          # 獅球嶺砲台（候選）
+│
+├── assets/
+│   ├── site.css                # 全站共用樣式：skip link、鍵盤焦點、reduced-motion
+│   ├── site.js                 # 全站共用腳本：天氣代碼對照表（PaPaWeather）
+│   ├── detail.css              # 十個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
+│   ├── detail.js               # 十個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
+│   └── tracks/                 # 已完成行程的實走 GPS 軌跡（簡化後的座標陣列）
+│       └── nanshijiao-2026-08-02.js
+│
+├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
+├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
+├── .github/workflows/
+│   └── integrity.yml           # push 到 main 後重算 integrity.json
+│
+├── .gitignore                  # 編輯器、系統檔、node_modules
+│
+├── ARCHITECTURE.md             # 架構指南（規範權威）：段落規格、色彩 token、腳本規格
+├── READABILITY_AUDIT.md        # 可讀性與對比度審計紀錄（改顏色前必讀）
+├── SNIPPETS.md                 # 元件片段快速參考
+├── CONTRIBUTING.md             # 貢獻指南：編輯清單與代碼風格
+└── README.md                   # 本檔案
 ```
+
+十個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
+`schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
+它規定了詳情頁只能有五個段落、id 與順序固定，以及色彩一律走 `--accent` token。
 
 ## 技術棧
 
@@ -107,5 +134,5 @@ A: 本倉庫已設定 GitHub Pages 自動部署。Push 到 main 分支後，網�
 
 ---
 
-**最後更新**: 2026-07-30  
+**最後更新**: 2026-08-02  
 **維護者**: @thhsu01
