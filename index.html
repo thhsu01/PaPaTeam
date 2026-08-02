@@ -163,7 +163,7 @@
                 { title: "南港山 + 拇指山 + 象山", date: "2024/06/30", location: "連峰縱走", desc: "一場體力與視野的饗宴，橫跨南港山系欣賞 101。", img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "#" },
                 { title: "豹山溪 + 虎山步道", date: "2024/05/26", location: "台北信義", desc: "清幽的溪谷步道，是市區中難得一見的避暑勝地。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "#" },
                 // 2026-08-02 補登：GPX 有 4/20 的虎山紀錄，原本漏在清單外
-                { title: "虎山步道", date: "2024/04/20", location: "台北信義", desc: "四獸山系的虎山，自信義區市街直接入山。2 小時走完 4.35 km，最高點 184 m。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "#" },
+                { title: "虎山親山步道", date: "2024/04/20", location: "台北信義", desc: "四獸山系的虎山，自信義區市街直接入山。2 小時走完 4.35 km，最高點 184 m。", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "#" },
                 { title: "象山親山步道", date: "2024/03/16", location: "經典步道", desc: "最受歡迎的路線，在一線天的奇岩窄縫中感受力量。", img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800", isLatest: false, url: "#" },
             ]
         };
@@ -214,6 +214,12 @@
 
             // 歷史紀錄
             const completedEl = document.getElementById('completed-container');
+            // 行程編號：依日期由舊到新排序後的序位，第 1 次是 2024/03/16 的象山。
+            // 由日期推導而非寫死在資料裡——補登舊行程時（像 2024/04/20 的虎山
+            // 就是後來才補的）後面的編號會自動遞補，不用回頭手動重編。
+            // 比對用的是物件本身而非日期字串，同日兩趟也不會拿到相同編號。
+            const byDate = [...data.completed].sort((a, b) => a.date.localeCompare(b.date));
+            const tripNo = item => byDate.indexOf(item) + 1;
             completedEl.innerHTML = data.completed.map(item => {
                 const isLocked = item.url === '#';
                 const tag = isLocked ? 'div' : 'a';
@@ -224,6 +230,7 @@
                     <div class="relative aspect-video rounded-xl overflow-hidden mb-4">
                         <img src="${item.img}" class="w-full h-full object-cover transition-all duration-500 ${isLocked ? 'grayscale' : ''}" alt="${item.title}" title="${item.date} · ${item.location}">
                         ${item.isLatest ? `<span class="absolute top-2 left-2 bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded" aria-label="最新行程">NEW</span>` : ''}
+                        <span class="absolute top-2 right-2 bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded" aria-label="第 ${tripNo(item)} 次行程">#${tripNo(item)}</span>
                         ${isLocked ? `<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-white text-xs font-bold bg-black/60 px-2 py-1 rounded">詳情待補充</span></div>` : ''}
                     </div>
                     <div>
