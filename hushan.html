@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>虎山親山步道 — 爬爬小隊</title>
+  <meta name="description" content="2024/4/20 虎山親山步道實走紀錄。自松山慈惠堂登山口起登，經復興園、虎山峰、120 高地，全程 4.35 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #0d9488, #7c9e52);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。 */
+      --accent:                 #0d9488;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線 */
+      --accent-strong:          #0f766e;                  /* 淺底上的文字（4.94:1） */
+      --accent-strong-deep:     #115e59;                  /* 淡底卡片上的內文，再深一階（6.84:1） */
+      --accent-tint:            #f0fdfa;                  /* 淡底 */
+      --accent-border:          #cceee9;                  /* 淡框線 */
+      --accent-border-deep:     #b8e3db;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/hushan-2024-04-20.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- Back button -->
+  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/4/20 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-teal-50 via-emerald-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">4月20日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.35 KM · 2 小時</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/4/20 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          城市邊上的四獸山<br>
+          <span style="color:var(--accent-strong);">虎山親山步道</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自松山慈惠堂登山口起登，沿稜線經復興園、虎山峰與 120 高地，一路都看得到台北 101。虎山與象山、豹山、獅山合稱四獸山，標高約 140 公尺，是台北市區裡最容易親近的一段山徑。</p>
+
+        <!-- 補登說明 -->
+        <div class="mb-8 max-w-2xl bg-teal-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+          <span class="text-2xl mt-0.5">🗃️</span>
+          <div>
+            <div class="font-bold text-teal-900 text-base mb-1">補登的一趟</div>
+            <p class="text-sm text-teal-800 leading-relaxed">這趟原本漏在歷史紀錄之外，2026 年整理 GPX 檔案時才發現並補回。頁面上的地點名稱由隊友指認，時刻與里程全部取自軌跡。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起點</div>
+            <div class="font-bold text-stone-800">松山慈惠堂登山口</div>
+            <div class="text-xs text-stone-600 mt-1">捷運後山埤站步行約 15 分鐘</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>步道北側出口</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">4月20日 09:48–11:48</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至松山慈惠堂登山口">
+              🗺️ 導航至登山口
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <!-- 里程與耗時取自 4/20 的 GPS 軌跡；海拔沒有地形圖數值可對，見下方註記。 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">4.35</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">2:00</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">120</div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">184</div>
+            <div class="text-xs text-stone-600">最高點 m（GPS 推估）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">本頁的海拔全部由軌跡推估，誤差約 ±25 m——這條路線沒有既有的航點清單可對，不像其他頁面有地形圖數值。唯一的例外是 120 高地，名字本身就是它的標高。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 4/20 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">松山慈惠堂登山口</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">09:48</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">60</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=75" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 虎山親山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=news&act=info&id=23404" target="_blank" class="text-sm text-emerald-700 hover:underline">📝 虎山環之徑（慈惠堂—奉天宮）</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">自慈惠堂登山口一路爬升至稜線，經復興園、虎山峰後由 120 高地下山。海拔由軌跡推估，誤差約 ±25 m。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          山系亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 4/20 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>松山慈惠堂登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">虎山親山步道最常用的入口之一，就在松山慈惠堂旁。自捷運後山埤站步行約 15 分鐘可達；周邊巷弄狹小、停車位難求，建議搭大眾運輸。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山復興園</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">步道上眺望台北 101 與台北盆地的三處平台之一（另兩處是 120 高地涼亭與十方禪寺）。視野已經相當開闊，時間或體力有限時走到這裡折返也值得。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>虎山親山步道登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">稜線上的另一處步道口。虎山一帶步道彼此串接，入口不只一個，這也是走成環狀的關鍵節點。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山峰 🔭</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">虎山山頂一帶的瞭望台。虎山標高約 140 公尺，與象山、豹山、獅山合稱四獸山，因山形如踞蹲的猛虎而得名。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>虎山 120 高地</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">設有涼亭的展望點，名字取自它的標高 120 公尺。與復興園、十方禪寺並列為步道上欣賞台北 101 的好位置，也是這趟下山前的最後一站。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">09:48 起登 · 11:48 收錄 · 全程 2 小時</p>
+        <p class="text-xs text-stone-600 mb-8">時刻為 GPS 軌跡最接近各航點的時間，含沿途休息。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 虎山親山步道 | 2024 年 4 月 20 日 · 09:48–11:48 · 4.35 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2024/4/20 實走紀錄。這趟原本漏在 index.html 的歷史紀錄之外，
+    // 2026-08 整理 GPX 時才補登，頁面也是那時才建的。
+    //
+    // time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，615 點）：對每個
+    // 航點座標找軌跡上最近的一點，取該點的時間與累計里程。地點名稱由
+    // 隊友指認，六個航點裡五個落在軌跡 5 m 內。
+    //
+    // ele 全部由軌跡推估（前後 60 m 內取樣點的高程中位數，取整到 5 m），
+    // 應視為 ±25 m 的估計值——這條路線沒有既有的航點清單可對，不像其他
+    // 頁面有地形圖數值。唯一的例外是 120 高地，名字本身就是它的標高。
+    //
+    // 全程最高處其實不在任何航點上：軌跡在 2.01 km 處讀到 184 m，比
+    // 虎山峰還高，但那裡沒有名字，不硬塞一個航點進去。
+    const schedule = [
+      { lat: 25.036395, lng: 121.587461, time: "09:48", loc: "松山慈惠堂登山口", dist: 0.00, ele: 60, pos: "集合起點",
+        desc: "行程起點。GPS 於 09:48 開始記錄。" },
+
+      { lat: 25.031030, lng: 121.586850, time: "10:18", loc: "虎山復興園", dist: 1.31, ele: 155, pos: "展望台",
+        desc: "累計 1.31 km。眺望台北 101 的展望平台。10:18–10:43 在此停留 25 分鐘，是全程最久的一站。" },
+
+      { lat: 25.029260, lng: 121.583930, time: "10:49", loc: "虎山親山步道登山口", dist: 2.36, ele: 175, pos: "步道口",
+        desc: "累計 2.36 km。稜線上的另一處步道口，由此轉向北側續行。" },
+
+      { lat: 25.031220, lng: 121.583710, time: "10:57", loc: "虎山峰", dist: 2.82, ele: 155, pos: "瞭望台",
+        desc: "累計 2.82 km。虎山山頂一帶的瞭望台，在此停留 16 分鐘。" },
+
+      { lat: 25.033105, lng: 121.582621, time: "11:16", loc: "虎山 120 高地", dist: 3.25, ele: 120, pos: "展望台",
+        desc: "累計 3.25 km。設有涼亭的展望點，停留 9 分鐘後下山。" },
+
+      { lat: 25.037750, lng: 121.585180, time: "11:48", loc: "終點", dist: 4.35, ele: 50, pos: "終點",
+        desc: "累計 4.35 km。GPS 於 11:48 收錄，收錄處離起登的慈惠堂登山口 284 公尺。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 山頂
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "集合起點":"🚇", "展望台":"🏙️", "步道口":"🚪", "瞭望台":"🔭", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2024-04-20";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.036395, 121.587461],
+
+      // 本頁 schedule 沒有 advice（走過才知道的東西，事後不補編），
+      // 建議框因此整塊收起來，不會在卡片下方留一個空框。
+      card: { follow: 'popup', wrap: 'clamp', hideEmptyAdvice: true },
+
+      weather: { lat: 25.0327, lng: 121.5849 },   // 虎山稜線一帶
+
+      map: {
+        setView: [[25.0330, 121.5855], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "瞭望台";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        label: wp => wp.loc,
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.pos === "瞭望台" ? PEAK :
+            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 200,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "瞭望台";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -86,6 +86,12 @@
       "title": "火炎山、北鞍古道 O 走",
       "status": "completed",
       "date": "2025-12-13"
+    },
+    {
+      "path": "hushan.html",
+      "title": "虎山親山步道",
+      "status": "completed",
+      "date": "2024-04-20"
     }
   ],
   "assets": [
@@ -128,6 +134,10 @@
     {
       "path": "assets/tracks/mochashan-2026-03-14.js",
       "purpose": "抹茶山 3/14 實走 GPS 軌跡，供地圖畫實際路線"
+    },
+    {
+      "path": "assets/tracks/hushan-2024-04-20.js",
+      "purpose": "虎山親山步道 2024/4/20 實走 GPS 軌跡，供地圖畫實際路線"
     }
   ],
   "docs": [
@@ -188,6 +198,6 @@
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
     "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造",
-    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前六頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan"
+    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前七頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan"
   }
 }
