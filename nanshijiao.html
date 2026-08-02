@@ -220,7 +220,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-600 mt-3 text-center">先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，於烘爐地結束。海拔取自地形圖；原計畫沒有的五點（鹿寮中心崙百年土地公、無極三清宮、圓通寺烘爐地登山步道口、青春嶺、新樂園）改由軌跡推估，誤差約 ±25 m。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">先往西爬升至五尖山（320m）制高點，再繞回東側南勢角山（302m）俯瞰台北盆地，於烘爐地結束。海拔取自地形圖；原計畫沒有的七點（迎日石、吹牛亭、鹿寮中心崙百年土地公、無極三清宮、圓通寺烘爐地登山步道口、青春嶺、新樂園）改由軌跡推估，誤差約 ±25 m。</p>
       </div>
     </section>
 
@@ -236,6 +236,16 @@
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>迎日石</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">山頭上一塊裸露的砂岩巨石。清晨來運動的民眾會佇立石上迎接朝陽，「迎日石」之名由此而來。是起登後第一個展望點。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>吹牛亭</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">圓通寺登山步道起登段的涼亭，海拔約 100 m。這條步道沿線有一連串各有名字的涼亭，吹牛亭是最靠近登山口的一座。8/2 在此休息 8 分鐘。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -357,7 +367,7 @@
     //    兩列合併，取這個座標與 160 m；另一列的 255 m 全程沒有佐證。
     // 2. 登山口的座標由隊友更正（離軌跡 7 m，原座標偏 12 m），里程隨之
     //    由 0.66 微調為 0.67。
-    // 3. 補上五個計畫裡沒有的地點：鹿寮中心崙百年土地公、中和無極三清宮、
+    // 3. 補上七個計畫裡沒有的地點：迎日石、吹牛亭、鹿寮中心崙百年土地公、中和無極三清宮、
     //    圓通寺烘爐地登山步道口、青春嶺、新樂園（前兩者的全名由隊友補正，
     //    先前只寫「百年土地公」「三清宮」查不到任何資料）。注意最後那個
     //    步道口與起登的「登山口」是
@@ -370,7 +380,7 @@
     //
     // ele 優先採地形圖數值，不用 GPS 高程——這份紀錄的高程雜訊達 ±20 m
     // （五尖山前後讀到 281 與 316），見 manifest.json 的
-    // conventions.elevation_source。但補上的五點不在原計畫裡，沒有地形圖
+    // conventions.elevation_source。但補上的七點不在原計畫裡，沒有地形圖
     // 數值可對，只能取軌跡：前後 60 m 內所有取樣點的中位數再取整到 5 m，
     // 壓掉單點跳動。即使如此仍應視為 ±25 m 的估計值——同一份軌跡在已知
     // 山頭上的偏差就是這個量級（石龍洞 +23、烘爐地 -38）。
@@ -384,6 +394,12 @@
       { lat: 24.987562, lng: 121.503443, time: "08:01", plan: "07:35", loc: "登山口", dist: 0.67, ele: 50, pos: "入山口",
         desc: "累計 0.67 km。11 分鐘走完市區路段，正式進入山區步道開始爬升。",
         advice: "確認登山鞋鞋帶緊好，手機導航開啟。沿步道階梯持續往上爬升至國旗嶺。" },
+
+      { lat: 24.986878, lng: 121.502218, time: "08:11", loc: "迎日石", dist: 0.89, ele: 65, pos: "展望岩",
+        desc: "累計 0.89 km。山頭上一塊裸露的砂岩巨石，清晨可佇立其上迎接朝陽，名字由此而來。08:11 經過。" },
+
+      { lat: 24.985788, lng: 121.500679, time: "08:17", loc: "吹牛亭", dist: 1.14, ele: 100, pos: "休息據點",
+        desc: "累計 1.14 km。起登後第一座涼亭，08:17–08:25 在此休息 8 分鐘。" },
 
       { lat: 24.984378, lng: 121.498137, time: "08:42", plan: "08:23", loc: "外南勢角山（國旗嶺）(H160m)", dist: 1.63, ele: 160, pos: "展望台",
         desc: "累計 1.63 km。南勢角山系的衛峰，稜線上的展望點，可俯瞰中永和市區，設有健身器材。在此停了 10 分鐘。",
@@ -444,7 +460,7 @@
 
     const POS_EMOJI = {
       "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
-      "地質奇觀":"🪨", "小百岳 #16":"⭐", "天然岩洞":"🕌", "信仰地標":"🙏",
+      "地質奇觀":"🪨", "小百岳 #16":"⭐", "天然岩洞":"🕌", "信仰地標":"🙏", "展望岩":"🌄",
       "稜線山頭":"🌿", "最高點":"🏔️", "休息據點":"🌳", "步道口":"🚪", "終點":"🏁"
     };
 
