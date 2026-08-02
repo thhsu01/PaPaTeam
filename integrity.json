@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-02 20:50",
+  "generated": "2026-08-02 21:01",
   "generated_tz": "UTC+8",
-  "commit": "9e12ac9d252880cb5bbf492d10e5f5e28487efc6",
+  "commit": "5c11aeca1f4bf7bf289780686a6982a65cc23cec",
   "file_count": 29,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -115,8 +115,8 @@
     },
     {
       "path": "index.html",
-      "size": 21550,
-      "sha": "b5ebb1c4eb946acf878affbf3385bb7a156c2c4f"
+      "size": 22744,
+      "sha": "ae742f169db615b09025c55a5a2b5d28f1581549"
     },
     {
       "path": "laojiujianshan.html",
