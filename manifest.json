@@ -108,6 +108,10 @@
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
       "purpose": "南勢角山 8/2 實走 GPS 軌跡（Douglas–Peucker 簡化至 352 點），供地圖畫實際路線"
+    },
+    {
+      "path": "assets/tracks/meihuashan-2026-01-10.js",
+      "purpose": "梅花山系 1/10 實走 GPS 軌跡（Douglas–Peucker 簡化至 435 點），供地圖畫實際路線"
     }
   ],
   "docs": [

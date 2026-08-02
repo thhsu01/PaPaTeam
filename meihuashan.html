@@ -56,6 +56,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
+  <script src="assets/tracks/meihuashan-2026-01-10.js"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -110,7 +111,7 @@
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest text-left">活動日期</span>
                         <span class="text-xl font-bold text-stone-800">2026年1月10日（六）</span>
-                        <span class="text-xs text-stone-600 mt-1">實際 07:40 出發 / 15:30 完賽</span>
+                        <span class="text-xs text-stone-600 mt-1">GPS 07:45 起錄 / 15:38 收錄</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6 text-left">
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest text-left">1/10 當日氣象紀錄</span>
@@ -129,17 +130,17 @@
             <!-- Metrics Card -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">實測步道總里程</div>
-                    <div class="text-3xl font-black text-stone-800">8.42<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">GPS 實測總里程</div>
+                    <div class="text-3xl font-black text-stone-800">12.22<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
                     <div class="text-xl md:text-2xl font-black accent-text leading-tight">
-                        7<span class="text-sm font-normal text-stone-600 mx-1">小時</span>50<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
+                        7<span class="text-sm font-normal text-stone-600 mx-1">小時</span>53<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
-                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升</div>
+                    <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升（地形圖估）</div>
                     <div class="text-3xl font-black text-stone-800">594<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
@@ -147,13 +148,14 @@
                     <div class="text-3xl font-black text-stone-800">643<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
+            <p class="text-xs text-stone-500 mt-3 text-left max-w-4xl mx-auto">里程與耗時取自 1/10 的 GPS 軌跡；爬升沿用地形圖估算，因為 GPS 高程雜訊大，同一份軌跡依平滑程度可推出 440 至 510 m 的任一數字。各航點海拔也維持地形圖數值，與軌跡高程中位數比對後最大差 10 m。</p>
         </section>
 
         <!-- Map Section -->
         <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
             <div class="mb-8">
                 <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-blue-600 rounded-full"></span> 實測路徑圖與觀測點</h2>
-                <p class="text-stone-600 mt-2 text-sm">路徑已依據 1.75 倍曲折率校準。點擊標記或箭頭切換航點。</p>
+                <p class="text-stone-600 mt-2 text-sm">地圖上的線是 1/10 當天的 GPS 軌跡，不是航點之間的直線。點擊標記或箭頭切換航點。</p>
             </div>
             <div class="space-y-8">
                 <div text-left><div id="map"></div></div>
@@ -169,7 +171,7 @@
                             </div>
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">地點明細</h3>
                             <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
-                                <div>實際時間 <span id="wp-time" class="text-stone-700">07:40</span></div>
+                                <div>實際時間 <span id="wp-time" class="text-stone-700">07:45</span></div>
                                 <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
                                 <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
                             </div>
@@ -177,7 +179,7 @@
                         </div>
                         <div class="mt-8 pt-6 border-t border-stone-200">
                             <span class="text-[10px] font-black text-stone-600 uppercase tracking-[0.2em]">行程狀態</span>
-                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2">到達時間：07:40</p>
+                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2"></p>
                         </div>
                     </div>
                 </div>
@@ -258,7 +260,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 text-left">
                 <div class="text-left text-left">
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left"><span class="w-2.5 h-8 bg-stone-800 rounded-full text-left"></span> 實際行程紀錄 (2026/1/10)</h2>
-                    <p class="text-stone-600 mt-2 text-sm text-left">總實測里程約 8.42 km (含 1.75 倍曲折率校正)。</p>
+                    <p class="text-stone-600 mt-2 text-sm text-left">GPS 實測 12.22 km，07:45–15:38 共 7 小時 53 分。時刻為軌跡最接近各航點的時間。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0 text-left" id="timeline-container">
@@ -278,18 +280,29 @@
 
         let currentWaypointIndex = 0;
 
+        // actual 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，1927 點）：
+        // 對每個航點座標找軌跡上最近的一點，取該點的時間與累計里程。
+        // 十個航點全部落在軌跡 15 m 內，只有起點差 138 m——GPX 是在
+        // 離公車站一段距離處才開始錄的，回程倒是收在站牌旁 14 m。
+        //
+        // 里程整組改寫過。原本的 8.42 km 是「直線距離 × 1.75 倍曲折率」
+        // 推估出來的，實測 12.22 km，差了 45%。頁面上兩處提到曲折率
+        // 校正的說明也一併移除——現在有軌跡了，不需要係數。
+        //
+        // ele 維持地形圖數值，與 GPS 高程中位數比對後最大差 10 m
+        // （西峰 521/510、主峰 643/633），沒有改的理由。
         const schedule = [
-            { lat: 25.124977, lng: 121.587709, actual: "07:40", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。實際於 07:40 正式出發。" },
-            { lat: 25.129906, lng: 121.593581, actual: "08:36", loc: "雙溪山", dist: 1.42, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。" },
-            { lat: 25.125953, lng: 121.596262, actual: "09:35", loc: "梅花山西峰", dist: 2.31, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。" },
-            { lat: 25.130616, lng: 121.598606, actual: "10:18", loc: "大石展望點", dist: 3.29, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。" },
-            { lat: 25.130752, lng: 121.599868, actual: "10:37", loc: "梅花山北峰", dist: 3.50, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。" },
-            { lat: 25.125390, lng: 121.604578, actual: "11:37", loc: "清心亭", dist: 4.80, ele: 617, pos: "休息點", desc: "停留大休息 50 分鐘補充體力。" },
-            { lat: 25.125736, lng: 121.601721, actual: "12:39", loc: "梅花山 (主峰)", dist: 5.29, ele: 643, pos: "最高點", desc: "標高 643m。" },
-            { lat: 25.124682, lng: 121.601430, actual: "12:42", loc: "梅花山南峰", dist: 5.50, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。" },
-            { lat: 25.120990, lng: 121.597671, actual: "13:30", loc: "梅花山西南峰", dist: 6.48, ele: 511, pos: "下切點", desc: "準備大幅度下坡。" },
-            { lat: 25.122079, lng: 121.593057, actual: "14:50", loc: "帕米爾公園", dist: 7.32, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。" },
-            { lat: 25.124977, lng: 121.587710, actual: "15:30", loc: "終點 (聖人橋)", dist: 8.42, ele: 217, pos: "終點解散", desc: "平安回到終點解散。" }
+            { lat: 25.124977, lng: 121.587709, actual: "07:45", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。GPS 於 07:45 開始記錄。" },
+            { lat: 25.129906, lng: 121.593581, actual: "08:40", loc: "雙溪山", dist: 1.30, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。" },
+            { lat: 25.125953, lng: 121.596262, actual: "09:38", loc: "梅花山西峰", dist: 2.64, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。" },
+            { lat: 25.130616, lng: 121.598606, actual: "10:22", loc: "大石展望點", dist: 3.95, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。" },
+            { lat: 25.130752, lng: 121.599868, actual: "10:39", loc: "梅花山北峰", dist: 4.20, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。" },
+            { lat: 25.125390, lng: 121.604578, actual: "11:54", loc: "清心亭", dist: 6.31, ele: 617, pos: "休息點", desc: "全程最長的一次停留：11:36–12:25 共 49 分鐘。" },
+            { lat: 25.125736, lng: 121.601721, actual: "12:40", loc: "梅花山 (主峰)", dist: 7.09, ele: 643, pos: "最高點", desc: "標高 643m，全程最高點。" },
+            { lat: 25.124682, lng: 121.601430, actual: "12:44", loc: "梅花山南峰", dist: 7.28, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。" },
+            { lat: 25.120990, lng: 121.597671, actual: "13:31", loc: "梅花山西南峰", dist: 8.90, ele: 511, pos: "下切點", desc: "準備大幅度下坡。" },
+            { lat: 25.122079, lng: 121.593057, actual: "15:12", loc: "帕米爾公園", dist: 11.04, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。" },
+            { lat: 25.124977, lng: 121.587710, actual: "15:38", loc: "終點 (聖人橋)", dist: 12.22, ele: 217, pos: "終點解散", desc: "平安回到終點解散。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -311,7 +324,8 @@
       map: {
         preferCanvas: true,
         center: [25.1275, 121.596], zoom: 15,
-        track: { weight: 5, opacity: 0.8 },
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['meihuashan-2026-01-10'], weight: 5, opacity: 0.8 },
         marker: (wp) => ({
           radius: wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6,
           fillColor: wp.pos === "最高點" ? '#16a34a'
