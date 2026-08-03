@@ -182,15 +182,7 @@
       "purpose": "專案說明：快速開始、檔案結構、常見問題"
     }
   ],
-  "open_items": [
-    {
-      "id": "huoyianshan-nanhuoyianshan-coordinate",
-      "due": null,
-      "blocking": false,
-      "desc": "huoyianshan 的南火炎山座標離實走軌跡 129 m（其餘航點中位 14 m）。可能是座標取自地圖而非軌跡，也可能當天只是從旁經過沒登頂。需原始 GPX 才能定案，勿逕自搬到軌跡上",
-      "source": "2026-08-03 航點座標對軌跡稽核"
-    }
-  ],
+  "open_items": [],
   "conventions": {
     "detail_page_sections": [
       "#overview",
