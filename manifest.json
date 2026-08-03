@@ -106,6 +106,12 @@
       "date": "2024-08-04"
     },
     {
+      "path": "jinmianshan.html",
+      "title": "金面山親山步道 × 剪刀石",
+      "status": "completed",
+      "date": "2024-10-06"
+    },
+    {
       "path": "datongshan.html",
       "title": "大同山 × 青龍嶺 × 大棟山縱走",
       "status": "candidate"
@@ -127,11 +133,11 @@
     },
     {
       "path": "assets/detail.css",
-      "purpose": "15 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
+      "purpose": "16 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
     },
     {
       "path": "assets/detail.js",
-      "purpose": "15 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染"
+      "purpose": "16 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染"
     },
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
@@ -168,6 +174,10 @@
     {
       "path": "assets/tracks/jiantanshan-2024-08-04.js",
       "purpose": "劍潭山親山步道 2024/8/4 實走 GPS 軌跡（Douglas–Peucker 簡化至 130 點），供地圖畫實際路線"
+    },
+    {
+      "path": "assets/tracks/jinmianshan-2024-10-06.js",
+      "purpose": "金面山親山步道 2024/10/6 實走 GPS 軌跡（Douglas–Peucker 簡化至 87 點）。09:15–10:19 有 63.7 分鐘訊號中斷，該段為直線連接"
     }
   ],
   "docs": [
@@ -194,10 +204,10 @@
   ],
   "open_items": [
     {
-      "id": "jiantanshan-two-inferred-waypoints",
+      "id": "jinmianshan-lunjianting-not-placed",
       "due": null,
       "blocking": false,
-      "desc": "jiantanshan 有兩個航點位置是推定的：觀音山眺望點取去程停留 11 分鐘處（0.88 km），圓山風景區入口取下山轉上中山北路的位置（4.59 km）。隊友只給了名稱沒給座標，若記錯可調整",
+      "desc": "jinmianshan 的論劍亭無法列為航點：當天經過它時 GPS 正處於 09:15–10:19 的 63.7 分鐘訊號中斷（大岩壁擋訊號），軌跡上沒有位置。已改放景點卡並說明。若有座標可補為航點",
       "source": "2026-08-03 建頁"
     }
   ],
@@ -221,12 +231,12 @@
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
     "no_fabrication": "里程、時間、海拔屬量測值，缺就留空，不得為填滿欄位而編造。advice 不在此列——它是「下次走的人用得上的提示」，可依路線資料與公開資訊撰寫，不必等實走",
-    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前九頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan",
+    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前十頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
     "source_citation": "候選／計畫頁的里程、海拔、營運時間若引自外部資料，於 #timeline 段落末尾以「參考資料」清單列出來源連結；實走後改以 GPS 軌跡為準",
     "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過",
     "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」",
-    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-03 全站 15 頁皆通過",
+    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-03 全站 16 頁皆通過",
     "advice": "每個航點都要有，同頁長度一致（現行約 25–50 字、一到兩句）。判準是有沒有講出讀者原本不知道的事：廁所在哪、哪裡會迷路、哪段危險、營業時間。「注意安全」「補充水分」這類不算",
     "waypoint_coords": "已完成行程的航點座標應取自 GPS 軌跡在該時刻的位置，不要另外從地圖抓——座標與里程若不同源，段長就會與直線距離矛盾。稽核方式：量每個航點到軌跡最近點的距離，正常在 15 m 以內；超過 40 m 就要查。三種例外本來就不在步行軌跡上，不必修：交通接駁的起訖點（dinghu 陽明山立體停車場離軌跡 1 km，那段搭小 9 路）、GPS 起錄前的集合點（jiantanshan 銘傳大學校門口 210 m、huoyianshan 正松泉停車場 67 m）、以及 GPS 尚未定位的起點（nanshijiao 捷運南勢角站 120 m）。這幾種的 dist 一律維持 0.00，總里程是「GPS 起錄到收錄」的距離，不含走到起錄點那一段"
   }

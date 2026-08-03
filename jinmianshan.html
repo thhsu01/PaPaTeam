@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>金面山親山步道 — 爬爬小隊</title>
+  <meta name="description" content="2024/10/6 金面山親山步道實走紀錄。自環山路一段136巷起登，攀上大岩壁登頂剪刀石（258m），經泰安亭下山，全程 3.26 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #ca8a04, #7c9e52);
+
+      /* 本頁主色。金面山得名於石英砂岩在陽光下的金色反光，故取黃系。
+         用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。
+         注意 yellow-700 (#a16207) 只有 4.44:1，不到門檻，文字色因此從
+         yellow-800 起跳，比其他頁深一階。 */
+      --accent:                 #ca8a04;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線 */
+      --accent-strong:          #854d0e;                  /* 淺底上的文字（6.18:1） */
+      --accent-strong-deep:     #713f12;                  /* 淡底卡片上的內文，再深一階（7.82:1） */
+      --accent-tint:            #fefce8;                  /* 淡底 */
+      --accent-border:          #f0e6c0;                  /* 淡框線 */
+      --accent-border-deep:     #e6d79a;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/jinmianshan-2024-10-06.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/10/6 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-yellow-50 via-amber-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">10月6日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 3.26 KM · 2 小時 59 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/10/6 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          攀上大岩壁的金色山面<br>
+          <span style="color:var(--accent-strong);">金面山．剪刀石</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自環山路一段136巷起登，經清代採石場遺跡攀上百公尺長的大岩壁，登頂形似鳥嘴的剪刀石（258m），再經泰安亭繞回環山路。金面山是五指山系的西南稜，山壁的石英砂岩在陽光下閃著金光，名字由此而來。</p>
+
+        <!-- GPS 中斷警示 -->
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-500 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">📡</span>
+          <div>
+            <div class="font-bold text-amber-900 text-base mb-1">大岩壁路段 GPS 訊號中斷 64 分鐘</div>
+            <p class="text-sm text-amber-800 leading-relaxed">軌跡在 09:15–10:19 之間只留下兩個點。這段正是大岩壁，岩面擋掉了衛星訊號。地圖上那一段是直線連接，不是實際走法；<strong>3.26 km 也因此略為低估</strong>。官方指標到山頂是 1.15 km，軌跡讀到 1.07 km，短少的約 80 公尺就在這裡。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起登點</div>
+            <div class="font-bold text-stone-800">環山路一段136巷口</div>
+            <div class="text-xs text-stone-600 mt-1">捷運西湖站步行約 15 分鐘</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>環山路一段（近起登點）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">10月6日 08:23–11:22</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至環山路一段136巷口">
+              🗺️ 導航至登山口
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">3.26</div>
+            <div class="text-xs text-stone-600">實走里程 km（略低估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">2:59</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~235</div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">258</div>
+            <div class="text-xs text-stone-600">最高點 m（剪刀石，公開標高）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">這份軌跡的高程異常準：剪刀石的 GPS 讀數 255.8 m，與公開標高 258 m 只差 2.2 m，因此其餘各點的海拔直接採 GPS 中位數取整到 5 m，不做偏差校正。這與其他頁面動輒高估 27 m 的情況不同。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 10/6 當天的 GPS 軌跡。大岩壁那 64 分鐘沒有訊號，該段是兩點之間的直線，不代表實際路徑。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">起登點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">環山路一段136巷口</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">08:23</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">30</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=41" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 金面山親山步道（健行筆記）</a>
+            <span class="text-xs text-stone-600">官方分段：136巷登山口 → 松友坪 0.26K → 剪刀石山打印台 0.46K → 金面山山頂 0.43K → 涼亭 0.4K → 內湖路三段登山口 0.75K</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">0.76 km 處的大岩壁到 1.07 km 的剪刀石之間爬升 108 公尺，是全程最陡的一段——也正是 GPS 失聯的那 64 分鐘。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          山系亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 10/6 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>金面山步道登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">環山路一段136巷底的主要登山口。沿巷子直走到底即是，捷運西湖站步行約 15 分鐘可達。步道全線約 3 公里，環狀走完約 1 小時起跳。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>金面山大岩壁 🧗</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">連續超過一百公尺的陡峭岩面，設有繩索護欄。這是金面山的招牌，也是它被當成入門攀岩路線的原因。當天在這裡花掉超過一小時，GPS 也在此失去訊號。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>論劍亭</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">過大岩壁、走完石龍山稜之後的觀景涼亭，再往前約 10 分鐘就是剪刀石。<strong>當天經過它的時間落在 GPS 失聯的那 64 分鐘內</strong>，軌跡上沒有留下位置，因此沒有列為航點。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>剪刀石 (H258m) ✂️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">山頂的巨石形貌如鳥嘴般尖銳，因此金面山又名剪刀石山。標高 258 公尺，站上去是 360 度環景，可俯瞰內湖科技園區、基隆河與大直一帶。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>泰安亭</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">下山途中的涼亭，位於剪刀石之後、往環山路二段方向。當天在這裡停留 12 分鐘，是全程最久的一次休息。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>清代採石場遺跡</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">步道沿途散布著清代開採的石材與鑿痕。當年台北府城的城牆石就取自這一帶的石英砂岩，山壁在陽光下閃著金光，「金面山」的名字由此而來。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">08:23 起登 · 11:22 收錄 · 全程 2 小時 59 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。大岩壁到剪刀石之間有 64 分鐘沒有紀錄，論劍亭因此不在航點之列。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 金面山親山步道 | 2024 年 10 月 6 日 · 08:23–11:22 · 3.26 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2024/10/6 實走紀錄，2026-08 拿到 GPX 後補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，491 點，
+    // 取樣間隔中位數 7 秒）：依隊友指認的地點推定時刻，再取軌跡在該時刻
+    // 的位置與累計里程。
+    //
+    // ★ 這份軌跡有一段 63.7 分鐘的訊號中斷（09:15:18 → 10:18:58，位移
+    //   只有 165 m），前面另有一段 14.4 分鐘的中斷。合計 86 分鐘沒有紀錄，
+    //   佔全程 179 分鐘的一半。位置正是大岩壁——岩面擋掉衛星訊號是常見現象。
+    //   影響有二：
+    //     1. 3.26 km 略為低估。官方指標到山頂 1.15 km，軌跡讀到 1.07 km。
+    //     2. 論劍亭落在中斷區間內，軌跡上沒有它的位置，因此不列為航點，
+    //        改放進景點卡並說明原因。硬塞一個座標就是編造。
+    //
+    // ele 直接採 GPS 中位數取整到 5 m，不做偏差校正——這份軌跡的高程異常
+    // 準確：剪刀石讀到 255.8 m，公開標高 258 m，只差 2.2 m。其他頁面的
+    // GPS 動輒高估 27 m，這份不用扣。剪刀石本身仍採公開標高 258 m。
+    const schedule = [
+      { lat: 25.087282, lng: 121.567978, time: "08:23", loc: "環山路一段136巷口", dist: 0.00, ele: 30, pos: "起登點",
+        desc: "行程起點。GPS 於 08:23 開始記錄，自環山路一段轉入136巷。",
+        advice: "捷運西湖站步行約 15 分鐘。巷內有零星車位但很少，建議搭捷運。步道上沒有商店與水源，水在此備足。" },
+
+      { lat: 25.088277, lng: 121.568176, time: "08:25", loc: "金面山步道登山口", dist: 0.14, ele: 35, pos: "入山口",
+        desc: "累計 0.14 km。沿136巷走到底即是登山口。08:25–08:32 在此整裝 7 分鐘。",
+        advice: "從這裡開始就是石階，一路陡上到大岩壁。手套建議在此戴上——上面要用到繩索，戴著爬比中途停下來戴省事。" },
+
+      { lat: 25.091139, lng: 121.570399, time: "08:58", loc: "金面山大岩壁", dist: 0.76, ele: 150, pos: "岩壁",
+        desc: "累計 0.76 km。連續超過一百公尺的陡峭岩面，設有繩索。GPS 從這裡開始失去訊號，到 10:19 才恢復。",
+        advice: "全程最需要專注的一段。三點不動一點動，鞋底有土先蹭掉再上。雨後岩面極滑，濕天不要嘗試。" },
+
+      { lat: 25.093197, lng: 121.571691, time: "10:20", loc: "剪刀石 (H258m)", dist: 1.07, ele: 258, pos: "最高點",
+        desc: "累計 1.07 km。山頂巨石形如鳥嘴，金面山因此又名剪刀石山。標高 258 公尺，360 度環景。",
+        advice: "站上剪刀石拍照要有人在下方接應，岩面有斜度且沒有護欄。假日這裡排隊的人多，想拍空景要早到。" },
+
+      { lat: 25.091533, lng: 121.574683, time: "10:34", loc: "泰安亭", dist: 1.56, ele: 180, pos: "涼亭",
+        desc: "累計 1.56 km。剪刀石之後、往環山路二段方向的涼亭。10:34–10:46 在此停留 12 分鐘，是全程最久的一次休息。",
+        advice: "有遮蔭與座椅，是下山前最後的休息處。接下來一路下坡到環山路，路況轉為平緩好走。" },
+
+      { lat: 25.086418, lng: 121.569099, time: "11:22", loc: "終點（環山路一段）", dist: 3.26, ele: 40, pos: "終點",
+        desc: "累計 3.26 km。GPS 於 11:22 收錄，收錄處離起登的136巷口 148 公尺，環狀路線完成。",
+        advice: "回到環山路即完成環狀。內湖科技園區一帶餐廳選擇多，適合安排慶功；捷運西湖站步行約 15 分鐘。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 最高點
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "起登點":"🚇", "入山口":"🚪", "岩壁":"🧗", "最高點":"✂️", "涼亭":"⛱️", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2024-10-06";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.087282, 121.567978],
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.0920, lng: 121.5715 },   // 金面山山頂一帶
+
+      map: {
+        setView: [[25.0900, 121.5715], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。09:15–10:19 沒有訊號，該段為直線連接。
+        track: { points: PaPaTracks['jinmianshan-2024-10-06'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "最高點";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.pos === "最高點" ? PEAK :
+            wp.pos === "起登點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 300,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "最高點";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
