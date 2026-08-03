@@ -184,18 +184,11 @@
   ],
   "open_items": [
     {
-      "id": "meihuashan-missing-advice",
+      "id": "mochashan-summit-area-distance",
       "due": null,
       "blocking": false,
-      "desc": "meihuashan schedule 缺 advice，該區塊在有資料前自動隱藏。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的一件事"
-    },
-    {
-      "id": "huoyianshan-missing-advice",
-      "due": null,
-      "blocking": false,
-      "desc": "huoyianshan schedule 缺 advice（dist 已於 2026-08-02 由 GPX 補齊、建議框 markup 已於 2026-08-03 補回）。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的一件事"
+      "desc": "mochashan 觀景台一帶的里程無法從簡化軌跡確定。原值 8.48 使下山第一段只有 570 m、短於 659 m 直線，已改為 8.22；但也可能是 0.7K亭(回程) 9.05 偏低。要定案需原始 GPX",
+      "source": "2026-08-03 里程健全性掃描"
     }
   ],
   "conventions": {
@@ -217,12 +210,13 @@
     "elevation_source": "地形圖資料，非 GPS（GPS 高程誤差較大）",
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
-    "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造",
+    "no_fabrication": "里程、時間、海拔屬量測值，缺就留空，不得為填滿欄位而編造。advice 不在此列——它是「下次走的人用得上的提示」，可依路線資料與公開資訊撰寫，不必等實走",
     "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前八頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
     "source_citation": "候選／計畫頁的里程、海拔、營運時間若引自外部資料，於 #timeline 段落末尾以「參考資料」清單列出來源連結；實走後改以 GPS 軌跡為準",
     "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過",
     "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」",
-    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-03 全站 14 頁皆通過"
+    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-03 全站 14 頁皆通過",
+    "advice": "每個航點都要有，同頁長度一致（現行約 25–50 字、一到兩句）。判準是有沒有講出讀者原本不知道的事：廁所在哪、哪裡會迷路、哪段危險、營業時間。「注意安全」「補充水分」這類不算"
   }
 }
