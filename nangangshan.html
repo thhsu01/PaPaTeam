@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>南港山 + 九五峰 + 象山縱走 — 爬爬小隊</title>
+  <meta name="description" content="2024/6/30 南港山系縱走實走紀錄。經南港山（小百岳 #13）、九五峰、南港山南峰與象山，單程 7.91 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #7c3aed, #7c9e52);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。 */
+      --accent:                 #7c3aed;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線（5.14:1，僅供非文字） */
+      --accent-strong:          #6d28d9;                  /* 淺底上的文字（6.41:1） */
+      --accent-strong-deep:     #5b21b6;                  /* 淡底卡片上的內文，再深一階（8.11:1） */
+      --accent-tint:            #f6f2ff;                  /* 淡底 */
+      --accent-border:          #e2d7fb;                  /* 淡框線 */
+      --accent-border-deep:     #cdbaf5;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/nangangshan-2024-06-30.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- Back button -->
+  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/6/30 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-violet-50 via-purple-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">6月30日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 7.91 KM · 4 小時 52 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/6/30 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          台北天際線稜線<br>
+          <span style="color:var(--accent-strong);">南港山 × 九五峰 × 象山</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">沿南港山系主稜由東往西縱走，經南港山（小百岳 #13，375m）、南港山系最高點九五峰、南港山南峰，再下抵台北最知名的 101 觀景點象山。單程 7.91 公里，起訖不同點。</p>
+
+        <!-- 補登說明 -->
+        <div class="mb-8 max-w-2xl bg-violet-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+          <span class="text-2xl mt-0.5">🏔️</span>
+          <div>
+            <div class="font-bold text-violet-900 text-base mb-1">關於拇指山</div>
+            <p class="text-sm text-violet-800 leading-relaxed">首頁的行程名稱寫著拇指山，但軌跡過了南港山南峰之後一路下降，全程再沒有 300 公尺以上的高點——拇指山（320m）這次應該沒有登頂。實走的三個山頭是南港山、九五峰與南港山南峰。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">路線型態</div>
+            <div class="font-bold text-stone-800">單程縱走</div>
+            <div class="text-xs text-stone-600 mt-1">由東往西沿主稜</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 起訖相距<br>949 公尺，非 O 型</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">6月30日 08:11–13:03</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至起登點">
+              🗺️ 導航至起登點
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <!-- 里程與耗時取自 4/20 的 GPS 軌跡；海拔沒有地形圖數值可對，見下方註記。 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">7.91</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">4:52</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">400</div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">376</div>
+            <div class="text-xs text-stone-600">最高點 m（九五峰）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">南港山 375、九五峰 376、南港山南峰 370、象山 183 是查得到的公開標高；其餘九點由軌跡推估，誤差約 ±25 m。這份軌跡的 GPS 高程偏差不小且方向不一致——象山讀到 205（公開值 183），南港山卻讀 362（公開值 375）。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 6/30 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">起點</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">08:11</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">35</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">GPS 於 08:11 開始記錄。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=78" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 南港山縱走親山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=112" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 南港山（小百岳 #13）</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">由東側緩升上主稜，於南港山、九五峰一帶到達全程最高，之後一路下降經象山至永春崗。四個山頭採公開標高，其餘由軌跡推估。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          山系亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 6/30 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>拇指山步道福德宮</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">上稜途中的土地公廟。這趟在此停了 42 分鐘，是全程最久的一站——起登後的第一個緩點。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>南港山 375m ⭐ 小百岳 #13</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">南港山系的主峰，小百岳第 13 名，設三等三角點 695 號。位在南港區九如里與信義區中坡里交界，山系橫跨南港、信義、大安三區，也是臺北大縱走第六段所經。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>九五峰 (H376m) 🏔</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">南港山系的最高點，標高 375.8 公尺，就在南港山三角點外 48 公尺處。峰頂為大片裸露岩石，展望開闊，是這條稜線上最著名的位置。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>南港山南峰 (H370m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">主稜上的山頭，標高 370 公尺。與四分里山（247m）、拇指山（320m）、象山（183m）同屬南港山系著名的郊山。這趟的軌跡過此之後就一路下降。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400" style="display:inline-block;"></span>拇指山 (H320m)<span class="text-[10px] font-medium text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded ml-1">本次未登頂</span></h3>
+            <p class="text-sm text-stone-600 leading-relaxed">標高 320 公尺，以 360 度超廣角視野著稱，大屯山、七星山、觀音山到木柵烏來群山一覽無遺。首頁的行程名稱有它，但 6/30 的軌跡過了南峰之後再無 300 公尺以上的高點，這次應該沒有登頂。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>象山 (H183m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">台北最知名的 101 觀景點，也是南港山縱走親山步道的西端。這條步道自中華科技大學登山口至信義路五段 150 巷登山口，全長約 7 公里。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">08:11 起錄 · 13:03 收錄 · 全程 4 小時 52 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻為 GPS 軌跡最接近各航點的時間，含沿途休息。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 南港山 × 九五峰 × 象山縱走 | 2024 年 6 月 30 日 · 08:11–13:03 · 7.91 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2024/6/30 實走紀錄。這頁是 2026-08 依 GPX 補建的，此前 index.html
+    // 上只有一張沒有連結的卡片。
+    //
+    // time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，1275 點）：對每個
+    // 航點座標找軌跡上最近的一點，取該點的時間與累計里程。地點名稱由隊友
+    // 指認，十一個名字全部落在軌跡 8 m 內。
+    //
+    // ele 分兩種來源，各自標明：
+    //   公開標高 —— 南港山 375（小百岳 #13，三等三角點 695 號）、
+    //     九五峰 376、南港山南峰 370、象山 183。
+    //   軌跡推估 —— 其餘各點取前後 60 m 內取樣點的高程中位數再取整到 5 m，
+    //     視為 ±25 m 的估計。這份軌跡的 GPS 高程明顯偏高：象山讀到 205
+    //     而公開值是 183，南港山讀 362 而公開值 375，偏差方向並不一致。
+    //
+    // 起訖兩點沒有名字，隊友未指認，暫記「起點」「終點」。單程路線，
+    // 起訖相距 949 m。
+    const schedule = [
+      { lat: 25.039200, lng: 121.587510, time: "08:11", loc: "起點", dist: 0.00, ele: 35, pos: "集合起點",
+        desc: "GPS 於 08:11 開始記錄。" },
+
+      { lat: 25.032650, lng: 121.594520, time: "08:45", loc: "拇指山步道福德宮", dist: 1.31, ele: 205, pos: "信仰地標",
+        desc: "累計 1.31 km。08:45–09:27 在此停留 42 分鐘，是全程最久的一站。" },
+
+      { lat: 25.030832, lng: 121.591774, time: "09:40", loc: "九五峰2號亭", dist: 2.09, ele: 265, pos: "休息據點",
+        desc: "累計 2.09 km。稜線上的涼亭，停留 16 分鐘。" },
+
+      { lat: 25.029685, lng: 121.590206, time: "10:00", loc: "長壽亭", dist: 2.42, ele: 295, pos: "休息據點",
+        desc: "累計 2.42 km。往九五峰途中的涼亭。" },
+
+      { lat: 25.026700, lng: 121.586660, time: "10:31", loc: "南港山 (H375m)", dist: 3.13, ele: 375, pos: "小百岳 #13",
+        desc: "累計 3.13 km。小百岳第 13 名，設三等三角點 695 號，南港山系的主峰。停留 14 分鐘。" },
+
+      { lat: 25.026293, lng: 121.586488, time: "10:41", loc: "九五峰 (H376m)", dist: 3.21, ele: 376, pos: "最高點",
+        desc: "累計 3.21 km。南港山系的最高點，就在南港山三角點外 48 公尺。裸岩展望極佳。" },
+
+      { lat: 25.023064, lng: 121.585085, time: "11:00", loc: "南港山南峰 (H370m)", dist: 3.64, ele: 370, pos: "稜線山頭",
+        desc: "累計 3.64 km。主稜上的山頭。過此之後軌跡一路下降，不再有 300 m 以上的高點。" },
+
+      { lat: 25.025304, lng: 121.579000, time: "11:46", loc: "拇指山長壽亭", dist: 5.32, ele: 190, pos: "休息據點",
+        desc: "累計 5.32 km。下坡途中的涼亭，停留 9 分鐘。" },
+
+      { lat: 25.026490, lng: 121.575510, time: "12:00", loc: "象山 (H183m)", dist: 5.83, ele: 183, pos: "展望台",
+        desc: "累計 5.83 km。台北最知名的 101 觀景點。軌跡在此讀到 205 m，比公開標高 183 m 高了 22 m。" },
+
+      { lat: 25.029023, lng: 121.577015, time: "12:11", loc: "永春崗平台", dist: 6.24, ele: 165, pos: "展望台",
+        desc: "累計 6.24 km。下山途中的觀景平台。" },
+
+      { lat: 25.031480, lng: 121.577080, time: "12:25", loc: "永春崗公園", dist: 6.83, ele: 110, pos: "公園",
+        desc: "累計 6.83 km。步道末段的社區公園。" },
+
+      { lat: 25.032410, lng: 121.576150, time: "12:30", loc: "象山登山口（松友福德宮）", dist: 7.04, ele: 65, pos: "步道口",
+        desc: "累計 7.04 km。自此離開山區回到市街，停留 12 分鐘。" },
+
+      { lat: 25.037300, lng: 121.578330, time: "13:03", loc: "終點", dist: 7.91, ele: 50, pos: "終點",
+        desc: "累計 7.91 km。GPS 於 13:03 收錄，離起點 949 公尺。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 山頂
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "集合起點":"🚩", "信仰地標":"🙏", "休息據點":"🌳", "小百岳 #13":"⭐",
+      "最高點":"🏔️", "稜線山頭":"🌿", "展望台":"🏙️", "公園":"🌲", "步道口":"🚪", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2024-06-30";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.039200, 121.587510],
+
+      // 本頁 schedule 沒有 advice（走過才知道的東西，事後不補編），
+      // 建議框因此整塊收起來，不會在卡片下方留一個空框。
+      card: { follow: 'popup', wrap: 'clamp', hideEmptyAdvice: true },
+
+      weather: { lat: 25.0265, lng: 121.5865 },   // 南港山稜線一帶
+
+      map: {
+        setView: [[25.0300, 121.5840], 14],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['nangangshan-2024-06-30'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #13";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.ele >= 350 ? PEAK :
+            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 420,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "最高點" || wp.pos === "小百岳 #13";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -92,6 +92,12 @@
       "title": "虎山親山步道",
       "status": "completed",
       "date": "2024-04-20"
+    },
+    {
+      "path": "nangangshan.html",
+      "title": "南港山 + 九五峰 + 象山縱走",
+      "status": "completed",
+      "date": "2024-06-30"
     }
   ],
   "assets": [
@@ -138,6 +144,10 @@
     {
       "path": "assets/tracks/hushan-2024-04-20.js",
       "purpose": "虎山親山步道 2024/4/20 實走 GPS 軌跡，供地圖畫實際路線"
+    },
+    {
+      "path": "assets/tracks/nangangshan-2024-06-30.js",
+      "purpose": "南港山系 2024/6/30 實走 GPS 軌跡，供地圖畫實際路線"
     }
   ],
   "docs": [
