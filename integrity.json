@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-03 07:59",
+  "generated": "2026-08-03 08:07",
   "generated_tz": "UTC+8",
-  "commit": "d6cbbec77b41c454d0cd3a231aeff02941b0a030",
+  "commit": "54f89e2bb0139febe4aee2eecfe2d03e810de87e",
   "file_count": 31,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -20,8 +20,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 26321,
-      "sha": "33d1b3dc5558e16d876585305c86016df604c382"
+      "size": 26404,
+      "sha": "3ad6b45e15cc533ce067fd79b74e8659698351ad"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -115,13 +115,13 @@
     },
     {
       "path": "huoyianshan.html",
-      "size": 29331,
-      "sha": "8d18cc6fb3d3f8fb4408382c7674512ee739d7a9"
+      "size": 30032,
+      "sha": "8cc2441ce52e30e41008a323f32688739032889a"
     },
     {
       "path": "hushan.html",
-      "size": 25214,
-      "sha": "b910ed57bbb996ea2fcd4685d51d75860694a2a9"
+      "size": 25438,
+      "sha": "e293c2657bee6f4dcc44916ec542db50b6fc260b"
     },
     {
       "path": "index.html",
