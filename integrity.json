@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-03 14:29",
+  "generated": "2026-08-03 15:45",
   "generated_tz": "UTC+8",
-  "commit": "26ab2cc26a5256b7d70d9bacb29eeb755335374d",
-  "file_count": 35,
+  "commit": "61002c97d8d7ce5bfa6874f61e9fbda7efc073be",
+  "file_count": 37,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -20,8 +20,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 31864,
-      "sha": "fc49e929842754ffdb0d9a99d0982630c56d762e"
+      "size": 31854,
+      "sha": "aa2719b33f9561925758a2ade3e5a258c8b9e64f"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "size": 6187,
-      "sha": "c5c2dd52939c53d2db8a90062087a05196a7d2df"
+      "size": 6336,
+      "sha": "8c5d4c4ef787391b0ea95e8bc5a71d8cee9f8d76"
     },
     {
       "path": "SNIPPETS.md",
@@ -77,6 +77,11 @@
       "path": "assets/tracks/hushan-2024-04-20.js",
       "size": 3291,
       "sha": "df2e4f0fd63de8f9716462119d5ffdc1c1805cf5"
+    },
+    {
+      "path": "assets/tracks/jiantanshan-2024-08-04.js",
+      "size": 3309,
+      "sha": "1b9f53571dcc07494b72f27e88c71d476f8ddcd8"
     },
     {
       "path": "assets/tracks/laojiujianshan-2026-05-01.js",
@@ -135,8 +140,13 @@
     },
     {
       "path": "index.html",
-      "size": 23879,
-      "sha": "d0072f986e6f8c309b924d6e7bf954cc4606ff64"
+      "size": 24154,
+      "sha": "7ec0bbc5a5e18da85b120412f56c4ba8be664864"
+    },
+    {
+      "path": "jiantanshan.html",
+      "size": 27895,
+      "sha": "ddb20e603999db09243e965848f0aca841c45cd3"
     },
     {
       "path": "laojiujianshan.html",
@@ -145,8 +155,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 8816,
-      "sha": "8d194ee2e4ed4c6205ede9a09dbbe2d632bf4c2c"
+      "size": 9604,
+      "sha": "c197c907e22a899c19e4e2e64488787f1af8d571"
     },
     {
       "path": "meihuashan.html",
