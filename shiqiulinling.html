@@ -11,19 +11,19 @@
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
     :root {
-      --page-bg: #f8fafc;
-      --page-fg: #334155;
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
       --chart-max-w: 800px;
       --chart-h: 320px;
       --map-w: 100%;
       --map-radius: 1.5rem;
       --map-z: 10;
       --map-h: 500px;
-      --map-border: 1px solid #e2e8f0;
+      --map-border: 1px solid #e7e5e4;
       --card-shadow: 0 12px 20px -5px rgba(14, 165, 233, 0.1);
       --card-hover-transition: all 0.3s;
       --timeline-left: 24px;
-      --timeline-bg: #e2e8f0;
+      --timeline-bg: #e7e5e4;
       --timeline-z: 0;
       --glass-bg: rgba(255, 255, 255, 0.9);
       --glass-blur: blur(12px);
@@ -46,7 +46,7 @@
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
     html { scroll-behavior: smooth; }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-track { background: #f5f5f4; }
     ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 10px; }
   </style>
   <link rel="stylesheet" href="assets/detail.css">
@@ -84,9 +84,9 @@
                     5.95 KM · 含停留約 3 小時 | 深度歷史縱走
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-900 tracking-tighter">
-                    串聯八堵，俯瞰基隆<br><span class="text-stone-500 text-2xl md:text-4xl font-bold italic">獅球嶺稜線歷史全紀錄</span>
+                    串聯八堵，俯瞰基隆<br><span class="text-stone-600 text-2xl md:text-4xl font-bold italic">獅球嶺稜線歷史全紀錄</span>
                 </h1>
-                <p class="text-lg text-stone-500 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     從八堵車站出發，越過守護港城的獅球嶺要塞，最後穿梭劉銘傳隧道的百年時光。
                 </p>
             </div>
@@ -97,17 +97,17 @@
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">活動日期</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">日期待定</span>
-                        <span class="text-xs text-stone-500 mt-1">建議挑選涼爽多雲日</span>
+                        <span class="text-xs text-stone-600 mt-1">建議挑選涼爽多雲日</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">八堵車站</span>
-                        <span class="text-xs text-stone-500 mt-1">出口大廳處</span>
+                        <span class="text-xs text-stone-600 mt-1">出口大廳處</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">下山地點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">基隆車站</span>
-                        <span class="text-xs text-stone-500 mt-1">步行解散</span>
+                        <span class="text-xs text-stone-600 mt-1">步行解散</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6 accent-tint p-2 rounded-xl">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">路線等級</span>
@@ -118,6 +118,31 @@
                         <span class="text-xs accent-text mt-1 font-medium">適合全齡、喜愛古蹟者</span>
                     </div>
                 </div>
+
+                <!-- 總覽數字。其餘候選頁都有這一排，本頁先前只有集合資訊，
+                     總里程完全沒出現在畫面上。 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-stone-900">5.95</div>
+                        <div class="text-xs text-stone-600">總里程 km（估）</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-stone-900">3</div>
+                        <div class="text-xs text-stone-600">目標耗時 hr（含停留）</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-black text-stone-900">~150</div>
+                        <div class="text-xs text-stone-600">預計爬升 m</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-black accent-text">155</div>
+                        <div class="text-xs text-stone-600">最高海拔 m（獅球嶺山／東砲台山）</div>
+                    </div>
+                </div>
+                <p class="text-xs text-stone-600 max-w-2xl mx-auto text-left md:text-center">
+                    海拔採基石與圖根點數值。航點淨爬升合計 136 m，稜線小起伏未計入，故以 150 m 估。
+                    里程與時刻皆為推估，非實走紀錄——來源見文末「參考資料」。
+                </p>
             </div>
         </section>
 
@@ -144,8 +169,8 @@
                             <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-4">請選擇航點</h3>
                             <div class="grid grid-cols-3 gap-3 mb-6">
                                 <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-600 block mb-1">預計時間</span><span class="font-bold text-stone-700"><span id="wp-time">09:00</span></span></div>
-                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-500 block mb-1">累積里程</span><span class="font-bold text-stone-700"><span id="wp-dist">0.00</span> km</span></div>
-                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-500 block mb-1">海拔</span><span class="font-bold text-stone-700"><span id="wp-ele">0</span> m</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-600 block mb-1">累積里程</span><span class="font-bold text-stone-700"><span id="wp-dist">0.00</span> km</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-stone-100"><span class="text-[10px] text-stone-600 block mb-1">海拔</span><span class="font-bold text-stone-700"><span id="wp-ele">0</span> m</span></div>
                             </div>
                             <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm"></p>
                         </div>
@@ -178,15 +203,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                     <h4 class="font-bold text-stone-800 mb-2">八堵車站</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">鐵道咽喉重鎮，見證清領至現代的交通演進，是縱走故事的起點。</p>
+                    <p class="text-xs text-stone-600 leading-relaxed">鐵道咽喉重鎮，見證清領至現代的交通演進，是縱走故事的起點。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                     <h4 class="font-bold text-stone-800 mb-2">三角洲嶺北峰</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">標高 115 m，有一顆台灣省政府圖根補點，基石藏在小廟後方。是捕捉基隆河 U 型蜿蜒地形的絕佳攝影位。</p>
+                    <p class="text-xs text-stone-600 leading-relaxed">標高 115 m，有一顆台灣省政府圖根補點，基石藏在小廟後方。是捕捉基隆河 U 型蜿蜒地形的絕佳攝影位。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                     <h4 class="font-bold text-stone-800 mb-2">獅球長壽公園</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">充滿在地人情味的社區公園，設有涼亭與石桌椅，適合在此調節呼吸。</p>
+                    <p class="text-xs text-stone-600 leading-relaxed">充滿在地人情味的社區公園，設有涼亭與石桌椅，適合在此調節呼吸。</p>
                 </div>
             </div>
 
@@ -246,11 +271,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                     <h4 class="font-bold text-stone-800 mb-2">獅球嶺北峰</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">標高 110 m（另一說 109 m），有台灣省政府圖根補點。環境原始且清幽，常有猛禽在此盤旋上升。</p>
+                    <p class="text-xs text-stone-600 leading-relaxed">標高 110 m（另一說 109 m），有台灣省政府圖根補點。環境原始且清幽，常有猛禽在此盤旋上升。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm">
                     <h4 class="font-bold text-stone-800 mb-2">基隆車站</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">現代化的終點站。走出車站即是海港，為歷史縱走劃下現代感的句點。</p>
+                    <p class="text-xs text-stone-600 leading-relaxed">現代化的終點站。走出車站即是海港，為歷史縱走劃下現代感的句點。</p>
                 </div>
             </div>
         </section>
@@ -294,7 +319,7 @@
     </main>
 
 <footer class="text-center py-20 border-t border-stone-100">
-            <p class="text-stone-500 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 獅球稜線全導覽</p>
+            <p class="text-stone-600 text-xs font-bold tracking-[0.2em] uppercase">© 爬爬小隊行程計畫 | 獅球稜線全導覽</p>
         </footer>
 
 
@@ -370,10 +395,10 @@
             <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all">
               <div class="flex justify-between items-center mb-1">
                 <span class="text-lg font-black text-stone-800">${wp.time}</span>
-                <span class="text-[9px] font-black text-stone-500 border border-stone-200 px-2 py-0.5 rounded uppercase">${wp.pos}</span>
+                <span class="text-[9px] font-black text-stone-600 border border-stone-200 px-2 py-0.5 rounded uppercase">${wp.pos}</span>
               </div>
               <h4 class="font-bold text-stone-700 text-sm mb-2">${wp.loc}</h4>
-              <p class="text-[11px] text-stone-500 leading-relaxed">${wp.desc}</p>
+              <p class="text-[11px] text-stone-600 leading-relaxed">${wp.desc}</p>
             </div>`;
         }
       }

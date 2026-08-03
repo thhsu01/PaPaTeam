@@ -15,7 +15,7 @@
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "why": "八輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
+      "why": "九輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
     },
     {
       "path": "SNIPPETS.md",
@@ -220,6 +220,8 @@
     "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造",
     "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前八頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
-    "source_citation": "候選／計畫頁的里程、海拔、營運時間若引自外部資料，於 #timeline 段落末尾以「參考資料」清單列出來源連結；實走後改以 GPS 軌跡為準"
+    "source_citation": "候選／計畫頁的里程、海拔、營運時間若引自外部資料，於 #timeline 段落末尾以「參考資料」清單列出來源連結；實走後改以 GPS 軌跡為準",
+    "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過",
+    "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」"
   }
 }

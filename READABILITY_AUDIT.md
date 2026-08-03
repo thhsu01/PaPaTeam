@@ -220,6 +220,39 @@ DOM 法要求背景不透明，像素法要求元素有足夠的留白面積。
 
 ---
 
+### 第九輪：`shiqiulinling` 的 slate 殘留（2026-08-03）
+
+使用者反映該頁「樣式跟其他頁不一致」。查出來是**全站唯一一頁灰階用 slate 的**：
+
+| 變數 | 改前 | 改後 |
+|---|---|---|
+| `--page-bg` | `#f8fafc`（slate-50） | `#f8f7f4` |
+| `--page-fg` | `#334155`（slate-700） | `#44403c`（stone-700） |
+| `--timeline-bg` | `#e2e8f0`（slate-200） | `#e7e5e4`（stone-200） |
+| `--map-border` | `#e2e8f0` | `#e7e5e4` |
+| `scrollbar-track` | `#f1f5f9`（slate-100） | `#f5f5f4`（stone-100） |
+
+順帶清掉別頁的同類殘留：`bishan`/`laojiujianshan`/`meihuashan`/`mochashan` 的
+`--map-border`、後三者的 `.leaflet-container` 底色、`dinghu` 的航點標記色 `#64748b`。
+全站 slate 十六進位值現為 0。
+
+**為什麼之前的檢查沒抓到**：`ARCHITECTURE.md` 的收斂表有「灰階用 stone」一項，
+但驗證方式是 grep `text-slate-*` / `bg-slate-*` 這類 **class 名稱**。這頁的 slate 全在
+`:root` 的十六進位值裡，一個 class 都沒用到，所以一路顯示通過。
+**規則寫成 class 檢查、實際違規發生在色值層，是這次漏掉的根本原因**——收斂表已改為
+兩者都查。
+
+**連帶的對比度變更**：頁底從 `#f8fafc` 換成較暖也較暗的 `#f8f7f4` 之後，
+`text-stone-500` 由 4.59:1 掉到 **4.48:1**，低於門檻。該頁 15 處全部改為
+`text-stone-600`。第六輪當時刻意保留它們（`#f8fafc` 上是通過的，不做無無障礙理由的
+視覺變更），那個判斷在當時正確；底色一改，前提就沒了。
+改完全站 14 個詳情頁的 `text-stone-500` 數量歸零。
+
+改動後重掃 `shiqiulinling`、`bishan`、`laojiujianshan`、`meihuashan`、`mochashan`、
+`dinghu` 六頁，**無新增的真實失敗**，只剩 skip link 與 `<strong>` 那兩類既有假失敗。
+
+---
+
 ## 4. 已完成的修正輪次
 
 本節按輪次由新到舊。**這些是完成紀錄，裡面的頁數（10 頁、11 頁）是當時的實際頁數，
