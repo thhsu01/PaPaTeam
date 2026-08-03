@@ -98,7 +98,7 @@
           台北天際線稜線<br>
           <span style="color:var(--accent-strong);">南港山 × 九五峰 × 象山</span>
         </h1>
-        <p class="text-lg text-stone-600 mb-8 max-w-2xl">沿南港山系主稜由東往西縱走，經南港山（小百岳 #13，375m）、南港山系最高點九五峰、南港山南峰，再下抵台北最知名的 101 觀景點象山。單程 7.91 公里，起訖不同點。</p>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">沿南港山系主稜由東往西縱走，經南港山（小百岳 #13，375m）、南港山系最高點九五峰、南港山南峰，再下抵台北最知名的 101 觀景點象山。自福德國小起登，單程 7.91 公里，收在山下的 Retro House 美式餐廳。</p>
 
         <!-- 補登說明 -->
         <div class="mb-8 max-w-2xl bg-violet-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
@@ -112,10 +112,10 @@
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">路線型態</div>
-            <div class="font-bold text-stone-800">單程縱走</div>
-            <div class="text-xs text-stone-600 mt-1">由東往西沿主稜</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 起訖相距<br>949 公尺，非 O 型</div>
+            <div class="text-xs text-stone-600 mb-1">起點</div>
+            <div class="font-bold text-stone-800">福德國小</div>
+            <div class="text-xs text-stone-600 mt-1">單程縱走，由東往西沿主稜</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🍔 終點<br>Retro House 美式餐廳</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -128,8 +128,8 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至起登點">
-              🗺️ 導航至起登點
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至福德國小">
+              🗺️ 導航至福德國小
             </button>
           </div>
         </div>
@@ -173,7 +173,7 @@
           <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
-            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">起點</h3>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">福德國小</h3>
             <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-600">
@@ -181,7 +181,7 @@
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
             <span>海拔 <strong class="text-stone-800" id="wp-ele">35</strong> m</span>
           </div>
-          <p class="text-base text-stone-700 mb-3" id="wp-desc">GPS 於 08:11 開始記錄。</p>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">集合地點。GPS 於 08:11 開始記錄。</p>
           <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
             <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
             <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
@@ -264,7 +264,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">08:11 起錄 · 13:03 收錄 · 全程 4 小時 52 分</p>
+        <p class="text-sm text-stone-600 mb-2">福德國小 08:11 出發 · Retro House 13:03 收錄 · 全程 4 小時 52 分</p>
         <p class="text-xs text-stone-600 mb-8">時刻為 GPS 軌跡最接近各航點的時間，含沿途休息。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -275,7 +275,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 南港山 × 九五峰 × 象山縱走 | 2024 年 6 月 30 日 · 08:11–13:03 · 7.91 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 南港山 × 九五峰 × 象山縱走 | 2024 年 6 月 30 日 · 福德國小 08:11 → Retro House 13:03 · 7.91 km</p>
   </footer>
 
   <script>
@@ -294,11 +294,11 @@
     //     視為 ±25 m 的估計。這份軌跡的 GPS 高程明顯偏高：象山讀到 205
     //     而公開值是 183，南港山讀 362 而公開值 375，偏差方向並不一致。
     //
-    // 起訖兩點沒有名字，隊友未指認，暫記「起點」「終點」。單程路線，
-    // 起訖相距 949 m。
+    // 單程路線：自福德國小集合起登，收在山下的 Retro House 美式餐廳，
+    // 起訖相距 949 m，不是 O 型。
     const schedule = [
-      { lat: 25.039200, lng: 121.587510, time: "08:11", loc: "起點", dist: 0.00, ele: 35, pos: "集合起點",
-        desc: "GPS 於 08:11 開始記錄。" },
+      { lat: 25.039200, lng: 121.587510, time: "08:11", loc: "福德國小", dist: 0.00, ele: 35, pos: "集合起點",
+        desc: "集合地點。GPS 於 08:11 開始記錄，自此步行進入山區。" },
 
       { lat: 25.032650, lng: 121.594520, time: "08:45", loc: "拇指山步道福德宮", dist: 1.31, ele: 205, pos: "信仰地標",
         desc: "累計 1.31 km。08:45–09:27 在此停留 42 分鐘，是全程最久的一站。" },
@@ -333,8 +333,8 @@
       { lat: 25.032410, lng: 121.576150, time: "12:30", loc: "象山登山口（松友福德宮）", dist: 7.04, ele: 65, pos: "步道口",
         desc: "累計 7.04 km。自此離開山區回到市街，停留 12 分鐘。" },
 
-      { lat: 25.037300, lng: 121.578330, time: "13:03", loc: "終點", dist: 7.91, ele: 50, pos: "終點",
-        desc: "累計 7.91 km。GPS 於 13:03 收錄，離起點 949 公尺。" }
+      { lat: 25.037300, lng: 121.578330, time: "13:03", loc: "Retro House 美式餐廳", dist: 7.91, ele: 50, pos: "慶功",
+        desc: "累計 7.91 km。下山後續行至餐廳，GPS 於 13:03 在此收錄。距起點的福德國小 949 公尺。" }
     ];
 
     // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
@@ -346,7 +346,7 @@
 
     const POS_EMOJI = {
       "集合起點":"🚩", "信仰地標":"🙏", "休息據點":"🌳", "小百岳 #13":"⭐",
-      "最高點":"🏔️", "稜線山頭":"🌿", "展望台":"🏙️", "公園":"🌲", "步道口":"🚪", "終點":"🏁"
+      "最高點":"🏔️", "稜線山頭":"🌿", "展望台":"🏙️", "公園":"🌲", "步道口":"🚪", "慶功":"🍔"
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
@@ -391,7 +391,7 @@
           pointRadius: 5,
           pointBackgroundColor: schedule.map(wp =>
             wp.ele >= 350 ? PEAK :
-            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
+            wp.pos === "集合起點" || wp.pos === "慶功" ? ACCENT : STONE)
         },
         options: {
           plugins: {
