@@ -57,10 +57,12 @@ git push origin feature/你的功能名稱
 
 ## 編輯清單
 
+> **動任何頁面前先讀 `ARCHITECTURE.md`。** 它是規範權威，規定了詳情頁只能有五個段落、
+> id 與順序固定、色彩一律走 `--accent` token。片段速查見 `SNIPPETS.md`。
+
 ### 新增登山路線
 
-1. 在 `index.html` 中找到 `data` 物件
-2. 在 `candidate` 陣列新增物件：
+1. 在 `index.html` 底部的 `data` 物件，於 `candidate` 陣列新增：
 ```javascript
 {
   title: "路線名稱",
@@ -72,12 +74,15 @@ git push origin feature/你的功能名稱
 }
 ```
 
-3. 若需詳情頁，複製現有 HTML 檔案（如 `nanshijiao.html`），修改：
-   - 頁面標題（`<title>`）
-   - 路線名稱、難度、距離等
-   - 高度圖表資料（若有）
-   - 地圖座標（Leaflet）
-   - 路線描述與貼士
+2. 若需詳情頁，**複製 `nanshijiao.html`**（不要複製其他頁），照
+   `ARCHITECTURE.md` §建立新詳情頁 的步驟改。重點：
+   - `<title>`、`<h1>`、`<meta name="description">`
+   - 底部的 `schedule` 陣列（座標、時間、里程、海拔、`pos`、描述）
+   - `:root` 的 `--accent` 那一段（換主色只改這裡）
+   - `PaPaDetail.init()` 的 `nav`、`weather`、`map.setView`
+
+   **不要自己寫地圖或圖表**——Leaflet 與 Chart.js 都在 `assets/detail.js` 裡，
+   各頁只提供 `schedule` 與設定。
 
 ### 更新已完成行程
 
@@ -90,15 +95,26 @@ git push origin feature/你的功能名稱
   location: "地點",
   desc: "簡短敘述",
   img: "https://...",
-  isLatest: false,
-  url: "filename.html"  // 指向詳情頁，若無則為 "#"
+  isLatest: false,        // 只有最新那筆為 true
+  url: "filename.html"    // 指向詳情頁，若無則為 "#"
 }
 ```
 
+行程編號（`#1`–`#21` 徽章）**不要寫進資料**，`renderUI()` 依日期推導；
+補登舊行程時後面的編號會自動遞補。
+
+### 里程與建議：缺就留空
+
+`dist` 與 `advice` 是實走才知道的東西。**不得為了填滿欄位而編造**——
+沒有 `advice` 時建議框會自動整塊收起來，不會留一個空框。
+座標對不上時同樣如實留著疑點，等走過的人確認，不要挑一個看起來合理的數字改掉。
+
 ### 修改樣式
 
-- 顏色、間距、字型調整位在各 HTML 檔案的 `<style>` 段落
-- 全域樣式（導覽列、卡片等）在 `index.html` 或各詳情頁的 `<style>` 中
+- 詳情頁共用樣式在 `assets/detail.css`，全站共用在 `assets/site.css`
+- 各頁 `<style>` 只放該頁的 `:root` 變數與少數專屬規則
+- **改顏色前必讀 `READABILITY_AUDIT.md`**，尤其小字：`text-stone-500` 只在白底安全，
+  頁底 `#f5f3ef` 上只有 4.33:1，小字一律 `text-stone-600` 起跳
 - **不建議大幅重構設計** — 先開 issue 討論
 
 ## 測試
@@ -116,10 +132,17 @@ python -m http.server 8000
 
 - [ ] 桌面裝置（Chrome、Firefox、Safari）
 - [ ] 平板與手機（響應式設計）
-- [ ] 圖片正常載入
 - [ ] 地圖與圖表能正常顯示
+- [ ] 上／下一個航點鍵可切換，地圖標記同步
 - [ ] 連結正確（無 404 或無效連結）
 - [ ] 中文字型正確顯示
+
+詳情頁另有一份規格檢查清單，見 `ARCHITECTURE.md` §快速檢查清單。
+
+**若要量對比度**：本環境的網路政策擋掉 `cdn.tailwindcss.com`，必須 stub 掉 CDN 並
+注入本地建置的 Tailwind，且**改完 HTML 要重建**。量之前先確認 `text-white` 的
+computed color 真的是白的——不是就代表樣式沒生效，量到的會是一個沒有樣式的假版面。
+細節與踩過的坑見 `READABILITY_AUDIT.md` §量測方法的三個坑。
 
 ### 效能檢查
 
@@ -146,13 +169,11 @@ python -m http.server 8000
 
 ## 常見編輯情境
 
+> 以下不寫行號——行號會飄。用搜尋找 `data.completed`、`data.planned` 等關鍵字。
+
 ### 情境 1：修正已完成行程的連結
 
-**位置** — `index.html` 第 144-167 行
-
-**步驟**：
-1. 在 `completed` 陣列找到該行程
-2. 若有對應 HTML 檔案，修改 `url` 字段：
+在 `index.html` 的 `data.completed` 陣列找到該行程，修改 `url`：
 ```javascript
 // 修改前
 { title: "...", url: "#" }
@@ -163,11 +184,18 @@ python -m http.server 8000
 
 ### 情境 2：更新計畫行程日期
 
-**位置** — `index.html` 第 127-137 行
+改 `data.planned` 的 `date`，同時更新對應詳情頁的 `TRIP_DATE`。
+**詳情頁的日期只在 `TRIP_DATE` 出現一次**，其餘都由它推導，不要另外寫死。
 
-**步驟**：修改 `date` 字段，同時更新對應詳情頁內容
+### 情境 3：把計畫行程歸檔為已完成
 
-### 情境 3：新增圖片
+1. 把該筆從 `data.planned` 搬到 `data.completed`，補上 `date`（`YYYY/MM/DD`）
+2. `isLatest: true` 移到這一筆，舊的那筆改成 `false`
+3. 若有 GPS 紀錄，把簡化後的軌跡存成 `assets/tracks/<頁名>-<YYYY-MM-DD>.js`，
+   詳情頁載入它並把 `map.track.points` 傳給 `PaPaDetail`
+4. 依實走紀錄更新 `schedule` 的 `time` 與 `dist`；原本的預估時刻搬進 `plan` 欄位
+
+### 情境 4：新增圖片
 
 建議使用 Unsplash、Pexels 等免費圖庫，確保版權清晰
 

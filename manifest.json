@@ -15,7 +15,7 @@
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "why": "六輪對比度審計與踩過的坑。改任何顏色前必讀第六輪，尤其「同一 token 同時出現於淺底與深底」不可全域替換。"
+      "why": "七輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
     },
     {
       "path": "SNIPPETS.md",
@@ -121,11 +121,11 @@
     },
     {
       "path": "assets/detail.css",
-      "purpose": "10 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
+      "purpose": "14 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
     },
     {
       "path": "assets/detail.js",
-      "purpose": "10 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染"
+      "purpose": "14 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染"
     },
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
@@ -184,18 +184,32 @@
   ],
   "open_items": [
     {
+      "id": "back-button-covered-by-nav",
+      "due": null,
+      "blocking": false,
+      "desc": "14 個詳情頁左上的 fixed 返回鍵被 fixed 導覽列完全蓋住（兩者同為 z-50，導覽列在 DOM 較後）。2026-08-03 以 elementFromPoint 在 1280px 與 390px 實測，14/14 皆被站徽連結覆蓋。非功能中斷（站徽本身連到 index.html），但那 14 份 markup 是死的。處置方式待定：移除返回鍵，或移出導覽列覆蓋範圍",
+      "source": "ARCHITECTURE.md §尚未收斂的三件事"
+    },
+    {
+      "id": "contrast-sweep-missing-new-pages",
+      "due": null,
+      "blocking": false,
+      "desc": "nangangshan、datongshan、shanying 建於第七輪之後，尚未跑過對比度掃描。跑之前務必 stub CDN 並重建本地 Tailwind，否則量到的是沒有樣式的假版面",
+      "source": "READABILITY_AUDIT.md §5"
+    },
+    {
       "id": "meihuashan-missing-advice",
       "due": null,
       "blocking": false,
       "desc": "meihuashan schedule 缺 advice，該區塊在有資料前自動隱藏。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的一件事"
+      "source": "ARCHITECTURE.md §尚未收斂的三件事"
     },
     {
       "id": "huoyianshan-missing-advice",
       "due": null,
       "blocking": false,
-      "desc": "huoyianshan schedule 缺 advice（dist 已於 2026-08-02 由 GPX 補齊）。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的一件事"
+      "desc": "huoyianshan schedule 缺 advice（dist 已於 2026-08-02 由 GPX 補齊、建議框 markup 已於 2026-08-03 補回）。需實走資料，不得編造",
+      "source": "ARCHITECTURE.md §尚未收斂的三件事"
     }
   ],
   "conventions": {

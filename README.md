@@ -54,30 +54,47 @@ npx http-server
 **編輯山峰詳情：** 修改對應 HTML 檔案（如 `nanshijiao.html`）底部的 `schedule` 陣列。
 詳情頁用的是 `schedule`，不是首頁的 `data` 物件；地圖、圖表、時間軸都由它推導。
 
+**加入實走軌跡：** 已完成的行程若有 GPS 紀錄，把簡化後的座標陣列存成
+`assets/tracks/<頁名>-<YYYY-MM-DD>.js`，頁面載入它並把 `map.track.points`
+傳給 `PaPaDetail`，地圖就改畫實際軌跡而非航點直線。
+
 ## 檔案結構
 
 ```
 PaPaTeam/
 ├── index.html                  # 主首頁：計畫／候選／歷史三區
 │
-├── nanshijiao.html             # 微笑山線 × 南勢角山 × 一線天（已完成 2026-08-02）
-├── dinghu.html                 # 猴崁水圳 × 青楓步道 × 頂湖O型（已完成）
-├── laojiujianshan.html         # 內溝山系 O 型全系列縱走（已完成）
-├── mochashan.html              # 聖母步道：抹茶山（已完成）
-├── meihuashan.html             # 梅花山全系列挑戰縱走（已完成）
-├── huoyianshan.html            # 火炎山、北鞍古道 O 走（已完成）
-├── qixingshan.html             # 七星山主東峰 苗圃O型（候選）
-├── datunshan.html              # 大屯山連峰四峰 O 型縱走（候選）
-├── bishan.html                 # 碧山 + 白石湖山（候選）
-├── shiqiulinling.html          # 獅球嶺砲台（候選）
+│   已完成（八頁附實走 GPS 軌跡）
+├── nanshijiao.html             # 微笑山線 × 南勢角山 × 一線天（2026-08-02）
+├── dinghu.html                 # 猴崁水圳 × 青楓步道 × 頂湖O型（2026-06-20）
+├── laojiujianshan.html         # 內溝山系 O 型全系列縱走（2026-05-01）
+├── mochashan.html              # 聖母步道：抹茶山（2026-03-14）
+├── meihuashan.html             # 梅花山全系列挑戰縱走（2026-01-10）
+├── huoyianshan.html            # 火炎山、北鞍古道 O 走（2025-12-13）
+├── nangangshan.html            # 南港山 + 九五峰 + 象山縱走（2024-06-30）
+├── hushan.html                 # 虎山親山步道（2024-04-20）
+│   候選
+├── qixingshan.html             # 七星山主東峰 苗圃O型
+├── datunshan.html              # 大屯山連峰四峰 O 型縱走
+├── bishan.html                 # 碧山 + 白石湖山
+├── shiqiulinling.html          # 獅球嶺砲台
+├── datongshan.html             # 大同山 × 青龍嶺 × 大棟山縱走
+├── shanying.html               # 山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石
 │
 ├── assets/
 │   ├── site.css                # 全站共用樣式：skip link、鍵盤焦點、reduced-motion
 │   ├── site.js                 # 全站共用腳本：天氣代碼對照表（PaPaWeather）
-│   ├── detail.css              # 十個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
-│   ├── detail.js               # 十個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
+│   ├── detail.css              # 十四個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
+│   ├── detail.js               # 十四個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
 │   └── tracks/                 # 已完成行程的實走 GPS 軌跡（簡化後的座標陣列）
-│       └── nanshijiao-2026-08-02.js
+│       ├── nanshijiao-2026-08-02.js
+│       ├── dinghu-2026-06-20.js
+│       ├── laojiujianshan-2026-05-01.js
+│       ├── mochashan-2026-03-14.js
+│       ├── meihuashan-2026-01-10.js
+│       ├── huoyianshan-2025-12-13.js
+│       ├── nangangshan-2024-06-30.js
+│       └── hushan-2024-04-20.js
 │
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
@@ -93,7 +110,7 @@ PaPaTeam/
 └── README.md                   # 本檔案
 ```
 
-十個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
+十四個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
 它規定了詳情頁只能有五個段落、id 與順序固定，以及色彩一律走 `--accent` token。
 
@@ -134,5 +151,5 @@ A: 本倉庫已設定 GitHub Pages 自動部署。Push 到 main 分支後，網�
 
 ---
 
-**最後更新**: 2026-08-02  
+**最後更新**: 2026-08-03  
 **維護者**: @thhsu01

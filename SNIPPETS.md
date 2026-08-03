@@ -1,26 +1,35 @@
 # 快速參考卡片 📋
 
-複製貼上即用的常見元件與模板。編輯內容時快速查閱。
+複製貼上即用的片段。**規範權威是 `ARCHITECTURE.md`**——本檔只是它的速查版，
+兩邊若有出入，以 `ARCHITECTURE.md` 為準。
+
+> **本檔於 2026-08-03 全面重寫。** 舊版描述的是 `assets/detail.js` 抽出以前的寫法
+> （`routeData` 物件、各頁自己寫 `initMap()` 與 `initElevationChart()`），那套結構
+> 早已不存在，照抄會做出一頁不符規格的東西。
 
 ---
 
 ## 1. 首頁資料項目（index.html）
 
-### 新增計畫行程
+三個陣列都在 `index.html` 底部的 `data` 物件裡。
+
+### 計畫行程 `data.planned`
 
 ```javascript
 {
   title: "路線名稱",
   location: "地點",
-  date: "8月2日",
-  desc: "單句簡述路線特色與路線名稱",
+  date: "8月2日",              // 顯示用的口語日期
+  desc: "單句簡述路線特色",
   img: "https://images.unsplash.com/photo-XXXXX?auto=format&fit=crop&q=80&w=800",
   tag: "PLANNED",
-  url: "filename.html"  // 對應的 HTML 檔案，若無則設為 "#"
+  url: "filename.html"          // 沒有詳情頁就填 "#"
 }
 ```
 
-### 新增候選路線
+陣列留空時 `renderUI()` 會渲染「目前尚無計畫行程」的虛線佔位卡，不需另外處理。
+
+### 候選路線 `data.candidate`
 
 ```javascript
 {
@@ -33,388 +42,296 @@
 }
 ```
 
-### 新增已完成行程
+### 已完成行程 `data.completed`
 
 ```javascript
 {
   title: "行程名稱",
-  date: "YYYY/MM/DD",  // 例如 "2026/06/20"
+  date: "2026/06/20",           // 站上一律 YYYY/MM/DD
   location: "地點",
   desc: "簡短敘述路線特色",
   img: "https://images.unsplash.com/photo-XXXXX?auto=format&fit=crop&q=80&w=800",
-  isLatest: true,  // 只有最新的設為 true，顯示「NEW」徽章；其餘設 false
-  url: "filename.html"  // 若無詳情頁，設為 "#"
+  isLatest: true,               // 只有最新那筆為 true，顯示「NEW」徽章
+  url: "filename.html"
 }
 ```
 
 **提示**：
-- `date` 格式務必正確（"2026/06/20" 而非 "06/20/2026"）
-- `isLatest: true` 最多只有一筆應設為 true
-- 圖片 URL 以 `?auto=format&fit=crop&q=80&w=800` 結尾可自動最佳化
+
+- 行程編號（`#1`–`#21` 徽章）**不要寫進資料**。`renderUI()` 依日期排序後推導，
+  補登舊行程時後面的編號會自動遞補。
+- `isLatest: true` 最多只有一筆。新行程歸檔時記得把舊的那筆改成 `false`。
+- 補登舊行程直接插進陣列即可，順序不影響編號。
 
 ---
 
-## 2. 詳情頁卡片與元件
+## 2. 詳情頁：資料與設定
 
-### 統計卡片（Stat Card）
+詳情頁**不各自實作地圖與圖表**。機制全在 `assets/detail.js`，各頁只提供
+`schedule` 陣列與一份 `PaPaDetail.init({...})` 設定。
+
+### 航點物件 `schedule`
+
+```javascript
+const schedule = [
+  { lat: 25.036395, lng: 121.587461, time: "09:48", loc: "松山慈惠堂登山口",
+    dist: 0.00, ele: 60, pos: "集合起點",
+    desc: "行程起點。GPS 於 09:48 開始記錄。" },
+
+  { lat: 25.031220, lng: 121.583710, time: "10:57", loc: "虎山峰 (H142m)",
+    dist: 2.82, ele: 142, pos: "瞭望台",
+    desc: "累計 2.82 km。虎山山頂的瞭望台，標高 142 m。" },
+];
+```
+
+| 欄位 | 說明 |
+|---|---|
+| `lat` / `lng` | 座標，地圖標記與軌跡對位都靠它 |
+| `time` | 已完成頁是實際時刻；計畫／候選頁是預估時刻 |
+| `loc` | 航點名稱，`(H142m)` 這類標高後綴會被圖表標籤剝掉 |
+| `short` | 選填。圖表標籤太長時用它取代 `loc` |
+| `dist` | 累計里程（km）。**GPS 實測優先** |
+| `ele` | 海拔（m）。**採地形圖數值，不用 GPS 高程** |
+| `pos` | 航點類型，決定標記大小與顏色（見 `map.marker`） |
+| `desc` | 景點卡內文 |
+| `advice` | 選填。隊友建議，**沒走過就留空，不要編** |
+| `plan` | 選填，僅已完成頁。當初的預估時刻，時間軸會並排顯示 |
+
+**不得編造**：`dist` 與 `advice` 都是實走才知道的東西。缺就留空——
+`hideEmptyAdvice` 會把空的建議框整塊收起來，不會留一個空框在卡片下方。
+
+### `PaPaDetail.init()` 設定
+
+```javascript
+PaPaDetail.init({
+  schedule,
+  tripDate: TRIP_DATE,              // 日期只在這一處出現
+  nav: [25.036395, 121.587461],     // 「開啟導航」的目的地
+
+  card: { follow: 'popup', wrap: 'clamp', hideEmptyAdvice: true },
+
+  weather: { lat: 25.0327, lng: 121.5849 },
+
+  map: {
+    setView: [[25.0330, 121.5855], 15],
+    attribution: 'Leaflet | © OpenStreetMap',
+    popup: true,
+    marker: (wp, i, n) => {
+      const isStartEnd = i === 0 || i === n - 1;
+      const isPeak     = wp.pos === "瞭望台";
+      return {
+        radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+        fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+        opacity: 1, fillOpacity: 0.92
+      };
+    }
+  },
+
+  chart: {
+    label: wp => wp.short || wp.loc.replace(/\s*\(H[^)]*\)/, ''),
+    fillAlpha: 0.10,
+    dataset: { borderWidth: 2.5, pointRadius: 5 },
+    options: { /* Chart.js 選項，會與預設值合併 */ }
+  }
+});
+```
+
+`ACCENT` / `PEAK` / `STONE` 是頁面腳本開頭以 `getComputedStyle` 從 `:root`
+取出的實際色值。**腳本裡不能直接寫 `var(--accent)`**——那些值最終進到 canvas 的
+`fillStyle`，canvas 不解析 CSS 變數。
+
+### 實走軌跡（僅已完成行程）
+
+有 GPS 紀錄的行程，地圖畫實際軌跡而不是航點連成的直線——那條線會繞過航點之間
+看不出來的髮夾彎。
+
+```javascript
+// assets/tracks/hushan-2024-04-20.js
+window.PaPaTracks = window.PaPaTracks || {};
+window.PaPaTracks['hushan-2024-04-20'] = [
+  [25.03640,121.58746],
+  [25.03612,121.58733],
+  // …Douglas–Peucker 簡化後的座標，eps = 5 m
+];
+```
 
 ```html
-<div class="stat-card rounded-2xl p-4 shadow-sm">
-  <div class="text-xs text-stone-400 mb-1">標籤文字</div>
-  <div class="font-bold text-stone-800">數值或主標題</div>
-  <div class="text-xs text-stone-400 mt-1">子標題或補充</div>
+<script src="assets/tracks/hushan-2024-04-20.js"></script>
+```
+
+```javascript
+map: {
+  track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+  // …
+}
+```
+
+沒給 `track.points` 就沿用航點直線，計畫與候選頁不受影響。
+
+---
+
+## 3. 詳情頁：常用 markup
+
+### 航點卡欄位（`#spots`）
+
+id 是固定的，`detail.js` 靠它們填值。`wp-pos-label` 不是 `wp-pos`。
+
+```html
+<div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+<div class="flex items-center gap-3 mb-3">
+  <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+  <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">航點名稱</h3>
+  <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+</div>
+<div class="flex gap-4 mb-3 text-sm text-stone-600">
+  <span>實際時間 <strong class="text-stone-800" id="wp-time">09:48</strong></span>
+  <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+  <span>海拔 <strong class="text-stone-800" id="wp-ele">60</strong> m</span>
+</div>
+<p class="text-base text-stone-700 mb-3" id="wp-desc">航點描述。</p>
+<div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+  <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+  <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
 </div>
 ```
 
-### 信息提示橫幅
+`min-w-[44px] min-h-[44px]` 是無障礙觸控目標下限，別拿掉。
+
+### 海拔圖容器（`#elevation`）
+
+canvas 的 id 必須是 `elevation-chart`（不是 `elevationChart`）。
 
 ```html
-<div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:#c77c3e;">
+<div class="chart-container">
+  <canvas id="elevation-chart" role="img" aria-label="海拔剖面圖"></canvas>
+</div>
+```
+
+### 時間軸容器（`#timeline`）
+
+```html
+<div id="timeline-container" class="relative max-w-2xl mx-auto">
+  <div class="timeline-line"></div>
+</div>
+```
+
+**渲染前不要清空容器**——那會連同 `.timeline-line` 一起清掉，時間軸的直線就不見了。
+
+### 提示橫幅
+
+```html
+<div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm border-l-4"
+     style="background:var(--accent-tint); border-color:var(--accent);">
   <span class="text-2xl mt-0.5">🏛️</span>
   <div>
-    <div class="font-bold text-amber-900 text-base mb-1">提醒標題</div>
-    <p class="text-sm text-amber-800 leading-relaxed">詳細說明與注意事項。</p>
+    <div class="font-bold text-base mb-1" style="color:var(--accent-strong-deep);">提醒標題</div>
+    <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">詳細說明與注意事項。</p>
   </div>
 </div>
 ```
 
-### 景點卡片（Waypoint Card）
+---
 
-```html
-<div class="waypoint-card bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-all">
-  <div class="flex items-start justify-between mb-4">
-    <div>
-      <h4 class="font-bold text-lg text-stone-900">景點名稱</h4>
-      <p class="text-xs text-stone-400 mt-1">里程 x.xx km | 海拔 xxxm</p>
-    </div>
-    <span class="text-2xl">🏔️</span>  <!-- 可選的 emoji -->
-  </div>
-  <p class="text-sm text-stone-600 leading-relaxed">景點描述與觀景要點。</p>
-  <div class="text-xs text-stone-400 mt-3">座標：25.0123° N, 121.5456° E</div>
-</div>
-```
+## 4. 色彩
 
-### 戳記徽章（Stamp Badge）
+### 主色層（每頁一份，只改 `:root`）
 
-```html
-<span class="stamp">8月2日</span>
-```
+換主色**只動這一段**，markup 與腳本都不必改。
 
-**CSS**（若未在 `<style>` 中定義）：
 ```css
-.stamp {
-  display: inline-block;
-  border: 3px solid #c77c3e;
-  color: #c77c3e;
-  font-weight: 900;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  padding: 4px 10px;
-  border-radius: 3px;
-  transform: rotate(-1.5deg);
-  text-transform: uppercase;
+:root {
+  --accent:             #0d9488;   /* 裝飾：色條、圓點、地圖軌跡、圖表線 */
+  --accent-strong:      #0f766e;   /* 淺底上的文字（4.94:1） */
+  --accent-strong-deep: #115e59;   /* 淡底卡片上的內文，再深一階（6.84:1） */
+  --accent-tint:        #f0fdfa;   /* 淡底 */
+  --accent-border:      #cceee9;   /* 淡框線 */
+  --accent-border-deep: #b8e3db;   /* 深一階的框線 */
 }
 ```
 
----
+新頁選色後**要實測對比度**再把數字寫進註解——底色是頁底 `#f5f3ef`，不是白色。
 
-## 3. 地圖初始化（Leaflet）
+### 跨頁語意色（不進 `--accent`，刻意的）
 
-### 基本地圖模板
+| 意義 | 色值 |
+|---|---|
+| 山頂 | `#7c9e52` |
+| 警告 | 紅 |
+| 外部連結 | 藍 |
+| 注意 | 琥珀 |
 
-```javascript
-// HTML：
-<section id="map-section" class="py-16 px-6 bg-white">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl font-black text-stone-900 mb-4">路線圖</h2>
-    <div id="map"></div>
-  </div>
-</section>
+這些跨頁共用同一套意義，不屬於任何單頁的識別色。
 
-// JavaScript：
-function initMap() {
-  // 台灣坐標中心
-  const map = L.map('map').setView([25.0, 121.5], 12);
-  
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 19
-  }).addTo(map);
-  
-  // 標記起點
-  L.marker([25.0123, 121.5456], {
-    title: "捷運南勢角站"
-  }).addTo(map)
-    .bindPopup('<strong>捷運南勢角站</strong><br>集合點');
-  
-  // 標記終點
-  L.marker([25.0456, 121.5789], {
-    title: "終點"
-  }).addTo(map)
-    .bindPopup('<strong>終點</strong>');
-}
+### 灰階與背景
 
-// 頁面載入時執行
-window.addEventListener('load', initMap);
-```
+| 用途 | 值 |
+|---|---|
+| 頁底 | `#f5f3ef`（`--page-bg`，**不是** `bg-stone-50`） |
+| 內文 | `#3a3632`（`--page-fg`） |
 
-### 繪製路線（Polyline）
+**灰階一律用 stone，不用 slate。**
 
-```javascript
-// 在 initMap() 中增加：
-const routeCoordinates = [
-  [25.0123, 121.5456],  // 起點
-  [25.0145, 121.5478],  // 中間點
-  [25.0167, 121.5501],  // 終點
-];
+### 小字顏色的鐵則
 
-L.polyline(routeCoordinates, {
-  color: '#c77c3e',
-  weight: 3,
-  opacity: 0.7,
-  dashArray: '5, 5'  // 虛線效果
-}).addTo(map);
-```
+| 類別 | 白底 | 頁底 `#f5f3ef` | `bg-stone-100` |
+|---|---|---|---|
+| `text-stone-400` | ❌ | ❌ | ❌ |
+| `text-stone-500` | 4.80:1 ✅ | 4.33:1 ❌ | 4.40:1 ❌ |
+| `text-stone-600` | ✅ | 6.88:1 ✅ | 6.99:1 ✅ |
+
+**小字一律 `text-stone-600` 起跳。** `text-stone-500` 只在白底安全，很容易漏看——
+第七輪就是這樣踩到的，詳見 `READABILITY_AUDIT.md`。
 
 ---
 
-## 4. 高度圖表（Chart.js）
-
-### 基本海拔圖表
-
-```html
-<!-- HTML 容器 -->
-<section id="elevation" class="py-16 px-6 bg-stone-50">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-2xl font-black text-stone-900 mb-4">海拔剖面</h2>
-    <div style="position: relative; width: 100%; height: 300px;">
-      <canvas id="elevation-chart" role="img" aria-label="海拔高度圖表"></canvas>
-    </div>
-  </div>
-</section>
-
-<!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-function initElevationChart() {
-  const ctx = document.getElementById('elevation-chart').getContext('2d');
-  
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['0', '2', '4', '6', '8', '10', '11.76'],  // 里程
-      datasets: [{
-        label: '海拔高度',
-        data: [50, 120, 250, 320, 280, 150, 100],  // 對應海拔
-        borderColor: '#c77c3e',
-        backgroundColor: 'rgba(199, 124, 62, 0.1)',
-        borderWidth: 2,
-        tension: 0.4,
-        fill: true,
-        pointRadius: 4,
-        pointBackgroundColor: '#c77c3e',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          labels: {
-            color: '#888780',
-            font: { size: 12 }
-          }
-        }
-      },
-      scales: {
-        y: {
-          title: { display: true, text: '海拔 (m)' },
-          ticks: { color: '#888780' },
-          grid: { color: 'rgba(139, 135, 128, 0.1)' }
-        },
-        x: {
-          title: { display: true, text: '里程 (km)' },
-          ticks: { color: '#888780' },
-          grid: { color: 'rgba(139, 135, 128, 0.1)' }
-        }
-      }
-    }
-  });
-}
-
-window.addEventListener('load', initElevationChart);
-</script>
-```
-
----
-
-## 5. 導覽列按鈕（詳情頁）
-
-### 頂部固定導覽列
-
-```html
-<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50">
-  <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-    <!-- Logo 與品牌 -->
-    <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-      <span class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
-      <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-    </a>
-    
-    <!-- 導覽按鈕 -->
-    <div class="flex gap-1 overflow-x-auto">
-      <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">
-        行程總覽
-      </button>
-      <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">
-        路線圖
-      </button>
-      <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-100 whitespace-nowrap">
-        海拔剖面
-      </button>
-    </div>
-  </div>
-</nav>
-```
-
----
-
-## 6. 天氣 API 呼叫（可選）
-
-### 簡單的天氣預報
-
-```javascript
-async function fetchWeather(date) {
-  try {
-    // 使用免費天氣 API（例如 Open-Meteo）
-    const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=25.0&longitude=121.5&daily=temperature_2m_max,precipitation,weathercode&timezone=Asia/Taipei`
-    );
-    const data = await response.json();
-    
-    // 解析資料
-    const weather = data.daily.weathercode[0];
-    const temp = data.daily.temperature_2m_max[0];
-    
-    // 更新 HTML
-    document.getElementById('weather-main').textContent = `${temp}°C`;
-    document.getElementById('weather-sub').textContent = getWeatherDescription(weather);
-  } catch (error) {
-    console.log('天氣預報載入失敗');
-  }
-}
-
-function getWeatherDescription(code) {
-  const weatherMap = {
-    0: '晴朗',
-    1: '大致晴朗',
-    2: '多雲',
-    3: '陰天',
-    45: '霧',
-    61: '小雨',
-    63: '中雨',
-    65: '大雨'
-  };
-  return weatherMap[code] || '不詳';
-}
-
-// 呼叫
-fetchWeather('2026-08-02');
-```
-
----
-
-## 7. 常用 Tailwind 類別速查表
+## 5. 常用 Tailwind 速查
 
 ### 尺寸與間距
 
 | 用途 | 類別 | 等同 CSS |
-|------|------|---------|
+|---|---|---|
 | 圓角（大） | `rounded-2xl` | `border-radius: 1rem;` |
-| 圓角（小） | `rounded-full` | `border-radius: 9999px;` |
+| 圓角（滿） | `rounded-full` | `border-radius: 9999px;` |
 | Padding | `p-4` | `padding: 1rem;` |
 | Padding X | `px-6` | `padding-left/right: 1.5rem;` |
-| Padding Y | `py-4` | `padding-top/bottom: 1rem;` |
 | Margin bottom | `mb-4` | `margin-bottom: 1rem;` |
 | Gap | `gap-3` | `gap: 0.75rem;` |
 
-### 文字與顏色
+### 字級
 
-| 用途 | 類別 | 用途 |
-|------|------|------|
-| 大標題 | `text-2xl font-black` | h2 級標題 |
-| 中標題 | `text-lg font-bold` | h4 級標題 |
-| 小字 | `text-xs text-stone-400` | 次要資訊或提示 |
-| 主色 | `text-stone-900` | 深灰（主文字） |
-| 次色 | `text-stone-600` | 中灰（次要文字） |
-| 淡色 | `text-stone-400` | 淺灰（提示） |
+| 用途 | 類別 | px |
+|---|---|---|
+| 標題 | `text-2xl`–`text-6xl` | 24–60 |
+| 卡片標題 | `text-lg`–`text-2xl` | 18–24 |
+| 內文 | `text-base` | 16 |
+| 小字 | `text-xs` | 12（屬一般文字，對比度門檻仍是 4.5:1） |
 
-### 區塊與布局
+### 內容寬度
 
-| 用途 | 類別 | 說明 |
-|------|------|------|
-| Flexbox | `flex items-center justify-between` | 水平排列，間距均分 |
-| Grid | `grid grid-cols-2 gap-4` | 2 欄網格 |
-| 固定定位 | `fixed top-0 left-0 z-50` | 固定在視窗頂左 |
-| 陰影 | `shadow-sm` | 細微陰影 |
-| 邊框 | `border border-stone-200` | 1px 灰邊框 |
+| 段落 | 類別 |
+|---|---|
+| 一般段落 | `max-w-4xl` |
+| 時間軸 | `max-w-2xl` |
 
-### 回應式
+### 響應式
 
-| 斷點 | 類別前綴 | 何時生效 |
-|------|---------|---------|
-| 行動 | 無前綴 | 預設（所有裝置） |
+| 斷點 | 前綴 | 何時生效 |
+|---|---|---|
+| 行動 | 無 | 預設 |
 | 平板 | `md:` | 768px 以上 |
 | 桌機 | `lg:` | 1024px 以上 |
 
-**例子**：
-```html
-<!-- 行動版 1 欄，平板 2 欄，桌機 3 欄 -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-```
+---
+
+## 6. 建立新詳情頁
+
+完整步驟與檢查清單在 **`ARCHITECTURE.md` §建立新詳情頁**，這裡只列最容易忘的三件事：
+
+1. **複製 `nanshijiao.html`**，不要複製其他頁。
+2. **五個段落 id 固定**：`overview` → `map-section` → `elevation` → `spots` → `timeline`，
+   順序不可換、不可多開。
+3. **日期只寫 `TRIP_DATE` 一處**；候選／計畫頁沒有 `TRIP_DATE`。
 
 ---
 
-## 8. 色系快速參考
-
-| 用途 | 十六進制 | 類別 | 場景 |
-|------|---------|------|------|
-| 主橙色 | `#c77c3e` | `.section-bar-orange` | 戳記、按鈕、強調 |
-| 主綠色 | `#7c9e52` | `.section-bar-green` | 完成標記 |
-| 石灰 | `#a09080` | `.section-bar-stone` | 分隔線、中性元素 |
-| 深文字 | `#3a3632` | `text-stone-900` | 主要標題 |
-| 淡背景 | `#f5f3ef` | `bg-stone-50` | 背景區塊 |
-
----
-
-## 9. 快速建立新路線檢查清單
-
-### Step 1：複製檔案
-- [ ] 複製 `nanshijiao.html` → `newmountain.html`
-
-### Step 2：更新基本資訊
-- [ ] 修改 `<title>` 標籤
-- [ ] 更新 `<h1>` 標題
-- [ ] 修改 `routeData` 物件
-
-### Step 3：更新數據
-- [ ] 更新 `title`, `location`, `distance`, `elevation_gain`
-- [ ] 修改座標（起終點、中間點）
-- [ ] 更新海拔高度資料點
-
-### Step 4：測試
-- [ ] 本機開啟檢查
-- [ ] 地圖顯示正確
-- [ ] 圖表繪製完整
-- [ ] 手機版本正常
-
-### Step 5：關聯首頁
-- [ ] 在 `index.html` 的 `data.candidate` 或 `data.planned` 中新增項目
-- [ ] 設定 `url: "newmountain.html"`
-
----
-
-**最後更新**：2026-07-30  
-如需更多範例，參考 ARCHITECTURE.md
+**最後更新**：2026-08-03（全面重寫以對應 `detail.js` 架構）
