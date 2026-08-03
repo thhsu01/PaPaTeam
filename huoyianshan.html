@@ -178,6 +178,12 @@
                             <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
                                 <!-- Dynamic content -->
                             </div>
+                            <!-- 建議框。本頁的 schedule 尚無 advice 資料，靠設定裡的
+                                 hideEmptyAdvice 整塊收起來；有資料時會自動出現。 -->
+                            <div class="mt-8 pt-6 border-t border-stone-200">
+                                <span class="text-[10px] font-black text-stone-600 uppercase tracking-[0.2em]">隊友建議</span>
+                                <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -357,14 +363,16 @@
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，航點卡因此加回
-    // 里程欄。advice 仍缺，而本頁的航點卡根本沒有建議框那塊 markup，
-    // 所以不需要 hideEmptyAdvice——哪天補了 advice，要先把區塊加回來。
+    // 里程欄。advice 仍缺，但建議框的 markup 已經補上（此前十一頁裡只有
+    // 本頁沒有 wp-advice，是規格上的缺口），沒資料時由 hideEmptyAdvice
+    // 收起來。哪天補了 advice，填資料就會直接顯示。
     PaPaDetail.init({
       schedule,
       nav: [24.358077127978664, 120.7361309924151],
 
       card: {
         follow: 'pan', wrap: 'cycle',
+        hideEmptyAdvice: true,      // 本頁 schedule 尚無 advice 資料
         // 大峽谷那一站的卡片加一圈紅框
         onUpdate: (wp) => {
           const card = document.getElementById('wp-card');

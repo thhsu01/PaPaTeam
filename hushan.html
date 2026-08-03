@@ -98,7 +98,7 @@
           城市邊上的四獸山<br>
           <span style="color:var(--accent-strong);">虎山親山步道</span>
         </h1>
-        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自松山慈惠堂登山口起登，沿稜線經復興園、虎山峰與 120 高地，一路都看得到台北 101。虎山與象山、豹山、獅山合稱四獸山，標高約 140 公尺，是台北市區裡最容易親近的一段山徑。</p>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自松山慈惠堂登山口起登，沿稜線經復興園、虎山峰與 120 高地，一路都看得到台北 101。虎山與象山、豹山、獅山合稱四獸山，主峰虎山峰標高 142 公尺，是台北市區裡最容易親近的一段山徑。</p>
 
         <!-- 補登說明 -->
         <div class="mb-8 max-w-2xl bg-teal-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
@@ -154,7 +154,7 @@
             <div class="text-xs text-stone-600">最高點 m（GPS 推估）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">本頁的海拔全部由軌跡推估，誤差約 ±25 m——這條路線沒有既有的航點清單可對，不像其他頁面有地形圖數值。唯一的例外是 120 高地，名字本身就是它的標高。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">虎山峰的 142 m 與 120 高地的 120 m 是查得到的公開標高；其餘四點沒有可對的數值，由軌跡推估，誤差約 ±25 m。</p>
       </div>
     </section>
 
@@ -209,7 +209,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-600 mt-3 text-center">自慈惠堂登山口一路爬升至稜線，經復興園、虎山峰後由 120 高地下山。海拔由軌跡推估，誤差約 ±25 m。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">自慈惠堂登山口一路爬升至稜線，經復興園、虎山峰（142m）後由 120 高地下山。虎山峰與 120 高地採公開標高，其餘由軌跡推估。</p>
       </div>
     </section>
 
@@ -239,8 +239,8 @@
           </div>
 
           <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山峰 🔭</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">虎山山頂一帶的瞭望台。虎山標高約 140 公尺，與象山、豹山、獅山合稱四獸山，因山形如踞蹲的猛虎而得名。</p>
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山峰 (H142m) 🔭</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">虎山山頂的瞭望台，標高 142 公尺，與豹山峰同高。虎山與象山、豹山、獅山合稱四獸山，因山形如踞蹲的猛虎而得名。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -282,9 +282,10 @@
     // 航點座標找軌跡上最近的一點，取該點的時間與累計里程。地點名稱由
     // 隊友指認，六個航點裡五個落在軌跡 5 m 內。
     //
-    // ele 全部由軌跡推估（前後 60 m 內取樣點的高程中位數，取整到 5 m），
-    // 應視為 ±25 m 的估計值——這條路線沒有既有的航點清單可對，不像其他
-    // 頁面有地形圖數值。唯一的例外是 120 高地，名字本身就是它的標高。
+    // ele 有兩點是公開標高：虎山峰 142 m（與豹山峰同高，見健行筆記）、
+    // 120 高地 120 m（名字本身就是標高）。其餘四點沒有可對的數值，取軌跡
+    // 前後 60 m 內取樣點的高程中位數再取整到 5 m，應視為 ±25 m 的估計。
+    // 軌跡在虎山峰讀到 155 m，比公開值高 13 m，是 GPS 高程的常見偏差。
     //
     // 全程最高處其實不在任何航點上：軌跡在 2.01 km 處讀到 184 m，比
     // 虎山峰還高，但那裡沒有名字，不硬塞一個航點進去。
@@ -298,8 +299,8 @@
       { lat: 25.029260, lng: 121.583930, time: "10:49", loc: "虎山親山步道登山口", dist: 2.36, ele: 175, pos: "步道口",
         desc: "累計 2.36 km。稜線上的另一處步道口，由此轉向北側續行。" },
 
-      { lat: 25.031220, lng: 121.583710, time: "10:57", loc: "虎山峰", dist: 2.82, ele: 155, pos: "瞭望台",
-        desc: "累計 2.82 km。虎山山頂一帶的瞭望台，在此停留 16 分鐘。" },
+      { lat: 25.031220, lng: 121.583710, time: "10:57", loc: "虎山峰 (H142m)", dist: 2.82, ele: 142, pos: "瞭望台",
+        desc: "累計 2.82 km。虎山山頂的瞭望台，標高 142 m，與豹山峰同高。在此停留 16 分鐘。" },
 
       { lat: 25.033105, lng: 121.582621, time: "11:16", loc: "虎山 120 高地", dist: 3.25, ele: 120, pos: "展望台",
         desc: "累計 3.25 km。設有涼亭的展望點，停留 9 分鐘後下山。" },
@@ -353,7 +354,8 @@
       },
 
       chart: {
-        label: wp => wp.loc,
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
         fillAlpha: 0.10,
         dataset: {
           borderWidth: 2.5,

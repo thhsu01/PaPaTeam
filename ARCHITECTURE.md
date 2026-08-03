@@ -352,7 +352,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 |---|---|
 | 段落 id 與順序 | ✅ 11/11 為 `overview` → `map-section` → `elevation` → `spots` → `timeline` |
 | 導覽鍵（五顆、規格文字） | ✅ 11/11 |
-| 航點卡欄位 id | ✅ 11/11（含新增的 `wp-time`） |
+| 航點卡欄位 id | ✅ 11/11（含 `wp-time` 與 `wp-advice`；`huoyianshan` 的建議框 2026-08-03 補上，此前是唯一缺的一頁）|
 | 導覽列 `fixed` | ✅ 11/11 |
 | `<footer>` 在 `<main>` 外 | ✅ 11/11 |
 | 地圖單欄堆疊 | ✅ 11/11 |
