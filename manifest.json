@@ -5,7 +5,7 @@
   "branch": "main",
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
-  "manifest_updated": "2026-08-02",
+  "manifest_updated": "2026-08-03",
   "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
@@ -98,6 +98,16 @@
       "title": "南港山 + 九五峰 + 象山縱走",
       "status": "completed",
       "date": "2024-06-30"
+    },
+    {
+      "path": "datongshan.html",
+      "title": "大同山 × 青龍嶺 × 大棟山縱走",
+      "status": "candidate"
+    },
+    {
+      "path": "shanying.html",
+      "title": "山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石",
+      "status": "candidate"
     }
   ],
   "assets": [

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>山佳鶯歌縱走：石灰坑山‧望湖山‧樟埔坑山‧鶯歌石山 — 爬爬小隊</title>
+  <meta name="description" content="候選行程：從台鐵山佳站後站起登，依序經石灰坑山、望湖山、樟埔坑山、鶯歌石山，下抵台鐵鶯歌站，全程約 8.3 公里的火車接火車縱走。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
+      --chart-max-w: 800px;
+      --chart-h: 320px;
+      --waypoint-transition: all 0.3s ease;
+      --map-h: 420px;
+      --map-radius: 12px;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #4338ca, #a5b4fc);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f8f7f4。
+         草稿原用 teal，與 hushan 的 #0d9488 同色系；每頁主色是刻意的辨識
+         設計，撞色就失去作用。改用 indigo——草稿的景點區標題本來就寫著
+         bg-indigo-600，等於把那個不一致順勢收成本頁主色。 */
+      --accent-fill:            #4338ca;                    /* 實心底（白字 7.90:1） */
+      --accent-border-deep:     #c7d2fe;                    /* indigo-200 */
+      --accent:                 #4f46e5;                    /* 裝飾：圓點、軌跡、圖表線（5.87:1） */
+      --accent-deep:            #4338ca;                    /* indigo-700 */
+      --accent-light:           #818cf8;                    /* indigo-400 */
+      --accent-soft:            #e0e7ff;                    /* indigo-100 */
+      --accent-strong:          #4338ca;                    /* 淺底上的文字（7.38:1） */
+      --accent-strong-deep:     #3730a3;                    /* 淡底卡片上的內文（9.27:1） */
+      --accent-strong-deeper:   #312e81;                    /* 再深一階（10.66:1） */
+      --accent-tint:            #eef2ff;                    /* 淡底 */
+    }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+</head>
+<body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- Back button -->
+  <a href="index.html" class="fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm text-stone-600 text-sm px-3 py-1.5 rounded-full border border-stone-200 hover:bg-white transition-all shadow-sm" aria-label="返回首頁">← 返回首頁</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到預估進度">預估進度</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-indigo-50 via-sky-50 to-stone-100">
+      <div class="max-w-4xl mx-auto w-full">
+        <div class="mb-4">
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 8.3 KM · 火車接火車</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          一趟不用接駁的郊山小縱走<br>
+          <span class="accent-text">山佳 → 鶯歌</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從百年古蹟山佳車站後站起登，沿石灰坑步道依序造訪石灰坑山、望湖山，接上光明山稜線步道續行樟埔坑山，再下鶯歌石山與鶯歌石地標，最終經孫龍步道抵達鶯歌車站。有山路也有柏油路，坡度平緩，起訖點皆為台鐵車站，不需接駁、不必原路折返。</p>
+
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">⚠️</span>
+          <div>
+            <div class="font-bold text-amber-800 text-base mb-1">全程無補給，請自備充足飲水</div>
+            <p class="text-sm text-amber-700 leading-relaxed">石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。</p>
+          </div>
+        </div>
+
+        <!-- 候選行程的數字都還是估計值，說清楚比含糊帶過好 -->
+        <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold accent-text-deeper text-base mb-1">里程、時刻與部分海拔都還是估計值</div>
+            <p class="text-sm accent-text-deep leading-relaxed">本頁尚無實走 GPS 軌跡，地圖上的線是航點之間的直線。各山頭採公開標高，車站與廟宇的高度則為推估。走過之後會比照其他紀錄頁，改用當天的軌跡重算。</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">台鐵山佳車站（後站）</div>
+            <div class="text-xs text-stone-600 mt-1">出後站沿德和巷步行接上登山路徑</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>台鐵鶯歌車站</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
+            <div class="font-bold text-stone-800">08:20（日期未定）</div>
+            <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達，確認車班時間</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">即時天氣參考</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">以石灰坑山山頂為準</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:opacity-90 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至山佳車站">
+              🗺️ 導航至山佳車站
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">8.3</div>
+            <div class="text-xs text-stone-600">總里程 km（估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">3.5–4</div>
+            <div class="text-xs text-stone-600">目標耗時 hr</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">~400</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black accent-text">375</div>
+            <div class="text-xs text-stone-600">最高海拔 m（石灰坑山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">山頭海拔為公開標高：石灰坑山 375、望湖山 350、樟埔坑山 234、鶯歌石山 156 m。航點之間的直線總和為 6.2 km，路線實際會繞得更長，故總里程以 8.3 km 估計。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          互動路線圖與航點切換
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節，琥珀色圓點為海拔 300 m 以上的高點。座標為規劃階段的估計位置，尚無實走 GPS 軌跡，成行前建議先下載離線地圖核對。</p>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">山佳車站後站 (H29m)</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>預計時間 <strong class="text-stone-800" id="wp-time">08:20</strong></span>
+            <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">29</strong> m</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點，08:20 準時出發。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border-deep);">
+            <div class="text-xs font-medium mb-1 accent-text">隊友建議</div>
+            <p class="text-xs accent-text-deep" id="wp-advice">檢查裝備與水分。</p>
+          </div>
+        </div>
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=1114" target="_blank" class="text-sm accent-text hover:underline">🔗 鶯歌石步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?act=info&q=review&review_id=13290" target="_blank" class="text-sm text-emerald-700 hover:underline">📝 山佳經石灰坑山、望湖山起登路線紀錄</a>
+            <a href="https://wayfarer.idv.tw/Taiwan/2025/1122/1122.htm" target="_blank" class="text-sm text-emerald-700 hover:underline">📝 2025 山鶯縱走：各山頭海拔與基石紀錄</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭為公開標高，車站與廟宇為推估值。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          山系亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>山佳車站</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">新北市定古蹟，1903 年設站，早年因煤礦、陶土運輸而興建，新舊站房並存。還沒起登，先逛一座百年車站——也是「大同山‧青龍嶺‧大棟山」那條候選路線的終點，兩趟可以接起來看。</p>
+          </div>
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 accent-mark rounded-full"></span>石灰坑山 (H375m) 🗻 全程最高</h3>
+            <p class="text-sm accent-text-deep leading-relaxed">設三等三角點 978 號，是全程展望最好的一段，晴天可遠眺大棟山。山頂旁有一尊三面佛。此處位於樹林、鶯歌與桃園龜山交界一帶。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>望湖山 (H350m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">鶯歌區內的最高峰（石灰坑山雖然更高，但不在鶯歌轄內），無基石，緊鄰百年老榕樹群，林蔭茂密清幽。與石灰坑山距離很近，步行約 15 分鐘可達。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>樟埔坑山 (H234m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">又稱彰埔坑山，位於光明山稜線步道上，礦務課第 90 號基石據多數紀錄未尋獲，是全程平緩好走的中繼段。此段有多條岔路可通往牛灶坑山、二坑步道，續行前請留意現場指標。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>鶯歌石山 (H156m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">設水泥區界基石 772 號，山頂雜草叢生無展望，但下山不遠即可抵達鶯歌地名由來的鶯歌石地標，是全程最後一座山頭。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>鶯歌石</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">鶯歌地名的由來，巨石形似昂首之鷹，石壁上岩洞景觀奇特。觀景平台視野極佳，可俯視大漢溪、鶯歌市區，並眺望對岸的三峽鳶山。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">本次行程亮點</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">火車接火車：<span class="font-normal accent-text">起訖點都是台鐵車站</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【零接駁縱走】</strong><br>從山佳站後站起登，鶯歌站終點下山，中途不需開車接送、不必原路折返，是新北郊山中少見「搭一次火車來、搭另一次火車走」的完整縱走路線。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【人文與自然並存】</strong><br>從百年古蹟山佳車站出發，途經百年老榕樹群，最後在鶯歌地名由來的鶯歌石作收，一趟路線串起礦業歷史、老樹自然景觀與地質奇石三種風景。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text-deep space-y-1">
+            <li>• 起訖點皆為台鐵車站，交通最方便的縱走路線之一</li>
+            <li>• 石灰坑山展望極佳，可遠眺大棟山</li>
+            <li>• 望湖山鄰近百年老榕樹群，林蔭遮蔭充足</li>
+            <li>• 終點鶯歌石為熱門地標，可順遊鶯歌陶瓷老街</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          預計行程進度（3.5–4H）
+        </h2>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。預計時間與里程參考多篇實走紀錄估算，成行前建議再依當日狀況調整。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-16 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 山佳鶯歌縱走 約 8.3 KM ｜ 日期未定</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 候選行程，日期未定。沒有實走軌跡，time 與 dist 都是規劃估計值，
+    // 走過之後會比照其他紀錄頁改用當天的 GPX 重算。
+    //
+    // ele 分兩種來源：
+    //   公開標高 —— 石灰坑山 375（三等三角點 978 號）、望湖山 350、
+    //     樟埔坑山 234、鶯歌石山 156。
+    //   推估 —— 車站與廟宇。其中鶯歌車站草稿寫 119 m，與草稿自己的
+    //     山佳車站 29 m 難以並存：兩站同屬縱貫線、相隔三公里餘、都在
+    //     大漢溪河階上，不會差九十公尺。有實走紀錄把本路線的高度範圍
+    //     記為 28–364 m，低點正是山佳站；據此把鶯歌站改記為約 30 m。
+    //     這是推估不是查證值，走過之後以軌跡為準。
+    const schedule = [
+      { lat: 24.972683, lng: 121.393083, time: "08:20", loc: "山佳車站後站 (H29m)", dist: 0.00, ele: 29, pos: "集合起點",
+        desc: "行程起點，08:20 準時出發，由後站出站沿德和巷步行進入登山路徑方向。",
+        advice: "山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐，全程無補給點。" },
+
+      { lat: 24.976000, lng: 121.386500, time: "08:35", loc: "正安宮 (H120m)", dist: 0.93, ele: 120, pos: "轉換路段",
+        desc: "沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.93 km。",
+        advice: "此段為柏油路，適合暖身。山下民宅偶有狗吠，通常不會攻擊，放慢腳步經過即可。" },
+
+      { lat: 24.982000, lng: 121.379000, time: "09:20", loc: "福安宮 (H306m)", dist: 2.08, ele: 306, pos: "入山口",
+        desc: "民和街末端的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.08 km。",
+        advice: "此後坡度轉陡，建議在此稍作休息、補充水分。福安宮周邊為住家，請保持安靜。" },
+
+      { lat: 24.984700, lng: 121.376000, time: "09:45", loc: "石灰坑山 (H375m)", dist: 3.01, ele: 375, pos: "最高點",
+        desc: "設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.01 km。",
+        advice: "山頂有三面佛可稍作休息，是全程展望最好的一段，適合拍照與補充體力。" },
+
+      { lat: 24.983200, lng: 121.373000, time: "10:00", loc: "望湖山 (H350m)", dist: 3.59, ele: 350, pos: "副峰",
+        desc: "鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 3.59 km。",
+        advice: "周邊有百年榕樹可順遊拍照，之後接上光明山稜線步道續行樟埔坑山方向。" },
+
+      { lat: 24.970000, lng: 121.367000, time: "10:40", loc: "樟埔坑山 (H234m)", dist: 5.40, ele: 234, pos: "稜線山頭",
+        desc: "又稱彰埔坑山，位於光明山稜線步道上，路況平緩好走。累計里程 5.40 km。",
+        advice: "此段岔路較多（牛灶坑、二坑步道等），請依現場指標續行往鶯歌石方向，必要時核對離線地圖。" },
+
+      { lat: 24.962000, lng: 121.360000, time: "11:15", loc: "鶯歌石山 (H156m)", dist: 6.80, ele: 156, pos: "稜線山頭",
+        desc: "設水泥區界基石 772 號，鶯歌地名由來的鶯歌石就在山下不遠處。累計里程 6.80 km。",
+        advice: "此後下坡路段多為樹根土路，較陡，請放慢腳步、小心行走，注意濕滑路段。" },
+
+      { lat: 24.958500, lng: 121.357500, time: "11:30", loc: "鶯歌石觀景平台", dist: 7.30, ele: 140, pos: "景觀亮點",
+        desc: "鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.30 km。",
+        advice: "此處為熱門拍照點，假日可能需稍候。下方步道改為鋪面，較好走。" },
+
+      { lat: 24.954500, lng: 121.355200, time: "12:00", loc: "鶯歌車站", dist: 8.30, ele: 30, pos: "終點",
+        desc: "行程終點！全程約 8.30 km，經孫龍步道、宏德宮下山抵達鶯歌車站。",
+        advice: "鶯歌老街與陶瓷博物館就在車站附近，可安排順遊或用餐慶祝完賽。" }
+    ];
+
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const ACCENT = cssVar('--accent-deep');
+    const HIGH = '#f59e0b';   // 海拔 ≥300m 的高點（語意色：琥珀）
+    const LOW  = '#16a34a';   // 起訖點（語意色：綠）
+
+    const ICONS = { "集合起點":"🚉", "入山口":"🥾", "景觀亮點":"🪨", "轉換路段":"↔️",
+                    "副峰":"⛰️", "最高點":"🗻", "稜線山頭":"🌿", "終點":"🚉" };
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    // 候選行程不寫行程日：日期未定就不要編一個出來，天氣以 forecast_days=1
+    // 顯示今日參考即可（見 ARCHITECTURE 的腳本規格）。
+    PaPaDetail.init({
+      schedule,
+      nav: [24.972683, 121.393083],
+      weather: { lat: 24.9847, lng: 121.376,
+                 subText: '石灰坑山山頂今日參考',
+                 unit: '°C', errorMain: '暫無法取得' },
+
+      map: {
+        setView: [[24.9686, 121.375], 13],
+        attribution: 'Leaflet | © OpenStreetMap',
+        track: { weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isEnd = i === 0 || i === n - 1;
+          const isPeak = wp.ele >= 300;
+          return { radius: isEnd ? 9 : isPeak ? 8 : 6,
+                   fillColor: isEnd ? LOW : isPeak ? HIGH : ACCENT,
+                   color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.9 };
+        }
+      },
+
+      chart: {
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
+        fillAlpha: 0.1,
+        dataset: { borderColor: ACCENT, borderWidth: 2.5, pointRadius: 5, tension: 0.3,
+                   pointBackgroundColor: schedule.map(wp => wp.ele >= 300 ? HIGH : ACCENT) },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 420, grid: { color: '#f0f0f0' } },
+            x: { ticks: { maxRotation: 30, font: { size: 11 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => `
+          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${wp.ele >= 300 ? 'bg-amber-400' : i === 0 || i === n - 1 ? 'bg-emerald-500' : 'accent-mark-light'} border-2 border-white shadow-sm"></div>
+          <div class="flex items-center gap-3 mb-1">
+            <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
+            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${ICONS[wp.pos] || '📍'} ${wp.pos}</span>
+          </div>
+          <div class="font-bold text-stone-800">${wp.loc}</div>
+          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`
+      }
+    });
+  </script>
+</body>
+</html>
