@@ -204,11 +204,11 @@
   ],
   "open_items": [
     {
-      "id": "jinmianshan-lunjianting-not-placed",
+      "id": "jinmianshan-blackout-distances",
       "due": null,
       "blocking": false,
-      "desc": "jinmianshan 的論劍亭無法列為航點：當天經過它時 GPS 正處於 09:15–10:19 的 63.7 分鐘訊號中斷（大岩壁擋訊號），軌跡上沒有位置。已改放景點卡並說明。若有座標可補為航點",
-      "source": "2026-08-03 建頁"
+      "desc": "jinmianshan 中斷區間（大岩壁→論劍亭→剪刀石）的里程是按直線 1.15 倍重建的估算，不是量測。總里程 3.30 km 應視為下限。論劍亭的 time 10:10 與 ele 215 m 同為估計值",
+      "source": "2026-08-03 隊友補上論劍亭座標後重建"
     }
   ],
   "conventions": {

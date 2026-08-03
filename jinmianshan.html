@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>金面山親山步道 — 爬爬小隊</title>
-  <meta name="description" content="2024/10/6 金面山親山步道實走紀錄。自環山路一段136巷起登，攀上大岩壁登頂剪刀石（258m），經泰安亭下山，全程 3.26 公里。">
+  <meta name="description" content="2024/10/6 金面山親山步道實走紀錄。自環山路一段136巷起登，攀上大岩壁登頂剪刀石（258m），經論劍亭、泰安亭下山，全程約 3.30 公里。">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -82,7 +82,7 @@
 
         <div class="mb-5 flex items-center gap-3">
           <span class="stamp">10月6日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 3.26 KM · 2 小時 59 分</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 約 3.30 KM · 2 小時 59 分</span>
         </div>
 
         <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
@@ -105,7 +105,7 @@
           <span class="text-2xl mt-0.5">📡</span>
           <div>
             <div class="font-bold text-amber-900 text-base mb-1">大岩壁路段 GPS 訊號中斷 64 分鐘</div>
-            <p class="text-sm text-amber-800 leading-relaxed">軌跡在 09:15–10:19 之間只留下兩個點。這段正是大岩壁，岩面擋掉了衛星訊號。地圖上那一段是直線連接，不是實際走法；<strong>3.26 km 也因此略為低估</strong>。官方指標到山頂是 1.15 km，軌跡讀到 1.07 km，短少的約 80 公尺就在這裡。</p>
+            <p class="text-sm text-amber-800 leading-relaxed">軌跡在 09:15–10:19 之間只留下兩個點。這段正是大岩壁，岩面擋掉了衛星訊號。地圖上那一段是直線連接，不是實際走法。<strong>中斷區間內的三個航點（大岩壁、論劍亭、剪刀石）里程是重建的</strong>：軌跡只記到 310 公尺，但這三點之間光是直線就要 309 公尺，而那是一段需要拉繩的岩稜，不可能筆直。改按直線的 1.15 倍估算，剪刀石之後的里程也一併加上同樣的 40 公尺。<strong>3.30 km 仍應視為下限。</strong></p>
           </div>
         </div>
 
@@ -137,8 +137,8 @@
         <!-- Stats row -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">3.26</div>
-            <div class="text-xs text-stone-600">實走里程 km（略低估）</div>
+            <div class="text-3xl font-black text-stone-900">3.30</div>
+            <div class="text-xs text-stone-600">實走里程 km（下限）</div>
           </div>
           <div class="text-center">
             <div class="text-3xl font-black text-stone-900">2:59</div>
@@ -164,7 +164,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-600 mb-6">地圖上的線是 10/6 當天的 GPS 軌跡。大岩壁那 64 分鐘沒有訊號，該段是兩點之間的直線，不代表實際路徑。</p>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 10/6 當天的 GPS 軌跡。大岩壁那 64 分鐘沒有訊號，該段是兩點之間的直線，不代表實際路徑——論劍亭的標記會落在線外，那是正常的。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
@@ -208,7 +208,7 @@
         <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
           <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
         </div>
-        <p class="text-xs text-stone-600 mt-3 text-center">0.76 km 處的大岩壁到 1.07 km 的剪刀石之間爬升 108 公尺，是全程最陡的一段——也正是 GPS 失聯的那 64 分鐘。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">0.76 km 處的大岩壁到 1.11 km 的剪刀石之間爬升 108 公尺，是全程最陡的一段——也正是 GPS 失聯的那 64 分鐘。論劍亭的海拔沒有公開值可對，取中斷區間兩端的高程內插，誤差可能達 ±20 m。</p>
       </div>
     </section>
 
@@ -234,7 +234,7 @@
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>論劍亭</h3>
-            <p class="text-sm text-stone-600 leading-relaxed">過大岩壁、走完石龍山稜之後的觀景涼亭，再往前約 10 分鐘就是剪刀石。<strong>當天經過它的時間落在 GPS 失聯的那 64 分鐘內</strong>，軌跡上沒有留下位置，因此沒有列為航點。</p>
+            <p class="text-sm text-stone-600 leading-relaxed">過大岩壁、走完石龍山稜之後的觀景涼亭，再往前約 10 分鐘就是剪刀石。當天經過它的時間落在 GPS 失聯的那 64 分鐘內，軌跡上沒有位置——<strong>座標由隊友於 2026-08-03 提供才得以補上</strong>，也正是它讓中斷區間的里程短報被發現。</p>
           </div>
 
           <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
@@ -264,7 +264,7 @@
           實走時間軸
         </h2>
         <p class="text-sm text-stone-600 mb-2">08:23 起登 · 11:22 收錄 · 全程 2 小時 59 分</p>
-        <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。大岩壁到剪刀石之間有 64 分鐘沒有紀錄，論劍亭因此不在航點之列。</p>
+        <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。大岩壁到剪刀石之間有 64 分鐘沒有紀錄，該區間的里程是重建的，論劍亭的時刻是估計值。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
         </div>
@@ -274,7 +274,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 金面山親山步道 | 2024 年 10 月 6 日 · 08:23–11:22 · 3.26 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 金面山親山步道 | 2024 年 10 月 6 日 · 08:23–11:22 · 約 3.30 km</p>
   </footer>
 
   <script>
@@ -288,10 +288,21 @@
     // ★ 這份軌跡有一段 63.7 分鐘的訊號中斷（09:15:18 → 10:18:58，位移
     //   只有 165 m），前面另有一段 14.4 分鐘的中斷。合計 86 分鐘沒有紀錄，
     //   佔全程 179 分鐘的一半。位置正是大岩壁——岩面擋掉衛星訊號是常見現象。
-    //   影響有二：
-    //     1. 3.26 km 略為低估。官方指標到山頂 1.15 km，軌跡讀到 1.07 km。
-    //     2. 論劍亭落在中斷區間內，軌跡上沒有它的位置，因此不列為航點，
-    //        改放進景點卡並說明原因。硬塞一個座標就是編造。
+    //
+    //   論劍亭的座標由隊友於 2026-08-03 提供（先前因為落在中斷區間內、
+    //   軌跡上沒有位置，只能放景點卡）。補上之後反而證實了里程短報：
+    //   大岩壁→論劍亭 227 m、論劍亭→剪刀石 82 m，光直線就要 309 m，
+    //   而軌跡在這一段只記到 310 m——那是要拉繩的岩稜，不可能筆直。
+    //   因此中斷區間內改按直線的 1.15 倍估算：
+    //     大岩壁 0.76（軌跡值，中斷前最後一點）
+    //     論劍亭 1.02（0.76 + 227×1.15）
+    //     剪刀石 1.11（1.02 + 82×1.15，原軌跡值 1.07）
+    //   剪刀石之後的航點一律 +0.04，總里程 3.26 → 3.30 km。
+    //   這個 1.15 是估算不是量測，所以頁面把 3.30 標為「下限」而非實測值。
+    //
+    //   論劍亭的 time 10:10 同樣是估計：依官方「論劍亭到剪刀石約 10 分鐘」
+    //   自剪刀石的 10:20 回推。ele 215 m 取中斷區間兩端高程（200／212）
+    //   內插後上修，誤差可能達 ±20 m。
     //
     // ele 直接採 GPS 中位數取整到 5 m，不做偏差校正——這份軌跡的高程異常
     // 準確：剪刀石讀到 255.8 m，公開標高 258 m，只差 2.2 m。其他頁面的
@@ -309,16 +320,20 @@
         desc: "累計 0.76 km。連續超過一百公尺的陡峭岩面，設有繩索。GPS 從這裡開始失去訊號，到 10:19 才恢復。",
         advice: "全程最需要專注的一段。三點不動一點動，鞋底有土先蹭掉再上。雨後岩面極滑，濕天不要嘗試。" },
 
-      { lat: 25.093197, lng: 121.571691, time: "10:20", loc: "剪刀石 (H258m)", dist: 1.07, ele: 258, pos: "最高點",
-        desc: "累計 1.07 km。山頂巨石形如鳥嘴，金面山因此又名剪刀石山。標高 258 公尺，360 度環景。",
+      { lat: 25.093134, lng: 121.570877, time: "10:10", loc: "論劍亭", dist: 1.02, ele: 215, pos: "涼亭",
+        desc: "累計約 1.02 km。過大岩壁、走完石龍山稜後的觀景涼亭，再往前約 10 分鐘就是剪刀石。座標由隊友提供；當天經過的時刻落在 GPS 中斷區間內，10:10 是依官方「論劍亭到剪刀石約 10 分鐘」自 10:20 回推的估計，不是紀錄。",
+        advice: "大岩壁結束後的第一處喘息點，有遮蔭。從這裡到剪刀石雖然只剩 80 幾公尺直線距離，但仍是岩稜，別急著收起手套。" },
+
+      { lat: 25.093197, lng: 121.571691, time: "10:20", loc: "剪刀石 (H258m)", dist: 1.11, ele: 258, pos: "最高點",
+        desc: "累計約 1.11 km。山頂巨石形如鳥嘴，金面山因此又名剪刀石山。標高 258 公尺，360 度環景。",
         advice: "站上剪刀石拍照要有人在下方接應，岩面有斜度且沒有護欄。假日這裡排隊的人多，想拍空景要早到。" },
 
-      { lat: 25.091533, lng: 121.574683, time: "10:34", loc: "泰安亭", dist: 1.56, ele: 180, pos: "涼亭",
-        desc: "累計 1.56 km。剪刀石之後、往環山路二段方向的涼亭。10:34–10:46 在此停留 12 分鐘，是全程最久的一次休息。",
+      { lat: 25.091533, lng: 121.574683, time: "10:34", loc: "泰安亭", dist: 1.60, ele: 180, pos: "涼亭",
+        desc: "累計約 1.60 km。剪刀石之後、往環山路二段方向的涼亭。10:34–10:46 在此停留 12 分鐘，是全程最久的一次休息。",
         advice: "有遮蔭與座椅，是下山前最後的休息處。接下來一路下坡到環山路，路況轉為平緩好走。" },
 
-      { lat: 25.086418, lng: 121.569099, time: "11:22", loc: "終點（環山路一段）", dist: 3.26, ele: 40, pos: "終點",
-        desc: "累計 3.26 km。GPS 於 11:22 收錄，收錄處離起登的136巷口 148 公尺，環狀路線完成。",
+      { lat: 25.086418, lng: 121.569099, time: "11:22", loc: "終點（環山路一段）", dist: 3.30, ele: 40, pos: "終點",
+        desc: "累計約 3.30 km。GPS 於 11:22 收錄，收錄處離起登的136巷口 148 公尺，環狀路線完成。",
         advice: "回到環山路即完成環狀。內湖科技園區一帶餐廳選擇多，適合安排慶功；捷運西湖站步行約 15 分鐘。" }
     ];
 
