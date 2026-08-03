@@ -15,7 +15,7 @@
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "why": "七輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
+      "why": "八輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
     },
     {
       "path": "SNIPPETS.md",
@@ -184,32 +184,18 @@
   ],
   "open_items": [
     {
-      "id": "back-button-covered-by-nav",
-      "due": null,
-      "blocking": false,
-      "desc": "14 個詳情頁左上的 fixed 返回鍵被 fixed 導覽列完全蓋住（兩者同為 z-50，導覽列在 DOM 較後）。2026-08-03 以 elementFromPoint 在 1280px 與 390px 實測，14/14 皆被站徽連結覆蓋。非功能中斷（站徽本身連到 index.html），但那 14 份 markup 是死的。處置方式待定：移除返回鍵，或移出導覽列覆蓋範圍",
-      "source": "ARCHITECTURE.md §尚未收斂的三件事"
-    },
-    {
-      "id": "contrast-sweep-missing-new-pages",
-      "due": null,
-      "blocking": false,
-      "desc": "nangangshan、datongshan、shanying 建於第七輪之後，尚未跑過對比度掃描。跑之前務必 stub CDN 並重建本地 Tailwind，否則量到的是沒有樣式的假版面",
-      "source": "READABILITY_AUDIT.md §5"
-    },
-    {
       "id": "meihuashan-missing-advice",
       "due": null,
       "blocking": false,
       "desc": "meihuashan schedule 缺 advice，該區塊在有資料前自動隱藏。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的三件事"
+      "source": "ARCHITECTURE.md §尚未收斂的一件事"
     },
     {
       "id": "huoyianshan-missing-advice",
       "due": null,
       "blocking": false,
       "desc": "huoyianshan schedule 缺 advice（dist 已於 2026-08-02 由 GPX 補齊、建議框 markup 已於 2026-08-03 補回）。需實走資料，不得編造",
-      "source": "ARCHITECTURE.md §尚未收斂的三件事"
+      "source": "ARCHITECTURE.md §尚未收斂的一件事"
     }
   ],
   "conventions": {
@@ -232,6 +218,7 @@
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
     "no_fabrication": "里程與建議屬實走資料，缺就留空，不得為填滿欄位而編造",
-    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前八頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan"
+    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前八頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan",
+    "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\""
   }
 }
