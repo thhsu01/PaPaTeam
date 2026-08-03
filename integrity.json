@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-03 08:07",
+  "generated": "2026-08-03 08:20",
   "generated_tz": "UTC+8",
-  "commit": "54f89e2bb0139febe4aee2eecfe2d03e810de87e",
-  "file_count": 31,
+  "commit": "a697d6f7759bf7e9695fe14e4429d8cac7fc0803",
+  "file_count": 33,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -94,6 +94,11 @@
       "sha": "f73d38d6d95daece22a3d87d45720101e256645e"
     },
     {
+      "path": "assets/tracks/nangangshan-2024-06-30.js",
+      "size": 5459,
+      "sha": "f8e6b7817f479ba02803b7335c62e3ad5b216998"
+    },
+    {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
       "size": 8863,
       "sha": "c07d03df4da421b010c40ec9a3e630bc30510c86"
@@ -125,8 +130,8 @@
     },
     {
       "path": "index.html",
-      "size": 22811,
-      "sha": "f91da26dbbe4ff85e99ffb95ddbb28b572ec6aff"
+      "size": 22948,
+      "sha": "449c578cb558e1a907343e46760d24837cb02624"
     },
     {
       "path": "laojiujianshan.html",
@@ -135,8 +140,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 6793,
-      "sha": "e5988148ab783149aa9a7007e390dfbc49a1d7ce"
+      "size": 7122,
+      "sha": "61a9676dac883ee0cc724a7b1f14eec38b851ade"
     },
     {
       "path": "meihuashan.html",
@@ -147,6 +152,11 @@
       "path": "mochashan.html",
       "size": 30747,
       "sha": "827f90a1f0e2217c4c8b2daf6df9489ec528c18a"
+    },
+    {
+      "path": "nangangshan.html",
+      "size": 28374,
+      "sha": "7d3dcc0790a4b8f0be5cdb9d3442361668de9975"
     },
     {
       "path": "nanshijiao.html",
