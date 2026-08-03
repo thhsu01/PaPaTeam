@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>劍潭山親山步道 — 爬爬小隊</title>
+  <meta name="description" content="2024/8/4 劍潭山親山步道實走紀錄。自銘傳大學校門口起登，經觀音山眺望點、老地方觀機平台，下山經圓山大飯店，全程 4.92 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #0891b2, #7c9e52);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。 */
+      --accent:                 #0891b2;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線 */
+      --accent-strong:          #0e7490;                  /* 淺底上的文字（4.83:1） */
+      --accent-strong-deep:     #155e75;                  /* 淡底卡片上的內文，再深一階（6.56:1） */
+      --accent-tint:            #ecfeff;                  /* 淡底 */
+      --accent-border:          #c8e9f0;                  /* 淡框線 */
+      --accent-border-deep:     #a8dbe6;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/jiantanshan-2024-08-04.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/8/4 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-cyan-50 via-sky-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">8月4日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.92 KM · 2 小時 56 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/8/4 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          台北市中心的第一座山<br>
+          <span style="color:var(--accent-strong);">劍潭山親山步道</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自銘傳大學校門口起登，沿劍潭山稜線東行至老地方觀機平台看松山機場的飛機起降，再折返下山經圓山大飯店，於圓山風景區出口結束。劍潭山是圓山大飯店的後山北稜，也是台北市區裡最靠近市中心的一座山。</p>
+
+        <!-- 補登說明 -->
+        <div class="mb-8 max-w-2xl border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-color:var(--accent);">
+          <span class="text-2xl mt-0.5">🗃️</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong-deep);">補登的一趟</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">這趟原本漏在歷史紀錄之外，2026 年整理 GPX 檔案時才補回。地點名稱由隊友指認，時刻、里程與座標全部取自軌跡在該時刻的位置。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">銘傳大學校門口</div>
+            <div class="text-xs text-stone-600 mt-1">中山北路五段，捷運劍潭站步行約 10 分鐘</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>圓山風景區出口（劍潭站旁）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">8月4日 08:35–11:31</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至銘傳大學校門口">
+              🗺️ 導航至銘傳大學
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <!-- 里程與耗時取自 8/4 的 GPS 軌跡；海拔的校正依據見下方註記。 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">4.92</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">2:56</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~200</div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">165</div>
+            <div class="text-xs text-stone-600">最高點 m（老地方觀機平台）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">老地方觀機平台的 165 m 是公開標高。當天的 GPS 在該處讀到 192 m，高了 27 m——其餘航點的海拔即以這個系統性偏差回推，應視為 ±25 m 的估計值。圓山大飯店回推得 31 m，與飯店實際所在的高度相符，可作為校正合理的旁證。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 8/4 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">銘傳大學校門口</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">08:35</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">20</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=34" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 劍潭山親山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?act=detail&id=39&q=mountain" target="_blank" rel="noopener" class="text-sm text-emerald-700 hover:underline">⛰️ 劍潭山 153 m．二等三角點 1064 號</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">自銘傳大學校門口一路爬升上稜，1.6 km 處的老地方觀機平台（165m）是全程最高，之後沿稜線折返西行、下切圓山大飯店，最後回到平地。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          山系亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 8/4 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>銘傳大學校門口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">中山北路五段上的集合點。劍潭山步道的入口不只一個，銘傳大學這側是西端最近的一處，捷運劍潭站步行約 10 分鐘可達。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>觀音山眺望點</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">稜線西段的觀景平台，視野越過基隆河與台北盆地西北側，正對觀音山。這一帶也是步道上看夕陽落在觀音山背後的位置。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>老地方觀機平台 (H165m) ✈️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">三角形的木造平台，尖角朝松山機場方向凸出，是台北市看飛機起降最有名的位置，名列圓山十景。標高 165 公尺，比劍潭山本身還高，也是本趟的最高點。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>劍潭山 (H153m)</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">步道的名字由來，標高 153 公尺，山頂有二等三角點 1064 號，位於士林區與中山區交界。它其實比老地方觀機平台低 12 公尺，稜線上沒有明顯的山形，容易在行進間走過去。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓山大飯店</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">劍潭山的南麓就是圓山大飯店，1952 年落成、1973 年改建為現在的十四層中國宮殿式建築。下山路徑直接切到飯店旁，是這條步道少見的「從山上走進地標」體驗。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>圓山風景區入口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">中山北路四段旁的風景區入口，也是劍潭山步道最常用的登山口。由此出來即是市街，捷運劍潭站就在幾步之外。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">08:35 起登 · 11:31 收錄 · 全程 2 小時 56 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置，含沿途休息。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 劍潭山親山步道 | 2024 年 8 月 4 日 · 08:35–11:31 · 4.92 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2024/8/4 實走紀錄。這趟原本漏在 index.html 的歷史紀錄之外，
+    // 2026-08 拿到 GPX 才補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 全部取自當天的 GPS 軌跡（健行筆記 GPX，827 點）：
+    // 依隊友指認的地點推定時刻，再取軌跡在該時刻的位置與累計里程。
+    // 座標與里程同源，段長因此不會與直線距離矛盾（見 ARCHITECTURE 的
+    // 「里程健全性」）。
+    //
+    // ele 的校正基準只有一個公開標高：老地方觀機平台 165 m。當天 GPS 在
+    // 該處讀到 192 m，偏高 27 m，其餘各點即扣掉這個系統性偏差回推，
+    // 應視為 ±25 m 的估計。旁證是圓山大飯店回推得 31 m，與飯店實際高度相符。
+    //
+    // 兩個航點的位置是推定的，隊友只給了名字沒給座標：
+    //   觀音山眺望點 —— 取去程 09:00–09:12 停留 11 分鐘處（0.88 km，稜線
+    //     西段，方位朝西正對觀音山）。步道西段還有其他平台，若記錯可調整。
+    //   圓山風景區入口 —— 取軌跡下山後轉上中山北路四段的位置（4.59 km）。
+    //
+    // 劍潭山（153 m，二等三角點 1064 號）不列為航點：稜線在該處沒有明顯
+    // 山形，軌跡是連續爬升沒有局部高點，無從指認確切位置。它比老地方
+    // 觀機平台還低 12 m，本趟的最高點是老地方而不是劍潭山。
+    const schedule = [
+      { lat: 25.087484, lng: 121.528844, time: "08:35", loc: "銘傳大學校門口", dist: 0.00, ele: 20, pos: "集合起點",
+        desc: "行程起點。GPS 於 08:35 開始記錄，自中山北路五段旁進入山區。",
+        advice: "捷運劍潭站步行約 10 分鐘。步道上沒有商店，水在起登前買足；夏天走這條路線稜線曝曬重，建議清晨出發。" },
+
+      { lat: 25.087205, lng: 121.532673, time: "09:00", loc: "觀音山眺望點", dist: 0.88, ele: 130, pos: "展望點",
+        desc: "累計 0.88 km。稜線西段的觀景平台，正對觀音山與基隆河。09:00–09:12 在此停留 11 分鐘。",
+        advice: "全程第一個開闊展望，方位朝西，午後逆光。傍晚來這裡可以看夕陽落在觀音山背後，是這條步道的招牌畫面。" },
+
+      { lat: 25.090572, lng: 121.536716, time: "09:50", loc: "老地方觀機平台 (H165m)", dist: 1.60, ele: 165, pos: "觀機平台",
+        desc: "累計 1.60 km。全程最高點，標高 165 公尺，比劍潭山本身還高 12 公尺。三角形木造平台的尖角正對松山機場，09:30–10:01 一帶共停留約 30 分鐘。",
+        advice: "看飛機的位置在尖角，假日人多要排隊。松山機場起降密集，等 10 分鐘通常就會有一架；離場航班從左側爬升，畫面比進場好拍。" },
+
+      { lat: 25.078788, lng: 121.526434, time: "11:08", loc: "圓山大飯店", dist: 4.03, ele: 30, pos: "地標",
+        desc: "累計 4.03 km。下山路徑直接切到圓山大飯店旁，軌跡在此離飯店本體僅 9 公尺。前一站 10:54–11:07 在飯店一帶停留 12 分鐘。",
+        advice: "從山徑直接走進地標，是這條路線少見的收尾。飯店大廳可借用洗手間，也有咖啡廳；穿著登山鞋進去不至於失禮，但先拍掉鞋上的土。" },
+
+      { lat: 25.080438, lng: 121.524141, time: "11:25", loc: "圓山風景區入口", dist: 4.59, ele: 10, pos: "步道口",
+        desc: "累計 4.59 km。自飯店一帶下切至中山北路四段，回到平地的風景區入口。",
+        advice: "這裡也是多數人走劍潭山的起登口，反方向走就是從市區直接上稜。由此往北沿中山北路走幾分鐘即達捷運劍潭站。" },
+
+      { lat: 25.083284, lng: 121.524424, time: "11:31", loc: "終點（劍潭捷運站旁）", dist: 4.92, ele: 10, pos: "終點",
+        desc: "累計 4.92 km。GPS 於 11:31 收錄，收錄處在中山北路四段、捷運劍潭站一帶。",
+        advice: "劍潭站對面就是士林夜市，適合安排慶功。想加碼的話，沿稜線續行可接文間山、劍潭古寺一線。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 最高點
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "集合起點":"🚇", "展望點":"🌄", "觀機平台":"✈️", "地標":"🏛️", "步道口":"🚪", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2024-08-04";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.087484, 121.528844],
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.0890, lng: 121.5350 },   // 劍潭山稜線一帶
+
+      map: {
+        setView: [[25.0850, 121.5305], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
+        track: { points: PaPaTracks['jiantanshan-2024-08-04'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "觀機平台";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.pos === "觀機平台" ? PEAK :
+            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 200,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "觀機平台";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -64,13 +64,14 @@ npx http-server
 PaPaTeam/
 ├── index.html                  # 主首頁：計畫／候選／歷史三區
 │
-│   已完成（八頁附實走 GPS 軌跡）
+│   已完成（九頁附實走 GPS 軌跡）
 ├── nanshijiao.html             # 微笑山線 × 南勢角山 × 一線天（2026-08-02）
 ├── dinghu.html                 # 猴崁水圳 × 青楓步道 × 頂湖O型（2026-06-20）
 ├── laojiujianshan.html         # 內溝山系 O 型全系列縱走（2026-05-01）
 ├── mochashan.html              # 聖母步道：抹茶山（2026-03-14）
 ├── meihuashan.html             # 梅花山全系列挑戰縱走（2026-01-10）
 ├── huoyianshan.html            # 火炎山、北鞍古道 O 走（2025-12-13）
+├── jiantanshan.html            # 劍潭山親山步道 × 老地方觀機平台（2024-08-04）
 ├── nangangshan.html            # 南港山 + 九五峰 + 象山縱走（2024-06-30）
 ├── hushan.html                 # 虎山親山步道（2024-04-20）
 │   候選
@@ -84,8 +85,8 @@ PaPaTeam/
 ├── assets/
 │   ├── site.css                # 全站共用樣式：skip link、鍵盤焦點、reduced-motion
 │   ├── site.js                 # 全站共用腳本：天氣代碼對照表（PaPaWeather）
-│   ├── detail.css              # 十四個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
-│   ├── detail.js               # 十四個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
+│   ├── detail.css              # 十五個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
+│   ├── detail.js               # 十五個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
 │   └── tracks/                 # 已完成行程的實走 GPS 軌跡（簡化後的座標陣列）
 │       ├── nanshijiao-2026-08-02.js
 │       ├── dinghu-2026-06-20.js
@@ -93,6 +94,7 @@ PaPaTeam/
 │       ├── mochashan-2026-03-14.js
 │       ├── meihuashan-2026-01-10.js
 │       ├── huoyianshan-2025-12-13.js
+│       ├── jiantanshan-2024-08-04.js
 │       ├── nangangshan-2024-06-30.js
 │       └── hushan-2024-04-20.js
 │
@@ -110,7 +112,7 @@ PaPaTeam/
 └── README.md                   # 本檔案
 ```
 
-十四個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
+十五個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
 它規定了詳情頁只能有五個段落、id 與順序固定，以及色彩一律走 `--accent` token。
 
