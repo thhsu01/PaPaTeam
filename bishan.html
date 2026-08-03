@@ -129,7 +129,7 @@
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">徒步長度</div>
-                    <div class="text-2xl font-black text-stone-800">約 8.00<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-2xl font-black text-stone-800">約 8.25<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">累計上升</div>
@@ -137,17 +137,24 @@
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">預估耗時</div>
-                    <div class="text-2xl font-black text-stone-800">6.5<span class="text-sm font-normal text-stone-600 ml-1">hr</span></div>
+                    <div class="text-2xl font-black text-stone-800">6.75<span class="text-sm font-normal text-stone-600 ml-1">hr</span></div>
                 </div>
+                <!-- 原本這格寫「時速基計 1.5 k/h」，但時程裡的分段速度是 0.98–1.50
+                     不等，全程平均也只有 1.22——沒有任何一個數字是 1.5。改成標示實際
+                     均速，並講明停留時間是含在各段時間裡的。 -->
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">時速基計</div>
-                    <div class="text-2xl font-black text-stone-800">1.5<span class="text-sm font-normal text-stone-600 ml-1">k/h</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">含停留均速</div>
+                    <div class="text-2xl font-black text-stone-800">1.2<span class="text-sm font-normal text-stone-600 ml-1">k/h</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all col-span-2 md:col-span-1">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">最高標高</div>
                     <div class="text-2xl font-black text-stone-800">518<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
+            <p class="text-xs text-stone-600 mt-3 max-w-3xl">
+                累計上升為航點淨爬升合計 508 m，稜線小起伏未計入。停留時間含在各段時間內，
+                所以分段速度看起來偏慢（碧山另有大休息 20 分鐘）。里程為估算值，非實走紀錄。
+            </p>
         </section>
 
         <!-- 2. Interactive Map Section -->
@@ -371,11 +378,11 @@
               desc: "隱身林間的靜謐湖泊。海拔極高且人煙罕至，常有雲霧籠罩，彷彿人間仙境。", advice: "在此享受森林靜謐。" },
             { lat: 25.099647, lng: 121.587372, time: "14:15", loc: "白石湖吊橋 (H230m)", dist: 7.50, ele: 230, pos: "文化", 
               desc: "紫色龍骨吊橋。由此回歸休閒農業區，不僅美觀更能感受當地地靈意象。", advice: "人潮眾多，請注意通行。" },
-            { lat: 25.096443, lng: 121.588504, time: "14:29", loc: "碧山巖清風亭 (H250m)", dist: 7.85, ele: 250, pos: "櫻紅", 
+            { lat: 25.096443, lng: 121.588504, time: "14:35", loc: "碧山巖清風亭 (H250m)", dist: 7.99, ele: 250, pos: "櫻紅",
               desc: "核心觀景點與 460 階櫻花隧道匯集處。提供無死角台北盆地視野，櫻花季美不勝收。", advice: "必看亮點，值得久留拍攝。" },
-            { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:35", loc: "碧山巖公車站", dist: 8.00, ele: 240, pos: "終點", 
+            { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:45", loc: "碧山巖公車站", dist: 8.25, ele: 240, pos: "終點",
               desc: "徒步行程終點。在此準備接駁回內湖市區。", advice: "清點裝備，候車回程。" },
-            { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", dist: 8.00, ele: 30, pos: "回程", 
+            { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", dist: 8.25, ele: 30, pos: "回程",
               desc: "搭乘公車回到出發點，完成環型全縱走挑戰。", advice: "行程圓滿完成。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
