@@ -184,13 +184,6 @@
   ],
   "open_items": [
     {
-      "id": "datunshan-distances-below-straight-line",
-      "due": null,
-      "blocking": false,
-      "desc": "datunshan 有 4 段步行里程短於直線距離（鞍部登山口→大屯山主峰 900/995、面天坪涼亭→面天山 400/460、面天山→面天坪石屋群 400/481、面天坪石屋群→二子坪 1500/1947），另有鞍部站→鞍部登山口 89 m 記為 0。航點直線總和扣掉公車段為 6.36 km，頁面總里程 7.90 km（曲折率僅 1.21），總數本身可能也偏低。無 GPX，需查實走資料重估，不得自行套倍率",
-      "source": "2026-08-03 全站里程健全性掃描"
-    },
-    {
       "id": "meihuashan-missing-advice",
       "due": null,
       "blocking": false,
@@ -230,6 +223,6 @@
     "source_citation": "候選／計畫頁的里程、海拔、營運時間若引自外部資料，於 #timeline 段落末尾以「參考資料」清單列出來源連結；實走後改以 GPS 軌跡為準",
     "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過",
     "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」",
-    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次"
+    "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-03 全站 14 頁皆通過"
   }
 }
