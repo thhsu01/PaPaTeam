@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-04 11:39",
+  "generated": "2026-08-04 14:41",
   "generated_tz": "UTC+8",
-  "commit": "56e9b0ea60b7e078782b72bda9b63e547c72f0df",
-  "file_count": 52,
+  "commit": "f18c7c82c055577315443b4bd53e8900039b4471",
+  "file_count": 53,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -20,8 +20,8 @@
     },
     {
       "path": ".github/workflows/spec.yml",
-      "size": 1967,
-      "sha": "4a107baf1fb2ce58d1626763c72c3f9ee979e1ad"
+      "size": 2385,
+      "sha": "dd929d5108edae20ccb4f7c6d458e2f0c353eee5"
     },
     {
       "path": ".gitignore",
@@ -30,13 +30,13 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 36876,
-      "sha": "cc08c35623019cabf3c2f81cf28c94671cc4fea0"
+      "size": 39409,
+      "sha": "433bf4992fb08cc46bad8ee6351b54519afe5f8e"
     },
     {
       "path": "CONTEXT.md",
-      "size": 3815,
-      "sha": "f96747999fb795252e2bac04f18cceceffa65e1a"
+      "size": 5503,
+      "sha": "bb818129fddb2597ec05ffbe48d38e78fe8b719a"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -65,8 +65,8 @@
     },
     {
       "path": "assets/detail.js",
-      "size": 18995,
-      "sha": "33e83e808d2ef882884521a9b19be3fca3eb8a98"
+      "size": 25184,
+      "sha": "98fa690828c188422255e0fa139b128340966107"
     },
     {
       "path": "assets/site.css",
@@ -140,28 +140,28 @@
     },
     {
       "path": "bishan.html",
-      "size": 37351,
-      "sha": "4a354ae99100956bfb5a6fedb6f56672121decf9"
+      "size": 36393,
+      "sha": "0d91af49cd90f975b0bcecf3ba19b7bd6b98acf7"
     },
     {
       "path": "caolingguidao.html",
-      "size": 32231,
-      "sha": "cbee882a3b9b0bd06ce5542e290a6a9ac1aaebd7"
+      "size": 31376,
+      "sha": "1709cd8060fd797dbcbe277f30f533df1c80d6c7"
     },
     {
       "path": "datongshan.html",
-      "size": 27415,
-      "sha": "53b9f9d9360a2c169cc0928aceda0830d4934069"
+      "size": 26222,
+      "sha": "b01279b8e5c569c5d156c9a59e031e6c04d92b48"
     },
     {
       "path": "datunshan.html",
-      "size": 30596,
-      "sha": "2d6d54567d8492aeb034fc805cb69d78423ee7ab"
+      "size": 29602,
+      "sha": "85eb53c82ac214136546f0a836a6a8ad157d6c1c"
     },
     {
       "path": "dinghu.html",
-      "size": 25851,
-      "sha": "722939aece45493a7d3f52c4564e6eae096ca5d7"
+      "size": 24805,
+      "sha": "42f3d4ea6d429d1a4f19122ef206fcbbe46ab1cb"
     },
     {
       "path": "docs/adr/0001-chartjs-behind-the-seam.md",
@@ -170,18 +170,18 @@
     },
     {
       "path": "henglingguidao.html",
-      "size": 33629,
-      "sha": "9125d947ac860d1d82bd37e97fe38c0391091e65"
+      "size": 32774,
+      "sha": "63b624b3f543c8495994710b0c85530e4f38f1d5"
     },
     {
       "path": "huoyianshan.html",
-      "size": 31187,
-      "sha": "5144eeb7c318134314dc0b7b75552bb7119b5c1c"
+      "size": 30052,
+      "sha": "2b39d04d46eeb31474602050c6dec00a52363579"
     },
     {
       "path": "hushan.html",
-      "size": 24999,
-      "sha": "fa02993a6c1241c87937ab1369a15ba77d755863"
+      "size": 24144,
+      "sha": "0465a16e2b12379c1165180b80592ec40df93504"
     },
     {
       "path": "index.html",
@@ -190,63 +190,63 @@
     },
     {
       "path": "jiantanshan.html",
-      "size": 27735,
-      "sha": "4b0c2ef7ea17773f9c3cbd5c0814b91036b32510"
+      "size": 26880,
+      "sha": "60396e2a5aae5de3bf3cceacf2f02957a69ddd68"
     },
     {
       "path": "jinmianshan.html",
-      "size": 30004,
-      "sha": "394495d9e66a003176a64f727fc5cbbdcbc9d8da"
+      "size": 29149,
+      "sha": "6366f3c53050ed89ec6cd7d57914fe2b9d3a4937"
     },
     {
       "path": "laojiujianshan.html",
-      "size": 29974,
-      "sha": "0962fce5b11a3093e9093f6389231693ff366c1e"
+      "size": 28612,
+      "sha": "695672ccbcf61d74540036dce8af3797a94aebbc"
     },
     {
       "path": "manifest.json",
-      "size": 20423,
-      "sha": "3df15828613d5c5c70c3bb1001180897cddbd3d0"
+      "size": 23162,
+      "sha": "2affcf97b68498ddfe73f9bb6ecefa513f60c9b3"
     },
     {
       "path": "meihuashan.html",
-      "size": 29986,
-      "sha": "7ade0bf7becdef2a2bcab3341197ed21655d2efa"
+      "size": 28559,
+      "sha": "77a773aef918b2b6a1495cf2eea17ba10f68363f"
     },
     {
       "path": "mochashan.html",
-      "size": 31580,
-      "sha": "978e79b0a69db78effe41639e5a4a80a519b4299"
+      "size": 30080,
+      "sha": "534ec28a8115c31800af6d65e368923721a504ff"
     },
     {
       "path": "nangangshan.html",
-      "size": 28829,
-      "sha": "f6283b1d9db8bbd6aa641f24fc626ef5c3cebe2e"
+      "size": 27944,
+      "sha": "a98403764874acefbf8ba1a52b7430a83cbd6cb0"
     },
     {
       "path": "nanshijiao.html",
-      "size": 42212,
-      "sha": "d2d8f7d7508fb81b7d4b93699ef77700760d08b3"
+      "size": 40744,
+      "sha": "7ef3f5544ea786b994acd0f5416d0852418e83c3"
     },
     {
       "path": "qixingshan.html",
-      "size": 24807,
-      "sha": "f40fb993f94ab0d434b63eda5b1fbac8cea8dba3"
+      "size": 23833,
+      "sha": "e636dcecbfd2e2e5f5d641d6b102cd57bc2e6b7b"
     },
     {
       "path": "shanying.html",
-      "size": 27765,
-      "sha": "ae5dd8536e759282045015c094c36746a97395fa"
+      "size": 26738,
+      "sha": "8fb93f0a4c0cdafb33814117edff059b0ab0aeed"
     },
     {
       "path": "shiqiulinling.html",
-      "size": 33180,
-      "sha": "90617f4bc1ae643f2c1f6c0e7da894914411434c"
+      "size": 32046,
+      "sha": "4b85a4ce9f694b6b063b7285ed924298b941fa44"
     },
     {
       "path": "tools/contrast/build-css.sh",
-      "size": 1306,
-      "sha": "24242401bfe358d5a5e0fe0bd9dd5ae7a2386275"
+      "size": 1538,
+      "sha": "ce5ca7b3e32c630c6a1c10a27f4a370df5fea6b3"
     },
     {
       "path": "tools/contrast/check.js",
@@ -260,13 +260,18 @@
     },
     {
       "path": "tools/contrast/tw.css",
-      "size": 38281,
-      "sha": "5da44e54ac99b6fb4c1671e2889d40f63f77f04d"
+      "size": 39094,
+      "sha": "03326256f52cdc84d7c11b7039d167e904277a68"
+    },
+    {
+      "path": "tools/fact_check.py",
+      "size": 6977,
+      "sha": "8e893113f05b4f25f3250629ae7eda8e2063a265"
     },
     {
       "path": "tools/spec_sweep.py",
-      "size": 8781,
-      "sha": "3536e340a34e0016dd3c7e7448b1dbee7352edc6"
+      "size": 11836,
+      "sha": "a9123022b2f3ba8a6d8d998554b2e0f62f8f231a"
     }
   ]
 }
