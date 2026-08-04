@@ -208,6 +208,17 @@ def check(f):
                    and 'xbaiyue' not in o:
                     p.append('%s 是台灣小百岳 #%d，卻沒有 xbaiyue 欄位' % (who, num))
 
+    # ── 無地名的停留點要自己講清楚 ──────────────────────────
+    # 這類航點的名字是描述詞不是地名（「第一休息點」「古圳休息點」），
+    # 不講明的話讀者會拿去查一個不存在的地方。慣例見 ARCHITECTURE.md。
+    for o in schedule_objects(s):
+        loc = re.search(r'loc:\s*"([^"]*)"', o)
+        pos = re.search(r'pos:\s*"([^"]*)"', o)
+        if loc and pos and pos.group(1) == '休息點' and loc.group(1).endswith('休息點'):
+            desc = re.search(r'desc:\s*"([^"]*)"', o)
+            if not desc or '沒有地名' not in desc.group(1):
+                p.append('%s 是沒有地名的停留點，desc 要寫明這件事' % loc.group(1))
+
     # ── overview 統計列必須看得到總里程 ─────────────────────
     if not re.search(r'(實走里程|總里程|里程 km)', s):
         p.append('overview 看不到總里程')

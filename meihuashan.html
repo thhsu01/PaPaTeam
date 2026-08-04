@@ -95,6 +95,13 @@
                     Mission Accomplished 任務完成
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">梅花山全系列縱走實錄</h1>
+                <div id="trip-past-notice" class="hidden mt-6 mb-2 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+                  <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+                  <div>
+                    <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+                    <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2026/1/10 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+                  </div>
+                </div>
                 <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     從聖人橋出發，經清心亭至梅花山主脊。本頁面已更新 1/10 實測紀錄與深度導覽內容。
                 </p>
@@ -102,7 +109,7 @@
 
             <!-- Meeting Block & Weather Record -->
             <div class="max-w-4xl mx-auto space-y-4">
-                <div class="info-glass p-6 rounded-3xl shadow-sm border accent-line grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                <div class="info-glass p-6 rounded-3xl shadow-sm border accent-line grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center md:text-left">
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合地點</span>
                         <span class="text-xl font-bold text-stone-800">聖人橋公車站 (H217m)</span>
@@ -119,6 +126,11 @@
                             <span class="text-xl font-bold text-stone-800">11-15 °C</span>
                             <span class="px-2 py-0.5 accent-soft accent-text text-[10px] font-bold rounded">晴</span>
                         </div>
+                    </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
+                        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest" id="weather-label">天氣預報</span>
+                        <span class="text-xl font-bold text-stone-800" id="weather-main">載入中...</span>
+                        <span class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</span>
                     </div>
                 </div>
                 
@@ -317,10 +329,16 @@
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
       const PAL = PaPaDetail.palette({ accent: ACCENT });
 
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2026-01-10";
+
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
+      tripDate: TRIP_DATE,
       nav: [25.124977555244143, 121.58770990640019],
+
+      weather: { lat: 25.125736, lng: 121.601721 },   // 梅花山主峰
 
       card: {
         follow: 'pan', wrap: 'cycle',
