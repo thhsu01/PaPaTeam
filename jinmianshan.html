@@ -112,9 +112,9 @@
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">起登點</div>
-            <div class="font-bold text-stone-800">環山路一段136巷口</div>
-            <div class="text-xs text-stone-600 mt-1">捷運西湖站步行約 15 分鐘</div>
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">金面山步道登山口</div>
+            <div class="text-xs text-stone-600 mt-1">環山路一段136巷底；捷運西湖站步行約 15 分鐘</div>
             <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>環山路一段（近起登點）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -128,8 +128,8 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至環山路一段136巷口">
-              🗺️ 導航至登山口
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至金面山步道登山口">
+              🗺️ 導航至集合地點
             </button>
           </div>
         </div>
@@ -309,11 +309,11 @@
     // GPS 動輒高估 27 m，這份不用扣。剪刀石本身仍採公開標高 258 m。
     const schedule = [
       { lat: 25.087282, lng: 121.567978, time: "08:23", loc: "環山路一段136巷口", dist: 0.00, ele: 30, pos: "起登點",
-        desc: "行程起點。GPS 於 08:23 開始記錄，自環山路一段轉入136巷。",
-        advice: "捷運西湖站步行約 15 分鐘。巷內有零星車位但很少，建議搭捷運。步道上沒有商店與水源，水在此備足。" },
+        desc: "GPS 於 08:23 開始記錄，自環山路一段轉入136巷。這是軌跡的起錄點，不是集合點——當天約在 136 巷底的登山口會合。",
+        advice: "捷運西湖站步行約 15 分鐘，巷口就在環山路上，很好找。巷內有零星車位但很少，建議搭捷運。步道上沒有商店與水源，水在此備足。" },
 
-      { lat: 25.088277, lng: 121.568176, time: "08:25", loc: "金面山步道登山口", dist: 0.14, ele: 35, pos: "入山口",
-        desc: "累計 0.14 km。沿136巷走到底即是登山口。08:25–08:32 在此整裝 7 分鐘。",
+      { lat: 25.088277, lng: 121.568176, time: "08:25", loc: "金面山步道登山口", dist: 0.14, ele: 35, pos: "集合地點",
+        desc: "當天的集合地點，沿136巷走到底即是。累計 0.14 km。08:25–08:32 在此等齊整裝 7 分鐘，08:32 全隊起登。",
         advice: "從這裡開始就是石階，一路陡上到大岩壁。手套建議在此戴上——上面要用到繩索，戴著爬比中途停下來戴省事。" },
 
       { lat: 25.091139, lng: 121.570399, time: "08:58", loc: "金面山大岩壁", dist: 0.76, ele: 150, pos: "岩壁",
@@ -345,7 +345,7 @@
     const STONE  = '#a09080';   // 一般航點
 
     const POS_EMOJI = {
-      "起登點":"🚇", "入山口":"🚪", "岩壁":"🧗", "最高點":"✂️", "涼亭":"⛱️", "終點":"🏁"
+      "起登點":"🚇", "集合地點":"🚩", "岩壁":"🧗", "最高點":"✂️", "涼亭":"⛱️", "終點":"🏁"
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
@@ -356,7 +356,7 @@
     PaPaDetail.init({
       schedule,
       tripDate: TRIP_DATE,
-      nav: [25.087282, 121.567978],
+      nav: [25.088277, 121.568176],   // 集合地點：136 巷底的登山口，不是軌跡起錄的巷口
 
       card: { follow: 'popup', wrap: 'clamp' },
 

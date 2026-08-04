@@ -110,9 +110,9 @@
         <!-- Info cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="stat-card rounded-2xl p-4 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">起登點</div>
-            <div class="font-bold text-stone-800">遠望坑口</div>
-            <div class="text-xs text-stone-600 mt-1">新北貢寮，福隆車站可接駁</div>
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">福隆火車站</div>
+            <div class="text-xs text-stone-600 mt-1">再搭接駁車至遠望坑口起登</div>
             <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>大里火車站（宜蘭頭城）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -126,8 +126,8 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至遠望坑口">
-              🗺️ 導航至遠望坑口
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至福隆火車站">
+              🗺️ 導航至集合地點
             </button>
           </div>
         </div>
@@ -151,7 +151,7 @@
             <div class="text-xs text-stone-600">最高點 m（埡口觀景亭）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">海拔經過漂移修正，見下方說明。這是一趟單向越嶺——起點遠望坑口在新北貢寮，終點大里火車站在宜蘭頭城，兩地直線相距 4.6 公里，不是環狀。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">海拔經過漂移修正，見下方說明。7.88 km 只算遠望坑口起登之後的腳程，福隆到遠望坑口那段接駁不計。這是一趟單向越嶺——起點遠望坑口在新北貢寮，終點大里火車站在宜蘭頭城，兩地直線相距 4.6 公里，不是環狀。</p>
       </div>
     </section>
 
@@ -167,18 +167,18 @@
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
         <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">起登點</div>
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合地點</div>
           <div class="flex items-center gap-3 mb-3">
             <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
-            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">遠望坑口</h3>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">福隆火車站</h3>
             <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
           </div>
           <div class="flex gap-4 mb-3 text-sm text-stone-600">
-            <span>實際時間 <strong class="text-stone-800" id="wp-time">09:44</strong></span>
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">—</strong></span>
             <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
-            <span>海拔 <strong class="text-stone-800" id="wp-ele">30</strong> m</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">10</strong> m</span>
           </div>
-          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點。</p>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">當天的集合地點。</p>
           <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
             <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
             <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
@@ -321,9 +321,13 @@
     //
     // 這是單向越嶺，起訖不同縣市（新北貢寮 → 宜蘭頭城），直線相距 4.6 km。
     const schedule = [
+      { lat: 25.015944, lng: 121.944861, time: "—", loc: "福隆火車站", dist: 0.00, ele: 10, pos: "集合地點",
+        desc: "當天的集合地點，接著搭接駁車前往遠望坑口。這一段是坐車，不計入 7.88 km；GPS 到了遠望坑口才起錄，所以沒有集合與車程的時刻。標高 10 公尺是海濱車站的概略值，不是當天量測。",
+        advice: "古道上沒有商店，水和行動糧在這裡買齊——出了福隆就沒得補給了。11/23 在芒花季期間且逢週六，福隆遊客中心有「芒花專車」開往遠望坑口，08:30–13:30 約每半點一班、車程 5–7 分。非活動期間可改搭 791、F823 到遠望坑口站。" },
+
       { lat: 25.011194, lng: 121.925444, time: "09:44", loc: "遠望坑口", dist: 0.00, ele: 30, pos: "起登點",
-        desc: "行程起點。GPS 於 09:44 開始記錄，自遠望坑溪谷的產業道路起步。",
-        advice: "古道上沒有商店，水和行動糧要在福隆車站買齊。單向越嶺記得先查大里站的班次——宜蘭線招呼站班次疏，錯過一班要等很久。" },
+        desc: "接駁車下車處，全程的起登點。GPS 於 09:44 開始記錄，自遠望坑溪谷的產業道路起步。",
+        advice: "下車後距離真正的古道登山口還有 1.2 km 產業道路要走，別以為到了就開始爬。單向越嶺記得先查大里站的班次——宜蘭線招呼站班次疏，錯過一班要等很久。" },
 
       { lat: 25.004489, lng: 121.927760, time: "10:02", loc: "草嶺古道登山口", dist: 1.20, ele: 55, pos: "入山口",
         desc: "累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。",
@@ -366,7 +370,7 @@
     const STONE  = '#a09080';   // 一般航點
 
     const POS_EMOJI = {
-      "起登點":"🚉", "入山口":"🚪", "步道口":"🪜", "古蹟":"🏛️", "最高點":"🌾", "休憩點":"⛱️", "信仰地標":"⛩️", "終點":"🏁"
+      "集合地點":"🚩", "起登點":"🚉", "入山口":"🚪", "步道口":"🪜", "古蹟":"🏛️", "最高點":"🌾", "休憩點":"⛱️", "信仰地標":"⛩️", "終點":"🏁"
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
@@ -377,14 +381,15 @@
     PaPaDetail.init({
       schedule,
       tripDate: TRIP_DATE,
-      nav: [25.011194, 121.925444],
+      nav: [25.015944, 121.944861],   // 集合地點：福隆車站。遠望坑口要搭接駁，不是自己開過去的
 
       card: { follow: 'popup', wrap: 'clamp' },
 
       weather: { lat: 24.9800, lng: 121.9260 },   // 埡口一帶
 
       map: {
-        setView: [[24.9905, 121.9265], 14],
+        // 視野要含到福隆車站（集合地點，在軌跡起點東北 1.9 km），所以退到 z13
+        setView: [[24.9928, 121.9348], 13],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。幾處訊號中斷的區間為直線連接。
         track: { points: PaPaTracks['caolingguidao-2024-11-23'], weight: 4, opacity: 0.85 },
