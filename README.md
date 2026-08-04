@@ -64,13 +64,17 @@ npx http-server
 PaPaTeam/
 ├── index.html                  # 主首頁：計畫／候選／歷史三區
 │
-│   已完成（十二頁附實走 GPS 軌跡）
+│   已完成（十六頁附實走 GPS 軌跡）
 ├── nanshijiao.html             # 微笑山線 × 南勢角山 × 一線天（2026-08-02）
 ├── dinghu.html                 # 猴崁水圳 × 青楓步道 × 頂湖O型（2026-06-20）
 ├── laojiujianshan.html         # 內溝山系 O 型全系列縱走（2026-05-01）
 ├── mochashan.html              # 聖母步道：抹茶山（2026-03-14）
 ├── meihuashan.html             # 梅花山全系列挑戰縱走（2026-01-10）
 ├── huoyianshan.html            # 火炎山、北鞍古道 O 走（2025-12-13）
+├── daluntouweishan.html        # 大崙頭尾山親山步道（2025-09-29）
+├── eweishan.html               # 鵝尾山 × 簡厝支線（2025-08-30）
+├── daqitou.html                # 大崎頭 × 鵝尾山 × 坪頂古圳（2025-06-15）
+├── zhongzhengshan.html         # 中正山親山步道（2025-04-27）
 ├── henglingguidao.html         # 橫嶺古道 × 紗帽山 環狀（2025-03-23）
 ├── caolingguidao.html          # 草嶺古道芒花季．單向越嶺（2024-11-23）
 ├── jinmianshan.html            # 金面山親山步道 × 剪刀石（2024-10-06）
@@ -88,8 +92,8 @@ PaPaTeam/
 ├── assets/
 │   ├── site.css                # 全站共用樣式：skip link、鍵盤焦點、reduced-motion
 │   ├── site.js                 # 全站共用腳本：天氣代碼對照表（PaPaWeather）
-│   ├── detail.css              # 十八個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
-│   ├── detail.js               # 十八個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
+│   ├── detail.css              # 二十二個詳情頁共用樣式：圖表、地圖、航點卡、時間軸
+│   ├── detail.js               # 二十二個詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸
 │   └── tracks/                 # 已完成行程的實走 GPS 軌跡（簡化後的座標陣列）
 │       ├── nanshijiao-2026-08-02.js
 │       ├── dinghu-2026-06-20.js
@@ -97,6 +101,10 @@ PaPaTeam/
 │       ├── mochashan-2026-03-14.js
 │       ├── meihuashan-2026-01-10.js
 │       ├── huoyianshan-2025-12-13.js
+│       ├── daluntouweishan-2025-09-29.js
+│       ├── eweishan-2025-08-30.js
+│       ├── daqitou-2025-06-15.js
+│       ├── zhongzhengshan-2025-04-27.js
 │       ├── henglingguidao-2025-03-23.js
 │       ├── caolingguidao-2024-11-23.js
 │       ├── jinmianshan-2024-10-06.js
@@ -106,8 +114,9 @@ PaPaTeam/
 │
 ├── tools/
 │   ├── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
+│   ├── fact_check.py           # 事實一致性：同一個日期／里程在頁內各處是否相符
 │   └── contrast/               # 對比度實測（改顏色後跑；需 Playwright）
-│       ├── check.js            #   量測器，檔頭記了五個量測坑
+│       ├── check.js            #   量測器，檔頭記了四個量測坑
 │       ├── build-css.sh        #   重建 tw.css（改完 HTML 要跑）
 │       ├── stubs.js            #   Leaflet／Chart.js 最小樁件
 │       └── tw.css              #   本地建置的 Tailwind（建置產物）
@@ -115,6 +124,8 @@ PaPaTeam/
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
 ├── .github/workflows/
+│   ├── spec.yml                # push 與 PR 跑 spec_sweep.py 與 fact_check.py
+│   ├── contrast.yml            # 動到 HTML／CSS 的 PR 跑對比度實測
 │   └── integrity.yml           # push 到 main 後重算 integrity.json
 │
 ├── .gitignore                  # 編輯器、系統檔、node_modules
@@ -148,7 +159,7 @@ node tools/contrast/check.js --all
 忘了重建也不會靜靜量錯——`check.js` 會比對頁面用到的 utility，缺了就中止並提示。
 動到 HTML 或 CSS 的 PR，CI 也會跑一次（`.github/workflows/contrast.yml`）。
 
-十八個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
+二十二個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
 它規定了詳情頁只能有五個段落、id 與順序固定，以及色彩一律走 `--accent` token。
 
