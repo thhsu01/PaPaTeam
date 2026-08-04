@@ -248,6 +248,20 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 **海拔圖**：`<canvas id="elevation-chart">`（不是 `elevationChart`），
 外層 `.chart-container`，並帶 `role="img"` 與 `aria-label`。
 
+**航點配色**：地圖標記、圖表資料點、時間軸圓點三處是同一個決定，走
+`PaPaDetail.palette({ accent, isPeak })` 取得，不要各寫一份。
+
+```javascript
+const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點" });
+// PAL.color(wp, i, n)  起訖點→主色、最高點→#7c9e52、其餘→#a09080
+// PAL.radius(wp, i, n) 起訖點 9、最高點 8、其餘 6
+```
+
+各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
+2026-08-04 導入的原因是這個決定寫三份就會漂：`caolingguidao` 加了集合地點之後只更新
+地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。目前 6 頁已改用，
+其餘 12 頁的判斷各有差異（依海拔、依多個 `pos`、依索引），尚未收斂。
+
 **時間軸**：`<div id="timeline-container">` 內含一個 `.timeline-line`，其餘由 JS 生成。
 渲染前不要清空容器——那會連同直線一起清掉。meihuashan 先前就是這樣，
 當時是唯一一頁沒有時間軸直線的（已修正）。

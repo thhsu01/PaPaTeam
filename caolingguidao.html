@@ -368,8 +368,10 @@
     // 所以要先從 :root 取出實際值。
     const ACCENT = getComputedStyle(document.documentElement)
                      .getPropertyValue('--accent').trim();
-    const PEAK   = '#7c9e52';   // 最高點
-    const STONE  = '#a09080';   // 一般航點
+
+    // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色與「哪個 pos 算山頂」；
+    // 地圖標記、圖表資料點、時間軸圓點三處共用它，不會再各寫一份而漂掉。
+    const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點" });
 
     const POS_EMOJI = {
       "集合地點":"🚩", "起登點":"🚉", "入山口":"🚪", "步道口":"🪜", "古蹟":"🏛️", "最高點":"🌾", "休憩點":"⛱️", "信仰地標":"⛩️", "終點":"🏁"
@@ -396,15 +398,10 @@
         // 實走軌跡（assets/tracks/）。幾處訊號中斷的區間為直線連接。
         track: { points: PaPaTracks['caolingguidao-2024-11-23'], weight: 4, opacity: 0.85 },
         popup: true,
-        marker: (wp, i, n) => {
-          const isStartEnd = i === 0 || i === n - 1;
-          const isPeak     = wp.pos === "最高點";
-          return {
-            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
-            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
-            opacity: 1, fillOpacity: 0.92
-          };
-        }
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.92
+        })
       },
 
       chart: {
@@ -414,9 +411,7 @@
         dataset: {
           borderWidth: 2.5,
           pointRadius: 5,
-          pointBackgroundColor: schedule.map(wp =>
-            wp.pos === "最高點" ? PEAK :
-            wp.pos === "起登點" || wp.pos === "終點" ? ACCENT : STONE)
+          pointBackgroundColor: schedule.map((wp, i) => PAL.color(wp, i, schedule.length))
         },
         options: {
           plugins: {
@@ -438,9 +433,7 @@
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
         item: (wp, i, n) => {
           const emoji = POS_EMOJI[wp.pos] || '📍';
-          const isPeak = wp.pos === "最高點";
-          const isStart = i === 0 || i === n - 1;
-          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          const dot = PAL.color(wp, i, n);
           return `
             <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
                  style="background:${dot};"></div>

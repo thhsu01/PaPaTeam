@@ -97,12 +97,19 @@ def check(f):
         p.append('slate class')
 
     # ── 語意色：最高點一律 #7c9e52 ─────────────────────────
-    for m in re.finditer(r'最高點"?\s*\?\s*([^\s:,]+)', s):
-        v = m.group(1).strip("'\"")
-        if v.startswith('#') and v.lower() != PEAK:
-            p.append('最高點語意色 %s，應為 %s' % (v, PEAK))
-        if v.startswith('bg-') and 'peak' not in v:
-            p.append('最高點用了 %s，應為山頂綠' % v)
+    # 用 PaPaDetail.palette() 的頁面，顏色來自 detail.js 的預設（由 check_shared()
+    # 把關），此處只查有沒有覆寫成別的顏色；沒用 palette() 的頁面才逐處查三元運算。
+    for m in re.finditer(r'palette\(\{([^}]*)\}', s):
+        ov = re.search(r'peak:\s*[\'"]?(#[0-9a-fA-F]{6})', m.group(1))
+        if ov and ov.group(1).lower() != PEAK:
+            p.append('palette() 把最高點覆寫成 %s，應為 %s' % (ov.group(1), PEAK))
+    if 'PaPaDetail.palette(' not in s:
+        for m in re.finditer(r'最高點"?\s*\?\s*([^\s:,]+)', s):
+            v = m.group(1).strip("'\"")
+            if v.startswith('#') and v.lower() != PEAK:
+                p.append('最高點語意色 %s，應為 %s' % (v, PEAK))
+            if v.startswith('bg-') and 'peak' not in v:
+                p.append('最高點用了 %s，應為山頂綠' % v)
 
     # ── overview 統計列必須看得到總里程 ─────────────────────
     if not re.search(r'(實走里程|總里程|里程 km)', s):
@@ -128,8 +135,26 @@ def check(f):
     return len(wps), p
 
 
+def check_shared():
+    """共用檔本身的把關。最高點的顏色自 2026-08-04 起收在 detail.js 的 palette()
+    預設值裡，這裡是它唯一的來源，所以要有人看著。"""
+    p = []
+    js = open('assets/detail.js', encoding='utf-8').read()
+    m = re.search(r"function palette\(opt\)[\s\S]{0,400}?peak\s*=\s*opt\.peak\s*\|\|\s*'(#[0-9a-fA-F]{6})'", js)
+    if not m:
+        p.append('detail.js 找不到 palette() 的山頂綠預設值')
+    elif m.group(1).lower() != PEAK:
+        p.append('detail.js 的 palette() 山頂綠是 %s，應為 %s' % (m.group(1), PEAK))
+    if 'hideEmptyAdvice' in js:
+        p.append('detail.js 又出現 hideEmptyAdvice：advice 現為必填，空的建議框該看得見')
+    return p
+
+
 def main():
     bad = 0
+    shared = check_shared()
+    print('%-16s %s' % ('assets/detail.js', 'OK' if not shared else ' / '.join(shared)))
+    bad += bool(shared)
     for f in sorted(glob.glob('*.html')):
         if f == 'index.html':
             continue        # 首頁自成一套視覺系統，見 manifest.conventions.greyscale

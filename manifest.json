@@ -221,11 +221,19 @@
     },
     {
       "path": "tools/contrast/tw.css",
-      "purpose": "本地建置的 Tailwind CSS，供對比度量測使用。改完 HTML 若新增了未曾用過的 utility class，要重建這支檔案，否則量到的是缺樣式的假版面（見 READABILITY_AUDIT.md 量測坑第二點）"
+      "purpose": "本地建置的 Tailwind CSS，供對比度量測使用（站上是走 CDN，量測環境連不到）。**改完 HTML 要跑 bash tools/contrast/build-css.sh 重建**——它是掃 HTML 產生的，新用到的 utility 沒重建就不存在，量測會拿到缺樣式的假版面。check.js 每次會比對，缺了就中止並要你重建，不會再無聲量錯"
     },
     {
       "path": ".github/workflows/spec.yml",
       "purpose": "push 與 PR 時跑 tools/spec_sweep.py，不過就讓 CI 紅字。2026-08-04 加上——規格表寫了卻沒有檢查就會漂移，這個 workflow 讓沒有人需要「記得」去跑它"
+    },
+    {
+      "path": "tools/contrast/build-css.sh",
+      "purpose": "重建 tw.css（npx tailwindcss@3 掃 ./*.html）。版本跟著站上的 cdn.tailwindcss.com 走，目前 v3。已驗證在乾淨環境可重現同一份輸出"
+    },
+    {
+      "path": ".github/workflows/contrast.yml",
+      "purpose": "PR 動到 HTML 或 CSS 時跑全站對比度實測。會先重建 tw.css 再量，所以 CI 用的一定是新的；與 spec.yml 分開是因為要裝 Playwright，不該拖慢每次 push"
     }
   ],
   "docs": [
@@ -281,6 +289,7 @@
     "elevation_gain": "累計上升不可直接加總軌跡的正增量。停留時 GPS 高程會原地抖動，每次抖動都被算成爬升——henglingguidao 原始加總 848 m，但全程只爬 293 m 到山頂，兩倍以上顯然是假的。作法是先對高程序列取移動中位數壓掉抖動再累加，並用不同視窗（15/31/61 點）確認收斂，另以各航點高程直接相加交叉核對；四個數字落在同一區間才採用",
     "accent_tokens_note": "只有這兩個是每頁必備：--accent 供裝飾（色條、圓點、地圖軌跡、圖表線），--accent-strong 供淺底上的文字。其餘依該頁需要自行擴充，命名一律 --accent-<用途>，常見的有 -strong-deep（淡底卡片內文，再深一階）、-tint（淡底）、-border／-border-deep（框線）、-light／-soft／-fill（更淺的裝飾）、-on-dark（深底上的文字）。全站目前共 16 種變體，刻意不統一成一份清單——各頁版面繁簡不同，硬湊會逼出用不到的 token",
     "semantic_colors": "跨頁共用、不屬於任何單頁識別色的語意色：紅 #ef4444 = 警示地形、綠 #7c9e52 = 最高點、藍 = 外部連結、琥珀 amber-50/400/800 = 注意事項面板、翡翠 emerald-700 = 站徽與官方來源連結。**這些跨頁必須一致**——2026-08-04 發現 datongshan／laojiujianshan／mochashan／shiqiulinling／huoyianshan 五頁各自把最高點畫成琥珀、深綠、橘、紅，還在自己的註解裡稱之為「語意色」，等於五種互相矛盾的語意。已全數收斂到 #7c9e52",
-    "verification": "改完頁面跑兩件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099；因為要 Playwright 與本地 Tailwind，沒有進 CI，改顏色時手動跑）。兩支都是全過回傳 0。對比度量測器有五個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md"
+    "verification": "改完頁面跑兩件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099；因為要 Playwright 與本地 Tailwind，沒有進 CI，改顏色時手動跑）。兩支都是全過回傳 0。對比度量測器有五個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
+    "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。目前 6 頁已改用：henglingguidao、caolingguidao、jiantanshan、jinmianshan、hushan、nangangshan；其餘 12 頁的判斷邏輯各有差異（依海拔、依多個 pos、依索引），尚未收斂"
   }
 }

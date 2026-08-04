@@ -276,8 +276,29 @@ window.PaPaDetail = (function () {
     }
   }
 
+  // ── 航點配色 ──────────────────────────────────────────────
+  // 「這個航點該是什麼顏色」原本在每頁寫三次：地圖標記、圖表資料點、時間軸圓點。
+  // 寫三次就會漂——2026-08-04 發現 caolingguidao 加了「集合地點」之後只更新了
+  // 地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。
+  //
+  // 這裡只收「規則」，顏色與判準仍由各頁給：哪個 pos 算山頂各頁不同
+  // （最高點／觀機平台／瞭望台），端點預設看索引但也可覆寫。
+  function palette(opt) {
+    var peak   = opt.peak  || '#7c9e52';   // 全站語意色：山頂（見 manifest 的 semantic_colors）
+    var stone  = opt.stone || '#a09080';   // 一般航點
+    var accent = opt.accent;               // 本頁主色，用於起訖點
+    var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
+    var isEnd  = opt.isEnd  || function (wp, i, n) { return i === 0 || i === n - 1; };
+    return {
+      peak: peak, stone: stone, accent: accent, isPeak: isPeak, isEnd: isEnd,
+      color:  function (wp, i, n) { return isPeak(wp) ? peak : isEnd(wp, i, n) ? accent : stone; },
+      radius: function (wp, i, n) { return isEnd(wp, i, n) ? 9 : isPeak(wp) ? 8 : 6; }
+    };
+  }
+
   // ── 對外介面 ──────────────────────────────────────────────
   return {
+    palette: palette,
     init: function (options) {
       cfg = options;
 

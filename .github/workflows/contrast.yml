@@ -1,0 +1,78 @@
+# 對比度實測（WCAG 2.1 AA）。跟 spec.yml 分開的三個理由：
+#   1. 它要 Playwright 與 Chromium，安裝就要一分多鐘，不該拖慢每次 push 的規格檢查。
+#   2. 它只在顏色可能變動時才有意義，所以只在動到 HTML 或 CSS 的 PR 上跑。
+#   3. 它會先重建 tw.css。那份 CSS 是掃 HTML 產生的，用倉庫裡那份舊的就會量到
+#      缺樣式的假版面——2026-08-04 就是這樣讓兩頁的 hero 漸層一直量錯底色。
+#      在 CI 現建，等於每次都是新的。
+
+name: 對比度檢查
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - 'assets/**.css'
+      - 'tools/contrast/**'
+      - '.github/workflows/contrast.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出程式碼
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 重建 tw.css
+        run: bash tools/contrast/build-css.sh
+
+      # tw.css 是建置產物。CI 現建的版本若與倉庫裡那份不同，代表有人改了 HTML
+      # 卻沒重建——本機再跑量測就會量錯。這裡只提醒，不擋（真正的把關是下一步：
+      # check.js 會逐一比對頁面用到的 utility，缺了就直接中止）。
+      - name: 提醒倉庫裡的 tw.css 已過期
+        run: |
+          if ! git diff --quiet -- tools/contrast/tw.css; then
+            echo "::notice::倉庫裡的 tools/contrast/tw.css 與現建的不同，請跑 bash tools/contrast/build-css.sh 後一併提交"
+          fi
+
+      - name: 安裝 Playwright
+        run: |
+          npm install --no-save playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: 起本機伺服器
+        run: |
+          python3 -m http.server 8099 &
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:8099/index.html >/dev/null && break
+            sleep 0.5
+          done
+
+      - name: 全站對比度實測
+        run: node tools/contrast/check.js --all
+
+      - name: 失敗時附上判讀說明
+        if: failure()
+        run: |
+          {
+            echo "### 對比度未達 WCAG 2.1 AA"
+            echo ""
+            echo "門檻：一般文字 4.5:1；大字（≥24px，或 ≥18.66px 且 ≥700 字重）3:1。"
+            echo ""
+            echo "本機重現："
+            echo '```'
+            echo "bash tools/contrast/build-css.sh"
+            echo "python3 -m http.server 8099 &"
+            echo "node tools/contrast/check.js --all"
+            echo '```'
+            echo ""
+            echo "改顏色前先讀 \`READABILITY_AUDIT.md\`——那裡記了五個會產生假訊號的量測坑，"
+            echo "以及各頁主色當初是怎麼選出來的。"
+          } >> "$GITHUB_STEP_SUMMARY"

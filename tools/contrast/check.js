@@ -80,6 +80,42 @@ async function checkPage(browser, name) {
     throw new Error(`${name}：Tailwind 未生效，中止（見本檔開頭第 3 點）`);
   }
 
+  // 坑 3 的隱蔽版本：Tailwind「載到了但過期」。tw.css 是掃 HTML 產生的，新頁面或
+  // 新用到的 utility 沒重建就不存在，於是只有那幾個 class 靜靜地沒有樣式。
+  // 2026-08-04 發現 tw.css 缺 from-blue-50 / from-lime-50，兩頁的 hero 漸層
+  // 一直在錯的底色上量。→ 逐一問瀏覽器：這個 class 到底有沒有產生任何宣告。
+  const stale = await p.evaluate(() => {
+    const used = new Set();
+    document.querySelectorAll('[class]').forEach(el => el.classList.forEach(c => used.add(c)));
+    // 只查 Tailwind 產的色彩／版面 utility；本頁自訂的 class（accent-*、section-bar-* 等）
+    // 定義在頁內或 detail.css，不歸 tw.css 管。
+    const TW = /^(bg|text|border|from|via|to|ring|shadow|fill|stroke|divide|placeholder|decoration|outline|accent)-(inherit|current|transparent|black|white|slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}$/;
+    // 不能比對「套上 class 前後的算繪結果」：頁面常把 --page-fg 設成跟某個 utility
+    // 同一個顏色（bishan 的 --page-fg 就是 stone-700），探針繼承後套 text-stone-700
+    // 什麼都不會變，於是把存在的規則誤判為缺漏。
+    // 改成直接問樣式表裡到底有沒有這條規則，沒有模稜兩可的空間。
+    const defined = new Set();
+    for (const sheet of document.styleSheets) {
+      let rules;
+      try { rules = sheet.cssRules; } catch { continue; }   // 跨來源的讀不到，略過
+      const walk = rs => {
+        for (const r of rs) {
+          if (r.selectorText)
+            for (const m of r.selectorText.matchAll(/\.((?:[\w-]|\\.)+)/g))
+              defined.add(m[1].replace(/\\/g, ''));
+          if (r.cssRules) walk(r.cssRules);                 // @media 之類的巢狀
+        }
+      };
+      walk(rules);
+    }
+    return [...used].filter(c => TW.test(c) && !defined.has(c)).sort();
+  });
+  if (stale.length) {
+    await ctx.close();
+    throw new Error(`${name}：tw.css 缺 ${stale.length} 個 utility（${stale.slice(0, 5).join(', ')}${stale.length > 5 ? '…' : ''}）` +
+                    `，量到的底色會是錯的。請先跑 bash tools/contrast/build-css.sh`);
+  }
+
   const cands = await p.evaluate(() => {
     const parse = s => (s.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
     const out = [];

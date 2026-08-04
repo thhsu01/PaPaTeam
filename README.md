@@ -108,8 +108,9 @@ PaPaTeam/
 │   ├── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
 │   └── contrast/               # 對比度實測（改顏色後跑；需 Playwright）
 │       ├── check.js            #   量測器，檔頭記了五個量測坑
+│       ├── build-css.sh        #   重建 tw.css（改完 HTML 要跑）
 │       ├── stubs.js            #   Leaflet／Chart.js 最小樁件
-│       └── tw.css              #   本地建置的 Tailwind
+│       └── tw.css              #   本地建置的 Tailwind（建置產物）
 │
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
@@ -139,9 +140,13 @@ python3 tools/spec_sweep.py
 改到顏色時另外跑對比度實測（需 Playwright，不在 CI 內）：
 
 ```bash
+bash tools/contrast/build-css.sh      # tw.css 是掃 HTML 產生的，改完頁面要重建
 python3 -m http.server 8099 &
 node tools/contrast/check.js --all
 ```
+
+忘了重建也不會靜靜量錯——`check.js` 會比對頁面用到的 utility，缺了就中止並提示。
+動到 HTML 或 CSS 的 PR，CI 也會跑一次（`.github/workflows/contrast.yml`）。
 
 十八個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
