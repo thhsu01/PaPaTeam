@@ -46,7 +46,7 @@ window.PaPaDetail = (function () {
 
     setText('wp-pos-label', wp.pos);
     setText('wp-title', wp.loc);
-    setText('wp-time', wp[card.timeField || 'time']);
+    setText('wp-time', wp.time);
     setText('wp-ele', wp.ele);
     if (wp.dist != null) setText('wp-dist', wp.dist.toFixed(2));
     setText('wp-desc', wp.desc);
@@ -119,7 +119,7 @@ window.PaPaDetail = (function () {
       style.weight = style.weight == null ? 2 : style.weight;
       var mk = L.circleMarker([wp.lat, wp.lng], style).addTo(map);
       if (m.popup) {
-        mk.bindPopup('<strong>' + wp.loc + '</strong><br>⏱ ' + wp[(cfg.card || {}).timeField || 'time'] +
+        mk.bindPopup('<strong>' + wp.loc + '</strong><br>⏱ ' + wp.time +
                      (wp.dist != null ? '<br>📏 ' + wp.dist + ' km' : '') + '<br>⛰ ' + wp.ele + ' m');
       }
       mk.on('click', function () { updateWaypointCard(i); });
