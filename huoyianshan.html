@@ -367,7 +367,9 @@
     // 里程欄；建議框的 markup 與 advice 內容也已於 2026-08-03 補齊
     // （此前是全站唯一沒有 wp-advice 的一頁，是規格上的缺口）。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT });
+      const PAL = PaPaDetail.palette({ accent: ACCENT,
+        // 大峽谷是全站語意色「警示地形」的紅：崩塌地形，不是普通景點
+        extra: { "深度導覽區": "#ef4444" } });
 
     PaPaDetail.init({
       schedule,
@@ -406,25 +408,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationFloor: 150, palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-10 group cursor-pointer pl-8',
-        item: (wp) => {
-          const dot = wp.loc === "火炎山大峽谷" ? 'bg-red-600 animate-pulse'
-                    : wp.pos.includes("點") ? 'accent-mark' : 'bg-stone-400';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">
-              <div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div>
-            </div>
-            <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all">
-              <div class="flex flex-wrap justify-between items-center mb-2">
-                <span class="text-xl font-black text-stone-800">${wp.time}</span>
-                <span class="text-[10px] font-black accent-text accent-tint px-2 py-0.5 rounded uppercase">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
-              <div class="text-[11px] text-stone-600 font-bold">累計 ${wp.dist.toFixed(2)} km · 海拔 ${wp.ele} m</div>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }
     });
     </script>
 </body>

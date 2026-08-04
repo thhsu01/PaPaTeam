@@ -345,26 +345,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationFloor: 200, palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-10 group cursor-pointer pl-8',
-        item: (wp) => {
-          const dot = wp.pos.includes("集合") ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-            <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">
-              <div class="flex flex-wrap justify-between items-center mb-2">
-                <span class="text-xl font-black text-stone-800">${wp.time}</span>
-                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
-              <div class="flex gap-4 text-[11px] text-stone-600 font-bold">
-                <span>累計里程: ${wp.dist.toFixed(2)} km</span>
-                <span>海拔: ${wp.ele} m</span>
-              </div>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }
     });
     </script>
 </body>

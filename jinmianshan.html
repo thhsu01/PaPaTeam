@@ -387,23 +387,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
       chart: { elevationMax: 300, palette: PAL },
 
-      timeline: {
-        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
-        item: (wp, i, n) => {
-          const emoji = POS_EMOJI[wp.pos] || '📍';
-          const dot = PAL.color(wp, i, n);
-          return `
-            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
-                 style="background:${dot};"></div>
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
-              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
-            </div>
-            <div class="font-bold text-stone-800">${wp.loc}</div>
-            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
-          `;
-        }
-      }
+      timeline: { emoji: POS_EMOJI, palette: PAL }
     });
   </script>
 </body>

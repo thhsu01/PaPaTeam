@@ -10,6 +10,9 @@
 #
 # check.js 會在每次量測前比對，缺 utility 就直接中止並要你跑這支——不會再無聲量錯。
 #
+# 掃描範圍含 assets/*.js：時間軸與航點卡的 class 是由 detail.js 在執行時產生的，
+# 只掃 HTML 會漏掉它們。站上走 CDN 的 JIT 會觀察 DOM 變動所以沒事，本地建置不會。
+#
 # 用法：bash tools/contrast/build-css.sh
 set -euo pipefail
 
@@ -20,7 +23,7 @@ OUT="tools/contrast/tw.css"
 # 不然量測用的 utility 語意會與實際頁面不同。
 npx --yes tailwindcss@3 \
   --input <(printf '@tailwind base;\n@tailwind components;\n@tailwind utilities;\n') \
-  --content './*.html' \
+  --content './*.html,./assets/*.js' \
   --minify \
   --output "$OUT"
 

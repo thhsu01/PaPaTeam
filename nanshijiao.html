@@ -467,7 +467,8 @@
     // ── 本頁設定 ──────────────────────────────────────────────
     // 地圖、圖表、航點卡、天氣的機制都在 assets/detail.js，此處只描述差異。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT, extra: { "歷史廟宇": "#8060b0", "信仰地標": "#8060b0", "天然岩洞": "#8060b0" } });
+      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點" || wp.pos === "小百岳 #16",
+        extra: { "歷史廟宇": "#8060b0", "信仰地標": "#8060b0", "天然岩洞": "#8060b0" } });
 
     PaPaDetail.init({
       schedule,
@@ -499,27 +500,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationMax: 360, palette: PAL },
 
-      timeline: {
-        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
-        item: (wp, i, n) => {
-          const emoji = POS_EMOJI[wp.pos] || '📍';
-          const isHighlight = wp.pos === "最高點" || wp.pos === "小百岳 #16";
-          const isStart = i === 0 || i === n - 1;
-          const dot = isHighlight ? PEAK : isStart ? ACCENT : STONE;
-          return `
-            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
-                 style="background:${dot};"></div>
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
-              ${wp.plan && wp.plan !== wp.time
-                ? `<span class="font-mono text-xs text-stone-600">(原估 ${wp.plan})</span>` : ''}
-              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
-            </div>
-            <div class="font-bold text-stone-800">${wp.loc}</div>
-            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
-          `;
-        }
-      }
+      timeline: { emoji: POS_EMOJI, palette: PAL }
     });
   </script>
 </body>

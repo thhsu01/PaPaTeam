@@ -9,11 +9,9 @@
      schedule / TRIP_DATE  ── 行程資料
      PaPaDetail.init({...}) ── 本頁的設定與少量小回呼
 
-   刻意不收進本檔：時間軸卡片的 HTML 樣板。2026-08-04 量測後修正這句話的理由——
-   結構其實只有兩種家族、圓點規則已收進 palette()，真正因頁而異的只有「顯示哪些欄位」。
-   還沒收是因為它應該以「欄位清單」為介面，不是把樣板字串搬個位置；那是下一輪的事。
-
-   海拔圖則已經收了：各頁只給領域旋鈕，Chart.js 藏在接縫後面（見 docs/adr/0001）。
+   海拔圖與時間軸都已經收進來了，各頁只給領域旋鈕：
+   Chart.js 藏在接縫後面（見 docs/adr/0001），時間軸以「欄位清單」為介面
+   （layout／fields／emoji／palette／hover），不再由各頁手寫 HTML 樣板。
 
    載入順序：site.js → detail.js → 各頁 inline script。
    兩支共用檔都不可加 defer，否則各頁 inline script 會先跑。
@@ -228,16 +226,74 @@ window.PaPaDetail = (function () {
   }
 
   // ── 時間軸 ────────────────────────────────────────────────
-  // 卡片樣板由各頁提供（那是版面設計）；此處只負責走訪、掛上點擊行為。
+  // 介面是「要顯示哪些欄位」，不是一段 HTML 樣板。2026-08-04 量測：18 頁手寫了
+  // 201 行樣板，結構其實只有兩種家族（12 頁行列式、6 頁卡片式），真正因頁而異的
+  // 只有欄位組合與圓點語意；其餘差異是世代殘留——同一種按鈕有三種圓角、
+  // 同一個間距有 mb-8／mb-10／mb-12 三種寫法。
+  //
+  // 「原估時間」不設旋鈕：有 wp.plan 且與實走不同就標，沒有就不標。例外用資料
+  // 表達，跟航點短名的 short 是同一條規則。
+  var FIELD = {
+    desc: function (wp) { return wp.desc; },
+    dist: function (wp) { return wp.dist == null ? '' : '累計 ' + wp.dist.toFixed(2) + ' km'; },
+    ele:  function (wp) { return wp.ele == null ? '' : '海拔 ' + wp.ele + ' m'; }
+  };
+
   function renderTimeline() {
     var t = cfg.timeline;
     var container = $('timeline-container');
     if (!t || !container) return;
 
+    var n = cfg.schedule.length;
+    var pal = t.palette || palette({ accent: cssVar('--accent') });
+    var fields = t.fields || ['desc'];
+    var emoji = t.emoji || null;
+    var card = t.layout === 'card';
+    // 行列式的滑過方向由該段的底色決定：暖底頁（--page-bg）提亮，
+    // bg-stone-50 的頁壓深。兩個方向都看得出來，統一成一個反而有一半會消失。
+    var cls = card
+      ? 'relative flex items-start mb-8 group cursor-pointer pl-8'
+      : 'relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all ' +
+        (t.hover === 'darken' ? 'hover:bg-stone-100' : 'hover:bg-white/60');
+
     cfg.schedule.forEach(function (wp, i) {
+      var body = fields.map(function (f) { return FIELD[f] ? FIELD[f](wp) : ''; })
+                       .filter(Boolean).join(' · ');
+      var tag = (emoji ? (emoji[wp.pos] || '📍') + ' ' : '') + wp.pos;
+      var plan = (wp.plan && wp.plan !== wp.time)
+        ? '<span class="font-mono text-xs text-stone-600">(原估 ' + wp.plan + ')</span>' : '';
+      var dot = pal.color(wp, i, n);
+      // 警示地形是全站唯一「要讀者主動留意」的語意，所以在時間軸上會脈動。
+      // 這是規則不是逐頁掛的 class——huoyianshan 的大峽谷原本自己寫 animate-pulse，
+      // 收進來之後任何一頁把某個 pos 標成警示地形都會有同樣的提示。
+      var pulse = dot.toLowerCase() === pal.warn ? ' animate-pulse' : '';
+
       var div = document.createElement('div');
-      div.className = t.className;
-      div.innerHTML = t.item(wp, i, cfg.schedule.length);
+      div.className = cls;
+      div.innerHTML = card
+        ? '<div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">' +
+            '<div class="w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all' + pulse + '"' +
+            ' style="background:' + dot + ';"></div>' +
+          '</div>' +
+          '<div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">' +
+            '<div class="flex flex-wrap justify-between items-center gap-2 mb-1">' +
+              '<span class="text-lg font-black text-stone-800">' + wp.time + '</span>' + plan +
+              '<span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase">' +
+                tag + '</span>' +
+            '</div>' +
+            '<h4 class="font-bold text-stone-700 text-sm mb-1">' + wp.loc + '</h4>' +
+            (body ? '<div class="text-[11px] text-stone-600 leading-relaxed">' + body + '</div>' : '') +
+          '</div>'
+        : '<div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm' + pulse + '"' +
+          ' style="background:' + dot + ';"></div>' +
+          '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
+            '<span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">' + wp.time + '</span>' +
+            plan +
+            '<span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">' + tag + '</span>' +
+          '</div>' +
+          '<div class="font-bold text-stone-800">' + wp.loc + '</div>' +
+          (body ? '<div class="text-xs text-stone-600 mt-0.5">' + body + '</div>' : '');
+
       div.onclick = function () {
         updateWaypointCard(i);
         var target = $('map-section');
@@ -350,6 +406,7 @@ window.PaPaDetail = (function () {
   // （最高點／觀機平台／瞭望台），端點預設看索引但也可覆寫。
   function palette(opt) {
     var peak   = opt.peak  || '#7c9e52';   // 全站語意色：山頂（見 manifest 的 semantic_colors）
+    var warn   = '#ef4444';                // 全站語意色：警示地形。以 extra 指給某個 pos
     var stone  = opt.stone || '#a09080';   // 一般航點
     var accent = opt.accent;               // 本頁主色，用於起訖點
     var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
@@ -364,7 +421,8 @@ window.PaPaDetail = (function () {
       return isEnd(wp, i, n) ? accent : stone;
     }
     return {
-      peak: peak, stone: stone, accent: accent, isPeak: isPeak, isEnd: isEnd, extra: extra,
+      peak: peak, warn: warn, stone: stone, accent: accent,
+      isPeak: isPeak, isEnd: isEnd, extra: extra,
       color:  colorOf,
       radius: function (wp, i, n) { return isEnd(wp, i, n) ? 9 : isPeak(wp) ? 8 : 6; }
     };

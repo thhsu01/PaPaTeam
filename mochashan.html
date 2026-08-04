@@ -367,7 +367,9 @@
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT });
+      const PAL = PaPaDetail.palette({ accent: ACCENT,
+        // 「開始下山」是這條來回路線的折返點，值得在圖上看得出來
+        extra: { "開始下山": "#f59e0b" } });
 
     PaPaDetail.init({
       schedule,
@@ -405,24 +407,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-8 group cursor-pointer pl-8',
-        item: (wp) => {
-          const dot = wp.pos.includes("起點") || wp.pos.includes("終點") ? 'accent-mark-deep'
-                    : wp.pos === "最高點" ? 'peak-dot'
-                    : wp.pos === "開始下山" ? 'bg-amber-500' : 'bg-stone-300';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-            <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
-              <div class="flex justify-between items-center mb-1 text-left">
-                <span class="text-lg font-black text-stone-800 text-left">${wp.time}</span>
-                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-sm text-left">${wp.loc}</h4>
-              <p class="text-[10px] text-stone-600 mt-1 text-left">累計里程: ${wp.dist.toFixed(2)} km</p>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['dist'], palette: PAL }
     });
     </script>
 </body>
