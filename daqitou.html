@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大崎頭 × 鵝尾山 × 坪頂古圳 — 爬爬小隊</title>
+  <meta name="description" content="2025/6/15 大崎頭步道、鵝尾山與坪頂古圳環狀實走紀錄。自溪和宮起走，經大崎頭登山口與清風亭陡上鵝尾山（523m），下切坪頂古圳沿水圳橫切，經桃仔腳橋、田尾仔橋與至善路登山口回到原點，全程 4.44 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #134e4a, #6aa8a2);
+
+      /* 本頁主色。取深水青呼應坪頂古圳——這條路線後半整段走在清代開鑿的水圳邊。
+         用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         括號內是實測對比度，底色為頁底 #f5f3ef。
+         選色是量出來的：對全站既有 20 個主色與六個保留語意色（最高點綠、警示紅、
+         小百岳金、廟宇紫、extra 琥珀、站徽翡翠）算 CIELab 距離，最近的鄰居有 26.6。 */
+      --accent:                 #134e4a;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線（8.55:1） */
+      --accent-strong:          #134e4a;                  /* 淺底上的文字（8.55:1） */
+      --accent-strong-deep:     #0f3d3a;                  /* 淡底卡片上的內文，再深一階（10.3:1） */
+      --accent-tint:            #f0fbfa;                  /* 淡底 */
+      --accent-border:          #cfe8e5;                  /* 淡框線 */
+      --accent-border-deep:     #a8d3ce;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/daqitou-2025-06-15.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/6/15 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-teal-50 via-cyan-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">6月15日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.44 KM · 2 小時 58 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/6/15 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          先爬一座山，再走一條水圳<br>
+          <span style="color:var(--accent-strong);">大崎頭 × 鵝尾山 × 坪頂古圳</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自溪和宮起走，200 公尺就進大崎頭登山口，接著 1.5 公里連續爬升 260 公尺直上鵝尾山（523m）。之後全部是下坡與橫切：切下坪頂古圳，沿著清代開鑿的水圳走過桃仔腳橋與田尾仔橋，由至善路登山口回到大崎頭，收在原點。環狀 4.44 公里、2 小時 58 分——前半是爬山，後半是散步。</p>
+
+        <!-- 資料來源說明 -->
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">鵝尾山用另一趟行程交叉驗過</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全線只有鵝尾山有公開標高（523 m），當天 GPS 讀到 520（−3）。更有力的是<a href="eweishan.html" class="underline">同年 8/30 從簡厝上鵝尾山那一趟</a>：兩條軌跡的最高點<strong>相距只有 4 公尺</strong>、高程都是 518–520，而且兩趟都在清風亭停了約 15 分鐘、位置相差 24 公尺。兩份獨立的紀錄互相對得上，本頁因此不做任何高程修正。<strong>其餘航點沒有可引用的圖資高度</strong>，取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺，是 ±25 公尺的估計值——所以名稱裡不寫 <code>(H___m)</code>。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">溪和宮</div>
+            <div class="text-xs text-stone-600 mt-1">集合處就是 GPS 起錄點</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>溪和宮（環狀原點）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">6月15日 07:34–10:32</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至溪和宮">
+              🗺️ 導航至集合地點
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">4.44</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">2:58</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~305</div>
+            <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">523</div>
+            <div class="text-xs text-stone-600">最高點 m（鵝尾山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">2 小時 58 分裡有 1 小時 12 分是站著不動的——桃仔腳橋一帶就待了近半小時。扣掉之後實際腳程約 1 小時 46 分，全程不到 4.5 公里，是這一系列裡最短的一趟。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 6/15 當天的 GPS 軌跡。這是一趟環狀，收錄處離起錄點 49 公尺。大崎頭登山口在去程 0.20 公里與回程 4.18 公里各經過一次，是全程唯一重疊的一小段。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">溪和宮</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:34</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">260</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">當天的集合地點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="eweishan.html" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 同一座鵝尾山：2025/8/30 從簡厝支線上山那一趟</a>
+            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（2025/06/15，726 點）。大崎頭登山口、桃仔腳橋、田尾仔橋、至善路登山口的座標由隊友提供，全部落在軌跡 6 公尺以內。</span>
+            <span class="text-xs text-stone-600">公開數據：鵝尾山標高 523 公尺。其餘航點沒有可引用的公開標高，本頁的數值由當天軌跡估算。</span>
+            <span class="text-xs text-stone-600">建頁時本環境的網路政策擋掉 hiking.biji.co，無法核對步道頁的網址，因此這裡不放未經查證的連結——待能連線時再補。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">這張圖只有一座山：0.20 km 的大崎頭登山口到 1.77 km 的鵝尾山之間爬升 238 公尺，全程的上升幾乎都在這 1.57 公里裡。過了山頂就沒有再爬——2.1 km 之後一路降到坪頂古圳，古圳段（3.05–3.67 km）起伏不到 60 公尺，那是水圳沿等高線走的緣故。</p>
+
+        <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼不是 864</span>
+          <p class="text-xs text-stone-700 leading-relaxed">
+            把軌跡上每一個正的高程增量加起來會得到 864 公尺，那個數字不能用。這條路線從 260 公尺爬到 523 公尺，
+            過了山頂就沒有再爬升，真實的累計上升不可能是它的近三倍。原因是 726 個點裡有很大一部分是站著不動時錄的——
+            桃仔腳橋一帶待了近半小時、清風亭 16 分鐘——GPS 高程在原地會上下抖動幾公尺，每一次抖動都被當成「爬升」累加進去。
+            本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 325、308、284 公尺，
+            依各航點高程直接相加是 298 公尺。四個算法落在 284–325 的同一區間，因此標 <strong>~305 公尺</strong>。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          沿途亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 6/15 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>大崎頭登山口 🪜</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">離溪和宮只有 200 公尺的步道口，海拔約 285 公尺。這是整趟唯一走過兩次的地方——去程從這裡上山，回程從坪頂古圳繞回來也是由此下切回溪和宮。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>清風亭 🛖</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">上鵝尾山途中的涼亭，海拔約 495 公尺，當天在此停留 16 分鐘。8/30 從簡厝上山那一趟也在同一座亭子停了 15 分鐘——兩趟紀錄的位置只差 24 公尺，是本站少數能互相印證的地標。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>鵝尾山 (H523m) 🏔️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程最高點，標高 523 公尺，士林與內湖之間的獨立山頭。自大崎頭登山口爬升 238 公尺、走了 75 分鐘。過了這裡整趟就沒有再爬升。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>桃仔腳橋 🌉</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">坪頂古圳上的橋，海拔約 360 公尺。當天在這一帶停留近半小時，是全程最長的一次休息。古圳是清道光年間開鑿的水利設施，至今仍在輸水。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>田尾仔橋 🌉</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">古圳段的第二座橋，海拔約 335 公尺，距至善路登山口只有 80 公尺。過了這裡水圳段就結束，接下來是回大崎頭的下坡。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>坪頂古圳親山步道至善路登山口 🚪</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">坪頂古圳親山步道的至善路側入口，海拔約 335 公尺。名字裡有「至善路」容易讓人以為它在山下的馬路邊，實際上它在半山腰——建這一頁時我就是這樣誤判的，是隊友給的座標把它擺回正確位置。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">07:34 起錄 · 10:32 收錄 · 全程 2 小時 58 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻、座標與里程取自 GPS 軌跡在該時刻的位置。陶然亭的位置是依停留點推斷的，隊友尚未提供座標——頁面上有標明。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 大崎頭 × 鵝尾山 × 坪頂古圳 | 2025 年 6 月 15 日 · 07:34–10:32 · 4.44 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2025/6/15 實走紀錄，2026-08 拿到 GPX 後補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 全部取自當天的 GPS 軌跡（健行筆記 GPX，726 點）。
+    // 大崎頭登山口、桃仔腳橋、田尾仔橋、至善路登山口的座標由隊友提供，
+    // 逐一量過離軌跡最近點：6／4／2／3 公尺，全部遠低於 15 公尺的稽核門檻。
+    //
+    // ★ 鵝尾山有兩份獨立證據。公開標高 523 m，當天 GPS 60 m 內中位數 520（−3）；
+    //   而且 2025/8/30 從簡厝上鵝尾山那一趟（eweishan.html）的最高點離本趟只有
+    //   4 m、高程 517（−6）。兩份不同日期的紀錄互相對得上，所以不做高程修正。
+    //
+    // ★ 清風亭同樣被兩趟印證：本趟停 16.2 分、8/30 停 14.9 分，兩個停留點相距
+    //   24 m。兩頁的 ele 一律採 495 m——同一個地點不該在兩頁上是兩個數字。
+    //
+    // ★ 其餘航點查不到圖資高度，依 ARCHITECTURE.md「走完才補上的航點」規則取
+    //   軌跡前後 60 m 內的高程中位數再取整到 5 m，是 ±25 m 的估計值，因此
+    //   **不寫進 loc 的 (H___m) 標註**。只有鵝尾山寫了 (H523m)。
+    //
+    // ★ 陶然亭的位置是推斷的。隊友列了這個地標但沒有給座標；3.24 km 處有一個
+    //   6 分鐘的停留（395 m），夾在桃仔腳橋與田尾仔橋之間，是唯一合理的候選。
+    //   **這是本頁唯一沒有硬證據的航點**，desc 裡有標明，拿到座標就換掉。
+    //
+    // ★ 累計上升不採原始加總。原始正增量合計 864 m，是站立不動時的高程抖動被
+    //   一次次累加出來的假值。移動中位數視窗 15/31/61 得 325/308/284 m，各航點
+    //   高程相加得 298 m。四個數字落在 284–325，故標 ~305 m。
+    //
+    // ★ 訊號中斷都是停下來時 App 暫停，沒有需要補回的里程。
+    const schedule = [
+      { lat: 25.128621, lng: 121.586709, time: "07:34", loc: "溪和宮", dist: 0.00, ele: 260, pos: "集合起點",
+        desc: "當天的集合地點，也是終點——這是一趟環狀。GPS 於 07:34 起錄，走 200 公尺就進大崎頭登山口。",
+        advice: "廟前有空地可以整裝，是這一帶最好認的集合點。整趟沒有補給點，水和行動糧要在這裡備妥。" },
+
+      { lat: 25.130279, lng: 121.586456, time: "07:38", loc: "大崎頭登山口", dist: 0.20, ele: 285, pos: "入山口",
+        desc: "累計 0.20 km。步道正式的入口，接下來 1.57 公里要爬升 238 公尺。座標由隊友提供，離軌跡 6 公尺。",
+        advice: "這裡也是回程的出口——傍晚從坪頂古圳繞回來會再經過一次。記一下路口的樣子，回來時比較好認。" },
+
+      { lat: 25.133260, lng: 121.582949, time: "08:27", loc: "清風亭", dist: 1.29, ele: 495, pos: "觀景亭",
+        desc: "累計 1.29 km。上鵝尾山途中的涼亭，08:27–08:44 在此停留 16 分鐘。8/30 那一趟也在同一座亭子停了 15 分鐘，兩次的位置只差 24 公尺。",
+        advice: "亭子有頂有座位，是上山段唯一像樣的休息點。距山頂還有 0.48 公里、85 公尺落差，在這裡把水補足。" },
+
+      { lat: 25.130750, lng: 121.581930, time: "08:53", loc: "鵝尾山 (H523m)", dist: 1.77, ele: 523, pos: "最高點",
+        desc: "累計 1.77 km，全程最高點，標高 523 公尺。自大崎頭登山口爬升 238 公尺、走了 75 分鐘。過了這裡整趟就沒有再爬升。",
+        advice: "山頂腹地不大，展望被樹擋掉一部分。真正好走的是接下來的下坡，體力可以放心用在後半段的古圳散步上。" },
+
+      { lat: 25.136689, lng: 121.585677, time: "09:50", loc: "桃仔腳橋", dist: 3.05, ele: 360, pos: "古圳橋",
+        desc: "累計 3.05 km。坪頂古圳上的橋。09:22–09:52 在這一帶停留近半小時，是全程最長的一次休息。座標由隊友提供，離軌跡 4 公尺。",
+        advice: "古圳水聲大、溫度明顯比稜線低，是夏天最舒服的一段。橋面窄且濕滑，會車要禮讓。" },
+
+      { lat: 25.137112, lng: 121.586677, time: "09:55", loc: "陶然亭", dist: 3.24, ele: 395, pos: "觀景亭",
+        desc: "累計 3.24 km，09:55–10:01 停留 6 分鐘。**這個航點的位置是推斷的**——隊友列了陶然亭但沒有給座標，此處是桃仔腳橋與田尾仔橋之間唯一的停留點，拿到座標會換掉。",
+        advice: "從這裡到田尾仔橋只剩 350 公尺，水圳段快走完了。想多待一會兒的話，這一段的樹蔭比橋上更密。" },
+
+      { lat: 25.134874, lng: 121.586296, time: "10:08", loc: "田尾仔橋", dist: 3.59, ele: 335, pos: "古圳橋",
+        desc: "累計 3.59 km。古圳段的第二座橋，距至善路登山口只有 80 公尺。座標由隊友提供，離軌跡 2 公尺。",
+        advice: "過了這座橋水圳段就結束，接下來是回大崎頭的連續下坡。膝蓋不好的人在這裡把登山杖拿出來。" },
+
+      { lat: 25.134314, lng: 121.586781, time: "10:10", loc: "坪頂古圳親山步道至善路登山口", short: "至善路登山口", dist: 3.67, ele: 335, pos: "步道口",
+        desc: "累計 3.67 km。坪頂古圳親山步道的至善路側入口，海拔約 335 公尺——名字裡有「至善路」但它在半山腰，不在山下的馬路邊。座標由隊友提供，離軌跡 3 公尺。",
+        advice: "只想走古圳不想爬鵝尾山的人可以從這裡進出，省掉前半段 240 公尺的爬升。" },
+
+      { lat: 25.130279, lng: 121.586456, time: "10:21", loc: "大崎頭登山口 (回程)", dist: 4.18, ele: 285, pos: "步道口",
+        desc: "累計 4.18 km。繞了一圈回到早上上山的那個路口，環狀在此閉合。離軌跡 1 公尺。",
+        advice: "到這裡只剩 260 公尺的緩下坡回溪和宮，可以放心把水喝完。" },
+
+      { lat: 25.128277, lng: 121.587015, time: "10:32", loc: "終點（溪和宮）", short: "終點", dist: 4.44, ele: 255, pos: "終點",
+        desc: "累計 4.44 km。GPS 於 10:32 收錄，收錄處離起錄點 49 公尺，環狀完成。全程 2 小時 58 分。",
+        advice: "回到原點解散。這一帶的公車班次不密，下山前先查好回程時刻。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+
+    // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色；
+    // 預設的 isPeak 認 pos === "最高點"，正好對上鵝尾山，不必覆寫。
+    const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    const POS_EMOJI = {
+      "集合起點":"🚩", "入山口":"🪜", "觀景亭":"🛖", "最高點":"🏔️",
+      "古圳橋":"🌉", "步道口":"🚪", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2025-06-15";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.128621, 121.586709],   // 集合地點＝溪和宮，環狀起訖同點
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.130750, lng: 121.581930 },   // 鵝尾山山頂
+
+      map: {
+        setView: [[25.1327, 121.5843], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。環狀，收錄處離起錄點 49 m。
+        track: { points: PaPaTracks['daqitou-2025-06-15'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.92
+        })
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationFloor: 200, palette: PAL },
+
+      timeline: { emoji: POS_EMOJI, palette: PAL }
+    });
+  </script>
+</body>
+</html>
