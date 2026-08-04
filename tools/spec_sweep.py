@@ -11,8 +11,33 @@ NAV = {'overview': '行程總覽', 'map-section': '路線圖', 'elevation': '海
 NAV_TIMELINE = {'預估進度', '實走紀錄'}          # 規格表：二選一
 H2 = {'map-section': '互動路線圖', 'elevation': '海拔高度剖面圖'}
 H2_TIMELINE = ('預計行程進度', '實走時間軸')     # 主詞須為其一，容許括號後綴
+H2_SPOTS = ('導覽', '亮點')                      # 規格表：自由，但要含其一
 SLATE_HEX = ('#f8fafc', '#334155', '#e2e8f0', '#f1f5f9', '#64748b')
 PEAK = '#7c9e52'
+
+# 停留類的描述詞。GPS 停留點若當地沒有地名，名字就是自己取的，見下方的檢查。
+STOP_SUFFIX = ('休息點', '折返點')
+
+# detail.js 認得的設定鍵。介面寫在文件、實作在 detail.js，兩邊各自演化：
+# 頁面寫錯一個鍵不會有任何反應——它就只是靜靜地不作用。2026-08-04 的雙軸審查
+# 一次抓到三種都在站上的寫法：card.wrap: 'clamp'（detail.js 只認 'cycle'，
+# 其餘任何字串等效於沒寫）、hideEmptyAdvice（SNIPPETS 教了，從來沒有實作）、
+# 以及 chart.label/dataset/options（ADR-0001 之後 Chart.js 的設定樹由 detail.js
+# 組出，這三個旋鈕已不存在）。共同點是「文件教了、頁面照做、實作不認」。
+# 加旋鈕時要一併加進這張表，否則新旋鈕會被這條擋下來——那是刻意的：
+# 一個沒人記得的介面，跟一個沒有實作的介面，讀起來一樣糟。
+KNOWN = {
+    '': {'schedule', 'tripDate', 'nav', 'card', 'palette', 'map', 'chart', 'timeline', 'weather'},
+    'card': {'follow', 'flash', 'onUpdate', 'wrap'},
+    'map': {'preferCanvas', 'center', 'zoom', 'setView', 'attribution', 'track',
+            'palette', 'marker', 'popup', 'selected'},
+    'map.track': {'points', 'slice', 'color', 'weight', 'opacity', 'dashArray'},
+    'chart': {'lineColor', 'fillColor', 'fillAlpha', 'palette',
+              'elevationFloor', 'elevationMax', 'advanced'},
+    'timeline': {'layout', 'fields', 'emoji', 'palette', 'hover'},
+    'weather': {'lat', 'lng', 'elevation', 'mainId', 'subId', 'subText',
+                'sep', 'unit', 'errorMain'},
+}
 
 # 本站出現過的台灣小百岳（山名 → 官方編號）。2026-08-04 查官方名單建立，
 # 因為「這座山是不是小百岳」不可能從頁面內容推導出來，只能維護一張表。
@@ -81,13 +106,70 @@ def js_block(s, key):
     return None
 
 
+def init_options(s):
+    """走訪 PaPaDetail.init({...}) 的設定樹，回傳 [(路徑, 鍵, 值的開頭)]。
+
+    同樣不用 regex：設定裡有箭頭函式、三元運算與巢狀物件，regex 分不清
+    「物件的鍵」與「函式主體裡的鍵」。路徑就是用來分開兩者的——KNOWN 沒有的路徑
+    （map.marker 的回傳物件、chart.advanced 的 Chart.js 設定樹、emoji 對照表）
+    一律不查，那些地方本來就不歸 detail.js 的介面管。
+    """
+    blk = js_block(s, 'PaPaDetail.init(')
+    if blk is None:
+        return []
+    out, stack, pending, prev = [], [], None, ''
+    i, n = 0, len(blk)
+    while i < n:
+        ch = blk[i]
+        if ch in '\'"`':                                  # 字串整段跳過
+            i += 1
+            while i < n and blk[i] != ch:
+                i += 2 if blk[i] == '\\' else 1
+            i, prev = i + 1, 'x'
+            continue
+        if blk.startswith('//', i):
+            j = blk.find('\n', i)
+            i = n if j < 0 else j
+            continue
+        if blk.startswith('/*', i):
+            j = blk.find('*/', i)
+            i = n if j < 0 else j + 2
+            continue
+        if ch == '{':
+            stack.append(pending)
+            pending, prev, i = None, ch, i + 1
+            continue
+        if ch == '}':
+            if stack:
+                stack.pop()
+            pending, prev, i = None, ch, i + 1
+            continue
+        if ch.isspace():
+            i += 1
+            continue
+        m = re.match(r'([A-Za-z_$][\w$]*)\s*:', blk[i:])
+        if m and prev in '{,':
+            comps = stack[1:]                              # stack[0] 是 init 自己的大括號
+            path = '?' if any(c is None for c in comps) else '.'.join(comps)
+            out.append((path, m.group(1), blk[i + m.end():i + m.end() + 40]))
+            pending, prev, i = m.group(1), 'x', i + m.end()
+            continue
+        prev, i = ch, i + 1
+    return out
+
+
 def h2_of(s, sec):
+    """該段落 <h2> 的文字。多數頁在標題前放一根色條 <span>，所以要剝標籤——
+    第一版只認 `</span>` 後面的文字，於是 huoyianshan 那種沒有色條的
+    「各景點深度導覽」整個讀成 None，明明合規卻查不到。"""
     i = s.find('id="%s"' % sec)
-    j = s.find('</h2>', i)
-    if i < 0 or j < i:
+    if i < 0:
         return None
-    m = re.search(r'</span>\s*([^<\n]+)', s[i:j])
-    return m.group(1).strip() if m else None
+    j = s.find('</h2>', i)
+    k = s.rfind('<h2', i, j)
+    if j < 0 or k < 0:
+        return None
+    return re.sub(r'<[^>]+>', '', s[k:j]).strip() or None
 
 
 def check(f):
@@ -121,6 +203,11 @@ def check(f):
     h = h2_of(s, 'timeline')
     if h is None or not h.startswith(H2_TIMELINE):
         p.append('#timeline 的 h2「%s」主詞應為 %s 之一' % (h, '／'.join(H2_TIMELINE)))
+    # spots 的標題是自由的，規格表只要求看得出「這段是導覽」。20 頁寫「X亮點導覽」，
+    # 漏網的兩頁寫成「百科」——讀者點進去看到的是同一種東西，標題卻自成一格。
+    h = h2_of(s, 'spots')
+    if h is None or not any(w in h for w in H2_SPOTS):
+        p.append('#spots 的 h2「%s」要看得出是導覽（含 %s）' % (h, '／'.join(H2_SPOTS)))
 
     # ── 灰階（先剝註解：dinghu 的 slate 只在說明遷移的註解裡）─
     code = re.sub(r'<!--.*?-->', '', s, flags=re.S)
@@ -163,12 +250,27 @@ def check(f):
     # 「宣告了 PAL」不算數，要真的送進去。2026-08-04 起各頁改成在 init 的頂層寫
     # 一次 palette: PAL，三個介面共用——那比在三個區塊各寫一次更好，所以頂層有就算過。
     # 只有頁面既沒有頂層 palette、該區塊自己也沒有時才報。
-    top = re.search(r'PaPaDetail\.init\(\{[^}]*?\bpalette:\s*\w', s)
-    if not top:
+    # 「頂層有沒有 palette」要走剖析器，不能用 regex：第一版寫成
+    # `init\(\{[^}]*?palette:`，[^}] 跨不過中間的 card: {...}，於是 huoyianshan
+    # 明明在頂層宣告了卻被判成沒有。
+    opts = init_options(s)
+    keys = {(path, key) for path, key, _ in opts}
+    if ('', 'palette') not in keys:
         for key, label in (('chart:', '海拔圖'), ('marker:', '地圖標記'), ('timeline:', '時間軸')):
             blk = js_block(s, key)
             if blk is not None and 'PAL' not in blk and 'palette' not in blk:
                 p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
+
+    # ── 設定鍵必須是 detail.js 認得的 ───────────────────────
+    for path, key, val in opts:
+        if path in KNOWN and key not in KNOWN[path]:
+            p.append('%s%s 不是 detail.js 認得的設定——寫了不會有任何作用'
+                     % (path + '.' if path else '', key))
+        if (path, key) == ('card', 'wrap'):
+            v = re.match(r"""\s*['"]([^'"]*)""", val)
+            if v and v.group(1) != 'cycle':
+                p.append("card.wrap: '%s' 沒有作用——detail.js 只認 'cycle'，"
+                         "到頭就停是不寫時的預設" % v.group(1))
 
     # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
     # 一座山可以同時是最高點與小百岳（全站七座裡有五座就是）。寫進 pos 會逼出
@@ -209,14 +311,20 @@ def check(f):
                     p.append('%s 是台灣小百岳 #%d，卻沒有 xbaiyue 欄位' % (who, num))
 
     # ── 無地名的停留點要自己講清楚 ──────────────────────────
-    # 這類航點的名字是描述詞不是地名（「第一休息點」「古圳休息點」），
+    # 這類航點的名字是描述詞不是地名（「第一休息點」「古圳休息點」「折返點」），
     # 不講明的話讀者會拿去查一個不存在的地方。慣例見 ARCHITECTURE.md。
+    #
+    # 只認 STOP_SUFFIX 那幾個「停留」類的描述詞：它們是 GPS 停留點轉出來的，
+    # 名字必然是自己取的。刻意不含「展望點／眺望點」——那是地形描述，該處究竟有沒有
+    # 地名不是從頁面形狀看得出來的事，硬要求註明等於逼頁面宣稱一件沒查證過的事。
+    # 也不含「休息站」：桂林峰休息站、一水休息站是有名字的既有設施。
+    # 第一版還多要求 pos 為「休息點」，於是漏掉 zhongzhengshan 的折返點（pos 是最高點）。
     for o in schedule_objects(s):
         loc = re.search(r'loc:\s*"([^"]*)"', o)
-        pos = re.search(r'pos:\s*"([^"]*)"', o)
-        if loc and pos and pos.group(1) == '休息點' and loc.group(1).endswith('休息點'):
+        if loc and loc.group(1).endswith(STOP_SUFFIX):
             desc = re.search(r'desc:\s*"([^"]*)"', o)
-            if not desc or '沒有地名' not in desc.group(1):
+            # 說法不必逐字相同：zhongzhengshan 寫的是「沒有可引用的地名」。
+            if not desc or not re.search(r'沒有[^，。]{0,8}地名', desc.group(1)):
                 p.append('%s 是沒有地名的停留點，desc 要寫明這件事' % loc.group(1))
 
     # ── overview 統計列必須看得到總里程 ─────────────────────

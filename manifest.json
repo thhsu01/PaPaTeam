@@ -257,7 +257,7 @@
     },
     {
       "path": "tools/contrast/check.js",
-      "purpose": "對比度實測（WCAG 2.1 AA）。用 Playwright 實際算繪、取畫面像素判定，不靠 DOM 推算。檔頭記了五個曾造成整批假訊號的量測坑與各自的修法。零忽略名單——2026-08-04 重寫時把假陽性全部改成量對，因為忽略名單會連真問題一起蓋掉。用法 node tools/contrast/check.js --all（需先 python3 -m http.server 8099）"
+      "purpose": "對比度實測（WCAG 2.1 AA）。用 Playwright 實際算繪、取畫面像素判定，不靠 DOM 推算。檔頭記了四個曾造成整批假訊號的量測坑與各自的修法。零忽略名單——2026-08-04 重寫時把假陽性全部改成量對，因為忽略名單會連真問題一起蓋掉。用法 node tools/contrast/check.js --all（需先 python3 -m http.server 8099）"
     },
     {
       "path": "tools/contrast/stubs.js",
@@ -343,7 +343,7 @@
     "accent_tokens_note": "只有這兩個是每頁必備：--accent 供裝飾（色條、圓點、地圖軌跡、圖表線），--accent-strong 供淺底上的文字。其餘依該頁需要自行擴充，命名一律 --accent-<用途>，常見的有 -strong-deep（淡底卡片內文，再深一階）、-tint（淡底）、-border／-border-deep（框線）、-light／-soft／-fill（更淺的裝飾）、-on-dark（深底上的文字）。全站目前共 16 種變體，刻意不統一成一份清單——各頁版面繁簡不同，硬湊會逼出用不到的 token",
     "semantic_colors": "跨頁共用、不屬於任何單頁識別色的語意色：紅 #ef4444 = 警示地形、綠 #7c9e52 = 最高點、金 #a16207 = 小百岳認證環（描邊不是填色，因為它與最高點可疊加）、藍 = 外部連結、琥珀 amber-50/400/800 = 注意事項面板、翡翠 emerald-700 = 站徽與官方來源連結。**這些跨頁必須一致**——2026-08-04 發現 datongshan／laojiujianshan／mochashan／shiqiulinling／huoyianshan 五頁各自把最高點畫成琥珀、深綠、橘、紅，還在自己的註解裡稱之為「語意色」，等於五種互相矛盾的語意。已全數收斂到 #7c9e52",
     "trip_facts": "一趟行程的日期與總里程在自己頁內會出現七、八次，首頁卡片再一份，全部手打。改數字時漏掉任何一處，畫面就會自相矛盾——改 henglingguidao 的 5.30→5.36 時就得逐處改過。由 tools/fact_check.py 交叉核對（CI 也會跑）。注意「總里程」沒有單一資料來源：schedule 末點的 dist 不是總里程，軌跡在最後一個航點之後還有一段（caolingguidao 末點 7.87、總里程 7.88）",
-    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099；因為要 Playwright 與本地 Tailwind，沒有進 CI，改顏色時手動跑）。兩支都是全過回傳 0。對比度量測器有五個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
+    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099；因為要 Playwright 與本地 Tailwind，沒有進 CI，改顏色時手動跑）。兩支都是全過回傳 0。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
     "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。第三種語意（datongshan 的展望台、nanshijiao 的信仰地標、bishan 的賞櫻點、mochashan 的折返點、huoyianshan 的大峽谷）經 palette({ extra }) 表達，只開一層——再多下去就變回每頁一套配色。**這條規約寫了半天其實只有海拔圖做到**：2026-08-04 量測 18 頁，海拔圖 18/18，地圖標記與時間軸各只有 6/18，於是 datunshan、qixingshan、shanying 等頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。同日全部收斂，並由 spec_sweep.py 逐區塊檢查（chart／marker／timeline 三個區塊都必須真的引用 palette，光宣告 PAL 不算）。警示地形紅 #ef4444 在時間軸上會脈動，那是 palette 的 warn 常數帶出的全站規則，不是逐頁掛的 class。小百岳走另一個通道：金環 #a16207（pal.ring）加粗描邊 ＋ ⭐ 文字徽章，因為它與最高點可以是同一座山，必須疊加而不是互斥。2026-08-04 查官方名單後補齊：全站共七座（大屯山主峰 #1、七星山主峰 #2、大崙頭山 #8、南港山 #13、大棟山 #15、南勢角山 #16、火炎山 #35）。七星山東峰先前被標成小百岳，查證後確認編號 002 指的是七星山這座山、東峰不是另一座，已更正。spec_sweep.py 內有一張山名對照表——「某座山是不是小百岳」無法從頁面內容推導，只能維護清單",
     "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha／palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",
     "waypoint_short_name": "海拔圖 x 軸的顯示名稱。預設由 detail.js 的 shortName() 剝除標高與狀態註記（(H643m)／(標高 65m)／(接駁)）；剝不乾淨的航點在 schedule 內給 short 欄位。例外用資料表達，不是每頁一個格式化函式——2026-08-04 之前是後者，18 頁有 8 種寫法在做同一件事"

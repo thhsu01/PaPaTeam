@@ -208,10 +208,14 @@ def check_page(name, idx):
     # 為什麼——fetchWeather() 靠 cfg.tripDate 才知道要標「行程日預報」還是
     # 「行程日已過，顯示今日天氣」。
     # 反過來沒有天氣卡的頁不算問題：TRIP_DATE 對它們是空轉的。那是功能缺口，
-    # 不是故障，別在這裡報。（2026-08-04：huoyianshan 與 meihuashan 原本是唯二
-    # 沒有天氣卡的頁，已補上，現在 22 頁全有。這條規則仍然留著——候選頁若哪天
-    # 加了天氣卡卻忘了 TRIP_DATE，一樣要擋。）
-    if name in idx and 'id="weather-main"' in s and not any(src == 'TRIP_DATE' for src, _ in ds):
+    # 不是故障，別在這裡報。
+    #
+    # 判準是 init 裡的 weather 設定，不是版面上的 id。第一版查 id="weather-main"，
+    # 於是 mochashan 整頁溜過去——它把 mainId 指到自己的 weather-summary，
+    # 天氣卡是真的，只是版面 id 不同。真正決定「這頁會不會去要天氣」的是
+    # detail.js:499 的 `if (cfg.weather) fetchWeather()`，所以查那個。
+    if name in idx and re.search(r'\bweather:\s*\{', s) \
+       and not any(src == 'TRIP_DATE' for src, _ in ds):
         problems.append('有天氣卡卻沒有 TRIP_DATE——會顯示今日天氣而不說明原因')
 
     return problems

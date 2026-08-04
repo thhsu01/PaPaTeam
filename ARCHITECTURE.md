@@ -24,7 +24,7 @@
   │    ├─ #map-section   路線圖 (Leaflet)
   │    ├─ #elevation     海拔剖面 (Chart.js)
   │    ├─ #spots         景點介紹
-  │    └─ #timeline      預估進度／實際行程
+  │    └─ #timeline      預估進度／實走紀錄
   └─ 頁腳 (在 main 之外)
 ```
 
@@ -172,6 +172,7 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -255,7 +256,7 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 理由見 [ADR-0001](docs/adr/0001-chartjs-behind-the-seam.md)。
 
 ```javascript
-chart: { elevationFloor: 450, lineColor: '--accent-deep', palette: PAL }
+chart: { elevationFloor: 450, lineColor: '--accent-deep' }
 ```
 
 `elevationFloor` 是編輯判斷（高山路線從 0 起會浪費半張圖）；`elevationMax` 不給就讓
@@ -374,8 +375,10 @@ GPS 顯示停留五分鐘以上、但隊友沒有給地名的點，**照樣收�
 前後 60 m 內取樣點的高程中位數再取整到 5 m，並在頁面腳本註明是 ±25 m 的估計值。
 不要為了看起來精確而寫進 `loc` 的 `(H___m)` 標註——那個括號代表的是圖資高度。
 
-補上的航點通常沒有 `advice`（當初沒寫、事後也不該補編）。這時要在 `card` 設定加上
-`hideEmptyAdvice: true`，建議框才會整塊收起來，而不是留一個空框在卡片下方。
+補上的航點一樣要有 `advice`——當初沒寫不代表現在不能寫，走過的人對那個位置有話說。
+空的建議框刻意不隱藏（`detail.js` 的 `updateWaypointCard()` 有註明），漏寫時就該在
+畫面上看得見。曾經有一版文件教人用 `hideEmptyAdvice` 把空框收起來，但那個旗標從來
+沒有實作過，寫了不會有任何反應；現在 `spec_sweep.py` 的 `KNOWN` 會擋下它。
 
 #### 集合地點與起錄點
 
@@ -507,8 +510,6 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 `caolingguidao`、`henglingguidao`、`zhongzhengshan`、`daluntouweishan`、`daqitou`、`eweishan` 是照本規格從零建起、而非事後收斂的）。以瀏覽器
 實測逐項確認（2026-08-04 重跑）：
 
-| 項目 | 狀態 |
-|---|---|
 **這張表由 `tools/spec_sweep.py` 產生，不是人工勾的。** 在專案根目錄跑 `python3 tools/spec_sweep.py`，全過會回傳 0。 標 🤖 的項目每次改完 `schedule` 或
 版面都該重跑；標 👁 的仍靠人眼或瀏覽器實測。2026-08-04 的雙軸審查發現這張表先前有
 兩項掛著 ✅ 卻不成立（導覽鍵文字、主色 token），原因就是規格寫了卻沒有人檢查——
@@ -704,7 +705,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 規格面（照上方「詳情頁正規規格」逐項對）：
 
 - [ ] 五個段落 id 為 `overview` / `map-section` / `elevation` / `spots` / `timeline`，順序正確
-- [ ] 導覽鍵文字為 行程總覽 / 路線圖 / 海拔剖面 / 景點介紹 / 預估進度（或實際行程）
+- [ ] 導覽鍵文字為 行程總覽 / 路線圖 / 海拔剖面 / 景點介紹 / 預估進度（或實走紀錄）
 - [ ] 沒有多開段落
 - [ ] `<footer>` 在 `<main>` 外面
 - [ ] 導覽列為 `fixed`，`<main class="pt-14">`

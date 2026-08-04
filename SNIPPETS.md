@@ -94,47 +94,52 @@ const schedule = [
 | `ele` | 海拔（m）。**採地形圖數值，不用 GPS 高程** |
 | `pos` | 航點類型，決定標記大小與顏色（見 `map.marker`） |
 | `desc` | 景點卡內文 |
-| `advice` | 選填。隊友建議，**沒走過就留空，不要編** |
+| `advice` | 隊友建議，每個航點都要有 |
 | `plan` | 選填，僅已完成頁。當初的預估時刻，時間軸會並排顯示 |
+| `xbaiyue` | 選填。台灣小百岳的編號（查不到編號時寫 `true`，不要編一個） |
 
-**不得編造**：`dist` 與 `advice` 都是實走才知道的東西。缺就留空——
-`hideEmptyAdvice` 會把空的建議框整塊收起來，不會留一個空框在卡片下方。
+**不得編造**：`dist` 是實走才知道的東西，缺就留空。`advice` 則是必填——
+候選頁依公開資訊寫「這段路要注意什麼」，走過之後再換成隊友的實際經驗。
+空的建議框刻意不隱藏：漏寫時就該在畫面上看得見。
 
 ### `PaPaDetail.init()` 設定
 
+各頁只描述「差異」，機制都在 `assets/detail.js`。設定鍵有哪些由
+`tools/spec_sweep.py` 的 `KNOWN` 把關——不在表上的鍵寫了不會有任何作用，
+所以會被擋下來，不會靜靜地失效。
+
 ```javascript
+// 航點配色宣告一次，三個介面共用。ACCENT 之類的色值在頁面腳本開頭取。
+const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "瞭望台" });
+
 PaPaDetail.init({
   schedule,
+  palette: PAL,                     // 地圖標記、海拔圖資料點、時間軸圓點共用
   tripDate: TRIP_DATE,              // 日期只在這一處出現
   nav: [25.036395, 121.587461],     // 「開啟導航」的目的地
 
-  card: { follow: 'popup', wrap: 'clamp', hideEmptyAdvice: true },
+  card: { follow: 'popup' },        // 'popup' 開地圖泡泡、'pan' 平移地圖
 
   weather: { lat: 25.0327, lng: 121.5849 },
 
   map: {
     setView: [[25.0330, 121.5855], 15],
     attribution: 'Leaflet | © OpenStreetMap',
-    popup: true,
-    marker: (wp, i, n) => {
-      const isStartEnd = i === 0 || i === n - 1;
-      const isPeak     = wp.pos === "瞭望台";
-      return {
-        radius: isStartEnd ? 9 : isPeak ? 8 : 6,
-        fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
-        opacity: 1, fillOpacity: 0.92
-      };
-    }
+    // 已完成行程畫實走軌跡；候選頁沒有這行，軌跡就是航點連成的直線
+    track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+    popup: true
   },
 
-  chart: {
-    label: wp => wp.short || wp.loc.replace(/\s*\(H[^)]*\)/, ''),
-    fillAlpha: 0.10,
-    dataset: { borderWidth: 2.5, pointRadius: 5 },
-    options: { /* Chart.js 選項，會與預設值合併 */ }
-  }
+  // 海拔圖只給領域旋鈕，Chart.js 的設定樹由 detail.js 組出（見 docs/adr/0001）
+  chart: { elevationMax: 200 },
+
+  timeline: { emoji: POS_EMOJI }
 });
 ```
+
+標記樣式不必自己寫：`palette` 已經決定了半徑與顏色，小百岳的金環也由
+`detail.js` 統一套上。`map.marker` 是逃生口，全站只有 `huoyianshan` 用它
+（大峽谷要加大半徑並換描邊）——寫了它就等於把該頁排除在全站語意之外。
 
 `ACCENT` / `PEAK` / `STONE` 是頁面腳本開頭以 `getComputedStyle` 從 `:root`
 取出的實際色值。**腳本裡不能直接寫 `var(--accent)`**——那些值最終進到 canvas 的
