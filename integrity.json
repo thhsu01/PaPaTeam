@@ -2,26 +2,36 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-04 09:21",
+  "generated": "2026-08-04 10:37",
   "generated_tz": "UTC+8",
-  "commit": "2080241e608d55618242aaa19275fd00b23d8cdd",
-  "file_count": 43,
+  "commit": "8528ec66476e6fd975c9def8d1d12264fe8a181e",
+  "file_count": 50,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
+    {
+      "path": ".github/workflows/contrast.yml",
+      "size": 2871,
+      "sha": "89b95b2dd3ed9971016c3fc3025b1df1112c19af"
+    },
     {
       "path": ".github/workflows/integrity.yml",
       "size": 2354,
       "sha": "26f7cd7880b9b2049d532001c90d79b224fa6561"
     },
     {
+      "path": ".github/workflows/spec.yml",
+      "size": 1967,
+      "sha": "4a107baf1fb2ce58d1626763c72c3f9ee979e1ad"
+    },
+    {
       "path": ".gitignore",
-      "size": 536,
-      "sha": "8cf8670f6fe0ff883e29fc3a0f47599badbcb178"
+      "size": 602,
+      "sha": "f361af33a8cfbeff3e481203cf57f181c4828ac7"
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 33129,
-      "sha": "ecb5df4533142f8f00c0f926c59899c8ed18a5fc"
+      "size": 36199,
+      "sha": "277a6451348ac4fd0a616ecc68966c2ed3569e53"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -30,13 +40,13 @@
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "size": 28895,
-      "sha": "7fee1e05f74af0726bdaae539e1d6ccac888b978"
+      "size": 31994,
+      "sha": "8bfc467b03781a36b369bcd2a09cbf183b4d1915"
     },
     {
       "path": "README.md",
-      "size": 6755,
-      "sha": "7a5d43605484a0704969f87917fb0d0d9bff78c3"
+      "size": 8254,
+      "sha": "c88e37292a086a357cb84ec8981189c1fcb970a2"
     },
     {
       "path": "SNIPPETS.md",
@@ -50,8 +60,8 @@
     },
     {
       "path": "assets/detail.js",
-      "size": 12895,
-      "sha": "d119bb9de997d00103a5e1210a0e81f94ce44bda"
+      "size": 14307,
+      "sha": "a3fb19707f69ac265802eeb2babab842dd328ba6"
     },
     {
       "path": "assets/site.css",
@@ -125,43 +135,43 @@
     },
     {
       "path": "bishan.html",
-      "size": 35762,
-      "sha": "7eaf58cfe51f667fdfce2a44b1ada914df65946c"
+      "size": 37206,
+      "sha": "7c46599115ee5f05ca4ded701db2616e36d2e359"
     },
     {
       "path": "caolingguidao.html",
-      "size": 33110,
-      "sha": "451776d36e4fc822dbb4be909603850bd32f68f3"
+      "size": 32943,
+      "sha": "457df3b8580092597bce87663f8d056327f3ea0e"
     },
     {
       "path": "datongshan.html",
-      "size": 27587,
-      "sha": "b2fcd57d5bc7dda3766b3a116311c613c75a84d2"
+      "size": 27788,
+      "sha": "8e5b201bfb13a9a9b871f0e672e59ebe90190262"
     },
     {
       "path": "datunshan.html",
-      "size": 30861,
-      "sha": "e3806761dd676eca574e93ae9e81ca3f2eb81339"
+      "size": 30871,
+      "sha": "e4797d56a04fe983b4c3772917d3ea5bac1fda2a"
     },
     {
       "path": "dinghu.html",
-      "size": 25969,
-      "sha": "df89fbcde69b75efd1fe61930da8ae81b496aa60"
+      "size": 26118,
+      "sha": "43e821d3a7222fee16001ccfd25783642159d1d1"
     },
     {
       "path": "henglingguidao.html",
-      "size": 34526,
-      "sha": "d562163ed99f1f9c07ff3cdf066c9aa9ab898ef0"
+      "size": 34356,
+      "sha": "8e6a29ee727915cac2a228317b6139aa660b27d9"
     },
     {
       "path": "huoyianshan.html",
-      "size": 31459,
-      "sha": "c4db6287342c5d12be5091bd5346b134112c15ea"
+      "size": 31262,
+      "sha": "228ef31cd9cbc98c4310705357596203ece12306"
     },
     {
       "path": "hushan.html",
-      "size": 26062,
-      "sha": "30ee6f256da507c21aceb9f03bc2352478ed9c1b"
+      "size": 25700,
+      "sha": "845ca6f4f7001fac2eab7e40bdf29b95c75a34c1"
     },
     {
       "path": "index.html",
@@ -170,48 +180,48 @@
     },
     {
       "path": "jiantanshan.html",
-      "size": 28612,
-      "sha": "be6d6cc8ac78715bb07e1ef049ba7156234eea9a"
+      "size": 28436,
+      "sha": "928b37040f7da626ff43835616283ac2315d1481"
     },
     {
       "path": "jinmianshan.html",
-      "size": 30872,
-      "sha": "3c21b89f2f5dd6bf442900fee1818913d84873a8"
+      "size": 30705,
+      "sha": "11df3f0a98bafa71aad338e1db3cd6b00d77c4b8"
     },
     {
       "path": "laojiujianshan.html",
-      "size": 29828,
-      "sha": "f2cd47597ddae8cea62a9314001350c23623128a"
+      "size": 30071,
+      "sha": "50f884d84398602eeaa4ea2330d35d14c2e4fbd6"
     },
     {
       "path": "manifest.json",
-      "size": 13330,
-      "sha": "72dde59e019dac20c25fb39ea20219927ad9495f"
+      "size": 19193,
+      "sha": "2241a544e6b180f59417248274759f7278a68b06"
     },
     {
       "path": "meihuashan.html",
-      "size": 29929,
-      "sha": "7d2e1349235b4b691f909c7cd55f6cc55c2f3706"
+      "size": 30054,
+      "sha": "eefce0699681e9f77e998176f78bc9e3a501f18f"
     },
     {
       "path": "mochashan.html",
-      "size": 31448,
-      "sha": "7bc213f52ab31cb4208597f166308a86443c7993"
+      "size": 31678,
+      "sha": "f2938efd56bc87fd4fd1686f4f07b11fd7abe7dd"
     },
     {
       "path": "nangangshan.html",
-      "size": 29913,
-      "sha": "8d61e99567d71545862ca8210a6810c7cf6506a3"
+      "size": 29530,
+      "sha": "e296e698facd0404ebbbf016a890bbb728c63458"
     },
     {
       "path": "nanshijiao.html",
-      "size": 43076,
-      "sha": "c7effd0260329ca574bb8b7e65be97c595c595e9"
+      "size": 43062,
+      "sha": "5eb159b140318097f6d08682769cca4bb1e3d154"
     },
     {
       "path": "qixingshan.html",
-      "size": 24894,
-      "sha": "aa8339133ff08416d0ad4b27292b35040ae155a8"
+      "size": 25061,
+      "sha": "cacc3a73a66fbf5dd7c4e622439fcce201a39603"
     },
     {
       "path": "shanying.html",
@@ -220,8 +230,33 @@
     },
     {
       "path": "shiqiulinling.html",
-      "size": 32974,
-      "sha": "df6de2c3a62d8757100939d24a4b4e17574ca526"
+      "size": 33053,
+      "sha": "b7ecee2eb65d68f1df5b709c405de2d7157ab4d8"
+    },
+    {
+      "path": "tools/contrast/build-css.sh",
+      "size": 1306,
+      "sha": "24242401bfe358d5a5e0fe0bd9dd5ae7a2386275"
+    },
+    {
+      "path": "tools/contrast/check.js",
+      "size": 11274,
+      "sha": "5d6d9bed077377e839fab2e3effb08cc13bedeff"
+    },
+    {
+      "path": "tools/contrast/stubs.js",
+      "size": 1575,
+      "sha": "cae50b578ece61f1793697bb06838ba112d60861"
+    },
+    {
+      "path": "tools/contrast/tw.css",
+      "size": 38281,
+      "sha": "5da44e54ac99b6fb4c1671e2889d40f63f77f04d"
+    },
+    {
+      "path": "tools/spec_sweep.py",
+      "size": 8015,
+      "sha": "0e1eab7a625400ed645f39b92ced62fc56bd26d1"
     }
   ]
 }
