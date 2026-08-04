@@ -150,6 +150,26 @@ def check(f):
         if blk is not None and 'PAL' not in blk and 'palette' not in blk:
             p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
 
+    # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
+    # 一座山可以同時是最高點與小百岳（全站六座裡有三座就是）。寫進 pos 會逼出
+    # 一個假的二選一：nangangshan 與 nanshijiao 因此把 pos 設成「小百岳 #13／#16」，
+    # 於是那兩頁真正的最高點（九五峰、五尖山）與小百岳共用同一個綠。
+    # 反過來 datunshan／datongshan／qixingshan 的小百岳只寫在散文裡，資料層看不到，
+    # 地圖與海拔圖上也就標不出來——這一條就是為了讓後者不再溜過去。
+    for o in schedule_objects(s):
+        pos = re.search(r'pos:\s*"([^"]*)"', o)
+        loc = re.search(r'loc:\s*"([^"]*)"', o)
+        who = (loc.group(1) if loc else '?')
+        if pos and '小百岳' in pos.group(1):
+            p.append('%s 的 pos 是「%s」——小百岳要放 xbaiyue 欄位，'
+                     '佔著 pos 會讓它與最高點互斥' % (who, pos.group(1)))
+        prose = ' '.join(m.group(1) for m in re.finditer(r'(?:desc|advice):\s*"([^"]*)"', o))
+        # 「兩座小百岳一次完成」是在講整趟行程，不是在說這個航點是小百岳——
+        # qixingshan 的回程終點（陽明山第二停車場）就是這樣寫的。帶數量詞的不算宣稱。
+        claims = re.sub(r'[一二兩三四五六七八九十百\d]+\s*座\s*小百岳', '', prose)
+        if '小百岳' in claims and 'xbaiyue' not in o:
+            p.append('%s 的敘述提到小百岳卻沒有 xbaiyue 欄位——地圖與海拔圖上標不出來' % who)
+
     # ── overview 統計列必須看得到總里程 ─────────────────────
     if not re.search(r'(實走里程|總里程|里程 km)', s):
         p.append('overview 看不到總里程')
