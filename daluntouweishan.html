@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大崙頭尾山親山步道 — 爬爬小隊</title>
+  <meta name="description" content="2025/9/29 大崙頭尾山親山步道環狀實走紀錄。自大崙尾山登山口起走，先登大崙尾山（451m），續走大崙頭山（476m）與森林步道，經樹之亭、長壽坡、眺望臺與翠山步道回到原點，全程 6.93 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #a21caf, #d08ade);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         括號內是實測對比度，底色為頁底 #f5f3ef。
+         選色是量出來的：對全站既有 19 個主色與五個保留語意色（最高點綠、警示紅、
+         小百岳金 #a16207、廟宇紫、extra 琥珀）算 CIELab 距離，最近的鄰居有 31.8，
+         是候選裡最遠的。原本想用深林綠呼應這條路線的林相，但 #065f46 離站徽的
+         翡翠 #047857 只有 11.5，會被誤讀成品牌色，因此放棄。 */
+      --accent:                 #a21caf;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線（5.71:1） */
+      --accent-strong:          #86198f;                  /* 淺底上的文字（7.43:1） */
+      --accent-strong-deep:     #701a75;                  /* 淡底卡片上的內文，再深一階（9.05:1） */
+      --accent-tint:            #fdf4ff;                  /* 淡底 */
+      --accent-border:          #f0d9f5;                  /* 淡框線 */
+      --accent-border-deep:     #e5b8ee;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/daluntouweishan-2025-09-29.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/9/29 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-fuchsia-50 via-purple-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">9月29日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 6.93 KM · 3 小時 44 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/9/29 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          內湖後山的兩顆頭<br>
+          <span style="color:var(--accent-strong);">大崙頭尾山親山步道</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自大崙尾山登山口起走，先上大崙尾山（451m），下到鞍部後接大崙頭山親山步道，續登全程最高的大崙頭山（476m）。之後沿森林步道繞經樹之亭與木棧道登山口下到最低點，再由長壽坡緩緩爬回稜線，經眺望臺與翠山步道回到原點。環狀 6.93 公里、3 小時 44 分——全線幾乎都在林蔭底下，兩座山頭之間的落差不到 30 公尺。</p>
+
+        <!-- 資料來源說明 -->
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">兩座山頭都對得上公開標高</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全線只有兩個點有公開標高，兩個都拿來驗了：大崙尾山 451 公尺、當天 GPS 讀到 447（−4）；大崙頭山 476 公尺、GPS 讀到 469（−7）。兩者都是小幅偏低、沒有系統性漂移，所以本頁不做任何高程修正，有公開值的取公開值。<strong>其餘十一個航點沒有可引用的圖資高度</strong>，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺，是 ±25 公尺的估計值——所以它們的名稱裡不寫 <code>(H___m)</code>。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">大崙尾山登山口</div>
+            <div class="text-xs text-stone-600 mt-1">集合處就是 GPS 起錄點</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>大崙尾山登山口（環狀原點）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">9月29日 07:35–11:19</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至大崙尾山登山口">
+              🗺️ 導航至集合地點
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">6.93</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">3:44</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~310</div>
+            <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">476</div>
+            <div class="text-xs text-stone-600">最高點 m（大崙頭山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">3 小時 44 分裡有 1 小時 25 分是站著不動的——大崙頭山一站就待了 39 分鐘、大崙尾山 18 分鐘。扣掉之後實際腳程約 2 小時 19 分，對一趟近 7 公里的郊山來說相當寬鬆。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 9/29 當天的 GPS 軌跡。這是一趟環狀，收錄處離起錄點只有 22 公尺。全程有八處訊號中斷超過兩分鐘，全部是停下來時 App 自動暫停造成的，位移都在 7 公尺以內——因此本頁的里程不需要像橫嶺古道那樣補回中斷段短報的距離。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">大崙尾山登山口</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:35</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">310</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">當天的集合地點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（2025/09/29，1097 點）。九個地標的座標由隊友提供，全部落在軌跡 10 公尺以內。</span>
+            <span class="text-xs text-stone-600">公開數據：大崙尾山標高 451 公尺、大崙頭山標高 476 公尺。其餘航點沒有可引用的公開標高，本頁的數值由當天軌跡估算，見上方「兩座山頭都對得上公開標高」。</span>
+            <span class="text-xs text-stone-600">建頁時本環境的網路政策擋掉 hiking.biji.co，無法核對步道頁的網址，因此這裡不放未經查證的連結——待能連線時再補。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">這張圖有三個峰：0–1.00 km 上大崙尾山、2.48–3.01 km 上大崙頭山，然後一路降到 4.28 km 的木棧道登山口（280m，全程最低），再由長壽坡緩緩爬回 335 公尺的稜線。兩座山頭只差 25 公尺，但中間下到 370 公尺的鞍部，所以是實實在在的兩段爬升。</p>
+
+        <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼標「~310」而不是 1246</span>
+          <p class="text-xs text-stone-700 leading-relaxed">
+            把軌跡上每一個正的高程增量加起來會得到 1246 公尺，那個數字不能用。這條路線最高 476 公尺、最低 280 公尺，
+            三段爬升加起來不可能有它的四倍。原因是 1097 個點裡有很大一部分是站著不動時錄的——大崙頭山待了 39 分鐘、
+            大崙尾山 18 分鐘——GPS 高程在原地會上下抖動幾公尺，每一次抖動都被當成「爬升」累加進去。
+            本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 364、326、285 公尺，
+            依各航點高程直接相加是 302 公尺。<strong>這四個數字的散布（285–364）比本站其他路線寬</strong>，
+            因為這條路線起伏碎、小坡多，平滑視窗一放大就會把真實的小起伏一起抹掉。取中間的兩個（326、302）落在 300–330，
+            因此標 <strong>~310 公尺</strong>——這個數字的不確定度比其他頁大，約 ±30 公尺。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          沿途亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 9/29 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>大崙尾山 (H451m) 🗻</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">內湖與士林交界的山頭，標高 451 公尺，是這趟環狀的第一座。山頂有平台與三角點，四周林木高，展望不如名字聽起來開闊。當天在此停留 18 分鐘。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>白石湖入口 🔀</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">大崙頭尾山親山步道登山口旁的岔路，往北接白石湖、碧山一帶。當天沒有走這一頭，但它是把這趟環狀延長成內湖大縱走的接點。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>大崙頭山 (H476m) 🏔️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程最高點，標高 476 公尺，山頂有觀景平台，是這條路線視野最好的一站。當天在此停留 39 分鐘，是全程最長的一次休息。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>樹之亭 🛖</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">大崙頭山森林步道途中的木造涼亭，位在 355 公尺的林間，是下坡段唯一有遮蔽的休息點。從這裡到木棧道登山口只剩 270 公尺、下降 75 公尺。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>長壽坡 🚶</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">木棧道登山口之後、回到稜線之前的緩上段，從 280 公尺爬回 335 公尺。名字聽起來輕鬆，實際上是全程最後一段有感的爬升，走到這裡通常已經三個多小時。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>眺望臺 🏙️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">回程稜線上的展望點，海拔約 320 公尺，可俯瞰士林與外雙溪一帶。當天在此停留 9 分鐘，是收工前最後一次休息，之後接翠山步道下山只剩 0.87 公里。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">07:35 起錄 · 11:19 收錄 · 全程 3 小時 44 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻、座標與里程全部取自 GPS 軌跡在該時刻的位置，沒有推算的航點。九個地標的座標由隊友提供，逐一比對後全部落在軌跡 10 公尺以內。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 大崙頭尾山親山步道 | 2025 年 9 月 29 日 · 07:35–11:19 · 6.93 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2025/9/29 實走紀錄，2026-08 拿到 GPX 後補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 全部取自當天的 GPS 軌跡（健行筆記 GPX，1097 點）。
+    // 本頁沒有推算的航點——九個地標由隊友給座標，逐一量過離軌跡最近點的距離：
+    // 最遠的大崙頭山親山步道入口 10 m，其餘都在 5 m 以內，全部遠低於
+    // ARCHITECTURE.md 定的 15 m 稽核門檻。另外三個（大崙尾山登山口、大崙尾山、
+    // 大崙頭山）沒有給座標，直接取軌跡上的對應位置：起錄點、以及兩段區間內
+    // 平滑高程的最高處。
+    //
+    // ★ 高程有兩個公開值可對，兩個都對上了：
+    //     大崙尾山  公開 451 m ／ GPS 60 m 內中位數 447（−4）
+    //     大崙頭山  公開 476 m ／ GPS 60 m 內中位數 469（−7）
+    //   都是小幅偏低、方向一致但量級很小，不構成需要修正的系統性漂移，
+    //   所以不做 huoyianshan 那樣的整體扣減，也不做 caolingguidao 那樣的內插。
+    //
+    // ★ 其餘十一個航點查不到圖資高度，依 ARCHITECTURE.md「走完才補上的航點」
+    //   規則處理：取軌跡前後 60 m 內取樣點的高程中位數再取整到 5 m。這是
+    //   ±25 m 的估計值，因此**不寫進 loc 的 (H___m) 標註**——那個括號代表的是
+    //   圖資高度。只有大崙尾山與大崙頭山寫了 (H451m)／(H476m)。
+    //
+    // ★ 累計上升標 ~310 m，但這一頁的不確定度比其他頁大。原始正增量合計
+    //   1246 m 顯然不可用（站立抖動：大崙頭山 39 分、大崙尾山 18 分都在錄）。
+    //   移動中位數視窗 15/31/61 得 364/326/285 m，各航點高程相加得 302 m。
+    //   四個數字散布 285–364，比本站其他路線寬——這條路線起伏碎、小坡多，
+    //   視窗一放大就把真實的小起伏一起抹掉了。取中間兩個（326、302）落在
+    //   300–330，故標 ~310 m（約 ±30 m）。頁面上有把這件事講清楚。
+    //
+    // ★ 訊號中斷。八處超過 120 秒，全部是停下來時 App 暫停，位移都在 7 m
+    //   以內，沒有任何一段需要把短報的距離加回去。
+    //
+    // ★ 起錄點與收錄點相距 22 m，兩者都在大崙尾山登山口一帶，視為同一處，
+    //   高程同樣採 310 m——那 5 m 的差是 GPS 散布，不是真的下降。
+    const schedule = [
+      { lat: 25.105950, lng: 121.568020, time: "07:35", loc: "大崙尾山登山口", dist: 0.00, ele: 310, pos: "集合起點",
+        desc: "當天的集合地點，也是終點——這是一趟環狀。GPS 於 07:35 起錄，07:41–07:49 在前方 0.2 km 處又停了 8 分鐘等齊隊伍。",
+        advice: "自忠山路（劍南路）上山的登山口，路邊車位有限。這一頭起登可以把兩座山頭都排在前半段，體力最好的時候先解決爬升。" },
+
+      { lat: 25.106325, lng: 121.573288, time: "08:06", loc: "大崙尾山 (H451m)", dist: 1.00, ele: 451, pos: "山頂",
+        desc: "累計 1.00 km。標高 451 公尺，內湖與士林交界的第一座山頭。自登山口爬升 141 公尺、走了 31 分鐘。08:01–08:19 在此停留 18 分鐘。",
+        advice: "山頂有平台與三角點，但四周樹高、展望有限，別把拍照期待留在這裡——後面的大崙頭山與眺望臺視野都好得多。" },
+
+      { lat: 25.105705, lng: 121.579019, time: "08:42", loc: "大崙頭尾山親山步道登山口", short: "頭尾山步道口", dist: 1.84, ele: 370, pos: "步道口",
+        desc: "累計 1.84 km。下到兩山之間鞍部後接上的步道口。自大崙尾山下降 81 公尺，08:26–08:35 在途中又休息了 9 分鐘。座標由隊友提供，離軌跡 1 公尺。",
+        advice: "這裡是整趟路線的交通節點：往回是大崙尾山、往前是大崙頭山、旁邊還有往白石湖的岔路。指標多，出發前先確認方向再走。" },
+
+      { lat: 25.105817, lng: 121.579162, time: "08:45", loc: "白石湖入口", dist: 1.91, ele: 370, pos: "岔路口",
+        desc: "累計 1.91 km。緊鄰步道口的岔路，往北可接白石湖與碧山一帶。當天沒有走這一頭。座標由隊友提供，離軌跡 5 公尺。",
+        advice: "想把行程拉長的人可以從這裡接白石湖吊橋、碧山巖，但那會多出 5 公里以上，且回程需要另外安排交通。" },
+
+      { lat: 25.106196, lng: 121.583746, time: "08:56", loc: "大崙頭山親山步道入口", short: "大崙頭山入口", dist: 2.48, ele: 380, pos: "入山口",
+        desc: "累計 2.48 km。大崙頭山這一段的正式入口，接下來 0.53 公里要爬升 96 公尺，是全程第二陡的一段。座標由隊友提供，離軌跡 10 公尺——是九個地標裡最遠的一個，仍遠低於 15 公尺的稽核門檻。",
+        advice: "從這裡到山頂是連續的石階與木階，沒有平緩處。當天走了 22 分鐘，抓半小時比較保險。" },
+
+      { lat: 25.108956, lng: 121.585442, time: "09:18", loc: "大崙頭山 (H476m)", dist: 3.01, ele: 476, pos: "最高點",
+        desc: "累計 3.01 km，全程最高點，標高 476 公尺，山頂有觀景平台。09:08–09:47 在此停留 39 分鐘，是全程最長的一次休息。",
+        advice: "這裡是整條路線視野最好的地方，也是唯一適合安排正餐的點。平台上沒有遮蔭，夏天中午前後會曬。" },
+
+      { lat: 25.110689, lng: 121.586409, time: "09:50", loc: "大崙頭山森林步道", short: "森林步道", dist: 3.45, ele: 450, pos: "森林步道",
+        desc: "累計 3.45 km。自山頂北下之後接上的森林步道，路面轉為土徑與木棧道，林相明顯變密。座標由隊友提供，離軌跡 5 公尺。",
+        advice: "這一段是全程最涼快的地方，也是「芬多精」名號的由來。雨後木棧道濕滑，下坡要放慢。" },
+
+      { lat: 25.112697, lng: 121.583708, time: "10:07", loc: "樹之亭", dist: 4.01, ele: 355, pos: "觀景亭",
+        desc: "累計 4.01 km。森林步道途中的木造涼亭，海拔約 355 公尺，是下坡段唯一有遮蔽的休息點。座標由隊友提供，離軌跡 2 公尺。",
+        advice: "亭子不大但有座位，適合補水整裝。從這裡到木棧道登山口只剩 270 公尺、要再降 75 公尺，是全程最陡的下坡。" },
+
+      { lat: 25.113209, lng: 121.581652, time: "10:14", loc: "大崙頭森林步道-木棧道登山口", short: "木棧道登山口", dist: 4.28, ele: 280, pos: "步道口",
+        desc: "累計 4.28 km，全程海拔最低點（約 280 公尺）。10:12–10:24 在此停留 12 分鐘。座標由隊友提供，離軌跡 2 公尺。",
+        advice: "這裡是整趟的轉折：前面都在下坡，過了這個點就要一路緩上回稜線。想中途離開的人，這是最後一個接得上市區道路的出口。" },
+
+      { lat: 25.108825, lng: 121.579744, time: "10:44", loc: "長壽坡", dist: 5.36, ele: 335, pos: "緩上段",
+        desc: "累計 5.36 km。自最低點爬回稜線的緩上段，1.08 公里上升 55 公尺。座標由隊友提供，離軌跡 2 公尺。",
+        advice: "坡度不陡但走到這裡通常已經三小時，是最容易失速的一段。前面沒有補給點，水要在大崙頭山就抓夠。" },
+
+      { lat: 25.109439, lng: 121.574744, time: "11:01", loc: "眺望臺", dist: 6.06, ele: 320, pos: "展望台",
+        desc: "累計 6.06 km。回程稜線上的展望點，可俯瞰士林與外雙溪一帶。10:54–11:03 在此停留 9 分鐘，是收工前最後一次休息。座標由隊友提供，離軌跡 2 公尺。",
+        advice: "到這裡只剩 0.87 公里的下坡，可以放心把水喝完。台北盆地方向的展望比兩座山頂都好，別急著走。" },
+
+      { lat: 25.107953, lng: 121.571327, time: "11:10", loc: "翠山步道登山口", short: "翠山步道口", dist: 6.52, ele: 310, pos: "步道口",
+        desc: "累計 6.52 km。翠山步道這一側的登山口，出來後沿路回到大崙尾山登山口只剩 410 公尺。座標由隊友提供，離軌跡 5 公尺。",
+        advice: "翠山步道全線平緩、路面好走，是這趟最後的緩衝段。走完環狀從這裡到起點還有一小段，別提早鬆懈。" },
+
+      { lat: 25.105970, lng: 121.568234, time: "11:19", loc: "終點（大崙尾山登山口）", short: "終點", dist: 6.93, ele: 310, pos: "終點",
+        desc: "累計 6.93 km。GPS 於 11:19 收錄，收錄處離起錄點 22 公尺，環狀完成。全程 3 小時 44 分。",
+        advice: "回到原點取車。下山後沿劍南路可以直接接到大直或內湖市區，吃飯與交通都方便。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+
+    // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色；
+    // 預設的 isPeak 認 pos === "最高點"，正好對上大崙頭山，不必覆寫。
+    // 地圖標記、圖表資料點、時間軸圓點三處共用它，不會再各寫一份而漂掉。
+    const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    const POS_EMOJI = {
+      "集合起點":"🚩", "山頂":"🗻", "步道口":"🪜", "岔路口":"🔀", "入山口":"🚪",
+      "最高點":"🏔️", "森林步道":"🌲", "觀景亭":"🛖", "緩上段":"🚶",
+      "展望台":"🏙️", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2025-09-29";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.105950, 121.568020],   // 集合地點＝大崙尾山登山口，環狀起訖同點
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.108956, lng: 121.585442 },   // 大崙頭山山頂
+
+      map: {
+        setView: [[25.1089, 121.5771], 14],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。環狀，收錄處離起錄點 22 m。
+        track: { points: PaPaTracks['daluntouweishan-2025-09-29'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.92
+        })
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationFloor: 250, palette: PAL },
+
+      timeline: { emoji: POS_EMOJI, palette: PAL }
+    });
+  </script>
+</body>
+</html>

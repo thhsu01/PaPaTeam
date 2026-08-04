@@ -124,6 +124,12 @@
       "date": "2024-11-23"
     },
     {
+      "path": "daluntouweishan.html",
+      "title": "大崙頭尾山親山步道（環狀）",
+      "status": "completed",
+      "date": "2025-09-29"
+    },
+    {
       "path": "zhongzhengshan.html",
       "title": "中正山親山步道（原路折返）",
       "status": "completed",
@@ -151,11 +157,11 @@
     },
     {
       "path": "assets/detail.css",
-      "purpose": "19 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
+      "purpose": "20 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
     },
     {
       "path": "assets/detail.js",
-      "purpose": "19 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／palette／hover，不再手寫 HTML 樣板）"
+      "purpose": "20 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／palette／hover，不再手寫 HTML 樣板）"
     },
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
@@ -208,6 +214,10 @@
     {
       "path": "assets/tracks/zhongzhengshan-2025-04-27.js",
       "purpose": "中正山親山步道 2025/04/27 實走 GPS 軌跡（Douglas–Peucker 簡化至 140 點）。原路折返，去回程重疊。二十餘處訊號中斷都是停留時 App 暫停、位移在 15 m 以內，里程不需要補回"
+    },
+    {
+      "path": "assets/tracks/daluntouweishan-2025-09-29.js",
+      "purpose": "大崙頭尾山親山步道 2025/09/29 實走 GPS 軌跡（Douglas–Peucker 簡化至 193 點）。環狀，收錄處離起錄點 22 m。八處訊號中斷都是停留時 App 暫停、位移在 7 m 以內，里程不需要補回"
     },
     {
       "path": "integrity.json",
@@ -304,7 +314,7 @@
     "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前十二頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan、caolingguidao、henglingguidao",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
     "source_citation": "外部來源以「參考資源」清單列在 #map-section 的航點卡下方（18 頁中 16 頁如此；shiqiulinling 放在 #overview，datunshan 另在 #timeline 末尾多放一份較詳細的分段里程出處；huoyianshan 沒有，它的數字全部出自當天 GPX）。候選／計畫頁的里程、海拔、營運時間若引自外部資料一定要列；已完成頁改以 GPS 軌跡為準，但引用公開標高或官方分段里程時同樣要列（henglingguidao、jinmianshan 就是靠這個才驗得出軌跡對不對）",
-    "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過。**本條僅適用 19 個詳情頁**；index.html 自成一套視覺系統（翡翠品牌色 + slate，見 assets/site.css），是刻意的例外，不要為了一致而改它",
+    "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過。**本條僅適用 20 個詳情頁**；index.html 自成一套視覺系統（翡翠品牌色 + slate，見 assets/site.css），是刻意的例外，不要為了一致而改它",
     "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」",
     "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-04 全站 18 頁皆通過",
     "advice": "每個航點都要有，同頁長度一致（現行約 25–50 字、一到兩句）。判準是有沒有講出讀者原本不知道的事：廁所在哪、哪裡會迷路、哪段危險、營業時間。「注意安全」「補充水分」這類不算",
