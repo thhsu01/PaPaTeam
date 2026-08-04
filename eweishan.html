@@ -164,7 +164,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-600 mb-6">地圖上的線是 8/30 當天的 GPS 軌跡。這不是嚴格的環狀——收錄處（簡厝支線登山口）離起錄點的簡厝公車站 143 公尺，海拔還低了 65 公尺。路線大致是往北爬上鵝尾山，再向西橫切一圈繞回來。</p>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 8/30 當天的 GPS 軌跡。這不是嚴格的環狀——收錄點離起錄的簡厝公車站 171 公尺，出口的簡厝支線登山口則是 143 公尺（兩者相距 32 公尺），海拔都比起點低了 65 公尺。路線大致是往北爬上鵝尾山，再向西橫切一圈繞回來。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
@@ -330,11 +330,11 @@
         advice: "從這裡開始坡度轉陡，接下來 1.1 公里要爬 200 公尺。趁還沒熱起來先把外套脫掉。" },
 
       { lat: 25.124733, lng: 121.581747, time: "08:10", loc: "第二休息點", dist: 0.59, ele: 385, pos: "休息點",
-        desc: "累計 0.59 km。08:10–08:20 停留 9 分鐘。自第一休息點爬升 70 公尺，是全程坡度最陡的一段。",
+        desc: "累計 0.59 km。08:10–08:20 停留 9 分鐘。自第一休息點爬升 70 公尺，是全程坡度最陡的一段。這個點沒有地名，以停留順序命名。",
         advice: "這一段是連續石階，沒有平緩處。八月底早上仍然悶熱，走走停停比硬撐有效。" },
 
       { lat: 25.126690, lng: 121.581108, time: "08:34", loc: "稜線休息點", dist: 0.97, ele: 480, pos: "休息點",
-        desc: "累計 0.97 km。08:34–08:43 停留 9 分鐘，接著 08:44–08:59 又在前方停了 15 分鐘。爬升到這裡已經完成 200 公尺，剩下的坡就緩了。",
+        desc: "累計 0.97 km。08:34–08:43 停留 9 分鐘，接著 08:44–08:59 又在前方停了 15 分鐘。爬升到這裡已經完成 200 公尺，剩下的坡就緩了。這個點沒有地名，以位置命名。",
         advice: "上到稜線之後風開始有感，是把濕衣服晾一下的好時機。接下來到鞦韆只剩 0.42 公里、爬升 15 公尺。" },
 
       { lat: 25.127615, lng: 121.581307, time: "09:00", loc: "鵝尾山鞦韆", dist: 1.39, ele: 495, pos: "景觀亮點",
@@ -383,6 +383,7 @@
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.122408, 121.584329],   // 集合地點＝簡厝公車站
 
@@ -395,17 +396,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。收錄處離起錄點 171 m。
         track: { points: PaPaTracks['eweishan-2025-08-30'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
-      chart: { elevationFloor: 150, palette: PAL },
+      chart: { elevationFloor: 150 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>

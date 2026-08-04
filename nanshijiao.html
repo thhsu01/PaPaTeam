@@ -446,13 +446,10 @@
     ];
 
     // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
-    // 所以要先從 :root 取出實際值。PEAK/TEMPLE/STONE 是次要語意色，
+    // 所以要先從 :root 取出實際值。
     // 不屬本頁主色，維持字面值。
     const ACCENT = getComputedStyle(document.documentElement)
                      .getPropertyValue('--accent').trim();
-    const PEAK   = '#7c9e52';   // 山頂
-    const TEMPLE = '#8060b0';   // 廟宇與岩洞
-    const STONE  = '#a09080';   // 一般航點
 
     const POS_EMOJI = {
       "集合起點":"🚇", "入山口":"🥾", "展望台":"🏙️", "歷史廟宇":"🏛️",
@@ -472,6 +469,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [24.990128, 121.509104],
 
@@ -484,17 +482,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['nanshijiao-2026-08-02'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { elevationMax: 360, palette: PAL },
+      chart: { elevationMax: 360 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>

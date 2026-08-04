@@ -326,6 +326,7 @@
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.036395, 121.587461],
 
@@ -338,17 +339,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
-      chart: { elevationMax: 200, palette: PAL },
+      chart: { elevationMax: 200 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>

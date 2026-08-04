@@ -384,6 +384,7 @@
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.015944, 121.944861],   // 集合地點：福隆車站。遠望坑口要搭接駁，不是自己開過去的
 
@@ -397,17 +398,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。幾處訊號中斷的區間為直線連接。
         track: { points: PaPaTracks['caolingguidao-2024-11-23'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
-      chart: { elevationMax: 400, palette: PAL },
+      chart: { elevationMax: 400 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>

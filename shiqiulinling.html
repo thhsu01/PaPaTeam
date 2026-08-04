@@ -365,6 +365,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
 
       card: { follow: 'pan', wrap: 'cycle' },
 
@@ -372,17 +373,13 @@
         preferCanvas: true,
         center: [25.119, 121.734], zoom: 14,
         track: { color: ACCENT_LIGHT, weight: 4, opacity: 0.7, dashArray: '8, 8' },
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 1
-        }),
-        selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
+selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { lineColor: '--accent-light', fillColor: '--accent-light', fillAlpha: 0.05, palette: PAL },
+      chart: { lineColor: '--accent-light', fillColor: '--accent-light', fillAlpha: 0.05 },
 
-      timeline: { layout: 'card', fields: ['desc'], palette: PAL }
+      timeline: { layout: 'card', fields: ['desc'] }
     });
     </script>
 </body>

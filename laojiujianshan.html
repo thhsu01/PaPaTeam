@@ -354,6 +354,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.071960894394802, 121.63322171182692],
       weather: { lat: 25.0719, lng: 121.6332, sep: '° - ',
@@ -369,20 +370,16 @@
         center: [25.083, 121.631], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['laojiujianshan-2026-05-01'], weight: 4, opacity: 0.8 },
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 1
-        }),
-        selected: (wp, i, n, sel) => ({
+selected: (wp, i, n, sel) => ({
           radius: sel ? 12
                 : (wp.pos === "最高點" || wp.pos.includes("終點") || wp.pos.includes("起點") ? 8 : 6)
         })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { palette: PAL },
+      chart: { },
 
-      timeline: { layout: 'card', fields: ['dist'], palette: PAL }
+      timeline: { layout: 'card', fields: ['dist'] }
     });
     </script>
 </body>

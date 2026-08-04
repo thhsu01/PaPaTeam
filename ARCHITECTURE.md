@@ -270,6 +270,17 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最�
 // PAL.radius(wp, i, n) 起訖點 9、最高點 8、其餘 6
 ```
 
+**在 `init` 的頂層宣告一次就好**，三個介面共用：
+
+```javascript
+PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {…} })
+```
+
+2026-08-04 之前是在 `chart`／`map.marker`／`timeline` 各寫一次，於是 21 頁的
+`marker:` 閉包逐字相同，唯一的分歧是 `fillOpacity` 的 0.9／0.92／1——0.9 與 0.92
+肉眼分不出來，那是抄來的差異不是決定，已統一為 0.92。**各頁不再寫 `marker:`**；
+它降為逃生口，目前只有 `huoyianshan` 用（大峽谷要加大半徑並換淺紅描邊）。
+
 各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
 第三種語意用 `palette({ extra })` 表達（`datongshan` 的展望台、`nanshijiao` 的信仰地標、
 `bishan` 的賞櫻點、`mochashan` 的折返點、`huoyianshan` 的大峽谷），只開一層。
@@ -288,7 +299,7 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最�
 各頁不寫時間軸的 HTML 樣板，只說要顯示哪些欄位：
 
 ```javascript
-timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，12 頁
+timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，16 頁
 timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }       // 卡片式，6 頁
 ```
 
@@ -333,12 +344,26 @@ const schedule = [
 
 **`xbaiyue`** 標記這個航點是台灣小百岳：`xbaiyue: 13` 顯示「⭐ 小百岳 #13」，
 查不到編號時寫 `xbaiyue: true` 顯示「⭐ 小百岳」——不要編一個號碼出來。
-它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站六座裡有三座就是），
+它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站七座裡有五座就是），
 `pos` 只能有一個值，塞進去就會逼出假的二選一（見 `CONTEXT.md`「小百岳」）。
 表現全部由 `detail.js` 負責，各頁只加這個欄位。`tools/spec_sweep.py` 會擋兩件事：
 `pos` 含「小百岳」、以及 `desc`／`advice` 宣稱是小百岳卻沒有這個欄位。
 
 `short`、`plan`、`xbaiyue` 是同一條規則的三個實例：**例外用資料表達，不是每頁一個旋鈕。**
+
+### 無地名的停留點
+
+GPS 顯示停留五分鐘以上、但隊友沒有給地名的點，**照樣收進 `schedule`**——停留是行程的
+一部分，不該因為叫不出名字就從紀錄裡消失。讀者從時間軸看得出哪一段會喘、哪裡適合歇。
+
+命名用**描述詞**，不要編地名：`eweishan` 的「第一休息點」「第二休息點」「稜線休息點」、
+`daqitou` 的「古圳休息點」。並在該航點的 `desc` 裡明寫**這個點沒有地名**，
+免得讀者把描述詞當成地名去查。`tools/spec_sweep.py` 會擋：`pos` 是「休息點」而
+`loc` 又以「休息點」結尾的航點，`desc` 必須說明它沒有地名。
+
+這條慣例的由來：2026-08-04 的雙軸審查指出，「只取 GPS 停留點」原本是只對
+`zhongzhengshan` 下的裁示，實作把它推廣到另外三頁、產生了四個清單外的航點。
+使用者裁定保留，於是把它從即興作法升格為明文慣例。
 
 `ele` **優先採地形圖數值，不改用 GPS 高程**。GPS 高程雜訊很大：南勢角 8/2 的紀錄
 在同一座五尖山前後讀到 281 與 316 m，起點捷運站（實際 20 m）讀到 10 m 甚至 -0.5 m。

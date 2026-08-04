@@ -126,14 +126,23 @@ window.PaPaDetail = (function () {
     if (track.dashArray) line.dashArray = track.dashArray;
     L.polyline(pts, line).addTo(map);
 
+    // 標記樣式由 palette 組出來，各頁不必再寫。2026-08-04 量測：21 頁的 marker
+    // 逐字相同，唯一的分歧是 fillOpacity 的 0.9／0.92／1——那是抄來的差異，
+    // 不是決定（0.9 與 0.92 肉眼分不出來）。統一為 0.92。
+    // m.marker 保留為逃生口：huoyianshan 的大峽谷要加大半徑與換描邊。
+    var mpal = m.palette || cfg.palette || palette({ accent: cssVar('--accent') });
     cfg.schedule.forEach(function (wp, i) {
-      var style = m.marker(wp, i, cfg.schedule.length);
+      var style = m.marker
+        ? m.marker(wp, i, cfg.schedule.length)
+        : { radius: mpal.radius(wp, i, cfg.schedule.length),
+            fillColor: mpal.color(wp, i, cfg.schedule.length),
+            opacity: 1, fillOpacity: 0.92 };
       style.color = style.color || '#fff';
       style.weight = style.weight == null ? 2 : style.weight;
       // 小百岳的金環刻意覆寫頁面給的描邊——那是全站語意，不是這一頁的版面決定。
       // 半徑一併提到 8：一般航點是 6，套上 3 px 的環之後幾乎只剩環看得見。
       if (wp.xbaiyue) {
-        style.color = RING;
+        style.color = mpal.ring;
         style.weight = 3;
         style.radius = Math.max(style.radius, 8);
       }
@@ -196,6 +205,7 @@ window.PaPaDetail = (function () {
     // 填色與線色是兩件事：四頁的線用較深的 --accent-deep，填色卻仍是 --accent。
     // 所以填色預設走 accent，只有 shiqiulinling 兩者刻意同色，用 fillColor 指定。
     var fillC = c.fillColor ? (cssVar(c.fillColor) || c.fillColor) : accent;
+    var cpal = c.palette || cfg.palette || palette({ accent: accent });
     var y = { title: { display: true, text: '海拔 (m)' },
               grid: { color: '#f0ede8' },
               min: c.elevationFloor == null ? 0 : c.elevationFloor };
@@ -228,15 +238,13 @@ window.PaPaDetail = (function () {
           pointRadius: 5,
           // 資料點顏色與地圖標記、時間軸圓點是同一個決定，走同一個 palette。
           // 沒給就用本頁主色建一個預設的。
-          pointBackgroundColor: (function () {
-            var pal = c.palette || cfg.palette || palette({ accent: accent });
-            var n = cfg.schedule.length;
-            return cfg.schedule.map(function (w, i) { return pal.color(w, i, n); });
-          })(),
+          pointBackgroundColor: cfg.schedule.map(function (w, i) {
+            return cpal.color(w, i, cfg.schedule.length);
+          }),
           // 小百岳的金環。沒有這兩行時 Chart.js 讓資料點的描邊沿用 dataset 的
           // borderColor 與 borderWidth（線色與 2.5），所以非小百岳一律填回那兩個值，
           // 免得整批資料點的描邊被這次改動悄悄換掉。
-          pointBorderColor: cfg.schedule.map(function (w) { return w.xbaiyue ? RING : line; }),
+          pointBorderColor: cfg.schedule.map(function (w) { return w.xbaiyue ? cpal.ring : line; }),
           pointBorderWidth: cfg.schedule.map(function (w) { return w.xbaiyue ? 4 : 2.5; }),
           fill: true,
           backgroundColor: alpha(fillC, c.fillAlpha == null ? 0.1 : c.fillAlpha),
@@ -273,7 +281,7 @@ window.PaPaDetail = (function () {
     if (!t || !container) return;
 
     var n = cfg.schedule.length;
-    var pal = t.palette || palette({ accent: cssVar('--accent') });
+    var pal = t.palette || cfg.palette || palette({ accent: cssVar('--accent') });
     var fields = t.fields || ['desc'];
     var emoji = t.emoji || null;
     var card = t.layout === 'card';
@@ -299,34 +307,42 @@ window.PaPaDetail = (function () {
       var ringStyle = wp.xbaiyue ? ' border-color:' + pal.ring + '; border-width:3px;' : '';
       var badge = wp.xbaiyue
         ? '<span class="text-xs font-bold px-2 py-0.5 rounded-full" ' +
-          'style="color:' + pal.ring + '; background:rgba(161,98,7,0.12);">' + xbadge(wp) + '</span>'
+          'style="color:' + pal.ring + '; background:' + alpha(pal.ring, 0.12) + ';">' + xbadge(wp) + '</span>'
         : '';
+
+      // 兩種版面同形，只差外層包裝與字級：圓點 → 時刻列（時刻＋原估＋pos 藥丸＋
+      // 小百岳徽章）→ 地點 → 主體。共用的部分只寫一次，差異集中在 L 這張表。
+      var L = card
+        ? { dot:  'w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all',
+            row:  'flex flex-wrap justify-between items-center gap-2 mb-1',
+            time: 'text-lg font-black text-stone-800', timeStyle: '',
+            pill: 'text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase',
+            loc:  'font-bold text-stone-700 text-sm mb-1', locTag: 'h4',
+            body: 'text-[11px] text-stone-600 leading-relaxed' }
+        : { dot:  'absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm',
+            row:  'flex items-center gap-2 mb-1 flex-wrap',
+            time: 'font-mono font-bold text-sm', timeStyle: ' style="color:var(--accent-strong);"',
+            pill: 'text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full',
+            loc:  'font-bold text-stone-800', locTag: 'div',
+            body: 'text-xs text-stone-600 mt-0.5' };
+
+      var dotHtml = '<div class="' + L.dot + pulse + '" style="background:' + dot + ';' + ringStyle + '"></div>';
+      var inner =
+        '<div class="' + L.row + '">' +
+          '<span class="' + L.time + '"' + L.timeStyle + '>' + wp.time + '</span>' + plan +
+          '<span class="' + L.pill + '">' + tag + '</span>' + badge +
+        '</div>' +
+        '<' + L.locTag + ' class="' + L.loc + '">' + wp.loc + '</' + L.locTag + '>' +
+        (body ? '<div class="' + L.body + '">' + body + '</div>' : '');
 
       var div = document.createElement('div');
       div.className = cls;
       div.innerHTML = card
-        ? '<div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">' +
-            '<div class="w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all' + pulse + '"' +
-            ' style="background:' + dot + ';' + ringStyle + '"></div>' +
-          '</div>' +
+        ? '<div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">' + dotHtml + '</div>' +
           '<div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">' +
-            '<div class="flex flex-wrap justify-between items-center gap-2 mb-1">' +
-              '<span class="text-lg font-black text-stone-800">' + wp.time + '</span>' + plan +
-              '<span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase">' +
-                tag + '</span>' + badge +
-            '</div>' +
-            '<h4 class="font-bold text-stone-700 text-sm mb-1">' + wp.loc + '</h4>' +
-            (body ? '<div class="text-[11px] text-stone-600 leading-relaxed">' + body + '</div>' : '') +
+            inner +
           '</div>'
-        : '<div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm' + pulse + '"' +
-          ' style="background:' + dot + ';' + ringStyle + '"></div>' +
-          '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
-            '<span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">' + wp.time + '</span>' +
-            plan +
-            '<span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">' + tag + '</span>' + badge +
-          '</div>' +
-          '<div class="font-bold text-stone-800">' + wp.loc + '</div>' +
-          (body ? '<div class="text-xs text-stone-600 mt-0.5">' + body + '</div>' : '');
+        : dotHtml + inner;
 
       div.onclick = function () {
         updateWaypointCard(i);

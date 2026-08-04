@@ -306,6 +306,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [25.1760,121.5185],
       weather: { lat: 25.176904760689496, lng: 121.52229613112243,
                  subText: '大屯山頂今日參考（雨後請勿前往）',
@@ -315,17 +316,13 @@
         setView: [[25.1760, 121.5185], 14],
         attribution: '© OpenStreetMap',
         track: { weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          fillOpacity: 0.9
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { elevationFloor: 450, lineColor: '--accent-deep', palette: PAL },
+      chart: { elevationFloor: 450, lineColor: '--accent-deep' },
 
-      timeline: { emoji: ICONS, palette: PAL, hover: 'darken' }
+      timeline: { emoji: ICONS, hover: 'darken' }
     });
   </script>
 </body>
