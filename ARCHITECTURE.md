@@ -271,13 +271,41 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最�
 ```
 
 各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
+第三種語意用 `palette({ extra })` 表達（`datongshan` 的展望台、`nanshijiao` 的信仰地標、
+`bishan` 的賞櫻點、`mochashan` 的折返點、`huoyianshan` 的大峽谷），只開一層。
+
 2026-08-04 導入的原因是這個決定寫三份就會漂：`caolingguidao` 加了集合地點之後只更新
-地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。目前 6 頁已改用，
-其餘 12 頁的判斷各有差異（依海拔、依多個 `pos`、依索引），尚未收斂。
+地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。同日量測發現「三處共用」
+這句話當時只有海拔圖做到（18/18），地圖標記與時間軸各只有 6/18——`datunshan`、
+`qixingshan`、`shanying` 的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。
+**18 頁三個介面現已全部收斂，並由 `tools/spec_sweep.py` 逐區塊檢查**：`chart`、`marker`、
+`timeline` 三個區塊都必須真的引用 `palette`，光在頁首宣告 `PAL` 不算。
 
 **時間軸**：`<div id="timeline-container">` 內含一個 `.timeline-line`，其餘由 JS 生成。
 渲染前不要清空容器——那會連同直線一起清掉。meihuashan 先前就是這樣，
 當時是唯一一頁沒有時間軸直線的（已修正）。
+
+各頁不寫時間軸的 HTML 樣板，只說要顯示哪些欄位：
+
+```javascript
+timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，12 頁
+timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }       // 卡片式，6 頁
+```
+
+| 旋鈕 | 意義 |
+|---|---|
+| `layout` | `'list'`（預設）或 `'card'`。兩種版面家族，不是喜好——卡片式頁面的時間軸沒有段落底色 |
+| `fields` | 卡片主體顯示哪些欄位，預設 `['desc']`。目前用到 `desc` / `dist` / `ele` |
+| `emoji` | `pos` → emoji 的對照表，省略則不顯示 |
+| `palette` | 圓點色，見上方「航點配色」 |
+| `hover` | 行列式專用。`'lighten'`（預設，暖底頁）或 `'darken'`（`bg-stone-50` 的頁） |
+
+「原估時間」不設旋鈕：航點有 `plan` 且與實走 `time` 不同就標，跟航點短名的 `short`
+是同一條「例外用資料表達」的規則。警示地形紅 `#ef4444` 的圓點會脈動——那是全站規則，
+不是逐頁掛的 class。
+
+2026-08-04 收進來之前，18 頁手寫了 201 行樣板。量下來只有兩種結構家族，其餘差異
+（`mb-8`／`mb-10`／`mb-12`、`rounded-2xl`／`rounded-[1.5rem]`）是世代殘留，不是決定。
 
 ### 頁面腳本規格
 
@@ -302,6 +330,15 @@ const schedule = [
 
 **已完成的行程另有 `plan` 欄位**，放當初的預估時刻。時間軸把它並排在實際時刻
 旁邊（`原估 07:30`），計畫與實走的落差不必另外解釋。行前頁不需要這個欄位。
+
+**`xbaiyue`** 標記這個航點是台灣小百岳：`xbaiyue: 13` 顯示「⭐ 小百岳 #13」，
+查不到編號時寫 `xbaiyue: true` 顯示「⭐ 小百岳」——不要編一個號碼出來。
+它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站六座裡有三座就是），
+`pos` 只能有一個值，塞進去就會逼出假的二選一（見 `CONTEXT.md`「小百岳」）。
+表現全部由 `detail.js` 負責，各頁只加這個欄位。`tools/spec_sweep.py` 會擋兩件事：
+`pos` 含「小百岳」、以及 `desc`／`advice` 宣稱是小百岳卻沒有這個欄位。
+
+`short`、`plan`、`xbaiyue` 是同一條規則的三個實例：**例外用資料表達，不是每頁一個旋鈕。**
 
 `ele` **優先採地形圖數值，不改用 GPS 高程**。GPS 高程雜訊很大：南勢角 8/2 的紀錄
 在同一座五尖山前後讀到 281 與 316 m，起點捷運站（實際 20 m）讀到 10 m 甚至 -0.5 m。

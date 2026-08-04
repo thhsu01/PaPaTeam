@@ -306,7 +306,7 @@
       { lat: 25.029685, lng: 121.590206, time: "10:00", loc: "長壽亭", dist: 2.42, ele: 295, pos: "休息據點",
         desc: "累計 2.42 km。往九五峰途中的涼亭。", advice: "此後至南港山是最後一段陡上。岔路口多，往九五峰與往拇指山的路在此分開，看清楚指標再走。" },
 
-      { lat: 25.026700, lng: 121.586660, time: "10:31", loc: "南港山 (H375m)", dist: 3.13, ele: 375, pos: "小百岳 #13",
+      { lat: 25.026700, lng: 121.586660, time: "10:31", loc: "南港山 (H375m)", dist: 3.13, ele: 375, pos: "山頂", xbaiyue: 13,
         desc: "累計 3.13 km。小百岳第 13 名，設三等三角點 695 號，南港山系的主峰。停留 14 分鐘。", advice: "小百岳 #13 的三等三角點 695 號就在這裡，但它不是山系最高點——最高的九五峰在 48 公尺外。" },
 
       { lat: 25.026293, lng: 121.586488, time: "10:41", loc: "九五峰 (H376m)", dist: 3.21, ele: 376, pos: "最高點",
@@ -341,10 +341,10 @@
 
     // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色與「哪個 pos 算山頂」；
     // 地圖標記、圖表資料點、時間軸圓點三處共用它，不會再各寫一份而漂掉。
-    const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點" || wp.pos === "小百岳 #13" });
+    const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點" });
 
     const POS_EMOJI = {
-      "集合起點":"🚩", "信仰地標":"🙏", "休息據點":"🌳", "小百岳 #13":"⭐",
+      "集合起點":"🚩", "信仰地標":"🙏", "休息據點":"🌳", "山頂":"🗻",
       "最高點":"🏔️", "稜線山頭":"🌿", "展望台":"🏙️", "公園":"🌲", "步道口":"🚪", "慶功":"🍔"
     };
 
@@ -377,23 +377,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
       chart: { elevationMax: 420, palette: PAL },
 
-      timeline: {
-        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
-        item: (wp, i, n) => {
-          const emoji = POS_EMOJI[wp.pos] || '📍';
-          const dot = PAL.color(wp, i, n);
-          return `
-            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
-                 style="background:${dot};"></div>
-            <div class="flex items-center gap-2 mb-1 flex-wrap">
-              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
-              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
-            </div>
-            <div class="font-bold text-stone-800">${wp.loc}</div>
-            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
-          `;
-        }
-      }
+      timeline: { emoji: POS_EMOJI, palette: PAL }
     });
   </script>
 </body>

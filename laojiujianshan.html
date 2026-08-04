@@ -344,8 +344,6 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent');
-    const PEAK   = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
-    const PLAIN  = '#1c1917';   // 一般航點
 
     const TRIP_DATE = "2026-05-01";
 
@@ -371,14 +369,10 @@
         center: [25.083, 121.631], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['laojiujianshan-2026-05-01'], weight: 4, opacity: 0.8 },
-        marker: (wp) => {
-          const isEnd = wp.pos.includes("終點") || wp.pos.includes("起點");
-          return {
-            radius: wp.pos === "最高點" || isEnd ? 8 : 6,
-            fillColor: wp.pos === "最高點" ? PEAK : (isEnd ? ACCENT : PLAIN),
-            opacity: 1, fillOpacity: 1
-          };
-        },
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 1
+        }),
         selected: (wp, i, n, sel) => ({
           radius: sel ? 12
                 : (wp.pos === "最高點" || wp.pos.includes("終點") || wp.pos.includes("起點") ? 8 : 6)
@@ -388,23 +382,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-8 group cursor-pointer pl-8',
-        item: (wp) => {
-          const dot = wp.pos.includes("終點") || wp.pos.includes("起點") ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-            <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-lg font-black text-stone-800">${wp.time}</span>
-                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-sm">${wp.loc}</h4>
-              <p class="text-[10px] text-stone-600 mt-1">累計里程: ${wp.dist.toFixed(2)} km</p>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['dist'], palette: PAL }
     });
     </script>
 </body>

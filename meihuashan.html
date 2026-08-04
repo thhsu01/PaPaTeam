@@ -280,7 +280,7 @@
 
         let currentWaypointIndex = 0;
 
-        // actual 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，1927 點）：
+        // time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，1927 點）：
         // 對每個航點座標找軌跡上最近的一點，取該點的時間與累計里程。
         // 十個航點全部落在軌跡 15 m 內，只有起點差 138 m——GPX 是在
         // 離公車站一段距離處才開始錄的，回程倒是收在站牌旁 14 m。
@@ -294,19 +294,19 @@
         // 走完才補上的登山口：它不在原本的清單裡，沒有地形圖數值可對，
         // 290 m 取自軌跡前後 60 m 內的高程中位數，應視為 ±25 m 的估計。
         const schedule = [
-            { lat: 25.124977, lng: 121.587709, actual: "07:45", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。GPS 於 07:45 開始記錄。", advice: "至善路上的公車站，附近沒有商店——水和行動糧要在市區備妥。12 km 的行程，水量抓 2 L 起跳。" },
-            { lat: 25.129120, lng: 121.589940, actual: "07:52", loc: "登山口", dist: 0.53, ele: 290, pos: "入山口", desc: "累計 0.53 km。自聖人橋沿路上行、爬升約 70 m 抵達，正式入山。07:52–08:01 整裝 9 分鐘。", advice: "從聖人橋沿產業道路上行約 70 m 落差才到真正的入山口，這段是鋪面，別把它當成已經在爬山。" },
+            { lat: 25.124977, lng: 121.587709, time: "07:45", loc: "聖人橋公車站 (起點)", dist: 0.00, ele: 217, pos: "集合起點", desc: "行程起點。GPS 於 07:45 開始記錄。", advice: "至善路上的公車站，附近沒有商店——水和行動糧要在市區備妥。12 km 的行程，水量抓 2 L 起跳。" },
+            { lat: 25.129120, lng: 121.589940, time: "07:52", loc: "登山口", dist: 0.53, ele: 290, pos: "入山口", desc: "累計 0.53 km。自聖人橋沿路上行、爬升約 70 m 抵達，正式入山。07:52–08:01 整裝 9 分鐘。", advice: "從聖人橋沿產業道路上行約 70 m 落差才到真正的入山口，這段是鋪面，別把它當成已經在爬山。" },
 
-            { lat: 25.129906, lng: 121.593581, actual: "08:40", loc: "雙溪山", dist: 1.30, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。", advice: "第一階段爬升結束。從這裡開始是連續稜線，中途沒有明顯的撤退點，體力要在此評估是否續行。" },
-            { lat: 25.125953, lng: 121.596262, actual: "09:38", loc: "梅花山西峰", dist: 2.64, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。", advice: "進入原始闊葉林，路徑轉為土徑並有拉繩段。林中訊號差，離線地圖要先下載好。" },
-            { lat: 25.130616, lng: 121.598606, actual: "10:22", loc: "大石展望點", dist: 3.95, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。", advice: "稜線上少數視野開闊處，是全程最值得停留拍照的一站。大石表面雨後濕滑，上去前先確認鞋底。" },
-            { lat: 25.130752, lng: 121.599868, actual: "10:39", loc: "梅花山北峰", dist: 4.20, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。", advice: "稜線起伏開始密集，接下來到清心亭是全程最消耗的一段，配速放慢比硬撐有效。" },
-            { lat: 25.125390, lng: 121.604578, actual: "11:54", loc: "清心亭", dist: 6.31, ele: 617, pos: "休息點", desc: "全程最長的一次停留：11:36–12:25 共 49 分鐘。", advice: "全程唯一有遮蔽的正式休息點，適合安排午餐。過此之後到主峰只剩 0.8 km，但仍是上坡。" },
-            { lat: 25.125736, lng: 121.601721, actual: "12:40", loc: "梅花山 (主峰)", dist: 7.09, ele: 643, pos: "最高點", desc: "標高 643m，全程最高點。", advice: "標高 643 m，全程最高點。三角點在林間無展望，拍照打卡後即可續行南峰。" },
-            { lat: 25.124682, lng: 121.601430, actual: "12:44", loc: "梅花山南峰", dist: 7.28, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。", advice: "緊鄰主峰，兩座之間不到 200 公尺。四座梅花山系山頭到此集滿三座，最後一座在西南峰。" },
-            { lat: 25.120990, lng: 121.597671, actual: "13:31", loc: "梅花山西南峰", dist: 8.90, ele: 511, pos: "下切點", desc: "準備大幅度下坡。", advice: "由此開始大幅下切，落差近 200 m 且路徑鬆軟，是全程最容易滑倒的一段。有登山杖務必拿出來。" },
-            { lat: 25.122079, lng: 121.593057, actual: "15:12", loc: "帕米爾公園", dist: 11.04, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。", advice: "義民紀念碑所在的文史園區，有座椅可休息。這裡已接近終點，離聖人橋剩約 1.2 km 的緩下坡。" },
-            { lat: 25.124977, lng: 121.587710, actual: "15:38", loc: "終點 (聖人橋)", dist: 12.22, ele: 217, pos: "終點解散", desc: "平安回到終點解散。", advice: "回到起點的公車站解散。至善路班次不密，下山前先查好回程時刻。" }
+            { lat: 25.129906, lng: 121.593581, time: "08:40", loc: "雙溪山", dist: 1.30, ele: 441, pos: "首個山頭", desc: "第一階段爬升完成。", advice: "第一階段爬升結束。從這裡開始是連續稜線，中途沒有明顯的撤退點，體力要在此評估是否續行。" },
+            { lat: 25.125953, lng: 121.596262, time: "09:38", loc: "梅花山西峰", dist: 2.64, ele: 521, pos: "精華稜線", desc: "進入原始闊葉林。", advice: "進入原始闊葉林，路徑轉為土徑並有拉繩段。林中訊號差，離線地圖要先下載好。" },
+            { lat: 25.130616, lng: 121.598606, time: "10:22", loc: "大石展望點", dist: 3.95, ele: 531, pos: "觀景點", desc: "稜線上重要開闊展望點。", advice: "稜線上少數視野開闊處，是全程最值得停留拍照的一站。大石表面雨後濕滑，上去前先確認鞋底。" },
+            { lat: 25.130752, lng: 121.599868, time: "10:39", loc: "梅花山北峰", dist: 4.20, ele: 584, pos: "連續稜線", desc: "海拔高度持續推進。", advice: "稜線起伏開始密集，接下來到清心亭是全程最消耗的一段，配速放慢比硬撐有效。" },
+            { lat: 25.125390, lng: 121.604578, time: "11:54", loc: "清心亭", dist: 6.31, ele: 617, pos: "休息點", desc: "全程最長的一次停留：11:36–12:25 共 49 分鐘。", advice: "全程唯一有遮蔽的正式休息點，適合安排午餐。過此之後到主峰只剩 0.8 km，但仍是上坡。" },
+            { lat: 25.125736, lng: 121.601721, time: "12:40", loc: "梅花山 (主峰)", dist: 7.09, ele: 643, pos: "最高點", desc: "標高 643m，全程最高點。", advice: "標高 643 m，全程最高點。三角點在林間無展望，拍照打卡後即可續行南峰。" },
+            { lat: 25.124682, lng: 121.601430, time: "12:44", loc: "梅花山南峰", dist: 7.28, ele: 629, pos: "稜線起伏", desc: "緊鄰主峰續行。", advice: "緊鄰主峰，兩座之間不到 200 公尺。四座梅花山系山頭到此集滿三座，最後一座在西南峰。" },
+            { lat: 25.120990, lng: 121.597671, time: "13:31", loc: "梅花山西南峰", dist: 8.90, ele: 511, pos: "下切點", desc: "準備大幅度下坡。", advice: "由此開始大幅下切，落差近 200 m 且路徑鬆軟，是全程最容易滑倒的一段。有登山杖務必拿出來。" },
+            { lat: 25.122079, lng: 121.593057, time: "15:12", loc: "帕米爾公園", dist: 11.04, ele: 316, pos: "文史園區", desc: "參訪義民紀念碑。", advice: "義民紀念碑所在的文史園區，有座椅可休息。這裡已接近終點，離聖人橋剩約 1.2 km 的緩下坡。" },
+            { lat: 25.124977, lng: 121.587710, time: "15:38", loc: "終點 (聖人橋)", dist: 12.22, ele: 217, pos: "終點解散", desc: "平安回到終點解散。", advice: "回到起點的公車站解散。至善路班次不密，下山前先查好回程時刻。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -322,7 +322,6 @@
       nav: [25.124977555244143, 121.58770990640019],
 
       card: {
-        timeField: 'actual',        // 本頁是活動紀錄，欄位名為實際到達時間
         follow: 'pan', wrap: 'cycle',
         flash: ['accent-line-deep', 'accent-tint-weak']
       },
@@ -332,10 +331,8 @@
         center: [25.1275, 121.596], zoom: 15,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['meihuashan-2026-01-10'], weight: 5, opacity: 0.8 },
-        marker: (wp) => ({
-          radius: wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6,
-          fillColor: wp.pos === "最高點" ? '#7c9e52'
-                   : (wp.pos.includes("集合") ? ACCENT : '#1c1917'),
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({
@@ -346,26 +343,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationFloor: 200, palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-10 group cursor-pointer pl-8',
-        item: (wp) => {
-          const dot = wp.pos.includes("集合") ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
-            <div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">
-              <div class="flex flex-wrap justify-between items-center mb-2">
-                <span class="text-xl font-black text-stone-800">${wp.actual}</span>
-                <span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-tighter">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-base mb-1">${wp.loc}</h4>
-              <div class="flex gap-4 text-[11px] text-stone-600 font-bold">
-                <span>累計里程: ${wp.dist.toFixed(2)} km</span>
-                <span>海拔: ${wp.ele} m</span>
-              </div>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }
     });
     </script>
 </body>

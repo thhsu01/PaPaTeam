@@ -373,8 +373,7 @@
         center: [25.119, 121.734], zoom: 14,
         track: { color: ACCENT_LIGHT, weight: 4, opacity: 0.7, dashArray: '8, 8' },
         marker: (wp, i, n) => ({
-          radius: i === 0 || i === n - 1 || wp.pos === "最高點" ? 8 : 6,
-          fillColor: i === 0 ? ACCENT_LIGHT : (wp.pos === "最高點" ? '#7c9e52' : '#292524'),
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
@@ -383,23 +382,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { lineColor: '--accent-light', fillColor: '--accent-light', fillAlpha: 0.05, palette: PAL },
 
-      timeline: {
-        className: 'relative flex items-start mb-12 group cursor-pointer pl-8',
-        item: (wp, i, n) => {
-          const dot = i === 0 || i === n - 1 ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
-          return `
-            <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white transition-transform group-hover:scale-125"></div></div>
-            <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all">
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-lg font-black text-stone-800">${wp.time}</span>
-                <span class="text-[9px] font-black text-stone-600 border border-stone-200 px-2 py-0.5 rounded uppercase">${wp.pos}</span>
-              </div>
-              <h4 class="font-bold text-stone-700 text-sm mb-2">${wp.loc}</h4>
-              <p class="text-[11px] text-stone-600 leading-relaxed">${wp.desc}</p>
-            </div>`;
-        }
-      }
+      timeline: { layout: 'card', fields: ['desc'], palette: PAL }
     });
     </script>
 </body>

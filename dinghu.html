@@ -289,9 +289,6 @@
     // 本頁地圖用的綠是 green-600，與 markup 的 emerald 主色不同族，
     // 是既有狀態，此處照原樣保留。
     const TRACK = '#16a34a';
-    const HIGH  = '#f59e0b';   // 高處
-    const MID   = '#78716c';   // 一般航點（stone-500；原為 slate-500，灰階一律走 stone）
-    const LOW   = '#3b82f6';   // 低處
 
     const ICONS = { "集合起點":"🅿️","入山口":"🚌","景觀亮點":"🌉","歷史遺跡":"🏺","轉換路段":"🌿","副峰":"⛰️","最高點":"🏔️","山頂":"🗻","終點":"🏁" };
 
@@ -315,28 +312,16 @@
         // 現在連地圖畫的線也換成它，不再是航點之間的直線。
         track: { points: PaPaTracks['dinghu-2026-06-20'], weight: 4, opacity: 0.85, color: TRACK },
         popup: true,
-        marker: (wp, i, n) => {
-          const isEnd = i === 0 || i === n - 1;
-          const isPeak = wp.ele >= 650;
-          return { radius: isEnd ? 9 : isPeak ? 8 : 6,
-                   fillColor: isEnd ? TRACK : isPeak ? HIGH : MID, opacity: 1, fillOpacity: 0.9 };
-        }
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.9
+        })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationFloor: 250, palette: PAL },
 
-      timeline: {
-        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',
-        item: (wp, i, n) => `
-          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${wp.ele >= 650 ? 'bg-amber-400' : i === 0 || i === n - 1 ? 'accent-mark-light' : 'bg-stone-400'} border-2 border-white shadow-sm"></div>
-          <div class="flex items-center gap-3 mb-1">
-            <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
-            <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${ICONS[wp.pos] || '📍'} ${wp.pos}</span>
-          </div>
-          <div class="font-bold text-stone-800">${wp.loc}</div>
-          <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>`
-      }
+      timeline: { emoji: ICONS, palette: PAL, hover: 'darken' }
     });
   </script>
 </body>
