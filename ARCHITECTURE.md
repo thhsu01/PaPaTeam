@@ -288,7 +288,7 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最�
 各頁不寫時間軸的 HTML 樣板，只說要顯示哪些欄位：
 
 ```javascript
-timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，12 頁
+timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，16 頁
 timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }       // 卡片式，6 頁
 ```
 
@@ -333,7 +333,7 @@ const schedule = [
 
 **`xbaiyue`** 標記這個航點是台灣小百岳：`xbaiyue: 13` 顯示「⭐ 小百岳 #13」，
 查不到編號時寫 `xbaiyue: true` 顯示「⭐ 小百岳」——不要編一個號碼出來。
-它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站六座裡有三座就是），
+它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站七座裡有五座就是），
 `pos` 只能有一個值，塞進去就會逼出假的二選一（見 `CONTEXT.md`「小百岳」）。
 表現全部由 `detail.js` 負責，各頁只加這個欄位。`tools/spec_sweep.py` 會擋兩件事：
 `pos` 含「小百岳」、以及 `desc`／`advice` 宣稱是小百岳卻沒有這個欄位。

@@ -165,7 +165,7 @@ def check(f):
             p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
 
     # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
-    # 一座山可以同時是最高點與小百岳（全站六座裡有三座就是）。寫進 pos 會逼出
+    # 一座山可以同時是最高點與小百岳（全站七座裡有五座就是）。寫進 pos 會逼出
     # 一個假的二選一：nangangshan 與 nanshijiao 因此把 pos 設成「小百岳 #13／#16」，
     # 於是那兩頁真正的最高點（九五峰、五尖山）與小百岳共用同一個綠。
     # 反過來 datunshan／datongshan／qixingshan 的小百岳只寫在散文裡，資料層看不到，
@@ -226,6 +226,59 @@ def check(f):
     return len(wps), p
 
 
+def check_doc_counts():
+    """文件裡宣稱的數量必須與實際相符。
+
+    2026-08-04 的雙軸審查抓到三處漂掉的數字：ARCHITECTURE.md 與本檔還寫著小百岳
+    「六座裡有三座」（實際七座五座）、manifest 的 track_source 還寫「十二頁有軌跡」
+    （實際十六頁）、chart_config 還寫「18 頁都沒用到 advanced」（實際 22 頁）。
+
+    三處都是**可以從倉庫算出來的數字**，卻靠人記得改。這一條把它們變成會被擋下來的事——
+    與本檔開頭那句「規格表寫了卻沒有檢查就會漂移」是同一個道理，只是對象換成數量。
+    刻意只查算得出來的那幾個，不做通用的「文件裡所有數字」掃描：那會誤報到不能用。
+    """
+    p = []
+    pages = [f for f in sorted(glob.glob('*.html')) if f != 'index.html']
+    n_pages = len(pages)
+    n_tracks = len(glob.glob('assets/tracks/*.js'))
+    xb = peak = 0
+    for f in pages:
+        for o in schedule_objects(open(f, encoding='utf-8').read()):
+            if 'xbaiyue' in o:
+                xb += 1
+                peak += bool(re.search(r'pos:\s*"最高點"', o))
+    CN = '零一二三四五六七八九十'
+
+    def cn(n):
+        return CN[n] if n < 11 else CN[10] + (CN[n - 10] if n < 20 else '')
+
+    checks = [
+        ('ARCHITECTURE.md', '小百岳座數', r'全站(\S+?)座裡有(\S+?)座就是', (cn(xb), cn(peak))),
+        ('CONTEXT.md',      '小百岳座數', r'全站(\S+?)座小百岳裡有(\S+?)座', (cn(xb), cn(peak))),
+        ('tools/spec_sweep.py', '小百岳座數', r'全站(\S+?)座裡有(\S+?)座就是', (cn(xb), cn(peak))),
+        ('manifest.json', '有軌跡的頁數', r'目前(\S+?)頁有軌跡', (cn(n_tracks),)),
+        ('manifest.json', 'advanced 未使用的頁數', r'advanced 目前 (\d+) 頁都沒用到', (str(n_pages),)),
+        ('ARCHITECTURE.md', '行列式的頁數', r'// 行列式，(\d+) 頁', (str(n_pages - 6),)),
+    ]
+    for path, what, pat, want in checks:
+        m = re.search(pat, open(path, encoding='utf-8').read())
+        if not m:
+            p.append('%s 找不到「%s」的敘述——樣式過期了，改文字時要一併改本檢查' % (path, what))
+        elif m.groups() != want:
+            p.append('%s 的%s寫成 %s，實際是 %s' % (path, what, '／'.join(m.groups()), '／'.join(want)))
+
+    used = set()
+    for f in pages:
+        for o in schedule_objects(open(f, encoding='utf-8').read()):
+            mm = re.search(r'xbaiyue:\s*(\d+)', o)
+            if mm:
+                used.add(int(mm.group(1)))
+    extra = used - set(XBAIYUE.values())
+    if extra:
+        p.append('頁面用了對照表沒有的小百岳編號 %s——表要補' % sorted(extra))
+    return p
+
+
 def check_shared():
     """共用檔本身的把關。最高點的顏色自 2026-08-04 起收在 detail.js 的 palette()
     預設值裡，這裡是它唯一的來源，所以要有人看著。"""
@@ -246,6 +299,9 @@ def main():
     shared = check_shared()
     print('%-16s %s' % ('assets/detail.js', 'OK' if not shared else ' / '.join(shared)))
     bad += bool(shared)
+    counts = check_doc_counts()
+    print('%-16s %s' % ('文件宣稱的數量', 'OK' if not counts else ' / '.join(counts)))
+    bad += bool(counts)
     for f in sorted(glob.glob('*.html')):
         if f == 'index.html':
             continue        # 首頁自成一套視覺系統，見 manifest.conventions.greyscale
