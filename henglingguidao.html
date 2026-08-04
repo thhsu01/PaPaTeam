@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>橫嶺古道 × 紗帽山 — 爬爬小隊</title>
+  <meta name="description" content="2025/3/23 橫嶺古道與紗帽山環狀實走紀錄。自橫嶺古道停車場起走，經大埔登山口登紗帽山（643m），由陽明湖登山口下至前山公園，再走橫嶺古道回停車場，全程 5.30 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #4d7c0f, #7c9e52);
+
+      /* 本頁主色。橫嶺古道走在紗帽山山腰的楓香與竹林之下，故取橄欖綠系。
+         用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。
+         注意 --accent 的 lime-700 剛好 4.51:1、只是勉強過關，所以文字
+         一律走 --accent-strong 以上，不要拿 --accent 當內文色。 */
+      --accent:                 #4d7c0f;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線 */
+      --accent-strong:          #3f6212;                  /* 淺底上的文字（6.39:1） */
+      --accent-strong-deep:     #365314;                  /* 淡底卡片上的內文，再深一階（7.88:1） */
+      --accent-tint:            #f7fee7;                  /* 淡底 */
+      --accent-border:          #dde8c4;                  /* 淡框線 */
+      --accent-border-deep:     #c8daa0;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/henglingguidao-2025-03-23.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/3/23 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-lime-50 via-emerald-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">3月23日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 5.30 KM · 3 小時 39 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/3/23 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          繞著火山錐走一圈<br>
+          <span style="color:var(--accent-strong);">橫嶺古道 × 紗帽山</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自紗帽路旁的橫嶺古道停車場出發，先沿紗帽路走到南端的大埔登山口，一路陡上錐狀火山紗帽山（643m），再由北側較緩的陽明湖登山口下到前山公園，最後走橫嶺古道橫切紗帽山山腰回到起點。紗帽山是七星山系的寄生火山，橫嶺古道則是它腰間一條走在楓香與竹林下的平緩舊路。</p>
+
+        <!-- 資料來源說明 -->
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">這份軌跡對得上官方數字</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">這條路線的公開資料很完整，正好可以拿來驗軌跡。官方標高大埔登山口 350 m、陽明湖登山口 415 m、紗帽山 643 m，當天 GPS 讀到的是 349、413、647——<strong>三個都在 4 公尺以內</strong>，所以本頁的高程不做任何偏差修正。距離也對得上：官方說山頂到大埔登山口 1.0 km、到陽明湖登山口 1.2 km，軌跡量到 1.09 km 與 1.22 km。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">橫嶺古道停車場</div>
+            <div class="text-xs text-stone-600 mt-1">紗帽路旁，環狀路線起訖同點</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>橫嶺古道停車場（原點）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">3月23日 07:59–11:38</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至橫嶺古道停車場">
+              🗺️ 導航至集合地點
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">5.30</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">3:39</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~320</div>
+            <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">643</div>
+            <div class="text-xs text-stone-600">最高點 m（紗帽山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">這是環狀路線，起訖都在橫嶺古道停車場。3 小時 39 分裡有將近 1 小時 40 分是站著不動的——山頂就待了超過一小時，所以實際腳程比時間看起來輕鬆得多。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 3/23 當天的 GPS 軌跡。沿途有二十幾處短暫中斷，絕大多數是停下來時 App 自動暫停、位移只有幾公尺；唯一有實際位移的是 08:14–08:22 那 7.9 分鐘（246 公尺），發生在紗帽路的柏油路段上，該段在圖上是直線連接。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合地點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">橫嶺古道停車場</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:59</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">360</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">當天的集合地點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=461" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 紗帽山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=859" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 半嶺步道、半嶺古道、橫嶺古道（健行筆記）</a>
+            <span class="text-xs text-stone-600">官方數據：紗帽山步道全長 2.2 km，山頂距陽明湖登山口 1.2 km、距大埔登山口 1.0 km；標高紗帽山 643 m、陽明湖登山口 415 m、大埔登山口 350 m。橫嶺古道自湖山路至紅壇二登山口間約 850 m。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">整張圖只有一座山：0.60 km 的大埔登山口到 1.69 km 的紗帽山之間爬升 293 公尺，全程的上升幾乎都集中在這 1.09 公里裡。之後就是一路緩降到前山公園，橫嶺古道那一段（3.58–4.44 km）起伏不到 25 公尺。</p>
+
+        <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼不是 848</span>
+          <p class="text-xs text-stone-700 leading-relaxed">
+            把軌跡上每一個正的高程增量加起來會得到 848 公尺，那個數字不能用。這條路線總共只爬升 293 公尺到山頂，
+            全程的真實累計上升不可能有它的兩倍以上。原因是 704 個點裡有很大一部分是站著不動時錄的——山頂待了一小時、
+            登山口等人等了十幾分鐘——GPS 高程在原地會上下抖動幾公尺，每一次抖動都被當成「爬升」累加進去。
+            本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 355、317、304 公尺，
+            已經收斂；直接用各航點高程相加也是 324 公尺。四個算法落在同一區間，因此標 <strong>~320 公尺</strong>。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          沿途亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 3/23 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>百年楓香姐妹樹 🍁</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">兩棵並生的高大楓香，樹齡據說已逾百年，長在橫嶺古道靠紗帽路這頭的叉路口，是這條古道最好認的地標。橫嶺古道全線被樹林遮蔽，楓香是其中最高大的一群。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>紗帽山步道大埔登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">紗帽山步道的南端登山口，位於紗帽路上，官方標高 350 公尺。距山頂 1.0 公里，比北端的陽明湖登山口短 0.2 公里，代價是坡度陡得多。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>紗帽山 (H643m) ⛰️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">七星山系南側的寄生火山，錐狀山形從山下看像一頂烏紗帽，名字由此而來。標高 643 公尺，山頂設有觀景平台與土地調查局圖根點，腹地不小，當天在這一帶待了超過一小時。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>紗帽山陽明湖登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">北端登山口，官方標高 415 公尺，位於紗帽路上、前山公園旁。距山頂 1.2 公里，坡度是兩個登山口裡較緩的一側，也離陽明山公車總站較近。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>前山公園 🌳</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">陽明公園的前山部分，園中有陽明湖，湖的兩側各有一間公共浴室（男湯在建國街、女湯在紗帽路），泡的是陽明山的白磺泉。走完紗帽山下來正好順路。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>橫嶺古道 🎋</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">橫切紗帽山山腰的舊路，兩端登山口間約 850 公尺，全線土石路、坡度極緩，起伏不到 70 公尺。沿途被樹林完全遮蔽，中間有一段竹林隧道，是這條環狀路線裡最輕鬆也最涼快的一段。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">07:59 起錄 · 11:38 收錄 · 全程 3 小時 39 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻、座標與里程都取自 GPS 軌跡在該時刻的位置。這份軌跡沒有需要重建的區間。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 橫嶺古道 × 紗帽山 | 2025 年 3 月 23 日 · 07:59–11:38 · 5.30 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2025/3/23 實走紀錄，2026-08 拿到 GPX 後補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 全部取自當天的 GPS 軌跡（健行筆記 GPX，704 點）：
+    // 依隊友指認的地點在軌跡上定位，再取該點的時刻與累計里程。
+    //
+    // ★ 這份軌跡的高程不需要修正，而且可以證明。三個地點有官方標高，
+    //   當天 GPS 讀到的分別是：
+    //     大埔登山口   官方 350 m ／ GPS 349 m （−1）
+    //     陽明湖登山口 官方 415 m ／ GPS 413 m （−2）
+    //     紗帽山       官方 643 m ／ GPS 647 m （+4）
+    //   沒有系統性偏差，所以不做 huoyianshan 那樣的整體扣減，也不做
+    //   caolingguidao 那樣的漂移內插。頁面上有官方值的取官方值。
+    //
+    // ★ 距離同樣對得上官方數據：山頂到大埔登山口官方 1.0 km、軌跡 1.09 km；
+    //   山頂到陽明湖登山口官方 1.2 km、軌跡 1.22 km；橫嶺古道兩端官方
+    //   約 850 m、軌跡 858 m。三段都在 10% 以內，本頁因此直接採軌跡值。
+    //
+    // ★ 累計上升不採原始加總。原始正增量合計 848 m，是站立不動時的高程
+    //   抖動被一次次累加出來的假值——全程實際只爬升 293 m 到山頂。改對
+    //   高程序列取移動中位數再累加：視窗 15/31/61 點得 355/317/304 m，
+    //   已收斂；依各航點高程直接相加得 324 m。故標 ~320 m。
+    //
+    // ★ 訊號中斷。共二十餘處超過 90 秒，但幾乎都是停下來時 App 暫停、
+    //   位移只有幾公尺，不影響里程。唯一有位移的是 08:14–08:22
+    //   （7.9 分、246 m），發生在紗帽路的柏油路段，該段以直線連接。
+    //
+    // ★ 百年楓香姐妹樹與橫嶺古道紗帽路登山口這兩點沒有公開座標，是依
+    //   當天 08:13–08:14 自停車場往西走 209 m 又折返的那段軌跡定位的
+    //   ——那是一趟明顯的「去看個東西再回來」。順序與隊友指認的一致，
+    //   但精度不如其他八點。
+    const schedule = [
+      { lat: 25.144926, lng: 121.538899, time: "07:59", loc: "橫嶺古道停車場", dist: 0.00, ele: 360, pos: "集合地點",
+        desc: "當天的集合地點，也是終點——這是一趟環狀。GPS 於 07:59 起錄，07:59–08:13 在此等齊整裝 14 分鐘。",
+        advice: "紗帽路旁的停車場，假日容易滿，早到才停得進去。搭公車的人可以反過來走：從陽明山公車總站進橫嶺古道，最後由大埔登山口下山。" },
+
+      { lat: 25.145032, lng: 121.538822, time: "08:13", loc: "百年楓香姐妹樹", dist: 0.15, ele: 358, pos: "老樹",
+        desc: "累計 0.15 km。停車場旁叉路口的兩棵並生楓香，樹齡逾百年，是橫嶺古道這一頭最好認的地標。",
+        advice: "十一月底到十二月中轉色，其餘季節是濃綠的遮蔭。樹下就是叉路口，往半嶺步道與往橫嶺古道從這裡分家，看清楚指標再走。" },
+
+      { lat: 25.144816, lng: 121.538314, time: "08:14", loc: "橫嶺古道紗帽路登山口", dist: 0.21, ele: 350, pos: "步道口",
+        desc: "累計 0.21 km。橫嶺古道靠紗帽路這側的入口，離停車場最近。當天先走到這裡看過古道口，隨即折返、轉往紗帽路南下。",
+        advice: "這一頭進去是橫嶺古道的西段。當天沒從這裡入山——先繞去爬紗帽山，回程才從另一端把古道走完，這樣整圈才連得起來。" },
+
+      { lat: 25.142834, lng: 121.541319, time: "08:23", loc: "紗帽山步道大埔登山口", dist: 0.60, ele: 350, pos: "入山口",
+        desc: "累計 0.60 km。紗帽山步道的南端登山口，官方標高 350 公尺，當天 GPS 讀到 349。08:23–08:28 在此整裝 5 分鐘後起登。",
+        advice: "南端這側距山頂 1.0 公里，比北邊短 0.2 公里但陡得多，接下來 1 公里要爬升近 300 公尺。想走緩坡的人請反過來由陽明湖登山口上、大埔下。" },
+
+      { lat: 25.148498, lng: 121.543277, time: "09:20", loc: "紗帽山 (H643m)", dist: 1.69, ele: 643, pos: "最高點",
+        desc: "累計 1.69 km。錐狀寄生火山的山頂，官方標高 643 公尺，當天 GPS 讀到 647。自大埔登山口爬升 293 公尺、走了 52 分鐘。09:20–10:27 在山頂一帶停留超過一小時。",
+        advice: "山頂有觀景平台與圖根點，腹地夠大，適合安排午餐。四周樹高，展望其實比上山途中的休息平台還收斂，想拍風景別留到山頂才拍。" },
+
+      { lat: 25.149813, lng: 121.548004, time: "10:50", loc: "紗帽山陽明湖登山口", dist: 3.28, ele: 415, pos: "出山口",
+        desc: "累計 3.28 km。紗帽山步道的北端登山口，官方標高 415 公尺，當天 GPS 讀到 413。自山頂下降 228 公尺，軌跡量到 1.22 公里，官方值是 1.2 公里。",
+        advice: "出來就是紗帽路，旁邊就是前山公園。從這裡到陽明山公車總站步行約 5 分鐘，只走紗帽山不走古道的人可以在此收工搭車。" },
+
+      { lat: 25.151312, lng: 121.548553, time: "10:56", loc: "前山公園", dist: 3.49, ele: 420, pos: "公園",
+        desc: "累計 3.49 km。陽明公園的前山部分，園中有陽明湖。10:56–11:02 在此停留 6 分鐘，是下山後唯一一次休息。",
+        advice: "湖的兩側各有一間公共浴室，泡的是白磺泉，男湯在建國街、女湯在紗帽路。走完山順道泡一下很划算，但要自備毛巾與盥洗用品。" },
+
+      { lat: 25.151190, lng: 121.548355, time: "11:02", loc: "橫嶺古道登山口", dist: 3.58, ele: 415, pos: "步道口",
+        desc: "累計 3.58 km。橫嶺古道東端的入口，就在陽明公園入口左側，離陽明山公車總站約 450 公尺。從這裡開始才真正走上古道。",
+        advice: "搭公車來的人從這頭進最順。古道從這裡到紅壇登山口約 850 公尺，全線土石路、樹蔭密，夏天走這段比走紗帽路涼快很多。" },
+
+      { lat: 25.151165, lng: 121.540662, time: "11:17", loc: "橫嶺古道紅壇登山口", dist: 4.44, ele: 420, pos: "步道口",
+        desc: "累計 4.44 km。橫嶺古道西端的出口。從東端走過來軌跡量到 858 公尺，官方說兩端相距約 850 公尺，對得上。這一段起伏只有 25 公尺。",
+        advice: "出了古道還沒到停車場——還有 860 公尺的下坡要走，落差近 60 公尺。看到這個登山口別急著鬆懈。" },
+
+      { lat: 25.144766, lng: 121.538949, time: "11:38", loc: "終點（橫嶺古道停車場）", dist: 5.30, ele: 360, pos: "終點",
+        desc: "累計 5.30 km。GPS 於 11:38 收錄，收錄處離起錄點 18 公尺，環狀完成。全程 3 小時 39 分。",
+        advice: "回到原點取車。想再加菜的人，紅壇登山口那頭可以續接半嶺步道；不想動的就下山到陽明山公車總站一帶吃飯。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 最高點
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "集合地點":"🚩", "老樹":"🍁", "步道口":"🪜", "入山口":"🚪",
+      "最高點":"⛰️", "出山口":"🚶", "公園":"🌳", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2025-03-23";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.144926, 121.538899],   // 集合地點＝停車場，環狀起訖同點
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.1485, lng: 121.5433 },   // 紗帽山山頂
+
+      map: {
+        setView: [[25.1474, 121.5435], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。08:14–08:22 那段沒有訊號，為直線連接。
+        track: { points: PaPaTracks['henglingguidao-2025-03-23'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "最高點";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, '').replace('（橫嶺古道停車場）', ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.pos === "最高點" ? PEAK :
+            wp.pos === "集合地點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 700,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "最高點";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
