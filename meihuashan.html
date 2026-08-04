@@ -331,10 +331,8 @@
         center: [25.1275, 121.596], zoom: 15,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['meihuashan-2026-01-10'], weight: 5, opacity: 0.8 },
-        marker: (wp) => ({
-          radius: wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6,
-          fillColor: wp.pos === "最高點" ? '#7c9e52'
-                   : (wp.pos.includes("集合") ? ACCENT : '#1c1917'),
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({

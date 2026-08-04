@@ -344,8 +344,6 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent');
-    const PEAK   = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
-    const PLAIN  = '#1c1917';   // 一般航點
 
     const TRIP_DATE = "2026-05-01";
 
@@ -371,14 +369,10 @@
         center: [25.083, 121.631], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['laojiujianshan-2026-05-01'], weight: 4, opacity: 0.8 },
-        marker: (wp) => {
-          const isEnd = wp.pos.includes("終點") || wp.pos.includes("起點");
-          return {
-            radius: wp.pos === "最高點" || isEnd ? 8 : 6,
-            fillColor: wp.pos === "最高點" ? PEAK : (isEnd ? ACCENT : PLAIN),
-            opacity: 1, fillOpacity: 1
-          };
-        },
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 1
+        }),
         selected: (wp, i, n, sel) => ({
           radius: sel ? 12
                 : (wp.pos === "最高點" || wp.pos.includes("終點") || wp.pos.includes("起點") ? 8 : 6)

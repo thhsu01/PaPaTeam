@@ -357,9 +357,6 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent');
-    const CANYON = '#ef4444';   // 大峽谷（語意色：紅＝警示地形）
-    const PEAK   = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
-    const PLAIN  = '#78716c';   // 一般航點
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
@@ -389,13 +386,14 @@
         center: [24.368, 120.734], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['huoyianshan-2025-12-13'], weight: 5, opacity: 0.8 },
-        marker: (wp) => {
-          const isCanyon = wp.loc === "火炎山大峽谷";
+        marker: (wp, i, n) => {
+          // 大峽谷是警示地形：除了語意紅，還加大半徑並換上淺紅描邊
+          const warn = PAL.color(wp, i, n) === PAL.warn;
           return {
-            radius: isCanyon ? 12 : (wp.pos === "最高點" ? 9 : 6),
-            fillColor: wp.pos === "最高點" ? PEAK : isCanyon ? CANYON : PLAIN,
-            color: isCanyon ? '#fee2e2' : '#fff',
-            weight: isCanyon ? 4 : 2,
+            radius: warn ? 12 : PAL.radius(wp, i, n),
+            fillColor: PAL.color(wp, i, n),
+            color: warn ? '#fee2e2' : '#fff',
+            weight: warn ? 4 : 2,
             fillOpacity: 1
           };
         },

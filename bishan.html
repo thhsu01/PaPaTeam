@@ -407,7 +407,10 @@
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "極點" });
+      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "極點",
+        // 清風亭是這條路線的賞櫻點，本頁把它標出來（原本只有地圖有，
+        // 現在圖表與時間軸也一致）
+        extra: { "櫻紅": ACCENT_FILL } });
 
     PaPaDetail.init({
       schedule,
@@ -421,8 +424,7 @@
         // 只畫步行段，末尾的接駁不畫
         track: { slice: [0, 10], weight: 4, opacity: 0.7, dashArray: '8, 8' },
         marker: (wp, i, n) => ({
-          radius: i === 0 || i === n - 1 || wp.pos === "極點" ? 8 : 6,
-          fillColor: wp.loc.includes("清風亭") ? ACCENT_FILL : (i === 0 ? ACCENT : '#1c1917'),
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })

@@ -268,8 +268,6 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent-deep');
-    const HIGH = '#f59e0b';   // 主東峰一帶（語意色：琥珀）
-    const LOW  = '#16a34a';   // 起訖點（語意色：綠）
 
     const ICONS = { "集合起點":"🅿️","入山口":"🥾","景觀亮點":"🌿","轉換路段":"↔️","副峰":"⛰️","最高點":"🏔️","山頂":"🗻","終點":"🏁","回程終點":"✅" };
 
@@ -290,12 +288,10 @@
         attribution: '© OpenStreetMap',
         track: { weight: 4, opacity: 0.85 },
         popup: true,
-        marker: (wp, i, n) => {
-          const isEnd = i === 0 || i === n - 1;
-          const isPeak = wp.ele >= 1000;
-          return { radius: isEnd ? 9 : isPeak ? 8 : 6,
-                   fillColor: isEnd ? LOW : isPeak ? HIGH : ACCENT, fillOpacity: 0.9 };
-        }
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          fillOpacity: 0.9
+        })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）

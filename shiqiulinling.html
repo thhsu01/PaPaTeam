@@ -373,8 +373,7 @@
         center: [25.119, 121.734], zoom: 14,
         track: { color: ACCENT_LIGHT, weight: 4, opacity: 0.7, dashArray: '8, 8' },
         marker: (wp, i, n) => ({
-          radius: i === 0 || i === n - 1 || wp.pos === "最高點" ? 8 : 6,
-          fillColor: i === 0 ? ACCENT_LIGHT : (wp.pos === "最高點" ? '#7c9e52' : '#292524'),
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })

@@ -358,9 +358,6 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT  = cssVar('--accent');
-    const SUMMIT  = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
-    const DESCENT = '#f59e0b';   // 開始下山（語意色：琥珀）
-    const PLAIN   = '#1c1917';   // 一般航點
 
     const TRIP_DATE = "2026-03-14";
 
@@ -391,12 +388,8 @@
         // 原本用 slice 只畫去程的八個航點，避免直線來回疊成一條；
         // 換成真實軌跡後不需要這個權宜作法。
         track: { points: PaPaTracks['mochashan-2026-03-14'], weight: 4, opacity: 0.8 },
-        marker: (wp) => ({
-          radius: wp.pos === "最高點" || wp.pos.includes("起點") ||
-                  wp.pos.includes("終點") || wp.pos === "開始下山" ? 8 : 6,
-          fillColor: wp.pos === "最高點" ? SUMMIT
-                   : wp.pos === "開始下山" ? DESCENT
-                   : (wp.pos.includes("點") ? ACCENT : PLAIN),
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({

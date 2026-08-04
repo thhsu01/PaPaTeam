@@ -45,6 +45,26 @@ def schedule_objects(s):
     return out
 
 
+def js_block(s, key):
+    """切出 `key` 後面第一個大括號區塊（含巢狀）。同樣不用 regex——
+    marker 與 timeline 的區塊裡有巢狀物件與三元運算，貪婪比對會吃過頭。"""
+    i = s.find(key)
+    if i < 0:
+        return None
+    j = s.find('{', i)
+    if j < 0:
+        return None
+    depth = 0
+    for k in range(j, len(s)):
+        if s[k] == '{':
+            depth += 1
+        elif s[k] == '}':
+            depth -= 1
+            if depth == 0:
+                return s[j:k + 1]
+    return None
+
+
 def h2_of(s, sec):
     i = s.find('id="%s"' % sec)
     j = s.find('</h2>', i)
@@ -119,6 +139,16 @@ def check(f):
     script = s[s.find('const schedule'):] if 'const schedule' in s else s
     if 'PaPaDetail.palette(' not in script and PEAK not in script.lower() and 'peak-dot' not in script:
         p.append('航點著色看不到山頂綠 %s——山頂在圖上與其他點沒有區別' % PEAK)
+
+    # ── 三個介面必須共用同一個航點配色 ───────────────────────
+    # manifest 的 waypoint_palette 寫著「地圖標記、圖表資料點、時間軸圓點一律走
+    # PaPaDetail.palette」。2026-08-04 量下來只有圖表 18/18，地圖與時間軸各 6/18——
+    # 規約寫了但沒有檢查，於是同一頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。
+    # 「宣告了 PAL」不算數，要真的用在那個介面上，所以逐區塊查。
+    for key, label in (('chart:', '海拔圖'), ('marker:', '地圖標記'), ('timeline:', '時間軸')):
+        blk = js_block(s, key)
+        if blk is not None and 'PAL' not in blk and 'palette' not in blk:
+            p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
 
     # ── overview 統計列必須看得到總里程 ─────────────────────
     if not re.search(r'(實走里程|總里程|里程 km)', s):

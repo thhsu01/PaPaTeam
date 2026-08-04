@@ -485,16 +485,10 @@
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['nanshijiao-2026-08-02'], weight: 4, opacity: 0.85 },
         popup: true,
-        marker: (wp, i, n) => {
-          const isStartEnd = i === 0 || i === n - 1;
-          const isPeak     = wp.pos === "最高點" || wp.pos === "小百岳 #16";
-          const isTemple   = wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" || wp.pos === "信仰地標";
-          return {
-            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
-            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : isTemple ? TEMPLE : '#888',
-            opacity: 1, fillOpacity: 0.92
-          };
-        }
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.92
+        })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
