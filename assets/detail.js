@@ -36,13 +36,28 @@ window.PaPaDetail = (function () {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
 
+  // ── 小百岳 ────────────────────────────────────────────────
+  // 小百岳是航點的屬性，不是 pos 的一個值——一座山可以同時是最高點與小百岳。
+  // 資料寫成 xbaiyue: 13（有編號）或 xbaiyue: true（站上查不到編號時，不編一個出來）。
+  // 表現分兩個通道：金色描邊（地圖、海拔圖、時間軸）與這個文字徽章（時間軸、航點卡、
+  // 地圖 popup）。顏色刻意不是唯一通道。
+  // 它不是填色而是描邊：填色講「這個航點是什麼」，描邊講「它另外還收集到了什麼」。
+  // 對三種頁底（#fff／#f5f3ef／stone-50）的對比是 4.9／4.4／4.7，與其他航點的白環
+  // 一眼分得出來。palette() 以 pal.ring 對外，同一個值不要再抄一份。
+  var RING = '#a16207';
+
+  function xbadge(wp) {
+    if (!wp.xbaiyue) return '';
+    return '⭐ 小百岳' + (wp.xbaiyue === true ? '' : ' #' + wp.xbaiyue);
+  }
+
   // ── 航點卡 ────────────────────────────────────────────────
   function updateWaypointCard(i) {
     current = i;
     var wp = cfg.schedule[i];
     var card = cfg.card || {};
 
-    setText('wp-pos-label', wp.pos);
+    setText('wp-pos-label', wp.pos + (wp.xbaiyue ? '　' + xbadge(wp) : ''));
     setText('wp-title', wp.loc);
     setText('wp-time', wp.time);
     setText('wp-ele', wp.ele);
@@ -115,10 +130,18 @@ window.PaPaDetail = (function () {
       var style = m.marker(wp, i, cfg.schedule.length);
       style.color = style.color || '#fff';
       style.weight = style.weight == null ? 2 : style.weight;
+      // 小百岳的金環刻意覆寫頁面給的描邊——那是全站語意，不是這一頁的版面決定。
+      // 半徑一併提到 8：一般航點是 6，套上 3 px 的環之後幾乎只剩環看得見。
+      if (wp.xbaiyue) {
+        style.color = RING;
+        style.weight = 3;
+        style.radius = Math.max(style.radius, 8);
+      }
       var mk = L.circleMarker([wp.lat, wp.lng], style).addTo(map);
       if (m.popup) {
         mk.bindPopup('<strong>' + wp.loc + '</strong><br>⏱ ' + wp.time +
-                     (wp.dist != null ? '<br>📏 ' + wp.dist + ' km' : '') + '<br>⛰ ' + wp.ele + ' m');
+                     (wp.dist != null ? '<br>📏 ' + wp.dist + ' km' : '') + '<br>⛰ ' + wp.ele + ' m' +
+                     (wp.xbaiyue ? '<br>' + xbadge(wp) : ''));
       }
       mk.on('click', function () { updateWaypointCard(i); });
       markers.push(mk);
@@ -210,6 +233,11 @@ window.PaPaDetail = (function () {
             var n = cfg.schedule.length;
             return cfg.schedule.map(function (w, i) { return pal.color(w, i, n); });
           })(),
+          // 小百岳的金環。沒有這兩行時 Chart.js 讓資料點的描邊沿用 dataset 的
+          // borderColor 與 borderWidth（線色與 2.5），所以非小百岳一律填回那兩個值，
+          // 免得整批資料點的描邊被這次改動悄悄換掉。
+          pointBorderColor: cfg.schedule.map(function (w) { return w.xbaiyue ? RING : line; }),
+          pointBorderWidth: cfg.schedule.map(function (w) { return w.xbaiyue ? 4 : 2.5; }),
           fill: true,
           backgroundColor: alpha(fillC, c.fillAlpha == null ? 0.1 : c.fillAlpha),
           tension: 0.35
@@ -267,29 +295,35 @@ window.PaPaDetail = (function () {
       // 這是規則不是逐頁掛的 class——huoyianshan 的大峽谷原本自己寫 animate-pulse，
       // 收進來之後任何一頁把某個 pos 標成警示地形都會有同樣的提示。
       var pulse = dot.toLowerCase() === pal.warn ? ' animate-pulse' : '';
+      // 小百岳：金環（加粗，不只換色）＋ pos 藥丸旁的文字徽章。兩個通道。
+      var ringStyle = wp.xbaiyue ? ' border-color:' + pal.ring + '; border-width:3px;' : '';
+      var badge = wp.xbaiyue
+        ? '<span class="text-xs font-bold px-2 py-0.5 rounded-full" ' +
+          'style="color:' + pal.ring + '; background:rgba(161,98,7,0.12);">' + xbadge(wp) + '</span>'
+        : '';
 
       var div = document.createElement('div');
       div.className = cls;
       div.innerHTML = card
         ? '<div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1">' +
             '<div class="w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all' + pulse + '"' +
-            ' style="background:' + dot + ';"></div>' +
+            ' style="background:' + dot + ';' + ringStyle + '"></div>' +
           '</div>' +
           '<div class="w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left">' +
             '<div class="flex flex-wrap justify-between items-center gap-2 mb-1">' +
               '<span class="text-lg font-black text-stone-800">' + wp.time + '</span>' + plan +
               '<span class="text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase">' +
-                tag + '</span>' +
+                tag + '</span>' + badge +
             '</div>' +
             '<h4 class="font-bold text-stone-700 text-sm mb-1">' + wp.loc + '</h4>' +
             (body ? '<div class="text-[11px] text-stone-600 leading-relaxed">' + body + '</div>' : '') +
           '</div>'
         : '<div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm' + pulse + '"' +
-          ' style="background:' + dot + ';"></div>' +
+          ' style="background:' + dot + ';' + ringStyle + '"></div>' +
           '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
             '<span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">' + wp.time + '</span>' +
             plan +
-            '<span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">' + tag + '</span>' +
+            '<span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">' + tag + '</span>' + badge +
           '</div>' +
           '<div class="font-bold text-stone-800">' + wp.loc + '</div>' +
           (body ? '<div class="text-xs text-stone-600 mt-0.5">' + body + '</div>' : '');
@@ -407,6 +441,7 @@ window.PaPaDetail = (function () {
   function palette(opt) {
     var peak   = opt.peak  || '#7c9e52';   // 全站語意色：山頂（見 manifest 的 semantic_colors）
     var warn   = '#ef4444';                // 全站語意色：警示地形。以 extra 指給某個 pos
+    var ring   = RING;                     // 全站語意色：小百岳認證環，見檔案上方 xbadge()
     var stone  = opt.stone || '#a09080';   // 一般航點
     var accent = opt.accent;               // 本頁主色，用於起訖點
     var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
@@ -421,7 +456,7 @@ window.PaPaDetail = (function () {
       return isEnd(wp, i, n) ? accent : stone;
     }
     return {
-      peak: peak, warn: warn, stone: stone, accent: accent,
+      peak: peak, warn: warn, ring: ring, stone: stone, accent: accent,
       isPeak: isPeak, isEnd: isEnd, extra: extra,
       color:  colorOf,
       radius: function (wp, i, n) { return isEnd(wp, i, n) ? 9 : isPeak(wp) ? 8 : 6; }
