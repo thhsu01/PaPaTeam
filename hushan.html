@@ -345,30 +345,8 @@
         })
       },
 
-      chart: {
-        // 標高標註在圖上是多餘的（y 軸就是海拔）
-        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
-        fillAlpha: 0.10,
-        dataset: {
-          borderWidth: 2.5,
-          pointRadius: 5,
-          pointBackgroundColor: schedule.map((wp, i) => PAL.color(wp, i, schedule.length))
-        },
-        options: {
-          plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: {
-              label: ctx => `海拔: ${ctx.parsed.y} m`,
-              title: ctx => ctx[0].label
-            } }
-          },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 200,
-                 grid: { color: '#f0ede8' } },
-            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationMax: 200, palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',

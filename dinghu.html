@@ -299,6 +299,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "山頂" });
+
     PaPaDetail.init({
       schedule,
       tripDate: TRIP_DATE,
@@ -320,19 +323,8 @@
         }
       },
 
-      chart: {
-        label: wp => wp.loc.replace(/ \(H.*\)/, ''),
-        fillAlpha: 0.1,
-        dataset: { borderColor: ACCENT, borderWidth: 2.5, pointRadius: 5, tension: 0.3,
-                   pointBackgroundColor: schedule.map(wp => wp.ele >= 650 ? HIGH : wp.ele <= 320 ? LOW : TRACK) },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 250, grid: { color: '#f0f0f0' } },
-            x: { ticks: { maxRotation: 30, font: { size: 11 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationFloor: 250, palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',

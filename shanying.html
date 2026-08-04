@@ -327,6 +327,9 @@
     // 機制在 assets/detail.js，此處只描述差異。
     // 候選行程不寫行程日：日期未定就不要編一個出來，天氣以 forecast_days=1
     // 顯示今日參考即可（見 ARCHITECTURE 的腳本規格）。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
     PaPaDetail.init({
       schedule,
       nav: [24.972683, 121.393083],
@@ -348,19 +351,8 @@
         }
       },
 
-      chart: {
-        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, ''),
-        fillAlpha: 0.1,
-        dataset: { borderColor: ACCENT, borderWidth: 2.5, pointRadius: 5, tension: 0.3,
-                   pointBackgroundColor: schedule.map(wp => wp.ele >= 300 ? HIGH : ACCENT) },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 420, grid: { color: '#f0f0f0' } },
-            x: { ticks: { maxRotation: 30, font: { size: 11 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationMax: 420, lineColor: '--accent-deep', palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',

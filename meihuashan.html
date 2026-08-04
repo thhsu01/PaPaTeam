@@ -314,6 +314,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
     PaPaDetail.init({
       schedule,
       nav: [25.124977555244143, 121.58770990640019],
@@ -340,16 +343,8 @@
         })
       },
 
-      chart: {
-        label: wp => wp.loc,
-        fillAlpha: 0.1,
-        dataset: { label: '實測海拔 (m)', borderWidth: 4, pointRadius: 6, tension: 0.35 },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: { y: { min: 200 } },
-          onHover: (e, el) => { if (el.length > 0) updateWaypointCard(el[0].index); }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationFloor: 200, palette: PAL },
 
       timeline: {
         className: 'relative flex items-start mb-10 group cursor-pointer pl-8',

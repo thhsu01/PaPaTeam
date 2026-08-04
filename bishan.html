@@ -376,7 +376,7 @@
     <script>
 
         const schedule = [
-            { lat: 25.083766, lng: 121.594224, time: "08:00", loc: "捷運內湖站 1 號出口", dist: 0.00, ele: 30, pos: "起點", 
+            { lat: 25.083766, lng: 121.594224, time: "08:00", loc: "捷運內湖站 1 號出口", short: "捷運內湖站", dist: 0.00, ele: 30, pos: "起點", 
               desc: "集合地點。位於內湖核心商業區，建議在此完成最後的物資補給與裝備檢查。", advice: "站內與周邊超商是全程最後的補給點。8 km、爬升 510 m 的路線，水量抓 2 L 起跳。" },
             { lat: 25.087463, lng: 121.595667, time: "08:24", loc: "梘頭山 (H80m)", dist: 0.60, ele: 80, pos: "熱身", 
               desc: "緩步爬升的小山頭。路徑開闊且坡度溫和，適合作為縱走初段的調整與熱身。", advice: "坡度溫和的暖身段。真正的爬升從這裡之後才開始，前段別走太快把體力用掉。" },
@@ -396,7 +396,7 @@
               desc: "核心觀景點與 460 階櫻花隧道匯集處。提供無死角台北盆地視野，櫻花季美不勝收。", advice: "460 階櫻花隧道與台北盆地展望都在這裡，是全程最值得久留的一站。櫻花季約在二至三月。" },
             { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:45", loc: "碧山巖公車站", dist: 8.25, ele: 240, pos: "終點",
               desc: "徒步行程終點。在此準備接駁回內湖市區。", advice: "小 2 公車由此返回內湖站，班次不密，下山前先查時刻。假日常客滿，可能要等下一班。" },
-            { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", dist: 8.25, ele: 30, pos: "回程",
+            { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", short: "捷運內湖站", dist: 8.25, ele: 30, pos: "回程",
               desc: "搭乘公車回到出發點，完成環型全縱走挑戰。", advice: "回到起點完成環型。內湖站周邊餐廳選擇多，適合安排慶功。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
@@ -406,6 +406,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "極點" });
+
     PaPaDetail.init({
       schedule,
       nav: [25.083766, 121.594224],
@@ -425,12 +428,8 @@
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
       },
 
-      chart: {
-        label: wp => wp.loc.split(' ')[0],
-        fillAlpha: 0.05,
-        dataset: { borderWidth: 3, pointRadius: 4, tension: 0.4 },
-        options: { plugins: { legend: { display: false } }, scales: { y: { min: 0 } } }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { fillAlpha: 0.05, palette: PAL },
 
       timeline: {
         className: 'relative flex items-start mb-12 group cursor-pointer pl-8',

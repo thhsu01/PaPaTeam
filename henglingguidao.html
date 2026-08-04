@@ -367,7 +367,7 @@
         desc: "累計 4.50 km。橫嶺古道西端的出口。從東端走過來軌跡量到 858 公尺，官方說兩端相距約 850 公尺，對得上。這一段起伏只有 25 公尺。",
         advice: "出了古道還沒到停車場——還有 860 公尺的下坡要走，落差近 60 公尺。看到這個登山口別急著鬆懈。" },
 
-      { lat: 25.144766, lng: 121.538949, time: "11:38", loc: "終點（橫嶺古道停車場）", dist: 5.36, ele: 360, pos: "終點",
+      { lat: 25.144766, lng: 121.538949, time: "11:38", loc: "終點（橫嶺古道停車場）", short: "終點", dist: 5.36, ele: 360, pos: "終點",
         desc: "累計 5.36 km。GPS 於 11:38 收錄，收錄處離起錄點 18 公尺，環狀完成。全程 3 小時 39 分。",
         advice: "回到原點取車。想再加菜的人，紅壇登山口那頭可以續接半嶺步道；不想動的就下山到陽明山公車總站一帶吃飯。" }
     ];
@@ -412,30 +412,8 @@
         })
       },
 
-      chart: {
-        // 標高標註在圖上是多餘的（y 軸就是海拔）
-        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, '').replace('（橫嶺古道停車場）', ''),
-        fillAlpha: 0.10,
-        dataset: {
-          borderWidth: 2.5,
-          pointRadius: 5,
-          pointBackgroundColor: schedule.map((wp, i) => PAL.color(wp, i, schedule.length))
-        },
-        options: {
-          plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: {
-              label: ctx => `海拔: ${ctx.parsed.y} m`,
-              title: ctx => ctx[0].label
-            } }
-          },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 700,
-                 grid: { color: '#f0ede8' } },
-            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationMax: 700, palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',

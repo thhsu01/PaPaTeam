@@ -355,7 +355,7 @@
         desc: "累計 6.32 km。下坡途中的護管所，設有休憩空間與解說牌。13:44–14:26 在此停留 42 分鐘，是全程最久的一次休息。",
         advice: "進入大里聚落前最後的遮蔽處。接下來 1.4 km 一路陡下到天公廟，落差 160 m，膝蓋負擔重，有登山杖務必拿出來。" },
 
-      { lat: 24.969987, lng: 121.925104, time: "15:13", loc: "草嶺慶雲宮（大里天公廟）", dist: 7.73, ele: 20, pos: "信仰地標",
+      { lat: 24.969987, lng: 121.925104, time: "15:13", loc: "草嶺慶雲宮（大里天公廟）", short: "草嶺慶雲宮", dist: 7.73, ele: 20, pos: "信仰地標",
         desc: "累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。",
         advice: "廟埕面海，回望剛翻過的山稜最有感。廟方有洗手間可借用，是走完全程後第一個能整理的地方。" },
 
@@ -404,30 +404,8 @@
         })
       },
 
-      chart: {
-        // 標高標註在圖上是多餘的（y 軸就是海拔）
-        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, '').replace('（大里天公廟）', ''),
-        fillAlpha: 0.10,
-        dataset: {
-          borderWidth: 2.5,
-          pointRadius: 5,
-          pointBackgroundColor: schedule.map((wp, i) => PAL.color(wp, i, schedule.length))
-        },
-        options: {
-          plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: {
-              label: ctx => `海拔: ${ctx.parsed.y} m`,
-              title: ctx => ctx[0].label
-            } }
-          },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 400,
-                 grid: { color: '#f0ede8' } },
-            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationMax: 400, palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',

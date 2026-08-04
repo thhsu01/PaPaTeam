@@ -360,6 +360,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。本頁無導航鍵，故不設 nav。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() });
+
     PaPaDetail.init({
       schedule,
 
@@ -377,14 +380,8 @@
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
       },
 
-      chart: {
-        label: wp => wp.loc,
-        dataset: {
-          borderColor: ACCENT_LIGHT, borderWidth: 3, pointRadius: 4, tension: 0.4,
-          backgroundColor: 'rgba(14, 165, 233, 0.05)'
-        },
-        options: { plugins: { legend: { display: false } }, scales: { y: { min: 0 } } }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { lineColor: '--accent-light', fillColor: '--accent-light', fillAlpha: 0.05, palette: PAL },
 
       timeline: {
         className: 'relative flex items-start mb-12 group cursor-pointer pl-8',

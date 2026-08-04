@@ -9,8 +9,11 @@
      schedule / TRIP_DATE  ── 行程資料
      PaPaDetail.init({...}) ── 本頁的設定與少量小回呼
 
-   刻意不收進本檔：時間軸卡片的 HTML 樣板。那是各頁的版面設計
-   （欄位、結構、圓點規則都不同），塞進設定只會把樣板字串搬個位置。
+   刻意不收進本檔：時間軸卡片的 HTML 樣板。2026-08-04 量測後修正這句話的理由——
+   結構其實只有兩種家族、圓點規則已收進 palette()，真正因頁而異的只有「顯示哪些欄位」。
+   還沒收是因為它應該以「欄位清單」為介面，不是把樣板字串搬個位置；那是下一輪的事。
+
+   海拔圖則已經收了：各頁只給領域旋鈕，Chart.js 藏在接縫後面（見 docs/adr/0001）。
 
    載入順序：site.js → detail.js → 各頁 inline script。
    兩支共用檔都不可加 defer，否則各頁 inline script 會先跑。
@@ -125,34 +128,96 @@ window.PaPaDetail = (function () {
   }
 
   // ── 海拔剖面圖 ────────────────────────────────────────────
+  /** 航點短名：海拔圖 x 軸上的顯示名稱。預設剝掉標高註記「(H643m)」，
+      剝不乾淨的航點在 schedule 裡直接給 short——例外用資料表達，不是每頁一個格式化函式。 */
+  function shortName(wp) {
+    return wp.short || wp.loc
+      // 標高註記有三種寫法：(H643m)、(H1,092m) 逗號、(標高 65m)
+      .replace(/\s*[（(]\s*(?:[Hh]|標高)?\s*[\d.,]+\s*(?:m|M|公尺)?\s*[)）]/g, '')
+      // 狀態註記：同一個地點在去回程各出現一次時用來區分，x 軸上是雜訊
+      .replace(/\s*[（(](?:起點|終點|回程|去程|接駁|抵達|出發)[)）]/g, '')
+      .trim();
+  }
+
+  /** 深合併：逃生口 advanced 用。陣列與非物件直接覆蓋，物件才往下併。 */
+  function merge(base, extra) {
+    if (!extra) return base;
+    Object.keys(extra).forEach(function (k) {
+      var a = base[k], b = extra[k];
+      base[k] = (a && b && typeof a === 'object' && typeof b === 'object' &&
+                 !Array.isArray(a) && !Array.isArray(b)) ? merge(a, b) : b;
+    });
+    return base;
+  }
+
+  // 海拔圖。各頁只給領域旋鈕，Chart.js 的設定樹完全由這裡組出來——
+  // 換圖表庫只要改這一個函式，不是改 18 頁。理由見 docs/adr/0001。
+  //
+  //   elevationFloor  y 軸起點。市郊路線從 0 起讀得出爬升感；高山路線從 0 起
+  //                   會浪費半張圖，所以設地板。這是編輯判斷，不可推導。預設 0。
+  //   elevationMax    y 軸上限。不給就讓 Chart.js 自己算——它的刻度演算法挑的
+  //                   數字（1092→1100、155→160）不是固定百分比，推導反而會改掉畫面。
+  //   lineColor       剖面線的顏色。預設 --accent；四頁改用較深的 --accent-deep、
+  //                   一頁改用較淺的 --accent-light。刻意不自動採用 --accent-deep：
+  //                   bishan 與 mochashan 有定義它卻沒拿來當線色，自動套用會改到它們。
+  //   fillAlpha       線下填色的濃度。預設 0.1，兩頁用 0.05。
+  //   fillColor       線下填色的顏色。預設 --accent（與 lineColor 分開——
+  //                   四頁的線較深但填色仍是主色）。只有 shiqiulinling 兩者同色。
+  //   palette         航點配色，與地圖標記、時間軸圓點共用同一個決定。
+  //   advanced        逃生口，深合併進最終的 Chart.js 設定。
   function initChart() {
-    var c = cfg.chart;
-    if (!c || !$('elevation-chart') || typeof Chart === 'undefined') return;
+    var c = cfg.chart || {};
+    if (!$('elevation-chart') || typeof Chart === 'undefined') return;
 
     var accent = cssVar('--accent');
-    var ctx = $('elevation-chart').getContext('2d');
-    var dataset = Object.assign({
-      label: '海拔 (m)',
-      data: cfg.schedule.map(function (w) { return w.ele; }),
-      borderColor: accent,
-      borderWidth: 3,
-      pointRadius: 4,
-      fill: true,
-      backgroundColor: c.fillAlpha === false ? undefined : alpha(accent, c.fillAlpha || 0.05),
-      tension: 0.35
-    }, c.dataset || {});
 
-    chart = new Chart(ctx, {
+    var line = c.lineColor ? (cssVar(c.lineColor) || c.lineColor) : accent;
+    // 填色與線色是兩件事：四頁的線用較深的 --accent-deep，填色卻仍是 --accent。
+    // 所以填色預設走 accent，只有 shiqiulinling 兩者刻意同色，用 fillColor 指定。
+    var fillC = c.fillColor ? (cssVar(c.fillColor) || c.fillColor) : accent;
+    var y = { title: { display: true, text: '海拔 (m)' },
+              grid: { color: '#f0ede8' },
+              min: c.elevationFloor == null ? 0 : c.elevationFloor };
+    if (c.elevationMax != null) y.max = c.elevationMax;
+
+    var opts = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: {
+          label: function (ctx) { return '海拔: ' + ctx.parsed.y + ' m'; },
+          title: function (ctx) { return ctx[0].label; }
+        } }
+      },
+      scales: { y: y, x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } } },
+      // 滑過圖表即選取該航點。原本只有四頁有（且四頁一字不差），2026-08-04 起全站預設。
+      onHover: function (e, el) { if (el.length > 0) updateWaypointCard(el[0].index); }
+    };
+
+    chart = new Chart($('elevation-chart').getContext('2d'), {
       type: 'line',
       data: {
-        labels: cfg.schedule.map(c.label || function (w) { return w.loc; }),
-        datasets: [dataset]
+        labels: cfg.schedule.map(shortName),
+        datasets: [{
+          label: '海拔 (m)',
+          data: cfg.schedule.map(function (w) { return w.ele; }),
+          borderColor: line,
+          borderWidth: 2.5,
+          pointRadius: 5,
+          // 資料點顏色與地圖標記、時間軸圓點是同一個決定，走同一個 palette。
+          // 沒給就用本頁主色建一個預設的。
+          pointBackgroundColor: (function () {
+            var pal = c.palette || cfg.palette || palette({ accent: accent });
+            var n = cfg.schedule.length;
+            return cfg.schedule.map(function (w, i) { return pal.color(w, i, n); });
+          })(),
+          fill: true,
+          backgroundColor: alpha(fillC, c.fillAlpha == null ? 0.1 : c.fillAlpha),
+          tension: 0.35
+        }]
       },
-      options: Object.assign({
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } }
-      }, c.options || {})
+      options: merge(opts, c.advanced)
     });
   }
 
@@ -289,9 +354,18 @@ window.PaPaDetail = (function () {
     var accent = opt.accent;               // 本頁主色，用於起訖點
     var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
     var isEnd  = opt.isEnd  || function (wp, i, n) { return i === 0 || i === n - 1; };
+    // 有些路線有第三種值得標的東西——datongshan 的展望台、nanshijiao 的信仰地標。
+    // 以 { pos: 顏色 } 表達，優先序在山頂之後、起訖點之前。刻意只開一層：
+    // 再多下去就變回「每頁一套配色」，那正是要收掉的東西。
+    var extra = opt.extra || null;
+    function colorOf(wp, i, n) {
+      if (isPeak(wp)) return peak;
+      if (extra && Object.prototype.hasOwnProperty.call(extra, wp.pos)) return extra[wp.pos];
+      return isEnd(wp, i, n) ? accent : stone;
+    }
     return {
-      peak: peak, stone: stone, accent: accent, isPeak: isPeak, isEnd: isEnd,
-      color:  function (wp, i, n) { return isPeak(wp) ? peak : isEnd(wp, i, n) ? accent : stone; },
+      peak: peak, stone: stone, accent: accent, isPeak: isPeak, isEnd: isEnd, extra: extra,
+      color:  colorOf,
       radius: function (wp, i, n) { return isEnd(wp, i, n) ? 9 : isPeak(wp) ? 8 : 6; }
     };
   }

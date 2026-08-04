@@ -2,6 +2,9 @@
 
 本文檔說明爬爬小隊網站的代碼結構、慣例與最佳實踐。適合開發者和內容編輯參考。
 
+**名詞看 [`CONTEXT.md`](CONTEXT.md)**（行程、航點、航點短名、最高點 vs 山頂），
+**承重的決策看 [`docs/adr/`](docs/adr/)**。本檔管的是版面與結構規格。
+
 ## 整體架構
 
 ```
@@ -247,6 +250,16 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 
 **海拔圖**：`<canvas id="elevation-chart">`（不是 `elevationChart`），
 外層 `.chart-container`，並帶 `role="img"` 與 `aria-label`。
+
+各頁不直接設定 Chart.js，只給領域旋鈕；設定樹由 `detail.js` 的 `initChart()` 組出。
+理由見 [ADR-0001](docs/adr/0001-chartjs-behind-the-seam.md)。
+
+```javascript
+chart: { elevationFloor: 450, lineColor: '--accent-deep', palette: PAL }
+```
+
+`elevationFloor` 是編輯判斷（高山路線從 0 起會浪費半張圖）；`elevationMax` 不給就讓
+Chart.js 自己算——它的刻度演算法挑的數字不是固定百分比，硬推導會改掉畫面。
 
 **航點配色**：地圖標記、圖表資料點、時間軸圓點三處是同一個決定，走
 `PaPaDetail.palette({ accent, isPeak })` 取得，不要各寫一份。

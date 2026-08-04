@@ -366,6 +366,9 @@
     // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，航點卡因此加回
     // 里程欄；建議框的 markup 與 advice 內容也已於 2026-08-03 補齊
     // （此前是全站唯一沒有 wp-advice 的一頁，是規格上的缺口）。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
     PaPaDetail.init({
       schedule,
       nav: [24.358077127978664, 120.7361309924151],
@@ -400,16 +403,8 @@
         })
       },
 
-      chart: {
-        label: wp => wp.loc,
-        fillAlpha: 0.1,
-        dataset: { borderWidth: 4, pointRadius: 6, tension: 0.35 },
-        options: {
-          plugins: { legend: { display: false } },
-          scales: { y: { min: 150 }, x: { ticks: { display: false } } },
-          onHover: (e, el) => { if (el.length > 0) updateWaypointCard(el[0].index); }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationFloor: 150, palette: PAL },
 
       timeline: {
         className: 'relative flex items-start mb-10 group cursor-pointer pl-8',

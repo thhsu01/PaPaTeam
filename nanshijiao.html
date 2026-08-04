@@ -466,6 +466,9 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 地圖、圖表、航點卡、天氣的機制都在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT, extra: { "歷史廟宇": "#8060b0", "信仰地標": "#8060b0", "天然岩洞": "#8060b0" } });
+
     PaPaDetail.init({
       schedule,
       tripDate: TRIP_DATE,
@@ -493,35 +496,8 @@
         }
       },
 
-      chart: {
-        // 標高標註在圖上是多餘的（y 軸就是海拔）。半形空格非必然存在——
-        // 「外南勢角山（國旗嶺）(H160m)」前面接的是全形括號，原本的
-        // / \(H.*\)/ 就吃不到，整串標高會留在標籤上。
-        label: wp => wp.short || wp.loc.replace(/\s*\(H[^)]*\)/, ''),
-        fillAlpha: 0.10,
-        dataset: {
-          borderWidth: 2.5,
-          pointRadius: 5,
-          pointBackgroundColor: schedule.map(wp =>
-            wp.ele >= 300 ? PEAK :
-            wp.pos === "歷史廟宇" || wp.pos === "天然岩洞" || wp.pos === "信仰地標" ? TEMPLE :
-            wp.pos === "集合起點" || wp.pos === "終點" ? ACCENT : STONE)
-        },
-        options: {
-          plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: {
-              label: ctx => `海拔: ${ctx.parsed.y} m`,
-              title: ctx => ctx[0].label
-            } }
-          },
-          scales: {
-            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 360,
-                 grid: { color: '#f0ede8' } },
-            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
-          }
-        }
-      },
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationMax: 360, palette: PAL },
 
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
