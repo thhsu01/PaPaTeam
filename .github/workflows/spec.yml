@@ -31,6 +31,11 @@ jobs:
       - name: 全站規格掃描
         run: python3 tools/spec_sweep.py
 
+      # 同一趟行程的日期與里程在頁內出現七、八次、首頁又有一份，全部手打。
+      # 這一步確保漏改其中一處會被擋下來，而不是靠人記得全部改到。
+      - name: 行程事實一致性
+        run: python3 tools/fact_check.py
+
       # 上一步失敗時，把 ARCHITECTURE.md 的對應規則指出來，
       # 免得看到紅字卻不知道去哪查規範。
       - name: 失敗時附上規範出處
@@ -45,6 +50,7 @@ jobs:
             echo "- 灰階一律 stone、最高點語意色 \`#7c9e52\` → \`manifest.json\` 的 \`conventions\`"
             echo "- 每段里程不得短於兩航點直線距離 → \`ARCHITECTURE.md\` 的「里程健全性」"
             echo "- 每個航點都要有 \`advice\` → \`ARCHITECTURE.md\` 的「尚未收斂的一件事」"
+            echo "- 日期與總里程在頁內多處重複 → 由 \`tools/fact_check.py\` 交叉核對，任一處漏改就會擋下"
             echo ""
             echo "本機重現：\`python3 tools/spec_sweep.py\`（全過回傳 0）"
           } >> "$GITHUB_STEP_SUMMARY"
