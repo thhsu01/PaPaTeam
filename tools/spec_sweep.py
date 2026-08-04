@@ -20,7 +20,9 @@ PEAK = '#7c9e52'
 # 新增行程若走到名單外的小百岳，要自己往這裡加一筆。
 XBAIYUE = {
     '大屯山主峰': 1,      # 台北，1092 m
-    '七星山主峰': 2,      # 台北，1120 m。東峰不是另一座——002 指的是七星山這座山
+    '七星山主峰': 2,      # 台北，1120 m
+    '七星山東峰': 2,      # 與主峰共用 002——名單上的編號給的是七星山這座山，
+                         # 主東峰是它的兩個峰頭。本站兩個峰頭都標，但不算兩座
     '大崙頭山': 8,        # 台北內湖，476 m
     '南港山': 13,         # 台北信義，375 m
     '大棟山': 15,         # 新北樹林／桃園龜山交界，405 m
@@ -158,11 +160,15 @@ def check(f):
     # manifest 的 waypoint_palette 寫著「地圖標記、圖表資料點、時間軸圓點一律走
     # PaPaDetail.palette」。2026-08-04 量下來只有圖表 18/18，地圖與時間軸各 6/18——
     # 規約寫了但沒有檢查，於是同一頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。
-    # 「宣告了 PAL」不算數，要真的用在那個介面上，所以逐區塊查。
-    for key, label in (('chart:', '海拔圖'), ('marker:', '地圖標記'), ('timeline:', '時間軸')):
-        blk = js_block(s, key)
-        if blk is not None and 'PAL' not in blk and 'palette' not in blk:
-            p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
+    # 「宣告了 PAL」不算數，要真的送進去。2026-08-04 起各頁改成在 init 的頂層寫
+    # 一次 palette: PAL，三個介面共用——那比在三個區塊各寫一次更好，所以頂層有就算過。
+    # 只有頁面既沒有頂層 palette、該區塊自己也沒有時才報。
+    top = re.search(r'PaPaDetail\.init\(\{[^}]*?\bpalette:\s*\w', s)
+    if not top:
+        for key, label in (('chart:', '海拔圖'), ('marker:', '地圖標記'), ('timeline:', '時間軸')):
+            blk = js_block(s, key)
+            if blk is not None and 'PAL' not in blk and 'palette' not in blk:
+                p.append('%s 沒有走 palette()——同一個航點會在不同介面上是不同顏色' % label)
 
     # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
     # 一座山可以同時是最高點與小百岳（全站七座裡有五座就是）。寫進 pos 會逼出
@@ -241,12 +247,16 @@ def check_doc_counts():
     pages = [f for f in sorted(glob.glob('*.html')) if f != 'index.html']
     n_pages = len(pages)
     n_tracks = len(glob.glob('assets/tracks/*.js'))
-    xb = peak = 0
+    # 以「不重複的編號」計數，不是以航點計數：七星山主峰與東峰共用 #2，
+    # 標了兩個航點但仍然只有一座小百岳。算成兩座會讓文件跟著錯。
+    seen = {}
     for f in pages:
         for o in schedule_objects(open(f, encoding='utf-8').read()):
-            if 'xbaiyue' in o:
-                xb += 1
-                peak += bool(re.search(r'pos:\s*"最高點"', o))
+            m0 = re.search(r'xbaiyue:\s*(\d+)', o)
+            if m0:
+                num = int(m0.group(1))
+                seen[num] = seen.get(num, False) or bool(re.search(r'pos:\s*"最高點"', o))
+    xb, peak = len(seen), sum(seen.values())
     CN = '零一二三四五六七八九十'
 
     def cn(n):

@@ -381,11 +381,14 @@
         }
       },
 
+      palette: PAL,
+
       map: {
         preferCanvas: true,
         center: [24.368, 120.734], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { points: PaPaTracks['huoyianshan-2025-12-13'], weight: 5, opacity: 0.8 },
+        palette: PAL,
         marker: (wp, i, n) => {
           // 大峽谷是警示地形：除了語意紅，還加大半徑並換上淺紅描邊
           const warn = PAL.color(wp, i, n) === PAL.warn;

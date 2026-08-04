@@ -301,6 +301,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.1620,121.5295],
       weather: { lat: 25.1654, lng: 121.5325, sep: '° - ' },
@@ -311,17 +312,13 @@
         // 實走軌跡（assets/tracks/）。時間與里程本來就取自這份 GPX，
         // 現在連地圖畫的線也換成它，不再是航點之間的直線。
         track: { points: PaPaTracks['dinghu-2026-06-20'], weight: 4, opacity: 0.85, color: TRACK },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.9
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { elevationFloor: 250, palette: PAL },
+      chart: { elevationFloor: 250 },
 
-      timeline: { emoji: ICONS, palette: PAL, hover: 'darken' }
+      timeline: { emoji: ICONS, hover: 'darken' }
     });
   </script>
 </body>

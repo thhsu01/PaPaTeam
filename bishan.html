@@ -414,6 +414,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [25.083766, 121.594224],
 
       card: { follow: 'pan', wrap: 'cycle' },
@@ -423,17 +424,13 @@
         center: [25.100, 121.595], zoom: 14,
         // 只畫步行段，末尾的接駁不畫
         track: { slice: [0, 10], weight: 4, opacity: 0.7, dashArray: '8, 8' },
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 1
-        }),
-        selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
+selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { fillAlpha: 0.05, palette: PAL },
+      chart: { fillAlpha: 0.05 },
 
-      timeline: { layout: 'card', fields: ['desc'], palette: PAL }
+      timeline: { layout: 'card', fields: ['desc'] }
     });
     </script>
 </body>

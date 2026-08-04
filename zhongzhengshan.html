@@ -361,6 +361,7 @@
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.156174, 121.511582],   // 集合地點＝停車場，原路折返起訖同點
 
@@ -373,17 +374,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。原路折返，去回程重疊。
         track: { points: PaPaTracks['zhongzhengshan-2025-04-27'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
-      chart: { elevationFloor: 450, palette: PAL },
+      chart: { elevationFloor: 450 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>

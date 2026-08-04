@@ -270,6 +270,17 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最�
 // PAL.radius(wp, i, n) 起訖點 9、最高點 8、其餘 6
 ```
 
+**在 `init` 的頂層宣告一次就好**，三個介面共用：
+
+```javascript
+PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {…} })
+```
+
+2026-08-04 之前是在 `chart`／`map.marker`／`timeline` 各寫一次，於是 21 頁的
+`marker:` 閉包逐字相同，唯一的分歧是 `fillOpacity` 的 0.9／0.92／1——0.9 與 0.92
+肉眼分不出來，那是抄來的差異不是決定，已統一為 0.92。**各頁不再寫 `marker:`**；
+它降為逃生口，目前只有 `huoyianshan` 用（大峽谷要加大半徑並換淺紅描邊）。
+
 各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
 第三種語意用 `palette({ extra })` 表達（`datongshan` 的展望台、`nanshijiao` 的信仰地標、
 `bishan` 的賞櫻點、`mochashan` 的折返點、`huoyianshan` 的大峽谷），只開一層。

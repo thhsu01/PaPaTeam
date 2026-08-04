@@ -317,6 +317,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [24.991397, 121.424430],
       weather: { lat: 24.995782, lng: 121.384254,
                  subText: '大棟山頂今日參考',
@@ -326,17 +327,13 @@
         setView: [[24.992, 121.404], 13],
         attribution: 'Leaflet | © OpenStreetMap',
         track: { weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.9
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { elevationMax: 450, lineColor: '--accent-deep', palette: PAL },
+      chart: { elevationMax: 450, lineColor: '--accent-deep' },
 
-      timeline: { emoji: ICONS, palette: PAL, hover: 'darken' }
+      timeline: { emoji: ICONS, hover: 'darken' }
     });
   </script>
 </body>

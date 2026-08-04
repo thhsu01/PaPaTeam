@@ -370,6 +370,7 @@
 
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [24.830230219662706, 121.74711388053494],
       weather: { lat: 24.8302, lng: 121.7471,
@@ -388,19 +389,15 @@
         // 原本用 slice 只畫去程的八個航點，避免直線來回疊成一條；
         // 換成真實軌跡後不需要這個權宜作法。
         track: { points: PaPaTracks['mochashan-2026-03-14'], weight: 4, opacity: 0.8 },
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 1
-        }),
-        selected: (wp, i, n, sel) => ({
+selected: (wp, i, n, sel) => ({
           radius: sel ? 12 : (wp.pos === "最高點" || wp.pos.includes("點") ? 8 : 6)
         })
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
-      chart: { palette: PAL },
+      chart: { },
 
-      timeline: { layout: 'card', fields: ['dist'], palette: PAL }
+      timeline: { layout: 'card', fields: ['dist'] }
     });
     </script>
 </body>

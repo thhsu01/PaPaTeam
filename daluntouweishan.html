@@ -402,6 +402,7 @@
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       tripDate: TRIP_DATE,
       nav: [25.105950, 121.568020],   // 集合地點＝大崙尾山登山口，環狀起訖同點
 
@@ -414,17 +415,13 @@
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。環狀，收錄處離起錄點 22 m。
         track: { points: PaPaTracks['daluntouweishan-2025-09-29'], weight: 4, opacity: 0.85 },
-        popup: true,
-        marker: (wp, i, n) => ({
-          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
-          opacity: 1, fillOpacity: 0.92
-        })
+        popup: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
-      chart: { elevationFloor: 250, palette: PAL },
+      chart: { elevationFloor: 250 },
 
-      timeline: { emoji: POS_EMOJI, palette: PAL }
+      timeline: { emoji: POS_EMOJI }
     });
   </script>
 </body>
