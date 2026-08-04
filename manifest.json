@@ -212,27 +212,7 @@
       "purpose": "專案說明：快速開始、檔案結構、常見問題"
     }
   ],
-  "open_items": [
-    {
-      "id": "jinmianshan-blackout-distances",
-      "due": null,
-      "blocking": false,
-      "desc": "jinmianshan 中斷區間（大岩壁→論劍亭→剪刀石）的里程是按直線 1.15 倍重建的估算，不是量測。總里程 3.30 km 應視為下限。論劍亭的 time 10:10 與 ele 215 m 同為估計值",
-      "source": "2026-08-03 隊友補上論劍亭座標後重建"
-    },
-    {
-      "id": "caolingguidao-huzibei-inferred",
-      "due": null,
-      "blocking": false,
-      "desc": "caolingguidao 的虎字碑落在 11:38–11:53 的訊號中斷內，位置取中斷結束的第一個點（4.69 km）。修正後高程 330 m 與公開標高相符，但仍是推定，有座標可更正",
-      "source": "2026-08-03 建頁"
-    },
-    {
-      "id": "caolingguidao-fulong-elevation",
-      "note": "福隆火車站標高 10 m 是海濱車站的概略值，不是量測也查不到官方數據（維基百科被代理擋在 403）。它只用在海拔剖面圖最左端那一點，不影響 7.88 km 與累計上升",
-      "opened": "2026-08-04"
-    }
-  ],
+  "open_items": [],
   "conventions": {
     "detail_page_sections": [
       "#overview",
@@ -249,8 +229,8 @@
       "--accent-strong-light"
     ],
     "accent_note": "換主色只改 :root 這一段，markup 與腳本不動",
-    "elevation_source": "地形圖／公開標高優先，非 GPS。若只能用 GPS，先查它有沒有系統性偏差：多數軌跡是固定高估（huoyianshan +27 m），扣掉即可；caolingguidao 則是一天內累積漂移 45 m（起點準、終點偏高），要依經過時間線性內插才扣得掉。修正後拿沒有參與校正的公開標高回驗，對得上才採用",
-    "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程",
+    "elevation_source": "地形圖／公開標高優先，非 GPS。若只能用 GPS，先查它有沒有系統性偏差：多數軌跡是固定高估（huoyianshan +27 m），扣掉即可；caolingguidao 則是一天內累積漂移 45 m（起點準、終點偏高），要依經過時間線性內插才扣得掉。修正後拿沒有參與校正的公開標高回驗，對得上才採用。頁面上的 ele 一律取公開標高（若有），修正後的 GPS 值只用來驗證，不直接上頁",
+    "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程。若中斷區間長到 GPS 短報（jinmianshan 大岩壁 64 分鐘），拿官方步道分段里程當錨點，用中斷前的良好軌跡相減求出短少量，再依直線比分配給區間內各段——比自訂倍率可靠，而且可被外部資料檢驗。原本用的「直線 ×1.15」純屬臆測，2026-08-04 已換掉",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
     "no_fabrication": "里程、時間、海拔屬量測值，缺就留空，不得為填滿欄位而編造。advice 不在此列——它是「下次走的人用得上的提示」，可依路線資料與公開資訊撰寫，不必等實走",
     "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/），計畫與候選行程畫航點直線。目前十一頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan、caolingguidao",
