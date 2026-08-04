@@ -48,7 +48,8 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f5f5f4; }
     ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 10px; }
-  </style>
+      .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -151,7 +152,7 @@
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                        <span class="w-2.5 h-8 accent-mark rounded-full"></span>稜線縱走地圖
+                        <span class="w-2.5 h-8 accent-mark rounded-full"></span>互動路線圖
                     </h2>
                     <p class="text-stone-600 mt-2 text-sm">全程 5.95 km、累計爬升約 150 m。時刻採分段配速推估，非實走紀錄。</p>
                 </div>
@@ -186,7 +187,7 @@
         <!-- 3. Elevation Chart -->
         <section id="elevation">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8">
-                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>海拔高度剖面
+                <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>海拔高度剖面圖
             </h2>
             <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
                 <div class="chart-container"><canvas id="elevation-chart"></canvas></div>
@@ -283,7 +284,7 @@
         <!-- 4. Detailed Timeline -->
         <section id="timeline" class="max-w-2xl mx-auto">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100">
-                <span class="w-2.5 h-8 accent-mark rounded-full"></span>詳細時程預估
+                <span class="w-2.5 h-8 accent-mark rounded-full"></span>預計行程進度
             </h2>
 
             <!-- 配速說明。舊版全程套用固定 1.5 km/hr，市區平路因此被高估成 36 分鐘、
@@ -370,7 +371,7 @@
         track: { color: ACCENT_LIGHT, weight: 4, opacity: 0.7, dashArray: '8, 8' },
         marker: (wp, i, n) => ({
           radius: i === 0 || i === n - 1 || wp.pos === "最高點" ? 8 : 6,
-          fillColor: i === 0 ? ACCENT_LIGHT : (wp.pos === "最高點" ? '#ef4444' : '#292524'),
+          fillColor: i === 0 ? ACCENT_LIGHT : (wp.pos === "最高點" ? '#7c9e52' : '#292524'),
           opacity: 1, fillOpacity: 1
         }),
         selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
@@ -389,7 +390,7 @@
         className: 'relative flex items-start mb-12 group cursor-pointer pl-8',
         item: (wp, i, n) => {
           const dot = i === 0 || i === n - 1 ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'bg-red-500' : 'bg-stone-300';
+                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
           return `
             <div class="absolute left-0 w-12 flex justify-center z-10 pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white transition-transform group-hover:scale-125"></div></div>
             <div class="w-full bg-white p-5 rounded-[1.5rem] border border-stone-100 card-hover transition-all">

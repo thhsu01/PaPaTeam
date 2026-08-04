@@ -35,7 +35,10 @@
       --accent-tint:            #f0f9ff;                    /* sky-50 */
 
     }
-  </style>
+      .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -99,7 +102,7 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">山頂氣溫較山下低 10–15°C</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full accent-fill hover:bg-sky-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場" style="background:var(--accent-strong);">
               🗺️ 導航至陽明山第二停車場
             </button>
           </div>
@@ -182,7 +185,7 @@
     <section id="spots" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+          <span class="w-2.5 h-8 section-bar-stone rounded-full"></span>
           山系亮點導覽
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

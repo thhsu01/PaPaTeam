@@ -47,7 +47,10 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f5f5f4; }
     ::-webkit-scrollbar-thumb { background: var(--accent-on-dark); border-radius: 10px; }
-  </style>
+      .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -116,7 +119,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
-                    <button onclick="openNavigation()" class="flex-1 py-4 bg-stone-800 text-white rounded-2xl font-bold shadow-xl hover:bg-black transition-all flex items-center justify-center gap-2" aria-label="在地圖應用中導航至捷運內湖站">
+                    <button onclick="openNavigation()" class="flex-1 py-4 text-white rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2" aria-label="在地圖應用中導航至捷運內湖站" style="background:var(--accent-strong);">
                         <span>🧭 導航至集合點</span>
                     </button>
                     <a href="https://ebus.gov.taipei/VsSimpleMap?routeid=0151000220&gb=1" target="_blank" class="flex-1 py-4 accent-btn rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2">
@@ -128,7 +131,7 @@
             <!-- Statistics Cards -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">徒步長度</div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">總里程 km（估）</div>
                     <div class="text-2xl font-black text-stone-800">約 8.25<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
@@ -163,7 +166,7 @@
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
                         <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
-                        縱走路線百科
+                        互動路線圖
                     </h2>
                     <p class="text-stone-600 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
                 </div>
@@ -201,6 +204,17 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 參考資源。本頁是候選行程、尚無實走軌跡，里程與海拔為估算值，
+                     成行後會比照其他紀錄頁改用當天 GPX 重算。 -->
+                <div class="mt-4 bg-white rounded-2xl p-5 border border-stone-200">
+                    <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+                    <div class="flex flex-col gap-2">
+                        <a href="https://hiking.biji.co/index.php?q=trail&amp;act=detail&amp;id=558" target="_blank" rel="noopener" class="text-sm accent-text hover:underline">🔗 龍船岩、開眼山步道（健行筆記）</a>
+                        <a href="https://hiking.biji.co/index.php?q=trail&amp;act=detail&amp;id=1356" target="_blank" rel="noopener" class="text-sm accent-text hover:underline">🔗 帕米爾公園、碧山、白石湖山、大邱田天然石壁洞（健行筆記）</a>
+                        <span class="text-xs text-stone-600">兩條步道涵蓋本路線的主要山頭。公開紀錄的相近走法里程約 5.1–5.3 公里（碧山巖進出），本頁自捷運內湖站起登、多走市區與稜線段，因此較長。實走前建議再核對當日路況。</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -208,7 +222,7 @@
         <section id="elevation">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8 text-left">
                 <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>
-                海拔高度剖面
+                海拔高度剖面圖
             </h2>
             <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm border border-stone-100">
                 <div class="chart-container">
@@ -221,7 +235,7 @@
         <section id="spots" class="space-y-12 text-left">
             <div>
                 <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                    <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+                    <span class="w-2.5 h-8 section-bar-stone rounded-full"></span>
                     縱走點地景百科
                 </h2>
                 <p class="text-stone-600 mt-2 text-sm italic">點擊下方卡片了解所有經過地點的精簡介紹。</p>
@@ -344,7 +358,7 @@
         <section id="timeline" class="max-w-2xl mx-auto">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-10 pb-8 border-b border-stone-100 text-left">
                 <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
-                詳細時程估算 (8.00km校準版)
+                預計行程進度
             </h2>
             <div class="relative pl-6" id="timeline-container">
                 <div class="timeline-line"></div>

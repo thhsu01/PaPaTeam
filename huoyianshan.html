@@ -77,7 +77,7 @@
                     <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
                     <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
                     <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實際行程">實際行程</button>
+                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
                 </div>
         </div>
     </nav>
@@ -150,7 +150,7 @@
         <!-- Interactive Map Section -->
         <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
             <div class="mb-8">
-                <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 accent-mark rounded-full"></span> 導覽地圖與重要地標</h2>
+                <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 accent-mark rounded-full"></span> 互動路線圖</h2>
                 <p class="text-stone-600 mt-2 text-sm">點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。</p>
             </div>
             <div class="space-y-8">
@@ -174,8 +174,7 @@
                             <div id="wp-desc" class="text-stone-600 leading-relaxed text-sm space-y-3">
                                 <!-- Dynamic content -->
                             </div>
-                            <!-- 建議框。本頁的 schedule 尚無 advice 資料，靠設定裡的
-                                 hideEmptyAdvice 整塊收起來；有資料時會自動出現。 -->
+                            <!-- 建議框。內容由 schedule 的 advice 欄位填入。 -->
                             <div class="mt-8 pt-6 border-t border-stone-200">
                                 <span class="text-[10px] font-black text-stone-600 uppercase tracking-[0.2em]">隊友建議</span>
                                 <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2"></p>
@@ -188,7 +187,7 @@
 
         <!-- Elevation Section -->
         <section id="elevation">
-            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8"><span class="w-2.5 h-8 bg-red-600 rounded-full"></span> 步道坡度剖面圖</h2>
+            <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8"><span class="w-2.5 h-8 bg-red-600 rounded-full"></span> 海拔高度剖面圖</h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
                 <div class="chart-container"><canvas id="elevation-chart"></canvas></div>
             </div>
@@ -285,7 +284,7 @@
         <section id="timeline" class="max-w-2xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
-                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實際行程紀錄</h2>
+                    <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實走時間軸</h2>
                     <p class="text-stone-600 mt-2 text-sm">2025/12/13 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。航點座標與累計里程皆取自軌跡在該時刻的位置。</p>
                 </div>
             </div>
@@ -358,22 +357,21 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent');
-    const CANYON = '#ef4444';   // 大峽谷與最高點（語意色：紅）
+    const CANYON = '#ef4444';   // 大峽谷（語意色：紅＝警示地形）
+    const PEAK   = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
     const PLAIN  = '#78716c';   // 一般航點
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，航點卡因此加回
-    // 里程欄。advice 仍缺，但建議框的 markup 已經補上（此前十一頁裡只有
-    // 本頁沒有 wp-advice，是規格上的缺口），沒資料時由 hideEmptyAdvice
-    // 收起來。哪天補了 advice，填資料就會直接顯示。
+    // 里程欄；建議框的 markup 與 advice 內容也已於 2026-08-03 補齊
+    // （此前是全站唯一沒有 wp-advice 的一頁，是規格上的缺口）。
     PaPaDetail.init({
       schedule,
       nav: [24.358077127978664, 120.7361309924151],
 
       card: {
         follow: 'pan', wrap: 'cycle',
-        hideEmptyAdvice: true,      // 本頁 schedule 尚無 advice 資料
         // 大峽谷那一站的卡片加一圈紅框
         onUpdate: (wp) => {
           const card = document.getElementById('wp-card');
@@ -390,7 +388,7 @@
           const isCanyon = wp.loc === "火炎山大峽谷";
           return {
             radius: isCanyon ? 12 : (wp.pos === "最高點" ? 9 : 6),
-            fillColor: isCanyon || wp.pos === "最高點" ? CANYON : PLAIN,
+            fillColor: wp.pos === "最高點" ? PEAK : isCanyon ? CANYON : PLAIN,
             color: isCanyon ? '#fee2e2' : '#fff',
             weight: isCanyon ? 4 : 2,
             fillOpacity: 1

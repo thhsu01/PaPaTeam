@@ -370,9 +370,9 @@
     //    兩個不同的地方，在 8.38 km 處，12:57 通過沒有停留。
     //
     // ── 補上的地點：兩個取捨 ──────────────────────────────────
-    // 沒有 plan 欄位，因為當初沒估過；也沒有 advice，因為當初沒寫、事後
-    // 不該補編。航點卡的建議框設了 hideEmptyAdvice，沒內容時整塊收起來，
-    // 不會留一個空框。
+    // 沒有 plan 欄位，因為當初沒估過。advice 則於 2026-08-03 依
+    // ARCHITECTURE.md 澄清後的定義補齊——它是給下次走的人的提示，
+    // 不是隊友當天的口述紀錄，所以可以事後寫。
     //
     // ele 優先採地形圖數值，不用 GPS 高程——這份紀錄的高程雜訊達 ±20 m
     // （五尖山前後讀到 281 與 316），見 manifest.json 的
@@ -471,7 +471,7 @@
       tripDate: TRIP_DATE,
       nav: [24.990128, 121.509104],
 
-      card: { follow: 'popup', wrap: 'clamp', hideEmptyAdvice: true },
+      card: { follow: 'popup', wrap: 'clamp' },
 
       weather: { lat: 24.9719, lng: 121.4976 },   // 烘爐地附近
 

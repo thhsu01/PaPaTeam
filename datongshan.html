@@ -38,7 +38,8 @@
       --accent-strong-deeper:   #881337;                    /* 再深一階（8.93:1） */
       --accent-tint:            #fff1f2;                    /* 淡底 */
     }
-  </style>
+      .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -304,7 +305,8 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent-deep');
-    const HIGH = '#f59e0b';   // 展望點與最高點（語意色：琥珀）
+    const HIGH = '#f59e0b';   // 展望台（語意色：琥珀）
+    const PEAK = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
     const LOW  = '#16a34a';   // 起訖點（語意色：綠）
 
     const ICONS = { "集合起點":"🚉", "入山口":"🥾", "展望台":"🏙️", "最高點":"🏔️", "終點":"🚉" };
@@ -329,7 +331,7 @@
           const isEnd = i === 0 || i === n - 1;
           const isHigh = wp.pos === "展望台" || wp.pos === "最高點";
           return { radius: isEnd ? 9 : isHigh ? 8 : 6,
-                   fillColor: isEnd ? LOW : isHigh ? HIGH : ACCENT,
+                   fillColor: isEnd ? LOW : wp.pos === "最高點" ? PEAK : isHigh ? HIGH : ACCENT,
                    color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.9 };
         }
       },
@@ -339,7 +341,7 @@
         fillAlpha: 0.1,
         dataset: { borderColor: ACCENT, borderWidth: 2.5, pointRadius: 5, tension: 0.3,
                    pointBackgroundColor: schedule.map(wp =>
-                     wp.pos === "展望台" || wp.pos === "最高點" ? HIGH
+                     wp.pos === "最高點" ? PEAK : wp.pos === "展望台" ? HIGH
                      : wp.pos === "集合起點" || wp.pos === "終點" ? LOW : ACCENT) },
         options: {
           plugins: { legend: { display: false } },
@@ -353,7 +355,7 @@
       timeline: {
         className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-stone-100 p-3 rounded-xl transition-all',
         item: (wp, i, n) => `
-          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${wp.pos === "展望台" || wp.pos === "最高點" ? 'bg-amber-400' : i === 0 || i === n - 1 ? 'bg-emerald-500' : 'accent-mark-light'} border-2 border-white shadow-sm"></div>
+          <div class="absolute -left-8 top-1 w-4 h-4 rounded-full ${wp.pos === "最高點" ? 'peak-dot' : wp.pos === "展望台" ? 'bg-amber-400' : i === 0 || i === n - 1 ? 'bg-emerald-500' : 'accent-mark-light'} border-2 border-white shadow-sm"></div>
           <div class="flex items-center gap-3 mb-1">
             <span class="accent-text font-mono font-bold text-sm">${wp.time}</span>
             <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${ICONS[wp.pos] || '📍'} ${wp.pos}</span>

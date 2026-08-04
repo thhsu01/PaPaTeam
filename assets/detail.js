@@ -48,14 +48,10 @@ window.PaPaDetail = (function () {
     if (wp.dist != null) setText('wp-dist', wp.dist.toFixed(2));
     setText('wp-desc', wp.desc);
 
-    // 沒有建議內容時整塊收起來，而不是留一個空欄位
+    // 每個航點都必須有 advice（見 ARCHITECTURE.md）。這裡刻意不隱藏空的
+    // 建議框——漏寫時就該在畫面上看得見，而不是被靜靜藏起來。
     var advice = $('wp-advice');
-    if (advice) {
-      advice.textContent = wp.advice || '';
-      if (card.hideEmptyAdvice) {
-        advice.parentElement.classList.toggle('hidden', !wp.advice);
-      }
-    }
+    if (advice) advice.textContent = wp.advice || '';
 
     if (map && markers.length) {
       if (cfg.map && cfg.map.selected) {

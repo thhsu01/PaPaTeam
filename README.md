@@ -104,6 +104,9 @@ PaPaTeam/
 │       ├── nangangshan-2024-06-30.js
 │       └── hushan-2024-04-20.js
 │
+├── tools/
+│   └── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
+│
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
 ├── .github/workflows/
@@ -117,6 +120,16 @@ PaPaTeam/
 ├── CONTRIBUTING.md             # 貢獻指南：編輯清單與代碼風格
 └── README.md                   # 本檔案
 ```
+
+改完任何一頁後，在專案根目錄跑一次規格掃描：
+
+```bash
+python3 tools/spec_sweep.py
+```
+
+它檢查段落 id 與順序、五顆導覽鍵的文字、三個 `<h2>` 的主詞、灰階是否誤用 slate、
+最高點的語意色、總里程有沒有顯示、每個航點是否都有 `advice`，以及里程的單調性與
+「每段不得短於兩點直線距離」。全部通過會回傳 0。
 
 十八個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，

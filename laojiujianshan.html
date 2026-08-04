@@ -54,7 +54,11 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
     .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-  </style>
+      .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+    .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -79,7 +83,7 @@
                     <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
                     <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
                     <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實際行程">實際行程</button>
+                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
                 </div>
         </div>
     </nav>
@@ -127,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至金龍場停車場">
+                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至金龍場停車場" style="background:var(--accent-strong);">
                     <span>🗺️ 開啟導航至金龍場停車場</span>
                 </button>
             </div>
@@ -158,7 +162,7 @@
         <section id="map-section" class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
             <div class="mb-8">
                 <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                    <span class="w-2.5 h-8 bg-blue-600 rounded-full"></span>
+                    <span class="w-2.5 h-8 section-bar-accent rounded-full"></span>
                     互動路線圖與地點切換
                 </h2>
                 <p class="text-stone-600 mt-2 text-sm">里程以直線距離之 1.3 倍修正。點擊地圖標記查看航點細節。</p>
@@ -220,7 +224,7 @@
         <!-- Elevation Section -->
         <section id="elevation">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 mb-8">
-                <span class="w-2.5 h-8 bg-green-600 rounded-full"></span>
+                <span class="w-2.5 h-8 section-bar-green rounded-full"></span>
                 海拔高度剖面圖
             </h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
@@ -233,7 +237,7 @@
         <!-- Detailed Spots -->
         <section id="spots" class="space-y-8 text-left">
             <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3">
-                <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+                <span class="w-2.5 h-8 section-bar-stone rounded-full"></span>
                 山系亮點導覽
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -297,7 +301,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 border-b pb-6 border-stone-200">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3 text-left">
-                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>實際行程紀錄 (2026/5/1)
+                        <span class="w-2.5 h-8 bg-stone-800 rounded-full"></span>實走時間軸
                     </h2>
                     <p class="text-stone-600 mt-2 text-sm text-left">GPS 實測總里程 8.33 km。</p>
                 </div>
@@ -340,7 +344,7 @@
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const ACCENT = cssVar('--accent');
-    const PEAK   = '#16a34a';   // 最高點（語意色：綠）
+    const PEAK   = '#7c9e52';   // 最高點（全站共用語意色：山頂綠）
     const PLAIN  = '#1c1917';   // 一般航點
 
     const TRIP_DATE = "2026-05-01";
@@ -393,7 +397,7 @@
         className: 'relative flex items-start mb-8 group cursor-pointer pl-8',
         item: (wp) => {
           const dot = wp.pos.includes("終點") || wp.pos.includes("起點") ? 'accent-mark'
-                    : wp.pos === "最高點" ? 'bg-green-600' : 'bg-stone-300';
+                    : wp.pos === "最高點" ? 'peak-dot' : 'bg-stone-300';
           return `
             <div class="absolute left-0 w-12 flex justify-center z-[1001] pt-1"><div class="w-4 h-4 rounded-full ${dot} border-2 border-white group-hover:scale-125 transition-all"></div></div>
             <div class="w-full bg-white p-4 rounded-2xl border border-stone-200 card-hover transition-all">

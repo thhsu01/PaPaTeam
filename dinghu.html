@@ -29,7 +29,10 @@
       --accent-strong-light:    #059669;                    /* emerald-600 */
 
     }
-  </style>
+      .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+</style>
   <link rel="stylesheet" href="assets/detail.css">
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
@@ -54,7 +57,7 @@
         <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
         <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
         <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實際行程">實際行程</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
     </div>
     </div>
   </nav>
@@ -98,7 +101,7 @@
             <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山立體停車場">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山立體停車場" style="background:var(--accent-strong);">
               🗺️ 開啟導航至陽明山立體停車場
             </button>
           </div>
@@ -188,7 +191,7 @@
     <section id="spots" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
-          <span class="w-2.5 h-8 bg-indigo-600 rounded-full"></span>
+          <span class="w-2.5 h-8 section-bar-stone rounded-full"></span>
           山系亮點導覽
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -213,7 +216,7 @@
             <p class="text-sm text-stone-600 leading-relaxed">青楓步道的出口處，接上稜線路段。走出步道後視野逐漸開闊，往中正山及頂湖山方向前進。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-indigo-600 rounded-full"></span>中正山第一登山口 (H580m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 section-bar-stone rounded-full"></span>中正山第一登山口 (H580m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">中正山的第一登山口，位於稜線路段上。海拔約580公尺，是往頂湖山主線的重要節點。</p>
           </div>
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
@@ -251,7 +254,7 @@
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 accent-mark rounded-full"></span>
-          實際行程紀錄 (2026/6/20)
+          實走時間軸
         </h2>
         <p class="text-sm text-stone-600 mb-8">GPS 實測總里程 7.75 km（圳內站至頂湖站，含估算起點段 0.80 km）。</p>
         <div class="relative pl-12" id="timeline-container">
