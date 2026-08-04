@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中正山親山步道 — 爬爬小隊</title>
+  <meta name="description" content="2025/4/27 中正山親山步道實走紀錄。自中正山停車場陡上中正山觀景台（646m），續行東北稜線至 830 公尺折返，原路返回，全程 4.51 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #9d174d, #be6b8a);
+
+      /* 本頁主色。中正山是一路石階直上的乾稜，四月底相思樹黃花落滿階面，
+         故取深酒紅系。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         括號內是實測對比度，底色為頁底 #f5f3ef。
+         選色是量出來的：對全站既有 16 個主色與五個保留語意色（最高點綠、
+         警示紅、小百岳金 #a16207、廟宇紫、extra 琥珀）算 CIELab 距離，
+         最近的鄰居也有 28.9。刻意避開琥珀／金色系——那會撞到小百岳認證環。 */
+      --accent:                 #9d174d;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線（7.11:1） */
+      --accent-strong:          #9d174d;                  /* 淺底上的文字（7.11:1） */
+      --accent-strong-deep:     #831843;                  /* 淡底卡片上的內文，再深一階（8.79:1） */
+      --accent-tint:            #fff1f5;                  /* 淡底 */
+      --accent-border:          #f3d5e0;                  /* 淡框線 */
+      --accent-border-deep:     #e8b9cc;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/zhongzhengshan-2025-04-27.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/4/27 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-rose-50 via-pink-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">4月27日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.51 KM · 3 小時 26 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/4/27 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          一段石階，兩趟停留<br>
+          <span style="color:var(--accent-strong);">中正山親山步道</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自中正山停車場起登，0.95 公里的石階直上中正山觀景台（646m），俯瞰關渡平原與淡水河口。之後沒有下山，而是續行東北向的稜線再爬 184 公尺，到 830 公尺處折返，原路走回停車場。全程 4.51 公里、3 小時 26 分——其中將近 1 小時 50 分是停著的，回程在中正山上就吃了 59 分鐘的午餐。</p>
+
+        <!-- 資料來源說明 -->
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">這份軌跡的高程可以自我驗證</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全線只有中正山有公開標高（646 m）。當天軌跡在山頂一帶平滑後的最高值<strong>正好是 646</strong>，60 公尺內取樣點的中位數是 641——差 5 公尺以內，代表這具 GPS 當天沒有系統性的高程偏差。其餘三個航點查不到圖資高度，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺（<strong>±25 公尺的估計值</strong>），所以它們的名稱裡不寫 <code>(H___m)</code>——那個括號代表的是圖資高度。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">中正山停車場</div>
+            <div class="text-xs text-stone-600 mt-1">集合處就是 GPS 起錄點</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>中正山停車場（原路折返）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">4月27日 07:24–10:50</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至中正山停車場">
+              🗺️ 導航至集合地點
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">4.51</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">3:26</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~315</div>
+            <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">830</div>
+            <div class="text-xs text-stone-600">最高點 m（折返點）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">最高點是折返點而不是中正山——步道以中正山命名，但當天走過山頂之後又往東北爬了 184 公尺。4.51 公里裡有 1 小時 49 分是站著不動的，扣掉之後實際腳程只有 1 小時 37 分。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 4/27 當天的 GPS 軌跡。這是原路折返，去程與回程重疊，所以看起來像一條線被描了兩次。沿途有二十幾處訊號中斷，全部是停下來時 App 自動暫停造成的，位移都在 15 公尺以內——因此本頁的里程不需要像橫嶺古道那樣補回中斷段短報的距離。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">中正山停車場</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:24</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">520</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">當天的集合地點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=79" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 中正山親山步道（健行筆記）</a>
+            <span class="text-xs text-stone-600">官方數據：中正山（彌陀山）標高 646 公尺。折返點與稜線休息點沒有可引用的公開標高，本頁的數值是由當天軌跡估算的，見上方「這份軌跡的高程可以自我驗證」。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 text-center">原路折返的剖面是對稱的：0.30 km 起連續爬升到 2.40 km 的折返點，再原樣降回來。爬得最急的是最前面那段——停車場到中正山 0.95 公里就上了 126 公尺，平均坡度 13%，全是石階。</p>
+
+        <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼不是 1030</span>
+          <p class="text-xs text-stone-700 leading-relaxed">
+            把軌跡上每一個正的高程增量加起來會得到 1030 公尺，那個數字不能用。這條路線從 520 公尺爬到 830 公尺，
+            淨爬升只有 311 公尺，而且原路折返、回程沒有再爬——真實的累計上升不可能是它的三倍。
+            原因是 768 個點裡有很大一部分是站著不動時錄的：起點整裝 29 分鐘、中正山午餐 59 分鐘，
+            GPS 高程在原地會上下抖動幾公尺，每一次抖動都被當成「爬升」累加進去。
+            本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 331、314、309 公尺，
+            已經收斂；依各航點高程直接相加得 310 公尺。四個算法落在同一區間，因此標 <strong>~315 公尺</strong>。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          沿途亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 4/27 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>中正山停車場 🅿️</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">位於中正山產業道路上，海拔約 520 公尺，是這條步道最省力的起登點——從山下的登山口起走要多爬兩百多公尺。當天在此集合整裝 29 分鐘後才起走。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>中正山 (H646m) 🗻</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">又名彌陀山、十八份山，標高 646 公尺，山頂有一座兩層樓的觀景台。往西南俯瞰整個關渡平原、淡水河與觀音山，是北投近郊視野最開闊的一處。當天去回各停留一次，回程在此吃了 59 分鐘的午餐。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>東北稜線 🌿</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">過了中正山觀景台，步道並沒有結束——往東北還有一條接往大屯山系的稜線，坡度比石階段緩，林相也更密。當天沿它續行了 1.45 公里、再爬 184 公尺。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>折返點（約 830m）⛰️</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程海拔最高的地方，比中正山還高 184 公尺。坡度在這裡轉平，隊伍停了 5 分鐘後原路折返。<strong>這個位置沒有可引用的地名與標高</strong>，所以頁面上就叫「折返點」，830 公尺是由軌跡估算的（±25 公尺）。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">07:24 起錄 · 10:50 收錄 · 全程 3 小時 26 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻、座標與里程全部取自 GPS 軌跡在該時刻的位置，沒有推算的航點。中正山出現兩次，那是原路折返、同一個地點去回各經過一次。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 中正山親山步道 | 2025 年 4 月 27 日 · 07:24–10:50 · 4.51 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2025/4/27 實走紀錄，2026-08 拿到 GPX 後補登，頁面也是那時才建的。
+    //
+    // 座標、time 與 dist 全部取自當天的 GPS 軌跡（健行筆記 GPX，768 點）。
+    // 本頁沒有推算的航點——六個航點都直接落在軌跡上，這一點與 henglingguidao
+    // 不同（那頁有一個航點落在訊號中斷裡，時刻與里程是內插的）。
+    //
+    // ★ 高程只有中正山有公開值可對，而它對上了。軌跡在山頂一帶平滑後的最高
+    //   值是 646 m，正好等於公開標高；60 m 內取樣點的中位數是 641（−5）。
+    //   沒有系統性偏差，所以不做 huoyianshan 那樣的整體扣減，也不做
+    //   caolingguidao 那樣的漂移內插。
+    //
+    // ★ 其餘三個航點查不到圖資高度，依 ARCHITECTURE.md「走完才補上的航點」
+    //   規則處理：取軌跡前後 60 m 內取樣點的高程中位數再取整到 5 m——
+    //     中正山停車場  中位數 517.6 → 520
+    //     稜線休息點    中位數 776.7 → 775
+    //     折返點        中位數 829.2 → 830
+    //   這是 ±25 m 的估計值，因此**不寫進 loc 的 (H___m) 標註**，那個括號
+    //   代表的是圖資高度。只有中正山寫了 (H646m)。
+    //
+    // ★ 累計上升不採原始加總。原始正增量合計 1030 m，是站立不動時的高程抖動
+    //   被一次次累加出來的假值——起點整裝 29 分、中正山午餐 59 分，都在錄。
+    //   全程淨爬升只有 311 m 且原路折返、回程沒有再爬。改對高程序列取移動
+    //   中位數再累加：視窗 15/31/61 點得 331/314/309 m，已收斂；依各航點高程
+    //   直接相加得 310 m。四個數字落在同一區間，故標 ~315 m。
+    //
+    // ★ 訊號中斷。共二十餘處超過 90 秒，全部是停下來時 App 暫停，位移都在
+    //   15 m 以內，沒有任何一段需要把短報的距離加回去。
+    //
+    // ★ 折返點刻意不編地名（2026-08-04 與隊友確認）。它離 dinghu.html 的
+    //   「中正山第一登山口 (H580m)」只有 393 m，高程卻差 250 m——無法從資料
+    //   判定是同一處或另一處，所以就叫「折返點」，不編造。
+    const schedule = [
+      { lat: 25.156174, lng: 121.511582, time: "07:24", loc: "中正山停車場", dist: 0.00, ele: 520, pos: "集合起點",
+        desc: "當天的集合地點，也是終點——這是一趟原路折返。GPS 於 07:24 起錄，07:24–07:52 在此等齊整裝 29 分鐘。",
+        advice: "中正山產業道路盡頭的停車場，車位不多，假日八點後常滿。從這裡起登可以省掉山下登山口那兩百多公尺的爬升，沒開車的人得從復興三路登山口走上來。" },
+
+      { lat: 25.158250, lng: 121.516017, time: "08:23", loc: "中正山 (H646m)", dist: 0.95, ele: 646, pos: "山頂",
+        desc: "累計 0.95 km。標高 646 公尺，山頂的兩層觀景台可俯瞰關渡平原、淡水河與觀音山。自停車場爬升 126 公尺、走了 31 分鐘，其中 08:05–08:17 在觀景台下方先歇了 12 分鐘才登頂。",
+        advice: "0.95 公里上升 126 公尺、全是石階，是全程最陡的一段，起登就先把節奏放慢。觀景台上風大，四月底早上仍需要一件薄外套。" },
+
+      { lat: 25.164199, lng: 121.517055, time: "08:48", loc: "稜線休息點", dist: 2.00, ele: 775, pos: "休息點",
+        desc: "累計 2.00 km。過中正山之後往東北的稜線途中，08:48–08:55 在此停了 6 分鐘。海拔 775 公尺是由軌跡估算的（±25 公尺），這裡沒有公開標高。",
+        advice: "這段稜線的坡度比前面的石階緩得多，但林蔭密、視野收斂，適合當補水點而不是展望點。想看風景還是留在中正山觀景台。" },
+
+      { lat: 25.164528, lng: 121.519380, time: "09:02", loc: "折返點", dist: 2.40, ele: 830, pos: "最高點",
+        desc: "累計 2.40 km，全程海拔最高處，比中正山還高 184 公尺。坡度在這裡轉平，09:02–09:07 停了 5 分鐘後原路折返。這個位置沒有可引用的地名與標高，830 公尺是由軌跡估算的（±25 公尺）。",
+        advice: "步道到這裡還沒結束，往東北可以續接大屯山系，時間與體力夠的人可以再往前。當天是在此收手折返的，回程的下坡全是來時的石階，膝蓋要留點餘裕。" },
+
+      { lat: 25.158251, lng: 121.515973, time: "09:33", loc: "中正山 (回程)", dist: 3.64, ele: 646, pos: "午餐大休",
+        desc: "累計 3.64 km。折返後回到中正山，09:34–10:33 在觀景台一帶吃午餐、休息 59 分鐘——是全程最長的一次停留，佔了總時間的四分之一以上。",
+        advice: "觀景台有遮蔭與座位，是全程唯一適合安排正餐的地方。這裡到停車場只剩 0.87 公里的下坡，吃飽再走完全來得及。" },
+
+      { lat: 25.156215, lng: 121.511588, time: "10:50", loc: "終點（中正山停車場）", short: "終點", dist: 4.51, ele: 520, pos: "終點",
+        desc: "累計 4.51 km。GPS 於 10:50 收錄，收錄處離起錄點只有 5 公尺，原路折返完成。全程 3 小時 26 分。",
+        advice: "回到原點取車。下山後順路可以繞去北投泡湯或吃碗麵，從停車場開下山到新北投只要十來分鐘。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+
+    // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色；
+    // 預設的 isPeak 認 pos === "最高點"，正好對上折返點，不必覆寫。
+    // 地圖標記、圖表資料點、時間軸圓點三處共用它，不會再各寫一份而漂掉。
+    const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    const POS_EMOJI = {
+      "集合起點":"🚩", "山頂":"🗻", "休息點":"🌳",
+      "最高點":"⛰️", "午餐大休":"🍱", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2025-04-27";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.156174, 121.511582],   // 集合地點＝停車場，原路折返起訖同點
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 25.15825, lng: 121.51597 },   // 中正山山頂
+
+      map: {
+        setView: [[25.1606, 121.5153], 15],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。原路折返，去回程重疊。
+        track: { points: PaPaTracks['zhongzhengshan-2025-04-27'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => ({
+          radius: PAL.radius(wp, i, n), fillColor: PAL.color(wp, i, n),
+          opacity: 1, fillOpacity: 0.92
+        })
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
+      chart: { elevationFloor: 450, palette: PAL },
+
+      timeline: { emoji: POS_EMOJI, palette: PAL }
+    });
+  </script>
+</body>
+</html>
