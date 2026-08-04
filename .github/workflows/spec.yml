@@ -1,0 +1,50 @@
+# 這個 workflow 存在的理由：2026-08-04 的架構審查發現 ARCHITECTURE.md 的段落規格表
+# 有三條規則寫了卻沒人檢查，因此長期漂移——導覽鍵文字跑出規格外的第三種、十頁的
+# <h2> 各自改名、五頁把最高點畫成互相矛盾的「語意色」。收斂表甚至還掛著 ✅。
+#
+# 結論是：規格寫了卻沒有檢查，等於沒寫。tools/spec_sweep.py 把那張表變成可執行的
+# 檢查，這個 workflow 則確保沒有人需要「記得」去跑它。
+
+name: 規格檢查
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - '**.html'
+      - 'assets/**'
+      - 'tools/spec_sweep.py'
+      - '.github/workflows/spec.yml'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read        # 唯讀：本 workflow 只檢查，不寫回任何東西
+
+jobs:
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取出程式碼
+        uses: actions/checkout@v4
+
+      - name: 全站規格掃描
+        run: python3 tools/spec_sweep.py
+
+      # 上一步失敗時，把 ARCHITECTURE.md 的對應規則指出來，
+      # 免得看到紅字卻不知道去哪查規範。
+      - name: 失敗時附上規範出處
+        if: failure()
+        run: |
+          {
+            echo "### 規格檢查未通過"
+            echo ""
+            echo "規範出處："
+            echo ""
+            echo "- 段落 id、導覽鍵文字、\`<h2>\` 主詞 → \`ARCHITECTURE.md\` 的「段落規格」表"
+            echo "- 灰階一律 stone、最高點語意色 \`#7c9e52\` → \`manifest.json\` 的 \`conventions\`"
+            echo "- 每段里程不得短於兩航點直線距離 → \`ARCHITECTURE.md\` 的「里程健全性」"
+            echo "- 每個航點都要有 \`advice\` → \`ARCHITECTURE.md\` 的「尚未收斂的一件事」"
+            echo ""
+            echo "本機重現：\`python3 tools/spec_sweep.py\`（全過回傳 0）"
+          } >> "$GITHUB_STEP_SUMMARY"

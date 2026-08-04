@@ -105,7 +105,11 @@ PaPaTeam/
 │       └── hushan-2024-04-20.js
 │
 ├── tools/
-│   └── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
+│   ├── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
+│   └── contrast/               # 對比度實測（改顏色後跑；需 Playwright）
+│       ├── check.js            #   量測器，檔頭記了五個量測坑
+│       ├── stubs.js            #   Leaflet／Chart.js 最小樁件
+│       └── tw.css              #   本地建置的 Tailwind
 │
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
@@ -129,7 +133,15 @@ python3 tools/spec_sweep.py
 
 它檢查段落 id 與順序、五顆導覽鍵的文字、三個 `<h2>` 的主詞、灰階是否誤用 slate、
 最高點的語意色、總里程有沒有顯示、每個航點是否都有 `advice`，以及里程的單調性與
-「每段不得短於兩點直線距離」。全部通過會回傳 0。
+「每段不得短於兩點直線距離」。全部通過會回傳 0。**push 與 PR 時 CI 也會跑同一支**，
+不過就會擋下來。
+
+改到顏色時另外跑對比度實測（需 Playwright，不在 CI 內）：
+
+```bash
+python3 -m http.server 8099 &
+node tools/contrast/check.js --all
+```
 
 十八個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
