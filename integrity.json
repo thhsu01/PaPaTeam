@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-04 08:55",
+  "generated": "2026-08-04 09:21",
   "generated_tz": "UTC+8",
-  "commit": "7eac1445a9bfc96b71589dd963491ee7461d91ef",
-  "file_count": 41,
+  "commit": "2080241e608d55618242aaa19275fd00b23d8cdd",
+  "file_count": 43,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -21,7 +21,7 @@
     {
       "path": "ARCHITECTURE.md",
       "size": 33129,
-      "sha": "d865f531e5913018004bbc28745be66bbd8b77a1"
+      "sha": "ecb5df4533142f8f00c0f926c59899c8ed18a5fc"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "size": 6617,
-      "sha": "25d8a05348b210601e759d44161269d12985b4d5"
+      "size": 6755,
+      "sha": "7a5d43605484a0704969f87917fb0d0d9bff78c3"
     },
     {
       "path": "SNIPPETS.md",
@@ -72,6 +72,11 @@
       "path": "assets/tracks/dinghu-2026-06-20.js",
       "size": 5565,
       "sha": "864312c1cc61acbdaadeeebcbeb398aab35ef409"
+    },
+    {
+      "path": "assets/tracks/henglingguidao-2025-03-23.js",
+      "size": 3970,
+      "sha": "d4256a6b4924a0c984f6200622a28150c61d6e85"
     },
     {
       "path": "assets/tracks/huoyianshan-2025-12-13.js",
@@ -144,6 +149,11 @@
       "sha": "df89fbcde69b75efd1fe61930da8ae81b496aa60"
     },
     {
+      "path": "henglingguidao.html",
+      "size": 34526,
+      "sha": "d562163ed99f1f9c07ff3cdf066c9aa9ab898ef0"
+    },
+    {
       "path": "huoyianshan.html",
       "size": 31459,
       "sha": "c4db6287342c5d12be5091bd5346b134112c15ea"
@@ -155,8 +165,8 @@
     },
     {
       "path": "index.html",
-      "size": 24697,
-      "sha": "afa821ca6a3583d40f9b694b59a5e4fce8d61493"
+      "size": 24965,
+      "sha": "1d1aed8bcb11ce5350c84514bc6425bb9091c19e"
     },
     {
       "path": "jiantanshan.html",
@@ -175,8 +185,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 11931,
-      "sha": "455cbd9211be6aceefc1915e6719a710d6943e4a"
+      "size": 13330,
+      "sha": "72dde59e019dac20c25fb39ea20219927ad9495f"
     },
     {
       "path": "meihuashan.html",
