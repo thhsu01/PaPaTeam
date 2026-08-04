@@ -111,6 +111,15 @@ def check(f):
             if v.startswith('bg-') and 'peak' not in v:
                 p.append('最高點用了 %s，應為山頂綠' % v)
 
+    # 上面那條只認「最高點 ? 顏色」的字面寫法，會漏掉用變數表達的頁面。
+    # 2026-08-04 抓到五頁就是這樣溜過去的：它們寫 `isPeak ? HIGH`，而 isPeak 的定義
+    # 其實是 `wp.ele >= 950`——依海拔高低帶上色，山頂只是剛好落在高帶，
+    # 等於整頁沒有標示山頂，而 isPeak 這個名字掩蓋了這件事。
+    # 所以改查結果而非寫法：航點著色邏輯裡必須真的出現山頂綠。
+    script = s[s.find('const schedule'):] if 'const schedule' in s else s
+    if 'PaPaDetail.palette(' not in script and PEAK not in script.lower() and 'peak-dot' not in script:
+        p.append('航點著色看不到山頂綠 %s——山頂在圖上與其他點沒有區別' % PEAK)
+
     # ── overview 統計列必須看得到總里程 ─────────────────────
     if not re.search(r'(實走里程|總里程|里程 km)', s):
         p.append('overview 看不到總里程')
