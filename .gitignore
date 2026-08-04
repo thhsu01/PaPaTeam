@@ -45,3 +45,7 @@ temp/
 .com.apple.timemachine.donotpresent
 ehthumbs.db
 Thumbs.db
+
+# Python（tools/ 的檢查腳本會產生）
+__pycache__/
+*.pyc
