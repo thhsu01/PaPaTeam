@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>草嶺古道 — 爬爬小隊</title>
+  <meta name="description" content="2024/11/23 草嶺古道芒花季實走紀錄。自遠望坑口越嶺，經雄鎮蠻煙碑、虎字碑至埡口觀景亭，下抵大里天公廟與大里火車站，全程 7.88 公里。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f5f3ef;
+      --page-fg: #3a3632;
+      --chart-max-w: 100%;
+      --chart-h: 300px;
+      --chart-overflow-x: auto;
+      --waypoint-transition: all 0.25s ease;
+      --map-h: 420px;
+      --map-radius: 16px;
+      --map-max-w: 100%;
+      --map-w: 100%;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #2563eb, #7c9e52);
+
+      /* 本頁主色。取藍系呼應埡口俯瞰的東北角海岸與龜山島。
+         用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f5f3ef。 */
+      --accent:                 #2563eb;                  /* 裝飾：色條、圓點、地圖軌跡、圖表線（4.66:1）*/
+      --accent-strong:          #1d4ed8;                  /* 淺底上的文字（6.05:1） */
+      --accent-strong-deep:     #1e40af;                  /* 淡底卡片上的內文，再深一階（7.87:1） */
+      --accent-tint:            #eff6ff;                  /* 淡底 */
+      --accent-border:          #c7dbfa;                   /* 淡框線 */
+      --accent-border-deep:     #a9c7f5;                  /* 深一階的框線 */
+    }
+
+    /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
+    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
+    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+    .section-bar-accent { background: var(--accent); }
+    .section-bar-green { background: #7c9e52; }
+    .section-bar-stone { background: #a09080; }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js"></script>
+  <script src="assets/detail.js"></script>
+  <script src="assets/tracks/caolingguidao-2024-11-23.js"></script>
+</head>
+<body class="antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
+        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
+        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/11/23 活動紀錄</span>
+      </a>
+      <div class="flex gap-1 overflow-x-auto">
+        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
+        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
+        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
+        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
+        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-14">
+
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-blue-50 via-sky-50 to-stone-100 hero-accent">
+      <div class="max-w-4xl mx-auto w-full">
+
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp">11月23日</span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 7.88 KM · 5 小時 41 分</span>
+        </div>
+
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
+          <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
+          <div>
+            <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/11/23 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+          </div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          芒花季的淡蘭越嶺<br>
+          <span style="color:var(--accent-strong);">草嶺古道</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自新北貢寮的遠望坑口起登，沿淡蘭古道南路越嶺，途經清代同治年間的雄鎮蠻煙碑與虎字碑，登上埡口觀景亭俯瞰東北角海岸與龜山島，再一路下抵宜蘭頭城的大里天公廟，於大里火車站結束。這是全台走過最多人的一條古道，也是芒花季的招牌路線。</p>
+
+        <!-- 補登說明 -->
+        <div class="mb-8 max-w-2xl border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-color:var(--accent);">
+          <span class="text-2xl mt-0.5">🗃️</span>
+          <div>
+            <div class="font-bold text-base mb-1" style="color:var(--accent-strong-deep);">補登的一趟</div>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">這趟原本漏在歷史紀錄之外，2026 年整理 GPX 檔案時才補回。地點名稱由隊友指認，時刻、里程與座標取自軌跡在該時刻的位置。</p>
+          </div>
+        </div>
+
+        <!-- Info cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起登點</div>
+            <div class="font-bold text-stone-800">遠望坑口</div>
+            <div class="text-xs text-stone-600 mt-1">新北貢寮，福隆車站可接駁</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>大里火車站（宜蘭頭城）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800">11月23日 09:44–15:26</div>
+            <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1" id="weather-label">天氣預報</div>
+            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
+            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
+          </div>
+          <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至遠望坑口">
+              🗺️ 導航至遠望坑口
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">7.88</div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">5:41</div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-stone-900">~355</div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black" style="color:var(--accent-strong);">355</div>
+            <div class="text-xs text-stone-600">最高點 m（埡口觀景亭）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">海拔經過漂移修正，見下方說明。這是一趟單向越嶺——起點遠望坑口在新北貢寮，終點大里火車站在宜蘭頭城，兩地直線相距 4.6 公里，不是環狀。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          互動路線圖
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 11/23 當天的 GPS 軌跡。沿途有幾處短暫的訊號中斷，最長一段是 11:38–11:53，虎字碑就落在裡面；那些區間在圖上是直線連接。</p>
+
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+
+        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">起登點</div>
+          <div class="flex items-center gap-3 mb-3">
+            <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
+            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">遠望坑口</h3>
+            <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
+          </div>
+          <div class="flex gap-4 mb-3 text-sm text-stone-600">
+            <span>實際時間 <strong class="text-stone-800" id="wp-time">09:44</strong></span>
+            <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
+            <span>海拔 <strong class="text-stone-800" id="wp-ele">30</strong> m</span>
+          </div>
+          <p class="text-base text-stone-700 mb-3" id="wp-desc">行程起點。</p>
+          <div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
+            <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
+            <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=171" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 草嶺古道（健行筆記）</a>
+            <a href="https://danlantrail.necoast-nsa.gov.tw/Trails-Content.aspx?a=2900&l=1&listid=2862" target="_blank" rel="noopener" class="text-sm text-emerald-700 hover:underline">🏛️ 草嶺古道 — 淡蘭國家綠道</a>
+            <span class="text-xs text-stone-600">官方路線：福隆車站 → 遠望坑親水公園 → 跌死馬橋 → 大榕樹 → 雄鎮蠻煙碣 → 休憩亭 → 虎字碑 → 啞口觀景亭 → 觀景亭 → 護管所 → 大里天公廟 → 大里車站</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
+          海拔高度剖面圖
+        </h2>
+        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100" role="region" aria-label="海拔高度剖面圖">
+          <canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>
+        </div>
+
+        <!-- 高程漂移的處理方式 -->
+        <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">海拔為什麼要修正</span>
+          <p class="text-xs text-stone-700 leading-relaxed">
+            這份軌跡的高程在一天之內往上漂了約 45 公尺：終點大里火車站是海邊的車站、實際約 15 m，GPS 卻讀到 62 m；而起點遠望坑口讀 28 m 是合理的。
+            起點準、終點偏高，代表偏差是行進中累積的，用單一數值扣不掉。
+            本頁改採<strong>依時間線性內插</strong>的修正——0% 時扣 0 m、100% 時扣 45 m。
+            驗證的方式是它自己吐出來的數字：修正後虎字碑得 330 m，正好是公開標高；大里火車站得 15 m、慶雲宮得 20 m，也都合理。
+            這三個都不是拿來校正的錨點，是修正完才對上的，所以這個模型可信。仍請視為 ±25 m 的估計。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
+          古道亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依 11/23 的抵達順序排列。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>遠望坑口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">古道北端的入口，位於新北貢寮。自福隆車站可搭接駁或步行前來，之後沿遠望坑溪谷的產業道路緩上約 1.2 公里才會接到步道。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>草嶺古道登山口．北口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">遠望坑親水公園一帶的正式登山口與古道北口。過了這裡開始是石階與土徑，路旁陸續出現跌死馬橋、大榕樹等舊路遺跡。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>雄鎮蠻煙碑</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">同治六年台灣鎮總兵劉明燈北巡至此，見山嵐瘴霧瀰漫，題下「雄鎮蠻煙」四字鎮之。碑高約 3.6 公尺，是古道上最大的一方摩碣，現列國家三級古蹟。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎字碑 🐅</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">同樣出自劉明燈之手。相傳他行至此處遇狂風，取《易經》「雲從龍、風從虎」之意，就地以草書題下一個「虎」字鎮風。標高約 330 公尺，是全台知名度最高的古道石碑。</p>
+          </div>
+
+          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
+            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>埡口觀景亭 (H355m) 🌾</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">古道最高處，也是芒花季的主景。亭上可一次看盡東北角海岸線與外海的龜山島；秋末整片山坡覆滿白芒，是這條路線每年最擁擠的時候。當天在此停留 39 分鐘。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>虎字碑觀護所</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">下坡途中的護管所，設有休憩空間與解說。當天在此停留 42 分鐘，是全程最久的一次休息，也是進入大里聚落前最後的遮蔽處。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>草嶺慶雲宮（大里天公廟）</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">古道南端出口旁的道教宮廟，主祀玉皇大帝，是宜蘭一帶香火鼎盛的天公廟。廟埕面海，走完古道在這裡回望剛剛翻過的山稜很有感。</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>大里火車站</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">宜蘭線的招呼站，緊鄰海岸，離慶雲宮只有一百多公尺。單向越嶺的行程在此搭火車返程，不必回頭走。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
+          實走時間軸
+        </h2>
+        <p class="text-sm text-stone-600 mb-2">09:44 起登 · 15:26 收錄 · 全程 5 小時 41 分</p>
+        <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。埡口與護管所兩處各停留 39 與 42 分鐘，佔掉全程近四分之一的時間。</p>
+        <div class="relative pl-12" id="timeline-container">
+          <div class="timeline-line"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 草嶺古道芒花季 | 2024 年 11 月 23 日 · 09:44–15:26 · 7.88 km</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 2024/11/23 草嶺古道芒花季實走紀錄，2026-08 拿到 GPX 後補登。
+    //
+    // 座標、time 與 dist 取自當天的 GPS 軌跡（健行筆記 GPX，1082 點，
+    // 取樣間隔中位數 7 秒）：依隊友指認的地點推定時刻，再取軌跡在該時刻
+    // 的位置與累計里程。
+    //
+    // ★ 高程漂移的處理。這份軌跡的 GPS 高程在一天內往上漂了約 45 m：
+    //   終點大里火車站（海邊，實際約 15 m）讀到 62 m，而起點遠望坑口讀
+    //   28 m 是合理的。起點準、終點偏，代表偏差是累積的，不能用單一
+    //   數值扣掉，因此改採「依經過時間線性內插」：0% 扣 0 m、100% 扣 45 m。
+    //
+    //   這個模型是自我驗證的——修正後虎字碑得 330 m，正好是公開標高；
+    //   大里火車站得 15 m、慶雲宮得 20 m。這三個都不是用來校正的錨點，
+    //   是修正完才對上的。仍應視為 ±25 m 的估計。
+    //
+    // ★ 訊號中斷。沿途有 23 處超過 90 秒的間隔，多數位移很小（停下來時
+    //   App 暫停）。有實質影響的是 11:38–11:53 這 14.9 分鐘、位移 444 m：
+    //   虎字碑就落在裡面。本頁把虎字碑放在中斷結束的第一個點（11:53），
+    //   修正後高程 330 m 與公開值相符，位置應該不遠，但仍是推定。
+    //
+    // 這是單向越嶺，起訖不同縣市（新北貢寮 → 宜蘭頭城），直線相距 4.6 km。
+    const schedule = [
+      { lat: 25.011194, lng: 121.925444, time: "09:44", loc: "遠望坑口", dist: 0.00, ele: 30, pos: "起登點",
+        desc: "行程起點。GPS 於 09:44 開始記錄，自遠望坑溪谷的產業道路起步。",
+        advice: "古道上沒有商店，水和行動糧要在福隆車站買齊。單向越嶺記得先查大里站的班次——宜蘭線招呼站班次疏，錯過一班要等很久。" },
+
+      { lat: 25.004489, lng: 121.927760, time: "10:02", loc: "草嶺古道登山口", dist: 1.20, ele: 55, pos: "入山口",
+        desc: "累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。",
+        advice: "真正的古道從這裡才開始。前段產業道路沒有遮蔭，芒花季人潮多時容易在這裡塞住，早點出發差很多。" },
+
+      { lat: 25.001852, lng: 121.929375, time: "10:14", loc: "草嶺古道北口", dist: 1.65, ele: 70, pos: "步道口",
+        desc: "累計 1.65 km。古道北口，過此進入石階與土徑，沿途會經過跌死馬橋與大榕樹等舊路遺跡。",
+        advice: "由此開始持續爬升到埡口，約 3.4 km、上升 285 m。步調從這裡就要放穩，前半段衝太快後面會很辛苦。" },
+
+      { lat: 24.993262, lng: 121.925825, time: "10:50", loc: "雄鎮蠻煙碑", dist: 3.04, ele: 195, pos: "古蹟",
+        desc: "累計 3.04 km。同治六年劉明燈北巡題字的摩碣，碑高約 3.6 公尺，國家三級古蹟。10:50–10:57 在此停留 7 分鐘。",
+        advice: "碑面在步道左側略低處，容易走過頭。這裡有平台可休息，是埡口之前最後一段像樣的緩坡。" },
+
+      { lat: 24.980447, lng: 121.926029, time: "11:53", loc: "虎字碑", dist: 4.69, ele: 330, pos: "古蹟",
+        desc: "累計 4.69 km。劉明燈以草書題「虎」字鎮風，取《易經》「雲從龍、風從虎」之意。標高約 330 公尺。當天經過的時刻落在 11:38–11:53 的訊號中斷內，位置為推定。",
+        advice: "全台最有名的古道石碑，假日排隊拍照是常態。此處風大，正是它題字的由來，停留時把帽子收好。" },
+
+      { lat: 24.979693, lng: 121.925878, time: "12:25", loc: "埡口觀景亭 (H355m)", dist: 5.04, ele: 355, pos: "最高點",
+        desc: "累計 5.04 km，全程最高點。可一次看盡東北角海岸與龜山島，秋末整片山坡覆滿白芒。11:57–12:36 在此停留 39 分鐘。",
+        advice: "芒花季的主景就在這裡，值得把午餐排在此處。埡口風極強且無遮蔽，外套要帶；下山前先在這裡把水喝夠。" },
+
+      { lat: 24.975622, lng: 121.926077, time: "13:44", loc: "虎字碑觀護所", dist: 6.32, ele: 180, pos: "休憩點",
+        desc: "累計 6.32 km。下坡途中的護管所，設有休憩空間與解說牌。13:44–14:26 在此停留 42 分鐘，是全程最久的一次休息。",
+        advice: "進入大里聚落前最後的遮蔽處。接下來 1.4 km 一路陡下到天公廟，落差 160 m，膝蓋負擔重，有登山杖務必拿出來。" },
+
+      { lat: 24.969987, lng: 121.925104, time: "15:13", loc: "草嶺慶雲宮（大里天公廟）", dist: 7.73, ele: 20, pos: "信仰地標",
+        desc: "累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。",
+        advice: "廟埕面海，回望剛翻過的山稜最有感。廟方有洗手間可借用，是走完全程後第一個能整理的地方。" },
+
+      { lat: 24.969905, lng: 121.924990, time: "15:25", loc: "大里火車站", dist: 7.87, ele: 15, pos: "終點",
+        desc: "累計 7.87 km。GPS 於 15:26 收錄。宜蘭線的招呼站，離慶雲宮只有一百多公尺，單向越嶺在此搭車返程。",
+        advice: "招呼站沒有商店。往北回福隆或往南到頭城都可以，但班次疏，下山前就該確認時刻表。" }
+    ];
+
+    // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
+    // 所以要先從 :root 取出實際值。
+    const ACCENT = getComputedStyle(document.documentElement)
+                     .getPropertyValue('--accent').trim();
+    const PEAK   = '#7c9e52';   // 最高點
+    const STONE  = '#a09080';   // 一般航點
+
+    const POS_EMOJI = {
+      "起登點":"🚉", "入山口":"🚪", "步道口":"🪜", "古蹟":"🏛️", "最高點":"🌾", "休憩點":"⛱️", "信仰地標":"⛩️", "終點":"🏁"
+    };
+
+    // ── 行程日（頁面唯一來源）────────────────────────────────
+    const TRIP_DATE = "2024-11-23";
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+    PaPaDetail.init({
+      schedule,
+      tripDate: TRIP_DATE,
+      nav: [25.011194, 121.925444],
+
+      card: { follow: 'popup', wrap: 'clamp' },
+
+      weather: { lat: 24.9800, lng: 121.9260 },   // 埡口一帶
+
+      map: {
+        setView: [[24.9905, 121.9265], 14],
+        attribution: 'Leaflet | © OpenStreetMap',
+        // 實走軌跡（assets/tracks/）。幾處訊號中斷的區間為直線連接。
+        track: { points: PaPaTracks['caolingguidao-2024-11-23'], weight: 4, opacity: 0.85 },
+        popup: true,
+        marker: (wp, i, n) => {
+          const isStartEnd = i === 0 || i === n - 1;
+          const isPeak     = wp.pos === "最高點";
+          return {
+            radius: isStartEnd ? 9 : isPeak ? 8 : 6,
+            fillColor: isStartEnd ? ACCENT : isPeak ? PEAK : '#888',
+            opacity: 1, fillOpacity: 0.92
+          };
+        }
+      },
+
+      chart: {
+        // 標高標註在圖上是多餘的（y 軸就是海拔）
+        label: wp => wp.loc.replace(/\s*\(H[^)]*\)/, '').replace('（大里天公廟）', ''),
+        fillAlpha: 0.10,
+        dataset: {
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: schedule.map(wp =>
+            wp.pos === "最高點" ? PEAK :
+            wp.pos === "起登點" || wp.pos === "終點" ? ACCENT : STONE)
+        },
+        options: {
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: ctx => `海拔: ${ctx.parsed.y} m`,
+              title: ctx => ctx[0].label
+            } }
+          },
+          scales: {
+            y: { title: { display: true, text: '海拔 (m)' }, min: 0, max: 400,
+                 grid: { color: '#f0ede8' } },
+            x: { ticks: { maxRotation: 35, font: { size: 10 } }, grid: { display: false } }
+          }
+        }
+      },
+
+      timeline: {
+        className: 'relative mb-8 waypoint-card cursor-pointer hover:bg-white/60 p-3 rounded-xl transition-all',
+        item: (wp, i, n) => {
+          const emoji = POS_EMOJI[wp.pos] || '📍';
+          const isPeak = wp.pos === "最高點";
+          const isStart = i === 0 || i === n - 1;
+          const dot = isPeak ? PEAK : isStart ? ACCENT : STONE;
+          return `
+            <div class="absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm"
+                 style="background:${dot};"></div>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="font-mono font-bold text-sm" style="color:var(--accent-strong);">${wp.time}</span>
+              <span class="text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full">${emoji} ${wp.pos}</span>
+            </div>
+            <div class="font-bold text-stone-800">${wp.loc}</div>
+            <div class="text-xs text-stone-600 mt-0.5">${wp.desc}</div>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
