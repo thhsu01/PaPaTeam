@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-08-03 16:19",
+  "generated": "2026-08-04 08:37",
   "generated_tz": "UTC+8",
-  "commit": "ff4e1ade509b6095155713779807dd1da5c68a51",
-  "file_count": 39,
+  "commit": "8fc3157ee9943b8d92a8def0c94f7307a8f2eb76",
+  "file_count": 41,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -20,8 +20,8 @@
     },
     {
       "path": "ARCHITECTURE.md",
-      "size": 31854,
-      "sha": "11bec11ebb0010ff0a567870bdd6c82c832d1ed0"
+      "size": 33129,
+      "sha": "d865f531e5913018004bbc28745be66bbd8b77a1"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "size": 6473,
-      "sha": "8b4d8c88b20538ba38bde4a4c8527354935c8748"
+      "size": 6617,
+      "sha": "25d8a05348b210601e759d44161269d12985b4d5"
     },
     {
       "path": "SNIPPETS.md",
@@ -62,6 +62,11 @@
       "path": "assets/site.js",
       "size": 3419,
       "sha": "c02e87ce0a91e9336040de1e90e4dba0943e716c"
+    },
+    {
+      "path": "assets/tracks/caolingguidao-2024-11-23.js",
+      "size": 5121,
+      "sha": "958da4b46864b5abd3d8ebb654ee51da28b67b45"
     },
     {
       "path": "assets/tracks/dinghu-2026-06-20.js",
@@ -119,6 +124,11 @@
       "sha": "7eaf58cfe51f667fdfce2a44b1ada914df65946c"
     },
     {
+      "path": "caolingguidao.html",
+      "size": 32641,
+      "sha": "639d042e3cef338debbb32e6fec7c9c3eb7cd66d"
+    },
+    {
       "path": "datongshan.html",
       "size": 27587,
       "sha": "b2fcd57d5bc7dda3766b3a116311c613c75a84d2"
@@ -145,8 +155,8 @@
     },
     {
       "path": "index.html",
-      "size": 24401,
-      "sha": "a8221a938917cb1b65ce97354c2f488295bf05fc"
+      "size": 24700,
+      "sha": "52c2555817f90b60d7541642fa7df78772b3d36f"
     },
     {
       "path": "jiantanshan.html",
@@ -155,8 +165,8 @@
     },
     {
       "path": "jinmianshan.html",
-      "size": 29557,
-      "sha": "a2335d92ebb9b7fd9a5c2562eb6b0bc6ffbb5f47"
+      "size": 29827,
+      "sha": "7c295d91cdd2edb7efe1dfca19b9c9b8fd2b207e"
     },
     {
       "path": "laojiujianshan.html",
@@ -165,8 +175,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 10395,
-      "sha": "3233e12870e6c4d5ebeb200e8128179c9cf88cb9"
+      "size": 12572,
+      "sha": "ab9111b314bcb0bff6955e644e3ad540d05f8412"
     },
     {
       "path": "meihuashan.html",
