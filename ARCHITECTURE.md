@@ -168,11 +168,14 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
     /* 本頁專屬樣式（僅限確實只有本頁用得到的東西） */
   </style>
 
-  <!-- 順序固定：inline style → detail.css → site.css -->
-  <link rel="stylesheet" href="assets/detail.css">
-  <link rel="stylesheet" href="assets/site.css">
-  <script src="assets/site.js"></script>
-  <script src="assets/detail.js"></script>
+  <!-- 順序固定：inline style → detail.css → site.css。
+       ?v= 是內容雜湊，由 tools/bump_assets.py 寫入、spec_sweep 檢查：導覽列等區塊由
+       detail.js 產生之後，新版 HTML 配上快取裡的舊版 JS 就會整條導覽列不見——
+       2026-09-07 正式站發生過。改了共用檔就跑一次 bump_assets.py。 -->
+  <link rel="stylesheet" href="assets/detail.css?v=d4fe0168">
+  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
+  <script src="assets/site.js?v=e945f15d"></script>
+  <script src="assets/detail.js?v=765195f8"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
