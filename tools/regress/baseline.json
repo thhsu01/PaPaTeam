@@ -581,8 +581,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "10:02🚪 入山口草嶺古道登山口累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">10:02</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚪 入山口</span></div><div class=\"font-bold text-stone-800\">草嶺古道登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。</div>"
+    "text": "10:02🥾 入山口草嶺古道登山口累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">10:02</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">草嶺古道登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.20 km。遠望坑親水公園一帶的登山口，前面 1.2 km 都是產業道路。10:02–10:07 在此停留 6 分鐘。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -635,8 +635,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "15:13⛩️ 信仰地標草嶺慶雲宮（大里天公廟）累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">15:13</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛩️ 信仰地標</span></div><div class=\"font-bold text-stone-800\">草嶺慶雲宮（大里天公廟）</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。</div>"
+    "text": "15:13🙏 信仰地標草嶺慶雲宮（大里天公廟）累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">15:13</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">草嶺慶雲宮（大里天公廟）</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 7.73 km。古道南端出口旁的道教宮廟，主祀玉皇大帝。15:13–15:25 在此停留 13 分鐘。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -1142,8 +1142,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:56🚪 入山口大崙頭山親山步道入口累計 2.48 km。大崙頭山這一段的正式入口，接下來 0.53 公里要爬升 96 公尺，是全程第二陡的一段。座標由隊友提供，離軌跡 10 公尺——是九個地標裡最遠的一個，仍遠低於 15 公尺的稽核門檻。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:56</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚪 入山口</span></div><div class=\"font-bold text-stone-800\">大崙頭山親山步道入口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.48 km。大崙頭山這一段的正式入口，接下來 0.53 公里要爬升 96 公尺，是全程第二陡的一段。座標由隊友提供，離軌跡 10 公尺——是九個地標裡最遠的一個，仍遠低於 15 公尺的稽核門檻。</div>"
+    "text": "08:56🥾 入山口大崙頭山親山步道入口累計 2.48 km。大崙頭山這一段的正式入口，接下來 0.53 公里要爬升 96 公尺，是全程第二陡的一段。座標由隊友提供，離軌跡 10 公尺——是九個地標裡最遠的一個，仍遠低於 15 公尺的稽核門檻。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:56</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">大崙頭山親山步道入口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.48 km。大崙頭山這一段的正式入口，接下來 0.53 公里要爬升 96 公尺，是全程第二陡的一段。座標由隊友提供，離軌跡 10 公尺——是九個地標裡最遠的一個，仍遠低於 15 公尺的稽核門檻。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -1835,8 +1835,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:55📍 休息點古圳休息點累計 3.24 km，09:55–10:01 停留 6 分鐘。這個點沒有地名，以位置命名——它夾在桃仔腳橋與田尾仔橋之間。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">📍 休息點</span></div><div class=\"font-bold text-stone-800\">古圳休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 3.24 km，09:55–10:01 停留 6 分鐘。這個點沒有地名，以位置命名——它夾在桃仔腳橋與田尾仔橋之間。</div>"
+    "text": "09:55🌳 休息點古圳休息點累計 3.24 km，09:55–10:01 停留 6 分鐘。這個點沒有地名，以位置命名——它夾在桃仔腳橋與田尾仔橋之間。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">古圳休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 3.24 km，09:55–10:01 停留 6 分鐘。這個點沒有地名，以位置命名——它夾在桃仔腳橋與田尾仔橋之間。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -2788,8 +2788,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:50📍 補給點二子坪遊客服務站 (H820m)巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">12:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">📍 補給點</span></div><div class=\"font-bold text-stone-800\">二子坪遊客服務站 (H820m)</div><div class=\"text-xs text-stone-600 mt-0.5\">巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。</div>"
+    "text": "12:50🏪 補給點二子坪遊客服務站 (H820m)巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">12:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏪 補給點</span></div><div class=\"font-bold text-stone-800\">二子坪遊客服務站 (H820m)</div><div class=\"text-xs text-stone-600 mt-0.5\">巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3266,8 +3266,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:50🌿 轉換路段青楓步道登山口 (H490m)累計里程: 3.30 km",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 轉換路段</span></div><div class=\"font-bold text-stone-800\">青楓步道登山口 (H490m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 3.30 km</div>"
+    "text": "08:50↔️ 轉換路段青楓步道登山口 (H490m)累計里程: 3.30 km",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">青楓步道登山口 (H490m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 3.30 km</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3275,8 +3275,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:22🌿 轉換路段青楓步道出口 (H500m)累計里程: 3.84 km",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:22</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 轉換路段</span></div><div class=\"font-bold text-stone-800\">青楓步道出口 (H500m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 3.84 km</div>"
+    "text": "09:22↔️ 轉換路段青楓步道出口 (H500m)累計里程: 3.84 km",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:22</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">青楓步道出口 (H500m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 3.84 km</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3284,8 +3284,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:48🌿 轉換路段中正山第一登山口 (H580m)累計里程: 5.20 km",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:48</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 轉換路段</span></div><div class=\"font-bold text-stone-800\">中正山第一登山口 (H580m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 5.20 km</div>"
+    "text": "09:48↔️ 轉換路段中正山第一登山口 (H580m)累計里程: 5.20 km",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:48</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">中正山第一登山口 (H580m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計里程: 5.20 km</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3320,8 +3320,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#059669;"
     },
-    "text": "11:45📍 回程終點陽明山立體停車場 (H385m)回程終點，累計里程: 7.75 km",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#059669;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">11:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">📍 回程終點</span></div><div class=\"font-bold text-stone-800\">陽明山立體停車場 (H385m)</div><div class=\"text-xs text-stone-600 mt-0.5\">回程終點，累計里程: 7.75 km</div>"
+    "text": "11:45✅ 回程終點陽明山立體停車場 (H385m)回程終點，累計里程: 7.75 km",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#059669;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">11:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">✅ 回程終點</span></div><div class=\"font-bold text-stone-800\">陽明山立體停車場 (H385m)</div><div class=\"text-xs text-stone-600 mt-0.5\">回程終點，累計里程: 7.75 km</div>"
    }
   ],
   "markers": [
@@ -4380,8 +4380,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:23🚪 入山口紗帽山步道大埔登山口累計 0.65 km。紗帽山步道的南端登山口，官方標高 350 公尺，當天 GPS 讀到 349。08:23–08:28 在此整裝 5 分鐘後起登。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:23</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚪 入山口</span></div><div class=\"font-bold text-stone-800\">紗帽山步道大埔登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 0.65 km。紗帽山步道的南端登山口，官方標高 350 公尺，當天 GPS 讀到 349。08:23–08:28 在此整裝 5 分鐘後起登。</div>"
+    "text": "08:23🥾 入山口紗帽山步道大埔登山口累計 0.65 km。紗帽山步道的南端登山口，官方標高 350 公尺，當天 GPS 讀到 349。08:23–08:28 在此整裝 5 分鐘後起登。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">08:23</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">紗帽山步道大埔登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 0.65 km。紗帽山步道的南端登山口，官方標高 350 公尺，當天 GPS 讀到 349。08:23–08:28 在此整裝 5 分鐘後起登。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -4389,8 +4389,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52;"
     },
-    "text": "09:20⛰️ 最高點紗帽山 (H643m)累計 1.75 km。錐狀寄生火山的山頂，官方標高 643 公尺，當天 GPS 讀到 647。自大埔登山口爬升 293 公尺、走了 52 分鐘。09:20–10:27 在山頂一帶停留超過一小時。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 最高點</span></div><div class=\"font-bold text-stone-800\">紗帽山 (H643m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.75 km。錐狀寄生火山的山頂，官方標高 643 公尺，當天 GPS 讀到 647。自大埔登山口爬升 293 公尺、走了 52 分鐘。09:20–10:27 在山頂一帶停留超過一小時。</div>"
+    "text": "09:20🏔️ 最高點紗帽山 (H643m)累計 1.75 km。錐狀寄生火山的山頂，官方標高 643 公尺，當天 GPS 讀到 647。自大埔登山口爬升 293 公尺、走了 52 分鐘。09:20–10:27 在山頂一帶停留超過一小時。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">紗帽山 (H643m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.75 km。錐狀寄生火山的山頂，官方標高 643 公尺，當天 GPS 讀到 647。自大埔登山口爬升 293 公尺、走了 52 分鐘。09:20–10:27 在山頂一帶停留超過一小時。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -8612,8 +8612,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:25🌲 公園永春崗公園累計 6.83 km。步道末段的社區公園。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">12:25</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌲 公園</span></div><div class=\"font-bold text-stone-800\">永春崗公園</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 6.83 km。步道末段的社區公園。</div>"
+    "text": "12:25🌳 公園永春崗公園累計 6.83 km。步道末段的社區公園。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">12:25</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 公園</span></div><div class=\"font-bold text-stone-800\">永春崗公園</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 6.83 km。步道末段的社區公園。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",
@@ -10497,8 +10497,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52;"
     },
-    "text": "09:45🗻 最高點石灰坑山 (H375m)設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.01 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🗻 最高點</span></div><div class=\"font-bold text-stone-800\">石灰坑山 (H375m)</div><div class=\"text-xs text-stone-600 mt-0.5\">設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.01 km。</div>"
+    "text": "09:45🏔️ 最高點石灰坑山 (H375m)設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.01 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">石灰坑山 (H375m)</div><div class=\"text-xs text-stone-600 mt-0.5\">設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.01 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -11415,8 +11415,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52;"
     },
-    "text": "09:02⛰️ 最高點折返點累計 2.40 km，全程海拔最高處，比中正山還高 184 公尺。坡度在這裡轉平，09:02–09:07 停了 5 分鐘後原路折返。這個位置沒有可引用的地名與標高，830 公尺是由軌跡估算的（±25 公尺）。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:02</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 最高點</span></div><div class=\"font-bold text-stone-800\">折返點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.40 km，全程海拔最高處，比中正山還高 184 公尺。坡度在這裡轉平，09:02–09:07 停了 5 分鐘後原路折返。這個位置沒有可引用的地名與標高，830 公尺是由軌跡估算的（±25 公尺）。</div>"
+    "text": "09:02🏔️ 最高點折返點累計 2.40 km，全程海拔最高處，比中正山還高 184 公尺。坡度在這裡轉平，09:02–09:07 停了 5 分鐘後原路折返。這個位置沒有可引用的地名與標高，830 公尺是由軌跡估算的（±25 公尺）。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm\" style=\"color:var(--accent-strong);\">09:02</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">折返點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.40 km，全程海拔最高處，比中正山還高 184 公尺。坡度在這裡轉平，09:02–09:07 停了 5 分鐘後原路折返。這個位置沒有可引用的地名與標高，830 公尺是由軌跡估算的（±25 公尺）。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-white/60",

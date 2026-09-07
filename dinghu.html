@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="assets/detail.css?v=d4fe0168">
   <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
   <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=765195f8"></script>
+  <script src="assets/detail.js?v=acd9dea7"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -248,7 +248,6 @@
     // 是既有狀態，此處照原樣保留。
     const TRACK = '#16a34a';
 
-    const ICONS = { "集合起點":"🅿️","入山口":"🚌","景觀亮點":"🌉","歷史遺跡":"🏺","轉換路段":"🌿","副峰":"⛰️","最高點":"🏔️","山頂":"🗻","終點":"🏁" };
 
 
     // ── 本頁設定 ──────────────────────────────────────────────
@@ -275,7 +274,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
       chart: { elevationFloor: 250 },
 
-      timeline: { emoji: ICONS, hover: 'darken' }
+      timeline: { emoji: { '集合起點': '🅿️', '入山口': '🚌', '景觀亮點': '🌉' }, hover: 'darken' }
     });
   </script>
 </body>

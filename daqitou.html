@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="assets/detail.css?v=d4fe0168">
   <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
   <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=765195f8"></script>
+  <script src="assets/detail.js?v=acd9dea7"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -330,12 +330,7 @@
     // 預設的 isPeak 認 pos === "最高點"，正好對上鵝尾山，不必覆寫。
     const PAL = PaPaDetail.palette({ accent: ACCENT });
 
-    const POS_EMOJI = {
-      "集合起點":"🚩", "入山口":"🪜", "觀景亭":"🛖", "最高點":"🏔️",
-      "古圳橋":"🌉", "步道口":"🚪", "終點":"🏁"
-    };
 
-    // ── 行程日（頁面唯一來源）────────────────────────────────
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
@@ -360,7 +355,7 @@
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出來（見 docs/adr/0001）
       chart: { elevationFloor: 200 },
 
-      timeline: { emoji: POS_EMOJI }
+      timeline: { emoji: { '入山口': '🪜' } }
     });
   </script>
 </body>

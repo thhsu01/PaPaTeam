@@ -11,7 +11,8 @@
 
    海拔圖與時間軸都已經收進來了，各頁只給領域旋鈕：
    Chart.js 藏在接縫後面（見 docs/adr/0001），時間軸以「欄位清單」為介面
-   （layout／fields／emoji／palette／hover），不再由各頁手寫 HTML 樣板。
+   （layout／fields／emoji／palette／hover），不再由各頁手寫 HTML 樣板；
+   pos → emoji 的對照也是全站一份（POS_EMOJI），各頁只覆寫有意思的例外。
    導覽列、航點卡、天氣卡、已完成提示、兩個容器也收進來了（見 WIDGETS）：
    頁面只放 <div data-widget="…"> 掃載點，段落與散文仍是頁面自己的。
 
@@ -271,6 +272,34 @@ window.PaPaDetail = (function () {
   //
   // 「原估時間」不設旋鈕：有 wp.plan 且與實走不同就標，沒有就不標。例外用資料
   // 表達，跟航點短名的 short 是同一條規則。
+  // pos → emoji 的全站表。2026-09 之前 11 頁各自寫一份，同一個 pos 在不同頁配不同 emoji
+  // （最高點就有四種），而且大多是抄來的差異不是決定。這裡取各頁的多數當預設；
+  // 頁面 timeline.emoji 給 true 就用它，給物件則疊在上面——那是留給有意思的例外：
+  // 在捷運站集合的頁把集合起點寫成 🚇、剪刀石那頁把最高點寫成 ✂️。
+  // pos 是各頁的敘事標籤不是詞彙（全站 80 種，54 種只出現一次），所以表上沒有的
+  // pos 顯示 📍；開了 emoji 的頁若有 pos 落到 📍，spec_sweep 會提醒。
+  var POS_EMOJI = {
+    '終點': '🏁', '回程終點': '✅', '終點解散': '🏁',
+    '最高點': '🏔️', '山頂': '🗻', '副峰': '⛰️', '稜線山頭': '🌿', '山頭': '🌿',
+    '集合起點': '🚩', '集合地點': '🚩', '起登點': '🚉', '起點': '🚩',
+    '步道口': '🚪', '入山口': '🥾', '入山點': '🥾', '出山口': '🚶', '出口': '🚶', '轉換路段': '↔️', '公車站': '🚌',
+    '展望台': '🏙️', '展望點': '🌄', '展望岩': '🌄', '觀景點': '🌄', '瞭望台': '🔭',
+    '觀機平台': '✈️', '觀景亭': '🛖', '涼亭': '⛱️', '景觀亮點': '🌿',
+    '休息點': '🌳', '休息據點': '🌳', '休憩點': '⛱️', '午餐大休': '🍱', '補給點': '🏪',
+    '公園': '🌳', '森林步道': '🌲', '老樹': '🍁', '古圳橋': '🌉', '岔路口': '🔀',
+    '緩上段': '🚶', '岩壁': '🧗', '地質奇觀': '🪨', '天然岩洞': '🕌',
+    '古蹟': '🏛️', '地標': '🏛️', '歷史廟宇': '🏛️', '歷史遺跡': '🏺', '信仰地標': '🙏', '慶功': '🍔'
+  };
+
+  function emojiTable(t) {
+    if (!t.emoji) return null;
+    if (t.emoji === true) return POS_EMOJI;
+    var m = {};
+    Object.keys(POS_EMOJI).forEach(function (k) { m[k] = POS_EMOJI[k]; });
+    Object.keys(t.emoji).forEach(function (k) { m[k] = t.emoji[k]; });
+    return m;
+  }
+
   var FIELD = {
     desc: function (wp) { return wp.desc; },
     dist: function (wp) { return wp.dist == null ? '' : '累計 ' + wp.dist.toFixed(2) + ' km'; },
@@ -285,7 +314,7 @@ window.PaPaDetail = (function () {
     var n = cfg.schedule.length;
     var pal = t.palette || cfg.palette || palette({ accent: cssVar('--accent') });
     var fields = t.fields || ['desc'];
-    var emoji = t.emoji || null;
+    var emoji = emojiTable(t);
     var card = t.layout === 'card';
     // 行列式的滑過方向由該段的底色決定：暖底頁（--page-bg）提亮，
     // bg-stone-50 的頁壓深。兩個方向都看得出來，統一成一個反而有一半會消失。

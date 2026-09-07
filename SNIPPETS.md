@@ -135,7 +135,7 @@ PaPaDetail.init({
   // 海拔圖只給領域旋鈕，Chart.js 的設定樹由 detail.js 組出（見 docs/adr/0001）
   chart: { elevationMax: 200 },
 
-  timeline: { emoji: POS_EMOJI }
+  timeline: { emoji: true }         // 全站的 pos → emoji 表；例外用物件疊上去，如 { '集合起點': '🚇' }
 });
 ```
 
