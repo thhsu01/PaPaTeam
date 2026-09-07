@@ -1,18 +1,21 @@
-# 對比度實測（WCAG 2.1 AA）。跟 spec.yml 分開的三個理由：
-#   1. 它要 Playwright 與 Chromium，安裝就要一分多鐘，不該拖慢每次 push 的規格檢查。
-#   2. 它只在顏色可能變動時才有意義，所以只在動到 HTML 或 CSS 的 PR 上跑。
-#   3. 它會先重建 tw.css。那份 CSS 是掃 HTML 產生的，用倉庫裡那份舊的就會量到
+# 瀏覽器實測：對比度（WCAG 2.1 AA）與 detail.js 的執行期基準。兩件事共用一個
+# workflow，因為都要 Playwright 與 Chromium。跟 spec.yml 分開的三個理由：
+#   1. 安裝 Playwright 就要一分多鐘，不該拖慢每次 push 的規格檢查。
+#   2. 它只在畫面可能變動時才有意義，所以只在動到 HTML、CSS 或 JS 的 PR 上跑。
+#   3. 對比度會先重建 tw.css。那份 CSS 是掃 HTML 產生的，用倉庫裡那份舊的就會量到
 #      缺樣式的假版面——2026-08-04 就是這樣讓兩頁的 hero 漸層一直量錯底色。
 #      在 CI 現建，等於每次都是新的。
 
-name: 對比度檢查
+name: 瀏覽器實測
 
 on:
   pull_request:
     paths:
       - '**.html'
       - 'assets/**.css'
+      - 'assets/**.js'
       - 'tools/contrast/**'
+      - 'tools/regress/**'
       - '.github/workflows/contrast.yml'
   workflow_dispatch:
 
@@ -57,6 +60,13 @@ jobs:
 
       - name: 全站對比度實測
         run: node tools/contrast/check.js --all
+
+      # detail.js 是 22 頁共用的機制。這一步把每頁的時間軸 DOM、地圖標記樣式、
+      # 海拔圖設定、航點卡欄位跟 tools/regress/baseline.json 逐欄比對——
+      # 沒打算改畫面的改動，22 頁必須零變動；打算改的，用 --update 重寫基準並一起提交。
+      - name: detail.js 執行期基準
+        if: always()
+        run: node tools/regress/check.js
 
       - name: 失敗時附上判讀說明
         if: failure()
