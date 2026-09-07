@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-09-07 12:05",
+  "generated": "2026-09-07 15:21",
   "generated_tz": "UTC+8",
-  "commit": "60a68a8e17267ba2bfdf1c7a6339ab0cb2215fb2",
-  "file_count": 65,
+  "commit": "156e7467e37278c0b57168765b38b6edbf09c729",
+  "file_count": 66,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -40,8 +40,8 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "size": 7464,
-      "sha": "ef4f612f44b4b259638c6c62dacfeed48c179edc"
+      "size": 7749,
+      "sha": "584e7325b977cda0f713213a379c055938da080c"
     },
     {
       "path": "READABILITY_AUDIT.md",
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 10751,
-      "sha": "45ae9d884bc6d2ee67d59a8a8bfa0dd76e42fc20"
+      "size": 11710,
+      "sha": "ee566ef5185fb5ae288f3ef25ce8d7698c49f5b0"
     },
     {
       "path": "SNIPPETS.md",
@@ -240,8 +240,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 29928,
-      "sha": "2b8c37d357fde95b2eb884e0b3b0fafc538b0938"
+      "size": 33799,
+      "sha": "7d766caa31a8e49e412231619bfc40aaf75e0efd"
     },
     {
       "path": "meihuashan.html",
@@ -309,6 +309,11 @@
       "sha": "575cc122721e4fd79a76a972996340922353e380"
     },
     {
+      "path": "tools/manifest_tree.py",
+      "size": 6394,
+      "sha": "97d03f12948085c7b2f8c1fc07dd03d24fa32f37"
+    },
+    {
       "path": "tools/regress/baseline.json",
       "size": 565004,
       "sha": "bd8c266b41b7a038eaadca0a1aece338645b6b4f"
@@ -325,8 +330,8 @@
     },
     {
       "path": "tools/spec_sweep.py",
-      "size": 29717,
-      "sha": "7da8be0f4fe8631b576d0009f34e84542f406d6d"
+      "size": 35421,
+      "sha": "037a6848645ca1f56ffae40252c2ee805a1568f3"
     },
     {
       "path": "zhongzhengshan.html",
