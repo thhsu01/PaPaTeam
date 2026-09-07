@@ -177,17 +177,27 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
 
-  <!-- 不要另外加左上的 fixed 返回鍵：它會被這條導覽列蓋住。站徽就是回首頁的入口。 -->
-  <nav class="fixed top-0 w-full z-50 ..." aria-label="頁面導覽">
-    <!-- 左：站徽 + 站名（連回 index.html）／右：5 顆 .nav-btn 藥丸 -->
-  </nav>
+  <!-- 導覽列由 detail.js 產生（站徽、副標、五顆鍵）。不要另外加左上的返回鍵：
+       它會被導覽列蓋住，站徽就是回首頁的入口。 -->
+  <nav data-widget="nav"></nav>
 
   <main id="main-content" class="pt-14">
-    <section id="overview">...</section>
-    <section id="map-section">...</section>
-    <section id="elevation">...</section>
+    <section id="overview">
+      <h1>…</h1>
+      <div data-widget="notice"></div>        <!-- 紀錄頁：行程日過後顯示「此行程已完成」 -->
+      …統計列裡的天氣格：<div data-widget="weather"></div>…
+    </section>
+    <section id="map-section">
+      …<div id="map"></div>
+      <div data-widget="wp-card"></div>       <!-- 航點卡：七個欄位與上下鍵 -->
+    </section>
+    <section id="elevation">
+      …<div data-widget="chart"></div>        <!-- 海拔圖容器與 canvas -->
+    </section>
     <section id="spots">...</section>
-    <section id="timeline">...</section>
+    <section id="timeline">
+      …<div data-widget="timeline"></div>     <!-- 時間軸容器 -->
+    </section>
   </main>
 
   <!-- footer 在 main 之外。放進 main 會讓 skip link 的目標範圍含頁腳。 -->
@@ -200,42 +210,43 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 
 ### 元件規格
 
+#### 共用區塊由 `detail.js` 產生
+
+導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器六個區塊，頁面只放掃載點：
+
+```html
+<nav data-widget="nav"></nav>
+<div data-widget="notice"></div>
+<div data-widget="weather"></div>
+<div data-widget="wp-card"></div>
+<div data-widget="chart"></div>
+<div data-widget="timeline"></div>
+```
+
+`detail.js` 的 `WIDGETS` 表在 DOMContentLoaded 填入正規 markup。2026-09 之前這六個區塊
+22 頁各自手寫，量下來分別有 5／3／7／9／3／1 種寫法，而 `spec_sweep.py` 用十來條規則
+在防它們漂移——檢查器在做模組該做的事。現在寫法只有一份，規則剩「掃載點在、手寫的不在」。
+
+兩條規則：
+
+- **掃載點自己沒寫 `class` 就套正規 class；有寫就保留。** 那是給「格子屬於頁面版面」的
+  情況用的逃生口——舊世代把天氣卡放在自己的資訊卡網格裡，格子的邊框與內距是網格的事，
+  不是天氣卡的事。跟 `map.marker` 同一種性質：能用就別用。
+- **紀錄頁與候選頁的差異由 `trip` 有無推導**，不再各頁手寫：第五顆導覽鍵的文字
+  （實走紀錄／預估進度）、航點卡的時間標籤（實際時間／預計時間）、導覽列的日期副標、
+  要不要已完成提示——候選頁的 `notice` 掃載點會被拿掉，不會留一個空框。
+
 **導覽列**：`fixed`，搭配 `<main class="pt-14">` 讓出高度。不用 `sticky`——
 `sticky` 版本另外需要 `z-[1000]` 才不會被 Leaflet 蓋住，是多餘的複雜度。
-
-**站徽**：綠色圓形 `爬` 配「爬爬小隊」，**全站一律相同**，不隨頁面主色變。
-站徽是識別標誌，每頁換一個就失去作用。它同時是**唯一的回首頁入口**，
-所以 `aria-label` 必要。
-
-```html
-<a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
-  <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
-  <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-</a>
-```
-
-紀錄頁在站名右側加一個副標，行前頁不加（尚無日期可寫）：
-
-```html
-<span class="text-stone-600 text-xs hidden sm:inline font-medium">2026/6/20 活動紀錄</span>
-```
-
-**導覽鍵**：五顆一致的藥丸，容器一律 `flex gap-1 overflow-x-auto`
-（少了 `overflow-x-auto`，窄螢幕上五顆鍵會被擠壓而不是橫向捲動）。
-`onclick` 直接寫 `scrollIntoView`，不要包 `scrollToSection()` 輔助函式。
-
-```html
-<button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})"
-        class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap"
-        aria-label="滾動到海拔剖面">海拔剖面</button>
-```
-
-平滑滾動由 `assets/site.js` 統一處理 `prefers-reduced-motion`，各頁不必也不該自行判斷。
-段落的 `scroll-margin-top` 在 `assets/detail.css`，用來讓捲動終點避開固定導覽列，
-否則捲過去之後 `<h2>` 會躲在導覽列後面。改導覽列高度時要一起改。
+站徽是綠色圓形 `爬` 配「爬爬小隊」，**全站一律相同**，不隨頁面主色變；它同時是
+**唯一的回首頁入口**（不要另外加左上返回鍵）。五顆鍵的文字與 `aria-label` 由規格表定，
+第五顆依頁面性質。平滑滾動由 `assets/site.js` 統一處理 `prefers-reduced-motion`；
+段落的 `scroll-margin-top` 在 `assets/detail.css`，讓捲動終點避開固定導覽列，
+改導覽列高度時要一起改。
 
 **地圖與航點卡**：地圖在上、航點卡在下的**單欄堆疊**，不可並排。
-航點卡欄位 id 固定如下，`updateWaypointCard()` 只認這些名字：
+航點卡由 `wp-card` 區塊產生，根元素 `id="wp-card"`（`card.flash` 與頁面的 `onUpdate`
+靠它）。欄位 id 如下，`updateWaypointCard()` 只認這些名字：
 
 | id | 內容 | 備註 |
 |---|---|---|
@@ -247,10 +258,11 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 | `wp-desc` | 該點描述 | |
 | `wp-advice` | 隊友建議 | 僅此欄位放建議，不要拿來塞到達時間 |
 
-上/下一個航點鍵必要，`min-w-[44px] min-h-[44px]`，帶 `aria-label="上一個航點"` / `"下一個航點"`。
+上/下一個航點鍵 `min-w-[44px] min-h-[44px]`，帶 `aria-label="上一個航點"` / `"下一個航點"`
+——都在區塊裡，頁面不必寫。
 
-**海拔圖**：`<canvas id="elevation-chart">`（不是 `elevationChart`），
-外層 `.chart-container`，並帶 `role="img"` 與 `aria-label`。
+**海拔圖**：`chart` 區塊產生 `.chart-container` 與 `<canvas id="elevation-chart">`
+（含 `role="img"` 與 `aria-label`）。
 
 各頁不直接設定 Chart.js，只給領域旋鈕；設定樹由 `detail.js` 的 `initChart()` 組出。
 理由見 [ADR-0001](docs/adr/0001-chartjs-behind-the-seam.md)。
@@ -293,7 +305,8 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 **22 頁三個介面現已全部收斂，並由 `tools/spec_sweep.py` 逐區塊檢查**：`chart`、`marker`、
 `timeline` 三個區塊都必須真的引用 `palette`，光在頁首宣告 `PAL` 不算。
 
-**時間軸**：`<div id="timeline-container">` 內含一個 `.timeline-line`，其餘由 JS 生成。
+**時間軸**：`timeline` 區塊產生 `#timeline-container` 與裡面的 `.timeline-line`，
+容器的內距依 `timeline.layout` 決定（行列式 `pl-12`、卡片式 `pl-6`）。
 渲染前不要清空容器——那會連同直線一起清掉。meihuashan 先前就是這樣，
 當時是唯一一頁沒有時間軸直線的（已修正）。
 
@@ -540,10 +553,8 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 | 項目 | 檢查方式 | 狀態 |
 |---|:--:|---|
 | 段落 id 與順序 | 🤖 | ✅ 22/22 為 `overview` → `map-section` → `elevation` → `spots` → `timeline` |
-| 導覽鍵（五顆、規格文字） | 🤖 | ✅ 22/22（2026-08-04 收斂：先前 7 頁用規格外的「實走紀錄」、5 頁用「實際行程」，已統一為「實走紀錄」並同步改規格表）|
+| 共用區塊只放掃載點（導覽列、航點卡、海拔圖容器、時間軸容器必要；`weather`／`notice` 依頁面性質） | 🤖 | ✅ 22/22（2026-09 收進 detail.js 之前，六個區塊分別有 5／3／7／9／3／1 種寫法；先前這裡的「導覽鍵文字」「航點卡欄位 id」「canvas id」三列都是在防那份手寫漂移）|
 | `<h2>` 主詞符合規格表 | 🤖 | ✅ 22/22（2026-08-04 收斂：`map-section` 5 頁、`elevation` 5 頁、`timeline` 2 頁曾各自命名）|
-| 航點卡欄位 id | 🤖 | ✅ 22/22（含 `wp-pos-label`、`wp-time`、`wp-advice`）|
-| canvas id 為 `elevation-chart` | 🤖 | ✅ 22/22 |
 | 灰階用 stone | 🤖 | ✅ 22/22 — **class 名稱與十六進位值都查過**，且先剝掉註解再查 |
 | 總覽有總里程 | 🤖 | ✅ 22/22（2026-08-04：`bishan` 標「徒步長度」不符規格，已改「總里程 km（估）」）|
 | 站徽帶 `aria-label` | 🤖 | ✅ 22/22 |
@@ -727,12 +738,11 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 規格面（照上方「詳情頁正規規格」逐項對）：
 
 - [ ] 五個段落 id 為 `overview` / `map-section` / `elevation` / `spots` / `timeline`，順序正確
-- [ ] 導覽鍵文字為 行程總覽 / 路線圖 / 海拔剖面 / 景點介紹 / 預估進度（或實走紀錄）
+- [ ] 六個共用區塊放的是掃載點（`nav`、`wp-card`、`chart`、`timeline` 必要；有 `weather`
+      設定就要 `weather`；紀錄頁要 `notice`），沒有把導覽鍵、航點卡欄位、canvas 手寫回來
 - [ ] 沒有多開段落
 - [ ] `<footer>` 在 `<main>` 外面
-- [ ] 導覽列為 `fixed`，`<main class="pt-14">`
-- [ ] 航點卡欄位 id 用 `wp-pos-label`（不是 `wp-pos`），且含 `wp-time`
-- [ ] canvas id 為 `elevation-chart`
+- [ ] `<main class="pt-14">`（導覽列由區塊產生，本來就是 `fixed`）
 - [ ] 行程事實只在 `trip` 出現一次；版面上用 `data-trip` 槽，不手打數字
 - [ ] 灰階用 stone 不用 slate（class **與** `:root` 的十六進位值都要查）
 - [ ] `#overview` 有統計數字排，含**總里程**、耗時、爬升、最高海拔

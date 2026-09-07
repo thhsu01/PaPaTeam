@@ -12,6 +12,8 @@
    海拔圖與時間軸都已經收進來了，各頁只給領域旋鈕：
    Chart.js 藏在接縫後面（見 docs/adr/0001），時間軸以「欄位清單」為介面
    （layout／fields／emoji／palette／hover），不再由各頁手寫 HTML 樣板。
+   導覽列、航點卡、天氣卡、已完成提示、兩個容器也收進來了（見 WIDGETS）：
+   頁面只放 <div data-widget="…"> 掃載點，段落與散文仍是頁面自己的。
 
    載入順序：site.js → detail.js → 各頁 inline script。
    兩支共用檔都不可加 defer，否則各頁 inline script 會先跑。
@@ -353,6 +355,111 @@ window.PaPaDetail = (function () {
     });
   }
 
+  // ── 共用區塊 ──────────────────────────────────────────────
+  // 導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器：22 頁各自手寫，
+  // 2026-09 量測分別有 5／3／7／9／3／1 種寫法，而 spec_sweep 用十來條規則在防它們
+  // 漂移——檢查器在做模組該做的事。現在頁面只放掃載點 <div data-widget="wp-card">，
+  // 這裡填正規 markup（以 2026-08 照規格從零建的那個家族為準）。
+  //
+  // 掃載點自己沒寫 class 就套正規 class；有寫就保留——那是給「格子屬於頁面版面」
+  // 的情況用的逃生口（舊世代把天氣卡放在自己的資訊卡網格裡），跟 map.marker 同一種性質。
+  // 紀錄頁與候選頁的差異（第五鍵的文字、航點卡的時間標籤、要不要已完成提示）
+  // 由 trip 有無推導，不再各頁手寫。
+  var NAV = [['overview', '行程總覽'], ['map-section', '路線圖'], ['elevation', '海拔剖面'],
+             ['spots', '景點介紹'], ['timeline', null]];   // 第五鍵依頁面性質，見下
+
+  function isRecord() { return !!(cfg.trip && cfg.trip.date); }
+
+  var WIDGETS = {
+    nav: {
+      cls: 'fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50',
+      attrs: { 'aria-label': '頁面導覽' },
+      html: function () {
+        var record = isRecord();
+        return '<div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">' +
+          '<a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">' +
+            '<span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>' +
+            '<span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>' +
+            (record ? '<span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>' : '') +
+          '</a>' +
+          '<div class="flex gap-1 overflow-x-auto">' +
+            NAV.map(function (n) {
+              var label = n[1] || (record ? '實走紀錄' : '預估進度');
+              return '<button onclick="document.getElementById(\'' + n[0] + '\').scrollIntoView({behavior:\'smooth\'})" ' +
+                     'class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" ' +
+                     'aria-label="滾動到' + label + '">' + label + '</button>';
+            }).join('') +
+          '</div></div>';
+      }
+    },
+    // 只有紀錄頁有；候選頁的掃載點會被拿掉，免得留一個空框
+    notice: {
+      skip: function () { return !isRecord(); },
+      cls: 'hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3',
+      attrs: { id: 'trip-past-notice' },
+      html: function () {
+        return '<span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span><div>' +
+          '<div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>' +
+          '<p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡，' +
+          '地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p></div>';
+      }
+    },
+    weather: {
+      cls: 'stat-card rounded-2xl p-4 shadow-sm',
+      html: function () {
+        return '<div class="text-xs text-stone-600 mb-1" id="weather-label">' + (isRecord() ? '天氣預報' : '今日天氣') + '</div>' +
+          '<div class="font-bold text-stone-800" id="weather-main">載入中...</div>' +
+          '<div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>';
+      }
+    },
+    'wp-card': {
+      cls: 'bg-stone-50 rounded-2xl p-6 border border-stone-100',
+      attrs: { id: 'wp-card' },
+      html: function () {
+        var btn = 'class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 ' +
+                  'flex items-center justify-center text-sm min-w-[44px] min-h-[44px]"';
+        return '<div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label"></div>' +
+          '<div class="flex items-center gap-3 mb-3">' +
+            '<button onclick="prevWaypoint()" ' + btn + ' aria-label="上一個航點">&lt;</button>' +
+            '<h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title"></h3>' +
+            '<button onclick="nextWaypoint()" ' + btn + ' aria-label="下一個航點">&gt;</button>' +
+          '</div>' +
+          '<div class="flex gap-4 mb-3 text-sm text-stone-600">' +
+            '<span>' + (isRecord() ? '實際時間' : '預計時間') + ' <strong class="text-stone-800" id="wp-time"></strong></span>' +
+            '<span>累計里程 <strong class="text-stone-800" id="wp-dist"></strong> km</span>' +
+            '<span>海拔 <strong class="text-stone-800" id="wp-ele"></strong> m</span>' +
+          '</div>' +
+          '<p class="text-base text-stone-700 mb-3" id="wp-desc"></p>' +
+          '<div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">' +
+            '<div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>' +
+            '<p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>' +
+          '</div>';
+      }
+    },
+    chart: {
+      cls: 'chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100',
+      attrs: { role: 'region', 'aria-label': '海拔高度剖面圖' },
+      html: function () { return '<canvas id="elevation-chart" role="img" aria-label="顯示登山路線的海拔變化"></canvas>'; }
+    },
+    timeline: {
+      cls: function () { return cfg.timeline && cfg.timeline.layout === 'card' ? 'relative pl-6' : 'relative pl-12'; },
+      attrs: { id: 'timeline-container' },
+      html: function () { return '<div class="timeline-line"></div>'; }
+    }
+  };
+
+  function mountWidgets() {
+    var els = document.querySelectorAll('[data-widget]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i], w = WIDGETS[el.getAttribute('data-widget')];
+      if (!w) continue;                       // 名字寫錯由 spec_sweep 擋，這裡不猜
+      if (w.skip && w.skip()) { el.parentNode.removeChild(el); continue; }
+      el.innerHTML = w.html();
+      if (!el.className) el.className = typeof w.cls === 'function' ? w.cls() : w.cls;
+      for (var k in w.attrs) el.setAttribute(k, w.attrs[k]);
+    }
+  }
+
   // ── 行程事實 ──────────────────────────────────────────────
   // 一趟行程的日期、里程、時長、爬升、最高點，在頁內各出現六到八次（導覽副標、
   // 日期戳、統計列、已完成提示、頁腳…）。2026-08 量測 16 個已完成頁共 165 處手打，
@@ -448,8 +555,8 @@ window.PaPaDetail = (function () {
   async function fetchWeather() {
     var w = cfg.weather;
     if (!w) return;
-    var main = $(w.mainId || 'weather-main');
-    var sub = $(w.subId || 'weather-sub');
+    var main = $('weather-main');
+    var sub = $('weather-sub');
     var label = $('weather-label');
     if (!main) return;
 
@@ -569,10 +676,11 @@ window.PaPaDetail = (function () {
         };
       }
 
-      if (cfg.weather) fetchWeather();
-
+      // 天氣卡是共用區塊之一，要等掃載點填好才有元素可寫，所以也排在 DOMContentLoaded
       window.addEventListener('DOMContentLoaded', function () {
+        mountWidgets();
         fillTrip();
+        if (cfg.weather) fetchWeather();
         loadTrack().then(function () {
           initMap();
           initChart();

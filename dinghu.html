@@ -42,24 +42,7 @@
   <a href="#main-content" class="skip-link">跳至主要內容</a>
 
   <!-- NAV -->
-  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
-    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁" title="回到主頁">
-          <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
-          <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        </a>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
-      </div>
-      <div class="flex gap-1 overflow-x-auto">
-        <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
-        <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
-        <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
-        <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-        <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
-    </div>
-    </div>
-  </nav>
+  <nav data-widget="nav"></nav>
 
   <main id="main-content" class="pt-14">
     <!-- HERO / OVERVIEW -->
@@ -72,6 +55,7 @@
           猴崁水圳，青楓疊翠<br>
           <span class="accent-text-light">頂湖山系 O 型縱走</span>
         </h1>
+        <div data-widget="notice"></div>
         <p class="text-lg text-stone-600 mb-6 max-w-2xl">從日治水道遺跡出發，穿越猴崁水圳古道，沿青楓步道登頂頂湖山，俯瞰陽明山翠谷，O 型完整體驗陽明山北麓山水之美。</p>
 
         <!-- 悠遊卡公告橫幅 -->
@@ -94,11 +78,7 @@
             <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 07:00</div>
             <div class="text-xs text-stone-600 mt-1">（請提前 10 分鐘抵達）</div>
           </div>
-          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">即時天氣預報</div>
-            <div class="font-bold text-stone-800" id="weather-main">載入中...</div>
-            <div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>
-          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
             <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山立體停車場" style="background:var(--accent-strong);">
               🗺️ 開啟導航至陽明山立體停車場
@@ -141,24 +121,7 @@
 
         <div id="map" class="mb-6 shadow-md"></div>
 
-        <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
-          <div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
-          <div class="flex items-center gap-3 mb-3">
-            <button onclick="prevWaypoint()" class="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="上一個航點">&lt;</button>
-            <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">陽明山立體停車場 (H385m)</h3>
-            <button onclick="nextWaypoint()" class="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm" aria-label="下一個航點">&gt;</button>
-          </div>
-          <div class="flex gap-4 mb-3 text-sm text-stone-600">
-            <span>實際時間 <strong class="text-stone-800" id="wp-time">07:00</strong></span>
-            <span>里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
-            <span>海拔 <strong class="text-stone-800" id="wp-ele">385</strong> m</span>
-          </div>
-          <p class="text-sm text-stone-600 mb-3" id="wp-desc">行程起點。07:00 準時出發。</p>
-          <div class="bg-amber-50 border border-amber-100 rounded-xl p-3">
-            <div class="text-xs font-medium text-amber-700 mb-1">隊友建議</div>
-            <p class="text-xs text-amber-700" id="wp-advice">檢查裝備與水分。</p>
-          </div>
-        </div>
+        <div data-widget="wp-card"></div>
 
         <!-- Resources -->
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
@@ -180,9 +143,7 @@
           <span class="w-2.5 h-8 accent-mark rounded-full"></span>
           海拔高度剖面圖
         </h2>
-        <div class="chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100">
-          <canvas id="elevation-chart"></canvas>
-        </div>
+        <div data-widget="chart"></div>
       </div>
     </section>
 
@@ -256,14 +217,12 @@
           實走時間軸
         </h2>
         <p class="text-sm text-stone-600 mb-8">GPS 實測總里程 <span data-trip="km"></span> km（圳內站至頂湖站，含估算起點段 0.80 km）。</p>
-        <div class="relative pl-12" id="timeline-container">
-          <div class="timeline-line"></div>
-        </div>
+        <div data-widget="timeline"></div>
       </div>
     </section>
   </main>
 
-  <footer class="text-center py-16 border-t border-stone-200">
+  <footer class="text-center py-12 border-t border-stone-200">
     <p class="text-stone-600 text-sm font-medium tracking-wide">© 2026 爬爬小隊 | 頂湖O型 <span data-trip="date"></span> 活動紀錄</p>
   </footer>
 
