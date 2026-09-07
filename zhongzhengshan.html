@@ -51,7 +51,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/zhongzhengshan-2025-04-27.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -62,7 +61,7 @@
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/4/27 活動紀錄</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
         <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -81,16 +80,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">4月27日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.51 KM · 3 小時 26 分</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span></span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷） -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/4/27 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -98,7 +97,7 @@
           一段石階，兩趟停留<br>
           <span style="color:var(--accent-strong);">中正山親山步道</span>
         </h1>
-        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自中正山停車場起登，0.95 公里的石階直上中正山觀景台（646m），俯瞰關渡平原與淡水河口。之後沒有下山，而是續行東北向的稜線再爬 184 公尺，到 830 公尺處折返，原路走回停車場。全程 4.51 公里、3 小時 26 分——其中將近 1 小時 50 分是停著的，回程在中正山上就吃了 59 分鐘的午餐。</p>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自中正山停車場起登，0.95 公里的石階直上中正山觀景台（646m），俯瞰關渡平原與淡水河口。之後沒有下山，而是續行東北向的稜線再爬 184 公尺，到 830 公尺處折返，原路走回停車場。全程 <span data-trip="km"></span> 公里、<span data-trip="duration:zh"></span>——其中將近 1 小時 50 分是停著的，回程在中正山上就吃了 59 分鐘的午餐。</p>
 
         <!-- 資料來源說明 -->
         <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
@@ -119,7 +118,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">4月27日 07:24–10:50</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 07:24–10:50</div>
             <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -137,23 +136,23 @@
         <!-- Stats row -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">4.51</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">3:26</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">~315</div>
+            <div class="text-3xl font-black text-stone-900">~<span data-trip="gain"></span></div>
             <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);">830</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（折返點）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">最高點是折返點而不是中正山——步道以中正山命名，但當天走過山頂之後又往東北爬了 184 公尺。4.51 公里裡有 1 小時 49 分是站著不動的，扣掉之後實際腳程只有 1 小時 37 分。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">最高點是折返點而不是中正山——步道以中正山命名，但當天走過山頂之後又往東北爬了 184 公尺。<span data-trip="km"></span> 公里裡有 1 小時 49 分是站著不動的，扣掉之後實際腳程只有 1 小時 37 分。</p>
       </div>
     </section>
 
@@ -191,7 +190,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（2025/04/27，768 點）。</span>
+            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（<span data-trip="date"></span>，768 點）。</span>
             <span class="text-xs text-stone-600">公開數據：中正山（彌陀山）標高 646 公尺。折返點與稜線休息點沒有可引用的公開標高，本頁的數值是由當天軌跡估算的，見上方「這份軌跡的高程可以自我驗證」。</span>
             <span class="text-xs text-stone-600">建頁時本環境的網路政策擋掉 hiking.biji.co，無法核對步道頁的網址，因此這裡不放未經查證的連結——待能連線時再補。</span>
           </div>
@@ -219,7 +218,7 @@
             原因是 768 個點裡有很大一部分是站著不動時錄的：起點整裝 29 分鐘、中正山午餐 59 分鐘，
             GPS 高程在原地會上下抖動幾公尺，每一次抖動都被當成「爬升」累加進去。
             本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 331、314、309 公尺，
-            已經收斂；依各航點高程直接相加得 310 公尺。四個算法落在同一區間，因此標 <strong>~315 公尺</strong>。
+            已經收斂；依各航點高程直接相加得 310 公尺。四個算法落在同一區間，因此標 <strong>~<span data-trip="gain"></span> 公尺</strong>。
           </p>
         </div>
       </div>
@@ -266,7 +265,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">07:24 起錄 · 10:50 收錄 · 全程 3 小時 26 分</p>
+        <p class="text-sm text-stone-600 mb-2">07:24 起錄 · 10:50 收錄 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻、座標與里程全部取自 GPS 軌跡在該時刻的位置，沒有推算的航點。中正山出現兩次，那是原路折返、同一個地點去回各經過一次。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -277,7 +276,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 中正山親山步道 | 2025 年 4 月 27 日 · 07:24–10:50 · 4.51 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 中正山親山步道 | <span data-trip="date:zh"></span> · 07:24–10:50 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -355,14 +354,13 @@
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2025-04-27";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2025-04-27", km: 4.51, duration: "3:26", gain: 315, summit: 830 },
       nav: [25.156174, 121.511582],   // 集合地點＝停車場，原路折返起訖同點
 
       card: { follow: 'popup' },
@@ -373,7 +371,7 @@
         setView: [[25.1606, 121.5153], 15],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。原路折返，去回程重疊。
-        track: { points: PaPaTracks['zhongzhengshan-2025-04-27'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

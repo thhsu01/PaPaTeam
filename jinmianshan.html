@@ -51,7 +51,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/jinmianshan-2024-10-06.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -62,7 +61,7 @@
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/10/6 活動紀錄</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
         <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -81,16 +80,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">10月6日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 3.48 KM · 2 小時 59 分</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span></span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷） -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/10/6 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -105,7 +104,7 @@
           <span class="text-2xl mt-0.5">📡</span>
           <div>
             <div class="font-bold text-amber-900 text-base mb-1">大岩壁路段 GPS 訊號中斷 64 分鐘</div>
-            <p class="text-sm text-amber-800 leading-relaxed">軌跡在 09:15–10:19 之間只留下兩個點。這段正是大岩壁，岩面擋掉了衛星訊號。地圖上那一段是直線連接，不是實際走法。<strong>大岩壁到剪刀石之間的里程因此是補回來的</strong>：軌跡只記到 300 公尺，但官方步道里程說登山口到山頂是 1.15 公里（松友坪 0.26K、打印台 0.46K、山頂 0.43K），而軌跡在中斷前的部分是好的——登山口到大岩壁 626 公尺。兩者相減，大岩壁到剪刀石應該有 524 公尺，比軌跡多 224 公尺，依直線比分給論劍亭與剪刀石兩段，之後的里程一律加上同樣的 224 公尺。<strong>全程因此是 3.48 km。</strong>另一個佐證是坡度：登山口到山頂爬升 223 公尺，攤在 1.15 公里上是 19%，攤在軌跡的 0.93 公里上要 24%，後者陡得不合理。</p>
+            <p class="text-sm text-amber-800 leading-relaxed">軌跡在 09:15–10:19 之間只留下兩個點。這段正是大岩壁，岩面擋掉了衛星訊號。地圖上那一段是直線連接，不是實際走法。<strong>大岩壁到剪刀石之間的里程因此是補回來的</strong>：軌跡只記到 300 公尺，但官方步道里程說登山口到山頂是 1.15 公里（松友坪 0.26K、打印台 0.46K、山頂 0.43K），而軌跡在中斷前的部分是好的——登山口到大岩壁 626 公尺。兩者相減，大岩壁到剪刀石應該有 524 公尺，比軌跡多 224 公尺，依直線比分給論劍亭與剪刀石兩段，之後的里程一律加上同樣的 224 公尺。<strong>全程因此是 <span data-trip="km"></span> km。</strong>另一個佐證是坡度：登山口到山頂爬升 223 公尺，攤在 1.15 公里上是 19%，攤在軌跡的 0.93 公里上要 24%，後者陡得不合理。</p>
           </div>
         </div>
 
@@ -119,7 +118,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">10月6日 08:23–11:22</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 08:23–11:22</div>
             <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -137,19 +136,19 @@
         <!-- Stats row -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">3.48</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">2:59</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">~235</div>
+            <div class="text-3xl font-black text-stone-900">~<span data-trip="gain"></span></div>
             <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);">258</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（剪刀石，公開標高）</div>
           </div>
         </div>
@@ -263,7 +262,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">08:23 起登 · 11:22 收錄 · 全程 2 小時 59 分</p>
+        <p class="text-sm text-stone-600 mb-2">08:23 起登 · 11:22 收錄 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。大岩壁到剪刀石之間有 64 分鐘沒有紀錄，該區間的里程是重建的，論劍亭的時刻是估計值。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -274,7 +273,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 金面山親山步道 | 2024 年 10 月 6 日 · 08:23–11:22 · 3.48 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 金面山親山步道 | <span data-trip="date:zh"></span> · 08:23–11:22 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -359,14 +358,13 @@
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2024-10-06";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2024-10-06", km: 3.48, duration: "2:59", gain: 235, summit: 258 },
       nav: [25.088277, 121.568176],   // 集合地點：136 巷底的登山口，不是軌跡起錄的巷口
 
       card: { follow: 'popup' },
@@ -377,7 +375,7 @@
         setView: [[25.0900, 121.5715], 15],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。09:15–10:19 沒有訊號，該段為直線連接。
-        track: { points: PaPaTracks['jinmianshan-2024-10-06'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

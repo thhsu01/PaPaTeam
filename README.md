@@ -55,8 +55,8 @@ npx http-server
 詳情頁用的是 `schedule`，不是首頁的 `data` 物件；地圖、圖表、時間軸都由它推導。
 
 **加入實走軌跡：** 已完成的行程若有 GPS 紀錄，把簡化後的座標陣列存成
-`assets/tracks/<頁名>-<YYYY-MM-DD>.js`，頁面載入它並把 `map.track.points`
-傳給 `PaPaDetail`，地圖就改畫實際軌跡而非航點直線。
+`assets/tracks/<頁名>-<YYYY-MM-DD>.js`，`init` 的 `map.track` 給樣式就好——
+`detail.js` 依 `trip.date` 載入那個檔，地圖就改畫實際軌跡而非航點直線。
 
 ## 檔案結構
 

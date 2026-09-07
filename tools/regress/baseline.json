@@ -1024,7 +1024,64 @@
     "wp-advice": "招呼站沒有商店。往北回福隆或往南到頭城都可以，但班次疏，下山前就該確認時刻表。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2024/11/23"
+   },
+   {
+    "slot": "date:md",
+    "text": "11月23日"
+   },
+   {
+    "slot": "km",
+    "text": "7.88"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "5 小時 41 分"
+   },
+   {
+    "slot": "date",
+    "text": "2024/11/23"
+   },
+   {
+    "slot": "date:md",
+    "text": "11月23日"
+   },
+   {
+    "slot": "km",
+    "text": "7.88"
+   },
+   {
+    "slot": "duration",
+    "text": "5:41"
+   },
+   {
+    "slot": "gain",
+    "text": "355"
+   },
+   {
+    "slot": "summit",
+    "text": "355"
+   },
+   {
+    "slot": "km",
+    "text": "7.88"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "5 小時 41 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2024 年 11 月 23 日"
+   },
+   {
+    "slot": "km",
+    "text": "7.88"
+   }
+  ],
   "errors": []
  },
  "daluntouweishan": {
@@ -1618,7 +1675,80 @@
     "wp-advice": "回到原點取車。下山後沿劍南路可以直接接到大直或內湖市區，吃飯與交通都方便。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/09/29"
+   },
+   {
+    "slot": "date:md",
+    "text": "9月29日"
+   },
+   {
+    "slot": "km",
+    "text": "6.93"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 44 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/09/29"
+   },
+   {
+    "slot": "km",
+    "text": "6.93"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 44 分"
+   },
+   {
+    "slot": "date:md",
+    "text": "9月29日"
+   },
+   {
+    "slot": "km",
+    "text": "6.93"
+   },
+   {
+    "slot": "duration",
+    "text": "3:44"
+   },
+   {
+    "slot": "gain",
+    "text": "310"
+   },
+   {
+    "slot": "summit",
+    "text": "476"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 44 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/09/29"
+   },
+   {
+    "slot": "gain",
+    "text": "310"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 44 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 9 月 29 日"
+   },
+   {
+    "slot": "km",
+    "text": "6.93"
+   }
+  ],
   "errors": []
  },
  "daqitou": {
@@ -2134,7 +2264,80 @@
     "wp-advice": "回到原點解散。這一帶的公車班次不密，下山前先查好回程時刻。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/06/15"
+   },
+   {
+    "slot": "date:md",
+    "text": "6月15日"
+   },
+   {
+    "slot": "km",
+    "text": "4.44"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 58 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/06/15"
+   },
+   {
+    "slot": "km",
+    "text": "4.44"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 58 分"
+   },
+   {
+    "slot": "date:md",
+    "text": "6月15日"
+   },
+   {
+    "slot": "km",
+    "text": "4.44"
+   },
+   {
+    "slot": "duration",
+    "text": "2:58"
+   },
+   {
+    "slot": "gain",
+    "text": "305"
+   },
+   {
+    "slot": "summit",
+    "text": "523"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 58 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/06/15"
+   },
+   {
+    "slot": "gain",
+    "text": "305"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 58 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 6 月 15 日"
+   },
+   {
+    "slot": "km",
+    "text": "4.44"
+   }
+  ],
   "errors": []
  },
  "datongshan": {
@@ -3488,7 +3691,44 @@
     "wp-advice": "搭乘公車或步行回到停車場，完成今日行程！"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2026/06/20"
+   },
+   {
+    "slot": "date:md",
+    "text": "6月20日"
+   },
+   {
+    "slot": "km",
+    "text": "7.75"
+   },
+   {
+    "slot": "duration:h",
+    "text": "4"
+   },
+   {
+    "slot": "duration:m",
+    "text": "45"
+   },
+   {
+    "slot": "gain",
+    "text": "352"
+   },
+   {
+    "slot": "summit",
+    "text": "662"
+   },
+   {
+    "slot": "km",
+    "text": "7.75"
+   },
+   {
+    "slot": "date",
+    "text": "2026/06/20"
+   }
+  ],
   "errors": []
  },
  "eweishan": {
@@ -3965,7 +4205,80 @@
     "wp-advice": "出來就是馬路，走一小段回簡厝公車站搭車。開車停在公車站那頭的人記得預留這段回程。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/08/30"
+   },
+   {
+    "slot": "date:md",
+    "text": "8月30日"
+   },
+   {
+    "slot": "km",
+    "text": "6.46"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/08/30"
+   },
+   {
+    "slot": "km",
+    "text": "6.46"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date:md",
+    "text": "8月30日"
+   },
+   {
+    "slot": "km",
+    "text": "6.46"
+   },
+   {
+    "slot": "duration",
+    "text": "3:39"
+   },
+   {
+    "slot": "gain",
+    "text": "260"
+   },
+   {
+    "slot": "summit",
+    "text": "523"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/08/30"
+   },
+   {
+    "slot": "gain",
+    "text": "260"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 8 月 30 日"
+   },
+   {
+    "slot": "km",
+    "text": "6.46"
+   }
+  ],
   "errors": []
  },
  "henglingguidao": {
@@ -4443,7 +4756,68 @@
     "wp-advice": "回到原點取車。想再加菜的人，紅壇登山口那頭可以續接半嶺步道；不想動的就下山到陽明山公車總站一帶吃飯。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/03/23"
+   },
+   {
+    "slot": "date:md",
+    "text": "3月23日"
+   },
+   {
+    "slot": "km",
+    "text": "5.36"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/03/23"
+   },
+   {
+    "slot": "date:md",
+    "text": "3月23日"
+   },
+   {
+    "slot": "km",
+    "text": "5.36"
+   },
+   {
+    "slot": "duration",
+    "text": "3:39"
+   },
+   {
+    "slot": "gain",
+    "text": "320"
+   },
+   {
+    "slot": "summit",
+    "text": "643"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "gain",
+    "text": "320"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 39 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 3 月 23 日"
+   },
+   {
+    "slot": "km",
+    "text": "5.36"
+   }
+  ],
   "errors": []
  },
  "huoyianshan": {
@@ -4858,7 +5232,56 @@
     "wp-advice": "回到馬路端即完成 O 型。停車場還要沿馬路走一小段，別以為到登山口就結束了。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/12/13"
+   },
+   {
+    "slot": "date",
+    "text": "2025/12/13"
+   },
+   {
+    "slot": "km",
+    "text": "8.34"
+   },
+   {
+    "slot": "km",
+    "text": "8.34"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 12 月 13 日"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "5 小時 7 分"
+   },
+   {
+    "slot": "km",
+    "text": "8.34"
+   },
+   {
+    "slot": "duration:h",
+    "text": "5"
+   },
+   {
+    "slot": "duration:m",
+    "text": "07"
+   },
+   {
+    "slot": "gain",
+    "text": "440"
+   },
+   {
+    "slot": "summit",
+    "text": "601"
+   },
+   {
+    "slot": "date",
+    "text": "2025/12/13"
+   }
+  ],
   "errors": []
  },
  "hushan": {
@@ -5180,7 +5603,52 @@
     "wp-advice": "步道口出來即是市街，最近的捷運是後山埤站。若要接象山，可從慈惠堂旁的四獸山縱走路徑續行。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2024/04/20"
+   },
+   {
+    "slot": "date:md",
+    "text": "4月20日"
+   },
+   {
+    "slot": "km",
+    "text": "4.35"
+   },
+   {
+    "slot": "date",
+    "text": "2024/04/20"
+   },
+   {
+    "slot": "date:md",
+    "text": "4月20日"
+   },
+   {
+    "slot": "km",
+    "text": "4.35"
+   },
+   {
+    "slot": "duration",
+    "text": "2:00"
+   },
+   {
+    "slot": "gain",
+    "text": "120"
+   },
+   {
+    "slot": "summit",
+    "text": "184"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2024 年 4 月 20 日"
+   },
+   {
+    "slot": "km",
+    "text": "4.35"
+   }
+  ],
   "errors": []
  },
  "jiantanshan": {
@@ -5502,7 +5970,64 @@
     "wp-advice": "劍潭站對面就是士林夜市，適合安排慶功。想加碼的話，沿稜線續行可接文間山、劍潭古寺一線。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2024/08/04"
+   },
+   {
+    "slot": "date:md",
+    "text": "8月4日"
+   },
+   {
+    "slot": "km",
+    "text": "4.92"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 56 分"
+   },
+   {
+    "slot": "date",
+    "text": "2024/08/04"
+   },
+   {
+    "slot": "date:md",
+    "text": "8月4日"
+   },
+   {
+    "slot": "km",
+    "text": "4.92"
+   },
+   {
+    "slot": "duration",
+    "text": "2:56"
+   },
+   {
+    "slot": "gain",
+    "text": "200"
+   },
+   {
+    "slot": "summit",
+    "text": "165"
+   },
+   {
+    "slot": "km",
+    "text": "4.92"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 56 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2024 年 8 月 4 日"
+   },
+   {
+    "slot": "km",
+    "text": "4.92"
+   }
+  ],
   "errors": []
  },
  "jinmianshan": {
@@ -5863,7 +6388,64 @@
     "wp-advice": "回到環山路即完成環狀。內湖科技園區一帶餐廳選擇多，適合安排慶功；捷運西湖站步行約 15 分鐘。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2024/10/06"
+   },
+   {
+    "slot": "date:md",
+    "text": "10月6日"
+   },
+   {
+    "slot": "km",
+    "text": "3.48"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 59 分"
+   },
+   {
+    "slot": "date",
+    "text": "2024/10/06"
+   },
+   {
+    "slot": "km",
+    "text": "3.48"
+   },
+   {
+    "slot": "date:md",
+    "text": "10月6日"
+   },
+   {
+    "slot": "km",
+    "text": "3.48"
+   },
+   {
+    "slot": "duration",
+    "text": "2:59"
+   },
+   {
+    "slot": "gain",
+    "text": "235"
+   },
+   {
+    "slot": "summit",
+    "text": "258"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "2 小時 59 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2024 年 10 月 6 日"
+   },
+   {
+    "slot": "km",
+    "text": "3.48"
+   }
+  ],
   "errors": []
  },
  "laojiujianshan": {
@@ -6360,7 +6942,40 @@
     "wp-advice": "回到起點完成 O 型。金龍寺周邊有小吃店，可安排慶功；捷運東湖站約 10 分鐘車程。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2026/05/01"
+   },
+   {
+    "slot": "date:md",
+    "text": "5月1日"
+   },
+   {
+    "slot": "km",
+    "text": "8.50"
+   },
+   {
+    "slot": "duration:h",
+    "text": "4"
+   },
+   {
+    "slot": "duration:m",
+    "text": "49"
+   },
+   {
+    "slot": "gain",
+    "text": "230"
+   },
+   {
+    "slot": "summit",
+    "text": "193"
+   },
+   {
+    "slot": "date",
+    "text": "2026/05/01"
+   }
+  ],
   "errors": []
  },
  "meihuashan": {
@@ -6939,7 +7554,48 @@
     "wp-advice": "回到起點的公車站解散。至善路班次不密，下山前先查好回程時刻。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2026/01/10"
+   },
+   {
+    "slot": "date",
+    "text": "2026/01/10"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2026 年 1 月 10 日"
+   },
+   {
+    "slot": "km",
+    "text": "12.22"
+   },
+   {
+    "slot": "duration:h",
+    "text": "7"
+   },
+   {
+    "slot": "duration:m",
+    "text": "53"
+   },
+   {
+    "slot": "gain",
+    "text": "594"
+   },
+   {
+    "slot": "summit",
+    "text": "643"
+   },
+   {
+    "slot": "km",
+    "text": "12.22"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "7 小時 53 分"
+   }
+  ],
   "errors": []
  },
  "mochashan": {
@@ -7682,7 +8338,48 @@
     "wp-advice": "行程完成。先拉筋伸展再上車；礁溪市區有溫泉可泡，是這條路線最好的收尾。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2026/03/14"
+   },
+   {
+    "slot": "date:md",
+    "text": "3月14日"
+   },
+   {
+    "slot": "km",
+    "text": "14.02"
+   },
+   {
+    "slot": "duration:h",
+    "text": "8"
+   },
+   {
+    "slot": "duration:m",
+    "text": "17"
+   },
+   {
+    "slot": "gain",
+    "text": "900"
+   },
+   {
+    "slot": "summit",
+    "text": "885"
+   },
+   {
+    "slot": "km",
+    "text": "14.02"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "8 小時 17 分"
+   },
+   {
+    "slot": "date",
+    "text": "2026/03/14"
+   }
+  ],
   "errors": []
  },
  "nangangshan": {
@@ -8277,7 +8974,64 @@
     "wp-advice": "慶功點。從象山登山口再走約 900 公尺，若隊伍疲累可先在登山口解散、各自前往。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2024/06/30"
+   },
+   {
+    "slot": "date:md",
+    "text": "6月30日"
+   },
+   {
+    "slot": "km",
+    "text": "7.91"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "4 小時 52 分"
+   },
+   {
+    "slot": "date",
+    "text": "2024/06/30"
+   },
+   {
+    "slot": "km",
+    "text": "7.91"
+   },
+   {
+    "slot": "date:md",
+    "text": "6月30日"
+   },
+   {
+    "slot": "km",
+    "text": "7.91"
+   },
+   {
+    "slot": "duration",
+    "text": "4:52"
+   },
+   {
+    "slot": "gain",
+    "text": "400"
+   },
+   {
+    "slot": "summit",
+    "text": "376"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "4 小時 52 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2024 年 6 月 30 日"
+   },
+   {
+    "slot": "km",
+    "text": "7.91"
+   }
+  ],
   "errors": []
  },
  "nanshijiao": {
@@ -9028,7 +9782,48 @@
     "wp-advice": "可入廟參拜祈福，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date:md",
+    "text": "8月2日"
+   },
+   {
+    "slot": "km",
+    "text": "11.09"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "7 小時 21 分"
+   },
+   {
+    "slot": "date",
+    "text": "2026/08/02"
+   },
+   {
+    "slot": "date:md",
+    "text": "8月2日"
+   },
+   {
+    "slot": "km",
+    "text": "11.09"
+   },
+   {
+    "slot": "duration",
+    "text": "7:21"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "7 小時 21 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2026 年 8 月 2 日"
+   },
+   {
+    "slot": "km",
+    "text": "11.09"
+   }
+  ],
   "errors": []
  },
  "qixingshan": {
@@ -10731,7 +11526,80 @@
     "wp-advice": "回到原點取車。下山後順路可以繞去北投泡湯或吃碗麵，從停車場開下山到新北投只要十來分鐘。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2025/04/27"
+   },
+   {
+    "slot": "date:md",
+    "text": "4月27日"
+   },
+   {
+    "slot": "km",
+    "text": "4.51"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 26 分"
+   },
+   {
+    "slot": "date",
+    "text": "2025/04/27"
+   },
+   {
+    "slot": "km",
+    "text": "4.51"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 26 分"
+   },
+   {
+    "slot": "date:md",
+    "text": "4月27日"
+   },
+   {
+    "slot": "km",
+    "text": "4.51"
+   },
+   {
+    "slot": "duration",
+    "text": "3:26"
+   },
+   {
+    "slot": "gain",
+    "text": "315"
+   },
+   {
+    "slot": "summit",
+    "text": "830"
+   },
+   {
+    "slot": "km",
+    "text": "4.51"
+   },
+   {
+    "slot": "date",
+    "text": "2025/04/27"
+   },
+   {
+    "slot": "gain",
+    "text": "315"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "3 小時 26 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2025 年 4 月 27 日"
+   },
+   {
+    "slot": "km",
+    "text": "4.51"
+   }
+  ],
   "errors": []
  }
 }

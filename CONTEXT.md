@@ -18,7 +18,20 @@
 | 候選 | `data.candidate` | 預估進度／預計行程進度 |
 | 已完成 | `data.completed` | 實走紀錄／實走時間軸 |
 
-已完成的行程若留下 GPS 紀錄，軌跡放在 `assets/tracks/<頁名>-<YYYY-MM-DD>.js`。
+已完成的行程若留下 GPS 紀錄，軌跡放在 `assets/tracks/<頁名>-<YYYY-MM-DD>.js`，
+由 `assets/detail.js` 依行程事實的日期載入。
+
+### 行程事實（trip）
+
+一趟行程本身的五個數字：**日期**、**總里程**（km）、**耗時**、**累計上升**、**最高點**。
+它們屬於行程，不屬於任何航點——最高點是全程的最高海拔（可能不在任何航點上，
+見 `hushan`），總里程也不等於最後一個航點的 `dist`（軌跡在它之後還有一段）。
+
+已完成頁在 `PaPaDetail.init` 的 `trip` 宣告一次；版面上承接它的位置叫**事實槽**
+（`data-trip="date:md"` 之類），由 `detail.js` 填。2026-09 之前這五個數字在每頁手打
+六到八次，16 頁共 165 處，靠 `fact_check.py` 交叉核對才沒有自相矛盾。
+
+仍然手寫的只有 `<title>`、`<meta description>` 與首頁卡片——給爬蟲看的，JS 填不到。
 
 ## 航點（waypoint）
 

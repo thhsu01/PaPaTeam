@@ -55,7 +55,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/nanshijiao-2026-08-02.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -84,16 +83,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">8月2日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 11.09 KM · 7 小時 21 分</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span></span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷），避免頁面看起來仍是即將出發 -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷），避免頁面看起來仍是即將出發 -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">頁面已改寫為實走紀錄：時刻與里程來自 8/2 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">頁面已改寫為實走紀錄：時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -122,7 +121,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">8月2日 07:50–15:11</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 07:50–15:11</div>
             <div class="text-xs text-stone-600 mt-1">（原訂 07:30 出發）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -141,11 +140,11 @@
         <!-- 里程與耗時取自 8/2 的 GPS 軌跡；爬升仍用地形圖估算值，理由見下方註記。 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">11.09</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">7:21</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
@@ -332,7 +331,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">07:50 出發 · 15:11 於烘爐地結束 · 全程 7 小時 21 分</p>
+        <p class="text-sm text-stone-600 mb-2">07:50 出發 · 15:11 於烘爐地結束 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻為 GPS 軌跡最接近各航點的時間，含沿途休息；括號內為當初的預估時間。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -343,7 +342,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 微笑山線·南勢角大縱走 | 2026 年 8 月 2 日 · 07:50–15:11 · 11.09 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 微笑山線·南勢角大縱走 | <span data-trip="date:zh"></span> · 07:50–15:11 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -459,7 +458,6 @@
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
     // 天氣查詢、天氣卡標題、行程結束提示都由此推導。
-    const TRIP_DATE = "2026-08-02";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 地圖、圖表、航點卡、天氣的機制都在 assets/detail.js，此處只描述差異。
@@ -470,7 +468,7 @@
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2026-08-02", km: 11.09, duration: "7:21" },
       nav: [24.990128, 121.509104],
 
       card: { follow: 'popup' },
@@ -481,7 +479,7 @@
         setView: [[24.977, 121.494], 14],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/），不是航點連成的直線
-        track: { points: PaPaTracks['nanshijiao-2026-08-02'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

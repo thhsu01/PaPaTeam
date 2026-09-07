@@ -49,7 +49,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/caolingguidao-2024-11-23.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -60,7 +59,7 @@
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/11/23 活動紀錄</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
         <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -79,16 +78,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">11月23日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 7.88 KM · 5 小時 41 分</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span></span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷） -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/11/23 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -117,7 +116,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">11月23日 09:44–15:26</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 09:44–15:26</div>
             <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -135,23 +134,23 @@
         <!-- Stats row -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">7.88</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">5:41</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">~355</div>
+            <div class="text-3xl font-black text-stone-900">~<span data-trip="gain"></span></div>
             <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);">355</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（埡口觀景亭）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">海拔經過漂移修正，見下方說明。7.88 km 只算遠望坑口起登之後的腳程，福隆到遠望坑口那段接駁不計。這是一趟單向越嶺——起點遠望坑口在新北貢寮，終點大里火車站在宜蘭頭城，兩地直線相距 4.6 公里，不是環狀。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">海拔經過漂移修正，見下方說明。<span data-trip="km"></span> km 只算遠望坑口起登之後的腳程，福隆到遠望坑口那段接駁不計。這是一趟單向越嶺——起點遠望坑口在新北貢寮，終點大里火車站在宜蘭頭城，兩地直線相距 4.6 公里，不是環狀。</p>
       </div>
     </section>
 
@@ -283,7 +282,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">09:44 起登 · 15:26 收錄 · 全程 5 小時 41 分</p>
+        <p class="text-sm text-stone-600 mb-2">09:44 起登 · 15:26 收錄 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻與座標取自 GPS 軌跡在該時刻的位置。埡口與護管所兩處各停留 39 與 42 分鐘，佔掉全程近四分之一的時間。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -294,7 +293,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 草嶺古道芒花季 | 2024 年 11 月 23 日 · 09:44–15:26 · 7.88 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 草嶺古道芒花季 | <span data-trip="date:zh"></span> · 09:44–15:26 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -378,14 +377,13 @@
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2024-11-23";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2024-11-23", km: 7.88, duration: "5:41", gain: 355, summit: 355 },
       nav: [25.015944, 121.944861],   // 集合地點：福隆車站。遠望坑口要搭接駁，不是自己開過去的
 
       card: { follow: 'popup' },
@@ -397,7 +395,7 @@
         setView: [[24.9928, 121.9348], 13],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。幾處訊號中斷的區間為直線連接。
-        track: { points: PaPaTracks['caolingguidao-2024-11-23'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

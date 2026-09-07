@@ -16,6 +16,13 @@ caolingguidao 末點 7.87、總里程 7.88；nanshijiao 末點 10.96、總里程
 
 所以改成「畫面上所有講同一件事的地方必須彼此一致」。缺某個欄位不算錯，
 各頁的版面家族本來就不同；只有「同時存在且互相矛盾」才是問題。
+
+## 2026-09：事實改成宣告一次
+
+已完成頁的事實現在只在 PaPaDetail.init 的 trip 物件宣告一次，版面上的槽
+（data-trip="date:md" 之類）由 detail.js 填。165 處手打縮到剩下 JS 填不到的地方：
+<title>、<meta description>、首頁卡片。本檔把 trip 當成事實的一個「出現位置」——
+跟其他位置一樣進交叉核對，所以殘留的手打副本若跟 trip 不合，一樣會被抓到。
 """
 import re
 import sys
@@ -33,8 +40,10 @@ def norm_date(y, m, d):
 # 一起旅行——把它們收成一張表，新增一個出現位置只要加一行。
 # 只取結構化的位置，不掃內文：內文合法地會提到別的日期（「2026 年整理 GPX 時補回」
 # 「同治六年」）。軌跡檔名的樣式依頁名而定，所以留在函式裡組。
+TRIP = r'\btrip:\s*\{[^}]*?'          # trip 物件是扁的，[^}] 走不出它
+
 DATE_SLOTS = [
-    ('TRIP_DATE',      r'TRIP_DATE\s*=\s*"(\d{4})-(\d{2})-(\d{2})"'),
+    ('trip.date',      TRIP + r'\bdate:\s*"(\d{4})-(\d{2})-(\d{2})"'),
     ('meta description', r'<meta name="description" content="(\d{4})/(\d{1,2})/(\d{1,2})'),
     ('導覽副標',        r'>(\d{4})/(\d{1,2})/(\d{1,2}) 活動紀錄<'),
     ('行程已完成提示',   r'時刻與里程來自 (\d{4})/(\d{1,2})/(\d{1,2}) 當天'),
@@ -60,6 +69,7 @@ def page_dates(s, name):
 
 
 TOTAL_SLOTS = [
+    ('trip.km',         TRIP + r'\bkm:\s*([\d.]+)'),
     ('meta description', r'<meta name="description" content="[^"]*?全程 *約? *([\d.]+) *公里'),
     ('日期戳旁摘要',      r'(?:實走紀錄|實走)[^<]*?·\s*約?\s*([\d.]+)\s*KM'),
     # 統計列：大字後面跟著「實走里程」或「總里程」的標籤
@@ -85,6 +95,9 @@ def page_durations(s):
     out = []
     def mins(h, m):
         return int(h) * 60 + int(m)
+    m = re.search(TRIP + r'\bduration:\s*"(\d+):(\d{2})"', s)
+    if m:
+        out.append(('trip.duration', mins(*m.groups())))
     m = re.search(r'實走紀錄[^<]*?·\s*(\d+)\s*小時\s*(\d+)\s*分', s)
     if m:
         out.append(('日期戳旁摘要', mins(*m.groups())))
@@ -103,6 +116,9 @@ def page_durations(s):
 def page_gains(s):
     """回傳 [(來源, 公尺)]。累計上升在統計列與海拔圖說明各一份。"""
     out = []
+    m = re.search(TRIP + r'\bgain:\s*(\d+)', s)
+    if m:
+        out.append(('trip.gain', m.group(1)))
     m = re.search(r'>\s*~?(\d+)\s*</div>\s*<div[^>]*>\s*累計上升', s)
     if m:
         out.append(('統計列', m.group(1)))
@@ -119,7 +135,8 @@ def page_summits(s):
     ≥ 最高航點的 ele；低於它才是錯的。第一版寫成等式，馬上把 hushan 誤判成錯——
     那頁的腳本明寫「全程最高處其實不在任何航點上：軌跡在 2.01 km 處讀到 184 m」，
     比最高航點的 175 高，是刻意且有說明的。與其加忽略名單，不如把判準改對。"""
-    m = re.search(r'<div class="text-3xl font-black"[^>]*>\s*([\d,]+)\s*</div>\s*'
+    m = re.search(TRIP + r'\bsummit:\s*(\d+)', s) or \
+        re.search(r'<div class="text-3xl font-black"[^>]*>\s*([\d,]+)\s*</div>\s*'
                   r'<div[^>]*>\s*最高點', s)
     eles = [int(x) for x in re.findall(r'\bele:\s*(\d+)', s)]
     if not m or not eles:
@@ -214,9 +231,17 @@ def check_page(name, idx):
     # 於是 mochashan 整頁溜過去——它把 mainId 指到自己的 weather-summary，
     # 天氣卡是真的，只是版面 id 不同。真正決定「這頁會不會去要天氣」的是
     # detail.js:499 的 `if (cfg.weather) fetchWeather()`，所以查那個。
-    if name in idx and re.search(r'\bweather:\s*\{', s) \
-       and not any(src == 'TRIP_DATE' for src, _ in ds):
-        problems.append('有天氣卡卻沒有 TRIP_DATE——會顯示今日天氣而不說明原因')
+    has_date = any(src == 'trip.date' for src, _ in ds)
+    if name in idx and re.search(r'\bweather:\s*\{', s) and not has_date:
+        problems.append('有天氣卡卻沒有 trip.date——會顯示今日天氣而不說明原因')
+
+    # ── 軌跡檔要真的存在 ──────────────────────────────────
+    # 軌跡由 detail.js 依 trip.date 載入，檔名是 assets/tracks/<頁名>-<日期>.js。
+    # 日期打錯不會有錯誤訊息，地圖只會靜靜退回航點直線——所以在這裡擋。
+    if has_date and re.search(r'\btrack:\s*\{', s) and not re.search(r'\bpoints:|\bslice:', s):
+        d = next(v for src, v in ds if src == 'trip.date')
+        if not os.path.exists('assets/tracks/%s-%s.js' % (name, d)):
+            problems.append('找不到軌跡檔 assets/tracks/%s-%s.js——trip.date 或檔名有一邊錯了' % (name, d))
 
     return problems
 

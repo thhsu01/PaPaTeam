@@ -51,7 +51,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/daluntouweishan-2025-09-29.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -62,7 +61,7 @@
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/9/29 活動紀錄</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
         <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -81,16 +80,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">9月29日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 6.93 KM · 3 小時 44 分</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span></span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷） -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/9/29 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -98,7 +97,7 @@
           內湖後山的兩顆頭<br>
           <span style="color:var(--accent-strong);">大崙頭尾山親山步道</span>
         </h1>
-        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自大崙尾山登山口起走，先上大崙尾山（451m），下到鞍部後接大崙頭山親山步道，續登全程最高的大崙頭山（476m）。之後沿森林步道繞經樹之亭與木棧道登山口下到最低點，再由長壽坡緩緩爬回稜線，經眺望臺與翠山步道回到原點。環狀 6.93 公里、3 小時 44 分——全線幾乎都在林蔭底下，兩座山頭之間的落差不到 30 公尺。</p>
+        <p class="text-lg text-stone-600 mb-8 max-w-2xl">自大崙尾山登山口起走，先上大崙尾山（451m），下到鞍部後接大崙頭山親山步道，續登全程最高的大崙頭山（476m）。之後沿森林步道繞經樹之亭與木棧道登山口下到最低點，再由長壽坡緩緩爬回稜線，經眺望臺與翠山步道回到原點。環狀 <span data-trip="km"></span> 公里、<span data-trip="duration:zh"></span>——全線幾乎都在林蔭底下，兩座山頭之間的落差不到 30 公尺。</p>
 
         <!-- 資料來源說明 -->
         <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
@@ -119,7 +118,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">9月29日 07:35–11:19</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 07:35–11:19</div>
             <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -137,23 +136,23 @@
         <!-- Stats row -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">6.93</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">3:44</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">~310</div>
+            <div class="text-3xl font-black text-stone-900">~<span data-trip="gain"></span></div>
             <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);">476</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（大崙頭山）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">3 小時 44 分裡有 1 小時 25 分是站著不動的——大崙頭山一站就待了 39 分鐘、大崙尾山 18 分鐘。扣掉之後實際腳程約 2 小時 19 分，對一趟近 7 公里的郊山來說相當寬鬆。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl"><span data-trip="duration:zh"></span>裡有 1 小時 25 分是站著不動的——大崙頭山一站就待了 39 分鐘、大崙尾山 18 分鐘。扣掉之後實際腳程約 2 小時 19 分，對一趟近 7 公里的郊山來說相當寬鬆。</p>
       </div>
     </section>
 
@@ -191,7 +190,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（2025/09/29，1097 點）。九個地標的座標由隊友提供，全部落在軌跡 10 公尺以內。</span>
+            <span class="text-xs text-stone-600">軌跡出處：健行筆記 App 匯出的 GPX（<span data-trip="date"></span>，1097 點）。九個地標的座標由隊友提供，全部落在軌跡 10 公尺以內。</span>
             <span class="text-xs text-stone-600">公開數據：大崙尾山標高 451 公尺、大崙頭山標高 476 公尺。其餘航點沒有可引用的公開標高，本頁的數值由當天軌跡估算，見上方「兩座山頭都對得上公開標高」。</span>
             <span class="text-xs text-stone-600">建頁時本環境的網路政策擋掉 hiking.biji.co，無法核對步道頁的網址，因此這裡不放未經查證的連結——待能連線時再補。</span>
           </div>
@@ -220,7 +219,7 @@
             本頁改先對高程序列取<strong>移動中位數</strong>把抖動壓掉再累加：視窗取 15、31、61 點分別得到 364、326、285 公尺，
             依各航點高程直接相加是 302 公尺。<strong>這四個數字的散布（285–364）比本站其他路線寬</strong>，
             因為這條路線起伏碎、小坡多，平滑視窗一放大就會把真實的小起伏一起抹掉。取中間的兩個（326、302）落在 300–330，
-            因此標 <strong>~310 公尺</strong>——這個數字的不確定度比其他頁大，約 ±30 公尺。
+            因此標 <strong>~<span data-trip="gain"></span> 公尺</strong>——這個數字的不確定度比其他頁大，約 ±30 公尺。
           </p>
         </div>
       </div>
@@ -277,7 +276,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">07:35 起錄 · 11:19 收錄 · 全程 3 小時 44 分</p>
+        <p class="text-sm text-stone-600 mb-2">07:35 起錄 · 11:19 收錄 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻、座標與里程全部取自 GPS 軌跡在該時刻的位置，沒有推算的航點。九個地標的座標由隊友提供，逐一比對後全部落在軌跡 10 公尺以內。</p>
         <div class="relative pl-12" id="timeline-container">
           <div class="timeline-line"></div>
@@ -288,7 +287,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 大崙頭尾山親山步道 | 2025 年 9 月 29 日 · 07:35–11:19 · 6.93 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 大崙頭尾山親山步道 | <span data-trip="date:zh"></span> · 07:35–11:19 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -396,14 +395,13 @@
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2025-09-29";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2025-09-29", km: 6.93, duration: "3:44", gain: 310, summit: 476 },
       nav: [25.105950, 121.568020],   // 集合地點＝大崙尾山登山口，環狀起訖同點
 
       card: { follow: 'popup' },
@@ -414,7 +412,7 @@
         setView: [[25.1089, 121.5771], 14],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。環狀，收錄處離起錄點 22 m。
-        track: { points: PaPaTracks['daluntouweishan-2025-09-29'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

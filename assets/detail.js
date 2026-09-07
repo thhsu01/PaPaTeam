@@ -6,8 +6,8 @@
    天氣代碼對照表寫了五份、五份都不完整，使用者因此看到「天氣代碼96」。
 
    本檔收「機制」，各頁只描述「差異」：
-     schedule / TRIP_DATE  ── 行程資料
-     PaPaDetail.init({...}) ── 本頁的設定與少量小回呼
+     schedule               ── 航點資料
+     PaPaDetail.init({...}) ── 本頁的設定與少量小回呼；行程事實（trip）也在這裡宣告一次
 
    海拔圖與時間軸都已經收進來了，各頁只給領域旋鈕：
    Chart.js 藏在接縫後面（見 docs/adr/0001），時間軸以「欄位清單」為介面
@@ -353,17 +353,89 @@ window.PaPaDetail = (function () {
     });
   }
 
+  // ── 行程事實 ──────────────────────────────────────────────
+  // 一趟行程的日期、里程、時長、爬升、最高點，在頁內各出現六到八次（導覽副標、
+  // 日期戳、統計列、已完成提示、頁腳…）。2026-08 量測 16 個已完成頁共 165 處手打，
+  // 靠 fact_check.py 交叉核對才沒有自相矛盾——那是在替一個不存在的模組把關。
+  // 現在只在 init 的 trip 宣告一次，版面上放 data-trip="date:md" 這類槽，這裡填。
+  // 冒號後面是格式，沒寫就用第一個：
+  //   date      ymd 2024/04/20 · md 4月20日 · zh 2024 年 4 月 20 日
+  //   km        4.68
+  //   duration  hm 3:26 · zh 3 小時 26 分 · h 3 · m 26（單位另外排版時拆兩槽）
+  //   gain / summit  整數原樣
+  // <title>、<meta description> 與首頁卡片仍是手寫的——那是給爬蟲看的，JS 填不到；
+  // 那幾處由 fact_check 對著 trip 核對。沒宣告的事實槽會留空：漏寫就該看得見。
+  var TRIP_FORMAT = {
+    date: {
+      ymd: function (d) { var p = d.split('-'); return p[0] + '/' + p[1] + '/' + p[2]; },
+      md:  function (d) { var p = d.split('-'); return (+p[1]) + '月' + (+p[2]) + '日'; },
+      zh:  function (d) { var p = d.split('-'); return p[0] + ' 年 ' + (+p[1]) + ' 月 ' + (+p[2]) + ' 日'; }
+    },
+    km:       { n: function (v) { return Number(v).toFixed(2); } },
+    duration: {
+      hm: function (v) { return v; },
+      zh: function (v) { var p = v.split(':'); return (+p[0]) + ' 小時 ' + (+p[1]) + ' 分'; },
+      // 舊世代統計區把單位另外排版：4<span>小時</span>45<span>分鐘</span>，所以拆成兩槽
+      h:  function (v) { return String(+v.split(':')[0]); },
+      m:  function (v) { return v.split(':')[1]; }
+    },
+    gain:   { n: String },
+    summit: { n: String }
+  };
+
+  function tripDate() { return cfg.trip ? cfg.trip.date : null; }
+
+  function fillTrip() {
+    var t = cfg.trip;
+    if (!t) return;
+    var els = document.querySelectorAll('[data-trip]');
+    for (var i = 0; i < els.length; i++) {
+      var spec = els[i].getAttribute('data-trip').split(':');
+      var fmts = TRIP_FORMAT[spec[0]];
+      if (!fmts || t[spec[0]] == null) continue;
+      var f = fmts[spec[1] || Object.keys(fmts)[0]];
+      if (f) els[i].textContent = f(t[spec[0]]);
+    }
+  }
+
+  // ── 實走軌跡 ──────────────────────────────────────────────
+  // 軌跡檔名裡的日期原本是頁面上的第三份日期：<script src> 一次、PaPaTracks 的鍵
+  // 一次。現在由 trip.date 推導——map.track 給了樣式但沒給 points，就在畫地圖之前
+  // 載入 assets/tracks/<頁名>-<日期>.js。找不到就退回航點直線，並在主控台說一聲。
+  function pageName() {
+    return (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
+  }
+
+  function loadTrack() {
+    var t = cfg.map && cfg.map.track;
+    var date = tripDate();
+    if (!t || t.points || t.slice || !date) return Promise.resolve();
+    var key = pageName() + '-' + date;
+    if (window.PaPaTracks && window.PaPaTracks[key]) {
+      t.points = window.PaPaTracks[key];
+      return Promise.resolve();
+    }
+    return new Promise(function (resolve) {
+      var s = document.createElement('script');
+      s.src = 'assets/tracks/' + key + '.js';
+      s.onload = function () { t.points = window.PaPaTracks && window.PaPaTracks[key]; resolve(); };
+      s.onerror = function () { console.warn('找不到軌跡檔 assets/tracks/' + key + '.js，改畫航點直線'); resolve(); };
+      document.head.appendChild(s);
+    });
+  }
+
   // ── 天氣 ──────────────────────────────────────────────────
   // 兩種情境：有行程日的查該日預報，沒日期的候選行程顯示今日天氣。
   function markTripPast(todayISO) {
-    if (cfg.tripDate && todayISO && cfg.tripDate < todayISO) {
+    var date = tripDate();
+    if (date && todayISO && date < todayISO) {
       var el = $('trip-past-notice');
       if (el) el.classList.remove('hidden');
     }
   }
 
   function tripMD() {
-    var p = cfg.tripDate.split('-');
+    var p = tripDate().split('-');
     return (+p[1]) + '/' + (+p[2]);
   }
 
@@ -381,7 +453,8 @@ window.PaPaDetail = (function () {
     var label = $('weather-label');
     if (!main) return;
 
-    var days = cfg.tripDate ? 16 : 1;
+    var date = tripDate();
+    var days = date ? 16 : 1;
 
     // 只給經緯度時，Open-Meteo 用它自己地形網格的高度，山區常常差很多。
     // 傳實際海拔可讓它做高度降尺度，拿到的才是那個高度的預報。
@@ -400,8 +473,8 @@ window.PaPaDetail = (function () {
       var data = await (await fetch(url)).json();
       var idx = 0, subText = w.subText || '', labelText = null;
 
-      if (cfg.tripDate) {
-        var found = data.daily.time.indexOf(cfg.tripDate);
+      if (date) {
+        var found = data.daily.time.indexOf(date);
         markTripPast(data.daily.time[0]);   // 視窗第一天即今日
         if (found !== -1) {
           idx = found;
@@ -410,7 +483,7 @@ window.PaPaDetail = (function () {
         } else {
           labelText = '今日天氣';
           // 行程日已過卻說「尚遠」是先前實際出現過的錯誤文案
-          subText = cfg.tripDate < data.daily.time[0]
+          subText = date < data.daily.time[0]
                     ? '行程日已過，顯示今日天氣' : '行程日尚遠，顯示今日天氣';
         }
       }
@@ -499,10 +572,13 @@ window.PaPaDetail = (function () {
       if (cfg.weather) fetchWeather();
 
       window.addEventListener('DOMContentLoaded', function () {
-        initMap();
-        initChart();
-        renderTimeline();
-        updateWaypointCard(0);
+        fillTrip();
+        loadTrack().then(function () {
+          initMap();
+          initChart();
+          renderTimeline();
+          updateWaypointCard(0);
+        });
       });
     },
     get map() { return map; },
