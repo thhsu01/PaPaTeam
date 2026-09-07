@@ -8,6 +8,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
 ASSET_HASHES = {a: bump_assets.asset_hash(a) for a in bump_assets.ASSETS if os.path.exists(a)}
 
+
+def pos_emoji_table():
+    """detail.js 的 POS_EMOJI：pos → emoji 的全站表。從原始碼讀，不另抄一份。"""
+    js = open('assets/detail.js', encoding='utf-8').read()
+    i = js.find('var POS_EMOJI = {')
+    if i < 0:
+        return {}
+    blk = js[i:js.index('};', i)]
+    return dict(re.findall(r"'([^']+)':\s*'([^']+)'", blk))
+
+
+POS_EMOJI = pos_emoji_table()
+
 SECTIONS = ['overview', 'map-section', 'elevation', 'spots', 'timeline']
 H2 = {'map-section': '互動路線圖', 'elevation': '海拔高度剖面圖'}
 H2_TIMELINE = ('預計行程進度', '實走時間軸')     # 主詞須為其一，容許括號後綴
@@ -312,6 +325,25 @@ def check(f):
             p.append('頁面自己載入軌跡檔——軌跡由 detail.js 依 trip.date 載入，script 標籤要拿掉')
         if 'PaPaTracks[' in s:
             p.append('頁面自己查 PaPaTracks——map.track 不給 points，detail.js 會依 trip.date 找')
+
+    # ── 時間軸的 emoji：開了就每個 pos 都要有 ────────────────
+    # pos → emoji 的全站表在 detail.js（POS_EMOJI），頁面只覆寫例外。表上沒有的 pos
+    # 會顯示 📍——那是無聲的退化，所以在這裡提醒；覆寫若跟全站表一樣就是多寫。
+    tl = js_block(s, 'timeline:')
+    em = re.search(r'\bemoji:\s*(true|\{[^}]*\})', tl) if tl else None
+    if tl and not em and re.search(r'\bemoji:\s*[A-Za-z_$]', tl):
+        p.append('timeline.emoji 要寫 true 或物件字面值——放變數，這裡讀不到、覆寫有沒有多餘就查不了')
+    if em:
+        over = dict(re.findall(r"""['"]([^'"]+)['"]\s*:\s*['"]([^'"]+)['"]""", em.group(1)))
+        for k, v in over.items():
+            if POS_EMOJI.get(k) == v:
+                p.append('timeline.emoji 覆寫的 %s→%s 跟全站表一樣，刪掉' % (k, v))
+        seen = set()
+        for o in schedule_objects(s):
+            pos = re.search(r'pos:\s*"([^"]*)"', o)
+            if pos and pos.group(1) not in POS_EMOJI and pos.group(1) not in over and pos.group(1) not in seen:
+                seen.add(pos.group(1))
+                p.append('pos「%s」全站表沒有 emoji、頁面也沒覆寫——時間軸會顯示 📍' % pos.group(1))
 
     # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
     # 一座山可以同時是最高點與小百岳（全站七座裡有五座就是）。寫進 pos 會逼出

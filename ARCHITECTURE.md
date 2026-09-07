@@ -316,15 +316,15 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 各頁不寫時間軸的 HTML 樣板，只說要顯示哪些欄位：
 
 ```javascript
-timeline: { emoji: POS_EMOJI, palette: PAL }                              // 行列式，16 頁
-timeline: { layout: 'card', fields: ['dist', 'ele'], palette: PAL }       // 卡片式，6 頁
+timeline: { emoji: true }                                                 // 行列式，16 頁
+timeline: { layout: 'card', fields: ['dist', 'ele'] }                     // 卡片式，6 頁
 ```
 
 | 旋鈕 | 意義 |
 |---|---|
 | `layout` | `'list'`（預設）或 `'card'`。兩種版面家族，不是喜好——卡片式頁面的時間軸沒有段落底色 |
 | `fields` | 卡片主體顯示哪些欄位，預設 `['desc']`。目前用到 `desc` / `dist` / `ele` |
-| `emoji` | `pos` → emoji 的對照表，省略則不顯示 |
+| `emoji` | `true` 用全站的 `pos` → emoji 表（`detail.js` 的 `POS_EMOJI`）；給物件則疊在全站表上，只寫有意思的例外（在捷運站集合的頁 `{ '集合起點': '🚇' }`、剪刀石那頁 `{ '最高點': '✂️' }`）；省略則不顯示。表上沒有的 `pos` 顯示 📍，spec_sweep 會提醒 |
 | `palette` | 圓點色，見上方「航點配色」 |
 | `hover` | 行列式專用。`'lighten'`（預設，暖底頁）或 `'darken'`（`bg-stone-50` 的頁） |
 
