@@ -119,6 +119,9 @@ git push origin feature/你的功能名稱
 - **改了 `assets/` 的共用檔就跑 `python3 tools/bump_assets.py`**，讓 23 頁的 `?v=` 換成
   新的內容雜湊——不然正式站的快取會拿舊 JS 配新 HTML，導覽列整條不見。忘了會被
   `spec_sweep` 擋下來
+- **新增或刪除檔案只改 `manifest.json`**（條目的 `short` 是檔案樹上那一句），然後跑
+  `python3 tools/manifest_tree.py --write` 讓 README 的檔案樹跟上。README 的樹是產生的，
+  不要手改；漏條目或樹過期都會被 `spec_sweep` 擋下來
 - **改顏色前必讀 `READABILITY_AUDIT.md`**，尤其小字：`text-stone-500` 只在白底安全，
   頁底 `#f5f3ef` 上只有 4.33:1，小字一律 `text-stone-600` 起跳
 - **不建議大幅重構設計** — 先開 issue 討論

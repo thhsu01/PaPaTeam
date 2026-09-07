@@ -11,25 +11,30 @@
   "read_first": [
     {
       "path": "ARCHITECTURE.md",
-      "why": "詳情頁只能有 5 個段落且 id 與順序固定；色彩一律走 --accent token；命名慣例。動任何頁面前先讀。"
+      "why": "詳情頁只能有 5 個段落且 id 與順序固定；色彩一律走 --accent token；命名慣例。動任何頁面前先讀。",
+      "short": "架構指南（規範權威）：段落規格、色彩 token、腳本規格"
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "why": "九輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。"
+      "why": "九輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。",
+      "short": "可讀性與對比度審計紀錄（改顏色前必讀）"
     },
     {
       "path": "SNIPPETS.md",
-      "why": "新增元件時複製既有片段，不要自己發明結構。"
+      "why": "新增元件時複製既有片段，不要自己發明結構。",
+      "short": "元件片段快速參考"
     },
     {
       "path": "CONTRIBUTING.md",
-      "why": "編輯清單與代碼風格。"
+      "why": "編輯清單與代碼風格。",
+      "short": "貢獻指南：編輯清單與代碼風格"
     }
   ],
   "pages": [
     {
       "path": "index.html",
-      "title": "主首頁：計畫／候選／歷史三區資料與渲染"
+      "title": "主首頁：計畫／候選／歷史三區資料與渲染",
+      "short": "主首頁：計畫／候選／歷史三區"
     },
     {
       "path": "nanshijiao.html",
@@ -161,19 +166,23 @@
   "assets": [
     {
       "path": "assets/site.css",
-      "purpose": "全站共用樣式：skip link、鍵盤焦點、prefers-reduced-motion"
+      "purpose": "全站共用樣式：skip link、鍵盤焦點、prefers-reduced-motion",
+      "short": "全站共用樣式：skip link、鍵盤焦點、reduced-motion"
     },
     {
       "path": "assets/site.js",
-      "purpose": "全站共用腳本：天氣代碼對應等"
+      "purpose": "全站共用腳本：天氣代碼對應等",
+      "short": "全站共用腳本：天氣代碼對照表（PaPaWeather）"
     },
     {
       "path": "assets/detail.css",
-      "purpose": "22 個詳情頁共用樣式：圖表、地圖、航點、時間軸"
+      "purpose": "22 個詳情頁共用樣式：圖表、地圖、航點、時間軸",
+      "short": "詳情頁共用樣式：圖表、地圖、航點卡、時間軸"
     },
     {
       "path": "assets/detail.js",
-      "purpose": "22 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／palette／hover，不再手寫 HTML 樣板）"
+      "purpose": "22 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／palette／hover，不再手寫 HTML 樣板）",
+      "short": "詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸、共用區塊"
     },
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
@@ -241,89 +250,153 @@
     },
     {
       "path": "integrity.json",
-      "purpose": "檔案清單與 blob SHA，由 .github/workflows/integrity.yml 在 push 到 main 後自動重算。勿手改；本 manifest 第 9-10 行以它為檔案是否存在的權威"
+      "purpose": "檔案清單與 blob SHA，由 .github/workflows/integrity.yml 在 push 到 main 後自動重算。勿手改；本 manifest 第 9-10 行以它為檔案是否存在的權威",
+      "short": "檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）"
     },
     {
       "path": ".github/workflows/integrity.yml",
-      "purpose": "push 到 main 後重算 integrity.json 的 GitHub Action，產生的 commit 帶 [skip ci]"
+      "purpose": "push 到 main 後重算 integrity.json 的 GitHub Action，產生的 commit 帶 [skip ci]",
+      "short": "push 到 main 後重算 integrity.json"
     },
     {
       "path": "tools/spec_sweep.py",
-      "purpose": "全站規格掃描：把 ARCHITECTURE.md 段落規格表變成可執行的檢查（段落 id 與順序、五顆導覽鍵文字、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、chart／marker／timeline 三個區塊是否都走 palette、小百岳是否放在 xbaiyue 欄位而非 pos，以及名單上的山有沒有漏標）。改完任何 schedule 或版面都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查"
+      "purpose": "全站規格掃描：把 ARCHITECTURE.md 段落規格表變成可執行的檢查（段落 id 與順序、五顆導覽鍵文字、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、chart／marker／timeline 三個區塊是否都走 palette、小百岳是否放在 xbaiyue 欄位而非 pos，以及名單上的山有沒有漏標）。改完任何 schedule 或版面都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
+      "short": "全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）"
     },
     {
       "path": "tools/fact_check.py",
-      "purpose": "同一趟行程的事實一致性：日期與總里程在自己頁內出現七、八次（meta、導覽副標、日期戳、統計列、頁腳、軌跡檔名），首頁卡片又各有一份，2026-08-04 量測 12 趟共重複 165 次且全部手打。這支腳本讓「漏改其中一處」變成會被擋下來的事。做法是畫面各處互相交叉核對，不拿資料當權威——schedule 末點的 dist 不等於總里程（caolingguidao 7.87 vs 7.88），軌跡在最後一個航點之後還有一段。缺欄位不算錯，只有同時存在且互相矛盾才報。CI 也會跑；全過回傳 0"
+      "purpose": "同一趟行程的事實一致性：日期與總里程在自己頁內出現七、八次（meta、導覽副標、日期戳、統計列、頁腳、軌跡檔名），首頁卡片又各有一份，2026-08-04 量測 12 趟共重複 165 次且全部手打。這支腳本讓「漏改其中一處」變成會被擋下來的事。做法是畫面各處互相交叉核對，不拿資料當權威——schedule 末點的 dist 不等於總里程（caolingguidao 7.87 vs 7.88），軌跡在最後一個航點之後還有一段。缺欄位不算錯，只有同時存在且互相矛盾才報。CI 也會跑；全過回傳 0",
+      "short": "事實一致性：同一個日期／里程在頁內各處是否相符"
     },
     {
       "path": "tools/bump_assets.py",
-      "purpose": "把 23 頁引用的四支共用資產（site.css、detail.css、site.js、detail.js）的 URL 換成帶內容雜湊的版本（?v=1a2b3c4d）。導覽列等區塊由 detail.js 產生之後，HTML 與 JS 的版本必須成對：2026-09-07 正式站換了新版 HTML，瀏覽器／Pages 邊緣快取還拿著舊版 detail.js，站徽與回首頁連結整條不見。雜湊跟內容走，改了共用檔就跑一次；spec_sweep 用同一個 asset_hash() 檢查，忘了跑會紅。--check 只報告不改"
+      "purpose": "把 23 頁引用的四支共用資產（site.css、detail.css、site.js、detail.js）的 URL 換成帶內容雜湊的版本（?v=1a2b3c4d）。導覽列等區塊由 detail.js 產生之後，HTML 與 JS 的版本必須成對：2026-09-07 正式站換了新版 HTML，瀏覽器／Pages 邊緣快取還拿著舊版 detail.js，站徽與回首頁連結整條不見。雜湊跟內容走，改了共用檔就跑一次；spec_sweep 用同一個 asset_hash() 檢查，忘了跑會紅。--check 只報告不改",
+      "short": "共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）"
     },
     {
       "path": "tools/contrast/check.js",
-      "purpose": "對比度實測（WCAG 2.1 AA）。用 Playwright 實際算繪、取畫面像素判定，不靠 DOM 推算。檔頭記了四個曾造成整批假訊號的量測坑與各自的修法。零忽略名單——2026-08-04 重寫時把假陽性全部改成量對，因為忽略名單會連真問題一起蓋掉。用法 node tools/contrast/check.js --all（需先 python3 -m http.server 8099）"
+      "purpose": "對比度實測（WCAG 2.1 AA）。用 Playwright 實際算繪、取畫面像素判定，不靠 DOM 推算。檔頭記了四個曾造成整批假訊號的量測坑與各自的修法。零忽略名單——2026-08-04 重寫時把假陽性全部改成量對，因為忽略名單會連真問題一起蓋掉。用法 node tools/contrast/check.js --all（需先 python3 -m http.server 8099）",
+      "short": "量測器，檔頭記了四個量測坑"
     },
     {
       "path": "tools/contrast/stubs.js",
-      "purpose": "對比度量測用的 Leaflet／Chart.js 最小樁件。本環境網路政策擋掉 CDN，沒有樁件的話 initMap() 一拋錯，後面的時間軸就不會算繪，量不到幾何"
+      "purpose": "對比度量測用的 Leaflet／Chart.js 最小樁件。本環境網路政策擋掉 CDN，沒有樁件的話 initMap() 一拋錯，後面的時間軸就不會算繪，量不到幾何",
+      "short": "Leaflet／Chart.js 最小樁件"
     },
     {
       "path": "tools/regress/check.js",
-      "purpose": "detail.js 的執行期基準。detail.js 是 22 頁共用的機制、介面只有 init(cfg)，改它時沒辦法看一眼就知道 22 頁有沒有變。這支只穿過 init(cfg)、量另一側的結果——每頁的時間軸 DOM、交給 L.circleMarker 的樣式物件、交給 new Chart() 的設定、逐一切換航點後航點卡的七個欄位——逐欄與 baseline.json 比對。2026-08 那輪重構靠的是三支住在暫存目錄的臨時腳本，事後就不見了；這是它們收進倉庫的版本。用法 node tools/regress/check.js（需先 python3 -m http.server 8099）；--update 重寫基準"
+      "purpose": "detail.js 的執行期基準。detail.js 是 22 頁共用的機制、介面只有 init(cfg)，改它時沒辦法看一眼就知道 22 頁有沒有變。這支只穿過 init(cfg)、量另一側的結果——每頁的時間軸 DOM、交給 L.circleMarker 的樣式物件、交給 new Chart() 的設定、逐一切換航點後航點卡的七個欄位——逐欄與 baseline.json 比對。2026-08 那輪重構靠的是三支住在暫存目錄的臨時腳本，事後就不見了；這是它們收進倉庫的版本。用法 node tools/regress/check.js（需先 python3 -m http.server 8099）；--update 重寫基準",
+      "short": "量 22 頁的時間軸／標記／海拔圖／航點卡，逐欄比對基準"
     },
     {
       "path": "tools/regress/record.js",
-      "purpose": "接在 contrast/stubs.js 之後注入的錄音機：包住 L.circleMarker 與 window.Chart，把 detail.js 交出去的樣式物件、popup、setStyle、Chart 設定原樣記下。量的是接縫上流過的資料（見 docs/adr/0001），不是截圖"
+      "purpose": "接在 contrast/stubs.js 之後注入的錄音機：包住 L.circleMarker 與 window.Chart，把 detail.js 交出去的樣式物件、popup、setStyle、Chart 設定原樣記下。量的是接縫上流過的資料（見 docs/adr/0001），不是截圖",
+      "short": "錄下 detail.js 交給 Leaflet 與 Chart.js 的東西"
     },
     {
       "path": "tools/regress/baseline.json",
-      "purpose": "22 頁的執行期基準。只有 check.js --update 會寫；打算改畫面的提交要連它一起改，git diff 它就是審查面——改了什麼、改到哪幾頁一眼看得到。沒打算改畫面的改動，它必須零變動"
+      "purpose": "22 頁的執行期基準。只有 check.js --update 會寫；打算改畫面的提交要連它一起改，git diff 它就是審查面——改了什麼、改到哪幾頁一眼看得到。沒打算改畫面的改動，它必須零變動",
+      "short": "基準。只有 --update 會寫，git diff 它就是審查面"
     },
     {
       "path": "tools/contrast/tw.css",
-      "purpose": "本地建置的 Tailwind CSS，供對比度量測使用（站上是走 CDN，量測環境連不到）。**改完 HTML 要跑 bash tools/contrast/build-css.sh 重建**——它是掃 ./*.html 與 ./assets/*.js 產生的（時間軸的 class 由 detail.js 在執行時產生，只掃 HTML 會漏掉），新用到的 utility 沒重建就不存在，量測會拿到缺樣式的假版面。check.js 每次會比對，缺了就中止並要你重建，不會再無聲量錯"
+      "purpose": "本地建置的 Tailwind CSS，供對比度量測使用（站上是走 CDN，量測環境連不到）。**改完 HTML 要跑 bash tools/contrast/build-css.sh 重建**——它是掃 ./*.html 與 ./assets/*.js 產生的（時間軸的 class 由 detail.js 在執行時產生，只掃 HTML 會漏掉），新用到的 utility 沒重建就不存在，量測會拿到缺樣式的假版面。check.js 每次會比對，缺了就中止並要你重建，不會再無聲量錯",
+      "short": "本地建置的 Tailwind（建置產物）"
     },
     {
       "path": ".github/workflows/spec.yml",
-      "purpose": "push 與 PR 時依序跑 tools/spec_sweep.py 與 tools/fact_check.py，不過就讓 CI 紅字。2026-08-04 加上——規格表寫了卻沒有檢查就會漂移，這個 workflow 讓沒有人需要「記得」去跑它"
+      "purpose": "push 與 PR 時依序跑 tools/spec_sweep.py 與 tools/fact_check.py，不過就讓 CI 紅字。2026-08-04 加上——規格表寫了卻沒有檢查就會漂移，這個 workflow 讓沒有人需要「記得」去跑它",
+      "short": "push 與 PR 跑 spec_sweep.py 與 fact_check.py"
     },
     {
       "path": "tools/contrast/build-css.sh",
-      "purpose": "重建 tw.css（npx tailwindcss@3 掃 ./*.html）。版本跟著站上的 cdn.tailwindcss.com 走，目前 v3。已驗證在乾淨環境可重現同一份輸出"
+      "purpose": "重建 tw.css（npx tailwindcss@3 掃 ./*.html）。版本跟著站上的 cdn.tailwindcss.com 走，目前 v3。已驗證在乾淨環境可重現同一份輸出",
+      "short": "重建 tw.css（改完 HTML 要跑）"
     },
     {
       "path": ".github/workflows/contrast.yml",
-      "purpose": "PR 動到 HTML 或 CSS 時跑全站對比度實測。會先重建 tw.css 再量，所以 CI 用的一定是新的；與 spec.yml 分開是因為要裝 Playwright，不該拖慢每次 push"
+      "purpose": "PR 動到 HTML 或 CSS 時跑全站對比度實測。會先重建 tw.css 再量，所以 CI 用的一定是新的；與 spec.yml 分開是因為要裝 Playwright，不該拖慢每次 push",
+      "short": "動到 HTML／CSS／JS 的 PR 跑對比度實測與執行期基準"
+    },
+    {
+      "path": "tools/manifest_tree.py",
+      "purpose": "README 的檔案樹由 manifest.json 產生：每個條目的 short 欄位就是樹上那一句，已完成頁的日期從軌跡檔名推導，分組頁數算出來。--write 寫進 README 的標記區塊；spec_sweep 比對區塊與產生結果。加一個檔案只改 manifest",
+      "short": "由 manifest.json 產生 README 的檔案樹（改了 manifest 就跑 --write）"
+    },
+    {
+      "path": "assets/",
+      "short": ""
+    },
+    {
+      "path": "assets/tracks/",
+      "short": "已完成行程的實走 GPS 軌跡（簡化後的座標陣列）"
+    },
+    {
+      "path": "tools/",
+      "short": ""
+    },
+    {
+      "path": "tools/contrast/",
+      "short": "對比度實測（改顏色後跑；需 Playwright）"
+    },
+    {
+      "path": "tools/regress/",
+      "short": "detail.js 的執行期基準（改 detail.js 後跑；需 Playwright）"
+    },
+    {
+      "path": ".github/workflows/",
+      "short": ""
     }
   ],
   "docs": [
     {
       "path": "ARCHITECTURE.md",
-      "purpose": "架構指南（規範權威）"
+      "purpose": "架構指南（規範權威）",
+      "short": "架構指南（規範權威）：段落規格、色彩 token、腳本規格"
     },
     {
       "path": "READABILITY_AUDIT.md",
-      "purpose": "可讀性與對比度審計紀錄"
+      "purpose": "可讀性與對比度審計紀錄",
+      "short": "可讀性與對比度審計紀錄（改顏色前必讀）"
     },
     {
       "path": "SNIPPETS.md",
-      "purpose": "元件片段快速參考"
+      "purpose": "元件片段快速參考",
+      "short": "元件片段快速參考"
     },
     {
       "path": "CONTRIBUTING.md",
-      "purpose": "貢獻指南"
+      "purpose": "貢獻指南",
+      "short": "貢獻指南：編輯清單與代碼風格"
     },
     {
       "path": "README.md",
-      "purpose": "專案說明：快速開始、檔案結構、常見問題"
+      "purpose": "專案說明：快速開始、檔案結構、常見問題",
+      "short": "本檔案"
     },
     {
       "path": "CONTEXT.md",
-      "purpose": "領域語彙：行程、航點、航點短名、pos 與語意色、最高點 vs 山頂 vs 副峰、海拔軸地板。動任何頁面前先讀——名詞不一致的代價在本專案已發生多次"
+      "purpose": "領域語彙：行程、航點、航點短名、pos 與語意色、最高點 vs 山頂 vs 副峰、海拔軸地板。動任何頁面前先讀——名詞不一致的代價在本專案已發生多次",
+      "short": "領域語彙：行程、航點、pos、最高點 vs 山頂、行程事實、共用區塊（動任何頁面前先讀）"
     },
     {
       "path": "docs/adr/0001-chartjs-behind-the-seam.md",
-      "purpose": "決策紀錄：Chart.js 藏在接縫後面，各頁不直接設定它。含重開此決策前該先做的量測"
+      "purpose": "決策紀錄：Chart.js 藏在接縫後面，各頁不直接設定它。含重開此決策前該先做的量測",
+      "short": "決策紀錄：Chart.js 藏在接縫後面"
+    },
+    {
+      "path": "manifest.json",
+      "purpose": "專案入口索引：各檔案的意義、慣例、待辦（README 的檔案樹由它產生）",
+      "short": "專案入口索引：各檔案的意義、慣例、待辦（README 的檔案樹由它產生）"
+    },
+    {
+      "path": ".gitignore",
+      "purpose": "編輯器、系統檔、node_modules",
+      "short": "編輯器、系統檔、node_modules"
+    },
+    {
+      "path": "docs/adr/",
+      "short": "架構決策記錄"
     }
   ],
   "open_items": [],
@@ -360,7 +433,7 @@
     "semantic_colors": "跨頁共用、不屬於任何單頁識別色的語意色：紅 #ef4444 = 警示地形、綠 #7c9e52 = 最高點、金 #a16207 = 小百岳認證環（描邊不是填色，因為它與最高點可疊加）、藍 = 外部連結、琥珀 amber-50/400/800 = 注意事項面板、翡翠 emerald-700 = 站徽與官方來源連結。**這些跨頁必須一致**——2026-08-04 發現 datongshan／laojiujianshan／mochashan／shiqiulinling／huoyianshan 五頁各自把最高點畫成琥珀、深綠、橘、紅，還在自己的註解裡稱之為「語意色」，等於五種互相矛盾的語意。已全數收斂到 #7c9e52",
     "widgets": "導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器六個共用區塊由 assets/detail.js 的 WIDGETS 產生，頁面只放掃載點 <div data-widget=\"nav|notice|weather|wp-card|chart|timeline\">。掃載點沒寫 class 就套正規 class，有寫就保留（逃生口：舊世代把天氣卡嵌在自己的資訊卡網格裡）。紀錄頁／候選頁的差異（第五鍵文字、航點卡時間標籤、日期副標、要不要 notice）由 trip 有無推導。2026-09 之前六個區塊在 22 頁各自手寫、分別有 5／3／7／9／3／1 種寫法。spec_sweep 查掃載點在不在、以及有沒有人把區塊手寫回來",
     "trip_facts": "一趟行程的日期、總里程、耗時、累計上升、最高點，2026-09 起只在已完成頁 PaPaDetail.init 的 trip 物件宣告一次，版面上用 data-trip=\"date:md\" 這類事實槽承接、由 detail.js 填。之前這五個數字每頁手打六到八次、16 頁共 165 處，靠 fact_check.py 交叉核對才沒有自相矛盾——改 henglingguidao 的 5.30→5.36 時就得逐處改過。仍手寫的只有 <title>、<meta description>、首頁卡片（給爬蟲看的），fact_check.py 拿它們跟 trip 核對。注意「總里程」不等於 schedule 末點的 dist：軌跡在最後一個航點之後還有一段（caolingguidao 末點 7.87、總里程 7.88）。候選頁的估計值仍手寫，走過之後轉紀錄頁時再接上 trip",
-    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。四支都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
+    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。四支都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
     "pos_emoji": "時間軸藥丸的 pos → emoji 對照是全站一份（assets/detail.js 的 POS_EMOJI，約 45 個常見 pos，取 2026-09 各頁的多數）。頁面 timeline.emoji: true 用它；給物件則疊在全站表上，只寫有意思的例外（捷運站集合 🚇、剪刀石 ✂️、芒草埡口 🌾、階梯步道口 🪜）。pos 本身是各頁的敘事標籤不是詞彙（80 種、54 種只出現一次），不強制從清單挑；表上沒有的 pos 顯示 📍，spec_sweep 會提醒，覆寫跟全站表一樣也會提醒。之前 11 頁各寫一份，同一個 pos 在不同頁配不同 emoji",
     "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。第三種語意（datongshan 的展望台、nanshijiao 的信仰地標、bishan 的賞櫻點、mochashan 的折返點、huoyianshan 的大峽谷）經 palette({ extra }) 表達，只開一層——再多下去就變回每頁一套配色。**這條規約寫了半天其實只有海拔圖做到**：2026-08-04 量測 18 頁，海拔圖 18/18，地圖標記與時間軸各只有 6/18，於是 datunshan、qixingshan、shanying 等頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。同日全部收斂，並由 spec_sweep.py 逐區塊檢查（chart／marker／timeline 三個區塊都必須真的引用 palette，光宣告 PAL 不算）。警示地形紅 #ef4444 在時間軸上會脈動，那是 palette 的 warn 常數帶出的全站規則，不是逐頁掛的 class。小百岳走另一個通道：金環 #a16207（pal.ring）加粗描邊 ＋ ⭐ 文字徽章，因為它與最高點可以是同一座山，必須疊加而不是互斥。2026-08-04 查官方名單後補齊：全站共七座（大屯山主峰 #1、七星山主峰 #2、大崙頭山 #8、南港山 #13、大棟山 #15、南勢角山 #16、火炎山 #35）。七星山東峰先前被標成小百岳，查證後確認編號 002 指的是七星山這座山、東峰不是另一座，已更正。spec_sweep.py 內有一張山名對照表——「某座山是不是小百岳」無法從頁面內容推導，只能維護清單",
     "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha／palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",
