@@ -2,16 +2,16 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-09-07 19:28",
+  "generated": "2026-09-07 21:10",
   "generated_tz": "UTC+8",
-  "commit": "201e877813f95f14341506db75071967d04c1282",
+  "commit": "79ac79700c734e7800bc065e642b14753c72d036",
   "file_count": 66,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
       "path": ".github/workflows/contrast.yml",
-      "size": 3823,
-      "sha": "638c386264c8c2edeb2f82ccb882bf55c445e999"
+      "size": 4116,
+      "sha": "c127e32b6ba27c0d0114d86b6b33481aa47d9e98"
     },
     {
       "path": ".github/workflows/integrity.yml",
