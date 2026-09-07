@@ -8,13 +8,10 @@
 name: 規格檢查
 
 on:
+  # push 不限路徑：spec_sweep 現在也查 Markdown 與 manifest.json，只改文件的 push 一樣要跑；
+  # 整支兩秒，不值得省。2026-09 的審查抓到原本的路徑清單漏了 *.md、manifest.json
+  # 與另外三支工具。
   push:
-    branches: ['**']
-    paths:
-      - '**.html'
-      - 'assets/**'
-      - 'tools/spec_sweep.py'
-      - '.github/workflows/spec.yml'
   pull_request:
   workflow_dispatch:
 

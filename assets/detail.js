@@ -397,7 +397,9 @@ window.PaPaDetail = (function () {
   var NAV = [['overview', '行程總覽'], ['map-section', '路線圖'], ['elevation', '海拔剖面'],
              ['spots', '景點介紹'], ['timeline', null]];   // 第五鍵依頁面性質，見下
 
-  function isRecord() { return !!(cfg.trip && cfg.trip.date); }
+  // 紀錄頁＝有實走里程。不能只看 trip.date：計畫頁也有日期（天氣卡要用），
+  // 但它的第五鍵該是「預估進度」、航點卡該標「預計時間」——2026-09 的審查抓到這個矛盾。
+  function isRecord() { return !!(cfg.trip && cfg.trip.km != null); }
 
   var WIDGETS = {
     nav: {
@@ -495,7 +497,7 @@ window.PaPaDetail = (function () {
   // 靠 fact_check.py 交叉核對才沒有自相矛盾——那是在替一個不存在的模組把關。
   // 現在只在 init 的 trip 宣告一次，版面上放 data-trip="date:md" 這類槽，這裡填。
   // 冒號後面是格式，沒寫就用第一個：
-  //   date      ymd 2024/04/20 · md 4月20日 · zh 2024 年 4 月 20 日
+  //   date      ymd 2024/04/20 · md 4月20日 · zh 2024 年 4 月 20 日 · slash 4/20
   //   km        4.68
   //   duration  hm 3:26 · zh 3 小時 26 分 · h 3 · m 26（單位另外排版時拆兩槽）
   //   gain / summit  整數原樣
@@ -503,9 +505,10 @@ window.PaPaDetail = (function () {
   // 那幾處由 fact_check 對著 trip 核對。沒宣告的事實槽會留空：漏寫就該看得見。
   var TRIP_FORMAT = {
     date: {
-      ymd: function (d) { var p = d.split('-'); return p[0] + '/' + p[1] + '/' + p[2]; },
-      md:  function (d) { var p = d.split('-'); return (+p[1]) + '月' + (+p[2]) + '日'; },
-      zh:  function (d) { var p = d.split('-'); return p[0] + ' 年 ' + (+p[1]) + ' 月 ' + (+p[2]) + ' 日'; }
+      ymd:   function (d) { var p = d.split('-'); return p[0] + '/' + p[1] + '/' + p[2]; },
+      md:    function (d) { var p = d.split('-'); return (+p[1]) + '月' + (+p[2]) + '日'; },
+      zh:    function (d) { var p = d.split('-'); return p[0] + ' 年 ' + (+p[1]) + ' 月 ' + (+p[2]) + ' 日'; },
+      slash: function (d) { var p = d.split('-'); return (+p[1]) + '/' + (+p[2]); }   // 散文裡的「4/20 當天」
     },
     km:       { n: function (v) { return Number(v).toFixed(2); } },
     duration: {

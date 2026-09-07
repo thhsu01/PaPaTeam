@@ -9,6 +9,17 @@
 name: 瀏覽器實測
 
 on:
+  # 也掛 push 到 main：2026-09 之前只掛 PR，而這個專案的合併都是本機直推，
+  # 結果對比度與執行期基準在 GitHub 上一次都沒跑過。
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'assets/**.css'
+      - 'assets/**.js'
+      - 'tools/contrast/**'
+      - 'tools/regress/**'
+      - '.github/workflows/contrast.yml'
   pull_request:
     paths:
       - '**.html'

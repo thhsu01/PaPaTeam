@@ -28,7 +28,12 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const BASE = process.env.PAPA_BASE || 'http://127.0.0.1:8099';
-const CHROME = process.env.PW_CHROME || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+// 本機沙箱的 Chromium 在 /opt/pw-browsers；CI 用 npx playwright install 裝的那份。
+// 路徑不存在就不指定 executablePath，讓 Playwright 用自己的——2026-09 的審查抓到
+// 這裡原本寫死本機路徑，CI 上會找不到執行檔（該 workflow 只掛 PR，所以沒被觸發過）。
+const DEFAULT_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = process.env.PW_CHROME || (fs.existsSync(DEFAULT_CHROME) ? DEFAULT_CHROME : null);
+const LAUNCH = CHROME ? { executablePath: CHROME } : {};
 const BASELINE = path.join(__dirname, 'baseline.json');
 const CDN = ['**://cdn.tailwindcss.com/**', '**://cdn.jsdelivr.net/**', '**://unpkg.com/**',
              '**://fonts.googleapis.com/**', '**://api.open-meteo.com/**',
@@ -132,7 +137,7 @@ function diff(a, b, p, out) {
     names = fs.readdirSync(ROOT).filter(f => f.endsWith('.html') && f !== 'index.html').map(f => f.slice(0, -5)).sort();
   }
   const base = fs.existsSync(BASELINE) ? JSON.parse(fs.readFileSync(BASELINE, 'utf8')) : {};
-  const browser = await chromium.launch({ executablePath: CHROME });
+  const browser = await chromium.launch(LAUNCH);
   let bad = 0;
   const next = Object.assign({}, base);
   for (const n of names) {
