@@ -481,6 +481,124 @@ def check_doc_counts():
     return p
 
 
+def tracked_files():
+    """倉庫追蹤的檔案。CI 與本機都有 git；沒有就退回走目錄。"""
+    import subprocess
+    try:
+        # --others --exclude-standard：還沒 git add 的新檔也算，否則新檔會被判成「倉庫沒有」
+        out = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
+                                      stderr=subprocess.DEVNULL).decode().split()
+        return set(out)
+    except Exception:
+        out = set()
+        for root, dirs, files in os.walk('.'):
+            dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'node_modules']
+            out.update(os.path.join(root, f)[2:] for f in files)
+        return out
+
+
+def check_manifest():
+    """manifest.json 是專案索引（給人也給 AI 的入口），必須跟倉庫一一對應：
+    倉庫裡的檔案都要有條目，條目指的檔案也都要存在。2026-09 的架構檢視發現
+    README 的檔案樹兩次漏檔（先漏四頁、後漏 CONTEXT.md 與 ADR），manifest 反而是齊的
+    ——所以拿它當唯一的清單，這裡守住它不漂。"""
+    import json
+    p = []
+    m = json.load(open('manifest.json', encoding='utf-8'))
+    paths = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            if isinstance(x.get('path'), str):
+                paths.add(x['path'])
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(m)
+    tracked = tracked_files()
+    dirs = {x for x in paths if x.endswith('/')}          # 目錄條目：給檔案樹一句說明用
+    for t in sorted(tracked - paths):
+        p.append('倉庫有 %s，manifest.json 沒有它的條目' % t)
+    for t in sorted(paths - dirs - tracked):
+        p.append('manifest.json 列了 %s，倉庫裡沒有這個檔' % t)
+    for d in sorted(dirs):
+        if not os.path.isdir(d):
+            p.append('manifest.json 列了目錄 %s，倉庫裡沒有' % d)
+    # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的
+    for e in _entries(m):
+        path = e.get('path', '')
+        # 頁面的那一句由 title 與軌跡日期組出來；軌跡檔不必註解；目錄可以沒有
+        if path.endswith('.html') or path.startswith('assets/tracks/') or path.endswith('/'):
+            continue
+        if not e.get('short'):
+            p.append('%s 的條目缺 short（檔案樹上那一句）' % path)
+    # README 的檔案樹必須是 manifest 印出來的那一份
+    import manifest_tree
+    if manifest_tree.readme_block() != manifest_tree.render():
+        p.append('README.md 的檔案樹跟 manifest.json 不一致——跑 python3 tools/manifest_tree.py --write')
+    return p
+
+
+def _entries(m):
+    out = []
+
+    def walk(x):
+        if isinstance(x, dict):
+            if isinstance(x.get('path'), str):
+                out.append(x)
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(m)
+    return out
+
+
+def check_live_counts():
+    """文件裡「N 頁」這種活數字必須等於某個現況。
+
+    check_doc_counts() 巡的是幾句指定的敘述；這裡補的是漏網的——2026-09 的審查在
+    巡邏外又抓到四處（十二→十六頁軌跡、十八→二十二個詳情頁、detail.css 檔頭的 10 頁）。
+    分兩種：有日期或「先前／之前／當時／曾」的句子是歷史敘述（「2026-08-04 量測 18 頁」），
+    當時是真的、以後也還是真的，不查；其餘是在講現況，數字必須落在現況的集合裡
+    （詳情頁數、含首頁的頁數、有軌跡的頁數、候選頁數、兩種時間軸版面的頁數）。
+    「落在集合裡」比「指定它是哪一個」寬鬆，代價是一個過期的數字若剛好等於另一個
+    現況會漏掉——那比逐句維護樣式要划算。"""
+    p = []
+    pages = [f for f in sorted(glob.glob('*.html')) if f != 'index.html']
+    n = len(pages)
+    n_tracks = len(glob.glob('assets/tracks/*.js'))
+    n_card = sum(1 for f in pages if "layout: 'card'" in open(f, encoding='utf-8').read())
+    live = {n, n + 1, n_tracks, n - n_tracks, n_card, n - n_card}
+    CN = '零一二三四五六七八九十'
+
+    def cn2int(t):
+        if t.isdigit():
+            return int(t)
+        if t == '十':
+            return 10
+        if '十' in t:
+            a, b = t.split('十')
+            return (CN.index(a) if a else 1) * 10 + (CN.index(b) if b else 0)
+        return CN.index(t)
+
+    for path in ('README.md', 'ARCHITECTURE.md', 'CONTEXT.md', 'CONTRIBUTING.md', 'SNIPPETS.md', 'assets/detail.css'):
+        text = open(path, encoding='utf-8').read()
+        for i, sent in enumerate(re.split(r'[。；\n]', text)):
+            if re.search(r'20\d\d[-/年]|先前|之前|當時|曾|原本|那時|上次|最早|早期|其餘|另', sent):
+                continue
+            for mm in re.finditer(r'(?<![\d.])(\d+|[一二三四五六七八九十]+)\s*(頁|個詳情頁)', sent):
+                v = cn2int(mm.group(1))
+                # 「一頁」「三頁」這種小數字多半是量詞或局部計數，不是在講全站
+                if v > 5 and v not in live:
+                    p.append('%s：「%s」——現況是 %d 頁（含首頁 %d、有軌跡 %d、候選 %d、卡片式 %d）'
+                             % (path, mm.group(0), n, n + 1, n_tracks, n - n_tracks, n_card))
+    return p
+
+
 def check_shared():
     """共用檔本身的把關。最高點的顏色自 2026-08-04 起收在 detail.js 的 palette()
     預設值裡，這裡是它唯一的來源，所以要有人看著。"""
@@ -501,9 +619,12 @@ def main():
     shared = check_shared()
     print('%-16s %s' % ('assets/detail.js', 'OK' if not shared else ' / '.join(shared)))
     bad += bool(shared)
-    counts = check_doc_counts()
+    counts = check_doc_counts() + check_live_counts()
     print('%-16s %s' % ('文件宣稱的數量', 'OK' if not counts else ' / '.join(counts)))
     bad += bool(counts)
+    mf = check_manifest()
+    print('%-16s %s' % ('manifest.json', 'OK' if not mf else ' / '.join(mf)))
+    bad += bool(mf)
     for f in sorted(glob.glob('*.html')):
         if f == 'index.html':
             continue        # 首頁自成一套視覺系統，見 manifest.conventions.greyscale
