@@ -115,6 +115,7 @@ PaPaTeam/
 ├── tools/
 │   ├── spec_sweep.py           # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
 │   ├── fact_check.py           # 事實一致性：同一個日期／里程在頁內各處是否相符
+│   ├── bump_assets.py          # 共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）
 │   └── contrast/               # 對比度實測（改顏色後跑；需 Playwright）
 │       ├── check.js            #   量測器，檔頭記了四個量測坑
 │       ├── build-css.sh        #   重建 tw.css（改完 HTML 要跑）
@@ -175,6 +176,16 @@ node tools/regress/check.js --update    # 打算改畫面：重寫基準，git d
 
 動到 HTML、CSS 或 JS 的 PR，CI 會把對比度與執行期基準都跑一次
 （`.github/workflows/contrast.yml`）。
+
+改到 `assets/` 下任何一支共用檔（`site.css`、`detail.css`、`site.js`、`detail.js`）之後，
+跑一次版本號：
+
+```bash
+python3 tools/bump_assets.py     # 23 頁的 ?v= 換成新的內容雜湊
+```
+
+導覽列等區塊由 `detail.js` 產生，新版 HTML 配上快取裡的舊版 JS 會讓整條導覽列不見
+（2026-09-07 正式站發生過）。URL 帶內容雜湊就不會抓到舊檔；忘了跑，`spec_sweep` 會紅。
 
 二十二個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，

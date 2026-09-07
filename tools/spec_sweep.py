@@ -4,6 +4,9 @@
 import re, glob, math, sys, os
 
 os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
+ASSET_HASHES = {a: bump_assets.asset_hash(a) for a in bump_assets.ASSETS if os.path.exists(a)}
 
 SECTIONS = ['overview', 'map-section', 'elevation', 'spots', 'timeline']
 H2 = {'map-section': '互動路線圖', 'elevation': '海拔高度剖面圖'}
@@ -190,6 +193,14 @@ def check(f):
         p.append('段落 id 或順序異常')
     if re.search(r'返回首頁|←\s*首頁', s):
         p.append('疑似左上返回鍵')
+
+    # ── 共用資產的版本要跟內容走 ─────────────────────────────
+    # 導覽列等區塊由 detail.js 產生之後，HTML 與 JS 的版本必須成對：新版 HTML 配上
+    # 快取裡的舊版 detail.js，掃載點就填不進去，站徽與回首頁連結整個不見——
+    # 2026-09-07 正式站實際發生過。URL 帶內容雜湊（?v=）就不會抓到舊檔；
+    # 改了共用檔要跑 python3 tools/bump_assets.py，忘了就在這裡紅。
+    for a in bump_assets.stale(s, ASSET_HASHES):
+        p.append('%s 的版本號不是現在的內容——跑 python3 tools/bump_assets.py' % a)
 
     # ── 共用區塊：掃載點在、手寫的不在 ───────────────────────
     # 導覽列（含五顆鍵的文字）、航點卡、海拔圖容器、時間軸容器、已完成提示、天氣卡
