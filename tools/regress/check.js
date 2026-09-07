@@ -12,8 +12,10 @@
 // 量的是介面另一側的結果，不是實作：
 //   timeline  #timeline-container 裡每個航點的 class、圓點的 inline style、文字與 HTML
 //   markers   detail.js 交給 L.circleMarker 的樣式物件、popup、選取時的 setStyle
+//   polyline  交給 L.polyline 的軌跡：點數、頭尾兩點、樣式
 //   chart     detail.js 交給 new Chart() 的設定（函式除外）
 //   card      逐一切換航點後，航點卡七個欄位的文字
+//   trip      行程事實槽 [data-trip] 填進去的文字
 // 所以測試只穿過 init(cfg)，跟頁面一樣。想測到介面「後面」去，多半是模組形狀不對。
 //
 // 基準是刻意的決定，不是快照的副產品：只有 --update 會寫，寫完 `git diff
@@ -69,7 +71,12 @@ async function capture(browser, name) {
     }
     if (typeof window.updateWaypointCard === 'function' && total) window.updateWaypointCard(0);
 
-    return { timeline: timeline, markers: window.__rec.markers, chart: window.__rec.chart, card: card };
+    // 行程事實槽：detail.js 依 trip 填進 [data-trip] 的文字
+    const trip = [...document.querySelectorAll('[data-trip]')]
+      .map(el => ({ slot: el.getAttribute('data-trip'), text: el.textContent.trim() }));
+
+    return { timeline: timeline, markers: window.__rec.markers, polyline: window.__rec.polyline,
+             chart: window.__rec.chart, card: card, trip: trip };
   });
   await ctx.close();
   state.errors = errors;

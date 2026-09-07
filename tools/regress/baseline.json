@@ -312,6 +312,23 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 10,
+   "first": [
+    25.083766,
+    121.594224
+   ],
+   "last": [
+    25.09831484836413,
+    121.58787212936703
+   ],
+   "options": {
+    "color": "#ec4899",
+    "weight": 4,
+    "opacity": 0.7,
+    "dashArray": "8, 8"
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -529,6 +546,7 @@
     "wp-advice": "回到起點完成環型。內湖站周邊餐廳選擇多，適合安排慶功。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "caolingguidao": {
@@ -786,6 +804,22 @@
     "popup": "<strong>大里火車站</strong><br>⏱ 15:25<br>📏 7.87 km<br>⛰ 15 m"
    }
   ],
+  "polyline": {
+   "n": 198,
+   "first": [
+    25.01119,
+    121.92544
+   ],
+   "last": [
+    24.96981,
+    121.92482
+   ],
+   "options": {
+    "color": "#2563eb",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -990,6 +1024,7 @@
     "wp-advice": "招呼站沒有商店。往北回福隆或往南到頭城都可以，但班次疏，下山前就該確認時刻表。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "daluntouweishan": {
@@ -1322,6 +1357,22 @@
     "popup": "<strong>終點（大崙尾山登山口）</strong><br>⏱ 11:19<br>📏 6.93 km<br>⛰ 310 m"
    }
   ],
+  "polyline": {
+   "n": 193,
+   "first": [
+    25.10595,
+    121.56802
+   ],
+   "last": [
+    25.10597,
+    121.56823
+   ],
+   "options": {
+    "color": "#a21caf",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -1567,6 +1618,7 @@
     "wp-advice": "回到原點取車。下山後沿劍南路可以直接接到大直或內湖市區，吃飯與交通都方便。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "daqitou": {
@@ -1849,6 +1901,22 @@
     "popup": "<strong>終點（溪和宮）</strong><br>⏱ 10:32<br>📏 4.44 km<br>⛰ 255 m"
    }
   ],
+  "polyline": {
+   "n": 120,
+   "first": [
+    25.12862,
+    121.58671
+   ],
+   "last": [
+    25.12828,
+    121.58701
+   ],
+   "options": {
+    "color": "#134e4a",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -2066,6 +2134,7 @@
     "wp-advice": "回到原點解散。這一帶的公車班次不密，下山前先查好回程時刻。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "datongshan": {
@@ -2223,6 +2292,22 @@
     "popup": "<strong>台鐵山佳站 (H30m)</strong><br>⏱ 11:00<br>📏 9.5 km<br>⛰ 30 m"
    }
   ],
+  "polyline": {
+   "n": 6,
+   "first": [
+    24.991397,
+    121.42443
+   ],
+   "last": [
+    24.972728,
+    121.392544
+   ],
+   "options": {
+    "color": "#e11d48",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -2371,6 +2456,7 @@
     "wp-advice": "恭喜完成！山佳一帶舊稱山仔腳，站後方留有蓋淡坑礦業遺址，若體力充足可順遊。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "datunshan": {
@@ -2653,6 +2739,22 @@
     "popup": "<strong>鞍部登山口 (H829m)</strong><br>⏱ 13:17<br>📏 8.9 km<br>⛰ 829 m"
    }
   ],
+  "polyline": {
+   "n": 11,
+   "first": [
+    25.162,
+    121.5368
+   ],
+   "last": [
+    25.18328804343731,
+    121.52923236366492
+   ],
+   "options": {
+    "color": "#f59e0b",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -2870,6 +2972,7 @@
     "wp-advice": "恭喜完成大屯山四峰 O 型！在鞍部站搭 108 公車返回陽明山第二停車場（約 35 分鐘）。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "dinghu": {
@@ -3152,6 +3255,22 @@
     "popup": "<strong>陽明山立體停車場 (H385m)</strong><br>⏱ 11:45<br>📏 7.75 km<br>⛰ 385 m"
    }
   ],
+  "polyline": {
+   "n": 214,
+   "first": [
+    25.16158,
+    121.53253
+   ],
+   "last": [
+    25.15444,
+    121.52887
+   ],
+   "options": {
+    "color": "#16a34a",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -3369,6 +3488,7 @@
     "wp-advice": "搭乘公車或步行回到停車場，完成今日行程！"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "eweishan": {
@@ -3626,6 +3746,22 @@
     "popup": "<strong>終點（簡厝支線登山口）</strong><br>⏱ 11:26<br>📏 6.46 km<br>⛰ 215 m"
    }
   ],
+  "polyline": {
+   "n": 197,
+   "first": [
+    25.12241,
+    121.58433
+   ],
+   "last": [
+    25.12145,
+    121.58566
+   ],
+   "options": {
+    "color": "#7c2d12",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -3829,6 +3965,7 @@
     "wp-advice": "出來就是馬路，走一小段回簡厝公車站搭車。開車停在公車站那頭的人記得預留這段回程。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "henglingguidao": {
@@ -4086,6 +4223,22 @@
     "popup": "<strong>終點（橫嶺古道停車場）</strong><br>⏱ 11:38<br>📏 5.36 km<br>⛰ 360 m"
    }
   ],
+  "polyline": {
+   "n": 143,
+   "first": [
+    25.14493,
+    121.5389
+   ],
+   "last": [
+    25.14477,
+    121.53895
+   ],
+   "options": {
+    "color": "#4d7c0f",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -4290,6 +4443,7 @@
     "wp-advice": "回到原點取車。想再加菜的人，紅壇登山口那頭可以續接半嶺步道；不想動的就下山到陽明山公車總站一帶吃飯。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "huoyianshan": {
@@ -4513,6 +4667,22 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 232,
+   "first": [
+    24.35902,
+    120.73681
+   ],
+   "last": [
+    24.35897,
+    120.73683
+   ],
+   "options": {
+    "color": "#ea580c",
+    "weight": 5,
+    "opacity": 0.8
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -4688,6 +4858,7 @@
     "wp-advice": "回到馬路端即完成 O 型。停車場還要沿馬路走一小段，別以為到登山口就結束了。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "hushan": {
@@ -4845,6 +5016,22 @@
     "popup": "<strong>終點</strong><br>⏱ 11:48<br>📏 4.35 km<br>⛰ 50 m"
    }
   ],
+  "polyline": {
+   "n": 119,
+   "first": [
+    25.03657,
+    121.58768
+   ],
+   "last": [
+    25.03775,
+    121.58518
+   ],
+   "options": {
+    "color": "#0d9488",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -4993,6 +5180,7 @@
     "wp-advice": "步道口出來即是市街，最近的捷運是後山埤站。若要接象山，可從慈惠堂旁的四獸山縱走路徑續行。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "jiantanshan": {
@@ -5150,6 +5338,22 @@
     "popup": "<strong>終點（劍潭捷運站旁）</strong><br>⏱ 11:31<br>📏 4.92 km<br>⛰ 10 m"
    }
   ],
+  "polyline": {
+   "n": 130,
+   "first": [
+    25.08748,
+    121.52884
+   ],
+   "last": [
+    25.08328,
+    121.52442
+   ],
+   "options": {
+    "color": "#0891b2",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -5298,6 +5502,7 @@
     "wp-advice": "劍潭站對面就是士林夜市，適合安排慶功。想加碼的話，沿稜線續行可接文間山、劍潭古寺一線。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "jinmianshan": {
@@ -5480,6 +5685,22 @@
     "popup": "<strong>終點（環山路一段）</strong><br>⏱ 11:22<br>📏 3.48 km<br>⛰ 40 m"
    }
   ],
+  "polyline": {
+   "n": 87,
+   "first": [
+    25.08728,
+    121.56798
+   ],
+   "last": [
+    25.08642,
+    121.5691
+   ],
+   "options": {
+    "color": "#ca8a04",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -5642,6 +5863,7 @@
     "wp-advice": "回到環山路即完成環狀。內湖科技園區一帶餐廳選擇多，適合安排慶功；捷運西湖站步行約 15 分鐘。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "laojiujianshan": {
@@ -5919,6 +6141,22 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 244,
+   "first": [
+    25.0721,
+    121.6332
+   ],
+   "last": [
+    25.07202,
+    121.63333
+   ],
+   "options": {
+    "color": "#ea580c",
+    "weight": 4,
+    "opacity": 0.8
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -6122,6 +6360,7 @@
     "wp-advice": "回到起點完成 O 型。金龍寺周邊有小吃店，可安排慶功；捷運東湖站約 10 分鐘車程。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "meihuashan": {
@@ -6453,6 +6692,22 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 435,
+   "first": [
+    25.1255,
+    121.58896
+   ],
+   "last": [
+    25.12487,
+    121.58778
+   ],
+   "options": {
+    "color": "#ea580c",
+    "weight": 5,
+    "opacity": 0.8
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -6684,6 +6939,7 @@
     "wp-advice": "回到起點的公車站解散。至善路班次不密，下山前先查好回程時刻。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "mochashan": {
@@ -7123,6 +7379,22 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 410,
+   "first": [
+    24.82972,
+    121.75229
+   ],
+   "last": [
+    24.83163,
+    121.74752
+   ],
+   "options": {
+    "color": "#16a34a",
+    "weight": 4,
+    "opacity": 0.8
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -7410,6 +7682,7 @@
     "wp-advice": "行程完成。先拉筋伸展再上車；礁溪市區有溫泉可泡，是這條路線最好的收尾。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "nangangshan": {
@@ -7742,6 +8015,22 @@
     "popup": "<strong>Retro House 美式餐廳</strong><br>⏱ 13:03<br>📏 7.91 km<br>⛰ 50 m"
    }
   ],
+  "polyline": {
+   "n": 215,
+   "first": [
+    25.0392,
+    121.58751
+   ],
+   "last": [
+    25.0373,
+    121.57833
+   ],
+   "options": {
+    "color": "#7c3aed",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -7988,6 +8277,7 @@
     "wp-advice": "慶功點。從象山登山口再走約 900 公尺，若隊伍疲累可先在登山口解散、各自前往。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "nanshijiao": {
@@ -8420,6 +8710,22 @@
     "popup": "<strong>烘爐地南山福德宮</strong><br>⏱ 15:05<br>📏 10.96 km<br>⛰ 280 m"
    }
   ],
+  "polyline": {
+   "n": 352,
+   "first": [
+    24.99053,
+    121.5078
+   ],
+   "last": [
+    24.97185,
+    121.49768
+   ],
+   "options": {
+    "color": "#c77c3e",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -8722,6 +9028,7 @@
     "wp-advice": "可入廟參拜祈福，附近有商店可補給飲料零食。廟旁 78 公尺土地公像是拍照焦點。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "qixingshan": {
@@ -8979,6 +9286,22 @@
     "popup": "<strong>陽明山第二停車場 (H590m)</strong><br>⏱ 11:00<br>📏 6.6 km<br>⛰ 590 m"
    }
   ],
+  "polyline": {
+   "n": 10,
+   "first": [
+    25.155339,
+    121.545874
+   ],
+   "last": [
+    25.155339,
+    121.545874
+   ],
+   "options": {
+    "color": "#0ea5e9",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -9182,6 +9505,7 @@
     "wp-advice": "補充水分慶祝，也可至附近陽明山餐廳用餐。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "shanying": {
@@ -9414,6 +9738,22 @@
     "popup": "<strong>鶯歌車站</strong><br>⏱ 12:00<br>📏 8.3 km<br>⛰ 30 m"
    }
   ],
+  "polyline": {
+   "n": 9,
+   "first": [
+    24.972683,
+    121.393083
+   ],
+   "last": [
+    24.9545,
+    121.3552
+   ],
+   "options": {
+    "color": "#4f46e5",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -9604,6 +9944,7 @@
     "wp-advice": "鶯歌老街與陶瓷博物館就在車站附近，可安排順遊或用餐慶祝完賽。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "shiqiulinling": {
@@ -9863,6 +10204,23 @@
     "popup": null
    }
   ],
+  "polyline": {
+   "n": 9,
+   "first": [
+    25.10841,
+    121.729033
+   ],
+   "last": [
+    25.1315,
+    121.739
+   ],
+   "options": {
+    "color": "#0ea5e9",
+    "weight": 4,
+    "opacity": 0.7,
+    "dashArray": "8, 8"
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -10052,6 +10410,7 @@
     "wp-advice": "行程圓滿完成！想縮短行程的話，從獅球嶺北峰經平安宮下三坑車站是更常見的走法。"
    }
   ],
+  "trip": [],
   "errors": []
  },
  "zhongzhengshan": {
@@ -10209,6 +10568,22 @@
     "popup": "<strong>終點（中正山停車場）</strong><br>⏱ 10:50<br>📏 4.51 km<br>⛰ 520 m"
    }
   ],
+  "polyline": {
+   "n": 140,
+   "first": [
+    25.15617,
+    121.51158
+   ],
+   "last": [
+    25.15622,
+    121.51159
+   ],
+   "options": {
+    "color": "#9d174d",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
   "chart": {
    "type": "line",
    "data": {
@@ -10356,6 +10731,7 @@
     "wp-advice": "回到原點取車。下山後順路可以繞去北投泡湯或吃碗麵，從停車場開下山到新北投只要十來分鐘。"
    }
   ],
+  "trip": [],
   "errors": []
  }
 }

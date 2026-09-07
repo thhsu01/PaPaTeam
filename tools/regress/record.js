@@ -1,10 +1,17 @@
 // 執行期基準的錄音機。接在 tools/contrast/stubs.js 之後注入：樁件讓各頁腳本跑得完，
 // 這一支則把 detail.js 交給 Leaflet 與 Chart.js 的東西原樣記下來——
 // 那正是接縫上流過的資料（見 docs/adr/0001），比截圖精確，也不受字型與抗鋸齒影響。
-window.__rec = { markers: [], chart: null };
+window.__rec = { markers: [], polyline: null, chart: null };
 
 (function () {
   const L = window.L;
+  const polyline = L.polyline;
+  L.polyline = function (pts, options) {
+    // 整條軌跡可能上千點，記點數與頭尾兩點就足以分辨「畫的是哪條線」
+    window.__rec.polyline = { n: pts.length, first: pts[0], last: pts[pts.length - 1], options: options };
+    return polyline(pts, options);
+  };
+
   const circleMarker = L.circleMarker;
   L.circleMarker = function (latlng, options) {
     const o = circleMarker(latlng, options);
