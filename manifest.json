@@ -185,7 +185,7 @@
     },
     {
       "path": "assets/detail.js",
-      "purpose": "22 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／palette／hover，不再手寫 HTML 樣板）",
+      "purpose": "22 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／hover，圓點色走最上層的 palette，不再手寫 HTML 樣板）",
       "short": "詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸、共用區塊"
     },
     {
@@ -276,6 +276,11 @@
       "path": "tools/bump_assets.py",
       "purpose": "把 23 頁引用的四支共用資產（site.css、detail.css、site.js、detail.js）的 URL 換成帶內容雜湊的版本（?v=1a2b3c4d）。導覽列等區塊由 detail.js 產生之後，HTML 與 JS 的版本必須成對：2026-09-07 正式站換了新版 HTML，瀏覽器／Pages 邊緣快取還拿著舊版 detail.js，站徽與回首頁連結整條不見。雜湊跟內容走，改了共用檔就跑一次；spec_sweep 用同一個 asset_hash() 檢查，忘了跑會紅。--check 只報告不改",
       "short": "共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）"
+    },
+    {
+      "path": "tools/pw-env.js",
+      "purpose": "contrast/check.js 與 regress/check.js 共用的 Playwright 環境：伺服器位址（PAPA_BASE）、Chromium 位置（PW_CHROME，或沙箱的 /opt/pw-browsers，都沒有就用 Playwright 自己的）、量測時要以空回應擋掉的外部網址。2026-09 的審查抓到這三樣在兩支各抄一份且已漂開，收成一份",
+      "short": "兩支 Playwright 工具共用的伺服器／瀏覽器／擋網址"
     },
     {
       "path": "tools/contrast/check.js",
@@ -440,7 +445,7 @@
     "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。六支（spec_sweep、fact_check、bump_assets --check、manifest_tree --check、regress、contrast）都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
     "pos_emoji": "時間軸藥丸的 pos → emoji 對照是全站一份（assets/detail.js 的 POS_EMOJI，約 45 個常見 pos，取 2026-09 各頁的多數）。頁面 timeline.emoji: true 用它；給物件則疊在全站表上，只寫有意思的例外（捷運站集合 🚇、剪刀石 ✂️、芒草埡口 🌾、階梯步道口 🪜）。pos 本身是各頁的敘事標籤不是詞彙（80 種、54 種只出現一次），不強制從清單挑；表上沒有的 pos 顯示 📍，spec_sweep 會提醒，覆寫跟全站表一樣也會提醒。之前 11 頁各寫一份，同一個 pos 在不同頁配不同 emoji",
     "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。第三種語意（datongshan 的展望台、nanshijiao 的信仰地標、bishan 的賞櫻點、mochashan 的折返點、huoyianshan 的大峽谷）經 palette({ extra }) 表達，只開一層——再多下去就變回每頁一套配色。**這條規約寫了半天其實只有海拔圖做到**：2026-08-04 量測 18 頁，海拔圖 18/18，地圖標記與時間軸各只有 6/18，於是 datunshan、qixingshan、shanying 等頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。同日全部收斂，並由 spec_sweep.py 逐區塊檢查（chart／marker／timeline 三個區塊都必須真的引用 palette，光宣告 PAL 不算）。警示地形紅 #ef4444 在時間軸上會脈動，那是 palette 的 warn 常數帶出的全站規則，不是逐頁掛的 class。小百岳走另一個通道：金環 #a16207（pal.ring）加粗描邊 ＋ ⭐ 文字徽章，因為它與最高點可以是同一座山，必須疊加而不是互斥。2026-08-04 查官方名單後補齊：全站共七座（大屯山主峰 #1、七星山主峰 #2、大崙頭山 #8、南港山 #13、大棟山 #15、南勢角山 #16、火炎山 #35）。七星山東峰先前被標成小百岳，查證後確認編號 002 指的是七星山這座山、東峰不是另一座，已更正。spec_sweep.py 內有一張山名對照表——「某座山是不是小百岳」無法從頁面內容推導，只能維護清單",
-    "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha／palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",
+    "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha；資料點顏色走最上層的 palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",
     "waypoint_short_name": "海拔圖 x 軸的顯示名稱。預設由 detail.js 的 shortName() 剝除標高與狀態註記（(H643m)／(標高 65m)／(接駁)）；剝不乾淨的航點在 schedule 內給 short 欄位。例外用資料表達，不是每頁一個格式化函式——2026-08-04 之前是後者，18 頁有 8 種寫法在做同一件事"
   }
 }

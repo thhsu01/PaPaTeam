@@ -142,6 +142,8 @@ PaPaDetail.init({
 標記樣式不必自己寫：`palette` 已經決定了半徑與顏色，小百岳的金環也由
 `detail.js` 統一套上。`map.marker` 是逃生口，全站只有 `huoyianshan` 用它
 （大峽谷要加大半徑並換描邊）——寫了它就等於把該頁排除在全站語意之外。
+點選航點要放大標記就寫 `map.selected: true`（`palette` 的半徑加 6、不透明），
+不要自己算半徑；給函式同樣是逃生口。
 
 `ACCENT` / `PEAK` / `STONE` 是頁面腳本開頭以 `getComputedStyle` 從 `:root`
 取出的實際色值。**腳本裡不能直接寫 `var(--accent)`**——那些值最終進到 canvas 的

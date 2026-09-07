@@ -59,7 +59,7 @@
   <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
   <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
   <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=d8094902"></script>
+  <script src="assets/detail.js?v=7d2594b3"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -297,9 +297,7 @@
         center: [25.1275, 121.596], zoom: 15,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { weight: 5, opacity: 0.8 },
-selected: (wp, i, n, sel) => ({
-          radius: sel ? 14 : (wp.pos === "最高點" || wp.pos.includes("集合") ? 9 : 6)
-        })
+selected: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）

@@ -297,6 +297,12 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 肉眼分不出來，那是抄來的差異不是決定，已統一為 0.92。**各頁不再寫 `marker:`**；
 它降為逃生口，目前只有 `huoyianshan` 用（大峽谷要加大半徑並換淺紅描邊）。
 
+點選航點時把標記放大是同一回事：寫 `map.selected: true`，`detail.js` 用 `palette`
+算好的半徑加 6、不透明度 1，未選取的回到原半徑與 0.92。2026-09 之前六頁各寫一個閉包，
+選取半徑 12／14／15 不等，未選取的半徑還各自重算一遍——`bishan` 與 `shiqiulinling`
+一律縮回 6，起訖點原本的 9 在第一次點擊後就消失了。給函式仍可，只有 `huoyianshan` 用
+（大峽谷要 12），性質跟 `map.marker` 一樣。
+
 各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
 第三種語意用 `palette({ extra })` 表達（`datongshan` 的展望台、`nanshijiao` 的信仰地標、
 `bishan` 的賞櫻點、`mochashan` 的折返點、`huoyianshan` 的大峽谷），只開一層。
@@ -325,8 +331,11 @@ timeline: { layout: 'card', fields: ['dist', 'ele'] }                     // 卡
 | `layout` | `'list'`（預設）或 `'card'`。兩種版面家族，不是喜好——卡片式頁面的時間軸沒有段落底色 |
 | `fields` | 卡片主體顯示哪些欄位，預設 `['desc']`。目前用到 `desc` / `dist` / `ele` |
 | `emoji` | `true` 用全站的 `pos` → emoji 表（`detail.js` 的 `POS_EMOJI`）；給物件則疊在全站表上，只寫有意思的例外（在捷運站集合的頁 `{ '集合起點': '🚇' }`、剪刀石那頁 `{ '最高點': '✂️' }`）；省略則不顯示。表上沒有的 `pos` 顯示 📍，spec_sweep 會提醒 |
-| `palette` | 圓點色，見上方「航點配色」 |
 | `hover` | 行列式專用。`'lighten'`（預設，暖底頁）或 `'darken'`（`bg-stone-50` 的頁） |
+
+圓點色沒有旋鈕：走 `init()` 最上層的 `palette`，與地圖標記、海拔圖資料點同一份。
+`map`／`chart`／`timeline` 各自的 `palette` 旋鈕 2026-09 拿掉了——22 頁沒有一頁用過，
+留著只是三個可以讓三處配色再度分家的入口。
 
 「原估時間」不設旋鈕：航點有 `plan` 且與實走 `time` 不同就標，跟航點短名的 `short`
 是同一條「例外用資料表達」的規則。警示地形紅 `#ef4444` 的圓點會脈動——那是全站規則，

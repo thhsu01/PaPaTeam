@@ -42,11 +42,16 @@ def entries():
             for v in x:
                 walk(v)
     walk(m)
-    seen, uniq = set(), []
+    # 同一個路徑可能出現在 read_first 與 docs 兩處：留第一條，short 缺的話從後面那條補
+    # （spec_sweep 也拿這份清單核對倉庫與 short，兩邊看到的是同一組條目）
+    by, uniq = {}, []
     for e in out:
-        if e['path'] not in seen:
-            seen.add(e['path'])
+        first = by.get(e['path'])
+        if first is None:
+            by[e['path']] = e
             uniq.append(e)
+        elif not first.get('short') and e.get('short'):
+            first['short'] = e['short']
     return uniq
 
 
@@ -119,6 +124,16 @@ def render():
     # 目錄與其餘檔案：照這個順序分組，各目錄內部照 manifest 順序
     groups = [['assets/'], ['tools/'], ['manifest.json', 'integrity.json', '.github/workflows/'], ['.gitignore'],
               [p for p in order if p.endswith('.md') and '/' not in p] + ['docs/adr/']]
+    # 分組是寫死的，但清單不是：manifest 裡任何不屬於上面任一組、也不歸任一組目錄管的
+    # 頂層條目，另成最後一組印出來。2026-09 的審查抓到之前是靜靜漏印——樹上看不到，
+    # spec_sweep 又只比對「README 等於產生結果」，所以漏了也不會紅。
+    covered = [p for g in groups for p in g]
+    under = lambda p, dirs: any(p != d and p.startswith(d) for d in dirs if d.endswith('/'))
+    rest = [p for p in order if p not in covered and p not in pages and p != 'index.html' and not under(p, covered)]
+    # 目錄條目底下的檔案交給 render_dir 印，不重複列
+    rest = [p for p in rest if not under(p, rest)]
+    if rest:
+        groups.append(rest)
     flat = [p for g in groups for p in g]
     for gi, g in enumerate(groups):
         for p in g:
