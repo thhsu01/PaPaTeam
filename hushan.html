@@ -48,7 +48,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/hushan-2024-04-20.js"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -59,7 +58,7 @@
       <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁">
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-        <span class="text-stone-600 text-xs hidden sm:inline font-medium">2024/4/20 活動紀錄</span>
+        <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
       </a>
       <div class="flex gap-1 overflow-x-auto">
         <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -78,16 +77,16 @@
       <div class="max-w-4xl mx-auto w-full">
 
         <div class="mb-5 flex items-center gap-3">
-          <span class="stamp">4月20日</span>
-          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · 4.35 KM · 2 小時</span>
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · 2 小時</span>
         </div>
 
-        <!-- 行程日過後自動顯示（由 markTripPast() 依 TRIP_DATE 判斷） -->
+        <!-- 行程日過後自動顯示（由 markTripPast() 依 trip.date 判斷） -->
         <div id="trip-past-notice" class="hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3">
           <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
           <div>
             <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2024/4/20 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
+            <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。</p>
           </div>
         </div>
 
@@ -116,7 +115,7 @@
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800">4月20日 09:48–11:48</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 09:48–11:48</div>
             <div class="text-xs text-stone-600 mt-1">（GPS 起錄至收錄）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
@@ -135,19 +134,19 @@
         <!-- 里程與耗時取自 4/20 的 GPS 軌跡；海拔沒有地形圖數值可對，見下方註記。 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">4.35</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="km"></span></div>
             <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">2:00</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="duration"></span></div>
             <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black text-stone-900">120</div>
+            <div class="text-3xl font-black text-stone-900"><span data-trip="gain"></span></div>
             <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);">184</div>
+            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（GPS 推估）</div>
           </div>
         </div>
@@ -267,7 +266,7 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 虎山親山步道 | 2024 年 4 月 20 日 · 09:48–11:48 · 4.35 km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 | 虎山親山步道 | <span data-trip="date:zh"></span> · 09:48–11:48 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
@@ -320,14 +319,13 @@
     };
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2024-04-20";
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
     PaPaDetail.init({
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      tripDate: TRIP_DATE,
+      trip: { date: "2024-04-20", km: 4.35, duration: "2:00", gain: 120, summit: 184 },
       nav: [25.036395, 121.587461],
 
       card: { follow: 'popup' },
@@ -338,7 +336,7 @@
         setView: [[25.0330, 121.5855], 15],
         attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/），不是航點連成的直線
-        track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+        track: { weight: 4, opacity: 0.85 },
         popup: true
       },
 

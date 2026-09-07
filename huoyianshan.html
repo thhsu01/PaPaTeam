@@ -57,7 +57,6 @@
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js"></script>
   <script src="assets/detail.js"></script>
-  <script src="assets/tracks/huoyianshan-2025-12-13.js"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -70,7 +69,7 @@
         <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
         <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
       </a>
-                    <span class="text-stone-600 text-xs hidden sm:inline font-medium">2025/12/13 活動紀錄</span>
+                    <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
                 </div>
                 <div class="flex gap-1 overflow-x-auto">
                     <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
@@ -96,12 +95,12 @@
                   <span class="text-2xl mt-0.5" aria-hidden="true">🗂️</span>
                   <div>
                     <div class="font-bold text-stone-800 text-base mb-1">此行程已完成</div>
-                    <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 2025/12/13 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
+                    <p class="text-sm text-stone-700 leading-relaxed">時刻與里程來自 <span data-trip="date"></span> 當天的 GPS 軌跡。天氣卡顯示的是今日天氣，不是當天的。</p>
                   </div>
                 </div>
                 <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。<br>
-                    <span class="font-bold accent-text mt-2 block">GPS 實測 8.34 公里</span>
+                    <span class="font-bold accent-text mt-2 block">GPS 實測 <span data-trip="km"></span> 公里</span>
                 </p>
             </div>
 
@@ -111,12 +110,12 @@
                     <div class="flex flex-col gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合起點</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">正松泉收費停車場</span>
-                        <span class="text-xs text-stone-600 mt-1">全程 8.34 公里 / 方便停車</span>
+                        <span class="text-xs text-stone-600 mt-1">全程 <span data-trip="km"></span> 公里 / 方便停車</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">活動日期</span>
-                        <span class="text-xl font-bold text-stone-800">2025年12月13日</span>
-                        <span class="text-xs text-stone-600 mt-1">全程費時：5 小時 07 分鐘</span>
+                        <span class="text-xl font-bold text-stone-800"><span data-trip="date:zh"></span></span>
+                        <span class="text-xs text-stone-600 mt-1">全程費時：<span data-trip="duration:zh"></span>鐘</span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">高度落差</span>
@@ -139,21 +138,21 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">GPS 實測總里程</div>
-                    <div class="text-3xl font-black text-stone-800">8.34<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-3xl font-black text-stone-800"><span data-trip="km"></span><span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">實際總耗時</div>
                     <div class="text-xl md:text-2xl font-black accent-text leading-tight">
-                        5<span class="text-sm font-normal text-stone-600 mx-1">小時</span>07<span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
+                        <span data-trip="duration:h"></span><span class="text-sm font-normal text-stone-600 mx-1">小時</span><span data-trip="duration:m"></span><span class="text-sm font-normal text-stone-600 ml-1">分鐘</span>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">累計上升（GPS 推估）</div>
-                    <div class="text-3xl font-black text-stone-800">440<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
+                    <div class="text-3xl font-black text-stone-800"><span data-trip="gain"></span><span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-stone-200 transition-all">
                     <div class="text-stone-600 text-xs font-bold uppercase mb-2">最高標高</div>
-                    <div class="text-3xl font-black text-stone-800">601<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
+                    <div class="text-3xl font-black text-stone-800"><span data-trip="summit"></span><span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
             </div>
             <p class="text-xs text-stone-600 mt-3 text-left max-w-4xl mx-auto">里程與耗時取自 12/13 的 GPS 軌跡。累計上升原本寫 406 m，那其實是最高與最低點的落差（601−195），不是累計爬升；改為由軌跡推估，依平滑程度介於 395 至 440 m。各航點海拔仍採地形圖數值。</p>
@@ -297,7 +296,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                 <div>
                     <h2 class="text-2xl font-black text-stone-800 flex items-center gap-3"><span class="w-2.5 h-8 bg-stone-800 rounded-full"></span> 實走時間軸</h2>
-                    <p class="text-stone-600 mt-2 text-sm">2025/12/13 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。航點座標與累計里程皆取自軌跡在該時刻的位置。</p>
+                    <p class="text-stone-600 mt-2 text-sm"><span data-trip="date"></span> 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。航點座標與累計里程皆取自軌跡在該時刻的位置。</p>
                 </div>
             </div>
             <div class="relative pl-6 space-y-0" id="timeline-container">
@@ -381,11 +380,10 @@
         extra: { "深度導覽區": "#ef4444" } });
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
-    const TRIP_DATE = "2025-12-13";
 
     PaPaDetail.init({
       schedule,
-      tripDate: TRIP_DATE,
+      trip: { date: "2025-12-13", km: 8.34, duration: "5:07", gain: 440, summit: 601 },
       nav: [24.358077127978664, 120.7361309924151],
 
       weather: { lat: 24.37731783512261, lng: 120.7301450753535 },   // 火炎山三角點
@@ -405,7 +403,7 @@
         preferCanvas: true,
         center: [24.368, 120.734], zoom: 14,
         // 實走軌跡（assets/tracks/），不是航點連成的直線
-        track: { points: PaPaTracks['huoyianshan-2025-12-13'], weight: 5, opacity: 0.8 },
+        track: { weight: 5, opacity: 0.8 },
         marker: (wp, i, n) => {
           // 大峽谷是警示地形：除了語意紅，還加大半徑並換上淺紅描邊
           const warn = PAL.color(wp, i, n) === PAL.warn;

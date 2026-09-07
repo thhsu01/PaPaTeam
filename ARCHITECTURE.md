@@ -101,7 +101,7 @@ const data = {
 以它為基準的理由：
 
 - 段落 id 與順序屬多數派（另 3 頁相同）
-- 功能最完整：`TRIP_DATE` 單一日期來源、行程結束提示、航點含預計時間、
+- 功能最完整：`trip` 單一事實來源、行程結束提示、航點含預計時間、
   天氣標題與內文同步、skip link、aria-label、44px 觸控目標
 - 對比度是刻意調過的（見 `READABILITY_AUDIT.md`），不是碰巧合格
 
@@ -433,18 +433,37 @@ GPX 產出的。症狀是下山第一段只有 570 m、短於當時兩點的 659
 教訓：**段長短於直線只說明「座標與里程不一致」，沒說是哪一個錯。** 先看座標離軌跡多遠，
 偏離大的那個才是嫌疑犯。
 
-有確定日期的頁面，行程日只寫一次，其餘全部由它推導——天氣查詢日期、
-天氣卡標題、行程結束提示。日期散寫在多處是先前實際發生過的 bug 來源：
-`dinghu` 與 `laojiujianshan` 各把日期寫死兩次，結果行程過了以後，
-天氣卡仍顯示「今日即時天氣 (目標日尚遠)」。
+#### 行程事實只宣告一次
+
+一趟行程的日期、總里程、耗時、累計上升、最高點，在頁內各出現六到八次：導覽副標、
+日期戳、統計列、已完成提示、頁腳、散文……2026-08 量測 16 個已完成頁共 165 處手打，
+靠 `fact_check.py` 交叉核對才沒有自相矛盾。日期散寫在多處更早就出過事：
+`dinghu` 與 `laojiujianshan` 各把日期寫死兩次，行程過了以後天氣卡仍顯示「目標日尚遠」。
+
+現在事實只在 `init` 的 `trip` 宣告一次，版面上放**事實槽**，由 `detail.js` 填：
 
 ```javascript
-const TRIP_DATE = "2026-08-02";
-const tripMD = (() => { const [, m, d] = TRIP_DATE.split('-'); return `${+m}/${+d}`; })();
+trip: { date: "2024-04-20", km: 4.35, duration: "2:00", gain: 120, summit: 184 },
 ```
 
-**候選行程沒有 `TRIP_DATE`**，因為它們本來就還沒定日期。這類頁面的天氣以
+```html
+<span data-trip="date"></span> 活動紀錄          <!-- 2024/04/20 -->
+<span class="stamp"><span data-trip="date:md"></span></span>   <!-- 4月20日 -->
+| <span data-trip="date:zh"></span>                <!-- 2024 年 4 月 20 日 -->
+<div class="text-3xl font-black" data-trip="km"></div>         <!-- 4.35 -->
+全程 <span data-trip="duration:zh"></span>          <!-- 2 小時 0 分 -->
+```
+
+格式在冒號後面，可用值由 `detail.js` 的 `TRIP_FORMAT` 與 `spec_sweep.py` 的 `TRIP_SLOTS`
+共同定義（`date`：ymd／md／zh；`duration`：hm／zh／h／m）。寫錯的槽只會靜靜留白，所以
+spec_sweep 會擋。沒宣告的事實槽也留白——漏寫就該在畫面上看得見。
+
+三處仍是手寫的：`<title>`、`<meta name="description">`、首頁卡片。那是給爬蟲看的，
+JS 填不到。`fact_check.py` 把 `trip` 當成事實的一個出現位置，跟這三處交叉核對。
+
+**候選行程沒有 `trip.date`**，因為它們本來就還沒定日期。這類頁面的天氣以
 `forecast_days=1` 顯示今日天氣即可，不要為了湊規格而編一個日期出來。
+候選頁的統計數字是估計值，目前仍手寫；走過之後轉成紀錄頁時再接上 `trip`。
 
 天氣請求一律走 `assets/detail.js` 的 `fetchWeather()`，各頁只在 `weather` 設定裡給
 經緯度與文案。目前取回氣溫、體感溫度與降雨機率。
@@ -471,8 +490,11 @@ Open-Meteo 回傳的 WMO 代碼有 28 種，先前五個頁面各寫一份、每
 
 **實走軌跡（僅已完成行程）。** 有 GPS 紀錄的行程，地圖畫實際軌跡而不是航點連成
 的直線——那條線會繞過航點之間看不出來的髮夾彎。軌跡放在
-`assets/tracks/<page>-<YYYY-MM-DD>.js`，掛在 `window.PaPaTracks[key]` 上，頁面以
-`map.track.points` 傳給 `PaPaDetail`；沒給 `points` 就沿用航點直線，計畫與候選頁不受影響。
+`assets/tracks/<page>-<YYYY-MM-DD>.js`，掛在 `window.PaPaTracks[key]` 上。
+**頁面不載入它**：`map.track` 只給樣式（`weight`、`opacity`），`detail.js` 依
+`trip.date` 算出檔名，在畫地圖之前載入。檔名裡的日期原本是頁面上的第三份日期
+（`<script src>` 一次、`PaPaTracks` 的鍵一次），推導之後日期就真的只剩 `trip` 一處；
+`fact_check.py` 會確認那個檔存在。沒有 `trip.date`（候選頁）就沿用航點直線。
 
 原始 GPX 動輒上千點、兩百多 KB，先用 Douglas–Peucker 簡化，容許偏差 5 公尺——
 在整條路線塞滿地圖的縮放級別下約等於一個像素。只存經緯度，高度不放進來（見上方 `ele`）。
@@ -685,7 +707,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 
 3. **更新資料**
    - 改寫 `schedule` 陣列（座標、時間、里程、海拔、`pos` 類型、描述、建議）
-   - 改 `TRIP_DATE` 為行程日；日期只寫這一處
+   - 改 `trip` 的日期、里程、耗時、爬升、最高點；事實只寫這一處，版面上的槽會自己填
    - 改 `openNavigation()` 的目的地座標與 `initMap()` 的 `setView` 中心點
    - 改 `initChart()` 的 `scales.y` 上下限，讓剖面圖填滿畫布
 
@@ -711,7 +733,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 - [ ] 導覽列為 `fixed`，`<main class="pt-14">`
 - [ ] 航點卡欄位 id 用 `wp-pos-label`（不是 `wp-pos`），且含 `wp-time`
 - [ ] canvas id 為 `elevation-chart`
-- [ ] 日期只在 `TRIP_DATE` 出現一次
+- [ ] 行程事實只在 `trip` 出現一次；版面上用 `data-trip` 槽，不手打數字
 - [ ] 灰階用 stone 不用 slate（class **與** `:root` 的十六進位值都要查）
 - [ ] `#overview` 有統計數字排，含**總里程**、耗時、爬升、最高海拔
 - [ ] **每段 `dist` 增量 ≥ 該段兩航點的直線距離**（見下方「里程健全性」）
@@ -780,7 +802,7 @@ open http://localhost:8000
 
 ### JavaScript 變數
 
-- **資料**：`schedule`（航點陣列）、`TRIP_DATE`（行程日）、`data`（僅 index.html）
+- **資料**：`schedule`（航點陣列）、`trip`（行程事實，在 `init` 內）、`data`（僅 index.html）
 - **DOM id**：見上方「元件規格」的航點卡欄位表
 - **函式**：`initMap()`, `initChart()`, `renderTimeline()`,
   `updateWaypointCard()`, `fetchWeather()`, `renderUI()`（僅 index.html）

@@ -55,8 +55,8 @@ npx http-server
 詳情頁用的是 `schedule`，不是首頁的 `data` 物件；地圖、圖表、時間軸都由它推導。
 
 **加入實走軌跡：** 已完成的行程若有 GPS 紀錄，把簡化後的座標陣列存成
-`assets/tracks/<頁名>-<YYYY-MM-DD>.js`，頁面載入它並把 `map.track.points`
-傳給 `PaPaDetail`，地圖就改畫實際軌跡而非航點直線。
+`assets/tracks/<頁名>-<YYYY-MM-DD>.js`，`init` 的 `map.track` 給樣式就好——
+`detail.js` 依 `trip.date` 載入那個檔，地圖就改畫實際軌跡而非航點直線。
 
 ## 檔案結構
 
@@ -120,6 +120,10 @@ PaPaTeam/
 │       ├── build-css.sh        #   重建 tw.css（改完 HTML 要跑）
 │       ├── stubs.js            #   Leaflet／Chart.js 最小樁件
 │       └── tw.css              #   本地建置的 Tailwind（建置產物）
+│   └── regress/                # detail.js 的執行期基準（改 detail.js 後跑；需 Playwright）
+│       ├── check.js            #   量 22 頁的時間軸／標記／海拔圖／航點卡，逐欄比對基準
+│       ├── record.js           #   錄下 detail.js 交給 Leaflet 與 Chart.js 的東西
+│       └── baseline.json       #   基準。只有 --update 會寫，git diff 它就是審查面
 │
 ├── manifest.json               # 專案入口索引：各檔案的意義、慣例、待辦
 ├── integrity.json              # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
@@ -157,7 +161,19 @@ node tools/contrast/check.js --all
 ```
 
 忘了重建也不會靜靜量錯——`check.js` 會比對頁面用到的 utility，缺了就中止並提示。
-動到 HTML 或 CSS 的 PR，CI 也會跑一次（`.github/workflows/contrast.yml`）。
+
+改到 `assets/detail.js` 時跑執行期基準。它只穿過 `PaPaDetail.init(cfg)`，量另一側的結果
+——22 頁的時間軸 DOM、地圖標記樣式、海拔圖設定、航點卡欄位——逐欄與
+`tools/regress/baseline.json` 比對：
+
+```bash
+python3 -m http.server 8099 &
+node tools/regress/check.js             # 沒打算改畫面的改動：22 頁必須零變動
+node tools/regress/check.js --update    # 打算改畫面：重寫基準，git diff 它，一起提交
+```
+
+動到 HTML、CSS 或 JS 的 PR，CI 會把對比度與執行期基準都跑一次
+（`.github/workflows/contrast.yml`）。
 
 二十二個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，

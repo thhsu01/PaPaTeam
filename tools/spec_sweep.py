@@ -18,6 +18,10 @@ PEAK = '#7c9e52'
 # 停留類的描述詞。GPS 停留點若當地沒有地名，名字就是自己取的，見下方的檢查。
 STOP_SUFFIX = ('休息點', '折返點')
 
+# 行程事實槽：data-trip="<事實>[:<格式>]"。與 detail.js 的 TRIP_FORMAT 一致。
+TRIP_SLOTS = {'date': {'ymd', 'md', 'zh'}, 'km': {'n'}, 'duration': {'hm', 'zh', 'h', 'm'},
+              'gain': {'n'}, 'summit': {'n'}}
+
 # detail.js 認得的設定鍵。介面寫在文件、實作在 detail.js，兩邊各自演化：
 # 頁面寫錯一個鍵不會有任何反應——它就只是靜靜地不作用。2026-08-04 的雙軸審查
 # 一次抓到三種都在站上的寫法：card.wrap: 'clamp'（detail.js 只認 'cycle'，
@@ -27,7 +31,8 @@ STOP_SUFFIX = ('休息點', '折返點')
 # 加旋鈕時要一併加進這張表，否則新旋鈕會被這條擋下來——那是刻意的：
 # 一個沒人記得的介面，跟一個沒有實作的介面，讀起來一樣糟。
 KNOWN = {
-    '': {'schedule', 'tripDate', 'nav', 'card', 'palette', 'map', 'chart', 'timeline', 'weather'},
+    '': {'schedule', 'trip', 'nav', 'card', 'palette', 'map', 'chart', 'timeline', 'weather'},
+    'trip': {'date', 'km', 'duration', 'gain', 'summit'},
     'card': {'follow', 'flash', 'onUpdate', 'wrap'},
     'map': {'preferCanvas', 'center', 'zoom', 'setView', 'attribution', 'track',
             'palette', 'marker', 'popup', 'selected'},
@@ -271,6 +276,22 @@ def check(f):
             if v and v.group(1) != 'cycle':
                 p.append("card.wrap: '%s' 沒有作用——detail.js 只認 'cycle'，"
                          "到頭就停是不寫時的預設" % v.group(1))
+
+    # ── 行程事實槽 ──────────────────────────────────────────
+    # data-trip="date:md" 的事實名與格式要是 detail.js 認得的，理由同上：寫錯的槽只會
+    # 靜靜留白。另外，已完成頁的軌跡由 detail.js 依 trip.date 載入，頁面自己再寫
+    # <script src="assets/tracks/…"> 或 PaPaTracks[…] 就是把第三份日期加回來。
+    for m in re.finditer(r'data-trip="([^"]*)"', s):
+        fact, _, fmt = m.group(1).partition(':')
+        if fact not in TRIP_SLOTS:
+            p.append('data-trip="%s"：沒有「%s」這個行程事實' % (m.group(1), fact))
+        elif fmt and fmt not in TRIP_SLOTS[fact]:
+            p.append('data-trip="%s"：%s 沒有「%s」這種格式' % (m.group(1), fact, fmt))
+    if ('trip', 'date') in keys:
+        if re.search(r'<script[^>]*src="assets/tracks/', s):
+            p.append('頁面自己載入軌跡檔——軌跡由 detail.js 依 trip.date 載入，script 標籤要拿掉')
+        if 'PaPaTracks[' in s:
+            p.append('頁面自己查 PaPaTracks——map.track 不給 points，detail.js 會依 trip.date 找')
 
     # ── 小百岳是航點的屬性，不是 pos 的一個值 ────────────────
     # 一座山可以同時是最高點與小百岳（全站七座裡有五座就是）。寫進 pos 會逼出

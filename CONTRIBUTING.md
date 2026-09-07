@@ -187,15 +187,15 @@ computed color 真的是白的——不是就代表樣式沒生效，量到的�
 
 ### 情境 2：更新計畫行程日期
 
-改 `data.planned` 的 `date`，同時更新對應詳情頁的 `TRIP_DATE`。
-**詳情頁的日期只在 `TRIP_DATE` 出現一次**，其餘都由它推導，不要另外寫死。
+改 `data.planned` 的 `date`，同時更新對應詳情頁 `init` 裡的 `trip.date`。
+**詳情頁的行程事實只在 `trip` 出現一次**，版面上的 `data-trip` 槽由它填，不要另外寫死。
 
 ### 情境 3：把計畫行程歸檔為已完成
 
 1. 把該筆從 `data.planned` 搬到 `data.completed`，補上 `date`（`YYYY/MM/DD`）
 2. `isLatest: true` 移到這一筆，舊的那筆改成 `false`
 3. 若有 GPS 紀錄，把簡化後的軌跡存成 `assets/tracks/<頁名>-<YYYY-MM-DD>.js`，
-   詳情頁載入它並把 `map.track.points` 傳給 `PaPaDetail`
+   `init` 的 `map.track` 只給樣式——`detail.js` 會依 `trip.date` 自己載入那個檔
 4. 依實走紀錄更新 `schedule` 的 `time` 與 `dist`；原本的預估時刻搬進 `plan` 欄位
 
 ### 情境 4：新增圖片

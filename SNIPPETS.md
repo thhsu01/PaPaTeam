@@ -115,7 +115,8 @@ const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "瞭�
 PaPaDetail.init({
   schedule,
   palette: PAL,                     // 地圖標記、海拔圖資料點、時間軸圓點共用
-  tripDate: TRIP_DATE,              // 日期只在這一處出現
+  // 行程事實只在這裡出現一次；版面上的 data-trip 槽由 detail.js 填（見下）
+  trip: { date: "2024-04-20", km: 4.35, duration: "2:00", gain: 120, summit: 184 },
   nav: [25.036395, 121.587461],     // 「開啟導航」的目的地
 
   card: { follow: 'popup' },        // 'popup' 開地圖泡泡、'pan' 平移地圖
@@ -125,8 +126,9 @@ PaPaDetail.init({
   map: {
     setView: [[25.0330, 121.5855], 15],
     attribution: 'Leaflet | © OpenStreetMap',
-    // 已完成行程畫實走軌跡；候選頁沒有這行，軌跡就是航點連成的直線
-    track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+    // 已完成行程畫實走軌跡：只給樣式，檔案由 detail.js 依 trip.date 載入。
+    // 候選頁沒有這行，軌跡就是航點連成的直線
+    track: { weight: 4, opacity: 0.85 },
     popup: true
   },
 
@@ -160,18 +162,43 @@ window.PaPaTracks['hushan-2024-04-20'] = [
 ];
 ```
 
-```html
-<script src="assets/tracks/hushan-2024-04-20.js"></script>
-```
-
 ```javascript
 map: {
-  track: { points: PaPaTracks['hushan-2024-04-20'], weight: 4, opacity: 0.85 },
+  track: { weight: 4, opacity: 0.85 },   // 不寫 points：detail.js 依 trip.date 載入
   // …
 }
 ```
 
-沒給 `track.points` 就沿用航點直線，計畫與候選頁不受影響。
+**頁面不要自己寫 `<script src="assets/tracks/…">`，也不要查 `PaPaTracks[…]`**——
+那會把日期第三次寫進頁面，spec_sweep 會擋。`detail.js` 用頁名＋`trip.date` 算出檔名，
+在畫地圖之前載入；`fact_check.py` 會確認那個檔真的存在。沒有 `trip.date` 的候選頁沿用航點直線。
+
+### 行程事實槽
+
+`trip` 宣告的事實，版面上用 `data-trip="<事實>[:<格式>]"` 的空元素承接，
+`detail.js` 在 DOMContentLoaded 填入。不要再手打數字。
+
+| 槽 | 顯示 |
+|---|---|
+| `data-trip="date"` | 2024/04/20 |
+| `data-trip="date:md"` | 4月20日 |
+| `data-trip="date:zh"` | 2024 年 4 月 20 日 |
+| `data-trip="km"` | 4.35 |
+| `data-trip="duration"` | 2:00 |
+| `data-trip="duration:zh"` | 2 小時 0 分 |
+| `data-trip="duration:h"` ／ `":m"` | 2 ／ 00（單位另外排版時拆兩槽） |
+| `data-trip="gain"` ／ `"summit"` | 120 ／ 184 |
+
+```html
+<span class="text-stone-600 text-xs">
+  <span data-trip="date"></span> 活動紀錄
+</span>
+<div class="text-3xl font-black text-stone-900" data-trip="km"></div>
+<div class="text-xs text-stone-600">實走里程</div>
+```
+
+`<title>`、`<meta description>` 與首頁卡片仍手寫（給爬蟲看的），`fact_check.py`
+會拿它們跟 `trip` 核對。
 
 ---
 
@@ -335,7 +362,7 @@ canvas 的 id 必須是 `elevation-chart`（不是 `elevationChart`）。
 1. **複製 `nanshijiao.html`**，不要複製其他頁。
 2. **五個段落 id 固定**：`overview` → `map-section` → `elevation` → `spots` → `timeline`，
    順序不可換、不可多開。
-3. **日期只寫 `TRIP_DATE` 一處**；候選／計畫頁沒有 `TRIP_DATE`。
+3. **行程事實只寫 `trip` 一處**，版面用 `data-trip` 槽；候選／計畫頁沒有 `trip.date`。
 
 ---
 
