@@ -26,19 +26,10 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
+const { BASE, LAUNCH, CDN } = require('../pw-env');   // 與 contrast/check.js 共用的伺服器、瀏覽器、擋網址
+
 const ROOT = path.resolve(__dirname, '..', '..');
-const BASE = process.env.PAPA_BASE || 'http://127.0.0.1:8099';
-// 本機沙箱的 Chromium 在 /opt/pw-browsers；CI 用 npx playwright install 裝的那份。
-// 路徑不存在就不指定 executablePath，讓 Playwright 用自己的——2026-09 的審查抓到
-// 這裡原本寫死本機路徑，CI 上會找不到執行檔（該 workflow 只掛 PR，所以沒被觸發過）。
-const DEFAULT_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
-const CHROME = process.env.PW_CHROME || (fs.existsSync(DEFAULT_CHROME) ? DEFAULT_CHROME : null);
-const LAUNCH = CHROME ? { executablePath: CHROME } : {};
 const BASELINE = path.join(__dirname, 'baseline.json');
-const CDN = ['**://cdn.tailwindcss.com/**', '**://cdn.jsdelivr.net/**', '**://unpkg.com/**',
-             '**://fonts.googleapis.com/**', '**://api.open-meteo.com/**',
-             '**://generativelanguage.googleapis.com/**', '**://images.unsplash.com/**',
-             '**://*.tile.openstreetmap.org/**'];
 
 async function capture(browser, name) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });

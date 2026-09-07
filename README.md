@@ -117,6 +117,7 @@ PaPaTeam/
 │   ├── spec_sweep.py            # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
 │   ├── fact_check.py            # 事實一致性：同一個日期／里程在頁內各處是否相符
 │   ├── bump_assets.py           # 共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）
+│   ├── pw-env.js                # 兩支 Playwright 工具共用的伺服器／瀏覽器／擋網址
 │   ├── manifest_tree.py         # 由 manifest.json 產生 README 的檔案樹（改了 manifest 就跑 --write）
 │   ├── contrast/                # 對比度實測（改顏色後跑；需 Playwright）
 │   │   ├── check.js             # 量測器，檔頭記了四個量測坑
@@ -138,7 +139,7 @@ PaPaTeam/
 ├── .gitignore                   # 編輯器、系統檔、node_modules
 │
 ├── ARCHITECTURE.md              # 架構指南（規範權威）：段落規格、色彩 token、腳本規格
-├── CONTEXT.md
+├── CONTEXT.md                   # 領域語彙：行程、航點、pos、最高點 vs 山頂、行程事實、共用區塊（動任何頁面前先讀）
 ├── READABILITY_AUDIT.md         # 可讀性與對比度審計紀錄（改顏色前必讀）
 ├── SNIPPETS.md                  # 元件片段快速參考
 ├── CONTRIBUTING.md              # 貢獻指南：編輯清單與代碼風格

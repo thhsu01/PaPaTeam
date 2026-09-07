@@ -11,7 +11,7 @@
 
    海拔圖與時間軸都已經收進來了，各頁只給領域旋鈕：
    Chart.js 藏在接縫後面（見 docs/adr/0001），時間軸以「欄位清單」為介面
-   （layout／fields／emoji／palette／hover），不再由各頁手寫 HTML 樣板；
+   （layout／fields／emoji／hover），不再由各頁手寫 HTML 樣板；
    pos → emoji 的對照也是全站一份（POS_EMOJI），各頁只覆寫有意思的例外。
    導覽列、航點卡、天氣卡、已完成提示、兩個容器也收進來了（見 WIDGETS）：
    頁面只放 <div data-widget="…"> 掃載點，段落與散文仍是頁面自己的。
@@ -73,9 +73,19 @@ window.PaPaDetail = (function () {
     if (advice) advice.textContent = wp.advice || '';
 
     if (map && markers.length) {
-      if (cfg.map && cfg.map.selected) {
+      // 選取時把該標記放大。map.selected: true 用預設（palette 半徑 +6、不透明；未選取的
+      // 回到 palette 半徑與 0.92）。2026-09 之前六頁各寫一個 closure，選取半徑 12／14／15
+      // 不等，未選取的半徑還各自重算一遍 palette 已經算過的東西——bishan 與 shiqiulinling
+      // 一律縮回 6，起訖點原本的 9 在第一次點擊後就消失了。給函式仍可（huoyianshan 的
+      // 大峽谷要 12），那是逃生口。
+      var sel = cfg.map && cfg.map.selected;
+      if (sel) {
+        var spal = pal();
         markers.forEach(function (m, j) {
-          m.setStyle(cfg.map.selected(cfg.schedule[j], j, cfg.schedule.length, j === i));
+          var wp = cfg.schedule[j], n = cfg.schedule.length, on = j === i;
+          m.setStyle(sel === true
+            ? { radius: spal.radius(wp, j, n) + (on ? 6 : 0), fillOpacity: on ? 1 : 0.92 }
+            : sel(wp, j, n, on));
         });
       }
       if (card.follow === 'pan') map.panTo([wp.lat, wp.lng]);
@@ -103,6 +113,12 @@ window.PaPaDetail = (function () {
     if ((cfg.card && cfg.card.wrap) === 'cycle') next = (next + n) % n;
     else if (next < 0 || next >= n) return;
     updateWaypointCard(next);
+  }
+
+  // 航點配色只從 init 頂層拿。map/chart/timeline 各自的 palette 子旋鈕 2026-09 刪除：
+  // 沒有任何頁在用，留著只是三份一樣的回退寫法。
+  function pal() {
+    return cfg.palette || palette({ accent: cssVar('--accent') });
   }
 
   // ── 地圖 ──────────────────────────────────────────────────
@@ -133,7 +149,7 @@ window.PaPaDetail = (function () {
     // 逐字相同，唯一的分歧是 fillOpacity 的 0.9／0.92／1——那是抄來的差異，
     // 不是決定（0.9 與 0.92 肉眼分不出來）。統一為 0.92。
     // m.marker 保留為逃生口：huoyianshan 的大峽谷要加大半徑與換描邊。
-    var mpal = m.palette || cfg.palette || palette({ accent: cssVar('--accent') });
+    var mpal = pal();
     cfg.schedule.forEach(function (wp, i) {
       var style = m.marker
         ? m.marker(wp, i, cfg.schedule.length)
@@ -196,7 +212,6 @@ window.PaPaDetail = (function () {
   //   fillAlpha       線下填色的濃度。預設 0.1，兩頁用 0.05。
   //   fillColor       線下填色的顏色。預設 --accent（與 lineColor 分開——
   //                   四頁的線較深但填色仍是主色）。只有 shiqiulinling 兩者同色。
-  //   palette         航點配色，與地圖標記、時間軸圓點共用同一個決定。
   //   advanced        逃生口，深合併進最終的 Chart.js 設定。
   function initChart() {
     var c = cfg.chart || {};
@@ -208,7 +223,7 @@ window.PaPaDetail = (function () {
     // 填色與線色是兩件事：四頁的線用較深的 --accent-deep，填色卻仍是 --accent。
     // 所以填色預設走 accent，只有 shiqiulinling 兩者刻意同色，用 fillColor 指定。
     var fillC = c.fillColor ? (cssVar(c.fillColor) || c.fillColor) : accent;
-    var cpal = c.palette || cfg.palette || palette({ accent: accent });
+    var cpal = pal();
     var y = { title: { display: true, text: '海拔 (m)' },
               grid: { color: '#f0ede8' },
               min: c.elevationFloor == null ? 0 : c.elevationFloor };
@@ -312,7 +327,7 @@ window.PaPaDetail = (function () {
     if (!t || !container) return;
 
     var n = cfg.schedule.length;
-    var pal = t.palette || cfg.palette || palette({ accent: cssVar('--accent') });
+    var tpal = pal();
     var fields = t.fields || ['desc'];
     var emoji = emojiTable(t);
     var card = t.layout === 'card';
@@ -329,21 +344,21 @@ window.PaPaDetail = (function () {
       var tag = (emoji ? (emoji[wp.pos] || '📍') + ' ' : '') + wp.pos;
       var plan = (wp.plan && wp.plan !== wp.time)
         ? '<span class="font-mono text-xs text-stone-600">(原估 ' + wp.plan + ')</span>' : '';
-      var dot = pal.color(wp, i, n);
+      var dot = tpal.color(wp, i, n);
       // 警示地形是全站唯一「要讀者主動留意」的語意，所以在時間軸上會脈動。
       // 這是規則不是逐頁掛的 class——huoyianshan 的大峽谷原本自己寫 animate-pulse，
       // 收進來之後任何一頁把某個 pos 標成警示地形都會有同樣的提示。
-      var pulse = dot.toLowerCase() === pal.warn ? ' animate-pulse' : '';
+      var pulse = dot.toLowerCase() === tpal.warn ? ' animate-pulse' : '';
       // 小百岳：金環（加粗，不只換色）＋ pos 藥丸旁的文字徽章。兩個通道。
-      var ringStyle = wp.xbaiyue ? ' border-color:' + pal.ring + '; border-width:3px;' : '';
+      var ringStyle = wp.xbaiyue ? ' border-color:' + tpal.ring + '; border-width:3px;' : '';
       var badge = wp.xbaiyue
         ? '<span class="text-xs font-bold px-2 py-0.5 rounded-full" ' +
-          'style="color:' + pal.ring + '; background:' + alpha(pal.ring, 0.12) + ';">' + xbadge(wp) + '</span>'
+          'style="color:' + tpal.ring + '; background:' + alpha(tpal.ring, 0.12) + ';">' + xbadge(wp) + '</span>'
         : '';
 
       // 兩種版面同形，只差外層包裝與字級：圓點 → 時刻列（時刻＋原估＋pos 藥丸＋
-      // 小百岳徽章）→ 地點 → 主體。共用的部分只寫一次，差異集中在 L 這張表。
-      var L = card
+      // 小百岳徽章）→ 地點 → 主體。共用的部分只寫一次，差異集中在 K 這張表。
+      var K = card
         ? { dot:  'w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all',
             row:  'flex flex-wrap justify-between items-center gap-2 mb-1',
             time: 'text-lg font-black text-stone-800', timeStyle: '',
@@ -357,14 +372,14 @@ window.PaPaDetail = (function () {
             loc:  'font-bold text-stone-800', locTag: 'div',
             body: 'text-xs text-stone-600 mt-0.5' };
 
-      var dotHtml = '<div class="' + L.dot + pulse + '" style="background:' + dot + ';' + ringStyle + '"></div>';
+      var dotHtml = '<div class="' + K.dot + pulse + '" style="background:' + dot + ';' + ringStyle + '"></div>';
       var inner =
-        '<div class="' + L.row + '">' +
-          '<span class="' + L.time + '"' + L.timeStyle + '>' + wp.time + '</span>' + plan +
-          '<span class="' + L.pill + '">' + tag + '</span>' + badge +
+        '<div class="' + K.row + '">' +
+          '<span class="' + K.time + '"' + K.timeStyle + '>' + wp.time + '</span>' + plan +
+          '<span class="' + K.pill + '">' + tag + '</span>' + badge +
         '</div>' +
-        '<' + L.locTag + ' class="' + L.loc + '">' + wp.loc + '</' + L.locTag + '>' +
-        (body ? '<div class="' + L.body + '">' + body + '</div>' : '');
+        '<' + K.locTag + ' class="' + K.loc + '">' + wp.loc + '</' + K.locTag + '>' +
+        (body ? '<div class="' + K.body + '">' + body + '</div>' : '');
 
       var div = document.createElement('div');
       div.className = cls;

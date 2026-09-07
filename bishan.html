@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
   <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
   <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=d8094902"></script>
+  <script src="assets/detail.js?v=7d2594b3"></script>
 </head>
 <body class="antialiased selection:bg-[var(--accent-soft)] text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -376,7 +376,7 @@
         center: [25.100, 121.595], zoom: 14,
         // 只畫步行段，末尾的接駁不畫
         track: { slice: [0, 10], weight: 4, opacity: 0.7, dashArray: '8, 8' },
-selected: (wp, i, n, sel) => ({ radius: sel ? 12 : 6, fillOpacity: sel ? 1 : 0.6 })
+selected: true
       },
 
       // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）

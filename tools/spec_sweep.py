@@ -1,12 +1,21 @@
 #!/usr/bin/env python3
 """全站規格掃描。ARCHITECTURE.md 的段落規格表寫了卻沒人檢查，導覽文字與 <h2>
 因此長期漂移（2026-08-04 的雙軸審查才發現）。這支腳本把那張表變成可執行的檢查。"""
-import re, glob, math, sys, os
+import re, glob, math, sys, os, functools
 
 os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
+import manifest_tree                     # manifest 條目與中文數字：README 檔案樹用的同一份
 ASSET_HASHES = {a: bump_assets.asset_hash(a) for a in bump_assets.ASSETS if os.path.exists(a)}
+
+
+@functools.lru_cache(maxsize=None)
+def site_counts():
+    """文件裡會被拿來核對的現況數字，全站只算一次：詳情頁數、有軌跡的頁數、卡片式時間軸的頁數。"""
+    pages = tuple(f for f in sorted(glob.glob('*.html')) if f != 'index.html')
+    n_card = sum(1 for f in pages if "layout: 'card'" in open(f, encoding='utf-8').read())
+    return {'pages': pages, 'n': len(pages), 'n_tracks': len(glob.glob('assets/tracks/*.js')), 'n_card': n_card}
 
 
 def pos_emoji_table():
@@ -47,12 +56,14 @@ KNOWN = {
     '': {'schedule', 'trip', 'nav', 'card', 'palette', 'map', 'chart', 'timeline', 'weather'},
     'trip': {'date', 'km', 'duration', 'gain', 'summit'},
     'card': {'follow', 'flash', 'onUpdate', 'wrap'},
+    # palette 只在最上層：map/chart/timeline 各自的 palette 旋鈕 22 頁沒人用，
+    # 2026-09 第二輪審查後拿掉（detail.js 三處改讀同一個 pal()）。
     'map': {'preferCanvas', 'center', 'zoom', 'setView', 'attribution', 'track',
-            'palette', 'marker', 'popup', 'selected'},
+            'marker', 'popup', 'selected'},
     'map.track': {'points', 'slice', 'color', 'weight', 'opacity', 'dashArray'},
-    'chart': {'lineColor', 'fillColor', 'fillAlpha', 'palette',
+    'chart': {'lineColor', 'fillColor', 'fillAlpha',
               'elevationFloor', 'elevationMax', 'advanced'},
-    'timeline': {'layout', 'fields', 'emoji', 'palette', 'hover'},
+    'timeline': {'layout', 'fields', 'emoji', 'hover'},
     'weather': {'lat', 'lng', 'elevation', 'subText', 'sep', 'unit', 'errorMain'},
 }
 
@@ -88,9 +99,11 @@ def hav(a, b, c, d):
     return 2 * R * math.asin(math.sqrt(x))
 
 
+@functools.lru_cache(maxsize=None)
 def schedule_objects(s):
     """以括號配對切出 schedule 的每個物件。用貪婪 regex 會跨物件吃字元，
-    2026-08-03 就是這樣漏讀了 nanshijiao 17 個航點裡的 3 個。"""
+    2026-08-03 就是這樣漏讀了 nanshijiao 17 個航點裡的 3 個。
+    五個檢查各自呼叫一次，所以以整頁原始碼為鍵快取；回傳的 list 不要就地改。"""
     i = s.find('const schedule')
     if i < 0:
         return []
@@ -108,7 +121,7 @@ def schedule_objects(s):
                 out.append(s[cur:j + 1])
         elif ch == ']' and depth == 0:
             break
-    return out
+    return tuple(out)
 
 
 def js_block(s, key):
@@ -444,9 +457,8 @@ def check_doc_counts():
     刻意只查算得出來的那幾個，不做通用的「文件裡所有數字」掃描：那會誤報到不能用。
     """
     p = []
-    pages = [f for f in sorted(glob.glob('*.html')) if f != 'index.html']
-    n_pages = len(pages)
-    n_tracks = len(glob.glob('assets/tracks/*.js'))
+    c = site_counts()
+    pages, cn = c['pages'], manifest_tree.cn
     # 以「不重複的編號」計數，不是以航點計數：七星山主峰與東峰共用 #2，
     # 標了兩個航點但仍然只有一座小百岳。算成兩座會讓文件跟著錯。
     seen = {}
@@ -457,18 +469,16 @@ def check_doc_counts():
                 num = int(m0.group(1))
                 seen[num] = seen.get(num, False) or bool(re.search(r'pos:\s*"最高點"', o))
     xb, peak = len(seen), sum(seen.values())
-    CN = '零一二三四五六七八九十'
-
-    def cn(n):
-        return CN[n] if n < 11 else CN[10] + (CN[n - 10] if n < 20 else '')
 
     checks = [
         ('ARCHITECTURE.md', '小百岳座數', r'全站(\S+?)座裡有(\S+?)座就是', (cn(xb), cn(peak))),
         ('CONTEXT.md',      '小百岳座數', r'全站(\S+?)座小百岳裡有(\S+?)座', (cn(xb), cn(peak))),
         ('tools/spec_sweep.py', '小百岳座數', r'全站(\S+?)座裡有(\S+?)座就是', (cn(xb), cn(peak))),
-        ('manifest.json', '有軌跡的頁數', r'目前(\S+?)頁有軌跡', (cn(n_tracks),)),
-        ('manifest.json', 'advanced 未使用的頁數', r'advanced 目前 (\d+) 頁都沒用到', (str(n_pages),)),
-        ('ARCHITECTURE.md', '行列式的頁數', r'// 行列式，(\d+) 頁', (str(n_pages - 6),)),
+        ('manifest.json', '有軌跡的頁數', r'目前(\S+?)頁有軌跡', (cn(c['n_tracks']),)),
+        ('manifest.json', 'advanced 未使用的頁數', r'advanced 目前 (\d+) 頁都沒用到', (str(c['n']),)),
+        # 行列式＝不是卡片式的那些頁。2026-09 之前這裡寫死 n - 6，卡片式頁數一變就會靜靜錯掉
+        ('ARCHITECTURE.md', '行列式的頁數', r'// 行列式，(\d+) 頁', (str(c['n'] - c['n_card']),)),
+        ('ARCHITECTURE.md', '卡片式的頁數', r'// 卡片式，(\d+) 頁', (str(c['n_card']),)),
     ]
     for path, what, pat, want in checks:
         m = re.search(pat, open(path, encoding='utf-8').read())
@@ -510,21 +520,9 @@ def check_manifest():
     倉庫裡的檔案都要有條目，條目指的檔案也都要存在。2026-09 的架構檢視發現
     README 的檔案樹兩次漏檔（先漏四頁、後漏 CONTEXT.md 與 ADR），manifest 反而是齊的
     ——所以拿它當唯一的清單，這裡守住它不漂。"""
-    import json
     p = []
-    m = json.load(open('manifest.json', encoding='utf-8'))
-    paths = set()
-
-    def walk(x):
-        if isinstance(x, dict):
-            if isinstance(x.get('path'), str):
-                paths.add(x['path'])
-            for v in x.values():
-                walk(v)
-        elif isinstance(x, list):
-            for v in x:
-                walk(v)
-    walk(m)
+    entries = manifest_tree.entries()       # 同一個路徑出現兩處時已併成一條，short 取有的那份
+    paths = {e['path'] for e in entries}
     tracked = tracked_files()
     dirs = {x for x in paths if x.endswith('/')}          # 目錄條目：給檔案樹一句說明用
     for t in sorted(tracked - paths):
@@ -535,37 +533,17 @@ def check_manifest():
         if not os.path.isdir(d):
             p.append('manifest.json 列了目錄 %s，倉庫裡沒有' % d)
     # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的。
-    # 同一個路徑可能出現在 read_first 與 docs 兩處，任一處有 short 就算有。
-    shorts = {}
-    for e in _entries(m):
-        shorts[e['path']] = shorts.get(e['path']) or e.get('short')
-    for path, short in shorts.items():
+    for e in entries:
+        path = e['path']
         # 頁面的那一句由 title 與軌跡日期組出來；軌跡檔不必註解；目錄可以沒有
         if path.endswith('.html') or path.startswith('assets/tracks/') or path.endswith('/'):
             continue
-        if not short:
+        if not e.get('short'):
             p.append('%s 的條目缺 short（檔案樹上那一句）' % path)
     # README 的檔案樹必須是 manifest 印出來的那一份
-    import manifest_tree
     if manifest_tree.readme_block() != manifest_tree.render():
         p.append('README.md 的檔案樹跟 manifest.json 不一致——跑 python3 tools/manifest_tree.py --write')
     return p
-
-
-def _entries(m):
-    out = []
-
-    def walk(x):
-        if isinstance(x, dict):
-            if isinstance(x.get('path'), str):
-                out.append(x)
-            for v in x.values():
-                walk(v)
-        elif isinstance(x, list):
-            for v in x:
-                walk(v)
-    walk(m)
-    return out
 
 
 def check_live_counts():
@@ -579,12 +557,10 @@ def check_live_counts():
     「落在集合裡」比「指定它是哪一個」寬鬆，代價是一個過期的數字若剛好等於另一個
     現況會漏掉——那比逐句維護樣式要划算。"""
     p = []
-    pages = [f for f in sorted(glob.glob('*.html')) if f != 'index.html']
-    n = len(pages)
-    n_tracks = len(glob.glob('assets/tracks/*.js'))
-    n_card = sum(1 for f in pages if "layout: 'card'" in open(f, encoding='utf-8').read())
+    c = site_counts()
+    n, n_tracks, n_card = c['n'], c['n_tracks'], c['n_card']
     live = {n, n + 1, n_tracks, n - n_tracks, n_card, n - n_card}
-    CN = '零一二三四五六七八九十'
+    CN = manifest_tree.CN
 
     def cn2int(t):
         if t.isdigit():
