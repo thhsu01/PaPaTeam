@@ -41,16 +41,15 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
     .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
-    .stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }
     .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
     .section-bar-accent { background: var(--accent); }
     .section-bar-green { background: #7c9e52; }
     .section-bar-stone { background: #a09080; }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=d4fe0168">
+  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
   <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
   <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=acd9dea7"></script>
+  <script src="assets/detail.js?v=d8094902"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -137,7 +136,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           互動路線圖
         </h2>
-        <p class="text-sm text-stone-600 mb-6">地圖上的線是 4/27 當天的 GPS 軌跡。這是原路折返，去程與回程重疊，所以看起來像一條線被描了兩次。沿途有二十幾處訊號中斷，全部是停下來時 App 自動暫停造成的，位移都在 15 公尺以內——因此本頁的里程不需要像橫嶺古道那樣補回中斷段短報的距離。</p>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 <span data-trip="date:slash"></span> 當天的 GPS 軌跡。這是原路折返，去程與回程重疊，所以看起來像一條線被描了兩次。沿途有二十幾處訊號中斷，全部是停下來時 App 自動暫停造成的，位移都在 15 公尺以內——因此本頁的里程不需要像橫嶺古道那樣補回中斷段短報的距離。</p>
 
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
 
@@ -186,7 +185,7 @@
           <span class="w-2.5 h-8 rounded-full section-bar-stone"></span>
           沿途亮點導覽
         </h2>
-        <p class="text-sm text-stone-600 mb-6">依 4/27 的抵達順序排列。</p>
+        <p class="text-sm text-stone-600 mb-6">依 <span data-trip="date:slash"></span> 的抵達順序排列。</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">

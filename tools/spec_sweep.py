@@ -32,7 +32,7 @@ PEAK = '#7c9e52'
 STOP_SUFFIX = ('休息點', '折返點')
 
 # 行程事實槽：data-trip="<事實>[:<格式>]"。與 detail.js 的 TRIP_FORMAT 一致。
-TRIP_SLOTS = {'date': {'ymd', 'md', 'zh'}, 'km': {'n'}, 'duration': {'hm', 'zh', 'h', 'm'},
+TRIP_SLOTS = {'date': {'ymd', 'md', 'zh', 'slash'}, 'km': {'n'}, 'duration': {'hm', 'zh', 'h', 'm'},
               'gain': {'n'}, 'summit': {'n'}}
 
 # detail.js 認得的設定鍵。介面寫在文件、實作在 detail.js，兩邊各自演化：
@@ -206,6 +206,14 @@ def check(f):
         p.append('段落 id 或順序異常')
     if re.search(r'返回首頁|←\s*首頁', s):
         p.append('疑似左上返回鍵')
+
+    # ── 共用區塊用到的主色 token 必須定義 ────────────────────
+    # wp-card 的建議框用 var(--accent-tint) 與 var(--accent-border)。2026-09 候選 2 把航點卡
+    # 收進 detail.js 之後，七頁沒定義這兩個 token，建議框就沒有底色與框線——執行期基準
+    # 只記骨架、對比度量測不管框線，兩個都抓不到。token 是 :root 裡的事，這裡查。
+    for tok in ('--accent', '--accent-strong', '--accent-tint', '--accent-border'):
+        if not re.search(r'%s\s*:' % re.escape(tok), s):
+            p.append('缺 %s——共用區塊（航點卡的建議框）靠它上色' % tok)
 
     # ── 共用資產的版本要跟內容走 ─────────────────────────────
     # 導覽列等區塊由 detail.js 產生之後，HTML 與 JS 的版本必須成對：新版 HTML 配上
@@ -526,13 +534,16 @@ def check_manifest():
     for d in sorted(dirs):
         if not os.path.isdir(d):
             p.append('manifest.json 列了目錄 %s，倉庫裡沒有' % d)
-    # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的
+    # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的。
+    # 同一個路徑可能出現在 read_first 與 docs 兩處，任一處有 short 就算有。
+    shorts = {}
     for e in _entries(m):
-        path = e.get('path', '')
+        shorts[e['path']] = shorts.get(e['path']) or e.get('short')
+    for path, short in shorts.items():
         # 頁面的那一句由 title 與軌跡日期組出來；軌跡檔不必註解；目錄可以沒有
         if path.endswith('.html') or path.startswith('assets/tracks/') or path.endswith('/'):
             continue
-        if not e.get('short'):
+        if not short:
             p.append('%s 的條目缺 short（檔案樹上那一句）' % path)
     # README 的檔案樹必須是 manifest 印出來的那一份
     import manifest_tree
@@ -625,6 +636,11 @@ def main():
     mf = check_manifest()
     print('%-16s %s' % ('manifest.json', 'OK' if not mf else ' / '.join(mf)))
     bad += bool(mf)
+    # 首頁不走詳情頁的規格，但它也引用共用資產——版本號一樣要跟內容走
+    idx = ['%s 的版本號不是現在的內容——跑 python3 tools/bump_assets.py' % a
+           for a in bump_assets.stale(open('index.html', encoding='utf-8').read(), ASSET_HASHES)]
+    print('%-16s %s' % ('index', 'OK' if not idx else ' / '.join(idx)))
+    bad += bool(idx)
     for f in sorted(glob.glob('*.html')):
         if f == 'index.html':
             continue        # 首頁自成一套視覺系統，見 manifest.conventions.greyscale

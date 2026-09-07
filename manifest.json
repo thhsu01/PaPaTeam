@@ -5,7 +5,7 @@
   "branch": "main",
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
-  "manifest_updated": "2026-08-04",
+  "manifest_updated": "2026-09-07",
   "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
@@ -13,6 +13,10 @@
       "path": "ARCHITECTURE.md",
       "why": "詳情頁只能有 5 個段落且 id 與順序固定；色彩一律走 --accent token；命名慣例。動任何頁面前先讀。",
       "short": "架構指南（規範權威）：段落規格、色彩 token、腳本規格"
+    },
+    {
+      "path": "CONTEXT.md",
+      "why": "領域語彙：行程、航點、pos 是標籤不是詞彙、最高點 vs 山頂、行程事實、共用區塊。動任何頁面前先讀，名詞不一致的代價在本專案發生過好幾次。"
     },
     {
       "path": "READABILITY_AUDIT.md",
@@ -306,7 +310,7 @@
     {
       "path": ".github/workflows/spec.yml",
       "purpose": "push 與 PR 時依序跑 tools/spec_sweep.py 與 tools/fact_check.py，不過就讓 CI 紅字。2026-08-04 加上——規格表寫了卻沒有檢查就會漂移，這個 workflow 讓沒有人需要「記得」去跑它",
-      "short": "push 與 PR 跑 spec_sweep.py 與 fact_check.py"
+      "short": "每次 push 與 PR 跑 spec_sweep.py 與 fact_check.py"
     },
     {
       "path": "tools/contrast/build-css.sh",
@@ -315,8 +319,8 @@
     },
     {
       "path": ".github/workflows/contrast.yml",
-      "purpose": "PR 動到 HTML 或 CSS 時跑全站對比度實測。會先重建 tw.css 再量，所以 CI 用的一定是新的；與 spec.yml 分開是因為要裝 Playwright，不該拖慢每次 push",
-      "short": "動到 HTML／CSS／JS 的 PR 跑對比度實測與執行期基準"
+      "purpose": "push 到 main 與 PR 動到 HTML／CSS／JS 時跑全站對比度實測與 detail.js 執行期基準。會先重建 tw.css 再量，所以 CI 用的一定是新的；與 spec.yml 分開是因為要裝 Playwright，不該拖慢每次 push",
+      "short": "push 到 main 與 PR 動到 HTML／CSS／JS 時跑對比度實測與執行期基準"
     },
     {
       "path": "tools/manifest_tree.py",
@@ -420,7 +424,7 @@
     "no_fabrication": "里程、時間、海拔屬量測值，缺就留空，不得為填滿欄位而編造。advice 不在此列——它是「下次走的人用得上的提示」，可依路線資料與公開資訊撰寫，不必等實走",
     "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/<頁名>-<日期>.js，由 detail.js 依 trip.date 載入，頁面自己不寫 script 標籤也不查 PaPaTracks），計畫與候選行程畫航點直線。目前十六頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan、caolingguidao、henglingguidao、zhongzhengshan、daluntouweishan、daqitou、eweishan。這份清單容易漏改——新增軌跡檔時一併更新",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
-    "source_citation": "外部來源以「參考資源」清單列在 #map-section 的航點卡下方（18 頁中 16 頁如此；shiqiulinling 放在 #overview，datunshan 另在 #timeline 末尾多放一份較詳細的分段里程出處；huoyianshan 沒有，它的數字全部出自當天 GPX）。候選／計畫頁的里程、海拔、營運時間若引自外部資料一定要列；已完成頁改以 GPS 軌跡為準，但引用公開標高或官方分段里程時同樣要列（henglingguidao、jinmianshan 就是靠這個才驗得出軌跡對不對）",
+    "source_citation": "外部來源以「參考資源」清單列在 #map-section 的航點卡下方（多數頁如此；shiqiulinling 放在 #overview，datunshan 另在 #timeline 末尾多放一份較詳細的分段里程出處；huoyianshan 沒有，它的數字全部出自當天 GPX）。候選／計畫頁的里程、海拔、營運時間若引自外部資料一定要列；已完成頁改以 GPS 軌跡為準，但引用公開標高或官方分段里程時同樣要列（henglingguidao、jinmianshan 就是靠這個才驗得出軌跡對不對）",
     "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過。**本條僅適用 22 個詳情頁**；index.html 自成一套視覺系統（翡翠品牌色 + slate，見 assets/site.css），是刻意的例外，不要為了一致而改它",
     "overview_stats": "#overview 必須有一排統計數字，含總里程、耗時、爬升、最高海拔。已完成頁標「實走里程」，計畫／候選頁標「總里程 km（估）」",
     "distance_sanity": "每段里程不得短於該段兩航點間的直線距離（Haversine）。交通接駁段例外——里程不累計、維持與前一點相同。這是最便宜的資料錯誤檢查，改完 schedule 一律跑一次。2026-08-04 全站 18 頁皆通過",
@@ -429,11 +433,11 @@
     "waypoint_coords": "已完成行程的航點座標應取自 GPS 軌跡在該時刻的位置，不要另外從地圖抓——座標與里程若不同源，段長就會與直線距離矛盾。稽核方式：量每個航點到軌跡最近點的距離，正常在 15 m 以內；超過 40 m 就要查——2026-08-04 henglingguidao 就是這樣抓到的：隊友補的紗帽路登山口離軌跡 94 m，查下去發現它落在訊號中斷內，軌跡只填了直線，實走至少短報 59 m。三種例外本來就不在步行軌跡上，不必修：交通接駁的起訖點（dinghu 陽明山立體停車場離軌跡 1 km，那段搭小 9 路）、GPS 起錄前的集合點（jiantanshan 銘傳大學校門口 210 m、huoyianshan 正松泉停車場 67 m）、GPS 尚未定位的起點（nanshijiao 捷運南勢角站 120 m），以及搭車前往起登點的集合站（caolingguidao 福隆火車站離軌跡 1.8 km）。這幾種的 dist 一律維持 0.00，總里程是「GPS 起錄到收錄」的距離，不含走到起錄點那一段",
     "meeting_point": "集合地點是隊伍實際會合的地方，不一定是 GPS 起錄點，兩者不同時要在頁面上分開講清楚。三種情形都出現過：集合點在起錄點之前（jiantanshan 銘傳大學校門口，走 210 m 才起錄）、集合點就在軌跡上但不是第一個點（jinmianshan 金面山步道登山口，起錄點是 140 m 外的巷口）、以及集合後搭車前往起登點（caolingguidao 福隆火車站 → 遠望坑口，接駁 1.9 km）。作法：航點 pos 標「集合地點」、dist 維持 0.00 不累計、#overview 第一張卡與導航鍵都指向集合點而非起錄點",
     "elevation_gain": "累計上升不可直接加總軌跡的正增量。停留時 GPS 高程會原地抖動，每次抖動都被算成爬升——henglingguidao 原始加總 848 m，但全程只爬 293 m 到山頂，兩倍以上顯然是假的。作法是先對高程序列取移動中位數壓掉抖動再累加，並用不同視窗（15/31/61 點）確認收斂，另以各航點高程直接相加交叉核對；四個數字落在同一區間才採用",
-    "accent_tokens_note": "只有這兩個是每頁必備：--accent 供裝飾（色條、圓點、地圖軌跡、圖表線），--accent-strong 供淺底上的文字。其餘依該頁需要自行擴充，命名一律 --accent-<用途>，常見的有 -strong-deep（淡底卡片內文，再深一階）、-tint（淡底）、-border／-border-deep（框線）、-light／-soft／-fill（更淺的裝飾）、-on-dark（深底上的文字）。全站目前共 16 種變體，刻意不統一成一份清單——各頁版面繁簡不同，硬湊會逼出用不到的 token",
+    "accent_tokens_note": "只有這兩個是每頁必備：--accent 供裝飾（色條、圓點、地圖軌跡、圖表線），--accent-strong 供淺底上的文字。其餘依該頁需要自行擴充，命名一律 --accent-<用途>，常見的有 -strong-deep（淡底卡片內文，再深一階）、-tint（淡底）、-border／-border-deep（框線）、-light／-soft／-fill（更淺的裝飾）、-on-dark（深底上的文字）。全站目前共 16 種變體，刻意不統一成一份清單——各頁版面繁簡不同，硬湊會逼出用不到的 token 2026-09 起 --accent-tint 與 --accent-border 也是必備：航點卡的建議框（detail.js 的 wp-card 區塊）靠它們上色，沒定義的頁會沒有底色與框線；spec_sweep 會查。",
     "semantic_colors": "跨頁共用、不屬於任何單頁識別色的語意色：紅 #ef4444 = 警示地形、綠 #7c9e52 = 最高點、金 #a16207 = 小百岳認證環（描邊不是填色，因為它與最高點可疊加）、藍 = 外部連結、琥珀 amber-50/400/800 = 注意事項面板、翡翠 emerald-700 = 站徽與官方來源連結。**這些跨頁必須一致**——2026-08-04 發現 datongshan／laojiujianshan／mochashan／shiqiulinling／huoyianshan 五頁各自把最高點畫成琥珀、深綠、橘、紅，還在自己的註解裡稱之為「語意色」，等於五種互相矛盾的語意。已全數收斂到 #7c9e52",
-    "widgets": "導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器六個共用區塊由 assets/detail.js 的 WIDGETS 產生，頁面只放掃載點 <div data-widget=\"nav|notice|weather|wp-card|chart|timeline\">。掃載點沒寫 class 就套正規 class，有寫就保留（逃生口：舊世代把天氣卡嵌在自己的資訊卡網格裡）。紀錄頁／候選頁的差異（第五鍵文字、航點卡時間標籤、日期副標、要不要 notice）由 trip 有無推導。2026-09 之前六個區塊在 22 頁各自手寫、分別有 5／3／7／9／3／1 種寫法。spec_sweep 查掃載點在不在、以及有沒有人把區塊手寫回來",
+    "widgets": "導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器六個共用區塊由 assets/detail.js 的 WIDGETS 產生，頁面只放掃載點 <div data-widget=\"nav|notice|weather|wp-card|chart|timeline\">。掃載點沒寫 class 就套正規 class，有寫就保留（逃生口：舊世代把天氣卡嵌在自己的資訊卡網格裡）。紀錄頁／候選頁的差異（第五鍵文字、航點卡時間標籤、日期副標、要不要 notice）由 trip.km 有無推導（紀錄頁才有實走里程）。2026-09 之前六個區塊在 22 頁各自手寫、分別有 5／3／7／9／3／1 種寫法。spec_sweep 查掃載點在不在、以及有沒有人把區塊手寫回來",
     "trip_facts": "一趟行程的日期、總里程、耗時、累計上升、最高點，2026-09 起只在已完成頁 PaPaDetail.init 的 trip 物件宣告一次，版面上用 data-trip=\"date:md\" 這類事實槽承接、由 detail.js 填。之前這五個數字每頁手打六到八次、16 頁共 165 處，靠 fact_check.py 交叉核對才沒有自相矛盾——改 henglingguidao 的 5.30→5.36 時就得逐處改過。仍手寫的只有 <title>、<meta description>、首頁卡片（給爬蟲看的），fact_check.py 拿它們跟 trip 核對。注意「總里程」不等於 schedule 末點的 dist：軌跡在最後一個航點之後還有一段（caolingguidao 末點 7.87、總里程 7.88）。候選頁的估計值仍手寫，走過之後轉紀錄頁時再接上 trip",
-    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。四支都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
+    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。六支（spec_sweep、fact_check、bump_assets --check、manifest_tree --check、regress、contrast）都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
     "pos_emoji": "時間軸藥丸的 pos → emoji 對照是全站一份（assets/detail.js 的 POS_EMOJI，約 45 個常見 pos，取 2026-09 各頁的多數）。頁面 timeline.emoji: true 用它；給物件則疊在全站表上，只寫有意思的例外（捷運站集合 🚇、剪刀石 ✂️、芒草埡口 🌾、階梯步道口 🪜）。pos 本身是各頁的敘事標籤不是詞彙（80 種、54 種只出現一次），不強制從清單挑；表上沒有的 pos 顯示 📍，spec_sweep 會提醒，覆寫跟全站表一樣也會提醒。之前 11 頁各寫一份，同一個 pos 在不同頁配不同 emoji",
     "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。第三種語意（datongshan 的展望台、nanshijiao 的信仰地標、bishan 的賞櫻點、mochashan 的折返點、huoyianshan 的大峽谷）經 palette({ extra }) 表達，只開一層——再多下去就變回每頁一套配色。**這條規約寫了半天其實只有海拔圖做到**：2026-08-04 量測 18 頁，海拔圖 18/18，地圖標記與時間軸各只有 6/18，於是 datunshan、qixingshan、shanying 等頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。同日全部收斂，並由 spec_sweep.py 逐區塊檢查（chart／marker／timeline 三個區塊都必須真的引用 palette，光宣告 PAL 不算）。警示地形紅 #ef4444 在時間軸上會脈動，那是 palette 的 warn 常數帶出的全站規則，不是逐頁掛的 class。小百岳走另一個通道：金環 #a16207（pal.ring）加粗描邊 ＋ ⭐ 文字徽章，因為它與最高點可以是同一座山，必須疊加而不是互斥。2026-08-04 查官方名單後補齊：全站共七座（大屯山主峰 #1、七星山主峰 #2、大崙頭山 #8、南港山 #13、大棟山 #15、南勢角山 #16、火炎山 #35）。七星山東峰先前被標成小百岳，查證後確認編號 002 指的是七星山這座山、東峰不是另一座，已更正。spec_sweep.py 內有一張山名對照表——「某座山是不是小百岳」無法從頁面內容推導，只能維護清單",
     "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha／palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",

@@ -169,3 +169,7 @@ main section[id] {
 
 /* 本區塊刻意排在 .info-glass 之後：後者用 border 簡寫，
    而簡寫與 border-color longhand 之間只看先後、不看特異性。 */
+
+/* 共用區塊的容器樣式。天氣卡（detail.js 的 weather 區塊）預設用 .stat-card；
+   2026-09 之前它在 11 頁各自定義、內容一字不差，區塊改由 detail.js 產生後就該住在這裡。 */
+.stat-card { background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.9); }

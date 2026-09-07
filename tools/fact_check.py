@@ -44,6 +44,9 @@ TRIP = r'\btrip:\s*\{[^}]*?'          # trip 物件是扁的，[^}] 走不出它
 
 DATE_SLOTS = [
     ('trip.date',      TRIP + r'\bdate:\s*"(\d{4})-(\d{2})-(\d{2})"'),
+    # <title> 給爬蟲看，JS 填不到，所以仍手寫——三頁的標題帶日期，要跟 trip 核對。
+    # 2026-09 的審查抓到：這一格原本沒有，把 meihuashan 標題改成錯的日期照樣全綠。
+    ('<title>',        r'<title>[^<]*?(\d{4})年(\d{1,2})月(\d{1,2})日'),
     ('meta description', r'<meta name="description" content="(\d{4})/(\d{1,2})/(\d{1,2})'),
     ('導覽副標',        r'>(\d{4})/(\d{1,2})/(\d{1,2}) 活動紀錄<'),
     ('行程已完成提示',   r'時刻與里程來自 (\d{4})/(\d{1,2})/(\d{1,2}) 當天'),
@@ -234,6 +237,19 @@ def check_page(name, idx):
     has_date = any(src == 'trip.date' for src, _ in ds)
     if name in idx and re.search(r'\bweather:\s*\{', s) and not has_date:
         problems.append('有天氣卡卻沒有 trip.date——會顯示今日天氣而不說明原因')
+
+    # ── 散文裡不該再有手打的行程日 ──────────────────────────
+    # 事實只在 trip 宣告一次之後，散文裡「地圖上的線是 4/20 當天的 GPS 軌跡」這種
+    # M/D 寫法就是漏網的副本——2026-09 的審查在 14 頁找到 40 處，改錯也沒人抓。
+    # 版面要用 <span data-trip="date:slash"></span>。註解、script、meta、title 不算
+    # （前兩者不會渲染，後兩者是刻意手寫給爬蟲的）。
+    if has_date:
+        d = next(v for src, v in ds if src == 'trip.date')
+        mo, day = int(d[5:7]), int(d[8:10])
+        body = re.sub(r'<script[\s\S]*?</script>|<!--[\s\S]*?-->|<meta[^>]*>|<title>[^<]*</title>', '', s)
+        n = len(re.findall(r'(?<![\d/])%d/%d(?![\d/])' % (mo, day), body))
+        if n:
+            problems.append('散文裡還有 %d 處手打的行程日 %d/%d——改用 data-trip="date:slash"' % (n, mo, day))
 
     # ── 軌跡檔要真的存在 ──────────────────────────────────
     # 軌跡由 detail.js 依 trip.date 載入，檔名是 assets/tracks/<頁名>-<日期>.js。

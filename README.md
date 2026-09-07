@@ -132,17 +132,17 @@ PaPaTeam/
 ├── integrity.json               # 檔案清單與 blob SHA（由 GitHub Action 自動產生，勿手改）
 ├── .github/workflows/
 │   ├── integrity.yml            # push 到 main 後重算 integrity.json
-│   ├── spec.yml                 # push 與 PR 跑 spec_sweep.py 與 fact_check.py
-│   └── contrast.yml             # 動到 HTML／CSS／JS 的 PR 跑對比度實測與執行期基準
+│   ├── spec.yml                 # 每次 push 與 PR 跑 spec_sweep.py 與 fact_check.py
+│   └── contrast.yml             # push 到 main 與 PR 動到 HTML／CSS／JS 時跑對比度實測與執行期基準
 │
 ├── .gitignore                   # 編輯器、系統檔、node_modules
 │
 ├── ARCHITECTURE.md              # 架構指南（規範權威）：段落規格、色彩 token、腳本規格
+├── CONTEXT.md
 ├── READABILITY_AUDIT.md         # 可讀性與對比度審計紀錄（改顏色前必讀）
 ├── SNIPPETS.md                  # 元件片段快速參考
 ├── CONTRIBUTING.md              # 貢獻指南：編輯清單與代碼風格
 ├── README.md                    # 本檔案
-├── CONTEXT.md                   # 領域語彙：行程、航點、pos、最高點 vs 山頂、行程事實、共用區塊（動任何頁面前先讀）
 └── docs/adr/                    # 架構決策記錄
     └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
 ```
@@ -164,7 +164,7 @@ python3 tools/spec_sweep.py
 「每段不得短於兩點直線距離」。全部通過會回傳 0。**push 與 PR 時 CI 也會跑同一支**，
 不過就會擋下來。
 
-改到顏色時另外跑對比度實測（需 Playwright，不在 CI 內）：
+改到顏色時另外跑對比度實測（需 Playwright；CI 在 push 到 main 與 PR 時也會跑）：
 
 ```bash
 bash tools/contrast/build-css.sh      # tw.css 是掃 HTML 產生的，改完頁面要重建
@@ -184,7 +184,7 @@ node tools/regress/check.js             # 沒打算改畫面的改動：22 頁�
 node tools/regress/check.js --update    # 打算改畫面：重寫基準，git diff 它，一起提交
 ```
 
-動到 HTML、CSS 或 JS 的 PR，CI 會把對比度與執行期基準都跑一次
+動到 HTML、CSS 或 JS 時，CI 會把對比度與執行期基準都跑一次——push 到 main 與 PR 都跑
 （`.github/workflows/contrast.yml`）。
 
 改到 `assets/` 下任何一支共用檔（`site.css`、`detail.css`、`site.js`、`detail.js`）之後，
@@ -238,5 +238,5 @@ A: 本倉庫已設定 GitHub Pages 自動部署。Push 到 main 分支後，網�
 
 ---
 
-**最後更新**: 2026-08-04  
+**最後更新**: 2026-09-07  
 **維護者**: @thhsu01

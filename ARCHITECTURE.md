@@ -235,7 +235,7 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 - **掃載點自己沒寫 `class` 就套正規 class；有寫就保留。** 那是給「格子屬於頁面版面」的
   情況用的逃生口——舊世代把天氣卡放在自己的資訊卡網格裡，格子的邊框與內距是網格的事，
   不是天氣卡的事。跟 `map.marker` 同一種性質：能用就別用。
-- **紀錄頁與候選頁的差異由 `trip` 有無推導**，不再各頁手寫：第五顆導覽鍵的文字
+- **紀錄頁與候選頁的差異由 `trip.km` 有無推導**（紀錄頁才有實走里程；計畫頁有日期但沒有里程，仍是行前頁），不再各頁手寫：第五顆導覽鍵的文字
   （實走紀錄／預估進度）、航點卡的時間標籤（實際時間／預計時間）、導覽列的日期副標、
   要不要已完成提示——候選頁的 `notice` 掃載點會被拿掉，不會留一個空框。
 
@@ -499,10 +499,12 @@ Open-Meteo 回傳的 WMO 代碼有 28 種，先前五個頁面各寫一份、每
 `assets/site.js` **不可加 `defer`**：各頁在 `await` 網路回應之後才查表，
 但回應夠快時（快取命中）續行會搶在 defer 腳本之前執行，`PaPaWeather` 尚未定義。
 
-必要函式：`initMap()`、`initChart()`、`renderTimeline()`、`updateWaypointCard(i)`、
-`prevWaypoint()`、`nextWaypoint()`、`openNavigation()`。
-已完成的行程頁另有 `fetchWeather()` 與 `markTripPast()` 的取捨——
-行前頁必須有天氣預報，紀錄頁改為顯示當日實測天氣，此時兩者皆可省略。
+頁面自己**不寫任何函式**：地圖、海拔圖、時間軸、航點卡、天氣、共用區塊都在
+`assets/detail.js`，頁面只給 `schedule` 與 `PaPaDetail.init({…})`（設定鍵由
+`tools/spec_sweep.py` 的 `KNOWN` 把關）。`prevWaypoint()`／`nextWaypoint()`／
+`openNavigation()` 是 `init` 掛到 `window` 上的，區塊裡的按鈕會呼叫。
+天氣卡兩種情境：有 `trip.date` 的頁查該日預報，行程日過了就顯示今日天氣並說明
+（`trip-past-notice`）；沒日期的候選頁顯示今日天氣。
 
 **實走軌跡（僅已完成行程）。** 有 GPS 紀錄的行程，地圖畫實際軌跡而不是航點連成
 的直線——那條線會繞過航點之間看不出來的髮夾彎。軌跡放在
@@ -722,8 +724,8 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 3. **更新資料**
    - 改寫 `schedule` 陣列（座標、時間、里程、海拔、`pos` 類型、描述、建議）
    - 改 `trip` 的日期、里程、耗時、爬升、最高點；事實只寫這一處，版面上的槽會自己填
-   - 改 `openNavigation()` 的目的地座標與 `initMap()` 的 `setView` 中心點
-   - 改 `initChart()` 的 `scales.y` 上下限，讓剖面圖填滿畫布
+   - 改 `init` 的 `nav`（導航目的地）與 `map.setView`（地圖中心與縮放）
+   - 需要時給 `chart.elevationFloor`／`elevationMax`，讓剖面圖填滿畫布
 
 4. **更新本頁色彩**
    - 只改 `:root` 的 `--timeline-bg` 等變數與本頁主色
@@ -807,7 +809,7 @@ open http://localhost:8000
 
 - **共用結構**（定義於 `assets/detail.css`）：`.nav-btn`, `.chart-container`,
   `.timeline-line`, `.waypoint-card`, `.card-hover`, `.info-glass`
-- **本頁專屬**：`.stat-card`, `.stamp`, `.hero-accent`, `.section-bar-*`
+- **本頁專屬**：`.stamp`, `.hero-accent`, `.section-bar-*`（`.stat-card` 已於 2026-09 收進 `detail.css`，天氣卡區塊靠它）
 - **回應式**：`hidden md:flex`, `grid-cols-1 md:grid-cols-2`
 
 同一個元件不要有兩個名字。第五輪已把 `#realMap` 併入 `#map`、
@@ -860,5 +862,5 @@ open http://localhost:8000
 
 ---
 
-**最後更新**：2026-08-04（新增 `zhongzhengshan`、`daluntouweishan`、`daqitou`、`eweishan`，22 頁結構已全數收斂；導覽文字、`<h2>` 主詞與最高點語意色收斂，並加上 `tools/spec_sweep.py` 讓這張收斂表可被機器複驗）  
+**最後更新**：2026-09-07（新增 `zhongzhengshan`、`daluntouweishan`、`daqitou`、`eweishan`，22 頁結構已全數收斂；導覽文字、`<h2>` 主詞與最高點語意色收斂，並加上 `tools/spec_sweep.py` 讓這張收斂表可被機器複驗）  
 如有疑問，參考 CONTRIBUTING.md 提出 issue。

@@ -1076,6 +1076,14 @@
     "text": "7.88"
    },
    {
+    "slot": "date:slash",
+    "text": "11/23"
+   },
+   {
+    "slot": "date:slash",
+    "text": "11/23"
+   },
+   {
     "slot": "duration:zh",
     "text": "5 小時 41 分"
    },
@@ -1743,12 +1751,20 @@
     "text": "3 小時 44 分"
    },
    {
+    "slot": "date:slash",
+    "text": "9/29"
+   },
+   {
     "slot": "date",
     "text": "2025/09/29"
    },
    {
     "slot": "gain",
     "text": "310"
+   },
+   {
+    "slot": "date:slash",
+    "text": "9/29"
    },
    {
     "slot": "duration:zh",
@@ -2340,12 +2356,20 @@
     "text": "2 小時 58 分"
    },
    {
+    "slot": "date:slash",
+    "text": "6/15"
+   },
+   {
     "slot": "date",
     "text": "2025/06/15"
    },
    {
     "slot": "gain",
     "text": "305"
+   },
+   {
+    "slot": "date:slash",
+    "text": "6/15"
    },
    {
     "slot": "duration:zh",
@@ -4315,12 +4339,20 @@
     "text": "3 小時 39 分"
    },
    {
+    "slot": "date:slash",
+    "text": "8/30"
+   },
+   {
     "slot": "date",
     "text": "2025/08/30"
    },
    {
     "slot": "gain",
     "text": "260"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/30"
    },
    {
     "slot": "duration:zh",
@@ -4866,8 +4898,16 @@
     "text": "3 小時 39 分"
    },
    {
+    "slot": "date:slash",
+    "text": "3/23"
+   },
+   {
     "slot": "gain",
     "text": "320"
+   },
+   {
+    "slot": "date:slash",
+    "text": "3/23"
    },
    {
     "slot": "duration:zh",
@@ -5350,6 +5390,10 @@
     "text": "601"
    },
    {
+    "slot": "date:slash",
+    "text": "12/13"
+   },
+   {
     "slot": "date",
     "text": "2025/12/13"
    }
@@ -5719,6 +5763,14 @@
    {
     "slot": "summit",
     "text": "184"
+   },
+   {
+    "slot": "date:slash",
+    "text": "4/20"
+   },
+   {
+    "slot": "date:slash",
+    "text": "4/20"
    },
    {
     "slot": "date:zh",
@@ -6102,6 +6154,14 @@
    {
     "slot": "km",
     "text": "4.92"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/4"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/4"
    },
    {
     "slot": "duration:zh",
@@ -6528,6 +6588,14 @@
    {
     "slot": "summit",
     "text": "258"
+   },
+   {
+    "slot": "date:slash",
+    "text": "10/6"
+   },
+   {
+    "slot": "date:slash",
+    "text": "10/6"
    },
    {
     "slot": "duration:zh",
@@ -7078,6 +7146,10 @@
    {
     "slot": "summit",
     "text": "193"
+   },
+   {
+    "slot": "date:slash",
+    "text": "5/1"
    },
    {
     "slot": "date",
@@ -7680,8 +7752,16 @@
     "text": "2026/01/10"
    },
    {
+    "slot": "date:slash",
+    "text": "1/10"
+   },
+   {
     "slot": "date:zh",
     "text": "2026 年 1 月 10 日"
+   },
+   {
+    "slot": "date:slash",
+    "text": "1/10"
    },
    {
     "slot": "km",
@@ -7702,6 +7782,14 @@
    {
     "slot": "summit",
     "text": "643"
+   },
+   {
+    "slot": "date:slash",
+    "text": "1/10"
+   },
+   {
+    "slot": "date:slash",
+    "text": "1/10"
    },
    {
     "slot": "km",
@@ -9152,6 +9240,18 @@
     "text": "376"
    },
    {
+    "slot": "date:slash",
+    "text": "6/30"
+   },
+   {
+    "slot": "date:slash",
+    "text": "6/30"
+   },
+   {
+    "slot": "date:slash",
+    "text": "6/30"
+   },
+   {
     "slot": "duration:zh",
     "text": "4 小時 52 分"
    },
@@ -9954,6 +10054,54 @@
    {
     "slot": "duration",
     "text": "7:21"
+   },
+   {
+    "slot": "gain",
+    "text": "674"
+   },
+   {
+    "slot": "summit",
+    "text": "320"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
+   },
+   {
+    "slot": "date:slash",
+    "text": "8/2"
    },
    {
     "slot": "duration:zh",
@@ -11752,12 +11900,20 @@
     "text": "4.51"
    },
    {
+    "slot": "date:slash",
+    "text": "4/27"
+   },
+   {
     "slot": "date",
     "text": "2025/04/27"
    },
    {
     "slot": "gain",
     "text": "315"
+   },
+   {
+    "slot": "date:slash",
+    "text": "4/27"
    },
    {
     "slot": "duration:zh",
