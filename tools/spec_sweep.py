@@ -6,9 +6,6 @@ import re, glob, math, sys, os
 os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 SECTIONS = ['overview', 'map-section', 'elevation', 'spots', 'timeline']
-NAV = {'overview': '行程總覽', 'map-section': '路線圖', 'elevation': '海拔剖面',
-       'spots': '景點介紹'}
-NAV_TIMELINE = {'預估進度', '實走紀錄'}          # 規格表：二選一
 H2 = {'map-section': '互動路線圖', 'elevation': '海拔高度剖面圖'}
 H2_TIMELINE = ('預計行程進度', '實走時間軸')     # 主詞須為其一，容許括號後綴
 H2_SPOTS = ('導覽', '亮點')                      # 規格表：自由，但要含其一
@@ -40,9 +37,16 @@ KNOWN = {
     'chart': {'lineColor', 'fillColor', 'fillAlpha', 'palette',
               'elevationFloor', 'elevationMax', 'advanced'},
     'timeline': {'layout', 'fields', 'emoji', 'palette', 'hover'},
-    'weather': {'lat', 'lng', 'elevation', 'mainId', 'subId', 'subText',
-                'sep', 'unit', 'errorMain'},
+    'weather': {'lat', 'lng', 'elevation', 'subText', 'sep', 'unit', 'errorMain'},
 }
+
+# 由 detail.js 產生的共用區塊。頁面只放 <div data-widget="…"> 掃載點；
+# 這些區塊的 id 與 class 若又出現在頁面原始碼裡，就是有人把它手寫回來了。
+WIDGETS = {'nav', 'notice', 'weather', 'wp-card', 'chart', 'timeline'}
+WIDGET_OWNED = [('id="wp-pos-label"', 'wp-card'), ('id="wp-advice"', 'wp-card'),
+                ('id="elevation-chart"', 'chart'), ('id="timeline-container"', 'timeline'),
+                ('id="trip-past-notice"', 'notice'), ('id="weather-main"', 'weather'),
+                ('class="nav-btn', 'nav'), ('aria-label="滾動到', 'nav')]
 
 # 本站出現過的台灣小百岳（山名 → 官方編號）。2026-08-04 查官方名單建立，
 # 因為「這座山是不是小百岳」不可能從頁面內容推導出來，只能維護一張表。
@@ -184,21 +188,24 @@ def check(f):
     # ── 結構 ────────────────────────────────────────────────
     if [x for x in re.findall(r'<section[^>]*id="([a-z-]+)"', s) if x in SECTIONS] != SECTIONS:
         p.append('段落 id 或順序異常')
-    for need, why in (('wp-pos-label', ''), ('wp-advice', ''), ('elevation-chart', ''),
-                      ('爬爬小隊首頁', '站徽 aria-label')):
-        if need not in s:
-            p.append('缺 %s%s' % (need, why and '（%s）' % why))
     if re.search(r'返回首頁|←\s*首頁', s):
         p.append('疑似左上返回鍵')
 
-    # ── 導覽鍵文字（規格表）─────────────────────────────────
-    for sec, want in NAV.items():
-        if 'aria-label="滾動到%s"' % want not in s:
-            p.append('導覽鍵文字：%s 應為「%s」' % (sec, want))
-    tl = re.findall(r'aria-label="滾動到([^"]+)"', s)
-    tl = [x for x in tl if x not in NAV.values()]
-    if len(tl) != 1 or tl[0] not in NAV_TIMELINE:
-        p.append('導覽第 5 鍵 %s，規格只允許 %s' % (tl or '缺', '／'.join(sorted(NAV_TIMELINE))))
+    # ── 共用區塊：掃載點在、手寫的不在 ───────────────────────
+    # 導覽列（含五顆鍵的文字）、航點卡、海拔圖容器、時間軸容器、已完成提示、天氣卡
+    # 都由 detail.js 產生。原本這裡有十來條規則在查它們有沒有漂——現在只要查
+    # 掃載點有沒有放對，以及有沒有人把區塊手寫回來。
+    mounts = set(re.findall(r'data-widget="([^"]*)"', s))
+    for name in mounts - WIDGETS:
+        p.append('data-widget="%s"：detail.js 沒有這個共用區塊' % name)
+    for name in ('nav', 'wp-card', 'chart', 'timeline'):
+        if name not in mounts:
+            p.append('缺 data-widget="%s" 掃載點' % name)
+    if re.search(r'\bweather:\s*\{', s) and 'weather' not in mounts:
+        p.append('有 weather 設定卻沒有 data-widget="weather" 掃載點——天氣會沒地方顯示')
+    for marker, owner in WIDGET_OWNED:
+        if marker in s:
+            p.append('%s 是 detail.js 產生的（%s 區塊），頁面不要自己寫' % (marker, owner))
 
     # ── <h2> 主詞（容許括號後綴）───────────────────────────
     for sec, want in H2.items():
@@ -287,6 +294,8 @@ def check(f):
             p.append('data-trip="%s"：沒有「%s」這個行程事實' % (m.group(1), fact))
         elif fmt and fmt not in TRIP_SLOTS[fact]:
             p.append('data-trip="%s"：%s 沒有「%s」這種格式' % (m.group(1), fact, fmt))
+    if ('trip', 'date') in keys and 'notice' not in mounts:
+        p.append('紀錄頁缺 data-widget="notice" 掃載點——行程日過後不會出現「此行程已完成」')
     if ('trip', 'date') in keys:
         if re.search(r'<script[^>]*src="assets/tracks/', s):
             p.append('頁面自己載入軌跡檔——軌跡由 detail.js 依 trip.date 載入，script 標籤要拿掉')

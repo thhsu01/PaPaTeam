@@ -68,24 +68,7 @@
   <a href="#main-content" class="skip-link">跳至主要內容</a>
 
     <!-- Top Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50" aria-label="頁面導覽">
-        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity" aria-label="爬爬小隊首頁" title="回到主頁">
-        <span class="w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0">爬</span>
-        <span class="font-bold text-stone-800 tracking-tight text-lg">爬爬小隊</span>
-      </a>
-                    <span class="text-stone-600 text-xs hidden sm:inline font-medium"><span data-trip="date"></span> 活動紀錄</span>
-                </div>
-                <div class="flex gap-1 overflow-x-auto">
-                    <button onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到行程總覽">行程總覽</button>
-                    <button onclick="document.getElementById('map-section').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到路線圖">路線圖</button>
-                    <button onclick="document.getElementById('elevation').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到海拔剖面">海拔剖面</button>
-                    <button onclick="document.getElementById('spots').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到景點介紹">景點介紹</button>
-                    <button onclick="document.getElementById('timeline').scrollIntoView({behavior:'smooth'})" class="nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap" aria-label="滾動到實走紀錄">實走紀錄</button>
-                </div>
-        </div>
-    </nav>
+    <nav data-widget="nav"></nav>
 
 
     <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 space-y-16">
@@ -97,6 +80,7 @@
                     Mission Accomplished 任務完成
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter">聖母步道：抹茶山春季挑戰</h1>
+                <div data-widget="notice"></div>
                 <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
                     挑戰抹茶色的視覺盛宴。
                 </p>
@@ -124,13 +108,7 @@
                     <div class="w-px h-10 accent-soft hidden md:block"></div>
 
                     <!-- 最新天氣預報 -->
-                    <div class="flex flex-col items-center md:items-start gap-1 min-w-[120px]">
-                        <span class="text-[10px] font-black accent-text uppercase tracking-widest" id="weather-label"><span data-trip="date:md"></span> 礁溪預報</span>
-                        <div class="flex items-center gap-2" id="weather-container">
-                            <span class="text-xl font-bold text-stone-600 weather-pulse" id="weather-summary">載入中...</span>
-                        </div>
-                        <span class="text-xs text-stone-600 mt-1 cursor-pointer hover:text-green-600 transition-colors" id="weather-detail">正在同步氣象數據</span>
-                    </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 min-w-[120px]" data-widget="weather"></div>
                 </div>
                 <button onclick="openNavigation()" class="w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至五峰旗停車場" style="background:var(--accent-strong);">
                     <span>🗺️ 開啟導航至五峰旗停車場</span>
@@ -175,32 +153,7 @@
                     <div id="map"></div>
                 </div>
                 <div>
-                    <div id="wp-card" class="bg-stone-50 rounded-2xl p-6 border border-stone-200 flex flex-col justify-between transition-all duration-300 overflow-hidden text-left">
-                        <div id="card-content">
-                            <div class="flex items-center justify-between mb-4">
-                                <div id="wp-pos-label" class="inline-block px-2.5 py-1 bg-stone-200 text-stone-600 text-[10px] font-black rounded tracking-wider uppercase">位置類型</div>
-                                <div class="flex gap-2">
-                                    <button onclick="prevWaypoint()" class="nav-arrow w-10 h-10 min-w-[44px] min-h-[44px] rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" aria-label="上一個航點">
-                                        &lt;
-                                    </button>
-                                    <button onclick="nextWaypoint()" class="nav-arrow w-10 h-10 min-w-[44px] min-h-[44px] rounded-full border border-stone-300 flex items-center justify-center transition-all bg-white text-stone-600 shadow-sm" aria-label="下一個航點">
-                                        &gt;
-                                    </button>
-                                </div>
-                            </div>
-                            <h3 id="wp-title" class="text-2xl font-black text-stone-800 mb-2">載入中...</h3>
-                            <div class="flex items-center gap-5 text-sm font-bold text-stone-600 mb-4">
-                                <div>實際時間 <span id="wp-time" class="text-stone-700">08:00</span></div>
-                                <div>里程 <span id="wp-dist" class="text-stone-700">0.00</span> km</div>
-                                <div>海拔 <span id="wp-ele" class="text-stone-700">0</span> m</div>
-                            </div>
-                            <p id="wp-desc" class="text-stone-600 leading-relaxed text-sm"></p>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-stone-200">
-                            <span class="text-[10px] font-black text-stone-600 uppercase tracking-[0.2em]">到達時間</span>
-                            <p id="wp-advice" class="text-sm font-medium text-stone-700 mt-2"></p>
-                        </div>
-                    </div>
+                    <div data-widget="wp-card"></div>
                 </div>
             </div>
 
@@ -223,9 +176,7 @@
                 海拔高度剖面圖
             </h2>
             <div class="bg-white rounded-[2rem] p-6 md:p-10 shadow-sm border border-stone-200">
-                <div class="chart-container">
-                    <canvas id="elevation-chart"></canvas>
-                </div>
+                <div data-widget="chart"></div>
             </div>
         </section>
 
@@ -311,14 +262,12 @@
                 </div>
 
             </div>
-            <div class="relative pl-6 space-y-0" id="timeline-container">
-                <div class="timeline-line"></div>
-            </div>
+            <div data-widget="timeline"></div>
         </section>
 
     </main>
 
-<footer class="text-center py-16 border-t border-stone-200">
+<footer class="text-center py-12 border-t border-stone-200">
             <p class="text-stone-600 text-sm font-medium tracking-wide">© 2026 爬爬小隊 | 聖母步道 <span data-trip="date"></span> 活動紀錄</p>
         </footer>
 
@@ -371,8 +320,7 @@
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       trip: { date: "2026-03-14", km: 14.02, duration: "8:17", gain: 900, summit: 885 },
       nav: [24.830230219662706, 121.74711388053494],
-      weather: { lat: 24.8302, lng: 121.7471,
-                 mainId: 'weather-summary', subId: 'weather-detail' },
+      weather: { lat: 24.8302, lng: 121.7471, },
 
       card: {
         follow: 'pan', wrap: 'cycle',

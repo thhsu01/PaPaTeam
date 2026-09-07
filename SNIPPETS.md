@@ -204,50 +204,43 @@ map: {
 
 ## 3. 詳情頁：常用 markup
 
-### 航點卡欄位（`#spots`）
+### 共用區塊：只放掃載點
 
-id 是固定的，`detail.js` 靠它們填值。`wp-pos-label` 不是 `wp-pos`。
-
-```html
-<div class="text-xs text-stone-600 uppercase tracking-widest mb-3" id="wp-pos-label">集合起點</div>
-<div class="flex items-center gap-3 mb-3">
-  <button onclick="prevWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="上一個航點">&lt;</button>
-  <h3 class="text-lg font-bold text-stone-900 flex-1" id="wp-title">航點名稱</h3>
-  <button onclick="nextWaypoint()" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" aria-label="下一個航點">&gt;</button>
-</div>
-<div class="flex gap-4 mb-3 text-sm text-stone-600">
-  <span>實際時間 <strong class="text-stone-800" id="wp-time">09:48</strong></span>
-  <span>累計里程 <strong class="text-stone-800" id="wp-dist">0.00</strong> km</span>
-  <span>海拔 <strong class="text-stone-800" id="wp-ele">60</strong> m</span>
-</div>
-<p class="text-base text-stone-700 mb-3" id="wp-desc">航點描述。</p>
-<div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">
-  <div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>
-  <p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>
-</div>
-```
-
-`min-w-[44px] min-h-[44px]` 是無障礙觸控目標下限，別拿掉。
-
-### 海拔圖容器（`#elevation`）
-
-canvas 的 id 必須是 `elevation-chart`（不是 `elevationChart`）。
+導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器都由 `detail.js` 產生。
+頁面在該放的位置寫空元素，**不要把裡面的 markup 手寫回來**（spec_sweep 會擋）：
 
 ```html
-<div class="chart-container">
-  <canvas id="elevation-chart" role="img" aria-label="海拔剖面圖"></canvas>
-</div>
+<nav data-widget="nav"></nav>                 <!-- body 開頭，skip link 之後 -->
+
+<section id="overview">
+  <h1>…</h1>
+  <div data-widget="notice"></div>            <!-- 紀錄頁才需要；候選頁不放 -->
+  …
+  <div data-widget="weather"></div>           <!-- 放在統計列的一格裡 -->
+</section>
+
+<section id="map-section">
+  <div id="map" …></div>
+  <div data-widget="wp-card"></div>           <!-- 航點卡：七個欄位、上下鍵、隊友建議 -->
+</section>
+
+<section id="elevation">
+  <h2>…</h2>
+  <div data-widget="chart"></div>             <!-- .chart-container + canvas -->
+</section>
+
+<section id="timeline">
+  <h2>…</h2>
+  <div data-widget="timeline"></div>          <!-- #timeline-container + .timeline-line -->
+</section>
 ```
 
-### 時間軸容器（`#timeline`）
+掃載點沒寫 `class` 就套正規 class。天氣卡若要嵌進頁面自己的資訊卡網格，把格子的 class
+寫在掃載點上（`<div class="flex flex-col gap-1 …" data-widget="weather">`），區塊只填內容
+——那是逃生口，新頁不該需要。
 
-```html
-<div id="timeline-container" class="relative max-w-2xl mx-auto">
-  <div class="timeline-line"></div>
-</div>
-```
-
-**渲染前不要清空容器**——那會連同 `.timeline-line` 一起清掉，時間軸的直線就不見了。
+紀錄頁／候選頁的差異（第五鍵「實走紀錄／預估進度」、航點卡「實際時間／預計時間」、
+導覽列日期副標）由 `trip` 有無推導，不用改任何 markup。
 
 ### 提示橫幅
 

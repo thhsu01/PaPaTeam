@@ -16,6 +16,7 @@
 //   chart     detail.js 交給 new Chart() 的設定（函式除外）
 //   card      逐一切換航點後，航點卡七個欄位的文字
 //   trip      行程事實槽 [data-trip] 填進去的文字
+//   widgets   共用區塊 [data-widget] 填進去的骨架（標籤、class、id、aria，不含文字）
 // 所以測試只穿過 init(cfg)，跟頁面一樣。想測到介面「後面」去，多半是模組形狀不對。
 //
 // 基準是刻意的決定，不是快照的副產品：只有 --update 會寫，寫完 `git diff
@@ -43,7 +44,9 @@ async function capture(browser, name) {
   await p.addInitScript({ path: path.join(__dirname, 'record.js') });
   for (const u of CDN) await p.route(u, r => r.fulfill({ body: '{}', contentType: 'application/javascript' }));
   await p.goto(`${BASE}/${name}.html`, { waitUntil: 'load' });
-  await p.waitForTimeout(300);   // DOMContentLoaded 的 initMap/initChart/renderTimeline 已跑完
+  // DOMContentLoaded 的 initMap/initChart/renderTimeline 已跑完；等過 card.flash 的 500 ms，
+  // 否則 wp-card 骨架會把閃一下的 class 也記進去（三頁有設 flash）
+  await p.waitForTimeout(700);
 
   const state = await p.evaluate(() => {
     const $ = id => document.getElementById(id);
@@ -58,6 +61,22 @@ async function capture(browser, name) {
                dot: dot ? { cls: dot.className, style: dot.getAttribute('style') } : null,
                text: el.textContent.trim().replace(/\s+/g, ' '),
                html: el.innerHTML.replace(/\s+/g, ' ').trim() };
+    });
+
+    // 共用區塊：detail.js 填進 [data-widget] 的骨架（去掉文字，只留標籤、class、id、aria）。
+    // 要在切換航點之前取——updateWaypointCard() 會讓 wp-card 閃一下（card.flash 的 class）
+    const widgets = {};
+    document.querySelectorAll('[data-widget]').forEach(el => {
+      const c = el.cloneNode(true);
+      // 時間軸容器裡裝的是 renderTimeline 產生的航點（timeline 那一面已經記了），只留容器本身
+      if (el.getAttribute('data-widget') === 'timeline') [...c.children].forEach(k => { if (!k.classList.contains('timeline-line')) k.remove(); });
+      const walk = x => [...x.childNodes].forEach(k => {
+        if (k.nodeType !== 1) { k.remove(); return; }
+        for (const a of [...k.attributes]) if (!/^(class|id|aria-label|role|onclick)$/.test(a.name)) k.removeAttribute(a.name);
+        walk(k);
+      });
+      walk(c);
+      widgets[el.getAttribute('data-widget')] = c.outerHTML.replace(/\s+/g, ' ');
     });
 
     // 逐一切換航點：航點卡的欄位、以及每個標記在「被選取／未選取」時拿到的樣式
@@ -76,7 +95,7 @@ async function capture(browser, name) {
       .map(el => ({ slot: el.getAttribute('data-trip'), text: el.textContent.trim() }));
 
     return { timeline: timeline, markers: window.__rec.markers, polyline: window.__rec.polyline,
-             chart: window.__rec.chart, card: card, trip: trip };
+             chart: window.__rec.chart, card: card, trip: trip, widgets: widgets };
   });
   await ctx.close();
   state.errors = errors;
