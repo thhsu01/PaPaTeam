@@ -61,6 +61,11 @@ jobs:
           npm install --no-save playwright@1
           npx playwright install --with-deps chromium
 
+      # check.js 取畫面眾數像素時呼叫 python3 + Pillow。2026-09-07 這支 workflow 第一次
+      # 真的在 GitHub 上跑，就是缺這個而 23 頁全紅——本機沙箱有裝，runner 沒有。
+      - name: 安裝 Pillow
+        run: python3 -m pip install --quiet pillow
+
       - name: 起本機伺服器
         run: |
           python3 -m http.server 8099 &
@@ -94,6 +99,6 @@ jobs:
             echo "node tools/contrast/check.js --all"
             echo '```'
             echo ""
-            echo "改顏色前先讀 \`READABILITY_AUDIT.md\`——那裡記了五個會產生假訊號的量測坑，"
+            echo "改顏色前先讀 \`READABILITY_AUDIT.md\`——那裡記了四個會產生假訊號的量測坑，"
             echo "以及各頁主色當初是怎麼選出來的。"
           } >> "$GITHUB_STEP_SUMMARY"
