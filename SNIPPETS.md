@@ -111,6 +111,8 @@ const schedule = [
 ```javascript
 // 航點配色宣告一次，三個介面共用。ACCENT 之類的色值在頁面腳本開頭取。
 const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "瞭望台" });
+// isPeak 只在該頁的山頂不是「最高點」時才寫（jiantanshan 是觀機平台、hushan 是瞭望台）；
+// 跟預設一樣就別寫，spec_sweep 會擋。警示地形用 extra: { '大峽谷': PaPaDetail.WARN }
 
 PaPaDetail.init({
   schedule,
@@ -125,7 +127,6 @@ PaPaDetail.init({
 
   map: {
     setView: [[25.0330, 121.5855], 15],
-    attribution: 'Leaflet | © OpenStreetMap',
     // 已完成行程畫實走軌跡：只給樣式，檔案由 detail.js 依 trip.date 載入。
     // 候選頁沒有這行，軌跡就是航點連成的直線
     track: { weight: 4, opacity: 0.85 },
@@ -191,8 +192,8 @@ map: {
 | `data-trip="date:slash"` | 4/20（散文裡「4/20 當天」這種寫法） |
 | `data-trip="km"` | 4.35 |
 | `data-trip="duration"` | 2:00 |
-| `data-trip="duration:zh"` | 2 小時 0 分 |
-| `data-trip="duration:h"` ／ `":m"` | 2 ／ 00（單位另外排版時拆兩槽） |
+| `data-trip="duration:zh"` | 2 小時（整點不寫「0 分」） |
+| `data-trip="duration:h"` ／ `":m"` | 2 ／ 0（單位另外排版時拆兩槽；分鐘不補零） |
 | `data-trip="gain"` ／ `"summit"` | 120 ／ 184 |
 
 ```html
@@ -251,15 +252,21 @@ map: {
 ### 提示橫幅
 
 ```html
-<div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm border-l-4"
-     style="background:var(--accent-tint); border-color:var(--accent);">
+<div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm border-l-4
+            accent-tint accent-line-bold">
   <span class="text-2xl mt-0.5">🏛️</span>
   <div>
-    <div class="font-bold text-base mb-1" style="color:var(--accent-strong-deep);">提醒標題</div>
-    <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">詳細說明與注意事項。</p>
+    <div class="font-bold text-base mb-1 accent-text-deep">提醒標題</div>
+    <p class="text-sm leading-relaxed accent-text-deep">詳細說明與注意事項。</p>
   </div>
 </div>
 ```
+
+**顏色一律走 class，不寫行內 `style`**（`spec_sweep` 會擋）。`detail.css` 的語意 class：
+`.accent-text`／`.accent-text-deep`／`.accent-text-mark`（字）、`.accent-mark`／
+`.accent-fill`／`.accent-fill-strong`（底）、`.accent-line`／`.accent-line-deep`／
+`.accent-line-bold`（框線）、`.accent-tint`／`.accent-soft`（淡底）、`.page-bg`（段落底＝頁底）。
+缺哪個組合就往 `detail.css` 補一個，不要在頁面寫一次性的行內樣式。
 
 ---
 

@@ -30,9 +30,11 @@ window.PaPaDetail = (function () {
   // ── 工具 ──────────────────────────────────────────────────
   function $(id) { return document.getElementById(id); }
 
+  // 缺值寫成空字串，不是「不寫」：不寫會留著上一個航點的值，讀者看不出這一欄漏了。
+  // advice 早就這樣做（見 updateWaypointCard），2026-09 第四輪把同一條推到七個欄位。
   function setText(id, value) {
     var el = $(id);
-    if (el && value != null) el.textContent = value;
+    if (el) el.textContent = value == null ? '' : value;
   }
 
   function cssVar(name) {
@@ -64,7 +66,7 @@ window.PaPaDetail = (function () {
     setText('wp-title', wp.loc);
     setText('wp-time', wp.time);
     setText('wp-ele', wp.ele);
-    if (wp.dist != null) setText('wp-dist', wp.dist.toFixed(2));
+    setText('wp-dist', wp.dist == null ? null : wp.dist.toFixed(2));
     setText('wp-desc', wp.desc);
 
     // 每個航點都必須有 advice（見 ARCHITECTURE.md）。這裡刻意不隱藏空的
@@ -369,7 +371,7 @@ window.PaPaDetail = (function () {
             body: 'text-[11px] text-stone-600 leading-relaxed' }
         : { dot:  'absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm',
             row:  'flex items-center gap-2 mb-1 flex-wrap',
-            time: 'font-mono font-bold text-sm accent-text', timeStyle: '',
+            time: 'font-mono font-bold text-sm accent-text',
             pill: 'text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full',
             loc:  'font-bold text-stone-800', locTag: 'div',
             body: 'text-xs text-stone-600 mt-0.5' };
@@ -618,11 +620,11 @@ window.PaPaDetail = (function () {
 
     // 只給經緯度時，Open-Meteo 用它自己地形網格的高度，山區常常差很多。
     // 傳實際海拔可讓它做高度降尺度，拿到的才是那個高度的預報。
-    // 預設取行程最高點——那是最冷、風最大的地方，對行前判斷是保守的一側。
-    var elev = w.elevation;
-    if (elev == null && cfg.schedule) {
-      elev = Math.max.apply(null, cfg.schedule.map(function (x) { return x.ele; }));
-    }
+    // 一律取行程最高點——那是最冷、風最大的地方，對行前判斷是保守的一側。
+    // 2026-09 第四輪拿掉 weather.elevation 旋鈕：22 頁沒有一頁給過，而文件卻寫「必須帶」。
+    var elev = cfg.schedule
+      ? Math.max.apply(null, cfg.schedule.map(function (x) { return x.ele; }))
+      : null;
 
     var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + w.lat + '&longitude=' + w.lng +
               (elev != null ? '&elevation=' + elev : '') +
@@ -691,9 +693,12 @@ window.PaPaDetail = (function () {
   // 山頂綠與一般航點的石色是全站語意色，不開旋鈕——2026-09 之前 peak／stone／isEnd 都可覆寫，
   // 22 頁沒有一頁用過，而 peak 給了別的值還會被 spec_sweep 擋。回傳的也只有兩個規則
   // （color、radius）與兩個要在別處引用的語意色（warn、ring）。
-  var PEAK = '#7c9e52', STONE = '#a09080';
+  // 全站語意色。WARN 對外匯出（見下方 return）：頁面要把某個 pos 標成警示地形時
+  // 寫 extra: { '大峽谷': PaPaDetail.WARN }，不要抄那串十六進位——時間軸的脈動是靠
+  // 「顏色等於 warn」認出來的，抄錯一個字就靜靜失效（2026-09 第四輪審查）。
+  var PEAK = '#7c9e52', STONE = '#a09080', WARN = '#ef4444';
   function palette(opt) {
-    var warn   = '#ef4444';                // 全站語意色：警示地形。以 extra 指給某個 pos
+    var warn   = WARN;                     // 全站語意色：警示地形。以 extra 指給某個 pos
     var accent = opt.accent;               // 本頁主色，用於起訖點
     var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
     function isEnd(wp, i, n) { return i === 0 || i === n - 1; }
@@ -716,6 +721,7 @@ window.PaPaDetail = (function () {
   // ── 對外介面 ──────────────────────────────────────────────
   return {
     palette: palette,
+    WARN: WARN,          // 警示地形的全站語意色，給 palette({ extra }) 用
     cssVar: cssVar,      // 頁面腳本要拿 :root 的色值（canvas 不解析 CSS 變數）；不要各頁自己寫一份
     init: function (options) {
       cfg = options;

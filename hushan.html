@@ -38,10 +38,10 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -64,12 +64,12 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           城市邊上的四獸山<br>
-          <span style="color:var(--accent-strong);">虎山親山步道</span>
+          <span class="accent-text">虎山親山步道</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">自松山慈惠堂登山口起登，沿稜線經復興園、虎山峰與 120 高地，一路都看得到台北 101。虎山與象山、豹山、獅山合稱四獸山，主峰虎山峰標高 142 公尺，是台北市區裡最容易親近的一段山徑。</p>
 
         <!-- 補登說明 -->
-        <div class="mb-8 max-w-2xl bg-teal-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+        <div class="mb-8 max-w-2xl bg-teal-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
           <span class="text-2xl mt-0.5">🗃️</span>
           <div>
             <div class="font-bold text-teal-900 text-base mb-1">補登的一趟</div>
@@ -83,7 +83,7 @@
             <div class="text-xs text-stone-600 mb-1">起點</div>
             <div class="font-bold text-stone-800">松山慈惠堂登山口</div>
             <div class="text-xs text-stone-600 mt-1">捷運後山埤站步行約 15 分鐘</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>步道北側出口</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>步道北側出口</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -92,7 +92,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至松山慈惠堂登山口">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至松山慈惠堂登山口">
               🗺️ 導航至登山口
             </button>
           </div>
@@ -114,7 +114,7 @@
             <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
+            <div class="text-3xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（GPS 推估）</div>
           </div>
         </div>
@@ -139,7 +139,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=75" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 虎山親山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=75" target="_blank" class="text-sm hover:underline accent-text">🔗 虎山親山步道（健行筆記）</a>
             <a href="https://hiking.biji.co/index.php?q=news&act=info&id=23404" target="_blank" class="text-sm text-emerald-700 hover:underline">📝 虎山環之徑（慈惠堂—奉天宮）</a>
           </div>
         </div>
@@ -147,7 +147,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -169,27 +169,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>松山慈惠堂登山口</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>松山慈惠堂登山口</h3>
             <p class="text-sm text-stone-600 leading-relaxed">虎山親山步道最常用的入口之一，就在松山慈惠堂旁。自捷運後山埤站步行約 15 分鐘可達；周邊巷弄狹小、停車位難求，建議搭大眾運輸。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山復興園</h3>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm accent-line-deep">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>虎山復興園</h3>
             <p class="text-sm text-stone-600 leading-relaxed">步道上眺望台北 101 與台北盆地的三處平台之一（另兩處是 120 高地涼亭與十方禪寺）。視野已經相當開闊，時間或體力有限時走到這裡折返也值得。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>虎山親山步道登山口</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>虎山親山步道登山口</h3>
             <p class="text-sm text-stone-600 leading-relaxed">稜線上的另一處步道口。虎山一帶步道彼此串接，入口不只一個，這也是走成環狀的關鍵節點。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>虎山峰 (H142m) 🔭</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">虎山山頂的瞭望台，標高 142 公尺，與豹山峰同高。虎山與象山、豹山、獅山合稱四獸山，因山形如踞蹲的猛虎而得名。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>虎山峰 (H142m) 🔭</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">虎山山頂的瞭望台，標高 142 公尺，與豹山峰同高。虎山與象山、豹山、獅山合稱四獸山，因山形如踞蹲的猛虎而得名。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>虎山 120 高地</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>虎山 120 高地</h3>
             <p class="text-sm text-stone-600 leading-relaxed">設有涼亭的展望點，名字取自它的標高 120 公尺。與復興園、十方禪寺並列為步道上欣賞台北 101 的好位置，也是這趟下山前的最後一站。</p>
           </div>
 
@@ -198,7 +198,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>

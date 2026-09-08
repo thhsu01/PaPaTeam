@@ -62,7 +62,9 @@ def page_dates(s):
 
 TOTAL_SLOTS = [
     ('trip.km',         TRIP + r'\bkm:\s*([\d.]+)'),
-    ('meta description', r'<meta name="description" content="[^"]*?全程 *約? *([\d.]+) *公里'),
+    # 「單程」也算：nangangshan 是單向縱走，meta 寫「單程 7.91 公里」講的是同一個 trip.km。
+    # 第一版只認「全程」，於是那一頁的里程整段不受核對——把它改成 9.91 也全綠（第四輪審查）。
+    ('meta description', r'<meta name="description" content="[^"]*?(?:全程|單程) *約? *([\d.]+) *公里'),
 ]
 
 

@@ -41,10 +41,10 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -67,16 +67,16 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           繞著火山錐走一圈<br>
-          <span style="color:var(--accent-strong);">橫嶺古道 × 紗帽山</span>
+          <span class="accent-text">橫嶺古道 × 紗帽山</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">自紗帽路旁的橫嶺古道停車場出發，先沿紗帽路走到南端的大埔登山口，一路陡上錐狀火山紗帽山（643m），再由北側較緩的陽明湖登山口下到前山公園，最後走橫嶺古道橫切紗帽山山腰回到起點。紗帽山是七星山系的寄生火山，橫嶺古道則是它腰間一條走在楓香與竹林下的平緩舊路。</p>
 
         <!-- 資料來源說明 -->
-        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-tint border-l-4 accent-line-bold">
           <span class="text-2xl mt-0.5">📐</span>
           <div>
-            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">這份軌跡對得上官方數字</div>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">這條路線的公開資料很完整，正好可以拿來驗軌跡。官方標高大埔登山口 350 m、陽明湖登山口 415 m、紗帽山 643 m，當天 GPS 讀到的是 349、413、647——<strong>三個都在 4 公尺以內</strong>，所以本頁的高程不做任何偏差修正。距離也對得上：官方說山頂到大埔登山口 1.0 km、到陽明湖登山口 1.2 km，軌跡量到 1.09 km 與 1.22 km。</p>
+            <div class="font-bold text-base mb-1 accent-text">這份軌跡對得上官方數字</div>
+            <p class="text-sm leading-relaxed accent-text-deep">這條路線的公開資料很完整，正好可以拿來驗軌跡。官方標高大埔登山口 350 m、陽明湖登山口 415 m、紗帽山 643 m，當天 GPS 讀到的是 349、413、647——<strong>三個都在 4 公尺以內</strong>，所以本頁的高程不做任何偏差修正。距離也對得上：官方說山頂到大埔登山口 1.0 km、到陽明湖登山口 1.2 km，軌跡量到 1.09 km 與 1.22 km。</p>
           </div>
         </div>
 
@@ -86,7 +86,7 @@
             <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">橫嶺古道停車場</div>
             <div class="text-xs text-stone-600 mt-1">紗帽路旁，環狀路線起訖同點</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>橫嶺古道停車場（原點）</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>橫嶺古道停車場（原點）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -95,7 +95,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至橫嶺古道停車場">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至橫嶺古道停車場">
               🗺️ 導航至集合地點
             </button>
           </div>
@@ -116,7 +116,7 @@
             <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
+            <div class="text-3xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（紗帽山）</div>
           </div>
         </div>
@@ -141,8 +141,8 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=461" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 紗帽山步道（健行筆記）</a>
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=859" target="_blank" rel="noopener" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 半嶺步道、半嶺古道、橫嶺古道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=461" target="_blank" rel="noopener" class="text-sm hover:underline accent-text">🔗 紗帽山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=859" target="_blank" rel="noopener" class="text-sm hover:underline accent-text">🔗 半嶺步道、半嶺古道、橫嶺古道（健行筆記）</a>
             <span class="text-xs text-stone-600">官方數據：紗帽山步道全長 2.2 km，山頂距陽明湖登山口 1.2 km、距大埔登山口 1.0 km；標高紗帽山 643 m、陽明湖登山口 415 m、大埔登山口 350 m。橫嶺古道自湖山路至紅壇二登山口間約 850 m。</span>
           </div>
         </div>
@@ -150,7 +150,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -160,7 +160,7 @@
         <p class="text-xs text-stone-600 mt-3 text-center">整張圖只有一座山：0.65 km 的大埔登山口到 1.75 km 的紗帽山之間爬升 293 公尺，全程的上升幾乎都集中在這 1.10 公里裡。之後就是一路緩降到前山公園，橫嶺古道那一段（3.64–4.50 km）起伏不到 25 公尺。</p>
 
         <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
-          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼不是 848</span>
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2 accent-text">累計上升為什麼不是 848</span>
           <p class="text-xs text-stone-700 leading-relaxed">
             把軌跡上每一個正的高程增量加起來會得到 848 公尺，那個數字不能用。這條路線總共只爬升 293 公尺到山頂，
             全程的真實累計上升不可能有它的兩倍以上。原因是 704 個點裡有很大一部分是站著不動時錄的——山頂待了一小時、
@@ -182,34 +182,34 @@
         <p class="text-sm text-stone-600 mb-6">依 <span data-trip="date:slash"></span> 的抵達順序排列。</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>百年楓香姐妹樹 🍁</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">兩棵並生的高大楓香，樹齡據說已逾百年，長在橫嶺古道靠紗帽路這頭的叉路口，是這條古道最好認的地標。橫嶺古道全線被樹林遮蔽，楓香是其中最高大的一群。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>百年楓香姐妹樹 🍁</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">兩棵並生的高大楓香，樹齡據說已逾百年，長在橫嶺古道靠紗帽路這頭的叉路口，是這條古道最好認的地標。橫嶺古道全線被樹林遮蔽，楓香是其中最高大的一群。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>紗帽山步道大埔登山口</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>紗帽山步道大埔登山口</h3>
             <p class="text-sm text-stone-600 leading-relaxed">紗帽山步道的南端登山口，位於紗帽路上，官方標高 350 公尺。距山頂 1.0 公里，比北端的陽明湖登山口短 0.2 公里，代價是坡度陡得多。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>紗帽山 (H643m) ⛰️</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">七星山系南側的寄生火山，錐狀山形從山下看像一頂烏紗帽，名字由此而來。標高 643 公尺，山頂設有觀景平台與土地調查局圖根點，腹地不小，當天在這一帶待了超過一小時。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>紗帽山 (H643m) ⛰️</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">七星山系南側的寄生火山，錐狀山形從山下看像一頂烏紗帽，名字由此而來。標高 643 公尺，山頂設有觀景平台與土地調查局圖根點，腹地不小，當天在這一帶待了超過一小時。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>紗帽山陽明湖登山口</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>紗帽山陽明湖登山口</h3>
             <p class="text-sm text-stone-600 leading-relaxed">北端登山口，官方標高 415 公尺，位於紗帽路上、前山公園旁。距山頂 1.2 公里，坡度是兩個登山口裡較緩的一側，也離陽明山公車總站較近。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>前山公園 🌳</h3>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm accent-line-deep">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>前山公園 🌳</h3>
             <p class="text-sm text-stone-600 leading-relaxed">陽明公園的前山部分，園中有陽明湖，湖的兩側各有一間公共浴室（男湯在建國街、女湯在紗帽路），泡的是陽明山的白磺泉。走完紗帽山下來正好順路。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>橫嶺古道 🎋</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">橫切紗帽山山腰的舊路，兩端登山口間約 850 公尺，全線土石路、坡度極緩，起伏不到 70 公尺。沿途被樹林完全遮蔽，中間有一段竹林隧道，是這條環狀路線裡最輕鬆也最涼快的一段。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>橫嶺古道 🎋</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">橫切紗帽山山腰的舊路，兩端登山口間約 850 公尺，全線土石路、坡度極緩，起伏不到 70 公尺。沿途被樹林完全遮蔽，中間有一段竹林隧道，是這條環狀路線裡最輕鬆也最涼快的一段。</p>
           </div>
 
         </div>
@@ -217,7 +217,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>

@@ -272,6 +272,11 @@
       "short": "兩支 Playwright 工具共用的伺服器／瀏覽器／擋網址"
     },
     {
+      "path": "tools/redteam.py",
+      "purpose": "刻意把倉庫改壞，確認 spec_sweep 與 fact_check 真的會紅。本專案的規矩是「檢查器先行、刻意紅字」，但那個動作一直是一次性的手工步驟，於是規則後來壞掉時沒有人會發現——2026-09 第四輪審查抓到兩條已經紅不起來（fact_check 的總里程只認「全程」而 nangangshan 寫「單程」；spec_sweep 的「多餘 isPeak」是字面比對，多一對括號就穿過）。這支把每條規則配一個最小的改壞動作，在暫時的倉庫副本上跑，要求檢查器回傳非零且訊息符合預期。加規則時一併加一列。CI 會跑；全過回傳 0",
+      "short": "把倉庫改壞，確認每條檢查規則真的會紅"
+    },
+    {
       "path": "tools/contrast/check.js",
       "purpose": "對比度實測（WCAG 2.1 AA）。用 Playwright 實際算繪、取畫面像素判定，不靠 DOM 推算。檔頭記了四個曾造成整批假訊號的量測坑與各自的修法。零忽略名單——2026-08-04 重寫時把假陽性全部改成量對，因為忽略名單會連真問題一起蓋掉。用法 node tools/contrast/check.js --all（需先 python3 -m http.server 8099）",
       "short": "量測器，檔頭記了四個量測坑"
@@ -413,7 +418,7 @@
       "--accent-tint",
       "--accent-border"
     ],
-    "accent_note": "換主色只改 :root 這一段，markup 與腳本不動。markup 裡出現的顏色 class 必須是該頁主色家族（hero 漸層的 from-/via- 淡色調）、上面那組語意色、或中性灰 stone 三者之一；跨家族的品牌色（橘色頁配藍色按鈕這種）是換色改不完的元凶。深色專題面板自成一套配色，見 ARCHITECTURE",
+    "accent_note": "換主色只改 :root 這一段，markup 與腳本不動：markup 用 detail.css 的語意 class（.accent-text／.accent-mark／.accent-line-bold／.page-bg 等），不寫行內 style；:root 定義了卻沒人讀的 token 也會被 spec_sweep 擋，因為換色時要確認的值愈少愈好。markup 裡出現的顏色 class 必須是該頁主色家族（hero 漸層的 from-/via- 淡色調）、上面那組語意色、或中性灰 stone 三者之一；跨家族的品牌色（橘色頁配藍色按鈕這種）是換色改不完的元凶。深色專題面板自成一套配色，見 ARCHITECTURE",
     "elevation_source": "地形圖／公開標高優先，非 GPS。若只能用 GPS，先查它有沒有系統性偏差：多數軌跡是固定高估（huoyianshan +27 m），扣掉即可；caolingguidao 則是一天內累積漂移 45 m（起點準、終點偏高），要依經過時間線性內插才扣得掉。修正後拿沒有參與校正的公開標高回驗，對得上才採用。頁面上的 ele 一律取公開標高（若有），修正後的 GPS 值只用來驗證，不直接上頁。反例是 henglingguidao：三個公開標高與 GPS 只差 1–4 m，證明沒有系統性偏差，就不要為了「一致」硬套修正",
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程。若中斷區間長到 GPS 短報（jinmianshan 大岩壁 64 分鐘），拿官方步道分段里程當錨點，用中斷前的良好軌跡相減求出短少量，再依直線比分配給區間內各段——比自訂倍率可靠，而且可被外部資料檢驗。原本用的「直線 ×1.15」純屬臆測，2026-08-04 已換掉",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",

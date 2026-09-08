@@ -41,10 +41,10 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -67,16 +67,16 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           內湖後山的兩顆頭<br>
-          <span style="color:var(--accent-strong);">大崙頭尾山親山步道</span>
+          <span class="accent-text">大崙頭尾山親山步道</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">自大崙尾山登山口起走，先上大崙尾山（451m），下到鞍部後接大崙頭山親山步道，續登全程最高的大崙頭山（476m）。之後沿森林步道繞經樹之亭與木棧道登山口下到最低點，再由長壽坡緩緩爬回稜線，經眺望臺與翠山步道回到原點。環狀 <span data-trip="km"></span> 公里、<span data-trip="duration:zh"></span>——全線幾乎都在林蔭底下，兩座山頭之間的落差不到 30 公尺。</p>
 
         <!-- 資料來源說明 -->
-        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-tint border-l-4 accent-line-bold">
           <span class="text-2xl mt-0.5">📐</span>
           <div>
-            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">兩座山頭都對得上公開標高</div>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全線只有兩個點有公開標高，兩個都拿來驗了：大崙尾山 451 公尺、當天 GPS 讀到 447（−4）；大崙頭山 476 公尺、GPS 讀到 469（−7）。兩者都是小幅偏低、沒有系統性漂移，所以本頁不做任何高程修正，有公開值的取公開值。<strong>其餘十一個航點沒有可引用的圖資高度</strong>，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺，是 ±25 公尺的估計值——所以它們的名稱裡不寫 <code>(H___m)</code>。</p>
+            <div class="font-bold text-base mb-1 accent-text">兩座山頭都對得上公開標高</div>
+            <p class="text-sm leading-relaxed accent-text-deep">全線只有兩個點有公開標高，兩個都拿來驗了：大崙尾山 451 公尺、當天 GPS 讀到 447（−4）；大崙頭山 476 公尺、GPS 讀到 469（−7）。兩者都是小幅偏低、沒有系統性漂移，所以本頁不做任何高程修正，有公開值的取公開值。<strong>其餘十一個航點沒有可引用的圖資高度</strong>，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺，是 ±25 公尺的估計值——所以它們的名稱裡不寫 <code>(H___m)</code>。</p>
           </div>
         </div>
 
@@ -86,7 +86,7 @@
             <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">大崙尾山登山口</div>
             <div class="text-xs text-stone-600 mt-1">集合處就是 GPS 起錄點</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>大崙尾山登山口（環狀原點）</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>大崙尾山登山口（環狀原點）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -95,7 +95,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至大崙尾山登山口">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至大崙尾山登山口">
               🗺️ 導航至集合地點
             </button>
           </div>
@@ -116,7 +116,7 @@
             <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
+            <div class="text-3xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（大崙頭山）</div>
           </div>
         </div>
@@ -150,7 +150,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -160,7 +160,7 @@
         <p class="text-xs text-stone-600 mt-3 text-center">這張圖有三個峰：0–1.00 km 上大崙尾山、2.48–3.01 km 上大崙頭山，然後一路降到 4.28 km 的木棧道登山口（280m，全程最低），再由長壽坡緩緩爬回 335 公尺的稜線。兩座山頭只差 25 公尺，但中間下到 370 公尺的鞍部，所以是實實在在的兩段爬升。</p>
 
         <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
-          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼標「~310」而不是 1246</span>
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2 accent-text">累計上升為什麼標「~310」而不是 1246</span>
           <p class="text-xs text-stone-700 leading-relaxed">
             把軌跡上每一個正的高程增量加起來會得到 1246 公尺，那個數字不能用。這條路線最高 476 公尺、最低 280 公尺，
             三段爬升加起來不可能有它的四倍。原因是 1097 個點裡有很大一部分是站著不動時錄的——大崙頭山待了 39 分鐘、
@@ -185,33 +185,33 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>大崙尾山 (H451m) 🗻</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>大崙尾山 (H451m) 🗻</h3>
             <p class="text-sm text-stone-600 leading-relaxed">內湖與士林交界的山頭，標高 451 公尺，是這趟環狀的第一座。山頂有平台與三角點，四周林木高，展望不如名字聽起來開闊。當天在此停留 18 分鐘。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>白石湖入口 🔀</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>白石湖入口 🔀</h3>
             <p class="text-sm text-stone-600 leading-relaxed">大崙頭尾山親山步道登山口旁的岔路，往北接白石湖、碧山一帶。當天沒有走這一頭，但它是把這趟環狀延長成內湖大縱走的接點。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>大崙頭山 (H476m) 🏔️</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程最高點，標高 476 公尺，山頂有觀景平台，是這條路線視野最好的一站。當天在此停留 39 分鐘，是全程最長的一次休息。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>大崙頭山 (H476m) 🏔️</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">全程最高點，標高 476 公尺，山頂有觀景平台，是這條路線視野最好的一站。當天在此停留 39 分鐘，是全程最長的一次休息。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>樹之亭 🛖</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>樹之亭 🛖</h3>
             <p class="text-sm text-stone-600 leading-relaxed">大崙頭山森林步道途中的木造涼亭，位在 355 公尺的林間，是下坡段唯一有遮蔽的休息點。從這裡到木棧道登山口只剩 270 公尺、下降 75 公尺。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>長壽坡 🚶</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>長壽坡 🚶</h3>
             <p class="text-sm text-stone-600 leading-relaxed">木棧道登山口之後、回到稜線之前的緩上段，從 280 公尺爬回 335 公尺。名字聽起來輕鬆，實際上是全程最後一段有感的爬升，走到這裡通常已經三個多小時。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>眺望臺 🏙️</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">回程稜線上的展望點，海拔約 320 公尺，可俯瞰士林與外雙溪一帶。當天在此停留 9 分鐘，是收工前最後一次休息，之後接翠山步道下山只剩 0.87 公里。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>眺望臺 🏙️</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">回程稜線上的展望點，海拔約 320 公尺，可俯瞰士林與外雙溪一帶。當天在此停留 9 分鐘，是收工前最後一次休息，之後接翠山步道下山只剩 0.87 公里。</p>
           </div>
 
         </div>
@@ -219,7 +219,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>

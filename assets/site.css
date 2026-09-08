@@ -15,7 +15,7 @@
   left: 1rem;
   z-index: 100;
   padding: 0.75rem 1.25rem;
-  background: #0f172a;
+  background: #1c1917;
   color: #ffffff;
   font-weight: 700;
   font-size: 0.875rem;
@@ -36,7 +36,7 @@
    外圈白色 halo 在深色底（例如 index 的 bg-slate-950 頁腳）上可見。
    用 :focus-visible 而非 :focus，滑鼠點擊不會觸發。 */
 :focus-visible {
-  outline: 3px solid #0f172a;
+  outline: 3px solid #1c1917;
   outline-offset: 2px;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9);
   border-radius: 2px;

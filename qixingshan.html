@@ -24,11 +24,9 @@
 
       /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
          要換主色只需改這一段，markup 與腳本都不必動。 */
-      --accent-fill:            #0369a1;                    /* sky-700 */
       --accent-border-deep:     #bae6fd;                    /* sky-200 */
       --accent:                 #0ea5e9;                    /* sky-500 */
       --accent-deep:            #0284c7;                    /* sky-600 */
-      --accent-light:           #38bdf8;                    /* sky-400 */
       --accent-soft:            #e0f2fe;                    /* sky-100 */
       --accent-strong:          #0369a1;                    /* sky-700 */
       --accent-strong-deep:     #075985;                    /* sky-800 */
@@ -37,10 +35,10 @@
       --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線：同上 */
     }
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -82,7 +80,7 @@
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至陽明山第二停車場" style="background:var(--accent-strong);">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至陽明山第二停車場">
               🗺️ 導航至陽明山第二停車場
             </button>
           </div>

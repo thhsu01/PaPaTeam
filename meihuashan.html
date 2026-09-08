@@ -26,7 +26,6 @@
       --timeline-left: 24px;
       --timeline-bg: #e7e5e4;
       --timeline-z: 0;
-      --nav-arrow-bg: #cd4d0b;
       --glass-bg: rgba(255, 255, 255, 0.6);
       --glass-blur: blur(8px);
       --glass-border: 1px solid rgba(234, 88, 12, 0.1);
@@ -35,14 +34,12 @@
          要換主色只需改這一段，markup 與腳本都不必動。 */
       --accent-fill:            #c2410c;                    /* orange-700 */
       --accent-border:          #ffedd5;                    /* orange-100 */
-      --accent-border-deep:     #fed7aa;                    /* orange-200 */
       --accent:                 #ea580c;                    /* orange-600 */
       --accent-light:           #f97316;                    /* orange-500 */
       --accent-soft:            #ffedd5;                    /* orange-100 */
       --accent-strong:          #c2410c;                    /* orange-700 */
       --accent-on-dark:         #f97316;                    /* orange-500 */
       --accent-on-dark-soft:    #fdba74;                    /* orange-300 */
-      --accent-tint-weak:       rgba(255, 247, 237, 0.3);   /* orange-50/30 */
       --accent-tint:   color-mix(in srgb, var(--accent) 8%, white);   /* 淡底：建議框等共用區塊用 */
     }
 
@@ -54,10 +51,10 @@
     .leaflet-container { background: #f5f5f4; }
     .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -104,7 +101,7 @@
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6" data-widget="weather"></div>
                 </div>
                 
-                <button onclick="openNavigation()" class="w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至起點" style="background:var(--accent-strong);">
+                <button onclick="openNavigation()" class="w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg accent-fill-strong" aria-label="在地圖應用中導航至起點">
                     <span>🗺️ 查看起點導航紀錄</span>
                 </button>
             </div>

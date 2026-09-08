@@ -76,6 +76,9 @@ PALETTE_OPTS = {'accent', 'isPeak', 'extra'}
 # 三根段落色條 16–17 頁定義得一字不差；頁面再寫一份就是漂移的起點（同 .stat-card 的前例）。
 CSS_OWNED = ('stamp', 'hero-accent', 'section-bar-green', 'section-bar-stone', 'section-bar-accent', 'stat-card')
 
+DETAIL_CSS = open('assets/detail.css', encoding='utf-8').read()
+DETAIL_JS = open('assets/detail.js', encoding='utf-8').read()
+
 # 由 detail.js 產生的共用區塊。頁面只放 <div data-widget="…"> 掃載點；
 # 這些區塊的 id 與 class 若又出現在頁面原始碼裡，就是有人把它手寫回來了。
 WIDGETS = {'nav', 'notice', 'weather', 'wp-card', 'chart', 'timeline'}
@@ -226,6 +229,32 @@ def check(f):
         if re.search(r'^\s*\.%s\s*\{' % re.escape(c), s, flags=re.M):
             p.append('.%s 已收進 detail.css，頁面不要再定義一份' % c)
 
+    # ── 主色一律走語意 class，不寫行內 style ──────────────────
+    # ARCHITECTURE 的「markup 用語意 class」「避免內聯 style」。2026-09 第四輪量到 22 頁
+    # 共 206 處行內 style 在寫 --accent 系的值，其中 76 處逐字等於 .accent-text——
+    # 同一件事一半走 class、一半走行內樣式，換色時只會改到一半。
+    # 深色專題面板的十六進位值仍是例外（見 ARCHITECTURE 的「尚未收斂的一件事」），
+    # 所以只查 var(--accent…)，不查所有 style。
+    n_inline = len(re.findall(r'style="[^"]*var\(--accent', s))
+    if n_inline:
+        p.append('%d 處行內 style 在寫 --accent——改用 detail.css 的語意 class' % n_inline)
+
+    # ── :root 定義了卻沒人讀的 token ─────────────────────────
+    # 換色時要逐一確認的值愈少愈好。判準是「這一頁有沒有任何地方引用它」：
+    # var()、PaPaDetail.cssVar()，或 detail.css 裡以它為值的那個 class 出現在本頁 markup。
+    for m in re.finditer(r'^\s*(--accent[\w-]*|--nav-arrow-bg):', s, flags=re.M):
+        tok = m.group(1)
+        if 'var(%s)' % tok in s or "cssVar('%s')" % tok in s:
+            continue
+        classes = re.findall(r'^\.([\w-]+)\s*\{[^}]*var\(%s\)' % re.escape(tok), DETAIL_CSS, flags=re.M)
+        # class 出現在本頁 markup，或出現在 detail.js 產生的共用區塊裡（航點卡的 .accent-box
+        # 就是這樣用掉 --accent-tint 與 --accent-border 的），都算有人讀
+        if any(re.search(r'class="[^"]*\b%s\b' % re.escape(c), s) or ("'" + c) in DETAIL_JS or (' ' + c) in DETAIL_JS
+               for c in classes):
+            continue
+        p.append('%s 定義了卻沒人讀（沒有 var()、cssVar()，對應的 class %s 也沒出現）'
+                 % (tok, '／'.join('.' + c for c in classes) or '（無）'))
+
     # ── 共用區塊用到的主色 token 必須定義 ────────────────────
     # wp-card 的建議框用 var(--accent-tint) 與 var(--accent-border)。2026-09 候選 2 把航點卡
     # 收進 detail.js 之後，七頁沒定義這兩個 token，建議框就沒有底色與框線——執行期基準
@@ -291,7 +320,8 @@ def check(f):
         for k in re.findall(r'(?<![\w$])([A-Za-z_$][\w$]*)\s*:', flat):
             if k not in PALETTE_OPTS:
                 p.append('palette({ %s })：不是 palette() 認得的選項（只有 %s）' % (k, '／'.join(sorted(PALETTE_OPTS))))
-        if 'isPeak: wp => wp.pos === "最高點"' in pblk:
+        # 容許括號與空白的寫法差異：第一版是字面比對，加一對括號就穿過去（第四輪審查）
+        if re.search(r'isPeak:\s*\(?\s*wp\s*\)?\s*=>\s*wp\.pos\s*===\s*"最高點"', pblk):
             p.append('palette() 的 isPeak 跟預設一樣（最高點），多寫')
     if 'PaPaDetail.palette(' not in s:
         for m in re.finditer(r'最高點"?\s*\?\s*([^\s:,]+)', s):
@@ -491,6 +521,9 @@ def check_doc_counts():
         # 行列式＝不是卡片式的那些頁。2026-09 之前這裡寫死 n - 6，卡片式頁數一變就會靜靜錯掉
         ('ARCHITECTURE.md', '行列式的頁數', r'// 行列式，(\d+) 頁', (str(c['n'] - c['n_card']),)),
         ('ARCHITECTURE.md', '卡片式的頁數', r'// 卡片式，(\d+) 頁', (str(c['n_card']),)),
+        # ADR 的其餘數字都是 2026-08 的量測（歷史敘述），只有這句是現在式
+        ('docs/adr/0001-chartjs-behind-the-seam.md', 'advanced 未使用的頁數',
+         r'目前 (\d+) 頁都沒用到它', (str(c['n']),)),
     ]
     for path, what, pat, want in checks:
         m = re.search(pat, open(path, encoding='utf-8').read())
@@ -520,9 +553,11 @@ def tracked_files():
                                       stderr=subprocess.DEVNULL).decode().split()
         return set(out)
     except Exception:
+        # 沒有 .git 時（例如 tools/redteam.py 的暫時副本）走目錄。只跳過 .git 與 node_modules——
+        # 跳過所有 dot 目錄會漏掉 .github/workflows，於是 manifest 的那三個條目被判成「倉庫裡沒有」。
         out = set()
         for root, dirs, files in os.walk('.'):
-            dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'node_modules']
+            dirs[:] = [d for d in dirs if d not in ('.git', 'node_modules', '__pycache__')]
             out.update(os.path.join(root, f)[2:] for f in files)
         return out
 
@@ -597,7 +632,8 @@ def check_live_counts():
             return (CN.index(a) if a else 1) * 10 + (CN.index(b) if b else 0)
         return CN.index(t)
 
-    for path in ('README.md', 'ARCHITECTURE.md', 'CONTEXT.md', 'CONTRIBUTING.md', 'SNIPPETS.md', 'assets/detail.css'):
+    for path in ('README.md', 'ARCHITECTURE.md', 'CONTEXT.md', 'CONTRIBUTING.md', 'SNIPPETS.md',
+                 'assets/detail.css'):     # ADR 通篇是當時的量測，不適合這條「現況」規則，改由 check_doc_counts 巡它那句現在式
         text = open(path, encoding='utf-8').read()
         for i, sent in enumerate(re.split(r'[。；\n]', text)):
             if re.search(r'20\d\d[-/年]|先前|之前|當時|曾|原本|那時|上次|最早|早期|其餘|另', sent):
@@ -637,9 +673,13 @@ def main():
     mf = check_manifest()
     print('%-16s %s' % ('manifest.json', 'OK' if not mf else ' / '.join(mf)))
     bad += bool(mf)
-    # 首頁不走詳情頁的規格，但它也引用共用資產——版本號一樣要跟內容走
+    # 首頁不走詳情頁的規格，但它也引用共用資產（版本號要跟內容走），
+    # 而且它是爬蟲最先看到的一頁——description 不能沒有（2026-09 第四輪：22 頁都補了，唯獨它漏）
+    index_html = open('index.html', encoding='utf-8').read()
     idx = ['%s 的版本號不是現在的內容——跑 python3 tools/bump_assets.py' % a
-           for a in bump_assets.stale(open('index.html', encoding='utf-8').read(), ASSET_HASHES)]
+           for a in bump_assets.stale(index_html, ASSET_HASHES)]
+    if not re.search(r'<meta name="description" content="[^"]+"', index_html):
+        idx.append('缺 <meta name="description">')
     print('%-16s %s' % ('index', 'OK' if not idx else ' / '.join(idx)))
     bad += bool(idx)
     for f in sorted(glob.glob('*.html')):

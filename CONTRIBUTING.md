@@ -168,7 +168,8 @@ computed color 真的是白的——不是就代表樣式沒生效，量到的�
 
 ### CSS
 - 優先用 Tailwind 類別
-- 避免內聯 `style` 屬性（用 `<style>` 標籤）
+- **不寫內聯 `style` 屬性**：顏色走 `detail.css` 的語意 class 與 `:root` token，
+  缺哪個組合就補一個 class（`spec_sweep` 會擋）
 - 使用有意義的顏色變數名稱
 
 ### JavaScript
@@ -190,6 +191,12 @@ computed color 真的是白的——不是就代表樣式沒生效，量到的�
 // 修改後
 { title: "...", url: "yourfile.html" }
 ```
+
+### 情境 1.5：改顏色或版面
+
+顏色一律走 `:root` 的 token 與 `assets/detail.css` 的語意 class，**頁面不寫行內 `style`**
+（`spec_sweep` 會擋）。缺哪個組合就往 `detail.css` 補一個 class；`:root` 定義了卻沒人讀的
+token 也會被擋——換色時要確認的值愈少愈好。
 
 ### 情境 2：更新計畫行程日期
 

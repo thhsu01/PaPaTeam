@@ -41,10 +41,10 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -67,16 +67,16 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           一段石階，兩趟停留<br>
-          <span style="color:var(--accent-strong);">中正山親山步道</span>
+          <span class="accent-text">中正山親山步道</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">自中正山停車場起登，0.95 公里的石階直上中正山觀景台（646m），俯瞰關渡平原與淡水河口。之後沒有下山，而是續行東北向的稜線再爬 184 公尺，到 830 公尺處折返，原路走回停車場。全程 <span data-trip="km"></span> 公里、<span data-trip="duration:zh"></span>——其中將近 1 小時 50 分是停著的，回程在中正山上就吃了 59 分鐘的午餐。</p>
 
         <!-- 資料來源說明 -->
-        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="background:var(--accent-tint); border-left:4px solid var(--accent);">
+        <div class="mb-8 max-w-2xl rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-tint border-l-4 accent-line-bold">
           <span class="text-2xl mt-0.5">📐</span>
           <div>
-            <div class="font-bold text-base mb-1" style="color:var(--accent-strong);">這份軌跡的高程可以自我驗證</div>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全線只有中正山有公開標高（646 m）。當天軌跡在山頂一帶平滑後的最高值<strong>正好是 646</strong>，60 公尺內取樣點的中位數是 641——差 5 公尺以內，代表這具 GPS 當天沒有系統性的高程偏差。其餘三個航點查不到圖資高度，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺（<strong>±25 公尺的估計值</strong>），所以它們的名稱裡不寫 <code>(H___m)</code>——那個括號代表的是圖資高度。</p>
+            <div class="font-bold text-base mb-1 accent-text">這份軌跡的高程可以自我驗證</div>
+            <p class="text-sm leading-relaxed accent-text-deep">全線只有中正山有公開標高（646 m）。當天軌跡在山頂一帶平滑後的最高值<strong>正好是 646</strong>，60 公尺內取樣點的中位數是 641——差 5 公尺以內，代表這具 GPS 當天沒有系統性的高程偏差。其餘三個航點查不到圖資高度，改取軌跡前後 60 公尺內的高程中位數再取整到 5 公尺（<strong>±25 公尺的估計值</strong>），所以它們的名稱裡不寫 <code>(H___m)</code>——那個括號代表的是圖資高度。</p>
           </div>
         </div>
 
@@ -86,7 +86,7 @@
             <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">中正山停車場</div>
             <div class="text-xs text-stone-600 mt-1">集合處就是 GPS 起錄點</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>中正山停車場（原路折返）</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>中正山停車場（原路折返）</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -95,7 +95,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至中正山停車場">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至中正山停車場">
               🗺️ 導航至集合地點
             </button>
           </div>
@@ -116,7 +116,7 @@
             <div class="text-xs text-stone-600">累計上升 m（平滑後）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
+            <div class="text-3xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（折返點）</div>
           </div>
         </div>
@@ -150,7 +150,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -160,7 +160,7 @@
         <p class="text-xs text-stone-600 mt-3 text-center">原路折返的剖面是對稱的：0.30 km 起連續爬升到 2.40 km 的折返點，再原樣降回來。爬得最急的是最前面那段——停車場到中正山 0.95 公里就上了 126 公尺，平均坡度 13%，全是石階。</p>
 
         <div class="mt-4 bg-stone-50 border border-stone-200 rounded-2xl p-5">
-          <span class="text-[10px] font-black tracking-widest uppercase block mb-2" style="color:var(--accent-strong);">累計上升為什麼不是 1030</span>
+          <span class="text-[10px] font-black tracking-widest uppercase block mb-2 accent-text">累計上升為什麼不是 1030</span>
           <p class="text-xs text-stone-700 leading-relaxed">
             把軌跡上每一個正的高程增量加起來會得到 1030 公尺，那個數字不能用。這條路線從 520 公尺爬到 830 公尺，
             淨爬升只有 311 公尺，而且原路折返、回程沒有再爬——真實的累計上升不可能是它的三倍。
@@ -184,23 +184,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>中正山停車場 🅿️</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>中正山停車場 🅿️</h3>
             <p class="text-sm text-stone-600 leading-relaxed">位於中正山產業道路上，海拔約 520 公尺，是這條步道最省力的起登點——從山下的登山口起走要多爬兩百多公尺。當天在此集合整裝 29 分鐘後才起走。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>中正山 (H646m) 🗻</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">又名彌陀山、十八份山，標高 646 公尺，山頂有一座兩層樓的觀景台。往西南俯瞰整個關渡平原、淡水河與觀音山，是北投近郊視野最開闊的一處。當天去回各停留一次，回程在此吃了 59 分鐘的午餐。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>中正山 (H646m) 🗻</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">又名彌陀山、十八份山，標高 646 公尺，山頂有一座兩層樓的觀景台。往西南俯瞰整個關渡平原、淡水河與觀音山，是北投近郊視野最開闊的一處。當天去回各停留一次，回程在此吃了 59 分鐘的午餐。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>東北稜線 🌿</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>東北稜線 🌿</h3>
             <p class="text-sm text-stone-600 leading-relaxed">過了中正山觀景台，步道並沒有結束——往東北還有一條接往大屯山系的稜線，坡度比石階段緩，林相也更密。當天沿它續行了 1.45 公里、再爬 184 公尺。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>折返點（約 830m）⛰️</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程海拔最高的地方，比中正山還高 184 公尺。坡度在這裡轉平，隊伍停了 5 分鐘後原路折返。<strong>這個位置沒有可引用的地名與標高</strong>，所以頁面上就叫「折返點」，830 公尺是由軌跡估算的（±25 公尺）。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>折返點（約 830m）⛰️</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">全程海拔最高的地方，比中正山還高 184 公尺。坡度在這裡轉平，隊伍停了 5 分鐘後原路折返。<strong>這個位置沒有可引用的地名與標高</strong>，所以頁面上就叫「折返點」，830 公尺是由軌跡估算的（±25 公尺）。</p>
           </div>
 
         </div>
@@ -208,7 +208,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
