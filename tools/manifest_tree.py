@@ -27,7 +27,9 @@ CN = '零一二三四五六七八九十'
 def cn(n):
     if n < 11:
         return CN[n]
-    return CN[10] + (CN[n - 10] if n < 20 else '') if n < 20 else CN[n // 10] + CN[10] + (CN[n % 10] if n % 10 else '')
+    if n < 20:
+        return CN[10] + CN[n - 10]
+    return CN[n // 10] + CN[10] + (CN[n % 10] if n % 10 else '')
 
 
 def entries():

@@ -119,6 +119,7 @@ PaPaTeam/
 │   ├── fact_check.py            # 事實一致性：同一個日期／里程在頁內各處是否相符
 │   ├── bump_assets.py           # 共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）
 │   ├── pw-env.js                # 兩支 Playwright 工具共用的伺服器／瀏覽器／擋網址
+│   ├── redteam.py               # 把倉庫改壞，確認每條檢查規則真的會紅
 │   ├── manifest_tree.py         # 由 manifest.json 產生 README 的檔案樹（改了 manifest 就跑 --write）
 │   ├── contrast/                # 對比度實測（改顏色後跑；需 Playwright）
 │   │   ├── check.js             # 量測器，檔頭記了四個量測坑

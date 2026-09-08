@@ -38,10 +38,10 @@
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -64,12 +64,12 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           台北天際線稜線<br>
-          <span style="color:var(--accent-strong);">南港山 × 九五峰 × 象山</span>
+          <span class="accent-text">南港山 × 九五峰 × 象山</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">沿南港山系主稜由東往西縱走，經南港山（小百岳 #13，375m）、南港山系最高點九五峰、南港山南峰，再下抵台北最知名的 101 觀景點象山。自福德國小起登，單程 <span data-trip="km"></span> 公里，收在山下的 Retro House 美式餐廳。</p>
 
         <!-- 補登說明 -->
-        <div class="mb-8 max-w-2xl bg-violet-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+        <div class="mb-8 max-w-2xl bg-violet-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
           <span class="text-2xl mt-0.5">🏔️</span>
           <div>
             <div class="font-bold text-violet-900 text-base mb-1">關於拇指山</div>
@@ -83,7 +83,7 @@
             <div class="text-xs text-stone-600 mb-1">起點</div>
             <div class="font-bold text-stone-800">福德國小</div>
             <div class="text-xs text-stone-600 mt-1">單程縱走，由東往西沿主稜</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🍔 終點<br>Retro House 美式餐廳</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🍔 終點<br>Retro House 美式餐廳</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -92,7 +92,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至福德國小">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至福德國小">
               🗺️ 導航至福德國小
             </button>
           </div>
@@ -114,7 +114,7 @@
             <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);"><span data-trip="summit"></span></div>
+            <div class="text-3xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高點 m（九五峰）</div>
           </div>
         </div>
@@ -139,7 +139,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=78" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 南港山縱走親山步道（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=78" target="_blank" class="text-sm hover:underline accent-text">🔗 南港山縱走親山步道（健行筆記）</a>
             <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=112" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 南港山（小百岳 #13）</a>
           </div>
         </div>
@@ -147,7 +147,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -169,32 +169,32 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>拇指山步道福德宮</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>拇指山步道福德宮</h3>
             <p class="text-sm text-stone-600 leading-relaxed">上稜途中的土地公廟。這趟在此停了 42 分鐘，是全程最久的一站——起登後的第一個緩點。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>南港山 375m ⭐ 小百岳 #13</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">南港山系的主峰，小百岳第 13 名，設三等三角點 695 號。位在南港區九如里與信義區中坡里交界，山系橫跨南港、信義、大安三區，也是臺北大縱走第六段所經。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>南港山 375m ⭐ 小百岳 #13</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">南港山系的主峰，小百岳第 13 名，設三等三角點 695 號。位在南港區九如里與信義區中坡里交界，山系橫跨南港、信義、大安三區，也是臺北大縱走第六段所經。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>九五峰 (H376m) 🏔</h3>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm accent-line-deep">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>九五峰 (H376m) 🏔</h3>
             <p class="text-sm text-stone-600 leading-relaxed">南港山系的最高點，標高 375.8 公尺，就在南港山三角點外 48 公尺處。峰頂為大片裸露岩石，展望開闊，是這條稜線上最著名的位置。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>南港山南峰 (H370m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>南港山南峰 (H370m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">主稜上的山頭，標高 370 公尺。與四分里山（247m）、拇指山（320m）、象山（183m）同屬南港山系著名的郊山。這趟的軌跡過此之後就一路下降。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400" style="display:inline-block;"></span>拇指山 (H320m)<span class="text-[10px] font-medium text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded ml-1">本次未登頂</span></h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400 inline-block"></span>拇指山 (H320m)<span class="text-[10px] font-medium text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded ml-1">本次未登頂</span></h3>
             <p class="text-sm text-stone-600 leading-relaxed">標高 320 公尺，以 360 度超廣角視野著稱，大屯山、七星山、觀音山到木柵烏來群山一覽無遺。首頁的行程名稱有它，但 <span data-trip="date:slash"></span> 這趟沒有登頂，留待下次。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>象山 (H183m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>象山 (H183m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">台北最知名的 101 觀景點，也是南港山縱走親山步道的西端。這條步道自中華科技大學登山口至信義路五段 150 巷登山口，全長約 7 公里。</p>
           </div>
 
@@ -203,7 +203,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>

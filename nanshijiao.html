@@ -43,10 +43,10 @@
     /* 日期戳章。文字與框線用 var(--accent-strong)（4.63:1）而非品牌色 var(--accent)（2.97:1），見 READABILITY_AUDIT.md */
     /* 區段標題色條（非文字，不受對比度門檻約束，保留品牌色） */
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -69,12 +69,12 @@
 
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           微笑山線，南勢角縱走<br>
-          <span style="color:var(--accent-strong);">一線天 × 烘爐地 × 五尖山</span>
+          <span class="accent-text">一線天 × 烘爐地 × 五尖山</span>
         </h1>
         <p class="text-lg text-stone-600 mb-8 max-w-2xl">從捷運南勢角站出發，穿越圓通禪寺一線天奇景，沿稜線縱走外南勢角山、南勢角山（小百岳 302m），再向西挺進牛埔頭山與五尖山，串連中和、土城兩區的天上山系精華。</p>
 
         <!-- 注意事項橫幅 -->
-        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm" style="border-color:var(--accent);">
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
           <span class="text-2xl mt-0.5">🏁</span>
           <div>
             <div class="font-bold text-amber-900 text-base mb-1">實走與計畫的差異</div>
@@ -88,7 +88,7 @@
             <div class="text-xs text-stone-600 mb-1">起點</div>
             <div class="font-bold text-stone-800">捷運南勢角站</div>
             <div class="text-xs text-stone-600 mt-1">捷運中和新蘆線，1 號出口</div>
-            <div class="text-xs mt-2 pt-2 border-t border-stone-100" style="color:var(--accent-strong);">🏁 終點<br>烘爐地南山福德宮</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>烘爐地南山福德宮</div>
           </div>
           <div class="stat-card rounded-2xl p-4 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
@@ -97,7 +97,7 @@
           </div>
           <div data-widget="weather"></div>
           <div class="stat-card rounded-2xl p-4 shadow-sm flex items-center justify-center">
-            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" style="background:var(--accent-strong);" aria-label="在地圖應用中導航至南勢角站">
+            <button onclick="openNavigation()" class="w-full text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors accent-fill-strong" aria-label="在地圖應用中導航至南勢角站">
               🗺️ 導航至南勢角站
             </button>
           </div>
@@ -119,7 +119,7 @@
             <div class="text-xs text-stone-600">總爬升 m（地形圖估）</div>
           </div>
           <div class="text-center">
-            <div class="text-3xl font-black" style="color:var(--accent-strong);" data-trip="summit"></div>
+            <div class="text-3xl font-black accent-text" data-trip="summit"></div>
             <div class="text-xs text-stone-600">最高海拔 m（五尖山）</div>
           </div>
         </div>
@@ -144,7 +144,7 @@
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
           <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
           <div class="flex flex-col gap-2">
-            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline" style="color:var(--accent-strong);">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5327836" target="_blank" class="text-sm hover:underline accent-text">🔗 GPX 軌跡來源 (健行筆記 #5327836)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=105" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 烘爐地登山步道資訊 (健行筆記)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=106" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 圓通寺登山步道資訊 (健行筆記)</a>
             <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=2077" target="_blank" class="text-sm text-blue-600 hover:underline">📝 微笑山線：天上山系 烘爐地土地公段</a>
@@ -156,7 +156,7 @@
     </section>
 
     <!-- ═══ ELEVATION ═══ -->
-    <section id="elevation" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="elevation" class="py-16 px-6 page-bg">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-green"></span>
@@ -177,42 +177,42 @@
         <p class="text-sm text-stone-600 mb-6">依 <span data-trip="date:slash"></span> 的抵達順序排列；末尾的光明頂本次未行經。</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>捷運南勢角站 (H20m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>捷運南勢角站 (H20m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">全程起終點。捷運中和新蘆線末站，交通便利，站旁有便利商店可補給，是整裝的最佳基地。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>迎日石</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>迎日石</h3>
             <p class="text-sm text-stone-600 leading-relaxed">山頭上一塊裸露的砂岩巨石。清晨來運動的民眾會佇立石上迎接朝陽，「迎日石」之名由此而來。是起登後第一個展望點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>吹牛亭</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>吹牛亭</h3>
             <p class="text-sm text-stone-600 leading-relaxed">圓通寺登山步道起登段的涼亭，海拔約 100 m。這條步道沿線有一連串各有名字的涼亭，吹牛亭是最靠近登山口的一座。<span data-trip="date:slash"></span> 在此休息 8 分鐘。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>外南勢角山（國旗嶺）(H160m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>外南勢角山（國旗嶺）(H160m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">南勢角山系稜線上的衛峰，山友多以山頭上的國旗稱它國旗嶺。設有健身器材與涼亭，居高臨下可俯瞰中和、永和市區，是全程第一個歇腳的展望點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓通禪寺 (H100m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>圓通禪寺 (H100m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">建於 1920 年代（清雍正至乾隆年間擴建），近 300 年歷史，略具日式風味的仿唐式建築。廟前俯瞰中和市區視野開闊，是香客與山友的共同聖地。</p>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm" style="border-color:var(--accent-border-deep);">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>一線天 (H100m)</h3>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm accent-line-deep">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>一線天 (H100m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">圓通禪寺後方的天然岩縫步道，僅容一人側身通過。昏暗岩縫中仰望天光，是全程最具震撼感的地質奇觀，也是路線上最上鏡的打卡點。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>鹿寮中心崙百年土地公</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>鹿寮中心崙百年土地公</h3>
             <p class="text-sm text-stone-600 leading-relaxed">中和鹿寮中心崙的百年土地公，位在中和登山步道的稜線上。同一段步道另一個為人所知的是一株巨大的雀榕老樹。<span data-trip="date:slash"></span> 在此停了 21 分鐘，是全程單次停留最久的一站。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>牛埔頭山 (H271m)</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>牛埔頭山 (H271m)</h3>
             <p class="text-sm text-stone-600 leading-relaxed">中和、土城交界的稜線山頭，設有省政府地籍測量三角點。山頂藏於林中無展望，但作為縱走里程碑，是邁向五尖山前的重要銜接點。</p>
           </div>
 
@@ -222,50 +222,50 @@
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>中和無極三清宮</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>中和無極三清宮</h3>
             <p class="text-sm text-stone-600 leading-relaxed">中和的道教宮廟。「三清宮登山口」是牛埔頭山與五尖山（牛埔頭山南峰）常見的登山起點，不少路線由此上稜。<span data-trip="date:slash"></span> 是從五尖山下來反向經過，12:36–12:50 在此停留。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>圓通寺烘爐地登山步道口</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>圓通寺烘爐地登山步道口</h3>
             <p class="text-sm text-stone-600 leading-relaxed">圓通禪寺至烘爐地登山觀光步道的入口之一。這條觀光步道串連中和、新店、土城三區，沿線俯瞰台北盆地視野開闊，是「微笑山線」天上山系的一段。<span data-trip="date:slash"></span> 於 12:57 由此接回步道，沒有停留。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>青春嶺</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>青春嶺</h3>
             <p class="text-sm text-stone-600 leading-relaxed">青春步道西端的稜線高點，設有涼亭。青春步道全長約 1.3 km，自南勢角山的 302 基點向西，依序經新樂園、涼亭叉路、石龍洞抵此。<span data-trip="date:slash"></span> 在此停留 10 分鐘。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>石龍洞觀音佛祖</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>石龍洞觀音佛祖</h3>
             <p class="text-sm text-stone-600 leading-relaxed">天然岩洞中的觀音寺廟，環境清幽。洞內終年陰涼，是山途中絕佳的休息納涼點，也是信仰與自然融為一體的特殊景致。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>新樂園</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>新樂園</h3>
             <p class="text-sm text-stone-600 leading-relaxed">青春步道上的休憩亭，位於涼亭叉路與南勢角山 302 基點之間，是石龍洞爬回山頂途中的中繼休息點。中和區公所的步道修繕工程整修過沿線地坪、涼亭與階梯。<span data-trip="date:slash"></span> 在此停留 11 分鐘。</p>
           </div>
 
-          <div class="p-6 rounded-2xl border shadow-sm" style="background:var(--accent-tint); border-color:var(--accent-border-deep);">
-            <h3 class="font-bold mb-2 flex items-center gap-2" style="color:var(--accent-strong);"><span class="w-2 h-2 rounded-full" style="background:var(--accent); display:inline-block;"></span>南勢角山 302m ⭐ 小百岳 #16</h3>
-            <p class="text-sm leading-relaxed" style="color:var(--accent-strong-deep);">全程最高展望點之一，小百岳第 16 名。山頂平坦開闊，可 360° 俯瞰台北盆地、大漢溪、新店溪，遠眺觀音山、大屯火山群及淡水出海口。入夜後更是大台北夜景名所。</p>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 rounded-full accent-mark inline-block"></span>南勢角山 302m ⭐ 小百岳 #16</h3>
+            <p class="text-sm leading-relaxed accent-text-deep">全程最高展望點之一，小百岳第 16 名。山頂平坦開闊，可 360° 俯瞰台北盆地、大漢溪、新店溪，遠眺觀音山、大屯火山群及淡水出海口。入夜後更是大台北夜景名所。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500" style="display:inline-block;"></span>烘爐地南山福德宮</h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-500 inline-block"></span>烘爐地南山福德宮</h3>
             <p class="text-sm text-stone-600 leading-relaxed">建於清乾隆 20 年（1736 年），北部著名「土地公王」。廟宇旁聳立高達 78 公尺的巨型土地公像，是中和區最醒目的地標，香火終年鼎盛。原列為預備撤退點，實際上 <span data-trip="date:slash"></span> 的行程就在這裡畫下句點——15:05 抵達，GPS 軌跡在 15:11 結束。</p>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
-            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400" style="display:inline-block;"></span>光明頂 (H225m)<span class="text-[10px] font-medium text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">本次未行經</span></h3>
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-stone-400 inline-block"></span>光明頂 (H225m)<span class="text-[10px] font-medium text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded">本次未行經</span></h3>
             <p class="text-sm text-stone-600 leading-relaxed">烘爐地步道上的四等三角點，海拔 225m，可俯瞰雙和地區全景。名字充滿武俠氣息，原是計畫中回程的稜線觀景台，<span data-trip="date:slash"></span> 未走到，留待下次。</p>
           </div>
         </div>
 
         <!-- Special focus: 一線天 -->
         <div class="mt-4 rounded-2xl p-6 border" style="background:#1c1c1c; border-color:#333; color:#e8e0d4;">
-          <div class="text-xs font-medium mb-2 tracking-widest uppercase" style="color:var(--accent);">地質景觀專題</div>
-          <h3 class="text-xl font-black mb-3" style="color:#f5e8d0;">一線天：<span class="font-normal" style="color:var(--accent-on-dark);">圓通寺後山的岩縫奇境</span></h3>
+          <div class="text-xs font-medium mb-2 tracking-widest uppercase accent-text-mark">地質景觀專題</div>
+          <h3 class="text-xl font-black mb-3" style="color:#f5e8d0;">一線天：<span class="font-normal accent-text-inv">圓通寺後山的岩縫奇境</span></h3>
           <p class="text-sm leading-relaxed mb-3" style="color:#b0a090;"><strong style="color:#e0c8a0;">【成因】</strong> 由堅硬砂岩受構造應力沿垂直節理裂開，歷經長期風化侵蝕，形成這道僅容一人通過的天然狹縫。仰望上方，天空被壓縮成一條細線，「一線天」之名由此而來。</p>
           <p class="text-sm leading-relaxed" style="color:#b0a090;"><strong style="color:#e0c8a0;">【攻略】</strong> 入口在圓通禪寺後方右側，步行約 2 分鐘可達。身形較寬者需側身通過，建議不要攜帶過大背包。岩壁常年濕潤，請注意腳步防滑。</p>
         </div>
@@ -273,7 +273,7 @@
     </section>
 
     <!-- ═══ TIMELINE ═══ -->
-    <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
+    <section id="timeline" class="py-16 px-6 page-bg">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>

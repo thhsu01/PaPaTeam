@@ -305,8 +305,10 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 點選航點時把標記放大是同一回事：寫 `map.selected: true`，`detail.js` 用 `palette`
 算好的半徑加 6、不透明度 1，未選取的回到原半徑與 0.92。2026-09 之前六頁各寫一個閉包，
 選取半徑 12／14／15 不等，未選取的半徑還各自重算一遍——`bishan` 與 `shiqiulinling`
-一律縮回 6，起訖點原本的 9 在第一次點擊後就消失了。給函式仍可，只有 `huoyianshan` 用
-（大峽谷要 12），性質跟 `map.marker` 一樣。
+一律縮回 6，起訖點原本的 9 在第一次點擊後就消失了。給函式仍可，只有 `huoyianshan` 用（大峽谷的半徑要 12），性質跟 `map.marker` 一樣——
+但**逃生口只該蓋掉它真正要蓋的那一項**：那頁 2026-09 之前連未選取的半徑都自己重算，
+於是起訖點的 9 與最高點的 8 在第一次點擊後都變成 6。現在它把大峽谷以外的半徑交回
+`PAL.radius()`，選取一律 +6，跟 `selected: true` 同一個規則。
 
 各頁只宣告主色與「哪個 `pos` 算山頂」——`jiantanshan` 是觀機平台、`hushan` 是瞭望台。
 第三種語意用 `palette({ extra })` 表達（`datongshan` 的展望台、`nanshijiao` 的信仰地標、
@@ -343,8 +345,9 @@ timeline: { layout: 'card', fields: ['dist', 'ele'] }                     // 卡
 留著只是三個可以讓三處配色再度分家的入口。
 
 「原估時間」不設旋鈕：航點有 `plan` 且與實走 `time` 不同就標，跟航點短名的 `short`
-是同一條「例外用資料表達」的規則。警示地形紅 `#ef4444` 的圓點會脈動——那是全站規則，
-不是逐頁掛的 class。
+是同一條「例外用資料表達」的規則。警示地形紅的圓點會脈動——那是全站規則，不是逐頁掛的 class。
+要把某個 `pos` 標成警示地形就寫 `extra: { '大峽谷': PaPaDetail.WARN }`，**不要抄那串
+十六進位**：脈動是靠「顏色等於 `warn`」認出來的，抄錯一個字就靜靜失效。
 
 2026-08-04 收進來之前，18 頁手寫了 201 行樣板。量下來只有兩種結構家族，其餘差異
 （`mb-8`／`mb-10`／`mb-12`、`rounded-2xl`／`rounded-[1.5rem]`）是世代殘留，不是決定。
@@ -500,9 +503,11 @@ JS 填不到。`fact_check.py` 把 `trip` 當成事實的一個出現位置，�
 天氣請求一律走 `assets/detail.js` 的 `fetchWeather()`，各頁只在 `weather` 設定裡給
 經緯度與文案。目前取回氣溫、體感溫度與降雨機率。
 
-**必須帶 `elevation`。** 只給經緯度時 Open-Meteo 會用它自己地形網格的高度，
-山區常常差很多——先前 `qixingshan` 的副標手寫「山頂較低 10–15°C」就是在補償這件事。
-模組預設取 `schedule` 的最高點，那是最冷、風最大的地方，對行前判斷是保守的一側。
+**請求一律帶 `elevation`，但頁面不必給。** 只給經緯度時 Open-Meteo 會用它自己地形網格的
+高度，山區常常差很多——先前 `qixingshan` 的副標手寫「山頂較低 10–15°C」就是在補償這件事。
+`fetchWeather()` 一律取 `schedule` 的最高點，那是最冷、風最大的地方，對行前判斷是保守的
+一側。2026-09 第四輪拿掉了 `weather.elevation` 旋鈕：22 頁沒有一頁給過，而規格卻寫著
+「必須帶」——那是規格與實作各說各話。
 
 **附加欄位仍要逐項確認再顯示。** 實測 16 天視窗內體感與降雨機率都有值，
 但欄位若因模型或參數組合而缺席，寧可整項不出現，也不要讓 null 變成畫面上的 NaN。
@@ -555,8 +560,14 @@ spec_sweep 現在會擋頁內的 `getComputedStyle`。
   第三輪就是這樣一次改壞 136 處，詳見 `READABILITY_AUDIT.md`。
 
 主色已全數收成 `--accent` 系列變數。各頁在 `:root` 給值，markup 用語意 class
-（`.accent-text` / `.accent-fill` / `.accent-mark` …），腳本以 `getComputedStyle`
+（`.accent-text` / `.accent-fill` / `.accent-mark` …），腳本以 `PaPaDetail.cssVar()`
 讀同一份值。換色與對比檢查因此只需面對 `:root` 的幾個值。
+
+**markup 裡不要出現行內 `style`。** 2026-09 第四輪量到 22 頁共 206 處行內樣式在寫
+`--accent` 系的值，其中 76 處逐字等於 `.accent-text`——同一件事一半走 class、一半走
+行內樣式，換色時只會改到一半。缺哪個組合就往 `detail.css` 補一個 class（第四輪補了
+`.accent-text-mark`、`.accent-fill-strong`、`.accent-line-bold`、`.page-bg`），
+`spec_sweep` 現在會擋。`:root` 定義了卻沒人讀的 token 同樣會擋——換色時要確認的值愈少愈好。
 
 **腳本裡的顏色不能寫 `var(--accent)`**：那些值最終進到 canvas 的 `fillStyle`，
 canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.js。
@@ -604,6 +615,9 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 
 一般段落 `max-w-4xl`、時間軸 `max-w-2xl`。兩種模板世代的達成方式不同但值相同：
 正規頁那一系是各段自帶容器，家族 A 出身的 6 頁是 `<main class="max-w-4xl">`。
+同樣這 6 頁（`bishan`、`huoyianshan`、`laojiujianshan`、`meihuashan`、`mochashan`、
+`shiqiulinling`）的 `<main>` 是 `pt-24` 而非 `pt-14`：它們的 hero 上方本來就留得多，
+改成 `pt-14` 會動到既有版面，因此追認為家族差異。
 
 時間軸再窄一階不是隨意——它是一長串短敘述堆疊，行長越短越好掃。
 
@@ -664,7 +678,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 - `rounded-2xl` — 2rem 圓角
 - `p-4` — 1rem padding
 - `shadow-sm` — 細微陰影
-- `stat-card` 類別 — 定義為 `background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);`
+- `stat-card` 類別 — 住在 `detail.css`：半透明白底、`backdrop-filter: blur(8px)`、淡白框線
 
 ### 2. 戳記（Stamp）
 
@@ -769,7 +783,8 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
       設定就要 `weather`；紀錄頁要 `notice`），沒有把導覽鍵、航點卡欄位、canvas 手寫回來
 - [ ] 沒有多開段落
 - [ ] `<footer>` 在 `<main>` 外面
-- [ ] `<main class="pt-14">`（導覽列由區塊產生，本來就是 `fixed`）
+- [ ] `<main>` 讓出導覽列高度：正規頁一系是 `pt-14`，家族 A 出身的 6 頁是 `pt-24`
+      （見「內容寬度」，同一個家族差異）
 - [ ] 行程事實只在 `trip` 出現一次；版面上用 `data-trip` 槽，不手打數字
 - [ ] 灰階用 stone 不用 slate（class **與** `:root` 的十六進位值都要查）
 - [ ] `#overview` 有統計數字排，含**總里程**、耗時、爬升、最高海拔
@@ -831,7 +846,8 @@ open http://localhost:8000
 
 - **共用結構**（定義於 `assets/detail.css`）：`.nav-btn`, `.chart-container`,
   `.timeline-line`, `.waypoint-card`, `.card-hover`, `.info-glass`
-- **本頁專屬**：`.stamp`, `.hero-accent`, `.section-bar-*`（`.stat-card` 已於 2026-09 收進 `detail.css`，天氣卡區塊靠它）
+- **本頁專屬**：目前沒有。`.stat-card`、`.stamp`、`.hero-accent`、`.section-bar-*` 都已於
+  2026-09 收進 `detail.css`（各頁原本定義得一字不差），`spec_sweep` 會擋頁面再定義一份
 - **回應式**：`hidden md:flex`, `grid-cols-1 md:grid-cols-2`
 
 同一個元件不要有兩個名字。第五輪已把 `#realMap` 併入 `#map`、

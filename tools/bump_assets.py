@@ -26,11 +26,17 @@ def asset_hash(path):
 
 
 def stale(s, hashes):
-    """回傳頁面裡版本不對的資產清單。沒帶 ?v= 也算過期。"""
+    """回傳頁面裡版本不對的資產清單。沒帶 ?v= 算過期，帶了別的查詢字串也算。
+
+    尾巴用 [^"]* 收乾淨是刻意的：第一版寫成 `(\\?v=([0-9a-f]*))?"`，於是
+    `?v=deadbeef&x=1a2b3c4d` 這種帶別的參數的寫法整段比對不上、直接沒被看見
+    ——那正是這條規則要擋的東西（2026-09 第四輪的注入測試發現）。
+    也因此只認 href=／src= 裡的引用：散文與註解裡提到檔名（「見 assets/detail.css 的…」）
+    不是引用，而收乾淨的尾巴會一路吃到下一個引號。"""
     bad = []
-    for m in re.finditer(r'(assets/(?:site|detail)\.(?:css|js))(\?v=([0-9a-f]*))?"', s):
-        path, ver = m.group(1), m.group(3)
-        if path in hashes and ver != hashes[path]:
+    for m in re.finditer(r'(?:href|src)="(assets/(?:site|detail)\.(?:css|js))([^"]*)"', s):
+        path, tail = m.group(1), m.group(2)
+        if path in hashes and tail != '?v=' + hashes[path]:
             bad.append(path)
     return bad
 

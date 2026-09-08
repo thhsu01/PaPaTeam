@@ -75,11 +75,6 @@ main section[id] {
   transition: background 0.2s;
 }
 
-.nav-arrow:hover {
-  background-color: var(--nav-arrow-bg);
-  color: #fff;
-}
-
 /* ── 卡片與時間軸 ────────────────────────────────────── */
 
 .card-hover:hover {
@@ -152,7 +147,6 @@ main section[id] {
 /* 其餘頁面用到的變體。命名一致，各頁在 :root 給自己的值。 */
 .accent-line-deep { border-color: var(--accent-border-deep); }
 .accent-mark-light { background: var(--accent-light); }
-.accent-soft-deep { background: var(--accent-soft-deep); }
 .accent-text-deep { color: var(--accent-strong-deep); }
 .accent-text-deeper { color: var(--accent-strong-deeper); }
 .accent-text-inv-soft { color: var(--accent-on-dark-soft); }
@@ -169,6 +163,14 @@ main section[id] {
 /* 淡底加淡框線的小框：航點卡的「隊友建議」（detail.js 的 wp-card 區塊）。
    2026-09 之前 detail.js 用行內 style 寫這兩個 token，違反本檔「markup 用語意 class」的規則 */
 .accent-box { background: var(--accent-tint); border: 1px solid var(--accent-border); }
+
+/* 2026-09 第四輪審查收進來的：22 頁共 206 處行內 style 在寫 --accent 系的值，其中 76 處
+   逐字等於 .accent-text。同一件事一半走 class、一半走行內樣式，換色時只會改到一半。
+   下面五個是原本沒有對應 class 的用法，補齊後頁面不再需要行內 style（spec_sweep 會擋）。 */
+.accent-text-mark  { color: var(--accent); }              /* 主色直接當字色，只有深色專題面板這樣用 */
+.accent-fill-strong { background: var(--accent-strong); } /* 導覽鍵的實心底，白字壓在上面 */
+.accent-line-bold  { border-color: var(--accent); }       /* 框線用主色本身，比 --accent-border 濃 */
+.page-bg { background: var(--page-bg); }                  /* 段落底色＝頁底，11 頁原本寫死 #f5f3ef */
 
 /* 各頁重複定義、內容一字不差的裝飾元件，2026-09 收進來（同 .stat-card 的前例）：
    先前 .stamp 與 .hero-accent 各在 11 頁、三根段落色條在 16–17 頁定義得一字不差。頁面不要再自己寫。

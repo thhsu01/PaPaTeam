@@ -26,7 +26,6 @@
       --timeline-left: 24px;
       --timeline-bg: #e7e5e4;
       --timeline-z: 0;
-      --nav-arrow-bg: #cd4d0b;
       --glass-bg: rgba(255, 255, 255, 0.6);
       --glass-blur: blur(8px);
       --glass-border: 1px solid rgba(234, 88, 12, 0.1);
@@ -42,7 +41,6 @@
       --accent-strong:          #c2410c;                    /* orange-700 */
       --accent-strong-deep:     #9a3412;                    /* orange-800 */
       --accent-tint:            #fff7ed;                    /* orange-50 */
-      --accent-tint-weak:       rgba(255, 247, 237, 0.3);   /* orange-50/30 */
 
     }
 
@@ -57,10 +55,10 @@
     .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -109,7 +107,7 @@
                         <div class="flex flex-col items-center md:items-start" data-widget="weather"></div>
                     </div>
                 </div>
-                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg" aria-label="在地圖應用中導航至金龍場停車場" style="background:var(--accent-strong);">
+                <button onclick="openNavigation()" class="max-w-xl mx-auto w-full py-4 text-white rounded-2xl font-bold shadow-lg transition-all flex items-center justify-center gap-2 text-lg accent-fill-strong" aria-label="在地圖應用中導航至金龍場停車場">
                     <span>🗺️ 開啟導航至金龍場停車場</span>
                 </button>
             </div>

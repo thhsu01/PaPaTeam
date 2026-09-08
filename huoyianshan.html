@@ -26,7 +26,6 @@
       --timeline-left: 24px;
       --timeline-bg: #ffedd5;
       --timeline-z: 0;
-      --nav-arrow-bg: #cd4d0b;
       --glass-bg: rgba(255, 255, 255, 0.7);
       --glass-blur: blur(8px);
       --glass-border: 1px solid rgba(234, 88, 12, 0.2);
@@ -37,12 +36,9 @@
       --accent-border:          #ffedd5;                    /* orange-100 */
       --accent:                 #ea580c;                    /* orange-600 */
       --accent-soft:            #ffedd5;                    /* orange-100 */
-      --accent-soft-deep:       #fed7aa;                    /* orange-200 */
       --accent-strong:          #c2410c;                    /* orange-700 */
-      --accent-strong-deep:     #9a3412;                    /* orange-800 */
       --accent-on-dark:         #fff7ed;                    /* orange-50 */
       --accent-tint:            #fff7ed;                    /* orange-50 */
-      --accent-tint-weak:       rgba(255, 247, 237, 0.3);   /* orange-50/30 */
 
     }
 
@@ -54,10 +50,10 @@
     .leaflet-container { background: #fff7ed; }
     .highlight-canyon { border: 2px solid #ef4444; background: #fff5f5; }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
-  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <link rel="stylesheet" href="assets/detail.css?v=8ba3d186">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
   <script src="assets/site.js?v=01982b47"></script>
-  <script src="assets/detail.js?v=be1baba2"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -93,7 +89,7 @@
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">活動日期</span>
                         <span class="text-xl font-bold text-stone-800"><span data-trip="date:zh"></span></span>
-                        <span class="text-xs text-stone-600 mt-1">全程費時：<span data-trip="duration:zh"></span>鐘</span>
+                        <span class="text-xs text-stone-600 mt-1">全程費時：<span data-trip="duration:zh"></span></span>
                     </div>
                     <div class="flex flex-col gap-1 border-t md:border-t-0 md:border-l accent-line pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">高度落差</span>
@@ -318,13 +314,12 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
-    // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，航點卡因此加回
-    // 里程欄；建議框的 markup 與 advice 內容也已於 2026-08-03 補齊
-    // （此前是全站唯一沒有 wp-advice 的一頁，是規格上的缺口）。
+    // 本頁 schedule 的 dist 已於 2026-08-02 由 GPX 補齊，advice 於 2026-08-03 補齊
+    // （此前是全站唯一沒有 advice 的一頁）。航點卡本身現由 detail.js 的 wp-card 區塊產生。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
       const PAL = PaPaDetail.palette({ accent: ACCENT,
         // 大峽谷是全站語意色「警示地形」的紅：崩塌地形，不是普通景點
-        extra: { "深度導覽區": "#ef4444" } });
+        extra: { "深度導覽區": PaPaDetail.WARN } });
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
 
@@ -362,9 +357,10 @@
             fillOpacity: 1
           };
         },
+        // 逃生口只為了大峽谷比別人大；其餘半徑交回 palette，選取一律 +6（同 map.selected: true）
         selected: (wp, i, n, sel) => ({
-          radius: sel ? 15 : (wp.loc === "火炎山大峽谷" ? 12 : 6),
-          fillOpacity: sel ? 1 : 0.8
+          radius: (wp.loc === "火炎山大峽谷" ? 12 : PAL.radius(wp, i, n)) + (sel ? 6 : 0),
+          fillOpacity: sel ? 1 : 0.92
         })
       },
 
