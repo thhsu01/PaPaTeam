@@ -3,8 +3,9 @@
 因此長期漂移（2026-08-04 的雙軸審查才發現）。這支腳本把那張表變成可執行的檢查。"""
 import re, glob, math, sys, os, functools
 
-os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from papa_common import chdir_root, schedule_objects   # 四支工具共用：根目錄、切航點物件
+chdir_root()
 import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
 import manifest_tree                     # manifest 條目與中文數字：README 檔案樹用的同一份
 ASSET_HASHES = {a: bump_assets.asset_hash(a) for a in bump_assets.ASSETS if os.path.exists(a)}
@@ -58,14 +59,22 @@ KNOWN = {
     'card': {'follow', 'flash', 'onUpdate', 'wrap'},
     # palette 只在最上層：map/chart/timeline 各自的 palette 旋鈕 22 頁沒人用，
     # 2026-09 第二輪審查後拿掉（detail.js 三處改讀同一個 pal()）。
-    'map': {'preferCanvas', 'center', 'zoom', 'setView', 'attribution', 'track',
-            'marker', 'popup', 'selected'},
+    # attribution 與天氣的 sep／unit／errorMain 2026-09 第三輪拿掉：圖磚出處與溫度寫法是
+    # 共用區塊的事，各頁給的值只是抄來的差異（4 頁多寫 °C、2 頁換分隔號、6 頁忘了出處）。
+    'map': {'preferCanvas', 'center', 'zoom', 'setView', 'track', 'marker', 'popup', 'selected'},
     'map.track': {'points', 'slice', 'color', 'weight', 'opacity', 'dashArray'},
     'chart': {'lineColor', 'fillColor', 'fillAlpha',
               'elevationFloor', 'elevationMax', 'advanced'},
     'timeline': {'layout', 'fields', 'emoji', 'hover'},
-    'weather': {'lat', 'lng', 'elevation', 'subText', 'sep', 'unit', 'errorMain'},
+    'weather': {'lat', 'lng', 'elevation', 'subText'},
 }
+# PaPaDetail.palette() 認得的選項。peak／stone／isEnd 同日拿掉：沒有頁用過，而 peak 給了
+# 別的值本來就會被下面的語意色規則擋——一個只能填預設值的旋鈕不是旋鈕。
+PALETTE_OPTS = {'accent', 'isPeak', 'extra'}
+
+# 住在 detail.css 的元件 class。2026-09 第三輪收進去之前，.stamp 與 .hero-accent 各 11 頁、
+# 三根段落色條 16–17 頁定義得一字不差；頁面再寫一份就是漂移的起點（同 .stat-card 的前例）。
+CSS_OWNED = ('stamp', 'hero-accent', 'section-bar-green', 'section-bar-stone', 'section-bar-accent', 'stat-card')
 
 # 由 detail.js 產生的共用區塊。頁面只放 <div data-widget="…"> 掃載點；
 # 這些區塊的 id 與 class 若又出現在頁面原始碼裡，就是有人把它手寫回來了。
@@ -97,31 +106,6 @@ def hav(a, b, c, d):
     p1, p2 = math.radians(a), math.radians(c)
     x = math.sin((p2 - p1) / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(math.radians(d - b) / 2) ** 2
     return 2 * R * math.asin(math.sqrt(x))
-
-
-@functools.lru_cache(maxsize=None)
-def schedule_objects(s):
-    """以括號配對切出 schedule 的每個物件。用貪婪 regex 會跨物件吃字元，
-    2026-08-03 就是這樣漏讀了 nanshijiao 17 個航點裡的 3 個。
-    五個檢查各自呼叫一次，所以以整頁原始碼為鍵快取；回傳的 list 不要就地改。"""
-    i = s.find('const schedule')
-    if i < 0:
-        return []
-    i = s.index('[', i)
-    depth, out, cur = 0, [], None
-    for j in range(i, len(s)):
-        ch = s[j]
-        if ch == '{':
-            if depth == 0:
-                cur = j
-            depth += 1
-        elif ch == '}':
-            depth -= 1
-            if depth == 0:
-                out.append(s[cur:j + 1])
-        elif ch == ']' and depth == 0:
-            break
-    return tuple(out)
 
 
 def js_block(s, key):
@@ -215,10 +199,32 @@ def check(f):
     p = []
 
     # ── 結構 ────────────────────────────────────────────────
-    if [x for x in re.findall(r'<section[^>]*id="([a-z-]+)"', s) if x in SECTIONS] != SECTIONS:
-        p.append('段落 id 或順序異常')
+    # 比對全部的 <section id>，不先過濾：規格說「不新增段落」，第一版先挑出規格內的五個
+    # 再比順序，多開一個 <section> 反而不會紅（2026-09 第三輪審查抓到）。
+    if re.findall(r'<section[^>]*id="([a-z-]+)"', s) != SECTIONS:
+        p.append('段落 id、順序或數量異常——只能有 %s' % ' → '.join(SECTIONS))
     if re.search(r'返回首頁|←\s*首頁', s):
         p.append('疑似左上返回鍵')
+
+    # ── 給爬蟲看的兩處手寫 ───────────────────────────────────
+    # <title> 與 <meta description> 是 JS 填不到的地方，所以留著手寫；也因此格式只能靠這裡守。
+    # 2026-09 第三輪審查：10 頁沒有 description（含正規頁），<title> 有三種寫法。
+    t = re.search(r'<title>([^<]*)</title>', s)
+    if not t or not re.fullmatch(r'\S.* — 爬爬小隊', t.group(1)):
+        p.append('<title> 格式應為「路線名 — 爬爬小隊」（全形破折號、不帶日期）')
+    if not re.search(r'<meta name="description" content="[^"]+"', s):
+        p.append('缺 <meta name="description">——正規頁骨架要求的三個 meta 之一')
+
+    # ── 頁面自己不寫函式 ─────────────────────────────────────
+    # 取 :root 色值的 cssVar 由 PaPaDetail 匯出；2026-09 之前 11 頁各自定義一份、另 11 頁
+    # 寫整段 getComputedStyle 長鏈。
+    if 'getComputedStyle(' in s:
+        p.append('頁面自己呼叫 getComputedStyle——改用 PaPaDetail.cssVar(\'--accent\')')
+
+    # ── 住在 detail.css 的元件 class 不要在頁內再定義 ──────────
+    for c in CSS_OWNED:
+        if re.search(r'^\s*\.%s\s*\{' % re.escape(c), s, flags=re.M):
+            p.append('.%s 已收進 detail.css，頁面不要再定義一份' % c)
 
     # ── 共用區塊用到的主色 token 必須定義 ────────────────────
     # wp-card 的建議框用 var(--accent-tint) 與 var(--accent-border)。2026-09 候選 2 把航點卡
@@ -277,12 +283,16 @@ def check(f):
         p.append('slate class')
 
     # ── 語意色：最高點一律 #7c9e52 ─────────────────────────
-    # 用 PaPaDetail.palette() 的頁面，顏色來自 detail.js 的預設（由 check_shared()
-    # 把關），此處只查有沒有覆寫成別的顏色；沒用 palette() 的頁面才逐處查三元運算。
-    for m in re.finditer(r'palette\(\{([^}]*)\}', s):
-        ov = re.search(r'peak:\s*[\'"]?(#[0-9a-fA-F]{6})', m.group(1))
-        if ov and ov.group(1).lower() != PEAK:
-            p.append('palette() 把最高點覆寫成 %s，應為 %s' % (ov.group(1), PEAK))
+    # 用 PaPaDetail.palette() 的頁面，顏色來自 detail.js 的常數（由 check_shared() 把關），
+    # 頁面能給的只有 PALETTE_OPTS 三樣；沒用 palette() 的頁面才逐處查三元運算。
+    pblk = js_block(s, 'PaPaDetail.palette(')
+    if pblk:
+        flat = re.sub(r'\{[^{}]*\}', '', pblk[1:-1])          # 去掉 extra 的內層物件，剩頂層鍵
+        for k in re.findall(r'(?<![\w$])([A-Za-z_$][\w$]*)\s*:', flat):
+            if k not in PALETTE_OPTS:
+                p.append('palette({ %s })：不是 palette() 認得的選項（只有 %s）' % (k, '／'.join(sorted(PALETTE_OPTS))))
+        if 'isPeak: wp => wp.pos === "最高點"' in pblk:
+            p.append('palette() 的 isPeak 跟預設一樣（最高點），多寫')
     if 'PaPaDetail.palette(' not in s:
         for m in re.finditer(r'最高點"?\s*\?\s*([^\s:,]+)', s):
             v = m.group(1).strip("'\"")
@@ -339,7 +349,9 @@ def check(f):
             p.append('data-trip="%s"：沒有「%s」這個行程事實' % (m.group(1), fact))
         elif fmt and fmt not in TRIP_SLOTS[fact]:
             p.append('data-trip="%s"：%s 沒有「%s」這種格式' % (m.group(1), fact, fmt))
-    if ('trip', 'date') in keys and 'notice' not in mounts:
+    # 紀錄頁＝有 trip.km，跟 detail.js 的 isRecord() 同一個判準。第一版看 trip.date，
+    # 於是「有日期沒里程」的計畫頁會被要求放 notice，而 detail.js 又把它拿掉（第三輪審查）。
+    if ('trip', 'km') in keys and 'notice' not in mounts:
         p.append('紀錄頁缺 data-widget="notice" 掃載點——行程日過後不會出現「此行程已完成」')
     if ('trip', 'date') in keys:
         if re.search(r'<script[^>]*src="assets/tracks/', s):
@@ -532,6 +544,19 @@ def check_manifest():
     for d in sorted(dirs):
         if not os.path.isdir(d):
             p.append('manifest.json 列了目錄 %s，倉庫裡沒有' % d)
+    # 頁面條目的 status 要跟「有沒有軌跡檔」一致——manifest_tree 就是拿軌跡檔分已完成／候選的，
+    # status 只是給讀 manifest 的人看，漂了沒人發現。行程日不在這裡：那是頁面 trip 的事
+    # （2026-09 第三輪審查刪掉 pages[].date——第三份日期副本，沒有任何工具讀）。
+    tracks = {re.match(r'assets/tracks/(.+)-\d{4}-\d{2}-\d{2}\.js$', t).group(1)
+              for t in glob.glob('assets/tracks/*.js')}
+    for e in entries:
+        path = e['path']
+        if path.endswith('.html') and path != 'index.html':
+            done = path[:-5] in tracks
+            if e.get('status') != ('completed' if done else 'candidate'):
+                p.append('%s 的 status 是 %s，但%s軌跡檔' % (path, e.get('status'), '有' if done else '沒有'))
+            if 'date' in e:
+                p.append('%s 的條目有 date——行程日只在頁面的 trip 宣告' % path)
     # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的。
     for e in entries:
         path = e['path']
@@ -591,9 +616,9 @@ def check_shared():
     預設值裡，這裡是它唯一的來源，所以要有人看著。"""
     p = []
     js = open('assets/detail.js', encoding='utf-8').read()
-    m = re.search(r"function palette\(opt\)[\s\S]{0,400}?peak\s*=\s*opt\.peak\s*\|\|\s*'(#[0-9a-fA-F]{6})'", js)
+    m = re.search(r"var PEAK\s*=\s*'(#[0-9a-fA-F]{6})'", js)
     if not m:
-        p.append('detail.js 找不到 palette() 的山頂綠預設值')
+        p.append('detail.js 找不到 palette() 的山頂綠常數 PEAK')
     elif m.group(1).lower() != PEAK:
         p.append('detail.js 的 palette() 山頂綠是 %s，應為 %s' % (m.group(1), PEAK))
     if 'hideEmptyAdvice' in js:

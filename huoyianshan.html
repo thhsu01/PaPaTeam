@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>爬爬小隊 2025年12月13日：苗栗火炎山、北鞍古道 O 走</title>
+  <meta name="description" content="2025/12/13 火炎山、北鞍古道 O 走實走紀錄。自正松泉收費停車場起登，經南鞍線登山口、火炎山三角點與火炎山大峽谷，全程 8.34 公里。">
+    <title>苗栗火炎山、北鞍古道 O 走 — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -53,10 +54,10 @@
     .leaflet-container { background: #fff7ed; }
     .highlight-canyon { border: 2px solid #ef4444; background: #fff5f5; }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased selection:accent-soft text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -313,8 +314,7 @@
             }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT = cssVar('--accent');
+    const ACCENT = PaPaDetail.cssVar('--accent');
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。

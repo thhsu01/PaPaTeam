@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026/6/20 猴崁水圳 × 青楓步道 × 頂湖 O 型實走紀錄。自陽明山立體停車場起走，經草山觀瀑吊橋、青楓步道登頂頂湖山，全程 7.75 公里。">
   <title>猴崁水圳 × 青楓步道 × 頂湖O型 — 爬爬小隊</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,14 +31,11 @@
       --accent-tint:   color-mix(in srgb, var(--accent) 8%, white);   /* 淡底：建議框等共用區塊用 */
       --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線：同上 */
     }
-      .section-bar-accent { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -243,8 +241,7 @@
       { lat: 25.154635, lng: 121.539265, time: "11:45", loc: "陽明山立體停車場 (H385m)", dist: 7.75, ele: 385, pos: "回程終點", desc: "回程終點，累計里程: 7.75 km", advice: "搭乘公車或步行回到停車場，完成今日行程！" }
     ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT = cssVar('--accent');
+    const ACCENT = PaPaDetail.cssVar('--accent');
     // 本頁地圖用的綠是 green-600，與 markup 的 emerald 主色不同族，
     // 是既有狀態，此處照原樣保留。
     const TRACK = '#16a34a';
@@ -261,11 +258,10 @@
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       trip: { date: "2026-06-20", km: 7.75, duration: "4:45", gain: 352, summit: 662 },
       nav: [25.1620,121.5295],
-      weather: { lat: 25.1654, lng: 121.5325, sep: '° - ' },
+      weather: { lat: 25.1654, lng: 121.5325 },
 
       map: {
         setView: [[25.1620, 121.5295], 15],
-        attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。時間與里程本來就取自這份 GPX，
         // 現在連地圖畫的線也換成它，不再是航點之間的直線。
         track: { weight: 4, opacity: 0.85, color: TRACK },

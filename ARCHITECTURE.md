@@ -171,11 +171,13 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
   <!-- 順序固定：inline style → detail.css → site.css。
        ?v= 是內容雜湊，由 tools/bump_assets.py 寫入、spec_sweep 檢查：導覽列等區塊由
        detail.js 產生之後，新版 HTML 配上快取裡的舊版 JS 就會整條導覽列不見——
-       2026-09-07 正式站發生過。改了共用檔就跑一次 bump_assets.py。 -->
-  <link rel="stylesheet" href="assets/detail.css?v=d4fe0168">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=765195f8"></script>
+       2026-09-07 正式站發生過。改了共用檔就跑一次 bump_assets.py。
+       下面的 <內容雜湊> 是佔位符：本檔不是頁面，bump_assets 不會改它，
+       真正的值抄任何一頁或跑一次工具就有。 -->
+  <link rel="stylesheet" href="assets/detail.css?v=<內容雜湊>">
+  <link rel="stylesheet" href="assets/site.css?v=<內容雜湊>">
+  <script src="assets/site.js?v=<內容雜湊>"></script>
+  <script src="assets/detail.js?v=<內容雜湊>"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -234,7 +236,10 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 
 - **掃載點自己沒寫 `class` 就套正規 class；有寫就保留。** 那是給「格子屬於頁面版面」的
   情況用的逃生口——舊世代把天氣卡放在自己的資訊卡網格裡，格子的邊框與內距是網格的事，
-  不是天氣卡的事。跟 `map.marker` 同一種性質：能用就別用。
+  不是天氣卡的事。跟 `map.marker` 同一種性質：能用就別用。目前只有天氣卡在用，且是刻意的：
+  `datongshan`、`datunshan`、`dinghu`、`qixingshan`、`shanying`、`huoyianshan`、
+  `laojiujianshan`、`meihuashan`、`mochashan` 的天氣格子住在各自的統計網格裡，
+  2026-09 補上天氣卡的 `bishan` 與 `shiqiulinling` 也是。
 - **紀錄頁與候選頁的差異由 `trip.km` 有無推導**（紀錄頁才有實走里程；計畫頁有日期但沒有里程，仍是行前頁），不再各頁手寫：第五顆導覽鍵的文字
   （實走紀錄／預估進度）、航點卡的時間標籤（實際時間／預計時間）、導覽列的日期副標、
   要不要已完成提示——候選頁的 `notice` 掃載點會被拿掉，不會留一個空框。
@@ -384,8 +389,9 @@ GPS 顯示停留五分鐘以上、但隊友沒有給地名的點，**照樣收�
 
 命名用**描述詞**，不要編地名：`eweishan` 的「第一休息點」「第二休息點」「稜線休息點」、
 `daqitou` 的「古圳休息點」。並在該航點的 `desc` 裡明寫**這個點沒有地名**，
-免得讀者把描述詞當成地名去查。`tools/spec_sweep.py` 會擋：`pos` 是「休息點」而
-`loc` 又以「休息點」結尾的航點，`desc` 必須說明它沒有地名。
+免得讀者把描述詞當成地名去查。`tools/spec_sweep.py` 會擋：`loc` 以「休息點」或
+「折返點」結尾的航點，`desc` 必須說明它沒有地名——只看 `loc` 不看 `pos`，因為
+`zhongzhengshan` 的折返點 `pos` 是最高點。
 
 這條慣例的由來：2026-08-04 的雙軸審查指出，「只取 GPS 停留點」原本是只對
 `zhongzhengshan` 下的裁示，實作把它推廣到另外三頁、產生了四個清單外的航點。
@@ -476,11 +482,12 @@ trip: { date: "2024-04-20", km: 4.35, duration: "2:00", gain: 120, summit: 184 }
 <span class="stamp"><span data-trip="date:md"></span></span>   <!-- 4月20日 -->
 | <span data-trip="date:zh"></span>                <!-- 2024 年 4 月 20 日 -->
 <div class="text-3xl font-black" data-trip="km"></div>         <!-- 4.35 -->
-全程 <span data-trip="duration:zh"></span>          <!-- 2 小時 0 分 -->
+全程 <span data-trip="duration:zh"></span>          <!-- 2 小時 -->
 ```
 
 格式在冒號後面，可用值由 `detail.js` 的 `TRIP_FORMAT` 與 `spec_sweep.py` 的 `TRIP_SLOTS`
-共同定義（`date`：ymd／md／zh；`duration`：hm／zh／h／m）。寫錯的槽只會靜靜留白，所以
+共同定義（`date`：ymd／md／zh／slash；`duration`：hm／zh／h／m——整點的 `zh` 不寫「0 分」，
+分鐘一律不補零，`zh` 與 `m` 才會一致）。寫錯的槽只會靜靜留白，所以
 spec_sweep 會擋。沒宣告的事實槽也留白——漏寫就該在畫面上看得見。
 
 三處仍是手寫的：`<title>`、`<meta name="description">`、首頁卡片。那是給爬蟲看的，
@@ -512,6 +519,9 @@ Open-Meteo 回傳的 WMO 代碼有 28 種，先前五個頁面各寫一份、每
 `assets/detail.js`，頁面只給 `schedule` 與 `PaPaDetail.init({…})`（設定鍵由
 `tools/spec_sweep.py` 的 `KNOWN` 把關）。`prevWaypoint()`／`nextWaypoint()`／
 `openNavigation()` 是 `init` 掛到 `window` 上的，區塊裡的按鈕會呼叫。
+腳本開頭要拿 `:root` 的色值（canvas 不解析 CSS 變數）就用 `PaPaDetail.cssVar('--accent')`
+——2026-09 之前 11 頁各自定義一份 `cssVar`、另 11 頁抄整段 `getComputedStyle`，
+spec_sweep 現在會擋頁內的 `getComputedStyle`。
 天氣卡兩種情境：有 `trip.date` 的頁查該日預報，行程日過了就顯示今日天氣並說明
 （`trip-past-notice`）；沒日期的候選頁顯示今日天氣。
 
@@ -559,8 +569,9 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 `caolingguidao`、`henglingguidao`、`zhongzhengshan`、`daluntouweishan`、`daqitou`、`eweishan` 是照本規格從零建起、而非事後收斂的）。以瀏覽器
 實測逐項確認（2026-08-04 重跑）：
 
-**這張表由 `tools/spec_sweep.py` 產生，不是人工勾的。** 在專案根目錄跑 `python3 tools/spec_sweep.py`，全過會回傳 0。 標 🤖 的項目每次改完 `schedule` 或
-版面都該重跑；標 👁 的仍靠人眼或瀏覽器實測。2026-08-04 的雙軸審查發現這張表先前有
+**這張表是人工維護、由工具複驗的：標 🤖 的每一列在 `tools/spec_sweep.py`（或 CI 的瀏覽器實測）
+都有對應的規則。** 在專案根目錄跑 `python3 tools/spec_sweep.py`，全過會回傳 0。 標 🤖 的項目每次改完 `schedule` 或
+版面都該重跑；標 👁 的仍靠人眼。2026-08-04 的雙軸審查發現這張表先前有
 兩項掛著 ✅ 卻不成立（導覽鍵文字、主色 token），原因就是規格寫了卻沒有人檢查——
 **規格表寫了卻沒有檢查，等於沒寫**，這是加上掃描腳本的由來。
 
@@ -571,7 +582,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 | `<h2>` 主詞符合規格表 | 🤖 | ✅ 22/22（2026-08-04 收斂：`map-section` 5 頁、`elevation` 5 頁、`timeline` 2 頁曾各自命名）|
 | 灰階用 stone | 🤖 | ✅ 22/22 — **class 名稱與十六進位值都查過**，且先剝掉註解再查 |
 | 總覽有總里程 | 🤖 | ✅ 22/22（2026-08-04：`bishan` 標「徒步長度」不符規格，已改「總里程 km（估）」）|
-| 站徽帶 `aria-label` | 🤖 | ✅ 22/22 |
+| 站徽帶 `aria-label` | 🤖 | ✅ 22/22（導覽列由 `detail.js` 產生；spec_sweep 只擋手寫回來的導覽列） |
 | 無左上 `fixed` 返回鍵 | 🤖 | ✅ 22/22 |
 | 每個航點都有 `advice` | 🤖 | ✅ 22/22，共 222 個航點 |
 | 里程健全性（≥ 直線、單調） | 🤖 | ✅ 22/22，0 筆 |
@@ -583,7 +594,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 | 站徽（綠圓 + 爬爬小隊） | 👁 | ✅ 22/22 |
 | 段落 `scroll-margin-top` | 👁 | ✅ 集中於 `detail.css` |
 | 主色收成 `--accent` token | 👁 | ✅ 22/22 導航鍵與段落色條（2026-08-04 收斂：7 頁的導航鍵、6 頁的段落色條曾寫死 `bg-blue-600`／`bg-indigo-600` 等）。深色專題面板與語意色仍在例外之列，見「尚未收斂的一件事」|
-| 小字對比 ≥ 4.5:1 | 👁 | ✅ 22/22（含 index）0 筆失敗。已知量測假陽性：skip link（聚焦前在畫面外）、index 的「詳情待補充」徽章、以及字佔滿整格的大標題（量到的底色會等於字色本身）|
+| 小字對比 ≥ 4.5:1 | 🤖 | ✅ 22/22（含 index；`contrast.yml` 在 push 到 main 與 PR 上以瀏覽器實測）0 筆失敗。已知量測假陽性：skip link（聚焦前在畫面外）、index 的「詳情待補充」徽章、以及字佔滿整格的大標題（量到的底色會等於字色本身）|
 
 **回首頁的唯一入口是導覽列的站徽**（帶 `aria-label="爬爬小隊首頁"`）。
 左上那顆 `fixed` 返回鍵已於 2026-08-03 全數移除（當時 15 頁）——它一直被導覽列蓋住，
@@ -725,10 +736,12 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
    - 一律複製 `nanshijiao.html`，不要複製其他頁——其他頁都還有偏離（見上方對照表）
    - 存成新檔名（如 `newmountain.html`）
 
-2. **更新標籤**
-   - `<title>` — 更改為新路線名稱
+2. **更新標籤**（這兩處是給爬蟲看的，JS 填不到，所以仍手寫；格式由 spec_sweep 守）
+   - `<title>` — 「路線名 — 爬爬小隊」：全形破折號、不帶日期。2026-09 之前有三種寫法
    - `<h1>` — 更新標題
-   - `<meta name="description">` — 新增頁面描述
+   - `<meta name="description">` — 必填。已完成頁以行程日 `YYYY/M/D` 開頭、句尾寫
+     「全程 N 公里」，fact_check 會對著 `trip` 核對；候選頁寫路線概要即可。
+     只用頁面上已有的事實換寫法，不在這裡加新的數字或地名
 
 3. **更新資料**
    - 改寫 `schedule` 陣列（座標、時間、里程、海拔、`pos` 類型、描述、建議）

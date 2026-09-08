@@ -39,16 +39,11 @@
     }
 
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
-    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
-    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
-    .section-bar-accent { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -322,8 +317,7 @@
 
     // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
     // 所以要先從 :root 取出實際值。
-    const ACCENT = getComputedStyle(document.documentElement)
-                     .getPropertyValue('--accent').trim();
+    const ACCENT = PaPaDetail.cssVar('--accent');
 
     // 航點配色。規則收在 detail.js 的 palette()，本頁只給主色；
     // 預設的 isPeak 認 pos === "最高點"，正好對上鵝尾山，不必覆寫。
@@ -345,7 +339,6 @@
 
       map: {
         setView: [[25.1327, 121.5843], 15],
-        attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/）。環狀，收錄處離起錄點 49 m。
         track: { weight: 4, opacity: 0.85 },
         popup: true

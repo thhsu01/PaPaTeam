@@ -15,7 +15,9 @@ ADR——manifest 反而一直是齊的。所以清單只留 manifest 一份：�
       python3 tools/manifest_tree.py --check  README 的區塊跟產生結果不同就回傳 1"""
 import json, re, os, sys
 
-os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from papa_common import chdir_root
+chdir_root()
 
 START, END = '<!-- manifest-tree:start -->', '<!-- manifest-tree:end -->'
 COL = 32        # 註解對齊的欄位

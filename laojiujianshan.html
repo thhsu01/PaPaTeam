@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鷹石之巔，翠湖幽境：內溝山系 O 型全系列縱走 - 爬爬小隊</title>
+  <meta name="description" content="2026/5/1 內溝山系 O 型全系列縱走實走紀錄。自金龍場停車場起登，經學頭坡山、汐止鷹石尖、老鷲尖，下翠湖回停車場，全程 8.50 公里。">
+    <title>鷹石之巔，翠湖幽境：內溝山系 O 型全系列縱走 — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -54,15 +55,12 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
     .loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-      .section-bar-accent { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
     .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -289,8 +287,7 @@
             { lat: 25.071960894394802, lng: 121.63322171182692, time: "12:37", loc: "金龍場停車場", dist: 8.38, ele: 20, pos: "終點", desc: "累計 8.38 km，軌跡於 12:39 收錄於 8.50 km。", advice: "回到起點完成 O 型。金龍寺周邊有小吃店，可安排慶功；捷運東湖站約 10 分鐘車程。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT = cssVar('--accent');
+    const ACCENT = PaPaDetail.cssVar('--accent');
 
 
     // ── 本頁設定 ──────────────────────────────────────────────
@@ -303,8 +300,7 @@
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       trip: { date: "2026-05-01", km: 8.50, duration: "4:49", gain: 230, summit: 193 },
       nav: [25.071960894394802, 121.63322171182692],
-      weather: { lat: 25.0719, lng: 121.6332, sep: '° - ',
-                 errorMain: '連線失敗' },
+      weather: { lat: 25.0719, lng: 121.6332 },
 
       card: {
         follow: 'pan', wrap: 'cycle',

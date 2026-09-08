@@ -166,6 +166,18 @@ main section[id] {
 .accent-soft { background: var(--accent-soft); }
 .accent-tint { background: var(--accent-tint); }
 .accent-line { border-color: var(--accent-border); }
+/* 淡底加淡框線的小框：航點卡的「隊友建議」（detail.js 的 wp-card 區塊）。
+   2026-09 之前 detail.js 用行內 style 寫這兩個 token，違反本檔「markup 用語意 class」的規則 */
+.accent-box { background: var(--accent-tint); border: 1px solid var(--accent-border); }
+
+/* 各頁重複定義、內容一字不差的裝飾元件，2026-09 收進來（同 .stat-card 的前例）：
+   先前 .stamp 與 .hero-accent 各在 11 頁、三根段落色條在 16–17 頁定義得一字不差。頁面不要再自己寫。
+   色條的綠與石色是全站語意色（山頂、一般航點），與 detail.js 的 palette() 同值。 */
+.stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
+.hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
+.section-bar-green  { background: #7c9e52; }
+.section-bar-stone  { background: #a09080; }
+.section-bar-accent { background: var(--accent); }
 
 /* 本區塊刻意排在 .info-glass 之後：後者用 border 簡寫，
    而簡寫與 border-color longhand 之間只看先後、不看特異性。 */
