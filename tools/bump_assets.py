@@ -6,14 +6,16 @@ JS 的版本。HTML 與 JS 各自快取——正式站換了新版 HTML（導覽
 瀏覽器或 GitHub Pages 的邊緣快取卻還拿著舊版 detail.js（沒有 WIDGETS），
 站徽與回首頁的連結就整個不見。這是實際發生過的事。
 
-雜湊跟著內容走：改了任何一支共用檔就跑一次本工具，22 頁的 URL 一起換，
+雜湊跟著內容走：改了任何一支共用檔就跑一次本工具，23 頁（含首頁）的 URL 一起換，
 新 URL 必然抓到新檔。忘了跑會被 spec_sweep 擋下來——它用同一個 asset_hash()。
 
 用法：python3 tools/bump_assets.py          改寫所有頁面
       python3 tools/bump_assets.py --check  只報告哪些頁面過期（spec_sweep 用的就是這個）"""
 import hashlib, re, glob, sys, os
 
-os.chdir(os.environ.get('PAPA_ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from papa_common import chdir_root
+chdir_root()
 
 ASSETS = ['assets/site.css', 'assets/detail.css', 'assets/site.js', 'assets/detail.js']
 REF = re.compile(r'(assets/(?:site|detail)\.(?:css|js))(?:\?v=[0-9a-f]*)?(?=")')

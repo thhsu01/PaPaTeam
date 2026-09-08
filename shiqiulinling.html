@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>獅球稜線：基隆門戶大縱走 - 爬爬小隊</title>
+  <meta name="description" content="獅球嶺砲台基隆歷史古蹟縱走計畫。自八堵車站起走，經獅球嶺步道登山口、獅球嶺山、獅球嶺砲台、劉銘傳隧道，至基隆車站解散。">
+    <title>獅球稜線：基隆門戶大縱走 — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -50,10 +51,10 @@
     ::-webkit-scrollbar-thumb { background: #0ea5e9; border-radius: 10px; }
       .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased selection:bg-blue-100">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -108,7 +109,7 @@
 
                 <!-- 總覽數字。其餘候選頁都有這一排，本頁先前只有集合資訊，
                      總里程完全沒出現在畫面上。 -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
                     <div class="text-center">
                         <div class="text-2xl font-black text-stone-900">5.95</div>
                         <div class="text-xs text-stone-600">總里程 km（估）</div>
@@ -125,6 +126,7 @@
                         <div class="text-2xl font-black accent-text">155</div>
                         <div class="text-xs text-stone-600">最高海拔 m（獅球嶺山／東砲台山）</div>
                     </div>
+                    <div class="text-center" data-widget="weather"></div>
                 </div>
                 <p class="text-xs text-stone-600 max-w-2xl mx-auto text-left md:text-center">
                     海拔採基石與圖根點數值。航點淨爬升合計 136 m，稜線小起伏未計入，故以 150 m 估。
@@ -323,13 +325,12 @@
               desc: "抵達基隆港邊。可前往廟口夜市享用慶功午餐。", advice: "行程圓滿完成！想縮短行程的話，從獅球嶺北峰經平安宮下三坑車站是更常見的走法。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT_LIGHT = cssVar('--accent-light');
+    const ACCENT_LIGHT = PaPaDetail.cssVar('--accent-light');
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。本頁無導航鍵，故不設 nav。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() });
+      const PAL = PaPaDetail.palette({ accent: PaPaDetail.cssVar('--accent') });
 
     PaPaDetail.init({
       schedule,
@@ -337,6 +338,7 @@
 
       card: { follow: 'pan', wrap: 'cycle' },
 
+      weather: { lat: 25.119, lng: 121.734 },   // 地圖中心；候選頁顯示今日天氣
       map: {
         preferCanvas: true,
         center: [25.119, 121.734], zoom: 14,

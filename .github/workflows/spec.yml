@@ -28,8 +28,8 @@ jobs:
       - name: 全站規格掃描
         run: python3 tools/spec_sweep.py
 
-      # 同一趟行程的日期與里程在頁內出現七、八次、首頁又有一份，全部手打。
-      # 這一步確保漏改其中一處會被擋下來，而不是靠人記得全部改到。
+      # 行程事實在 trip 宣告一次、由槽填；剩下手寫的 meta、首頁卡片與散文裡順口提到的
+      # 數字，這一步對著 trip 交叉核對，漏改其中一處會被擋下來，而不是靠人記得。
       - name: 行程事實一致性
         run: python3 tools/fact_check.py
 
@@ -43,11 +43,11 @@ jobs:
             echo ""
             echo "規範出處："
             echo ""
-            echo "- 段落 id、導覽鍵文字、\`<h2>\` 主詞 → \`ARCHITECTURE.md\` 的「段落規格」表"
+            echo "- 段落 id、\`<h2>\` 主詞、共用區塊的掃載點 → \`ARCHITECTURE.md\` 的「段落規格」與「元件規格」"
             echo "- 灰階一律 stone、最高點語意色 \`#7c9e52\` → \`manifest.json\` 的 \`conventions\`"
             echo "- 每段里程不得短於兩航點直線距離 → \`ARCHITECTURE.md\` 的「里程健全性」"
             echo "- 每個航點都要有 \`advice\` → \`ARCHITECTURE.md\` 的「尚未收斂的一件事」"
-            echo "- 日期與總里程在頁內多處重複 → 由 \`tools/fact_check.py\` 交叉核對，任一處漏改就會擋下"
+            echo "- 手寫的 meta、首頁卡片、散文數字要與 \`trip\` 一致 → 由 \`tools/fact_check.py\` 交叉核對"
             echo ""
             echo "本機重現：\`python3 tools/spec_sweep.py\`（全過回傳 0）"
           } >> "$GITHUB_STEP_SUMMARY"

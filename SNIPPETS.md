@@ -145,9 +145,12 @@ PaPaDetail.init({
 點選航點要放大標記就寫 `map.selected: true`（`palette` 的半徑加 6、不透明），
 不要自己算半徑；給函式同樣是逃生口。
 
-`ACCENT` / `PEAK` / `STONE` 是頁面腳本開頭以 `getComputedStyle` 從 `:root`
-取出的實際色值。**腳本裡不能直接寫 `var(--accent)`**——那些值最終進到 canvas 的
-`fillStyle`，canvas 不解析 CSS 變數。
+`ACCENT` 是頁面腳本開頭以 `PaPaDetail.cssVar('--accent')` 從 `:root` 取出的實際色值
+（頁面自己不寫 `getComputedStyle`，spec_sweep 會擋）。**腳本裡不能直接寫
+`var(--accent)`**——那些值最終進到 canvas 的 `fillStyle`，canvas 不解析 CSS 變數。
+山頂綠與一般航點的石色是 `detail.js` 的常數，頁面拿不到也不需要拿。
+`palette()` 認得的選項只有 `accent`、`isPeak`、`extra`；`isPeak` 跟預設一樣
+（`pos === "最高點"`）就不要寫。
 
 ### 實走軌跡（僅已完成行程）
 

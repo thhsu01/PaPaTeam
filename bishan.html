@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>內湖稜線之巔：全縱走連峰 + 櫻紅秘境 - 爬爬小隊</title>
+  <meta name="description" content="內湖山系悠閒縱走計畫。自捷運內湖站起走，經梘頭山、龍船岩、開眼山、白石湖山、碧山，下白石湖吊橋與碧山巖，回捷運內湖站。">
+    <title>內湖稜線之巔：全縱走連峰 + 櫻紅秘境 — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -47,14 +48,11 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f5f5f4; }
     ::-webkit-scrollbar-thumb { background: var(--accent-on-dark); border-radius: 10px; }
-      .section-bar-accent { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased selection:bg-[var(--accent-soft)] text-left">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -79,7 +77,7 @@
 
             <!-- Meeting Info Block -->
             <div class="space-y-4">
-                <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left border border-stone-200">
+                <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left border border-stone-200">
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">預計活動日期</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">2月中至2月底期間</span>
@@ -95,6 +93,7 @@
                         <span class="text-xl font-bold text-stone-800 leading-tight">小 2 區間車</span>
                         <span class="text-xs text-stone-600 mt-1">直達捷運內湖站</span>
                     </div>
+                    <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6" data-widget="weather"></div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
                     <button onclick="openNavigation()" class="flex-1 py-4 text-white rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2" aria-label="在地圖應用中導航至捷運內湖站" style="background:var(--accent-strong);">
@@ -352,9 +351,8 @@
               desc: "搭乘公車回到出發點，完成環型全縱走挑戰。", advice: "回到起點完成環型。內湖站周邊餐廳選擇多，適合安排慶功。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT      = cssVar('--accent');
-    const ACCENT_FILL = cssVar('--accent-fill');
+    const ACCENT      = PaPaDetail.cssVar('--accent');
+    const ACCENT_FILL = PaPaDetail.cssVar('--accent-fill');
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
@@ -371,6 +369,7 @@
 
       card: { follow: 'pan', wrap: 'cycle' },
 
+      weather: { lat: 25.100, lng: 121.595 },   // 地圖中心；候選頁顯示今日天氣
       map: {
         preferCanvas: true,
         center: [25.100, 121.595], zoom: 14,

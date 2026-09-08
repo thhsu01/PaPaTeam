@@ -114,6 +114,7 @@ PaPaTeam/
 │       └── hushan-2024-04-20.js
 │
 ├── tools/
+│   ├── papa_common.py           # Python 工具共用：根目錄、切航點物件
 │   ├── spec_sweep.py            # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
 │   ├── fact_check.py            # 事實一致性：同一個日期／里程在頁內各處是否相符
 │   ├── bump_assets.py           # 共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）
@@ -227,7 +228,7 @@ A:
 
 **Q: 圖片和地圖無法載入？**
 
-A: 檢查網路連接。本站依賴 Unsplash、CDN 等外部資源。如需離線版本，可將圖片和資源本地化（見 CONTRIBUTING.md）。
+A: 檢查網路連接。本站依賴 Unsplash、CDN 等外部資源。如需離線版本，可將圖片和資源本地化。
 
 **Q: 如何自動部署更新？**
 

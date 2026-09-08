@@ -11,7 +11,7 @@
    遇到沒列到的代碼就顯示「天氣代碼96」這種原始值給使用者看
    （96 是雷雨伴冰雹，實際發生過）。此處收成唯一一份完整表。
 
-   本檔不可加 defer。各頁的 fetchWeather() 在 await 網路回應之後查表，
+   本檔不可加 defer。detail.js 的 fetchWeather() 在 await 網路回應之後查表，
    一度以為「網路往返一定比 defer 晚」所以安全——實測推翻了這個推論：
    回應夠快（快取命中或本地測試）時，續行會在 defer 腳本執行前就跑完，
    PaPaWeather 還不存在，整段掉進 catch 顯示「天氣資料暫無法取得」。
@@ -47,8 +47,8 @@ window.PaPaWeather = (function () {
   // 依規範，scrollIntoView({behavior:'smooth'}) 會覆蓋 CSS 的
   // scroll-behavior，因此 @media (prefers-reduced-motion) 攔不到它。
   //
-  // 各詳情頁的導覽鍵都是 inline onclick 直接呼叫 scrollIntoView（約 50 處），
-  // 逐一改寫風險高且易漏，故在此集中改寫 behavior。
+  // 詳情頁的導覽鍵由 detail.js 的 nav 區塊產生，onclick 直接呼叫 scrollIntoView；
+  // 時間軸的項目點下去也是。與其在每個呼叫點各判斷一次，不如在此集中改寫 behavior。
   // 僅在使用者確實要求減少動態時才介入，其餘情況完全不改變行為。
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

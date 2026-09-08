@@ -26,11 +26,16 @@
 **`assets/detail.js` 完整擁有 Chart.js。各頁只給領域旋鈕，不寫 Chart.js 設定。**
 
 ```javascript
-chart: { elevationFloor: 450, lineColor: '--accent-deep', palette: PAL }
+chart: { elevationFloor: 450, lineColor: '--accent-deep' }
 ```
 
-現行旋鈕：`elevationFloor`、`elevationMax`、`lineColor`、`fillColor`、`fillAlpha`、
-`palette`，以及逃生口 `advanced`（深合併進最終設定）。
+現行旋鈕：`elevationFloor`、`elevationMax`、`lineColor`、`fillColor`、`fillAlpha`，
+以及逃生口 `advanced`（深合併進最終設定）。資料點的顏色走 `init()` 最上層的 `palette`，
+與地圖標記、時間軸圓點同一份。
+
+**修訂（2026-09）**：本 ADR 原本列有 `chart.palette` 旋鈕。全站沒有一頁用它——各頁都在
+頂層宣告一次 `palette: PAL`——所以連同 `map`／`timeline` 的同名旋鈕一起拿掉，`spec_sweep`
+的 `KNOWN` 同步。上面的片段與清單已依此改寫；決策本身（Chart.js 藏在接縫後）不變。
 
 `tooltip`、`legend`、`onHover`、格線、x 軸旋轉角、航點短名規則全部收進機制。
 

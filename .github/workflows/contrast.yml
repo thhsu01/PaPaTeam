@@ -1,7 +1,7 @@
 # 瀏覽器實測：對比度（WCAG 2.1 AA）與 detail.js 的執行期基準。兩件事共用一個
 # workflow，因為都要 Playwright 與 Chromium。跟 spec.yml 分開的三個理由：
 #   1. 安裝 Playwright 就要一分多鐘，不該拖慢每次 push 的規格檢查。
-#   2. 它只在畫面可能變動時才有意義，所以只在動到 HTML、CSS 或 JS 的 PR 上跑。
+#   2. 它只在畫面可能變動時才有意義，所以只在動到 HTML、CSS 或 JS 的 PR 與 push 到 main 時跑。
 #   3. 對比度會先重建 tw.css。那份 CSS 是掃 HTML 產生的，用倉庫裡那份舊的就會量到
 #      缺樣式的假版面——2026-08-04 就是這樣讓兩頁的 hero 漸層一直量錯底色。
 #      在 CI 現建，等於每次都是新的。

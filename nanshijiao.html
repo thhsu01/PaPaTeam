@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026/8/2 微笑山線 × 南勢角山 × 一線天實走紀錄。自捷運南勢角站出發，經圓通禪寺一線天、外南勢角山、南勢角山、牛埔頭山與五尖山，全程 11.09 公里。">
   <title>微笑山線 × 南勢角山 × 一線天 — 爬爬小隊</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,21 +40,13 @@
     /* 本頁專屬（刻意不進 detail.css，見該檔說明） */
 
     /* 步道標記意象的斜紋底 */
-    .hero-accent { background: repeating-linear-gradient( -55deg, transparent, transparent 12px, color-mix(in srgb, var(--accent) 6%, transparent) 12px, color-mix(in srgb, var(--accent) 6%, transparent) 24px ); }
-
-
     /* 日期戳章。文字與框線用 var(--accent-strong)（4.63:1）而非品牌色 var(--accent)（2.97:1），見 READABILITY_AUDIT.md */
-    .stamp { display: inline-block; border: 3px solid var(--accent-strong); color: var(--accent-strong); font-weight: 900; font-size: 11px; letter-spacing: 0.15em; padding: 4px 10px; border-radius: 3px; transform: rotate(-1.5deg); text-transform: uppercase; }
-
     /* 區段標題色條（非文字，不受對比度門檻約束，保留品牌色） */
-    .section-bar-orange { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -138,7 +131,7 @@
     <section id="map-section" class="py-16 px-6 bg-white">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           互動路線圖
         </h2>
         <p class="text-sm text-stone-600 mb-6">地圖上的線是 <span data-trip="date:slash"></span> 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節。</p>
@@ -283,7 +276,7 @@
     <section id="timeline" class="py-16 px-6" style="background:#f5f3ef;">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
-          <span class="w-2.5 h-8 rounded-full section-bar-orange"></span>
+          <span class="w-2.5 h-8 rounded-full section-bar-accent"></span>
           實走時間軸
         </h2>
         <p class="text-sm text-stone-600 mb-2">07:50 出發 · 15:11 於烘爐地結束 · 全程 <span data-trip="duration:zh"></span></p>
@@ -400,8 +393,7 @@
     // 地圖與圖表的顏色最終進到 canvas，那裡不解析 CSS 變數，
     // 所以要先從 :root 取出實際值。
     // 不屬本頁主色，維持字面值。
-    const ACCENT = getComputedStyle(document.documentElement)
-                     .getPropertyValue('--accent').trim();
+    const ACCENT = PaPaDetail.cssVar('--accent');
 
 
     // ── 行程日（頁面唯一來源）────────────────────────────────
@@ -410,7 +402,7 @@
     // ── 本頁設定 ──────────────────────────────────────────────
     // 地圖、圖表、航點卡、天氣的機制都在 assets/detail.js，此處只描述差異。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "最高點",
+      const PAL = PaPaDetail.palette({ accent: ACCENT,
         extra: { "歷史廟宇": "#8060b0", "信仰地標": "#8060b0", "天然岩洞": "#8060b0" } });
 
     PaPaDetail.init({
@@ -425,7 +417,6 @@
 
       map: {
         setView: [[24.977, 121.494], 14],
-        attribution: 'Leaflet | © OpenStreetMap',
         // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { weight: 4, opacity: 0.85 },
         popup: true

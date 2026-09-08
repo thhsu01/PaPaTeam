@@ -17,6 +17,8 @@
 //   card      逐一切換航點後，航點卡七個欄位的文字
 //   trip      行程事實槽 [data-trip] 填進去的文字
 //   widgets   共用區塊 [data-widget] 填進去的骨架（標籤、class、id、aria，不含文字）
+//   text      整頁 body 的文字（去掉 script／style，空白正規化）——「同一事實換寫法」的
+//             遷移前後這一面必須零變動；2026-09 三次遷移都靠暫存腳本比這個，事後無法重跑
 // 所以測試只穿過 init(cfg)，跟頁面一樣。想測到介面「後面」去，多半是模組形狀不對。
 //
 // 基準是刻意的決定，不是快照的副產品：只有 --update 會寫，寫完 `git diff
@@ -90,8 +92,13 @@ async function capture(browser, name) {
     const trip = [...document.querySelectorAll('[data-trip]')]
       .map(el => ({ slot: el.getAttribute('data-trip'), text: el.textContent.trim() }));
 
+    // 全頁文字：切回第 0 個航點之後才取，讓航點卡的欄位是確定的
+    const bodyClone = document.body.cloneNode(true);
+    bodyClone.querySelectorAll('script, style').forEach(el => el.remove());
+    const bodyText = bodyClone.textContent.replace(/\s+/g, ' ').trim();
+
     return { timeline: timeline, markers: window.__rec.markers, polyline: window.__rec.polyline,
-             chart: window.__rec.chart, card: card, trip: trip, widgets: widgets };
+             chart: window.__rec.chart, card: card, trip: trip, widgets: widgets, text: bodyText };
   });
   await ctx.close();
   state.errors = errors;

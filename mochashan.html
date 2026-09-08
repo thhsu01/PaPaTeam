@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>爬爬小隊 2026年3月14日活動紀錄：礁溪聖母登山步道（抹茶山）</title>
+  <meta name="description" content="2026/3/14 礁溪聖母登山步道（抹茶山）實走紀錄。自五峰旗停車場起登，經五峰旗聖母堂、通天橋休息區至聖母山莊觀景台，全程 14.02 公里。">
+    <title>礁溪聖母登山步道（抹茶山） — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -54,15 +55,12 @@
     /* 天氣載入動畫 */ .weather-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     0%, 100% { opacity: 1; }
     50% { opacity: .5; }
-      .section-bar-accent { background: var(--accent); }
-    .section-bar-green { background: #7c9e52; }
-    .section-bar-stone { background: #a09080; }
     .peak-dot { background: #7c9e52; }   /* 最高點：全站共用語意色 */
 </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="antialiased selection:accent-soft">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -304,8 +302,7 @@
             { lat: 24.831833, lng: 121.747308, time: "16:14", loc: "五峰旗停車場 (終點)", dist: 14.02, ele: 65, pos: "圓滿結束", desc: "回抵終點。GPS 實測往返 14.02 km。", advice: "行程完成。先拉筋伸展再上車；礁溪市區有溫泉可泡，是這條路線最好的收尾。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT  = cssVar('--accent');
+    const ACCENT  = PaPaDetail.cssVar('--accent');
 
 
     // ── 本頁設定 ──────────────────────────────────────────────

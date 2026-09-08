@@ -5,7 +5,7 @@
   "branch": "main",
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
-  "manifest_updated": "2026-09-07",
+  "manifest_updated": "2026-09-08",
   "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
@@ -43,8 +43,7 @@
     {
       "path": "nanshijiao.html",
       "title": "微笑山線 × 南勢角山 × 一線天",
-      "status": "completed",
-      "date": "2026-08-02"
+      "status": "completed"
     },
     {
       "path": "qixingshan.html",
@@ -69,92 +68,77 @@
     {
       "path": "dinghu.html",
       "title": "猴崁水圳 × 青楓步道 × 頂湖O型",
-      "status": "completed",
-      "date": "2026-06-20"
+      "status": "completed"
     },
     {
       "path": "laojiujianshan.html",
       "title": "內溝山系 O 型全系列縱走",
-      "status": "completed",
-      "date": "2026-05-01"
+      "status": "completed"
     },
     {
       "path": "mochashan.html",
       "title": "聖母步道：抹茶山春季挑戰",
-      "status": "completed",
-      "date": "2026-03-14"
+      "status": "completed"
     },
     {
       "path": "meihuashan.html",
       "title": "梅花山全系列挑戰縱走",
-      "status": "completed",
-      "date": "2026-01-10"
+      "status": "completed"
     },
     {
       "path": "huoyianshan.html",
       "title": "火炎山、北鞍古道 O 走",
-      "status": "completed",
-      "date": "2025-12-13"
+      "status": "completed"
     },
     {
       "path": "hushan.html",
       "title": "虎山親山步道",
-      "status": "completed",
-      "date": "2024-04-20"
+      "status": "completed"
     },
     {
       "path": "nangangshan.html",
       "title": "南港山 + 九五峰 + 象山縱走",
-      "status": "completed",
-      "date": "2024-06-30"
+      "status": "completed"
     },
     {
       "path": "jiantanshan.html",
       "title": "劍潭山親山步道 × 老地方觀機平台",
-      "status": "completed",
-      "date": "2024-08-04"
+      "status": "completed"
     },
     {
       "path": "jinmianshan.html",
       "title": "金面山親山步道 × 剪刀石",
-      "status": "completed",
-      "date": "2024-10-06"
+      "status": "completed"
     },
     {
       "path": "henglingguidao.html",
       "title": "橫嶺古道 × 紗帽山 環狀",
-      "status": "completed",
-      "date": "2025-03-23"
+      "status": "completed"
     },
     {
       "path": "caolingguidao.html",
       "title": "草嶺古道芒花季（單向越嶺）",
-      "status": "completed",
-      "date": "2024-11-23"
+      "status": "completed"
     },
     {
       "path": "daqitou.html",
       "title": "大崎頭 × 鵝尾山 × 坪頂古圳（環狀）",
-      "status": "completed",
-      "date": "2025-06-15"
+      "status": "completed"
     },
     {
       "path": "eweishan.html",
       "title": "鵝尾山 × 簡厝支線",
-      "status": "completed",
-      "date": "2025-08-30"
+      "status": "completed"
     },
     {
       "path": "daluntouweishan.html",
       "title": "大崙頭尾山親山步道（環狀）",
-      "status": "completed",
-      "date": "2025-09-29"
+      "status": "completed"
     },
     {
       "path": "zhongzhengshan.html",
       "title": "中正山親山步道（原路折返）",
-      "status": "completed",
-      "date": "2025-04-27"
+      "status": "completed"
     },
     {
       "path": "datongshan.html",
@@ -180,7 +164,7 @@
     },
     {
       "path": "assets/detail.css",
-      "purpose": "22 個詳情頁共用樣式：圖表、地圖、航點、時間軸",
+      "purpose": "22 個詳情頁共用樣式：圖表、地圖、航點卡、時間軸的結構規則，--accent 系的語意 class，以及各頁曾重複定義的元件（.stat-card、.stamp、.hero-accent、三根段落色條、航點卡建議框的 .accent-box）；各頁 :root 只給值",
       "short": "詳情頁共用樣式：圖表、地圖、航點卡、時間軸"
     },
     {
@@ -263,13 +247,18 @@
       "short": "push 到 main 後重算 integrity.json"
     },
     {
+      "path": "tools/papa_common.py",
+      "purpose": "四支 Python 工具共用的兩件小事：切到倉庫根目錄（PAPA_ROOT 可覆寫）、以括號配對切出 schedule 的航點物件。2026-09 第三輪審查抓到前者抄了四份、後者 fact_check 自己用 regex 切（會漏讀），收成一份",
+      "short": "Python 工具共用：根目錄、切航點物件"
+    },
+    {
       "path": "tools/spec_sweep.py",
-      "purpose": "全站規格掃描：把 ARCHITECTURE.md 段落規格表變成可執行的檢查（段落 id 與順序、五顆導覽鍵文字、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、chart／marker／timeline 三個區塊是否都走 palette、小百岳是否放在 xbaiyue 欄位而非 pos，以及名單上的山有沒有漏標）。改完任何 schedule 或版面都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
+      "purpose": "全站規格掃描：把 ARCHITECTURE.md 的規格變成可執行的檢查——五個段落的 id 與順序（不多不少）、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、共用區塊只放掃載點、init(cfg) 的設定鍵與 palette() 的選項都是 detail.js 認得的、行程事實槽的名稱與格式、時間軸 emoji 覆蓋、小百岳放在 xbaiyue 欄位而非 pos、<title> 格式與 meta description、頁面不自寫 getComputedStyle、detail.css 擁有的 class 不在頁內重定義、共用資產的 ?v= 內容雜湊、以及文件宣稱的數量與 manifest／README 檔案樹是否與倉庫一致。改完任何頁面或文件都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
       "short": "全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）"
     },
     {
       "path": "tools/fact_check.py",
-      "purpose": "同一趟行程的事實一致性：日期與總里程在自己頁內出現七、八次（meta、導覽副標、日期戳、統計列、頁腳、軌跡檔名），首頁卡片又各有一份，2026-08-04 量測 12 趟共重複 165 次且全部手打。這支腳本讓「漏改其中一處」變成會被擋下來的事。做法是畫面各處互相交叉核對，不拿資料當權威——schedule 末點的 dist 不等於總里程（caolingguidao 7.87 vs 7.88），軌跡在最後一個航點之後還有一段。缺欄位不算錯，只有同時存在且互相矛盾才報。CI 也會跑；全過回傳 0",
+      "purpose": "同一趟行程的事實一致性：行程事實只在 init 的 trip 宣告一次、版面上的槽由 detail.js 填，剩下 JS 填不到的手寫副本——meta description、首頁卡片、散文與航點 desc 裡順口提到的時長與最高海拔、航點名裡的 (H643m)——這支對著 trip 交叉核對，漏改其中一處會被擋下來。做法是各處互相核對，不拿資料當權威（schedule 末點的 dist 不等於總里程）；缺欄位不算錯，只有同時存在且互相矛盾才報。另外擋散文裡手打的行程日 M/D、trip.date 對不上的軌跡檔名。2026-08-04 量測 12 趟共重複 165 次且全部手打，是這支的由來。CI 也會跑；全過回傳 0",
       "short": "事實一致性：同一個日期／里程在頁內各處是否相符"
     },
     {
@@ -294,7 +283,7 @@
     },
     {
       "path": "tools/regress/check.js",
-      "purpose": "detail.js 的執行期基準。detail.js 是 22 頁共用的機制、介面只有 init(cfg)，改它時沒辦法看一眼就知道 22 頁有沒有變。這支只穿過 init(cfg)、量另一側的結果——每頁的時間軸 DOM、交給 L.circleMarker 的樣式物件、交給 new Chart() 的設定、逐一切換航點後航點卡的七個欄位——逐欄與 baseline.json 比對。2026-08 那輪重構靠的是三支住在暫存目錄的臨時腳本，事後就不見了；這是它們收進倉庫的版本。用法 node tools/regress/check.js（需先 python3 -m http.server 8099）；--update 重寫基準",
+      "purpose": "detail.js 的執行期基準。detail.js 是 22 頁共用的機制、介面只有 init(cfg)，改它時沒辦法看一眼就知道 22 頁有沒有變。這支只穿過 init(cfg)、量另一側的結果——每頁的時間軸 DOM、交給 L.circleMarker 的樣式物件、交給 new Chart() 的設定、逐一切換航點後航點卡的七個欄位——以及去掉 script／style 的全頁文字——逐欄與 baseline.json 比對。2026-08 那輪重構靠的是三支住在暫存目錄的臨時腳本，事後就不見了；這是它們收進倉庫的版本。用法 node tools/regress/check.js（需先 python3 -m http.server 8099）；--update 重寫基準",
       "short": "量 22 頁的時間軸／標記／海拔圖／航點卡，逐欄比對基準"
     },
     {
@@ -420,7 +409,9 @@
     "detail_page_sections_note": "只能有這五個，id 與順序固定",
     "accent_tokens": [
       "--accent",
-      "--accent-strong"
+      "--accent-strong",
+      "--accent-tint",
+      "--accent-border"
     ],
     "accent_note": "換主色只改 :root 這一段，markup 與腳本不動。markup 裡出現的顏色 class 必須是該頁主色家族（hero 漸層的 from-/via- 淡色調）、上面那組語意色、或中性灰 stone 三者之一；跨家族的品牌色（橘色頁配藍色按鈕這種）是換色改不完的元凶。深色專題面板自成一套配色，見 ARCHITECTURE",
     "elevation_source": "地形圖／公開標高優先，非 GPS。若只能用 GPS，先查它有沒有系統性偏差：多數軌跡是固定高估（huoyianshan +27 m），扣掉即可；caolingguidao 則是一天內累積漂移 45 m（起點準、終點偏高），要依經過時間線性內插才扣得掉。修正後拿沒有參與校正的公開標高回驗，對得上才採用。頁面上的 ele 一律取公開標高（若有），修正後的 GPS 值只用來驗證，不直接上頁。反例是 henglingguidao：三個公開標高與 GPS 只差 1–4 m，證明沒有系統性偏差，就不要為了「一致」硬套修正",
@@ -442,7 +433,7 @@
     "semantic_colors": "跨頁共用、不屬於任何單頁識別色的語意色：紅 #ef4444 = 警示地形、綠 #7c9e52 = 最高點、金 #a16207 = 小百岳認證環（描邊不是填色，因為它與最高點可疊加）、藍 = 外部連結、琥珀 amber-50/400/800 = 注意事項面板、翡翠 emerald-700 = 站徽與官方來源連結。**這些跨頁必須一致**——2026-08-04 發現 datongshan／laojiujianshan／mochashan／shiqiulinling／huoyianshan 五頁各自把最高點畫成琥珀、深綠、橘、紅，還在自己的註解裡稱之為「語意色」，等於五種互相矛盾的語意。已全數收斂到 #7c9e52",
     "widgets": "導覽列、已完成提示、天氣卡、航點卡、海拔圖容器、時間軸容器六個共用區塊由 assets/detail.js 的 WIDGETS 產生，頁面只放掃載點 <div data-widget=\"nav|notice|weather|wp-card|chart|timeline\">。掃載點沒寫 class 就套正規 class，有寫就保留（逃生口：舊世代把天氣卡嵌在自己的資訊卡網格裡）。紀錄頁／候選頁的差異（第五鍵文字、航點卡時間標籤、日期副標、要不要 notice）由 trip.km 有無推導（紀錄頁才有實走里程）。2026-09 之前六個區塊在 22 頁各自手寫、分別有 5／3／7／9／3／1 種寫法。spec_sweep 查掃載點在不在、以及有沒有人把區塊手寫回來",
     "trip_facts": "一趟行程的日期、總里程、耗時、累計上升、最高點，2026-09 起只在已完成頁 PaPaDetail.init 的 trip 物件宣告一次，版面上用 data-trip=\"date:md\" 這類事實槽承接、由 detail.js 填。之前這五個數字每頁手打六到八次、16 頁共 165 處，靠 fact_check.py 交叉核對才沒有自相矛盾——改 henglingguidao 的 5.30→5.36 時就得逐處改過。仍手寫的只有 <title>、<meta description>、首頁卡片（給爬蟲看的），fact_check.py 拿它們跟 trip 核對。注意「總里程」不等於 schedule 末點的 dist：軌跡在最後一個航點之後還有一段（caolingguidao 末點 7.87、總里程 7.88）。候選頁的估計值仍手寫，走過之後轉紀錄頁時再接上 trip",
-    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。六支（spec_sweep、fact_check、bump_assets --check、manifest_tree --check、regress、contrast）都是全過回傳 0。對比度與執行期基準要 Playwright，只在動到 HTML／CSS／JS 的 PR 上跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
+    "verification": "改完頁面跑三件事：python3 tools/spec_sweep.py（結構與資料，CI 也會跑）、python3 tools/fact_check.py（日期與里程在各處是否一致，CI 也會跑）、以及 node tools/contrast/check.js --all（顏色，需先起 python3 -m http.server 8099）。改到 assets/detail.js 另外跑 node tools/regress/check.js（執行期基準，同樣需要 8099；沒打算改畫面就要 22 頁零變動，打算改就 --update 並連 baseline.json 一起提交）。改了 assets/ 的共用檔另外跑 python3 tools/bump_assets.py 換版本號（spec_sweep 會查）。新增或刪除檔案只改 manifest.json，再跑 python3 tools/manifest_tree.py --write 更新 README 的檔案樹（spec_sweep 會比對）。六支（spec_sweep、fact_check、bump_assets --check、manifest_tree --check、regress、contrast）都是全過回傳 0。對比度與執行期基準要 Playwright，在動到 HTML／CSS／JS 的 PR 與 push 到 main 時跑（contrast.yml）。對比度量測器有四個已知的坑，都寫在檔頭與 READABILITY_AUDIT.md",
     "pos_emoji": "時間軸藥丸的 pos → emoji 對照是全站一份（assets/detail.js 的 POS_EMOJI，約 45 個常見 pos，取 2026-09 各頁的多數）。頁面 timeline.emoji: true 用它；給物件則疊在全站表上，只寫有意思的例外（捷運站集合 🚇、剪刀石 ✂️、芒草埡口 🌾、階梯步道口 🪜）。pos 本身是各頁的敘事標籤不是詞彙（80 種、54 種只出現一次），不強制從清單挑；表上沒有的 pos 顯示 📍，spec_sweep 會提醒，覆寫跟全站表一樣也會提醒。之前 11 頁各寫一份，同一個 pos 在不同頁配不同 emoji",
     "waypoint_palette": "航點顏色（地圖標記、圖表資料點、時間軸圓點）一律走 detail.js 的 PaPaDetail.palette({ accent, isPeak })：起訖點用主色、最高點 #7c9e52、其餘 #a09080。各頁只宣告主色與「哪個 pos 算山頂」（最高點／觀機平台／瞭望台各頁不同）。2026-08-04 導入——同一個決定原本每頁寫三次，caolingguidao 加了集合地點之後只改了地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。第三種語意（datongshan 的展望台、nanshijiao 的信仰地標、bishan 的賞櫻點、mochashan 的折返點、huoyianshan 的大峽谷）經 palette({ extra }) 表達，只開一層——再多下去就變回每頁一套配色。**這條規約寫了半天其實只有海拔圖做到**：2026-08-04 量測 18 頁，海拔圖 18/18，地圖標記與時間軸各只有 6/18，於是 datunshan、qixingshan、shanying 等頁的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。同日全部收斂，並由 spec_sweep.py 逐區塊檢查（chart／marker／timeline 三個區塊都必須真的引用 palette，光宣告 PAL 不算）。警示地形紅 #ef4444 在時間軸上會脈動，那是 palette 的 warn 常數帶出的全站規則，不是逐頁掛的 class。小百岳走另一個通道：金環 #a16207（pal.ring）加粗描邊 ＋ ⭐ 文字徽章，因為它與最高點可以是同一座山，必須疊加而不是互斥。2026-08-04 查官方名單後補齊：全站共七座（大屯山主峰 #1、七星山主峰 #2、大崙頭山 #8、南港山 #13、大棟山 #15、南勢角山 #16、火炎山 #35）。七星山東峰先前被標成小百岳，查證後確認編號 002 指的是七星山這座山、東峰不是另一座，已更正。spec_sweep.py 內有一張山名對照表——「某座山是不是小百岳」無法從頁面內容推導，只能維護清單",
     "chart_config": "各頁不直接設定 Chart.js——只給領域旋鈕（elevationFloor／elevationMax／lineColor／fillColor／fillAlpha；資料點顏色走最上層的 palette），設定樹由 assets/detail.js 的 initChart() 組出。理由與判準見 docs/adr/0001-chartjs-behind-the-seam.md。逃生口 advanced 目前 22 頁都沒用到；若哪天多數頁面都在傳它，那是該重開那份 ADR 的訊號，不是該再加旋鈕",

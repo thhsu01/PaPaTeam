@@ -131,8 +131,10 @@ window.PaPaDetail = (function () {
     map = L.map('map', opts);
     if (!m.center) map.setView(m.setView[0], m.setView[1]);
 
+    // 圖磚出處是 OSM 授權條款要求的，不是版面偏好：全站一句，不設旋鈕。2026-09 之前
+    // 14 頁同一句、2 頁少了「Leaflet |」、6 頁沒給就整個不掛——那是抄來的差異。
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                m.attribution ? { attribution: m.attribution } : {}).addTo(map);
+                { attribution: 'Leaflet | © OpenStreetMap' }).addTo(map);
 
     // 候選／計畫行程只有航點，軌跡就是航點連成的直線；已走過的行程若留下
     // GPS 紀錄，就改畫實際軌跡——那條線會繞過航點之間看不出來的髮夾彎。
@@ -168,7 +170,7 @@ window.PaPaDetail = (function () {
       var mk = L.circleMarker([wp.lat, wp.lng], style).addTo(map);
       if (m.popup) {
         mk.bindPopup('<strong>' + wp.loc + '</strong><br>⏱ ' + wp.time +
-                     (wp.dist != null ? '<br>📏 ' + wp.dist + ' km' : '') + '<br>⛰ ' + wp.ele + ' m' +
+                     (wp.dist != null ? '<br>📏 ' + wp.dist.toFixed(2) + ' km' : '') + '<br>⛰ ' + wp.ele + ' m' +
                      (wp.xbaiyue ? '<br>' + xbadge(wp) : ''));
       }
       mk.on('click', function () { updateWaypointCard(i); });
@@ -361,13 +363,13 @@ window.PaPaDetail = (function () {
       var K = card
         ? { dot:  'w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all',
             row:  'flex flex-wrap justify-between items-center gap-2 mb-1',
-            time: 'text-lg font-black text-stone-800', timeStyle: '',
+            time: 'text-lg font-black text-stone-800',
             pill: 'text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase',
             loc:  'font-bold text-stone-700 text-sm mb-1', locTag: 'h4',
             body: 'text-[11px] text-stone-600 leading-relaxed' }
         : { dot:  'absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm',
             row:  'flex items-center gap-2 mb-1 flex-wrap',
-            time: 'font-mono font-bold text-sm', timeStyle: ' style="color:var(--accent-strong);"',
+            time: 'font-mono font-bold text-sm accent-text', timeStyle: '',
             pill: 'text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full',
             loc:  'font-bold text-stone-800', locTag: 'div',
             body: 'text-xs text-stone-600 mt-0.5' };
@@ -375,7 +377,7 @@ window.PaPaDetail = (function () {
       var dotHtml = '<div class="' + K.dot + pulse + '" style="background:' + dot + ';' + ringStyle + '"></div>';
       var inner =
         '<div class="' + K.row + '">' +
-          '<span class="' + K.time + '"' + K.timeStyle + '>' + wp.time + '</span>' + plan +
+          '<span class="' + K.time + '">' + wp.time + '</span>' + plan +
           '<span class="' + K.pill + '">' + tag + '</span>' + badge +
         '</div>' +
         '<' + K.locTag + ' class="' + K.loc + '">' + wp.loc + '</' + K.locTag + '>' +
@@ -453,7 +455,10 @@ window.PaPaDetail = (function () {
     weather: {
       cls: 'stat-card rounded-2xl p-4 shadow-sm',
       html: function () {
-        return '<div class="text-xs text-stone-600 mb-1" id="weather-label">' + (isRecord() ? '天氣預報' : '今日天氣') + '</div>' +
+        // 初值就依日期判斷：行程日還沒到才是「天氣預報」。紀錄頁一律先寫「天氣預報」
+        // 是 2026-09 審查抓到的錯——取不到資料時整頁就停在那個字。
+        var future = tripDate() && tripDate() >= todayISO();
+        return '<div class="text-xs text-stone-600 mb-1" id="weather-label">' + (future ? '天氣預報' : '今日天氣') + '</div>' +
           '<div class="font-bold text-stone-800" id="weather-main">載入中...</div>' +
           '<div class="text-xs text-stone-600 mt-1" id="weather-sub">正在取得資料</div>';
       }
@@ -476,9 +481,9 @@ window.PaPaDetail = (function () {
             '<span>海拔 <strong class="text-stone-800" id="wp-ele"></strong> m</span>' +
           '</div>' +
           '<p class="text-base text-stone-700 mb-3" id="wp-desc"></p>' +
-          '<div class="rounded-xl p-3" style="background:var(--accent-tint); border:1px solid var(--accent-border);">' +
-            '<div class="text-xs font-medium mb-1" style="color:var(--accent-strong);">隊友建議</div>' +
-            '<p class="text-xs" style="color:var(--accent-strong);" id="wp-advice"></p>' +
+          '<div class="rounded-xl p-3 accent-box">' +
+            '<div class="text-xs font-medium mb-1 accent-text">隊友建議</div>' +
+            '<p class="text-xs accent-text" id="wp-advice"></p>' +
           '</div>';
       }
     },
@@ -528,10 +533,12 @@ window.PaPaDetail = (function () {
     km:       { n: function (v) { return Number(v).toFixed(2); } },
     duration: {
       hm: function (v) { return v; },
-      zh: function (v) { var p = v.split(':'); return (+p[0]) + ' 小時 ' + (+p[1]) + ' 分'; },
+      // 整點不寫「0 分」（hushan 的 2:00 是「全程 2 小時」）；分鐘不補零，跟 m 一致——
+      // huoyianshan 先前同頁一邊「5 小時 7 分」一邊「5小時07分鐘」
+      zh: function (v) { var p = v.split(':'); return (+p[0]) + ' 小時' + (+p[1] ? ' ' + (+p[1]) + ' 分' : ''); },
       // 舊世代統計區把單位另外排版：4<span>小時</span>45<span>分鐘</span>，所以拆成兩槽
       h:  function (v) { return String(+v.split(':')[0]); },
-      m:  function (v) { return v.split(':')[1]; }
+      m:  function (v) { return String(+v.split(':')[1]); }
     },
     gain:   { n: String },
     summit: { n: String }
@@ -588,10 +595,9 @@ window.PaPaDetail = (function () {
     }
   }
 
-  function tripMD() {
-    var p = tripDate().split('-');
-    return (+p[1]) + '/' + (+p[2]);
-  }
+  function tripMD() { return TRIP_FORMAT.date.slash(tripDate()); }
+
+  function todayISO() { return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }); }
 
   function val(arr, i) {
     if (!arr) return null;
@@ -645,7 +651,8 @@ window.PaPaDetail = (function () {
       var text = window.PaPaWeather.text(data.daily.weathercode[idx]);
       var lo = Math.round(data.daily.temperature_2m_min[idx]);
       var hi = Math.round(data.daily.temperature_2m_max[idx]);
-      main.textContent = text + ' ' + lo + (w.sep || '°–') + hi + (w.unit || '°');
+      // 溫度的寫法是共用區塊的事，不設旋鈕：先前四頁多寫 °C、兩頁把「–」換成「 - 」，都是抄來的差異
+      main.textContent = text + ' ' + lo + '°–' + hi + '°';
 
       // 體感與降雨機率是附加資訊，接在副標後面。
       // 實測 16 天視窗內兩者都有值，但仍逐項確認才顯示——欄位若因模型或
@@ -654,7 +661,7 @@ window.PaPaDetail = (function () {
       var fl = val(data.daily.apparent_temperature_min, idx);
       var fh = val(data.daily.apparent_temperature_max, idx);
       if (fl != null && fh != null) {
-        extra.push('體感 ' + Math.round(fl) + (w.sep || '°–') + Math.round(fh) + (w.unit || '°'));
+        extra.push('體感 ' + Math.round(fl) + '°–' + Math.round(fh) + '°');
       }
       var pop = val(data.daily.precipitation_probability_max, idx);
       if (pop != null) extra.push('降雨 ' + Math.round(pop) + '%');
@@ -667,8 +674,8 @@ window.PaPaDetail = (function () {
       main.classList.remove('loading-pulse', 'weather-pulse');
     } catch (e) {
       // 天氣取不到時仍要判斷行程是否已過，故以本地日期作為後備
-      markTripPast(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' }));
-      main.textContent = w.errorMain || '天氣資料暫無法取得';
+      markTripPast(todayISO());
+      main.textContent = '天氣資料暫無法取得';
       if (sub) sub.textContent = '請稍後再試';
       main.classList.remove('loading-pulse', 'weather-pulse');
     }
@@ -679,28 +686,28 @@ window.PaPaDetail = (function () {
   // 寫三次就會漂——2026-08-04 發現 caolingguidao 加了「集合地點」之後只更新了
   // 地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。
   //
-  // 這裡只收「規則」，顏色與判準仍由各頁給：哪個 pos 算山頂各頁不同
-  // （最高點／觀機平台／瞭望台），端點預設看索引但也可覆寫。
+  // 這裡只收「規則」，各頁只給三樣：主色 accent、哪個 pos 算山頂（isPeak，預設「最高點」；
+  // jiantanshan 是觀機平台、hushan 是瞭望台）、以及最多一層的第三種語意 extra。
+  // 山頂綠與一般航點的石色是全站語意色，不開旋鈕——2026-09 之前 peak／stone／isEnd 都可覆寫，
+  // 22 頁沒有一頁用過，而 peak 給了別的值還會被 spec_sweep 擋。回傳的也只有兩個規則
+  // （color、radius）與兩個要在別處引用的語意色（warn、ring）。
+  var PEAK = '#7c9e52', STONE = '#a09080';
   function palette(opt) {
-    var peak   = opt.peak  || '#7c9e52';   // 全站語意色：山頂（見 manifest 的 semantic_colors）
     var warn   = '#ef4444';                // 全站語意色：警示地形。以 extra 指給某個 pos
-    var ring   = RING;                     // 全站語意色：小百岳認證環，見檔案上方 xbadge()
-    var stone  = opt.stone || '#a09080';   // 一般航點
     var accent = opt.accent;               // 本頁主色，用於起訖點
     var isPeak = opt.isPeak || function (wp) { return wp.pos === '最高點'; };
-    var isEnd  = opt.isEnd  || function (wp, i, n) { return i === 0 || i === n - 1; };
+    function isEnd(wp, i, n) { return i === 0 || i === n - 1; }
     // 有些路線有第三種值得標的東西——datongshan 的展望台、nanshijiao 的信仰地標。
     // 以 { pos: 顏色 } 表達，優先序在山頂之後、起訖點之前。刻意只開一層：
     // 再多下去就變回「每頁一套配色」，那正是要收掉的東西。
     var extra = opt.extra || null;
     function colorOf(wp, i, n) {
-      if (isPeak(wp)) return peak;
+      if (isPeak(wp)) return PEAK;
       if (extra && Object.prototype.hasOwnProperty.call(extra, wp.pos)) return extra[wp.pos];
-      return isEnd(wp, i, n) ? accent : stone;
+      return isEnd(wp, i, n) ? accent : STONE;
     }
     return {
-      peak: peak, warn: warn, ring: ring, stone: stone, accent: accent,
-      isPeak: isPeak, isEnd: isEnd, extra: extra,
+      warn: warn, ring: RING,
       color:  colorOf,
       radius: function (wp, i, n) { return isEnd(wp, i, n) ? 9 : isPeak(wp) ? 8 : 6; }
     };
@@ -709,6 +716,7 @@ window.PaPaDetail = (function () {
   // ── 對外介面 ──────────────────────────────────────────────
   return {
     palette: palette,
+    cssVar: cssVar,      // 頁面腳本要拿 :root 的色值（canvas 不解析 CSS 變數）；不要各頁自己寫一份
     init: function (options) {
       cfg = options;
 
@@ -736,8 +744,7 @@ window.PaPaDetail = (function () {
         });
       });
     },
-    get map() { return map; },
-    get chart() { return chart; },
+    // 只給 tools/regress 量標記樣式用；map 與 chart 先前也曝露，全站沒人讀，2026-09 拿掉
     get markers() { return markers; }
   };
 })();

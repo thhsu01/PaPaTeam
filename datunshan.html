@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="大屯山連峰四峰 O 型計畫。自鞍部登山口起登，依序經大屯山主峰、南峰、西峰與面天山，下二子坪後循巴拉卡人車分道回鞍部。">
   <title>大屯山連峰四峰O型 — 爬爬小隊</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -37,10 +38,10 @@
 
     }
   </style>
-  <link rel="stylesheet" href="assets/detail.css?v=1a46dfb4">
-  <link rel="stylesheet" href="assets/site.css?v=d0b70a1a">
-  <script src="assets/site.js?v=e945f15d"></script>
-  <script src="assets/detail.js?v=7d2594b3"></script>
+  <link rel="stylesheet" href="assets/detail.css?v=24657a1d">
+  <link rel="stylesheet" href="assets/site.css?v=21852abd">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=be1baba2"></script>
 </head>
 <body class="text-stone-800 antialiased">
   <a href="#main-content" class="skip-link">跳至主要內容</a>
@@ -255,8 +256,7 @@
       { lat: 25.18328804343731, lng: 121.52923236366492, time: "13:17", loc: "鞍部登山口 (H829m)", dist: 8.90, ele: 829, pos: "終點", desc: "O 型完成！回到鞍部起點。全程 8.9 km，四峰連走大功告成！", advice: "恭喜完成大屯山四峰 O 型！在鞍部站搭 108 公車返回陽明山第二停車場（約 35 分鐘）。" }
     ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
-    const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-    const ACCENT = cssVar('--accent-deep');
+    const ACCENT = PaPaDetail.cssVar('--accent-deep');
 
 
     // ── 本頁設定 ──────────────────────────────────────────────
@@ -269,12 +269,10 @@
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [25.1760,121.5185],
       weather: { lat: 25.176904760689496, lng: 121.52229613112243,
-                 subText: '大屯山頂今日參考（雨後請勿前往）',
-                 unit: '°C', errorMain: '暫無法取得' },
+                 subText: '大屯山頂今日參考（雨後請勿前往）' },
 
       map: {
         setView: [[25.1760, 121.5185], 14],
-        attribution: '© OpenStreetMap',
         track: { weight: 4, opacity: 0.85 },
         popup: true
       },
