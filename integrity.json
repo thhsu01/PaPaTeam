@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-09-25 07:27",
+  "generated": "2026-09-25 08:05",
   "generated_tz": "UTC+8",
-  "commit": "b047ba60c68b56773b90fb0421e59db87c2198f5",
+  "commit": "d0faf9e0d6091803a5cf87bdcd1b9de4860d0bca",
   "file_count": 69,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 12067,
-      "sha": "128da2cd73d4e07f16cadac4ac636147d1e1ef29"
+      "size": 12115,
+      "sha": "02e604b235cd0fc24908f1746e7b3afcc88a8331"
     },
     {
       "path": "SNIPPETS.md",
@@ -220,8 +220,8 @@
     },
     {
       "path": "index.html",
-      "size": 25780,
-      "sha": "5aa41514e4637539021e95974eaa3f0154198ae8"
+      "size": 25730,
+      "sha": "1e591da5644286cd7ee53a212147c08e68e0fbc2"
     },
     {
       "path": "jiantanshan.html",
@@ -240,8 +240,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 36672,
-      "sha": "c479349191a6cfb8a391f29bfc41fd347142493f"
+      "size": 36670,
+      "sha": "71e131a38a918c23ca5b98bad6becb0cb91132f6"
     },
     {
       "path": "meihuashan.html",
@@ -270,8 +270,8 @@
     },
     {
       "path": "shanying.html",
-      "size": 25605,
-      "sha": "d472ee3a92e42a30377820a1842cd90a04fde984"
+      "size": 30174,
+      "sha": "697b29de7b7e7327cc990fd1f32080cc097ec92f"
     },
     {
       "path": "shiqiulinling.html",
@@ -310,13 +310,13 @@
     },
     {
       "path": "tools/manifest_tree.py",
-      "size": 7477,
-      "sha": "9bbb8390717d5e31aa2ac44de6973ef1f5b3edc8"
+      "size": 7936,
+      "sha": "e85e847728a1feadbe16bb3b2f076666b8f421dd"
     },
     {
       "path": "tools/papa_common.py",
-      "size": 1392,
-      "sha": "fe7dd352199cb0f3d91f589e2adaf2879ece903e"
+      "size": 2222,
+      "sha": "9850f921e4102412ed7f91c753721108e82097ee"
     },
     {
       "path": "tools/pw-env.js",
@@ -325,13 +325,13 @@
     },
     {
       "path": "tools/redteam.py",
-      "size": 9116,
-      "sha": "2c37cf8ca23a3e5fb89b2b55b3ac1bd8bc074fae"
+      "size": 9416,
+      "sha": "d169241f06234c95682fbc8a848a405f0729160b"
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 710214,
-      "sha": "184118c4065f4c9cecc77868c6347bb517a15d67"
+      "size": 721625,
+      "sha": "f60afef204a9dfd5f38c405ae03715c141829319"
     },
     {
       "path": "tools/regress/check.js",
@@ -345,8 +345,8 @@
     },
     {
       "path": "tools/spec_sweep.py",
-      "size": 43043,
-      "sha": "596ae4e70a8baf340e6322b8f7f944eea75208e5"
+      "size": 43277,
+      "sha": "d53b9457e68ff8f7a049097d7ebd7327f6f65247"
     },
     {
       "path": "zhongzhengshan.html",
