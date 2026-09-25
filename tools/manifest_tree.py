@@ -7,7 +7,8 @@ ADR——manifest 反而一直是齊的。所以清單只留 manifest 一份：�
 （樹上那一句），這支把樹印出來寫進 README 的標記區塊；spec_sweep 比對區塊與產生結果，
 不一致就紅。加一個檔案只改 manifest。
 
-已完成頁的日期從軌跡檔名推導（assets/tracks/<頁名>-<日期>.js），不另外寫；分組標題的
+已完成頁的日期從軌跡檔名推導（assets/tracks/<頁名>-<日期>.js），計畫頁的出發日取頁面
+trip.date（papa_common.page_state），都不另外寫；分組標題的
 頁數也是算出來的，所以「十六頁附實走 GPS 軌跡」這種數字不會再漂。
 
 用法：python3 tools/manifest_tree.py          印出樹
@@ -16,7 +17,7 @@ ADR——manifest 反而一直是齊的。所以清單只留 manifest 一份：�
 import json, re, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from papa_common import chdir_root
+from papa_common import chdir_root, page_state
 chdir_root()
 
 START, END = '<!-- manifest-tree:start -->', '<!-- manifest-tree:end -->'
@@ -76,7 +77,10 @@ def render():
             date_of[mm.group(1)] = mm.group(2)
     pages = [p for p in order if p.endswith('.html') and '/' not in p and p != 'index.html']
     done = sorted([p for p in pages if p[:-5] in date_of], key=lambda p: date_of[p[:-5]], reverse=True)
-    cand = [p for p in pages if p[:-5] not in date_of]
+    rest = [p for p in pages if p[:-5] not in date_of]
+    plan_of = {p: page_state(p, date_of)[1] for p in rest}
+    plan = sorted([p for p in rest if plan_of[p]], key=lambda p: plan_of[p])
+    cand = [p for p in rest if not plan_of[p]]
 
     lines = ['PaPaTeam/']
 
@@ -120,6 +124,10 @@ def render():
     lines.append('│   已完成（%s頁附實走 GPS 軌跡）' % cn(len(done)))
     for p in done:
         row('', p, '%s（%s）' % (by[p].get('title', ''), date_of[p[:-5]]), False)
+    if plan:
+        lines.append('│   計畫（%s頁）' % cn(len(plan)))
+        for p in plan:
+            row('', p, '%s（%s 出發）' % (by[p].get('title', ''), plan_of[p]), False)
     lines.append('│   候選（%s頁）' % cn(len(cand)))
     for p in cand:
         row('', p, by[p].get('title', ''), False)
