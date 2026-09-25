@@ -4,7 +4,7 @@
 import re, glob, math, sys, os, functools
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from papa_common import chdir_root, schedule_objects   # 四支工具共用：根目錄、切航點物件
+from papa_common import chdir_root, schedule_objects, page_state   # 四支工具共用：根目錄、切航點物件、行程三態
 chdir_root()
 import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
 import manifest_tree                     # manifest 條目與中文數字：README 檔案樹用的同一份
@@ -579,7 +579,8 @@ def check_manifest():
     for d in sorted(dirs):
         if not os.path.isdir(d):
             p.append('manifest.json 列了目錄 %s，倉庫裡沒有' % d)
-    # 頁面條目的 status 要跟「有沒有軌跡檔」一致——manifest_tree 就是拿軌跡檔分已完成／候選的，
+    # 頁面條目的 status 要跟 page_state() 一致（有軌跡檔＝completed、trip 只有日期＝planned、
+    # 其餘＝candidate）——manifest_tree 就是拿同一個判準分組的，
     # status 只是給讀 manifest 的人看，漂了沒人發現。行程日不在這裡：那是頁面 trip 的事
     # （2026-09 第三輪審查刪掉 pages[].date——第三份日期副本，沒有任何工具讀）。
     tracks = {re.match(r'assets/tracks/(.+)-\d{4}-\d{2}-\d{2}\.js$', t).group(1)
@@ -587,9 +588,11 @@ def check_manifest():
     for e in entries:
         path = e['path']
         if path.endswith('.html') and path != 'index.html':
-            done = path[:-5] in tracks
-            if e.get('status') != ('completed' if done else 'candidate'):
-                p.append('%s 的 status 是 %s，但%s軌跡檔' % (path, e.get('status'), '有' if done else '沒有'))
+            state, _ = page_state(path, tracks)
+            if e.get('status') != state:
+                why = {'completed': '有軌跡檔', 'planned': '沒有軌跡檔、頁面 trip 有日期',
+                       'candidate': '沒有軌跡檔、頁面 trip 沒有日期'}[state]
+                p.append('%s 的 status 是 %s，但%s' % (path, e.get('status'), why))
             if 'date' in e:
                 p.append('%s 的條目有 date——行程日只在頁面的 trip 宣告' % path)
     # 非頁面、非軌跡的條目要有 short——README 的檔案樹就是拿它印的。

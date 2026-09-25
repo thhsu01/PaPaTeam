@@ -79,6 +79,9 @@ CASES = [
     ('manifest status', 'manifest.json', '"title": "虎山親山步道",\n      "status": "completed"',
      '"title": "虎山親山步道",\n      "status": "candidate"',
      'spec_sweep', 'status 是 candidate，但有軌跡檔'),
+    # 計畫頁＝沒有軌跡檔、trip 只給日期。日期拿掉它就回到候選，manifest 還寫 planned 要紅
+    ('manifest status（計畫）', 'shanying.html', "trip: { date: '2026-09-27' },", '',
+     'spec_sweep', 'status 是 planned，但沒有軌跡檔、頁面 trip 沒有日期'),
     ('README 檔案樹', 'README.md', '├── index.html', '├── index-x.html',
      'spec_sweep', 'README.md 的檔案樹跟 manifest.json 不一致'),
     ('文件數量',   'ARCHITECTURE.md', '// 卡片式，6 頁', '// 卡片式，7 頁',

@@ -82,13 +82,14 @@ PaPaTeam/
 ├── jiantanshan.html             # 劍潭山親山步道 × 老地方觀機平台（2024-08-04）
 ├── nangangshan.html             # 南港山 + 九五峰 + 象山縱走（2024-06-30）
 ├── hushan.html                  # 虎山親山步道（2024-04-20）
-│   候選（六頁）
+│   計畫（一頁）
+├── shanying.html                # 山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石（2026-09-27 出發）
+│   候選（五頁）
 ├── qixingshan.html              # 七星山主東峰 苗圃O型
 ├── datunshan.html               # 大屯山連峰四峰 O 型縱走
 ├── bishan.html                  # 碧山 + 白石湖山：原始縱走
 ├── shiqiulinling.html           # 獅球嶺砲台：基隆歷史古蹟
 ├── datongshan.html              # 大同山 × 青龍嶺 × 大棟山縱走
-├── shanying.html                # 山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石
 │
 ├── assets/
 │   ├── site.css                 # 全站共用樣式：skip link、鍵盤焦點、reduced-motion
