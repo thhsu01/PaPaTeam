@@ -148,7 +148,7 @@
     {
       "path": "shanying.html",
       "title": "山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石",
-      "status": "planned"
+      "status": "completed"
     }
   ],
   "assets": [
@@ -171,6 +171,10 @@
       "path": "assets/detail.js",
       "purpose": "22 個詳情頁共用腳本：Leaflet、Chart.js、時間軸渲染。海拔圖與時間軸都藏在接縫後面——各頁只給領域旋鈕（海拔圖見 docs/adr/0001；時間軸的介面是 layout／fields／emoji／hover，圓點色走最上層的 palette，不再手寫 HTML 樣板）",
       "short": "詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸、共用區塊"
+    },
+    {
+      "path": "assets/tracks/shanying-2026-09-27.js",
+      "purpose": "山佳鶯歌縱走 9/27 實走 GPS 軌跡（Douglas–Peucker 簡化至 247 點，自 08:35 車站出發起算），供地圖畫實際路線"
     },
     {
       "path": "assets/tracks/nanshijiao-2026-08-02.js",
@@ -423,7 +427,7 @@
     "distance_source": "GPS 實測優先；GPS 未錄到的前段以估算值作為位移量，加總到後續所有里程。若中斷區間長到 GPS 短報（jinmianshan 大岩壁 64 分鐘），拿官方步道分段里程當錨點，用中斷前的良好軌跡相減求出短少量，再依直線比分配給區間內各段——比自訂倍率可靠，而且可被外部資料檢驗。原本用的「直線 ×1.15」純屬臆測，2026-08-04 已換掉",
     "date_format": "站上顯示沿用 YYYY/MM/DD；本 manifest 內部一律 YYYY-MM-DD",
     "no_fabrication": "里程、時間、海拔屬量測值，缺就留空，不得為填滿欄位而編造。advice 不在此列——它是「下次走的人用得上的提示」，可依路線資料與公開資訊撰寫，不必等實走",
-    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/<頁名>-<日期>.js，由 detail.js 依 trip.date 載入，頁面自己不寫 script 標籤也不查 PaPaTracks），計畫與候選行程畫航點直線。目前十六頁有軌跡：nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan、caolingguidao、henglingguidao、zhongzhengshan、daluntouweishan、daqitou、eweishan。這份清單容易漏改——新增軌跡檔時一併更新",
+    "track_source": "已完成行程若有 GPS 軌跡，地圖畫實走軌跡（assets/tracks/<頁名>-<日期>.js，由 detail.js 依 trip.date 載入，頁面自己不寫 script 標籤也不查 PaPaTracks），計畫與候選行程畫航點直線。目前十七頁有軌跡：shanying、nanshijiao、meihuashan、huoyianshan、dinghu、laojiujianshan、mochashan、hushan、nangangshan、jiantanshan、jinmianshan、caolingguidao、henglingguidao、zhongzhengshan、daluntouweishan、daqitou、eweishan。這份清單容易漏改——新增軌跡檔時一併更新",
     "home_link": "詳情頁沒有左上返回鍵（會被 fixed 導覽列蓋住，2026-08-03 全數移除）。回首頁的唯一入口是導覽列站徽，需帶 aria-label=\"爬爬小隊首頁\"",
     "source_citation": "外部來源以「參考資源」清單列在 #map-section 的航點卡下方（多數頁如此；shiqiulinling 放在 #overview，datunshan 另在 #timeline 末尾多放一份較詳細的分段里程出處；huoyianshan 沒有，它的數字全部出自當天 GPX）。候選／計畫頁的里程、海拔、營運時間若引自外部資料一定要列；已完成頁改以 GPS 軌跡為準，但引用公開標高或官方分段里程時同樣要列（henglingguidao、jinmianshan 就是靠這個才驗得出軌跡對不對）",
     "greyscale": "灰階一律 stone 不用 slate。檢查時 class 名稱與 :root 的十六進位值都要查——2026-08-03 發現 shiqiulinling 的 slate 全在色值層，按 class 檢查會誤判為通過。**本條僅適用 22 個詳情頁**；index.html 自成一套視覺系統（翡翠品牌色 + slate，見 assets/site.css），是刻意的例外，不要為了一致而改它",
