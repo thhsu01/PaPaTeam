@@ -65,7 +65,8 @@ npx http-server
 PaPaTeam/
 ├── index.html                   # 主首頁：計畫／候選／歷史三區
 │
-│   已完成（十六頁附實走 GPS 軌跡）
+│   已完成（十七頁附實走 GPS 軌跡）
+├── shanying.html                # 山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石（2026-09-27）
 ├── nanshijiao.html              # 微笑山線 × 南勢角山 × 一線天（2026-08-02）
 ├── dinghu.html                  # 猴崁水圳 × 青楓步道 × 頂湖O型（2026-06-20）
 ├── laojiujianshan.html          # 內溝山系 O 型全系列縱走（2026-05-01）
@@ -82,8 +83,6 @@ PaPaTeam/
 ├── jiantanshan.html             # 劍潭山親山步道 × 老地方觀機平台（2024-08-04）
 ├── nangangshan.html             # 南港山 + 九五峰 + 象山縱走（2024-06-30）
 ├── hushan.html                  # 虎山親山步道（2024-04-20）
-│   計畫（一頁）
-├── shanying.html                # 山佳鶯歌縱走：石灰坑山 × 望湖山 × 鶯歌石（2026-09-27 出發）
 │   候選（五頁）
 ├── qixingshan.html              # 七星山主東峰 苗圃O型
 ├── datunshan.html               # 大屯山連峰四峰 O 型縱走
@@ -97,6 +96,7 @@ PaPaTeam/
 │   ├── detail.css               # 詳情頁共用樣式：圖表、地圖、航點卡、時間軸
 │   ├── detail.js                # 詳情頁共用腳本：Leaflet、Chart.js、天氣、時間軸、共用區塊
 │   └── tracks/                  # 已完成行程的實走 GPS 軌跡（簡化後的座標陣列）
+│       ├── shanying-2026-09-27.js
 │       ├── nanshijiao-2026-08-02.js
 │       ├── dinghu-2026-06-20.js
 │       ├── laojiujianshan-2026-05-01.js

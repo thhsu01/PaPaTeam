@@ -10680,8 +10680,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#4338ca;"
     },
-    "text": "08:10🚉 集合起點山佳車站剪票口 (H25m)08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#4338ca;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 集合起點</span></div><div class=\"font-bold text-stone-800\">山佳車站剪票口 (H25m)</div><div class=\"text-xs text-stone-600 mt-0.5\">08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。</div>"
+    "text": "08:35(原估 08:10)🚉 集合起點山佳車站剪票口08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#4338ca;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:35</span><span class=\"font-mono text-xs text-stone-600\">(原估 08:10)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 集合起點</span></div><div class=\"font-bold text-stone-800\">山佳車站剪票口</div><div class=\"text-xs text-stone-600 mt-0.5\">08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10689,8 +10689,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:30🙏 信仰地標德和福德宮 (H81m)沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。累計里程 0.69 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">德和福德宮 (H81m)</div><div class=\"text-xs text-stone-600 mt-0.5\">沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。累計里程 0.69 km。</div>"
+    "text": "08:47(原估 08:30)🙏 信仰地標德和福德宮累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:47</span><span class=\"font-mono text-xs text-stone-600\">(原估 08:30)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">德和福德宮</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10698,8 +10698,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:35↔️ 轉換路段正安宮 (H109m)沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.98 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">正安宮 (H109m)</div><div class=\"text-xs text-stone-600 mt-0.5\">沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.98 km。</div>"
+    "text": "08:52(原估 08:35)↔️ 轉換路段正安宮累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:52</span><span class=\"font-mono text-xs text-stone-600\">(原估 08:35)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">正安宮</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10707,8 +10707,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:15🏙️ 展望台樹林觀景平台 (H300m)福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。累計里程 2.56 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:15</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">樹林觀景平台 (H300m)</div><div class=\"text-xs text-stone-600 mt-0.5\">福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。累計里程 2.56 km。</div>"
+    "text": "09:03🌳 休息點第一休息點累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:03</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第一休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10716,8 +10716,26 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:20🥾 入山口福安宮 (H305m)民和街上的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.59 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">福安宮 (H305m)</div><div class=\"text-xs text-stone-600 mt-0.5\">民和街上的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.59 km。</div>"
+    "text": "09:23🌳 休息點第二休息點累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:23</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第二休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:49(原估 09:15)🏙️ 展望台樹林觀景平台累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:49</span><span class=\"font-mono text-xs text-stone-600\">(原估 09:15)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">樹林觀景平台</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:55(原估 09:20)🥾 入山口福安宮累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:55</span><span class=\"font-mono text-xs text-stone-600\">(原估 09:20)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">福安宮</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10725,8 +10743,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52;"
     },
-    "text": "10:05🏔️ 最高點石灰坑山 (H374m)設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.66 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">石灰坑山 (H374m)</div><div class=\"text-xs text-stone-600 mt-0.5\">設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.66 km。</div>"
+    "text": "10:22(原估 10:05)🏔️ 最高點石灰坑山 (H374m)累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:22</span><span class=\"font-mono text-xs text-stone-600\">(原估 10:05)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">石灰坑山 (H374m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10734,8 +10752,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "10:30⛰️ 副峰望湖山 (H361m)鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 4.29 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">望湖山 (H361m)</div><div class=\"text-xs text-stone-600 mt-0.5\">鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 4.29 km。</div>"
+    "text": "10:42(原估 10:30)⛰️ 副峰望湖山 (H361m)累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:42</span><span class=\"font-mono text-xs text-stone-600\">(原估 10:30)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">望湖山 (H361m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10743,8 +10761,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "10:35🍁 老樹百年大榕樹 (H350m)鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公，平台可俯視三峽、鶯歌與八德。累計里程 4.33 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🍁 老樹</span></div><div class=\"font-bold text-stone-800\">百年大榕樹 (H350m)</div><div class=\"text-xs text-stone-600 mt-0.5\">鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公，平台可俯視三峽、鶯歌與八德。累計里程 4.33 km。</div>"
+    "text": "10:47(原估 10:35)🍁 老樹百年大榕樹累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:47</span><span class=\"font-mono text-xs text-stone-600\">(原估 10:35)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🍁 老樹</span></div><div class=\"font-bold text-stone-800\">百年大榕樹</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10752,8 +10770,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "11:10🙏 信仰地標光明山大樹佛 (H264m)光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。累計里程 5.25 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">光明山大樹佛 (H264m)</div><div class=\"text-xs text-stone-600 mt-0.5\">光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。累計里程 5.25 km。</div>"
+    "text": "11:43🌳 休息點第三休息點累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:43</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第三休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10761,8 +10779,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "11:35🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。累計里程 6.11 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 稜線山頭</span></div><div class=\"font-bold text-stone-800\">彰埔坑山（樟普坑山）(H234m)</div><div class=\"text-xs text-stone-600 mt-0.5\">現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。累計里程 6.11 km。</div>"
+    "text": "11:57🌳 休息點第四休息點累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:57</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第四休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10770,8 +10788,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:20🌿 稜線山頭鶯歌石山 (H192m)設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。累計里程 7.19 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 稜線山頭</span></div><div class=\"font-bold text-stone-800\">鶯歌石山 (H192m)</div><div class=\"text-xs text-stone-600 mt-0.5\">設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。累計里程 7.19 km。</div>"
+    "text": "12:07(原估 11:10)🙏 信仰地標光明山大樹佛累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:07</span><span class=\"font-mono text-xs text-stone-600\">(原估 11:10)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">光明山大樹佛</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10779,8 +10797,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:35🪨 景觀亮點鶯歌石鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.52 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🪨 景觀亮點</span></div><div class=\"font-bold text-stone-800\">鶯歌石</div><div class=\"text-xs text-stone-600 mt-0.5\">鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.52 km。</div>"
+    "text": "12:22🌳 休息點第五休息點累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:22</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第五休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10788,8 +10806,53 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:40🌳 公園北鶯公園鶯歌石步道 0K 起點旁的公園，路線從公園北側經過。累計里程 7.63 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 公園</span></div><div class=\"font-bold text-stone-800\">北鶯公園</div><div class=\"text-xs text-stone-600 mt-0.5\">鶯歌石步道 0K 起點旁的公園，路線從公園北側經過。累計里程 7.63 km。</div>"
+    "text": "12:42(原估 11:35)🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:42</span><span class=\"font-mono text-xs text-stone-600\">(原估 11:35)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 稜線山頭</span></div><div class=\"font-bold text-stone-800\">彰埔坑山（樟普坑山）(H234m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "13:07🌳 休息點第六休息點累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:07</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第六休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "13:25(原估 12:20)🌿 稜線山頭鶯歌石山 (H192m)累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:25</span><span class=\"font-mono text-xs text-stone-600\">(原估 12:20)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 稜線山頭</span></div><div class=\"font-bold text-stone-800\">鶯歌石山 (H192m)</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "13:46(原估 12:35)🪨 景觀亮點鶯歌石累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:46</span><span class=\"font-mono text-xs text-stone-600\">(原估 12:35)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🪨 景觀亮點</span></div><div class=\"font-bold text-stone-800\">鶯歌石</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "13:56(原估 12:40)🌳 公園北鶯公園累計 7.72 km。鶯歌石步道 0K 起點旁的公園。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:56</span><span class=\"font-mono text-xs text-stone-600\">(原估 12:40)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 公園</span></div><div class=\"font-bold text-stone-800\">北鶯公園</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 7.72 km。鶯歌石步道 0K 起點旁的公園。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "14:12🌳 休息點第七休息點累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">14:12</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌳 休息點</span></div><div class=\"font-bold text-stone-800\">第七休息點</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -10797,15 +10860,15 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#4338ca;"
     },
-    "text": "13:00🚉 終點解散鶯歌車站預定在鶯歌車站解散！全程約 8.38 km，經鶯歌石步道下到北鶯公園，再步行抵達鶯歌車站。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#4338ca;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 終點解散</span></div><div class=\"font-bold text-stone-800\">鶯歌車站</div><div class=\"text-xs text-stone-600 mt-0.5\">預定在鶯歌車站解散！全程約 8.38 km，經鶯歌石步道下到北鶯公園，再步行抵達鶯歌車站。</div>"
+    "text": "14:22(原估 13:00)🚉 終點解散鶯歌車站累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#4338ca;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">14:22</span><span class=\"font-mono text-xs text-stone-600\">(原估 13:00)</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 終點解散</span></div><div class=\"font-bold text-stone-800\">鶯歌車站</div><div class=\"text-xs text-stone-600 mt-0.5\">累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。</div>"
    }
   ],
   "markers": [
    {
     "latlng": [
-     24.972788,
-     121.392484
+     24.972943,
+     121.392019
     ],
     "options": {
      "radius": 9,
@@ -10816,12 +10879,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>山佳車站剪票口 (H25m)</strong><br>⏱ 08:10<br>📏 0.00 km<br>⛰ 25 m"
+    "popup": "<strong>山佳車站剪票口</strong><br>⏱ 08:35<br>📏 0.00 km<br>⛰ 45 m"
    },
    {
     "latlng": [
-     24.978138,
-     121.390329
+     24.977886,
+     121.390338
     ],
     "options": {
      "radius": 6,
@@ -10832,12 +10895,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>德和福德宮 (H81m)</strong><br>⏱ 08:30<br>📏 0.69 km<br>⛰ 81 m"
+    "popup": "<strong>德和福德宮</strong><br>⏱ 08:47<br>📏 0.63 km<br>⛰ 75 m"
    },
    {
     "latlng": [
-     24.980615,
-     121.389471
+     24.980599,
+     121.389668
     ],
     "options": {
      "radius": 6,
@@ -10848,12 +10911,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>正安宮 (H109m)</strong><br>⏱ 08:35<br>📏 0.98 km<br>⛰ 109 m"
+    "popup": "<strong>正安宮</strong><br>⏱ 08:52<br>📏 0.96 km<br>⛰ 100 m"
    },
    {
     "latlng": [
-     24.983676,
-     121.380312
+     24.98271,
+     121.385909
     ],
     "options": {
      "radius": 6,
@@ -10864,12 +10927,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>樹林觀景平台 (H300m)</strong><br>⏱ 09:15<br>📏 2.56 km<br>⛰ 300 m"
+    "popup": "<strong>第一休息點</strong><br>⏱ 09:03<br>📏 1.49 km<br>⛰ 180 m"
    },
    {
     "latlng": [
-     24.98385,
-     121.38005
+     24.9846,
+     121.385231
     ],
     "options": {
      "radius": 6,
@@ -10880,12 +10943,44 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>福安宮 (H305m)</strong><br>⏱ 09:20<br>📏 2.59 km<br>⛰ 305 m"
+    "popup": "<strong>第二休息點</strong><br>⏱ 09:23<br>📏 1.91 km<br>⛰ 250 m"
    },
    {
     "latlng": [
-     24.979892,
-     121.372434
+     24.983822,
+     121.380179
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>樹林觀景平台</strong><br>⏱ 09:49<br>📏 2.63 km<br>⛰ 300 m"
+   },
+   {
+    "latlng": [
+     24.983789,
+     121.380176
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>福安宮</strong><br>⏱ 09:55<br>📏 2.67 km<br>⛰ 300 m"
+   },
+   {
+    "latlng": [
+     24.980003,
+     121.372586
     ],
     "options": {
      "radius": 8,
@@ -10896,12 +10991,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>石灰坑山 (H374m)</strong><br>⏱ 10:05<br>📏 3.66 km<br>⛰ 374 m"
+    "popup": "<strong>石灰坑山 (H374m)</strong><br>⏱ 10:22<br>📏 3.67 km<br>⛰ 374 m"
    },
    {
     "latlng": [
-     24.976671,
-     121.368745
+     24.97681,
+     121.368866
     ],
     "options": {
      "radius": 6,
@@ -10912,12 +11007,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>望湖山 (H361m)</strong><br>⏱ 10:30<br>📏 4.29 km<br>⛰ 361 m"
+    "popup": "<strong>望湖山 (H361m)</strong><br>⏱ 10:42<br>📏 4.22 km<br>⛰ 361 m"
    },
    {
     "latlng": [
-     24.976556,
-     121.368544
+     24.976667,
+     121.36868
     ],
     "options": {
      "radius": 6,
@@ -10928,12 +11023,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>百年大榕樹 (H350m)</strong><br>⏱ 10:35<br>📏 4.33 km<br>⛰ 350 m"
+    "popup": "<strong>百年大榕樹</strong><br>⏱ 10:47<br>📏 4.29 km<br>⛰ 350 m"
    },
    {
     "latlng": [
-     24.970704,
-     121.368398
+     24.973041,
+     121.368728
     ],
     "options": {
      "radius": 6,
@@ -10944,12 +11039,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>光明山大樹佛 (H264m)</strong><br>⏱ 11:10<br>📏 5.25 km<br>⛰ 264 m"
+    "popup": "<strong>第三休息點</strong><br>⏱ 11:43<br>📏 4.91 km<br>⛰ 265 m"
    },
    {
     "latlng": [
-     24.96685,
-     121.363381
+     24.972082,
+     121.368906
     ],
     "options": {
      "radius": 6,
@@ -10960,12 +11055,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>彰埔坑山（樟普坑山）(H234m)</strong><br>⏱ 11:35<br>📏 6.11 km<br>⛰ 234 m"
+    "popup": "<strong>第四休息點</strong><br>⏱ 11:57<br>📏 5.10 km<br>⛰ 260 m"
    },
    {
     "latlng": [
-     24.96043,
-     121.359283
+     24.970861,
+     121.368522
     ],
     "options": {
      "radius": 6,
@@ -10976,12 +11071,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鶯歌石山 (H192m)</strong><br>⏱ 12:20<br>📏 7.19 km<br>⛰ 192 m"
+    "popup": "<strong>光明山大樹佛</strong><br>⏱ 12:07<br>📏 5.30 km<br>⛰ 265 m"
    },
    {
     "latlng": [
-     24.958888,
-     121.359397
+     24.96918,
+     121.367187
     ],
     "options": {
      "radius": 6,
@@ -10992,12 +11087,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鶯歌石</strong><br>⏱ 12:35<br>📏 7.52 km<br>⛰ 97 m"
+    "popup": "<strong>第五休息點</strong><br>⏱ 12:22<br>📏 5.57 km<br>⛰ 260 m"
    },
    {
     "latlng": [
-     24.958033,
-     121.35946
+     24.966827,
+     121.363577
     ],
     "options": {
      "radius": 6,
@@ -11008,12 +11103,92 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>北鶯公園</strong><br>⏱ 12:40<br>📏 7.63 km<br>⛰ 76 m"
+    "popup": "<strong>彰埔坑山（樟普坑山）(H234m)</strong><br>⏱ 12:42<br>📏 6.15 km<br>⛰ 234 m"
    },
    {
     "latlng": [
-     24.954787,
-     121.355045
+     24.963481,
+     121.359466
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>第六休息點</strong><br>⏱ 13:07<br>📏 6.87 km<br>⛰ 185 m"
+   },
+   {
+    "latlng": [
+     24.960594,
+     121.359267
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>鶯歌石山 (H192m)</strong><br>⏱ 13:25<br>📏 7.29 km<br>⛰ 192 m"
+   },
+   {
+    "latlng": [
+     24.959054,
+     121.359391
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>鶯歌石</strong><br>⏱ 13:46<br>📏 7.53 km<br>⛰ 110 m"
+   },
+   {
+    "latlng": [
+     24.957608,
+     121.359409
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>北鶯公園</strong><br>⏱ 13:56<br>📏 7.72 km<br>⛰ 65 m"
+   },
+   {
+    "latlng": [
+     24.954286,
+     121.353577
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>第七休息點</strong><br>⏱ 14:12<br>📏 8.50 km<br>⛰ 55 m"
+   },
+   {
+    "latlng": [
+     24.954819,
+     121.354878
     ],
     "options": {
      "radius": 9,
@@ -11024,18 +11199,18 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鶯歌車站</strong><br>⏱ 13:00<br>📏 8.38 km<br>⛰ 54 m"
+    "popup": "<strong>鶯歌車站</strong><br>⏱ 14:22<br>📏 8.84 km<br>⛰ 55 m"
    }
   ],
   "polyline": {
-   "n": 14,
+   "n": 247,
    "first": [
-    24.972788,
-    121.392484
+    24.97294,
+    121.39202
    ],
    "last": [
-    24.954787,
-    121.355045
+    24.95456,
+    121.35514
    ],
    "options": {
     "color": "#4f46e5",
@@ -11050,36 +11225,50 @@
      "山佳車站剪票口",
      "德和福德宮",
      "正安宮",
+     "第一休息點",
+     "第二休息點",
      "樹林觀景平台",
      "福安宮",
      "石灰坑山",
      "望湖山",
      "百年大榕樹",
+     "第三休息點",
+     "第四休息點",
      "光明山大樹佛",
+     "第五休息點",
      "彰埔坑山",
+     "第六休息點",
      "鶯歌石山",
      "鶯歌石",
      "北鶯公園",
+     "第七休息點",
      "鶯歌車站"
     ],
     "datasets": [
      {
       "label": "海拔 (m)",
       "data": [
-       25,
-       81,
-       109,
+       45,
+       75,
+       100,
+       180,
+       250,
        300,
-       305,
+       300,
        374,
        361,
        350,
-       264,
+       265,
+       260,
+       265,
+       260,
        234,
+       185,
        192,
-       97,
-       76,
-       54
+       110,
+       65,
+       55,
+       55
       ],
       "borderColor": "#4338ca",
       "borderWidth": 2.5,
@@ -11090,7 +11279,14 @@
        "#a09080",
        "#a09080",
        "#a09080",
+       "#a09080",
+       "#a09080",
        "#7c9e52",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
        "#a09080",
        "#a09080",
        "#a09080",
@@ -11114,9 +11310,23 @@
        "#4338ca",
        "#4338ca",
        "#4338ca",
+       "#4338ca",
+       "#4338ca",
+       "#4338ca",
+       "#4338ca",
+       "#4338ca",
+       "#4338ca",
+       "#4338ca",
        "#4338ca"
       ],
       "pointBorderWidth": [
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
        2.5,
        2.5,
        2.5,
@@ -11178,140 +11388,265 @@
   "card": [
    {
     "wp-pos-label": "集合起點",
-    "wp-title": "山佳車站剪票口 (H25m)",
-    "wp-time": "08:10",
+    "wp-title": "山佳車站剪票口",
+    "wp-time": "08:35",
     "wp-dist": "0.00",
-    "wp-ele": "25",
-    "wp-desc": "08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。",
-    "wp-advice": "山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐，全程無補給點。"
+    "wp-ele": "45",
+    "wp-desc": "08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。",
+    "wp-advice": "山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐；沿途補給點很少。"
    },
    {
     "wp-pos-label": "信仰地標",
-    "wp-title": "德和福德宮 (H81m)",
-    "wp-time": "08:30",
-    "wp-dist": "0.69",
-    "wp-ele": "81",
-    "wp-desc": "沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。累計里程 0.69 km。",
-    "wp-advice": "從這裡到樹林觀景平台還有約 1.9 km 柏油坡，到民和街才有山路，步調放穩。"
+    "wp-title": "德和福德宮",
+    "wp-time": "08:47",
+    "wp-dist": "0.63",
+    "wp-ele": "75",
+    "wp-desc": "累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。",
+    "wp-advice": "從這裡到福安宮還有約 2 km 柏油坡，到民和街才有山路，步調放穩。"
    },
    {
     "wp-pos-label": "轉換路段",
-    "wp-title": "正安宮 (H109m)",
-    "wp-time": "08:35",
-    "wp-dist": "0.98",
-    "wp-ele": "109",
-    "wp-desc": "沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.98 km。",
+    "wp-title": "正安宮",
+    "wp-time": "08:52",
+    "wp-dist": "0.96",
+    "wp-ele": "100",
+    "wp-desc": "累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。",
     "wp-advice": "此段為柏油路，適合暖身。山下民宅偶有狗吠，通常不會攻擊，放慢腳步經過即可。"
    },
    {
+    "wp-pos-label": "休息點",
+    "wp-title": "第一休息點",
+    "wp-time": "09:03",
+    "wp-dist": "1.49",
+    "wp-ele": "180",
+    "wp-desc": "累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。",
+    "wp-advice": "從正安宮起一路是柏油坡，這裡離福安宮登山口還有約 1.2 km，可在此整隊。"
+   },
+   {
+    "wp-pos-label": "休息點",
+    "wp-title": "第二休息點",
+    "wp-time": "09:23",
+    "wp-dist": "1.91",
+    "wp-ele": "250",
+    "wp-desc": "累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。",
+    "wp-advice": "離福安宮登山口約 0.8 km，之後就要進山徑爬石灰坑步道，先在這裡補水。"
+   },
+   {
     "wp-pos-label": "展望台",
-    "wp-title": "樹林觀景平台 (H300m)",
-    "wp-time": "09:15",
-    "wp-dist": "2.56",
+    "wp-title": "樹林觀景平台",
+    "wp-time": "09:49",
+    "wp-dist": "2.63",
     "wp-ele": "300",
-    "wp-desc": "福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。累計里程 2.56 km。",
+    "wp-desc": "累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。",
     "wp-advice": "紀錄指出平台不確定是否開放，勿擅自進入；百年大榕樹的平台視野更好，可留到那裡再拍。"
    },
    {
     "wp-pos-label": "入山口",
-    "wp-title": "福安宮 (H305m)",
-    "wp-time": "09:20",
-    "wp-dist": "2.59",
-    "wp-ele": "305",
-    "wp-desc": "民和街上的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.59 km。",
+    "wp-title": "福安宮",
+    "wp-time": "09:55",
+    "wp-dist": "2.67",
+    "wp-ele": "300",
+    "wp-desc": "累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。",
     "wp-advice": "此後坡度轉陡，建議在此稍作休息、補充水分。福安宮周邊為住家，請保持安靜。"
    },
    {
     "wp-pos-label": "最高點",
     "wp-title": "石灰坑山 (H374m)",
-    "wp-time": "10:05",
-    "wp-dist": "3.66",
+    "wp-time": "10:22",
+    "wp-dist": "3.67",
     "wp-ele": "374",
-    "wp-desc": "設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.66 km。",
+    "wp-desc": "累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。",
     "wp-advice": "山頂有三面佛可稍作休息，是全程展望最好的一段，適合拍照與補充體力。"
    },
    {
     "wp-pos-label": "副峰",
     "wp-title": "望湖山 (H361m)",
-    "wp-time": "10:30",
-    "wp-dist": "4.29",
+    "wp-time": "10:42",
+    "wp-dist": "4.22",
     "wp-ele": "361",
-    "wp-desc": "鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 4.29 km。",
+    "wp-desc": "累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。",
     "wp-advice": "山頭在路旁竹林的凹處，順向走很容易錯過；大榕樹就在幾步外，錯過折返也不吃力。"
    },
    {
     "wp-pos-label": "老樹",
-    "wp-title": "百年大榕樹 (H350m)",
-    "wp-time": "10:35",
-    "wp-dist": "4.33",
+    "wp-title": "百年大榕樹",
+    "wp-time": "10:47",
+    "wp-dist": "4.29",
     "wp-ele": "350",
-    "wp-desc": "鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公，平台可俯視三峽、鶯歌與八德。累計里程 4.33 km。",
+    "wp-desc": "累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。",
     "wp-advice": "下山有往妙音寺與往鶯歌石兩條路，走往鶯歌石方向接光明山稜線，免得繞遠路。"
    },
    {
+    "wp-pos-label": "休息點",
+    "wp-title": "第三休息點",
+    "wp-time": "11:43",
+    "wp-dist": "4.91",
+    "wp-ele": "265",
+    "wp-desc": "累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。",
+    "wp-advice": "大榕樹往大樹佛一路下坡、竹林夾道，樹根土路濕滑，放慢腳步。"
+   },
+   {
+    "wp-pos-label": "休息點",
+    "wp-title": "第四休息點",
+    "wp-time": "11:57",
+    "wp-dist": "5.10",
+    "wp-ele": "260",
+    "wp-desc": "累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。",
+    "wp-advice": "再往下約 200 m 就是光明山大樹佛，平台可以坐下來休息。"
+   },
+   {
     "wp-pos-label": "信仰地標",
-    "wp-title": "光明山大樹佛 (H264m)",
-    "wp-time": "11:10",
-    "wp-dist": "5.25",
-    "wp-ele": "264",
-    "wp-desc": "光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。累計里程 5.25 km。",
+    "wp-title": "光明山大樹佛",
+    "wp-time": "12:07",
+    "wp-dist": "5.30",
+    "wp-ele": "265",
+    "wp-desc": "累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。",
     "wp-advice": "再往下到馬路會經過福德祠，紀錄提到那裡有水和廁所，可以在那裡整理休息。"
+   },
+   {
+    "wp-pos-label": "休息點",
+    "wp-title": "第五休息點",
+    "wp-time": "12:22",
+    "wp-dist": "5.57",
+    "wp-ele": "260",
+    "wp-desc": "累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。",
+    "wp-advice": "從這裡到彰埔坑山約 0.6 km，當天走了 15 分鐘。"
    },
    {
     "wp-pos-label": "稜線山頭",
     "wp-title": "彰埔坑山（樟普坑山）(H234m)",
-    "wp-time": "11:35",
-    "wp-dist": "6.11",
+    "wp-time": "12:42",
+    "wp-dist": "6.15",
     "wp-ele": "234",
-    "wp-desc": "現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。累計里程 6.11 km。",
+    "wp-desc": "累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。",
     "wp-advice": "此段岔路較多（牛灶坑、二坑步道等），請依現場指標續行往鶯歌石方向，必要時核對離線地圖。"
+   },
+   {
+    "wp-pos-label": "休息點",
+    "wp-title": "第六休息點",
+    "wp-time": "13:07",
+    "wp-dist": "6.87",
+    "wp-ele": "185",
+    "wp-desc": "累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。",
+    "wp-advice": "這一段下坡多為樹根土路，較陡，下山請放慢腳步。"
    },
    {
     "wp-pos-label": "稜線山頭",
     "wp-title": "鶯歌石山 (H192m)",
-    "wp-time": "12:20",
-    "wp-dist": "7.19",
+    "wp-time": "13:25",
+    "wp-dist": "7.29",
     "wp-ele": "192",
-    "wp-desc": "設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。累計里程 7.19 km。",
+    "wp-desc": "累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。",
     "wp-advice": "往山頂的岔路沒有明顯指標，只有路旁紅布條，請對照離線地圖，別錯過岔口。"
    },
    {
     "wp-pos-label": "景觀亮點",
     "wp-title": "鶯歌石",
-    "wp-time": "12:35",
-    "wp-dist": "7.52",
-    "wp-ele": "97",
-    "wp-desc": "鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.52 km。",
+    "wp-time": "13:46",
+    "wp-dist": "7.53",
+    "wp-ele": "110",
+    "wp-desc": "累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。",
     "wp-advice": "此處為熱門拍照點，假日可能需稍候。下方步道改為鋪面，較好走。"
    },
    {
     "wp-pos-label": "公園",
     "wp-title": "北鶯公園",
-    "wp-time": "12:40",
-    "wp-dist": "7.63",
-    "wp-ele": "76",
-    "wp-desc": "鶯歌石步道 0K 起點旁的公園，路線從公園北側經過。累計里程 7.63 km。",
-    "wp-advice": "可在「北鶯公園」站搭新北市新巴士 F651，或步行約 0.75 km 到鶯歌車站。"
+    "wp-time": "13:56",
+    "wp-dist": "7.72",
+    "wp-ele": "65",
+    "wp-desc": "累計 7.72 km。鶯歌石步道 0K 起點旁的公園。",
+    "wp-advice": "可在「北鶯公園」站搭新北市新巴士 F651，或步行約 1 km 到鶯歌車站。"
+   },
+   {
+    "wp-pos-label": "休息點",
+    "wp-title": "第七休息點",
+    "wp-time": "14:12",
+    "wp-dist": "8.50",
+    "wp-ele": "55",
+    "wp-desc": "累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。",
+    "wp-advice": "鶯歌車站就在東側約 150 m，當天從這裡走 4 分鐘抵達。"
    },
    {
     "wp-pos-label": "終點解散",
     "wp-title": "鶯歌車站",
-    "wp-time": "13:00",
-    "wp-dist": "8.38",
-    "wp-ele": "54",
-    "wp-desc": "預定在鶯歌車站解散！全程約 8.38 km，經鶯歌石步道下到北鶯公園，再步行抵達鶯歌車站。",
+    "wp-time": "14:22",
+    "wp-dist": "8.84",
+    "wp-ele": "55",
+    "wp-desc": "累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。",
     "wp-advice": "鶯歌老街與陶瓷博物館就在車站附近，可安排順遊或用餐慶祝完賽。"
    }
   ],
-  "trip": [],
+  "trip": [
+   {
+    "slot": "date",
+    "text": "2026/09/27"
+   },
+   {
+    "slot": "date:md",
+    "text": "9月27日"
+   },
+   {
+    "slot": "km",
+    "text": "8.89"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "5 小時 50 分"
+   },
+   {
+    "slot": "date",
+    "text": "2026/09/27"
+   },
+   {
+    "slot": "date:md",
+    "text": "9月27日"
+   },
+   {
+    "slot": "km",
+    "text": "8.89"
+   },
+   {
+    "slot": "duration",
+    "text": "5:50"
+   },
+   {
+    "slot": "gain",
+    "text": "386"
+   },
+   {
+    "slot": "summit",
+    "text": "374"
+   },
+   {
+    "slot": "date:slash",
+    "text": "9/27"
+   },
+   {
+    "slot": "date:slash",
+    "text": "9/27"
+   },
+   {
+    "slot": "duration:zh",
+    "text": "5 小時 50 分"
+   },
+   {
+    "slot": "date:zh",
+    "text": "2026 年 9 月 27 日"
+   },
+   {
+    "slot": "km",
+    "text": "8.89"
+   }
+  ],
   "widgets": {
-   "nav": "<nav data-widget=\"nav\" class=\"fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50\" aria-label=\"頁面導覽\"><div class=\"max-w-7xl mx-auto px-6 h-14 flex items-center justify-between\"><a class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\" aria-label=\"爬爬小隊首頁\"><span class=\"w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0\"></span><span class=\"font-bold text-stone-800 tracking-tight text-lg\"></span></a><div class=\"flex gap-1 overflow-x-auto\"><button onclick=\"document.getElementById('overview').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到行程總覽\"></button><button onclick=\"document.getElementById('map-section').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到路線圖\"></button><button onclick=\"document.getElementById('elevation').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到海拔剖面\"></button><button onclick=\"document.getElementById('spots').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到景點介紹\"></button><button onclick=\"document.getElementById('timeline').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到預估進度\"></button></div></div></nav>",
+   "nav": "<nav data-widget=\"nav\" class=\"fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50\" aria-label=\"頁面導覽\"><div class=\"max-w-7xl mx-auto px-6 h-14 flex items-center justify-between\"><a class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\" aria-label=\"爬爬小隊首頁\"><span class=\"w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0\"></span><span class=\"font-bold text-stone-800 tracking-tight text-lg\"></span><span class=\"text-stone-600 text-xs hidden sm:inline font-medium\"><span></span></span></a><div class=\"flex gap-1 overflow-x-auto\"><button onclick=\"document.getElementById('overview').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到行程總覽\"></button><button onclick=\"document.getElementById('map-section').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到路線圖\"></button><button onclick=\"document.getElementById('elevation').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到海拔剖面\"></button><button onclick=\"document.getElementById('spots').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到景點介紹\"></button><button onclick=\"document.getElementById('timeline').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到實走紀錄\"></button></div></div></nav>",
+   "notice": "<div data-widget=\"notice\" class=\"hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3\" id=\"trip-past-notice\"><span class=\"text-2xl mt-0.5\"></span><div><div class=\"font-bold text-stone-800 text-base mb-1\"></div><p class=\"text-sm text-stone-700 leading-relaxed\"><span></span></p></div></div>",
    "weather": "<div class=\"bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm\" data-widget=\"weather\"><div class=\"text-xs text-stone-600 mb-1\" id=\"weather-label\"></div><div class=\"font-bold text-stone-800\" id=\"weather-main\"></div><div class=\"text-xs text-stone-600 mt-1\" id=\"weather-sub\"></div></div>",
    "wp-card": "<div data-widget=\"wp-card\" class=\"bg-stone-50 rounded-2xl p-6 border border-stone-100\" id=\"wp-card\"><div class=\"text-xs text-stone-600 uppercase tracking-widest mb-3\" id=\"wp-pos-label\"></div><div class=\"flex items-center gap-3 mb-3\"><button onclick=\"prevWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"上一個航點\"></button><h3 class=\"text-lg font-bold text-stone-900 flex-1\" id=\"wp-title\"></h3><button onclick=\"nextWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"下一個航點\"></button></div><div class=\"flex gap-4 mb-3 text-sm text-stone-600\"><span><strong class=\"text-stone-800\" id=\"wp-time\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-dist\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-ele\"></strong></span></div><p class=\"text-base text-stone-700 mb-3\" id=\"wp-desc\"></p><div class=\"rounded-xl p-3 accent-box\"><div class=\"text-xs font-medium mb-1 accent-text\"></div><p class=\"text-xs accent-text\" id=\"wp-advice\"></p></div></div>",
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 計畫行程 · 2026/09/27（日）· 約 8.4 KM · 火車接火車 一趟不用接駁的郊山小縱走 山佳 → 鶯歌 從百年古蹟山佳車站起登，沿石灰坑步道依序造訪石灰坑山、望湖山，經百年大榕樹接上光明山稜線步道續行彰埔坑山，再下鶯歌石山與鶯歌石地標，最後經北鶯公園抵達鶯歌車站。有山路也有柏油路，坡度平緩，起訖點皆為台鐵車站，不需接駁、不必原路折返。 ⚠️ 全程無補給，請自備充足飲水 石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。 📐 里程、時刻與部分海拔都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。里程與山頭以外的高度讀自同路線的公開 GPX #4725375，時刻依那條軌跡的步調比例排進規劃時段。走過之後會比照其他紀錄頁，改用當天的軌跡重算。 集合地點 台鐵山佳車站剪票口 出站後經中和街、德和街 17 巷上山 🏁 解散台鐵鶯歌車站 集合時間 2026/09/27（日）08:10 請提前 10 分鐘抵達，確認車班時間 天氣預報天氣資料暫無法取得請稍後再試 🗺️ 導航至山佳車站 8.4 總里程 km（估） 4.8 目標耗時 hr ~400 預計爬升 m 374 最高海拔 m（石灰坑山） 山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。總里程讀自健行筆記 GPX #4725375（2025/07/14 由山佳站走到鶯歌站，健行筆記標示 8.43 km），各航點的累計里程依同一比例換算。 互動路線圖與航點切換 點擊地圖標記查看各航點細節，琥珀色圓點為海拔 300 m 以上的高點。航點座標為隊上標記的位置，已對照公開 GPX #4725375，都在軌跡 30 m 內；成行前仍建議下載離線地圖備用。 集合起點<山佳車站剪票口 (H25m)>預計時間 08:10累計里程 0.00 km海拔 25 m08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。隊友建議山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐，全程無補給點。 參考資源 🔗 鶯歌石步道（健行筆記） 🔗 微笑山線：【大棟山系】百年大榕樹段（健行筆記官方路線，7.6 km） 📝 山佳經石灰坑山、望湖山起登路線紀錄 📝 2025 山鶯縱走：各山頭海拔與基石紀錄 📝 【微笑山線大棟山百年榕樹滄桑】（健行筆記） 📝 微笑山線大棟山系百年大榕樹段+大湖坑步道（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務 -Ep.02【大棟山系】百年大榕樹（YouTube・踏青生活選） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 【大棟山系】百年大榕樹段 #5631664・記錄 2025/04/23・7.65 km・爬升 341 m・官方路線 GPX，未上石灰坑山頂 🛰️ 2025微笑山線大縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段20260125165050 #5307229・記錄 2026/01/25・8.01 km・爬升 396 m 🛰️ 1150725大榕樹光明線-鶯歌石步道 #5801018・記錄 2026/07/25・7.55 km・爬升 456 m 🛰️ 2025微笑山線：【大棟山系】百年大榕樹段-山佳到鶯歌 #4988910・記錄 2025/09/20・9.18 km・爬升 454 m 🛰️ 2025微笑山線縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段202507141055 #4725375・記錄 2025/07/14・8.43 km・爬升 418 m 海拔高度剖面圖 自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點為 GPX #4725375 的 GPS 讀數。 山系亮點導覽 依預計的抵達順序排列。 山佳車站 新北市定古蹟，1903 年設站，早年因煤礦、陶土運輸而興建，新舊站房並存。還沒起登，先逛一座百年車站——也是「大同山‧青龍嶺‧大棟山」那條候選路線的終點，兩趟可以接起來看。 石灰坑山 (H374m) 🗻 全程最高 設三等三角點 978 號，是全程展望最好的一段，晴天可遠眺大棟山。山頂旁有一尊三面佛。此處位於樹林、鶯歌與桃園龜山交界一帶。 望湖山 (H361m) 鶯歌區內的最高峰（石灰坑山雖然更高，但不在鶯歌轄內），無基石，緊鄰百年老榕樹群，林蔭茂密清幽。與石灰坑山距離很近，步行約 15 分鐘可達。 百年大榕樹 鶯歌一號大榕，實際樹齡約三百年，是多條步道的交會點，樹下供奉土地公。平台可俯視三峽、鶯歌與桃園八德，這裡開車也到得了。下山往鶯歌石方向接光明山稜線，另一條往妙音寺會繞遠。 光明山大樹佛 光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，回頭才看得到。再往下到馬路會經過福德祠，紀錄提到有水和廁所。 彰埔坑山（樟普坑山）(H234m) 步道布條與健行筆記寫作彰埔坑山；舊地名為「樟普坑」，有在地居民指出彰埔坑是誤寫。位於光明山稜線步道上，礦務課第 90 號基石據多數紀錄未尋獲，是全程平緩好走的中繼段。此段有多條岔路可通往牛灶坑山、二坑步道，續行前請留意現場指標。 鶯歌石山 (H192m) 設水泥區界基石 772 號，海拔採山頂標示牌的 192 m（其他紀錄另有 156、163 m）。往山頂的岔路只有紅布條標示，山頂雜草叢生無展望，但下山不遠即可抵達鶯歌地名由來的鶯歌石地標，是全程最後一座山頭。 鶯歌石 鶯歌地名的由來，巨石形似昂首之鷹，石壁上岩洞景觀奇特。觀景平台視野極佳，可俯視大漢溪、鶯歌市區，並眺望對岸的三峽鳶山。 本次行程亮點 火車接火車：起訖點都是台鐵車站 【零接駁縱走】從山佳站起登，鶯歌站解散，中途不需開車接送、不必原路折返，是新北郊山中少見「搭一次火車來、搭另一次火車走」的完整縱走路線。 【人文與自然並存】從百年古蹟山佳車站出發，途經百年老榕樹群，最後在鶯歌地名由來的鶯歌石作收，一趟路線串起礦業歷史、老樹自然景觀與地質奇石三種風景。 行程四大特色 • 起訖點皆為台鐵車站，交通最方便的縱走路線之一 • 石灰坑山展望極佳，可遠眺大棟山 • 望湖山鄰近百年老榕樹群，林蔭遮蔭充足 • 終點鶯歌石為熱門地標，可順遊鶯歌陶瓷老街 預計行程進度（4H50M） 2026/09/27（日）08:10 山佳車站剪票口集合，預定 13:00 在鶯歌車站解散。里程讀自公開 GPX #4725375，時間依那條軌跡的步調比例排入 08:10–13:00，成行前建議再依當日狀況調整。 08:10🚉 集合起點山佳車站剪票口 (H25m)08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。08:30🙏 信仰地標德和福德宮 (H81m)沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。累計里程 0.69 km。08:35↔️ 轉換路段正安宮 (H109m)沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.98 km。09:15🏙️ 展望台樹林觀景平台 (H300m)福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。累計里程 2.56 km。09:20🥾 入山口福安宮 (H305m)民和街上的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.59 km。10:05🏔️ 最高點石灰坑山 (H374m)設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.66 km。10:30⛰️ 副峰望湖山 (H361m)鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 4.29 km。10:35🍁 老樹百年大榕樹 (H350m)鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公，平台可俯視三峽、鶯歌與八德。累計里程 4.33 km。11:10🙏 信仰地標光明山大樹佛 (H264m)光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。累計里程 5.25 km。11:35🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。累計里程 6.11 km。12:20🌿 稜線山頭鶯歌石山 (H192m)設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。累計里程 7.19 km。12:35🪨 景觀亮點鶯歌石鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.52 km。12:40🌳 公園北鶯公園鶯歌石步道 0K 起點旁的公園，路線從公園北側經過。累計里程 7.63 km。13:00🚉 終點解散鶯歌車站預定在鶯歌車站解散！全程約 8.38 km，經鶯歌石步道下到北鶯公園，再步行抵達鶯歌車站。 © 爬爬小隊計畫行程 ｜ 山佳鶯歌縱走 約 8.4 KM ｜ 2026/09/27",
+  "text": "跳至主要內容 爬爬爬小隊2026/09/27 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 9月27日 實走紀錄 · 8.89 KM · 5 小時 50 分 · 火車接火車 🗂️此行程已完成時刻與里程來自 2026/09/27 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 一趟不用接駁的郊山小縱走 山佳 → 鶯歌 從百年古蹟山佳車站出發，沿德和街柏油坡上到福安宮，接石灰坑步道登石灰坑山、望湖山，在百年大榕樹平台停留約 40 分鐘後，沿光明山稜線經大樹佛、彰埔坑山、鶯歌石山下到鶯歌石，最後經北鶯公園抵達鶯歌車站解散。起訖點都是台鐵車站，不需接駁、不必原路折返。 ⚠️ 沿途補給很少，請自備充足飲水 石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。 🛰️ 時刻與里程取自當天的 GPS 軌跡 GPS 於 08:17 在山佳車站起錄，出發前先在車站周邊繞了約 1 km，這一圈不計入；里程從 08:35 由車站出發起算，以簡化到 5 m 的軌跡計算。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。 集合地點 台鐵山佳車站剪票口 出站後經中和街、德和街 17 巷上山 🏁 解散台鐵鶯歌車站 實際時間 9月27日 08:35–14:24 08:10 集合；車站出發至 GPS 收錄 天氣預報天氣資料暫無法取得請稍後再試 🗺️ 導航至山佳車站 8.89 實走里程 km 5:50 實走耗時（含休息） 386 累計上升 m（GPS 推估） 374 最高海拔 m（石灰坑山） 山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。其餘地點由當天軌跡推估，誤差約 ±25 m。 互動路線圖與航點切換 地圖上的線是 9/27 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節，航點座標取自軌跡在抵達時刻的位置。 集合起點<山佳車站剪票口>實際時間 08:35累計里程 0.00 km海拔 45 m08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。隊友建議山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐；沿途補給點很少。 參考資源 🔗 鶯歌石步道（健行筆記） 🔗 微笑山線：【大棟山系】百年大榕樹段（健行筆記官方路線，7.6 km） 📝 山佳經石灰坑山、望湖山起登路線紀錄 📝 2025 山鶯縱走：各山頭海拔與基石紀錄 📝 【微笑山線大棟山百年榕樹滄桑】（健行筆記） 📝 微笑山線大棟山系百年大榕樹段+大湖坑步道（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務 -Ep.02【大棟山系】百年大榕樹（YouTube・踏青生活選） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 【大棟山系】百年大榕樹段 #5631664・記錄 2025/04/23・7.65 km・爬升 341 m・官方路線 GPX，未上石灰坑山頂 🛰️ 2025微笑山線大縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段20260125165050 #5307229・記錄 2026/01/25・8.01 km・爬升 396 m 🛰️ 1150725大榕樹光明線-鶯歌石步道 #5801018・記錄 2026/07/25・7.55 km・爬升 456 m 🛰️ 2025微笑山線：【大棟山系】百年大榕樹段-山佳到鶯歌 #4988910・記錄 2025/09/20・9.18 km・爬升 454 m 🛰️ 2025微笑山線縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段202507141055 #4725375・記錄 2025/07/14・8.43 km・爬升 418 m 海拔高度剖面圖 自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點由當天軌跡推估。 山系亮點導覽 依 9/27 的抵達順序排列。 山佳車站 新北市定古蹟，1903 年設站，早年因煤礦、陶土運輸而興建，新舊站房並存。還沒起登，先逛一座百年車站——也是「大同山‧青龍嶺‧大棟山」那條候選路線的終點，兩趟可以接起來看。 石灰坑山 (H374m) 🗻 全程最高 設三等三角點 978 號，是全程展望最好的一段，晴天可遠眺大棟山。山頂旁有一尊三面佛。此處位於樹林、鶯歌與桃園龜山交界一帶。 望湖山 (H361m) 鶯歌區內的最高峰（石灰坑山雖然更高，但不在鶯歌轄內），無基石，緊鄰百年老榕樹群，林蔭茂密清幽。與石灰坑山距離很近，步行約 15 分鐘可達。 百年大榕樹 鶯歌一號大榕，實際樹齡約三百年，是多條步道的交會點，樹下供奉土地公。平台可俯視三峽、鶯歌與桃園八德，這裡開車也到得了。下山往鶯歌石方向接光明山稜線，另一條往妙音寺會繞遠。 光明山大樹佛 光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，回頭才看得到。再往下到馬路會經過福德祠，紀錄提到有水和廁所。 彰埔坑山（樟普坑山）(H234m) 步道布條與健行筆記寫作彰埔坑山；舊地名為「樟普坑」，有在地居民指出彰埔坑是誤寫。位於光明山稜線步道上，礦務課第 90 號基石據多數紀錄未尋獲，是全程平緩好走的中繼段。此段有多條岔路可通往牛灶坑山、二坑步道，續行前請留意現場指標。 鶯歌石山 (H192m) 設水泥區界基石 772 號，海拔採山頂標示牌的 192 m（其他紀錄另有 156、163 m）。往山頂的岔路只有紅布條標示，山頂雜草叢生無展望，但下山不遠即可抵達鶯歌地名由來的鶯歌石地標，是全程最後一座山頭。 鶯歌石 鶯歌地名的由來，巨石形似昂首之鷹，石壁上岩洞景觀奇特。觀景平台視野極佳，可俯視大漢溪、鶯歌市區，並眺望對岸的三峽鳶山。 本次行程亮點 火車接火車：起訖點都是台鐵車站 【零接駁縱走】從山佳站起登，鶯歌站解散，中途不需開車接送、不必原路折返，是新北郊山中少見「搭一次火車來、搭另一次火車走」的完整縱走路線。 【人文與自然並存】從百年古蹟山佳車站出發，途經百年老榕樹群，最後在鶯歌地名由來的鶯歌石作收，一趟路線串起礦業歷史、老樹自然景觀與地質奇石三種風景。 行程四大特色 • 起訖點皆為台鐵車站，交通最方便的縱走路線之一 • 石灰坑山展望極佳，可遠眺大棟山 • 望湖山鄰近百年老榕樹群，林蔭遮蔭充足 • 終點鶯歌石為熱門地標，可順遊鶯歌陶瓷老街 實走時間軸 08:35 山佳車站出發 · 14:22 抵達鶯歌車站 · 全程 5 小時 50 分 時刻、座標與里程取自 GPS 軌跡；「原估」是行前規劃的時刻。七個休息點沒有地名，以停留順序命名。 08:35(原估 08:10)🚉 集合起點山佳車站剪票口08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。08:47(原估 08:30)🙏 信仰地標德和福德宮累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。08:52(原估 08:35)↔️ 轉換路段正安宮累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。09:03🌳 休息點第一休息點累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。09:23🌳 休息點第二休息點累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。09:49(原估 09:15)🏙️ 展望台樹林觀景平台累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。09:55(原估 09:20)🥾 入山口福安宮累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。10:22(原估 10:05)🏔️ 最高點石灰坑山 (H374m)累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。10:42(原估 10:30)⛰️ 副峰望湖山 (H361m)累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。10:47(原估 10:35)🍁 老樹百年大榕樹累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。11:43🌳 休息點第三休息點累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。11:57🌳 休息點第四休息點累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。12:07(原估 11:10)🙏 信仰地標光明山大樹佛累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。12:22🌳 休息點第五休息點累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。12:42(原估 11:35)🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。13:07🌳 休息點第六休息點累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。13:25(原估 12:20)🌿 稜線山頭鶯歌石山 (H192m)累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。13:46(原估 12:35)🪨 景觀亮點鶯歌石累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。13:56(原估 12:40)🌳 公園北鶯公園累計 7.72 km。鶯歌石步道 0K 起點旁的公園。14:12🌳 休息點第七休息點累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。14:22(原估 13:00)🚉 終點解散鶯歌車站累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。 © 爬爬小隊實走紀錄 ｜ 山佳鶯歌縱走 ｜ 2026 年 9 月 27 日 · 08:35–14:24 · 8.89 km",
   "errors": []
  },
  "shiqiulinling": {

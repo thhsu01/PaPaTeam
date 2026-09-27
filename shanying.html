@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>山佳鶯歌縱走：石灰坑山‧望湖山‧彰埔坑山‧鶯歌石山 — 爬爬小隊</title>
-  <meta name="description" content="計畫行程（2026/09/27 週日）：08:10 台鐵山佳站集合，依序經石灰坑山、望湖山、彰埔坑山、鶯歌石山，下抵台鐵鶯歌站，全程約 8.4 公里的火車接火車縱走。">
+  <meta name="description" content="2026/9/27 山佳鶯歌縱走實走紀錄。自台鐵山佳站出發，經石灰坑山、望湖山、百年大榕樹、彰埔坑山、鶯歌石山，下抵台鐵鶯歌站，全程 8.89 公里。">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -32,7 +32,6 @@
       --accent-border-deep:     #c7d2fe;                    /* indigo-200 */
       --accent:                 #4f46e5;                    /* 裝飾：圓點、軌跡、圖表線（5.87:1） */
       --accent-deep:            #4338ca;                    /* indigo-700 */
-      --accent-soft:            #e0e7ff;                    /* indigo-100 */
       --accent-strong:          #4338ca;                    /* 淺底上的文字（7.38:1） */
       --accent-strong-deep:     #3730a3;                    /* 淡底卡片上的內文（9.27:1） */
       --accent-strong-deeper:   #312e81;                    /* 再深一階（10.66:1） */
@@ -55,29 +54,32 @@
     <!-- ═══ HERO / OVERVIEW ═══ -->
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-indigo-50 via-sky-50 to-stone-100">
       <div class="max-w-4xl mx-auto w-full">
-        <div class="mb-4">
-          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">計畫行程 · 2026/09/27（日）· 約 8.4 KM · 火車接火車</span>
+        <div class="mb-5 flex items-center gap-3">
+          <span class="stamp"><span data-trip="date:md"></span></span>
+          <span class="text-xs text-stone-600 tracking-widest uppercase">實走紀錄 · <span data-trip="km"></span> KM · <span data-trip="duration:zh"></span> · 火車接火車</span>
         </div>
+
+        <div data-widget="notice"></div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           一趟不用接駁的郊山小縱走<br>
           <span class="accent-text">山佳 → 鶯歌</span>
         </h1>
-        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從百年古蹟山佳車站起登，沿石灰坑步道依序造訪石灰坑山、望湖山，經百年大榕樹接上光明山稜線步道續行彰埔坑山，再下鶯歌石山與鶯歌石地標，最後經北鶯公園抵達鶯歌車站。有山路也有柏油路，坡度平緩，起訖點皆為台鐵車站，不需接駁、不必原路折返。</p>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從百年古蹟山佳車站出發，沿德和街柏油坡上到福安宮，接石灰坑步道登石灰坑山、望湖山，在百年大榕樹平台停留約 40 分鐘後，沿光明山稜線經大樹佛、彰埔坑山、鶯歌石山下到鶯歌石，最後經北鶯公園抵達鶯歌車站解散。起訖點都是台鐵車站，不需接駁、不必原路折返。</p>
 
         <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
           <span class="text-2xl mt-0.5">⚠️</span>
           <div>
-            <div class="font-bold text-amber-800 text-base mb-1">全程無補給，請自備充足飲水</div>
+            <div class="font-bold text-amber-800 text-base mb-1">沿途補給很少，請自備充足飲水</div>
             <p class="text-sm text-amber-700 leading-relaxed">石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。</p>
           </div>
         </div>
 
-        <!-- 行前頁的數字都還是估計值，說清楚比含糊帶過好 -->
+        <!-- 紀錄怎麼來的，說清楚比含糊帶過好 -->
         <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
-          <span class="text-2xl mt-0.5">📐</span>
+          <span class="text-2xl mt-0.5">🛰️</span>
           <div>
-            <div class="font-bold accent-text-deeper text-base mb-1">里程、時刻與部分海拔都還是估計值</div>
-            <p class="text-sm accent-text-deep leading-relaxed">本隊尚未實走，地圖上的線是航點之間的直線。里程與山頭以外的高度讀自同路線的公開 GPX #4725375，時刻依那條軌跡的步調比例排進規劃時段。走過之後會比照其他紀錄頁，改用當天的軌跡重算。</p>
+            <div class="font-bold accent-text-deeper text-base mb-1">時刻與里程取自當天的 GPS 軌跡</div>
+            <p class="text-sm accent-text-deep leading-relaxed">GPS 於 08:17 在山佳車站起錄，出發前先在車站周邊繞了約 1 km，這一圈不計入；里程從 08:35 由車站出發起算，以簡化到 5 m 的軌跡計算。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。</p>
           </div>
         </div>
 
@@ -89,9 +91,9 @@
             <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 解散<br>台鐵鶯歌車站</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
-            <div class="text-xs text-stone-600 mb-1">集合時間</div>
-            <div class="font-bold text-stone-800">2026/09/27（日）08:10</div>
-            <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達，確認車班時間</div>
+            <div class="text-xs text-stone-600 mb-1">實際時間</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 08:35–14:24</div>
+            <div class="text-xs text-stone-600 mt-1">08:10 集合；車站出發至 GPS 收錄</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
@@ -101,25 +103,26 @@
           </div>
         </div>
 
+        <!-- 里程與耗時取自 9/27 的 GPS 軌跡；山頭海拔見下方註記 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="text-center">
-            <div class="text-2xl font-black text-stone-900">8.4</div>
-            <div class="text-xs text-stone-600">總里程 km（估）</div>
+            <div class="text-2xl font-black text-stone-900"><span data-trip="km"></span></div>
+            <div class="text-xs text-stone-600">實走里程 km</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-black text-stone-900">4.8</div>
-            <div class="text-xs text-stone-600">目標耗時 hr</div>
+            <div class="text-2xl font-black text-stone-900"><span data-trip="duration"></span></div>
+            <div class="text-xs text-stone-600">實走耗時（含休息）</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-black text-stone-900">~400</div>
-            <div class="text-xs text-stone-600">預計爬升 m</div>
+            <div class="text-2xl font-black text-stone-900"><span data-trip="gain"></span></div>
+            <div class="text-xs text-stone-600">累計上升 m（GPS 推估）</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-black accent-text">374</div>
+            <div class="text-2xl font-black accent-text"><span data-trip="summit"></span></div>
             <div class="text-xs text-stone-600">最高海拔 m（石灰坑山）</div>
           </div>
         </div>
-        <p class="text-xs text-stone-600 mt-3 max-w-2xl">山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。總里程讀自健行筆記 GPX #4725375（2025/07/14 由山佳站走到鶯歌站，健行筆記標示 8.43 km），各航點的累計里程依同一比例換算。</p>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。其餘地點由當天軌跡推估，誤差約 ±25 m。</p>
       </div>
     </section>
 
@@ -130,7 +133,7 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           互動路線圖與航點切換
         </h2>
-        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節，琥珀色圓點為海拔 300 m 以上的高點。航點座標為隊上標記的位置，已對照公開 GPX #4725375，都在軌跡 30 m 內；成行前仍建議下載離線地圖備用。</p>
+        <p class="text-sm text-stone-600 mb-6">地圖上的線是 <span data-trip="date:slash"></span> 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節，航點座標取自軌跡在抵達時刻的位置。</p>
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
         <div data-widget="wp-card"></div>
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
@@ -179,7 +182,7 @@
           海拔高度剖面圖
         </h2>
         <div data-widget="chart"></div>
-        <p class="text-xs text-stone-600 mt-3 text-center">自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點為 GPX #4725375 的 GPS 讀數。</p>
+        <p class="text-xs text-stone-600 mt-3 text-center">自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點由當天軌跡推估。</p>
       </div>
     </section>
 
@@ -190,7 +193,7 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           山系亮點導覽
         </h2>
-        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列。</p>
+        <p class="text-sm text-stone-600 mb-6">依 <span data-trip="date:slash"></span> 的抵達順序排列。</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
             <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>山佳車站</h3>
@@ -247,97 +250,131 @@
       <div class="max-w-2xl mx-auto">
         <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
-          預計行程進度（4H50M）
+          實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-8">2026/09/27（日）08:10 山佳車站剪票口集合，預定 13:00 在鶯歌車站解散。里程讀自公開 GPX #4725375，時間依那條軌跡的步調比例排入 08:10–13:00，成行前建議再依當日狀況調整。</p>
+        <p class="text-sm text-stone-600 mb-2">08:35 山佳車站出發 · 14:22 抵達鶯歌車站 · 全程 <span data-trip="duration:zh"></span></p>
+        <p class="text-xs text-stone-600 mb-8">時刻、座標與里程取自 GPS 軌跡；「原估」是行前規劃的時刻。七個休息點沒有地名，以停留順序命名。</p>
         <div data-widget="timeline"></div>
       </div>
     </section>
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊計畫行程 ｜ 山佳鶯歌縱走 約 8.4 KM ｜ 2026/09/27</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 ｜ 山佳鶯歌縱走 ｜ <span data-trip="date:zh"></span> · 08:35–14:24 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
     // ── 行程數據 ──────────────────────────────────────────────
-    // 計畫行程：2026-09-27（日）08:10 山佳車站剪票口集合，鶯歌車站解散。本隊尚未實走。
+    // 2026-09-27 實走紀錄。08:10 山佳車站剪票口集合，14:22 抵達鶯歌車站解散。
     //
-    // 航點座標是隊上標記的位置（2026-09-24 提供），逐點對照健行筆記 GPX #4725375
-    // （2025-07-14，山佳站→鶯歌站）都在 30 m 內。兩個例外：福安宮沿用 5 份 GPX
-    // 以「福安宮」命名的路點（彼此差 15 m 內）；北鶯公園的標記點離軌跡 63 m，
-    // 為了座標與里程同源，改取軌跡經過公園北側的位置。
+    // 軌跡：健行筆記 App 匯出的 GPX（1771 點），簡化後放在
+    // assets/tracks/shanying-2026-09-27.js。GPS 08:17 起錄後先在車站周邊繞行約
+    // 1 km，依使用者裁定不計入；軌跡與里程都從 08:35 回到車站、正式出發那一點起算。
     //
-    // dist 讀 #4725375 上的累計距離，再乘 8.43 ÷ 9.02（健行筆記標示值 ÷ 原始點
-    // 加總，原始點的 GPS 抖動會把長度灌大），所以山佳站到鶯歌站是 8.38 km。
-    // time 取該軌跡各點經過時刻佔全程（2 小時 45 分）的比例，排進 08:10–13:00
-    // 的規劃時段，取整到 5 分鐘；是規劃值，不是實測。德和福德宮算出 0.6988，
-    //     頁面寫 0.69：寫 0.70 會讓下一段短於兩點直線（spec_sweep 的段長檢查），差 9 m。
+    // dist：Douglas–Peucker 5 m 簡化後的累計距離（全程 8.89 km）。原始點加總是
+    // 9.45 km（扣掉那一圈後），多出來的是停留時 GPS 原地抖動；對照 4 條有健行筆記
+    // 官方里程的同路線 GPX，官方值約為 5 m 簡化值的 0.97–1.00 倍，故採簡化值。
+    //
+    // time：軌跡抵達該航點的時刻；停留時間寫在 desc。plan 是行前頁排的時刻。
+    // 座標取軌跡在抵達時刻的位置（隊上行前標記的點都在 50 m 內）。
+    //
+    // 停留 5 分鐘以上（30 m 內）共 13 處；落在沒有地名處的 7 處收為第一～第七休息點
+    // （conventions.unnamed_stops）。
     //
     // ele：
-    //   山頭 —— 石灰坑山 374（三等三角點 978 號）、彰埔坑山 234 採多數登山紀錄；
-    //     望湖山 361、鶯歌石山 192 依使用者指定（361 見兩份 GPX 路點名稱，
-    //     192 是山頂標示牌）。四座都查不到官方公布的標高。對照：#4725375 的
-    //     GPS 讀數是 362／355／226／149，其他紀錄的鶯歌石山有 156、163。
-    //   其他各點 —— #4725375 的 GPS 讀數，取整數。
+    //   山頭 —— 石灰坑山 374、望湖山 361、彰埔坑山 234、鶯歌石山 192，沿用行前頁
+    //     的定案（出處見總覽註記）。當天 GPS 讀數 364／358／220／164。
+    //   其他各點 —— 軌跡前後 60 m 內取樣點的高程中位數，取整到 5 m，±25 m 的估計，
+    //     所以 loc 不加 (H___m)。
+    //   累計上升 386 m：高程序列取移動中位數後累加，15／31／61 點視窗分別得 484／
+    //     386／328 m，沒有收斂（本檔約 12 秒一點，61 點已抹掉真實起伏）；航點高程
+    //     相加的下限是 329 m（山佳 45 → 石灰坑山 374）。取中間的 31 點，應視為推估。
     //   山名：步道布條與健行筆記寫「彰埔坑山」，舊地名是「樟普坑」（維基百科
     //     〈大湖 (新北市)〉；ballenf 2023-12-17 轉述在地居民說彰埔坑是誤寫）。
     //     依使用者裁定主名用彰埔坑山、括號附樟普坑山；「樟埔坑山」查無出處。
     const schedule = [
-      { lat: 24.972788, lng: 121.392484, time: "08:10", loc: "山佳車站剪票口 (H25m)", dist: 0.00, ele: 25, pos: "集合起點",
-        desc: "08:10 在山佳車站剪票口集合出發，依官方路線經中和街、德和街 17 巷往上山的產業道路前進。",
-        advice: "山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐，全程無補給點。" },
+      { lat: 24.972943, lng: 121.392019, time: "08:35", plan: "08:10", loc: "山佳車站剪票口", dist: 0.00, ele: 45, pos: "集合起點",
+        desc: "08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。",
+        advice: "山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐；沿途補給點很少。" },
 
-      { lat: 24.978138, lng: 121.390329, time: "08:30", loc: "德和福德宮 (H81m)", dist: 0.69, ele: 81, pos: "信仰地標",
-        desc: "沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。累計里程 0.69 km。",
-        advice: "從這裡到樹林觀景平台還有約 1.9 km 柏油坡，到民和街才有山路，步調放穩。" },
+      { lat: 24.977886, lng: 121.390338, time: "08:47", plan: "08:30", loc: "德和福德宮", dist: 0.63, ele: 75, pos: "信仰地標",
+        desc: "累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。",
+        advice: "從這裡到福安宮還有約 2 km 柏油坡，到民和街才有山路，步調放穩。" },
 
-      { lat: 24.980615, lng: 121.389471, time: "08:35", loc: "正安宮 (H109m)", dist: 0.98, ele: 109, pos: "轉換路段",
-        desc: "沿德和巷、德和街走出社區，接上通往石灰坑步道方向的岔路口。累計里程 0.98 km。",
+      { lat: 24.980599, lng: 121.389668, time: "08:52", plan: "08:35", loc: "正安宮", dist: 0.96, ele: 100, pos: "轉換路段",
+        desc: "累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。",
         advice: "此段為柏油路，適合暖身。山下民宅偶有狗吠，通常不會攻擊，放慢腳步經過即可。" },
 
-      { lat: 24.983676, lng: 121.380312, time: "09:15", loc: "樹林觀景平台 (H300m)", dist: 2.56, ele: 300, pos: "展望台",
-        desc: "福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。累計里程 2.56 km。",
+      { lat: 24.982710, lng: 121.385909, time: "09:03", loc: "第一休息點", dist: 1.49, ele: 180, pos: "休息點",
+        desc: "累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。",
+        advice: "從正安宮起一路是柏油坡，這裡離福安宮登山口還有約 1.2 km，可在此整隊。" },
+
+      { lat: 24.984600, lng: 121.385231, time: "09:23", loc: "第二休息點", dist: 1.91, ele: 250, pos: "休息點",
+        desc: "累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。",
+        advice: "離福安宮登山口約 0.8 km，之後就要進山徑爬石灰坑步道，先在這裡補水。" },
+
+      { lat: 24.983822, lng: 121.380179, time: "09:49", plan: "09:15", loc: "樹林觀景平台", dist: 2.63, ele: 300, pos: "展望台",
+        desc: "累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。",
         advice: "紀錄指出平台不確定是否開放，勿擅自進入；百年大榕樹的平台視野更好，可留到那裡再拍。" },
 
-      { lat: 24.983850, lng: 121.380050, time: "09:20", loc: "福安宮 (H305m)", dist: 2.59, ele: 305, pos: "入山口",
-        desc: "民和街上的登山口，由此接上紅色鐵梯開始正式起登石灰坑步道。累計里程 2.59 km。",
+      { lat: 24.983789, lng: 121.380176, time: "09:55", plan: "09:20", loc: "福安宮", dist: 2.67, ele: 300, pos: "入山口",
+        desc: "累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。",
         advice: "此後坡度轉陡，建議在此稍作休息、補充水分。福安宮周邊為住家，請保持安靜。" },
 
-      { lat: 24.979892, lng: 121.372434, time: "10:05", loc: "石灰坑山 (H374m)", dist: 3.66, ele: 374, pos: "最高點",
-        desc: "設三等三角點 978 號，展望極佳，可遠眺大棟山。累計里程 3.66 km。",
+      { lat: 24.980003, lng: 121.372586, time: "10:22", plan: "10:05", loc: "石灰坑山 (H374m)", dist: 3.67, ele: 374, pos: "最高點",
+        desc: "累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。",
         advice: "山頂有三面佛可稍作休息，是全程展望最好的一段，適合拍照與補充體力。" },
 
-      { lat: 24.976671, lng: 121.368745, time: "10:30", loc: "望湖山 (H361m)", dist: 4.29, ele: 361, pos: "副峰",
-        desc: "鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。累計里程 4.29 km。",
+      { lat: 24.976810, lng: 121.368866, time: "10:42", plan: "10:30", loc: "望湖山 (H361m)", dist: 4.22, ele: 361, pos: "副峰",
+        desc: "累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。",
         advice: "山頭在路旁竹林的凹處，順向走很容易錯過；大榕樹就在幾步外，錯過折返也不吃力。" },
 
-      { lat: 24.976556, lng: 121.368544, time: "10:35", loc: "百年大榕樹 (H350m)", dist: 4.33, ele: 350, pos: "老樹",
-        desc: "鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公，平台可俯視三峽、鶯歌與八德。累計里程 4.33 km。",
+      { lat: 24.976667, lng: 121.368680, time: "10:47", plan: "10:35", loc: "百年大榕樹", dist: 4.29, ele: 350, pos: "老樹",
+        desc: "累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。",
         advice: "下山有往妙音寺與往鶯歌石兩條路，走往鶯歌石方向接光明山稜線，免得繞遠路。" },
 
-      { lat: 24.970704, lng: 121.368398, time: "11:10", loc: "光明山大樹佛 (H264m)", short: "光明山大樹佛", dist: 5.25, ele: 264, pos: "信仰地標",
-        desc: "光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。累計里程 5.25 km。",
+      { lat: 24.973041, lng: 121.368728, time: "11:43", loc: "第三休息點", dist: 4.91, ele: 265, pos: "休息點",
+        desc: "累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。",
+        advice: "大榕樹往大樹佛一路下坡、竹林夾道，樹根土路濕滑，放慢腳步。" },
+
+      { lat: 24.972082, lng: 121.368906, time: "11:57", loc: "第四休息點", dist: 5.10, ele: 260, pos: "休息點",
+        desc: "累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。",
+        advice: "再往下約 200 m 就是光明山大樹佛，平台可以坐下來休息。" },
+
+      { lat: 24.970861, lng: 121.368522, time: "12:07", plan: "11:10", loc: "光明山大樹佛", short: "光明山大樹佛", dist: 5.30, ele: 265, pos: "信仰地標",
+        desc: "累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。",
         advice: "再往下到馬路會經過福德祠，紀錄提到那裡有水和廁所，可以在那裡整理休息。" },
 
-      { lat: 24.966850, lng: 121.363381, time: "11:35", loc: "彰埔坑山（樟普坑山）(H234m)", short: "彰埔坑山", dist: 6.11, ele: 234, pos: "稜線山頭",
-        desc: "現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。累計里程 6.11 km。",
+      { lat: 24.969180, lng: 121.367187, time: "12:22", loc: "第五休息點", dist: 5.57, ele: 260, pos: "休息點",
+        desc: "累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。",
+        advice: "從這裡到彰埔坑山約 0.6 km，當天走了 15 分鐘。" },
+
+      { lat: 24.966827, lng: 121.363577, time: "12:42", plan: "11:35", loc: "彰埔坑山（樟普坑山）(H234m)", short: "彰埔坑山", dist: 6.15, ele: 234, pos: "稜線山頭",
+        desc: "累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。",
         advice: "此段岔路較多（牛灶坑、二坑步道等），請依現場指標續行往鶯歌石方向，必要時核對離線地圖。" },
 
-      { lat: 24.960430, lng: 121.359283, time: "12:20", loc: "鶯歌石山 (H192m)", dist: 7.19, ele: 192, pos: "稜線山頭",
-        desc: "設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。累計里程 7.19 km。",
+      { lat: 24.963481, lng: 121.359466, time: "13:07", loc: "第六休息點", dist: 6.87, ele: 185, pos: "休息點",
+        desc: "累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。",
+        advice: "這一段下坡多為樹根土路，較陡，下山請放慢腳步。" },
+
+      { lat: 24.960594, lng: 121.359267, time: "13:25", plan: "12:20", loc: "鶯歌石山 (H192m)", dist: 7.29, ele: 192, pos: "稜線山頭",
+        desc: "累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。",
         advice: "往山頂的岔路沒有明顯指標，只有路旁紅布條，請對照離線地圖，別錯過岔口。" },
 
-      { lat: 24.958888, lng: 121.359397, time: "12:35", loc: "鶯歌石", dist: 7.52, ele: 97, pos: "景觀亮點",
-        desc: "鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。累計里程 7.52 km。",
+      { lat: 24.959054, lng: 121.359391, time: "13:46", plan: "12:35", loc: "鶯歌石", dist: 7.53, ele: 110, pos: "景觀亮點",
+        desc: "累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。",
         advice: "此處為熱門拍照點，假日可能需稍候。下方步道改為鋪面，較好走。" },
 
-      { lat: 24.958033, lng: 121.359460, time: "12:40", loc: "北鶯公園", dist: 7.63, ele: 76, pos: "公園",
-        desc: "鶯歌石步道 0K 起點旁的公園，路線從公園北側經過。累計里程 7.63 km。",
-        advice: "可在「北鶯公園」站搭新北市新巴士 F651，或步行約 0.75 km 到鶯歌車站。" },
+      { lat: 24.957608, lng: 121.359409, time: "13:56", plan: "12:40", loc: "北鶯公園", dist: 7.72, ele: 65, pos: "公園",
+        desc: "累計 7.72 km。鶯歌石步道 0K 起點旁的公園。",
+        advice: "可在「北鶯公園」站搭新北市新巴士 F651，或步行約 1 km 到鶯歌車站。" },
 
-      { lat: 24.954787, lng: 121.355045, time: "13:00", loc: "鶯歌車站", dist: 8.38, ele: 54, pos: "終點解散",
-        desc: "預定在鶯歌車站解散！全程約 8.38 km，經鶯歌石步道下到北鶯公園，再步行抵達鶯歌車站。",
+      { lat: 24.954286, lng: 121.353577, time: "14:12", loc: "第七休息點", dist: 8.50, ele: 55, pos: "休息點",
+        desc: "累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。",
+        advice: "鶯歌車站就在東側約 150 m，當天從這裡走 4 分鐘抵達。" },
+
+      { lat: 24.954819, lng: 121.354878, time: "14:22", plan: "13:00", loc: "鶯歌車站", dist: 8.84, ele: 55, pos: "終點解散",
+        desc: "累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。",
         advice: "鶯歌老街與陶瓷博物館就在車站附近，可安排順遊或用餐慶祝完賽。" }
     ];
 
@@ -347,20 +384,20 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
-    // 計畫頁：trip 只給日期不給里程（沒有 km 就仍是行前頁），天氣卡查行程日的預報。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
       const PAL = PaPaDetail.palette({ accent: ACCENT });
 
     PaPaDetail.init({
-      trip: { date: '2026-09-27' },
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
-      nav: [24.972788, 121.392484],
+      trip: { date: "2026-09-27", km: 8.89, duration: "5:50", gain: 386, summit: 374 },
+      nav: [24.972943, 121.392019],
       weather: { lat: 24.9799, lng: 121.3724,
                  subText: '石灰坑山山頂今日參考' },
 
       map: {
         setView: [[24.9686, 121.375], 13],
+        // 實走軌跡（assets/tracks/），不是航點連成的直線
         track: { weight: 4, opacity: 0.85 },
         popup: true
       },
