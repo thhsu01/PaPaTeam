@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-09-25 08:19",
+  "generated": "2026-09-27 15:17",
   "generated_tz": "UTC+8",
-  "commit": "0cdc84586affe05b297d2281035c7ce0f822ccb5",
-  "file_count": 69,
+  "commit": "135c2d75dab6a522b1ab4e71ca69334fcab5f687",
+  "file_count": 70,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 12115,
-      "sha": "02e604b235cd0fc24908f1746e7b3afcc88a8331"
+      "size": 12126,
+      "sha": "980d99225cbcc5c52151ffe2ec0e8fc221f01cef"
     },
     {
       "path": "SNIPPETS.md",
@@ -154,6 +154,11 @@
       "sha": "c07d03df4da421b010c40ec9a3e630bc30510c86"
     },
     {
+      "path": "assets/tracks/shanying-2026-09-27.js",
+      "size": 6342,
+      "sha": "9d7602c8c27b5234e72f90b49e8de9e0f62d5506"
+    },
+    {
       "path": "assets/tracks/zhongzhengshan-2025-04-27.js",
       "size": 3996,
       "sha": "7651deb7655c4287908aceccd927c332db717f7e"
@@ -220,8 +225,8 @@
     },
     {
       "path": "index.html",
-      "size": 25730,
-      "sha": "7f82537af1a85140a48b86c0cf1975d959f653f5"
+      "size": 25914,
+      "sha": "54b371b0c1160d1bcbc65e44519821526a80a671"
     },
     {
       "path": "jiantanshan.html",
@@ -240,8 +245,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 36670,
-      "sha": "71e131a38a918c23ca5b98bad6becb0cb91132f6"
+      "size": 36910,
+      "sha": "d8a7156b7d64289bff9986ffe8ca24c1ccbeabd8"
     },
     {
       "path": "meihuashan.html",
@@ -270,8 +275,8 @@
     },
     {
       "path": "shanying.html",
-      "size": 30167,
-      "sha": "17212fd689943b407b21735a68e6bbfce407ac3e"
+      "size": 33343,
+      "sha": "a3c1b0f0f25794b8af0de274ca3135c7543d0ccf"
     },
     {
       "path": "shiqiulinling.html",
@@ -325,13 +330,13 @@
     },
     {
       "path": "tools/redteam.py",
-      "size": 9416,
-      "sha": "d169241f06234c95682fbc8a848a405f0729160b"
+      "size": 9587,
+      "sha": "77599b9be182e826796d37c14814b7e2568b836c"
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 721618,
-      "sha": "6b7f025548c7a1ab9f1be0729e2e4a30af7fcd93"
+      "size": 737868,
+      "sha": "7f5413d68deaf68322774d45251294383196e6c3"
     },
     {
       "path": "tools/regress/check.js",
