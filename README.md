@@ -88,7 +88,7 @@ PaPaTeam/
 ├── datunshan.html               # 大屯山連峰四峰 O 型縱走
 ├── bishan.html                  # 碧山 + 白石湖山：原始縱走
 ├── shiqiulinling.html           # 獅球嶺砲台：基隆歷史古蹟
-├── datongshan.html              # 大同山 × 青龍嶺 × 大棟山縱走
+├── datongshan.html              # 樹林山佳縱走：大同山 × 青龍嶺 × 大棟山
 │
 ├── assets/
 │   ├── site.css                 # 全站共用樣式：skip link、鍵盤焦點、reduced-motion

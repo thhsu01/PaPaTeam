@@ -2407,8 +2407,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#be123c;"
     },
-    "text": "07:00🚉 集合起點台鐵樹林站 (H20m)行程集合點，07:00 於樹林站前站出發。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#be123c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 集合起點</span></div><div class=\"font-bold text-stone-800\">台鐵樹林站 (H20m)</div><div class=\"text-xs text-stone-600 mt-0.5\">行程集合點，07:00 於樹林站前站出發。</div>"
+    "text": "08:00🚉 集合起點台鐵樹林站行程集合點，暫定 08:00 於樹林站出發。官方說明由後站出站，穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#be123c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 集合起點</span></div><div class=\"font-bold text-stone-800\">台鐵樹林站</div><div class=\"text-xs text-stone-600 mt-0.5\">行程集合點，暫定 08:00 於樹林站出發。官方說明由後站出站，穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -2416,8 +2416,26 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "07:10🥾 入山口大同山登山口（大安路側） (H40m)大同山三條登山口之一，正式起登。累計里程 0.70 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">大同山登山口（大安路側） (H40m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山三條登山口之一，正式起登。累計里程 0.70 km。</div>"
+    "text": "08:30🥾 入山口大同山登山步道口大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計里程 0.79 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">大同山登山步道口</div><div class=\"text-xs text-stone-600 mt-0.5\">大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計里程 0.79 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:10🙏 信仰地標南寮福德宮大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計里程 1.79 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">南寮福德宮</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計里程 1.79 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:35🙏 信仰地標大同山福德宮大同山頂旁的土地公廟，與大同山基點相距不到 30 m。累計里程 2.35 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">大同山福德宮</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山頂旁的土地公廟，與大同山基點相距不到 30 m。累計里程 2.35 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -2425,8 +2443,17 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#f59e0b;"
     },
-    "text": "08:10🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.40 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#f59e0b;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">大同山 (H237m)</div><div class=\"text-xs text-stone-600 mt-0.5\">又名九茶山、狗蹄山，山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.40 km。</div>"
+    "text": "09:35🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.38 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#f59e0b;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">大同山 (H237m)</div><div class=\"text-xs text-stone-600 mt-0.5\">又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.38 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:45⛱️ 涼亭泗水亭大同山往青龍嶺途中的一座亭子。累計里程 2.61 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">泗水亭</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山往青龍嶺途中的一座亭子。累計里程 2.61 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -2434,8 +2461,62 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#f59e0b;"
     },
-    "text": "08:30🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，樹林區展望最遼闊處，可俯瞰樹林、新莊與大漢溪。累計里程 3.15 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#f59e0b;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">青龍嶺 (H256m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山西北稜上的稜線高點，樹林區展望最遼闊處，可俯瞰樹林、新莊與大漢溪。累計里程 3.15 km。</div>"
+    "text": "10:05🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪。累計里程 3.11 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#f59e0b;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">青龍嶺 (H256m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪。累計里程 3.11 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:10🏪 補給點青德宮青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計里程 3.25 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏪 補給點</span></div><div class=\"font-bold text-stone-800\">青德宮</div><div class=\"text-xs text-stone-600 mt-0.5\">青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計里程 3.25 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:20🚪 步道口大棟山登山步道由青德宮一帶轉入往大棟山的步道入口。累計里程 3.56 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚪 步道口</span></div><div class=\"font-bold text-stone-800\">大棟山登山步道</div><div class=\"text-xs text-stone-600 mt-0.5\">由青德宮一帶轉入往大棟山的步道入口。累計里程 3.56 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:30⛱️ 涼亭青龍亭往大棟山稜線上的涼亭。累計里程 3.80 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">青龍亭</div><div class=\"text-xs text-stone-600 mt-0.5\">往大棟山稜線上的涼亭。累計里程 3.80 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "11:10⛱️ 涼亭迴音亭稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石。累計里程 4.70 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">迴音亭</div><div class=\"text-xs text-stone-600 mt-0.5\">稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石。累計里程 4.70 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "11:15🌿 山頭鎮遠山 (H325m)無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計里程 4.91 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:15</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 山頭</span></div><div class=\"font-bold text-stone-800\">鎮遠山 (H325m)</div><div class=\"text-xs text-stone-600 mt-0.5\">無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計里程 4.91 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "11:45🌿 山頭秋壇山 (H359m)山頭有石碑標示。累計里程 5.58 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 山頭</span></div><div class=\"font-bold text-stone-800\">秋壇山 (H359m)</div><div class=\"text-xs text-stone-600 mt-0.5\">山頭有石碑標示。累計里程 5.58 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -2443,8 +2524,44 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52; border-color:#a16207; border-width:3px;"
     },
-    "text": "09:40🏔️ 最高點⭐ 小百岳 #15大棟山 405 三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點。累計里程 5.80 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #15</span></div><div class=\"font-bold text-stone-800\">大棟山 405 三角點 (H405m)</div><div class=\"text-xs text-stone-600 mt-0.5\">全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點。累計里程 5.80 km。</div>"
+    "text": "12:05🏔️ 最高點⭐ 小百岳 #15大棟山405三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。累計里程 6.10 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #15</span></div><div class=\"font-bold text-stone-800\">大棟山405三角點 (H405m)</div><div class=\"text-xs text-stone-600 mt-0.5\">全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。累計里程 6.10 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "12:10🙏 信仰地標普世禪寺大棟山山頂南側約 100 m 的寺院，由此開始下山。累計里程 6.22 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">普世禪寺</div><div class=\"text-xs text-stone-600 mt-0.5\">大棟山山頂南側約 100 m 的寺院，由此開始下山。累計里程 6.22 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "12:30🙏 信仰地標福山五路財神廟大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。累計里程 6.77 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">福山五路財神廟</div><div class=\"text-xs text-stone-600 mt-0.5\">大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。累計里程 6.77 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "13:20🔀 岔路口山佳岔往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。累計里程 7.97 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🔀 岔路口</span></div><div class=\"font-bold text-stone-800\">山佳岔</div><div class=\"text-xs text-stone-600 mt-0.5\">往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。累計里程 7.97 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "14:00↔️ 轉換路段正安宮德和街旁的宮廟，距山佳站約 1 km。累計里程 8.99 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">14:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">正安宮</div><div class=\"text-xs text-stone-600 mt-0.5\">德和街旁的宮廟，距山佳站約 1 km。累計里程 8.99 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -2452,8 +2569,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#be123c;"
     },
-    "text": "11:00🚉 終點台鐵山佳站 (H30m)全程完成！沿產業道路下山抵達山佳站，穿過站內地下道即達月台。累計里程 9.50 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#be123c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 終點</span></div><div class=\"font-bold text-stone-800\">台鐵山佳站 (H30m)</div><div class=\"text-xs text-stone-600 mt-0.5\">全程完成！沿產業道路下山抵達山佳站，穿過站內地下道即達月台。累計里程 9.50 km。</div>"
+    "text": "14:40🚉 終點台鐵山佳站全程完成！沿德和街下山抵達山佳站，穿過站旁地下道即達月台。累計里程 10.03 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#be123c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">14:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚉 終點</span></div><div class=\"font-bold text-stone-800\">台鐵山佳站</div><div class=\"text-xs text-stone-600 mt-0.5\">全程完成！沿德和街下山抵達山佳站，穿過站旁地下道即達月台。累計里程 10.03 km。</div>"
    }
   ],
   "markers": [
@@ -2471,12 +2588,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>台鐵樹林站 (H20m)</strong><br>⏱ 07:00<br>📏 0.00 km<br>⛰ 20 m"
+    "popup": "<strong>台鐵樹林站</strong><br>⏱ 08:00<br>📏 0.00 km<br>⛰ 15 m"
    },
    {
     "latlng": [
-     24.992374,
-     121.417549
+     24.992341,
+     121.417566
     ],
     "options": {
      "radius": 6,
@@ -2487,12 +2604,44 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>大同山登山口（大安路側） (H40m)</strong><br>⏱ 07:10<br>📏 0.90 km<br>⛰ 40 m"
+    "popup": "<strong>大同山登山步道口</strong><br>⏱ 08:30<br>📏 0.79 km<br>⛰ 15 m"
    },
    {
     "latlng": [
-     24.99997,
-     121.403365
+     24.996413,
+     121.410651
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>南寮福德宮</strong><br>⏱ 09:10<br>📏 1.79 km<br>⛰ 115 m"
+   },
+   {
+    "latlng": [
+     24.996462,
+     121.406686
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>大同山福德宮</strong><br>⏱ 09:35<br>📏 2.35 km<br>⛰ 225 m"
+   },
+   {
+    "latlng": [
+     24.99628,
+     121.406575
     ],
     "options": {
      "radius": 6,
@@ -2503,12 +2652,28 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>大同山 (H237m)</strong><br>⏱ 08:10<br>📏 2.60 km<br>⛰ 237 m"
+    "popup": "<strong>大同山 (H237m)</strong><br>⏱ 09:35<br>📏 2.38 km<br>⛰ 237 m"
    },
    {
     "latlng": [
-     25.006255,
-     121.401253
+     24.997002,
+     121.404837
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>泗水亭</strong><br>⏱ 09:45<br>📏 2.61 km<br>⛰ 210 m"
+   },
+   {
+    "latlng": [
+     25.000347,
+     121.403196
     ],
     "options": {
      "radius": 6,
@@ -2519,12 +2684,108 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>青龍嶺 (H256m)</strong><br>⏱ 08:30<br>📏 3.35 km<br>⛰ 256 m"
+    "popup": "<strong>青龍嶺 (H256m)</strong><br>⏱ 10:05<br>📏 3.11 km<br>⛰ 256 m"
    },
    {
     "latlng": [
-     24.995782,
-     121.384254
+     24.999464,
+     121.403231
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>青德宮</strong><br>⏱ 10:10<br>📏 3.25 km<br>⛰ 255 m"
+   },
+   {
+    "latlng": [
+     24.998264,
+     121.40066
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>大棟山登山步道</strong><br>⏱ 10:20<br>📏 3.56 km<br>⛰ 255 m"
+   },
+   {
+    "latlng": [
+     24.998136,
+     121.398633
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>青龍亭</strong><br>⏱ 10:30<br>📏 3.80 km<br>⛰ 285 m"
+   },
+   {
+    "latlng": [
+     24.993861,
+     121.393466
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>迴音亭</strong><br>⏱ 11:10<br>📏 4.70 km<br>⛰ 310 m"
+   },
+   {
+    "latlng": [
+     24.99382,
+     121.392273
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>鎮遠山 (H325m)</strong><br>⏱ 11:15<br>📏 4.91 km<br>⛰ 325 m"
+   },
+   {
+    "latlng": [
+     24.996374,
+     121.3883
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>秋壇山 (H359m)</strong><br>⏱ 11:45<br>📏 5.58 km<br>⛰ 359 m"
+   },
+   {
+    "latlng": [
+     24.995788,
+     121.384208
     ],
     "options": {
      "radius": 8,
@@ -2535,12 +2796,76 @@
      "weight": 3
     },
     "last": null,
-    "popup": "<strong>大棟山 405 三角點 (H405m)</strong><br>⏱ 09:40<br>📏 6.00 km<br>⛰ 405 m<br>⭐ 小百岳 #15"
+    "popup": "<strong>大棟山405三角點 (H405m)</strong><br>⏱ 12:05<br>📏 6.10 km<br>⛰ 405 m<br>⭐ 小百岳 #15"
    },
    {
     "latlng": [
-     24.972728,
-     121.392544
+     24.994886,
+     121.384162
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>普世禪寺</strong><br>⏱ 12:10<br>📏 6.22 km<br>⛰ 390 m"
+   },
+   {
+    "latlng": [
+     24.992462,
+     121.384024
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>福山五路財神廟</strong><br>⏱ 12:30<br>📏 6.77 km<br>⛰ 340 m"
+   },
+   {
+    "latlng": [
+     24.984669,
+     121.383865
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>山佳岔</strong><br>⏱ 13:20<br>📏 7.97 km<br>⛰ 265 m"
+   },
+   {
+    "latlng": [
+     24.980615,
+     121.389471
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>正安宮</strong><br>⏱ 14:00<br>📏 8.99 km<br>⛰ 100 m"
+   },
+   {
+    "latlng": [
+     24.972788,
+     121.392484
     ],
     "options": {
      "radius": 9,
@@ -2551,18 +2876,18 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>台鐵山佳站 (H30m)</strong><br>⏱ 11:00<br>📏 9.50 km<br>⛰ 30 m"
+    "popup": "<strong>台鐵山佳站</strong><br>⏱ 14:40<br>📏 10.03 km<br>⛰ 30 m"
    }
   ],
   "polyline": {
-   "n": 6,
+   "n": 19,
    "first": [
     24.991397,
     121.42443
    ],
    "last": [
-    24.972728,
-    121.392544
+    24.972788,
+    121.392484
    ],
    "options": {
     "color": "#e11d48",
@@ -2575,21 +2900,47 @@
    "data": {
     "labels": [
      "台鐵樹林站",
-     "大同山登山口（大安路側）",
+     "大同山登山步道口",
+     "南寮福德宮",
+     "大同山福德宮",
      "大同山",
+     "泗水亭",
      "青龍嶺",
-     "大棟山 405 三角點",
+     "青德宮",
+     "大棟山登山步道",
+     "青龍亭",
+     "迴音亭",
+     "鎮遠山",
+     "秋壇山",
+     "大棟山405三角點",
+     "普世禪寺",
+     "福山五路財神廟",
+     "山佳岔",
+     "正安宮",
      "台鐵山佳站"
     ],
     "datasets": [
      {
       "label": "海拔 (m)",
       "data": [
-       20,
-       40,
+       15,
+       15,
+       115,
+       225,
        237,
+       210,
        256,
+       255,
+       255,
+       285,
+       310,
+       325,
+       359,
        405,
+       390,
+       340,
+       265,
+       100,
        30
       ],
       "borderColor": "#be123c",
@@ -2598,9 +2949,22 @@
       "pointBackgroundColor": [
        "#be123c",
        "#a09080",
+       "#a09080",
+       "#a09080",
        "#f59e0b",
+       "#a09080",
        "#f59e0b",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
        "#7c9e52",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
        "#be123c"
       ],
       "pointBorderColor": [
@@ -2608,7 +2972,20 @@
        "#be123c",
        "#be123c",
        "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
        "#a16207",
+       "#be123c",
+       "#be123c",
+       "#be123c",
+       "#be123c",
        "#be123c"
       ],
       "pointBorderWidth": [
@@ -2616,7 +2993,20 @@
        2.5,
        2.5,
        2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
        4,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
        2.5
       ],
       "fill": true,
@@ -2665,57 +3055,174 @@
   "card": [
    {
     "wp-pos-label": "集合起點",
-    "wp-title": "台鐵樹林站 (H20m)",
-    "wp-time": "07:00",
+    "wp-title": "台鐵樹林站",
+    "wp-time": "08:00",
     "wp-dist": "0.00",
-    "wp-ele": "20",
-    "wp-desc": "行程集合點，07:00 於樹林站前站出發。",
-    "wp-advice": "確認悠遊卡與登山裝備，前站出口沿鎮前街步行即可接往登山口方向。"
+    "wp-ele": "15",
+    "wp-desc": "行程集合點，暫定 08:00 於樹林站出發。官方說明由後站出站，穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。",
+    "wp-advice": "確認悠遊卡與登山裝備；到登山口約 0.8 km 是市區路段。"
    },
    {
     "wp-pos-label": "入山口",
-    "wp-title": "大同山登山口（大安路側） (H40m)",
-    "wp-time": "07:10",
-    "wp-dist": "0.90",
-    "wp-ele": "40",
-    "wp-desc": "大同山三條登山口之一，正式起登。累計里程 0.70 km。",
-    "wp-advice": "沿途會通過海拔 75m 的樹林山，設台北縣政府三角點但無明顯地標，順走通過即可。"
+    "wp-title": "大同山登山步道口",
+    "wp-time": "08:30",
+    "wp-dist": "0.79",
+    "wp-ele": "15",
+    "wp-desc": "大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計里程 0.79 km。",
+    "wp-advice": "沿途會通過海拔 75 m 的樹林山，設台北縣政府三角點但無明顯地標，順走通過即可。"
+   },
+   {
+    "wp-pos-label": "信仰地標",
+    "wp-title": "南寮福德宮",
+    "wp-time": "09:10",
+    "wp-dist": "1.79",
+    "wp-ele": "115",
+    "wp-desc": "大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計里程 1.79 km。",
+    "wp-advice": "微笑山線集章任務的其中一顆寶石在這一帶；再往上約 0.6 km 到大同山。"
+   },
+   {
+    "wp-pos-label": "信仰地標",
+    "wp-title": "大同山福德宮",
+    "wp-time": "09:35",
+    "wp-dist": "2.35",
+    "wp-ele": "225",
+    "wp-desc": "大同山頂旁的土地公廟，與大同山基點相距不到 30 m。累計里程 2.35 km。",
+    "wp-advice": "到這裡已爬升約 200 m，接下來到青龍嶺前多是稜線緩坡，可以在此喘口氣。"
    },
    {
     "wp-pos-label": "展望台",
     "wp-title": "大同山 (H237m)",
-    "wp-time": "08:10",
-    "wp-dist": "2.60",
+    "wp-time": "09:35",
+    "wp-dist": "2.38",
     "wp-ele": "237",
-    "wp-desc": "又名九茶山、狗蹄山，山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.40 km。",
+    "wp-desc": "又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.38 km。",
     "wp-advice": "平台適合小休拍照，接著沿西北稜往青龍嶺方向前進，這段路程平緩好走。"
+   },
+   {
+    "wp-pos-label": "涼亭",
+    "wp-title": "泗水亭",
+    "wp-time": "09:45",
+    "wp-dist": "2.61",
+    "wp-ele": "210",
+    "wp-desc": "大同山往青龍嶺途中的一座亭子。累計里程 2.61 km。",
+    "wp-advice": "從這裡到青龍嶺約 0.5 km，是這一段唯一的上坡，爬升約 50 m。"
    },
    {
     "wp-pos-label": "展望台",
     "wp-title": "青龍嶺 (H256m)",
-    "wp-time": "08:30",
-    "wp-dist": "3.35",
+    "wp-time": "10:05",
+    "wp-dist": "3.11",
     "wp-ele": "256",
-    "wp-desc": "大同山西北稜上的稜線高點，樹林區展望最遼闊處，可俯瞰樹林、新莊與大漢溪。累計里程 3.15 km。",
-    "wp-advice": "熱門夜景點，白天視野同樣極佳。由此續行往大棟山方向，路程較長，建議在此補水休息。"
+    "wp-desc": "大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪。累計里程 3.11 km。",
+    "wp-advice": "熱門夜景點，白天視野同樣極佳。下一站青德宮有飲水機與廁所，補水可以留到那裡。"
+   },
+   {
+    "wp-pos-label": "補給點",
+    "wp-title": "青德宮",
+    "wp-time": "10:10",
+    "wp-dist": "3.25",
+    "wp-ele": "255",
+    "wp-desc": "青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計里程 3.25 km。",
+    "wp-advice": "全程最確定能補水、上廁所的地方；往大棟山還有約 2.9 km 稜線路，水先裝滿。"
+   },
+   {
+    "wp-pos-label": "步道口",
+    "wp-title": "大棟山登山步道",
+    "wp-time": "10:20",
+    "wp-dist": "3.56",
+    "wp-ele": "255",
+    "wp-desc": "由青德宮一帶轉入往大棟山的步道入口。累計里程 3.56 km。",
+    "wp-advice": "這一帶岔路多（青龍嶺岔、大棟山步道岔），認明往大棟山的指標再轉入。"
+   },
+   {
+    "wp-pos-label": "涼亭",
+    "wp-title": "青龍亭",
+    "wp-time": "10:30",
+    "wp-dist": "3.80",
+    "wp-ele": "285",
+    "wp-desc": "往大棟山稜線上的涼亭。累計里程 3.80 km。",
+    "wp-advice": "從這裡到迴音亭約 0.9 km、爬升約 25 m，是一段起伏不大的稜線路。"
+   },
+   {
+    "wp-pos-label": "涼亭",
+    "wp-title": "迴音亭",
+    "wp-time": "11:10",
+    "wp-dist": "4.70",
+    "wp-ele": "310",
+    "wp-desc": "稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石。累計里程 4.70 km。",
+    "wp-advice": "微笑山線集章任務的其中一顆寶石在這一帶；鎮遠山只剩約 0.2 km。"
+   },
+   {
+    "wp-pos-label": "山頭",
+    "wp-title": "鎮遠山 (H325m)",
+    "wp-time": "11:15",
+    "wp-dist": "4.91",
+    "wp-ele": "325",
+    "wp-desc": "無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計里程 4.91 km。",
+    "wp-advice": "從這裡到秋壇山約 0.7 km，爬升約 35 m；過了秋壇山就是大棟山。"
+   },
+   {
+    "wp-pos-label": "山頭",
+    "wp-title": "秋壇山 (H359m)",
+    "wp-time": "11:45",
+    "wp-dist": "5.58",
+    "wp-ele": "359",
+    "wp-desc": "山頭有石碑標示。累計里程 5.58 km。",
+    "wp-advice": "大棟山就在約 0.5 km 外，是全程最後一段上坡。"
    },
    {
     "wp-pos-label": "最高點 ⭐ 小百岳 #15",
-    "wp-title": "大棟山 405 三角點 (H405m)",
-    "wp-time": "09:40",
-    "wp-dist": "6.00",
+    "wp-title": "大棟山405三角點 (H405m)",
+    "wp-time": "12:05",
+    "wp-dist": "6.10",
     "wp-ele": "405",
-    "wp-desc": "全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點。累計里程 5.80 km。",
-    "wp-advice": "山頂視野最好，可環視林口台地、觀音山與雙北天際線，適合在此大休午餐。下山段以產業道路為主，路程較長。"
+    "wp-desc": "全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。累計里程 6.10 km。",
+    "wp-advice": "山頂視野最好，可環視林口台地、觀音山與雙北天際線，適合在此大休。下山段以產業道路為主，路程較長。"
+   },
+   {
+    "wp-pos-label": "信仰地標",
+    "wp-title": "普世禪寺",
+    "wp-time": "12:10",
+    "wp-dist": "6.22",
+    "wp-ele": "390",
+    "wp-desc": "大棟山山頂南側約 100 m 的寺院，由此開始下山。累計里程 6.22 km。",
+    "wp-advice": "從這裡起到山佳站幾乎都是水泥、柏油產業道路下坡，約 3.8 km，膝蓋不好的可用登山杖。"
+   },
+   {
+    "wp-pos-label": "信仰地標",
+    "wp-title": "福山五路財神廟",
+    "wp-time": "12:30",
+    "wp-dist": "6.77",
+    "wp-ele": "340",
+    "wp-desc": "大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。累計里程 6.77 km。",
+    "wp-advice": "接下來約 1.2 km 到山佳岔，沿產業道路一路下坡。"
+   },
+   {
+    "wp-pos-label": "岔路口",
+    "wp-title": "山佳岔",
+    "wp-time": "13:20",
+    "wp-dist": "7.97",
+    "wp-ele": "265",
+    "wp-desc": "往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。累計里程 7.97 km。",
+    "wp-advice": "往山佳站走德和街下山；另一邊可接百年大榕樹段往石灰坑山，就是「山佳鶯歌縱走」那條路線。"
+   },
+   {
+    "wp-pos-label": "轉換路段",
+    "wp-title": "正安宮",
+    "wp-time": "14:00",
+    "wp-dist": "8.99",
+    "wp-ele": "100",
+    "wp-desc": "德和街旁的宮廟，距山佳站約 1 km。累計里程 8.99 km。",
+    "wp-advice": "此段為柏油路，山下民宅偶有狗吠，通常不會攻擊，放慢腳步經過即可。"
    },
    {
     "wp-pos-label": "終點",
-    "wp-title": "台鐵山佳站 (H30m)",
-    "wp-time": "11:00",
-    "wp-dist": "9.50",
+    "wp-title": "台鐵山佳站",
+    "wp-time": "14:40",
+    "wp-dist": "10.03",
     "wp-ele": "30",
-    "wp-desc": "全程完成！沿產業道路下山抵達山佳站，穿過站內地下道即達月台。累計里程 9.50 km。",
-    "wp-advice": "恭喜完成！山佳一帶舊稱山仔腳，站後方留有蓋淡坑礦業遺址，若體力充足可順遊。"
+    "wp-desc": "全程完成！沿德和街下山抵達山佳站，穿過站旁地下道即達月台。累計里程 10.03 km。",
+    "wp-advice": "山佳一帶舊稱山仔腳，站後方留有蓋淡坑礦業遺址，若體力充足可順遊。"
    }
   ],
   "trip": [],
@@ -2726,7 +3233,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 9.5 KM · 小百岳 雙鐵一線走稜線 大同山 × 青龍嶺 × 大棟山 從台鐵樹林站步行起登，沿稜線依序造訪大同山、青龍嶺兩處展望點，續行至林口台地稜脈最高峰、台灣小百岳大棟山（405m），最後循產業道路下山，於台鐵山佳站結束。單程走完，起訖點皆為台鐵車站，交通最省心的新北郊山路線之一。 🥾 大棟山下山段以產業道路（柏油路）為主 前段登山口至青龍嶺為石階與原始步道，大棟山往山佳這段路程較長，多為水泥／柏油產業道路，適合穿一般好走的鞋即可，但仍建議備好登山杖分攤膝蓋負擔。 📐 里程與時刻都還是估計值 本頁尚無實走 GPS 軌跡，地圖上的線是航點之間的直線，里程與時刻供規劃參考。走過之後會比照其他紀錄頁，改用當天的軌跡重算。 起點 台鐵樹林站 步行約 10 分鐘至大同山登山口 🏁 終點台鐵山佳站 集合時間 07:00（日期未定） 請提前 10 分鐘抵達 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至台鐵樹林站 9.5 總里程 km（估） 4 目標耗時 hr ~400 預計爬升 m 405 最高海拔 m（大棟山，小百岳） 海拔為公開標高：大同山 237、青龍嶺 256、大棟山 405 m。航點之間的直線總和為 7.9 km，路線實際會繞得更長，故總里程以 9.5 km 估計。各段里程是在這個總數下分配的估算值：起登段與大棟山下山段約為直線的 1.28–1.30 倍，但登山口→大同山、大同山→青龍嶺兩段只有 1.02–1.03 倍，偏低——真正的總里程可能超過 9.5 km。實走後以 GPS 為準。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。候選行程尚無實走 GPS，地圖上的線為航點直線連接，僅供路線參考。 集合起點<台鐵樹林站 (H20m)>預計時間 07:00累計里程 0.00 km海拔 20 m行程集合點，07:00 於樹林站前站出發。隊友建議確認悠遊卡與登山裝備，前站出口沿鎮前街步行即可接往登山口方向。 參考資源 🔗 樹林大棟山、青龍嶺、大同山步道（健行筆記） 🔗 大同山（健行筆記） 🔗 青龍嶺（健行筆記） 海拔高度剖面圖 自樹林站緩升上稜，經大同山、青龍嶺至大棟山達全程最高，之後循產業道路長程下坡至山佳站。海拔為公開標高。 山系亮點導覽 依預計的抵達順序排列。 大同山登山步道口（大安路側） 距樹林站步行約 10 分鐘，是大同山三條登山口之一。沿途會經過海拔僅 75 公尺的樹林山（設台北縣政府三角點，行進中順走通過），是全程最平易近人的起登段。 大同山 (H237m) 又名九茶山、狗蹄山，山上曾發現新石器時代陶器與石器遺址，基點為台灣省地政處精密導線點。山頂設有觀景平台與涼亭，天氣晴朗時可眺望雙北天際線與高鐵列車穿梭市區的畫面，是樹林區居民口中的「後花園」。 青龍嶺 (H256m) 位在大同山西北稜上，是樹林區公認展望最遼闊的稜線高點，可俯瞰樹林、新莊市區與蜿蜒的大漢溪，晴天還能看見高鐵列車如長龍般劃過谷地。也是熱門的夜景地點，山頂設有台北縣政府三角點。 南寮福德宮（途中補給點） 青龍嶺與大棟山之間山腰的土地公廟，設有洗手間與休憩空間，是全程少數可補給、上廁所的據點。廟埕廣場也是大同山、青龍嶺路線的另一個常用登山口。 大棟山 405m ⭐ 小百岳 又名龜崙山、橫坑仔山，位於新北樹林與桃園龜山交界，是林口台地稜脈最高峰，設有一等三角點及土地調查局圖根點，名列台灣小百岳。山頂視野極佳，可環視林口台地、觀音山、大屯山系與雙北天際線。 台鐵山佳站（終點） 大棟山下山後的產業道路終點站，穿過站內地下道即達月台。山佳一帶舊稱「山仔腳」，昔日為煤礦聚落，站後方仍留有蓋淡坑遺址等礦業歷史痕跡可順遊。 本次行程亮點 雙鐵郊山：起訖點皆是台鐵車站，交通零煩惱 【一次收集一座小百岳】大棟山是林口台地稜脈最高峰，擁有一等三角點，名列台灣小百岳。全程另可順走大同山、青龍嶺兩座知名展望點，三段風景層次分明——大同山林蔭茂密、青龍嶺視野開闊、大棟山制高遠眺，一趟走完新北樹林郊山的精華。 【交通最省心的郊山路線之一】起點台鐵樹林站、終點台鐵山佳站，兩站直線距離約 3.8 公里、同屬縱貫線，往返皆不需開車或轉乘公車，行程結束後也可直接搭車返回，適合單程健行規劃。每年 5 月油桐花沿途散落，秋季則可賞芒，四季皆宜造訪。 行程四大特色 • 台灣小百岳大棟山（405m），林口台地稜脈最高峰 • 三段展望層次分明：大同山、青龍嶺、大棟山一次走完 • 起訖點皆為台鐵車站，單程健行免接駁 • 沿途廟宇補給點多，適合新手與親子入門郊山 預計行程進度（約 4H） 候選行程，日期未定，預計時間與里程供規劃參考，實際以走過的資料為準。 07:00🚉 集合起點台鐵樹林站 (H20m)行程集合點，07:00 於樹林站前站出發。07:10🥾 入山口大同山登山口（大安路側） (H40m)大同山三條登山口之一，正式起登。累計里程 0.70 km。08:10🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.40 km。08:30🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，樹林區展望最遼闊處，可俯瞰樹林、新莊與大漢溪。累計里程 3.15 km。09:40🏔️ 最高點⭐ 小百岳 #15大棟山 405 三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點。累計里程 5.80 km。11:00🚉 終點台鐵山佳站 (H30m)全程完成！沿產業道路下山抵達山佳站，穿過站內地下道即達月台。累計里程 9.50 km。 © 爬爬小隊候選行程 ｜ 樹林大同山、青龍嶺、大棟山縱走 約 9.5 KM ｜ 日期未定",
+  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 10.0 KM · 小百岳 雙鐵一線走稜線 樹林 → 山佳 從台鐵樹林站步行起登，沿稜線依序造訪大同山、青龍嶺兩處展望點，續行至林口台地稜脈最高峰、台灣小百岳大棟山（405m），最後循產業道路下山，於台鐵山佳站結束。單程走完，起訖點皆為台鐵車站，交通最省心的新北郊山路線之一。 🥾 大棟山下山段以產業道路（柏油路）為主 前段登山口至青龍嶺為石階與原始步道，大棟山往山佳這段路程較長，多為水泥／柏油產業道路，適合穿一般好走的鞋即可，但仍建議備好登山杖分攤膝蓋負擔。 📐 里程與時刻都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。里程讀自同路線的公開 GPX #4688462，時刻以每小時 1.5 公里推算（未另計休息），供規劃參考。走過之後會比照其他紀錄頁，改用當天的軌跡重算。 起點 台鐵樹林站 步行約 10 分鐘至大同山登山口 🏁 終點台鐵山佳站 集合時間 08:00（暫定，日期未定） 請提前 10 分鐘抵達 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至台鐵樹林站 10.0 總里程 km（估） 6.7 目標耗時 hr ~520 預計爬升 m 405 最高海拔 m（大棟山，小百岳） 山頭海拔：大同山 237、青龍嶺 256、大棟山 405 m 為基點公開標高；秋壇山 359、鎮遠山 325 m 依隊上提供（無基石可對）。總里程讀自健行筆記 GPX #4688462（2025/07/05 由樹林站走到山佳站，健行筆記標示 10.03 km），各航點的累計里程依同一比例換算。爬升取吻合本路線的 11 條公開 GPX 的中位數（524 m）。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。候選行程尚無實走 GPS，地圖上的線為航點直線連接；航點座標為隊上標記的位置，已對照公開 GPX #4688462，都在軌跡 20 m 內（樹林站除外）。 集合起點<台鐵樹林站>預計時間 08:00累計里程 0.00 km海拔 15 m行程集合點，暫定 08:00 於樹林站出發。官方說明由後站出站，穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。隊友建議確認悠遊卡與登山裝備；到登山口約 0.8 km 是市區路段。 參考資源 🔗 樹林大棟山、青龍嶺、大同山步道（健行筆記） 🔗 微笑山線：【大棟山系】405高地段（健行筆記官方路線，9.6 km） 🔗 大同山（健行筆記） 🔗 青龍嶺（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務-Ep.01【大棟山系】405高地（YouTube・踏青生活選） 海拔高度剖面圖 自樹林站緩升上稜，經大同山、青龍嶺至大棟山達全程最高，之後經秋壇山、鎮遠山的稜線到大棟山，再循產業道路長程下坡至山佳站。山頭海拔出處見總覽，其餘各點為 GPX #4688462 的 GPS 讀數。 山系亮點導覽 依預計的抵達順序排列。 大同山登山步道口（大安路側） 距樹林站步行約 10 分鐘，是大同山三條登山口之一。沿途會經過海拔僅 75 公尺的樹林山（設台北縣政府三角點，行進中順走通過），是全程最平易近人的起登段。 大同山 (H237m) 又名九茶山、狗蹄山，山上曾發現新石器時代陶器與石器遺址，基點為台灣省地政處精密導線點。山頂設有觀景平台與涼亭，天氣晴朗時可眺望雙北天際線與高鐵列車穿梭市區的畫面，是樹林區居民口中的「後花園」。 青龍嶺 (H256m) 位在大同山西北稜上，是樹林區公認展望最遼闊的稜線高點，可俯瞰樹林、新莊市區與蜿蜒的大漢溪，晴天還能看見高鐵列車如長龍般劃過谷地。也是熱門的夜景地點，山頂設有台北縣政府三角點。 青德宮（途中補給點） 青龍嶺南側約 100 m 的宮廟，多份公開 GPX 的路點標為補給站，附近有飲水機與公廁，是全程最確定能補水、上廁所的據點。往大棟山還有約 2.9 km 稜線路，水在這裡裝滿。 大棟山 405m ⭐ 小百岳 又名龜崙山、橫坑仔山，位於新北樹林與桃園龜山交界，是林口台地稜脈最高峰，設有一等三角點及土地調查局圖根點，名列台灣小百岳。山頂視野極佳，可環視林口台地、觀音山、大屯山系與雙北天際線。 台鐵山佳站（終點） 大棟山下山後的產業道路終點站，穿過站內地下道即達月台。山佳一帶舊稱「山仔腳」，昔日為煤礦聚落，站後方仍留有蓋淡坑遺址等礦業歷史痕跡可順遊。 本次行程亮點 雙鐵郊山：起訖點皆是台鐵車站，交通零煩惱 【一次收集一座小百岳】大棟山是林口台地稜脈最高峰，擁有一等三角點，名列台灣小百岳。全程另可順走大同山、青龍嶺兩座知名展望點，三段風景層次分明——大同山林蔭茂密、青龍嶺視野開闊、大棟山制高遠眺，一趟走完新北樹林郊山的精華。 【交通最省心的郊山路線之一】起點台鐵樹林站、終點台鐵山佳站，兩站直線距離約 3.8 公里、同屬縱貫線，往返皆不需開車或轉乘公車，行程結束後也可直接搭車返回，適合單程健行規劃。每年 5 月油桐花沿途散落，秋季則可賞芒，四季皆宜造訪。 行程四大特色 • 台灣小百岳大棟山（405m），林口台地稜脈最高峰 • 三段展望層次分明：大同山、青龍嶺、大棟山一次走完 • 起訖點皆為台鐵車站，單程健行免接駁 • 沿途廟宇補給點多，適合新手與親子入門郊山 預計行程進度（約 6H40M） 候選行程，日期未定。里程讀自公開 GPX #4688462，時間以每小時 1.5 公里推算，08:00 出發、約 14:40 抵達山佳站，實際以走過的資料為準。 08:00🚉 集合起點台鐵樹林站行程集合點，暫定 08:00 於樹林站出發。官方說明由後站出站，穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。08:30🥾 入山口大同山登山步道口大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計里程 0.79 km。09:10🙏 信仰地標南寮福德宮大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計里程 1.79 km。09:35🙏 信仰地標大同山福德宮大同山頂旁的土地公廟，與大同山基點相距不到 30 m。累計里程 2.35 km。09:35🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計里程 2.38 km。09:45⛱️ 涼亭泗水亭大同山往青龍嶺途中的一座亭子。累計里程 2.61 km。10:05🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪。累計里程 3.11 km。10:10🏪 補給點青德宮青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計里程 3.25 km。10:20🚪 步道口大棟山登山步道由青德宮一帶轉入往大棟山的步道入口。累計里程 3.56 km。10:30⛱️ 涼亭青龍亭往大棟山稜線上的涼亭。累計里程 3.80 km。11:10⛱️ 涼亭迴音亭稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石。累計里程 4.70 km。11:15🌿 山頭鎮遠山 (H325m)無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計里程 4.91 km。11:45🌿 山頭秋壇山 (H359m)山頭有石碑標示。累計里程 5.58 km。12:05🏔️ 最高點⭐ 小百岳 #15大棟山405三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。累計里程 6.10 km。12:10🙏 信仰地標普世禪寺大棟山山頂南側約 100 m 的寺院，由此開始下山。累計里程 6.22 km。12:30🙏 信仰地標福山五路財神廟大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。累計里程 6.77 km。13:20🔀 岔路口山佳岔往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。累計里程 7.97 km。14:00↔️ 轉換路段正安宮德和街旁的宮廟，距山佳站約 1 km。累計里程 8.99 km。14:40🚉 終點台鐵山佳站全程完成！沿德和街下山抵達山佳站，穿過站旁地下道即達月台。累計里程 10.03 km。 © 爬爬小隊候選行程 ｜ 樹林山佳縱走 約 10.0 KM ｜ 日期未定",
   "errors": []
  },
  "datunshan": {
@@ -11640,13 +12147,13 @@
   ],
   "widgets": {
    "nav": "<nav data-widget=\"nav\" class=\"fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50\" aria-label=\"頁面導覽\"><div class=\"max-w-7xl mx-auto px-6 h-14 flex items-center justify-between\"><a class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\" aria-label=\"爬爬小隊首頁\"><span class=\"w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0\"></span><span class=\"font-bold text-stone-800 tracking-tight text-lg\"></span><span class=\"text-stone-600 text-xs hidden sm:inline font-medium\"><span></span></span></a><div class=\"flex gap-1 overflow-x-auto\"><button onclick=\"document.getElementById('overview').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到行程總覽\"></button><button onclick=\"document.getElementById('map-section').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到路線圖\"></button><button onclick=\"document.getElementById('elevation').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到海拔剖面\"></button><button onclick=\"document.getElementById('spots').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到景點介紹\"></button><button onclick=\"document.getElementById('timeline').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到實走紀錄\"></button></div></div></nav>",
-   "notice": "<div data-widget=\"notice\" class=\"hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3\" id=\"trip-past-notice\"><span class=\"text-2xl mt-0.5\"></span><div><div class=\"font-bold text-stone-800 text-base mb-1\"></div><p class=\"text-sm text-stone-700 leading-relaxed\"><span></span></p></div></div>",
+   "notice": "<div data-widget=\"notice\" class=\"mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3\" id=\"trip-past-notice\"><span class=\"text-2xl mt-0.5\"></span><div><div class=\"font-bold text-stone-800 text-base mb-1\"></div><p class=\"text-sm text-stone-700 leading-relaxed\"><span></span></p></div></div>",
    "weather": "<div class=\"bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm\" data-widget=\"weather\"><div class=\"text-xs text-stone-600 mb-1\" id=\"weather-label\"></div><div class=\"font-bold text-stone-800\" id=\"weather-main\"></div><div class=\"text-xs text-stone-600 mt-1\" id=\"weather-sub\"></div></div>",
    "wp-card": "<div data-widget=\"wp-card\" class=\"bg-stone-50 rounded-2xl p-6 border border-stone-100\" id=\"wp-card\"><div class=\"text-xs text-stone-600 uppercase tracking-widest mb-3\" id=\"wp-pos-label\"></div><div class=\"flex items-center gap-3 mb-3\"><button onclick=\"prevWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"上一個航點\"></button><h3 class=\"text-lg font-bold text-stone-900 flex-1\" id=\"wp-title\"></h3><button onclick=\"nextWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"下一個航點\"></button></div><div class=\"flex gap-4 mb-3 text-sm text-stone-600\"><span><strong class=\"text-stone-800\" id=\"wp-time\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-dist\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-ele\"></strong></span></div><p class=\"text-base text-stone-700 mb-3\" id=\"wp-desc\"></p><div class=\"rounded-xl p-3 accent-box\"><div class=\"text-xs font-medium mb-1 accent-text\"></div><p class=\"text-xs accent-text\" id=\"wp-advice\"></p></div></div>",
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊2026/09/27 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 9月27日 實走紀錄 · 8.89 KM · 5 小時 50 分 · 火車接火車 🗂️此行程已完成時刻與里程來自 2026/09/27 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 一趟不用接駁的郊山小縱走 山佳 → 鶯歌 從百年古蹟山佳車站出發，沿德和街柏油坡上到福安宮，接石灰坑步道登石灰坑山、望湖山，在百年大榕樹平台停留約 40 分鐘後，沿光明山稜線經大樹佛、彰埔坑山、鶯歌石山下到鶯歌石，最後經北鶯公園抵達鶯歌車站解散。起訖點都是台鐵車站，不需接駁、不必原路折返。 ⚠️ 沿途補給很少，請自備充足飲水 石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。 🛰️ 時刻與里程取自當天的 GPS 軌跡 GPS 於 08:17 在山佳車站起錄，出發前先在車站周邊繞了約 1 km，這一圈不計入；里程從 08:35 由車站出發起算，以簡化到 5 m 的軌跡計算。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。 集合地點 台鐵山佳車站剪票口 出站後經中和街、德和街 17 巷上山 🏁 解散台鐵鶯歌車站 實際時間 9月27日 08:35–14:24 08:10 集合；車站出發至 GPS 收錄 天氣預報天氣資料暫無法取得請稍後再試 🗺️ 導航至山佳車站 8.89 實走里程 km 5:50 實走耗時（含休息） 386 累計上升 m（GPS 推估） 374 最高海拔 m（石灰坑山） 山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。其餘地點由當天軌跡推估，誤差約 ±25 m。 互動路線圖與航點切換 地圖上的線是 9/27 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節，航點座標取自軌跡在抵達時刻的位置。 集合起點<山佳車站剪票口>實際時間 08:35累計里程 0.00 km海拔 45 m08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。隊友建議山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐；沿途補給點很少。 參考資源 🔗 鶯歌石步道（健行筆記） 🔗 微笑山線：【大棟山系】百年大榕樹段（健行筆記官方路線，7.6 km） 📝 山佳經石灰坑山、望湖山起登路線紀錄 📝 2025 山鶯縱走：各山頭海拔與基石紀錄 📝 【微笑山線大棟山百年榕樹滄桑】（健行筆記） 📝 微笑山線大棟山系百年大榕樹段+大湖坑步道（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務 -Ep.02【大棟山系】百年大榕樹（YouTube・踏青生活選） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 【大棟山系】百年大榕樹段 #5631664・記錄 2025/04/23・7.65 km・爬升 341 m・官方路線 GPX，未上石灰坑山頂 🛰️ 2025微笑山線大縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段20260125165050 #5307229・記錄 2026/01/25・8.01 km・爬升 396 m 🛰️ 1150725大榕樹光明線-鶯歌石步道 #5801018・記錄 2026/07/25・7.55 km・爬升 456 m 🛰️ 2025微笑山線：【大棟山系】百年大榕樹段-山佳到鶯歌 #4988910・記錄 2025/09/20・9.18 km・爬升 454 m 🛰️ 2025微笑山線縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段202507141055 #4725375・記錄 2025/07/14・8.43 km・爬升 418 m 海拔高度剖面圖 自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點由當天軌跡推估。 山系亮點導覽 依 9/27 的抵達順序排列。 山佳車站 新北市定古蹟，1903 年設站，早年因煤礦、陶土運輸而興建，新舊站房並存。還沒起登，先逛一座百年車站——也是「大同山‧青龍嶺‧大棟山」那條候選路線的終點，兩趟可以接起來看。 石灰坑山 (H374m) 🗻 全程最高 設三等三角點 978 號，是全程展望最好的一段，晴天可遠眺大棟山。山頂旁有一尊三面佛。此處位於樹林、鶯歌與桃園龜山交界一帶。 望湖山 (H361m) 鶯歌區內的最高峰（石灰坑山雖然更高，但不在鶯歌轄內），無基石，緊鄰百年老榕樹群，林蔭茂密清幽。與石灰坑山距離很近，步行約 15 分鐘可達。 百年大榕樹 鶯歌一號大榕，實際樹齡約三百年，是多條步道的交會點，樹下供奉土地公。平台可俯視三峽、鶯歌與桃園八德，這裡開車也到得了。下山往鶯歌石方向接光明山稜線，另一條往妙音寺會繞遠。 光明山大樹佛 光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，回頭才看得到。再往下到馬路會經過福德祠，紀錄提到有水和廁所。 彰埔坑山（樟普坑山）(H234m) 步道布條與健行筆記寫作彰埔坑山；舊地名為「樟普坑」，有在地居民指出彰埔坑是誤寫。位於光明山稜線步道上，礦務課第 90 號基石據多數紀錄未尋獲，是全程平緩好走的中繼段。此段有多條岔路可通往牛灶坑山、二坑步道，續行前請留意現場指標。 鶯歌石山 (H192m) 設水泥區界基石 772 號，海拔採山頂標示牌的 192 m（其他紀錄另有 156、163 m）。往山頂的岔路只有紅布條標示，山頂雜草叢生無展望，但下山不遠即可抵達鶯歌地名由來的鶯歌石地標，是全程最後一座山頭。 鶯歌石 鶯歌地名的由來，巨石形似昂首之鷹，石壁上岩洞景觀奇特。觀景平台視野極佳，可俯視大漢溪、鶯歌市區，並眺望對岸的三峽鳶山。 本次行程亮點 火車接火車：起訖點都是台鐵車站 【零接駁縱走】從山佳站起登，鶯歌站解散，中途不需開車接送、不必原路折返，是新北郊山中少見「搭一次火車來、搭另一次火車走」的完整縱走路線。 【人文與自然並存】從百年古蹟山佳車站出發，途經百年老榕樹群，最後在鶯歌地名由來的鶯歌石作收，一趟路線串起礦業歷史、老樹自然景觀與地質奇石三種風景。 行程四大特色 • 起訖點皆為台鐵車站，交通最方便的縱走路線之一 • 石灰坑山展望極佳，可遠眺大棟山 • 望湖山鄰近百年老榕樹群，林蔭遮蔭充足 • 終點鶯歌石為熱門地標，可順遊鶯歌陶瓷老街 實走時間軸 08:35 山佳車站出發 · 14:22 抵達鶯歌車站 · 全程 5 小時 50 分 時刻、座標與里程取自 GPS 軌跡；「原估」是行前規劃的時刻。七個休息點沒有地名，以停留順序命名。 08:35(原估 08:10)🚉 集合起點山佳車站剪票口08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。08:47(原估 08:30)🙏 信仰地標德和福德宮累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。08:52(原估 08:35)↔️ 轉換路段正安宮累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。09:03🌳 休息點第一休息點累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。09:23🌳 休息點第二休息點累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。09:49(原估 09:15)🏙️ 展望台樹林觀景平台累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。09:55(原估 09:20)🥾 入山口福安宮累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。10:22(原估 10:05)🏔️ 最高點石灰坑山 (H374m)累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。10:42(原估 10:30)⛰️ 副峰望湖山 (H361m)累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。10:47(原估 10:35)🍁 老樹百年大榕樹累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。11:43🌳 休息點第三休息點累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。11:57🌳 休息點第四休息點累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。12:07(原估 11:10)🙏 信仰地標光明山大樹佛累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。12:22🌳 休息點第五休息點累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。12:42(原估 11:35)🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。13:07🌳 休息點第六休息點累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。13:25(原估 12:20)🌿 稜線山頭鶯歌石山 (H192m)累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。13:46(原估 12:35)🪨 景觀亮點鶯歌石累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。13:56(原估 12:40)🌳 公園北鶯公園累計 7.72 km。鶯歌石步道 0K 起點旁的公園。14:12🌳 休息點第七休息點累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。14:22(原估 13:00)🚉 終點解散鶯歌車站累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。 © 爬爬小隊實走紀錄 ｜ 山佳鶯歌縱走 ｜ 2026 年 9 月 27 日 · 08:35–14:24 · 8.89 km",
+  "text": "跳至主要內容 爬爬爬小隊2026/09/27 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 9月27日 實走紀錄 · 8.89 KM · 5 小時 50 分 · 火車接火車 🗂️此行程已完成時刻與里程來自 2026/09/27 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 一趟不用接駁的郊山小縱走 山佳 → 鶯歌 從百年古蹟山佳車站出發，沿德和街柏油坡上到福安宮，接石灰坑步道登石灰坑山、望湖山，在百年大榕樹平台停留約 40 分鐘後，沿光明山稜線經大樹佛、彰埔坑山、鶯歌石山下到鶯歌石，最後經北鶯公園抵達鶯歌車站解散。起訖點都是台鐵車站，不需接駁、不必原路折返。 ⚠️ 沿途補給很少，請自備充足飲水 石灰坑山至鶯歌石路段多為樹根土路、坡度較陡，下山請放慢腳步。福安宮一帶為住家與私人土地邊界，請保持安靜、勿逗留喧嘩。山區岔路多，建議下載離線地圖與 GPX 軌跡備用。 🛰️ 時刻與里程取自當天的 GPS 軌跡 GPS 於 08:17 在山佳車站起錄，出發前先在車站周邊繞了約 1 km，這一圈不計入；里程從 08:35 由車站出發起算，以簡化到 5 m 的軌跡計算。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。 集合地點 台鐵山佳車站剪票口 出站後經中和街、德和街 17 巷上山 🏁 解散台鐵鶯歌車站 實際時間 9月27日 08:35–14:24 08:10 集合；車站出發至 GPS 收錄 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至山佳車站 8.89 實走里程 km 5:50 實走耗時（含休息） 386 累計上升 m（GPS 推估） 374 最高海拔 m（石灰坑山） 山頭海拔：石灰坑山 374、彰埔坑山 234 m 採多數登山紀錄；望湖山 361 m 取自 GPX 路點標註，鶯歌石山 192 m 為山頂標示牌（其他紀錄另有 156、163 m）。其餘地點由當天軌跡推估，誤差約 ±25 m。 互動路線圖與航點切換 地圖上的線是 9/27 當天的 GPS 軌跡，不是航點之間的直線。點擊標記可切換各航點細節，航點座標取自軌跡在抵達時刻的位置。 集合起點<山佳車站剪票口>實際時間 08:35累計里程 0.00 km海拔 45 m08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。隊友建議山佳站周邊商店不多，建議先在前站或家中備妥飲水與早餐；沿途補給點很少。 參考資源 🔗 鶯歌石步道（健行筆記） 🔗 微笑山線：【大棟山系】百年大榕樹段（健行筆記官方路線，7.6 km） 📝 山佳經石灰坑山、望湖山起登路線紀錄 📝 2025 山鶯縱走：各山頭海拔與基石紀錄 📝 【微笑山線大棟山百年榕樹滄桑】（健行筆記） 📝 微笑山線大棟山系百年大榕樹段+大湖坑步道（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務 -Ep.02【大棟山系】百年大榕樹（YouTube・踏青生活選） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 【大棟山系】百年大榕樹段 #5631664・記錄 2025/04/23・7.65 km・爬升 341 m・官方路線 GPX，未上石灰坑山頂 🛰️ 2025微笑山線大縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段20260125165050 #5307229・記錄 2026/01/25・8.01 km・爬升 396 m 🛰️ 1150725大榕樹光明線-鶯歌石步道 #5801018・記錄 2026/07/25・7.55 km・爬升 456 m 🛰️ 2025微笑山線：【大棟山系】百年大榕樹段-山佳到鶯歌 #4988910・記錄 2025/09/20・9.18 km・爬升 454 m 🛰️ 2025微笑山線縱走尋寶集章任務微笑山線：【大棟山系】百年大榕樹段202507141055 #4725375・記錄 2025/07/14・8.43 km・爬升 418 m 海拔高度剖面圖 自山佳站緩升至石灰坑山達全程最高，經望湖山後沿光明山稜線一路下降，於鶯歌石結束後下抵鶯歌站。山頭海拔的出處見總覽，其餘各點由當天軌跡推估。 山系亮點導覽 依 9/27 的抵達順序排列。 山佳車站 新北市定古蹟，1903 年設站，早年因煤礦、陶土運輸而興建，新舊站房並存。還沒起登，先逛一座百年車站——也是「樹林山佳縱走」那條候選路線的終點，兩趟可以接起來看。 石灰坑山 (H374m) 🗻 全程最高 設三等三角點 978 號，是全程展望最好的一段，晴天可遠眺大棟山。山頂旁有一尊三面佛。此處位於樹林、鶯歌與桃園龜山交界一帶。 望湖山 (H361m) 鶯歌區內的最高峰（石灰坑山雖然更高，但不在鶯歌轄內），無基石，緊鄰百年老榕樹群，林蔭茂密清幽。與石灰坑山距離很近，步行約 15 分鐘可達。 百年大榕樹 鶯歌一號大榕，實際樹齡約三百年，是多條步道的交會點，樹下供奉土地公。平台可俯視三峽、鶯歌與桃園八德，這裡開車也到得了。下山往鶯歌石方向接光明山稜線，另一條往妙音寺會繞遠。 光明山大樹佛 光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，回頭才看得到。再往下到馬路會經過福德祠，紀錄提到有水和廁所。 彰埔坑山（樟普坑山）(H234m) 步道布條與健行筆記寫作彰埔坑山；舊地名為「樟普坑」，有在地居民指出彰埔坑是誤寫。位於光明山稜線步道上，礦務課第 90 號基石據多數紀錄未尋獲，是全程平緩好走的中繼段。此段有多條岔路可通往牛灶坑山、二坑步道，續行前請留意現場指標。 鶯歌石山 (H192m) 設水泥區界基石 772 號，海拔採山頂標示牌的 192 m（其他紀錄另有 156、163 m）。往山頂的岔路只有紅布條標示，山頂雜草叢生無展望，但下山不遠即可抵達鶯歌地名由來的鶯歌石地標，是全程最後一座山頭。 鶯歌石 鶯歌地名的由來，巨石形似昂首之鷹，石壁上岩洞景觀奇特。觀景平台視野極佳，可俯視大漢溪、鶯歌市區，並眺望對岸的三峽鳶山。 本次行程亮點 火車接火車：起訖點都是台鐵車站 【零接駁縱走】從山佳站起登，鶯歌站解散，中途不需開車接送、不必原路折返，是新北郊山中少見「搭一次火車來、搭另一次火車走」的完整縱走路線。 【人文與自然並存】從百年古蹟山佳車站出發，途經百年老榕樹群，最後在鶯歌地名由來的鶯歌石作收，一趟路線串起礦業歷史、老樹自然景觀與地質奇石三種風景。 行程四大特色 • 起訖點皆為台鐵車站，交通最方便的縱走路線之一 • 石灰坑山展望極佳，可遠眺大棟山 • 望湖山鄰近百年老榕樹群，林蔭遮蔭充足 • 終點鶯歌石為熱門地標，可順遊鶯歌陶瓷老街 實走時間軸 08:35 山佳車站出發 · 14:22 抵達鶯歌車站 · 全程 5 小時 50 分 時刻、座標與里程取自 GPS 軌跡；「原估」是行前規劃的時刻。七個休息點沒有地名，以停留順序命名。 08:35(原估 08:10)🚉 集合起點山佳車站剪票口08:10 在剪票口集合。GPS 08:17 起錄後先在車站周邊繞行約 1 km（不計入里程），08:35 由車站出發，里程自此起算。08:47(原估 08:30)🙏 信仰地標德和福德宮累計 0.63 km。沿德和街上行途中的土地公廟，這一段是產業道路的柏油坡。08:52(原估 08:35)↔️ 轉換路段正安宮累計 0.96 km。沿德和街走出社區，接上通往石灰坑步道方向的岔路口。09:03🌳 休息點第一休息點累計 1.49 km。09:03–09:14 在此停留 12 分鐘。這個點沒有地名，位於正安宮往福安宮的柏油路上。09:23🌳 休息點第二休息點累計 1.91 km。09:23–09:38 在此停留 15 分鐘。這個點沒有地名。09:49(原估 09:15)🏙️ 展望台樹林觀景平台累計 2.63 km。福安宮旁由私人屋頂闢建的觀景平台，可俯瞰山佳、鶯歌一帶。09:49–09:57 與福安宮一帶合計停留 8 分鐘。09:55(原估 09:20)🥾 入山口福安宮累計 2.67 km。民和街上的登山口，由此接上紅色鐵梯開始起登石灰坑步道。10:22(原估 10:05)🏔️ 最高點石灰坑山 (H374m)累計 3.67 km。設三等三角點 978 號，全程最高點。10:22–10:30 在山頂停留 8 分鐘。10:42(原估 10:30)⛰️ 副峰望湖山 (H361m)累計 4.22 km。鶯歌區內最高峰，無基石，鄰近百年老榕樹群，林蔭茂密清幽。10:47(原估 10:35)🍁 老樹百年大榕樹累計 4.29 km。鶯歌一號大榕，實際樹齡約三百年，樹下供奉土地公。10:47–11:28 在大榕樹平台一帶停留約 40 分鐘，是全程最久的一站。11:43🌳 休息點第三休息點累計 4.91 km。11:43–11:49 在此停留 6 分鐘。這個點沒有地名，位於百年大榕樹往大樹佛的下坡途中。11:57🌳 休息點第四休息點累計 5.10 km。11:57–12:05 在此停留 8 分鐘。這個點沒有地名。12:07(原估 11:10)🙏 信仰地標光明山大樹佛累計 5.30 km。光明山稜線上的平台，盤根錯節的樹叢裡供奉一尊觀音像，因而稱為大樹佛。12:07–12:17 停留 10 分鐘。12:22🌳 休息點第五休息點累計 5.57 km。12:22–12:27 在此停留 5 分鐘。這個點沒有地名，位於大樹佛往彰埔坑山途中。12:42(原估 11:35)🌿 稜線山頭彰埔坑山（樟普坑山）(H234m)累計 6.15 km。現場布條與健行筆記寫作彰埔坑山，舊地名為「樟普坑」。無基石，只有山名牌。13:07🌳 休息點第六休息點累計 6.87 km。13:07–13:17 在此停留 10 分鐘。這個點沒有地名，距鶯歌石山約 300 m。13:25(原估 12:20)🌿 稜線山頭鶯歌石山 (H192m)累計 7.29 km。設水泥區界基石 772 號，海拔採山頂標示牌的 192 m。13:24–13:41 在此停留 17 分鐘。13:46(原估 12:35)🪨 景觀亮點鶯歌石累計 7.53 km。鶯歌地名由來的巨石地標，形似昂首之鷹，可俯視大漢溪與鶯歌市區，眺望對岸鳶山。13:56(原估 12:40)🌳 公園北鶯公園累計 7.72 km。鶯歌石步道 0K 起點旁的公園。14:12🌳 休息點第七休息點累計 8.50 km。14:12–14:18 在此停留 6 分鐘。這個點沒有地名，位於鶯歌車站西側約 150 m。14:22(原估 13:00)🚉 終點解散鶯歌車站累計 8.84 km。14:22 抵達鶯歌車站解散，GPS 於 14:24 收錄。 © 爬爬小隊實走紀錄 ｜ 山佳鶯歌縱走 ｜ 2026 年 9 月 27 日 · 08:35–14:24 · 8.89 km",
   "errors": []
  },
  "shiqiulinling": {
