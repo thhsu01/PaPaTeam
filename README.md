@@ -85,7 +85,7 @@ PaPaTeam/
 ├── hushan.html                  # 虎山親山步道（2024-04-20）
 │   候選（五頁）
 ├── qixingshan.html              # 七星山主東峰 苗圃O型
-├── datunshan.html               # 大屯山連峰四峰 O 型縱走
+├── datunshan.html               # 大屯三峰縱走：鞍部 → 二子坪
 ├── bishan.html                  # 碧山 + 白石湖山：原始縱走
 ├── shiqiulinling.html           # 獅球嶺砲台：基隆歷史古蹟
 ├── datongshan.html              # 樹林山佳縱走：大同山 × 青龍嶺 × 大棟山

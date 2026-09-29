@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="內湖山系悠閒縱走計畫。自捷運內湖站起走，經梘頭山、龍船岩、開眼山、白石湖山、碧山，下白石湖吊橋與碧山巖，回捷運內湖站。">
-    <title>內湖稜線之巔：全縱走連峰 + 櫻紅秘境 — 爬爬小隊</title>
+  <meta name="description" content="內湖山系悠閒縱走計畫。自捷運內湖站起走，經碧湖步道、龍船岩、開眼山、白石湖山、碧山，下甜水鴛鴦湖與大崙頭山北面步道，於恆光禪寺搭小2區間車回捷運內湖站，步行約 8 公里。">
+    <title>內湖稜線之巔：龍船岩 × 碧山 × 甜水鴛鴦湖 — 爬爬小隊</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Leaflet Real Map Library -->
@@ -67,11 +67,11 @@
         <section id="overview" class="text-center space-y-8">
             <div class="space-y-4">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 accent-soft accent-text rounded-full text-[10px] font-bold tracking-widest uppercase border accent-line">
-                    Pace: Leisure 1.5km/hr | 櫻花季縱走百科
+                    Pace: Leisure 1.5km/hr | 內湖山系縱走
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter leading-tight">龍船奇岩，清風櫻影<br><span class="text-stone-600 text-2xl md:text-4xl font-bold italic">內湖山系悠閒縱走計畫</span></h1>
+                <h1 class="text-4xl md:text-6xl font-black text-stone-800 tracking-tighter leading-tight">龍船奇岩，碧山稜線<br><span class="text-stone-600 text-2xl md:text-4xl font-bold italic">內湖山系悠閒縱走計畫</span></h1>
                 <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
-                    探訪內湖最壯闊的石英巨岩，沉浸在碧山巖 460 階粉紅櫻花隧道。這是一場結合地質與人文的慢活之旅。
+                    探訪內湖最壯闊的石英巨岩龍船岩，沿稜線連走開眼山、白石湖山到內湖第一高峰碧山，經甜水鴛鴦湖下到恆光禪寺，搭小2區間車回捷運內湖站。
                 </p>
             </div>
 
@@ -80,8 +80,8 @@
                 <div class="info-glass p-8 rounded-[2.5rem] shadow-sm grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left border border-stone-200">
                     <div class="flex flex-col items-center md:items-start gap-1">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">預計活動日期</span>
-                        <span class="text-xl font-bold text-stone-800 leading-tight">2月中至2月底期間</span>
-                        <span class="text-xs text-stone-600 mt-1">配合椿寒櫻滿開期</span>
+                        <span class="text-xl font-bold text-stone-800 leading-tight">日期未定</span>
+                        <span class="text-xs text-stone-600 mt-1">候選行程</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">集合地點</span>
@@ -91,7 +91,7 @@
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6">
                         <span class="text-[10px] font-black accent-text uppercase tracking-widest">下山交通</span>
                         <span class="text-xl font-bold text-stone-800 leading-tight">小 2 區間車</span>
-                        <span class="text-xs text-stone-600 mt-1">直達捷運內湖站</span>
+                        <span class="text-xs text-stone-600 mt-1">恆光禪寺上車，經石崁折返回捷運內湖站</span>
                     </div>
                     <div class="flex flex-col items-center md:items-start gap-1 border-t md:border-t-0 md:border-l border-stone-200 pt-4 md:pt-0 md:pl-6" data-widget="weather"></div>
                 </div>
@@ -99,8 +99,8 @@
                     <button onclick="openNavigation()" class="flex-1 py-4 text-white rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2 accent-fill-strong" aria-label="在地圖應用中導航至捷運內湖站">
                         <span>🧭 導航至集合點</span>
                     </button>
-                    <a href="https://ebus.gov.taipei/VsSimpleMap?routeid=0151000220&gb=1" target="_blank" class="flex-1 py-4 accent-btn rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2">
-                        <span>🚌 小2公車即時動態</span>
+                    <a href="https://ebus.gov.taipei/VsSimpleMap?routeid=0151000220&gb=0" target="_blank" class="flex-1 py-4 accent-btn rounded-2xl font-bold shadow-xl transition-all flex items-center justify-center gap-2">
+                        <span>🚌 小2區間車即時動態</span>
                     </a>
                 </div>
             </div>
@@ -109,22 +109,20 @@
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-left">
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">總里程 km（估）</div>
-                    <div class="text-2xl font-black text-stone-800">約 8.25<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
+                    <div class="text-2xl font-black text-stone-800">約 8.0<span class="text-sm font-normal text-stone-600 ml-1">km</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all text-left">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">累計上升</div>
-                    <div class="text-2xl font-black accent-text">~510<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
+                    <div class="text-2xl font-black accent-text">~500<span class="text-sm font-normal text-stone-600 ml-1">m</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">預估耗時</div>
-                    <div class="text-2xl font-black text-stone-800">6.75<span class="text-sm font-normal text-stone-600 ml-1">hr</span></div>
+                    <div class="text-2xl font-black text-stone-800">5.3<span class="text-sm font-normal text-stone-600 ml-1">hr</span></div>
                 </div>
-                <!-- 原本這格寫「時速基計 1.5 k/h」，但時程裡的分段速度是 0.98–1.50
-                     不等，全程平均也只有 1.22——沒有任何一個數字是 1.5。改成標示實際
-                     均速，並講明停留時間是含在各段時間裡的。 -->
+                <!-- 2026-09-29 起時刻依使用者指定以每小時 1.5 公里推算（未另計休息），這格照實寫 1.5。 -->
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all">
-                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">含停留均速</div>
-                    <div class="text-2xl font-black text-stone-800">1.2<span class="text-sm font-normal text-stone-600 ml-1">k/h</span></div>
+                    <div class="text-stone-600 text-[10px] font-black uppercase mb-2">推算時速</div>
+                    <div class="text-2xl font-black text-stone-800">1.5<span class="text-sm font-normal text-stone-600 ml-1">k/h</span></div>
                 </div>
                 <div class="bg-white p-6 rounded-3xl card-hover border border-stone-100 transition-all col-span-2 md:col-span-1">
                     <div class="text-stone-600 text-[10px] font-black uppercase mb-2">最高標高</div>
@@ -132,8 +130,8 @@
                 </div>
             </div>
             <p class="text-xs text-stone-600 mt-3 max-w-3xl">
-                累計上升為航點淨爬升合計 508 m，稜線小起伏未計入。停留時間含在各段時間內，
-                所以分段速度看起來偏慢（碧山另有大休息 20 分鐘）。里程為估算值，非實走紀錄。
+                里程為健行筆記公開 GPX 逐段量測的中位數（每段取所有依序經過兩端航點的軌跡），約 8.0 km；首段（捷運站→碧湖步道登山口）與末段（北面步道登山口→恆光禪寺）各只有 2 條軌跡可量。
+                累計上升為航點高程淨爬升的概估。時刻以每小時 1.5 公里推算，未另計休息。
             </p>
         </section>
 
@@ -145,7 +143,7 @@
                         <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
                         互動路線圖
                     </h2>
-                    <p class="text-stone-600 mt-2 text-sm">數據校準：8.00km 悠閒模式。紫色虛線為縱走路徑。</p>
+                    <p class="text-stone-600 mt-2 text-sm">約 8.0 km 悠閒模式。紫色虛線為縱走路徑，末段搭公車不畫。</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="prevWaypoint()" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-100 flex items-center justify-center accent-hover transition-all" aria-label="上一個航點">&lt;</button>
@@ -168,7 +166,7 @@
                     <div class="flex flex-col gap-2">
                         <a href="https://hiking.biji.co/index.php?q=trail&amp;act=detail&amp;id=558" target="_blank" rel="noopener" class="text-sm accent-text hover:underline">🔗 龍船岩、開眼山步道（健行筆記）</a>
                         <a href="https://hiking.biji.co/index.php?q=trail&amp;act=detail&amp;id=1356" target="_blank" rel="noopener" class="text-sm accent-text hover:underline">🔗 帕米爾公園、碧山、白石湖山、大邱田天然石壁洞（健行筆記）</a>
-                        <span class="text-xs text-stone-600">兩條步道涵蓋本路線的主要山頭。公開紀錄的相近走法里程約 5.1–5.3 公里（碧山巖進出），本頁自捷運內湖站起登、多走市區與稜線段，因此較長。實走前建議再核對當日路況。</span>
+                        <span class="text-xs text-stone-600">兩條步道涵蓋本路線的主要山頭。本頁里程由這兩條步道底下的公開 GPX 逐段量測。實走前建議再核對當日路況。</span>
                     </div>
                 </div>
             </div>
@@ -202,10 +200,6 @@
                     <p class="text-[11px] text-stone-600 leading-relaxed">行程起點。位於捷運文湖線核心，交通與補給極為便利，是登山客進入內湖山系的關鍵門戶。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
-                    <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 梘頭山 (H80m)</h4>
-                    <p class="text-[11px] text-stone-600 leading-relaxed">位於捷運站後方的親山步道，是縱走初期的緩坡熱身段，路徑明朗，適合調整體感頻率。</p>
-                </div>
-                <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
                     <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 開眼山 (H401m)</h4>
                     <p class="text-[11px] text-stone-600 leading-relaxed">內湖稜線上的重要展望點。此處視野開闊，可俯瞰大湖公園，山頂涼風宜人，是重要的補水點。</p>
                 </div>
@@ -222,12 +216,11 @@
                     <p class="text-[11px] text-stone-600 leading-relaxed">隱身在稜線森林下方的靜謐湖泊。海拔極高，常有雲霧籠罩，彷彿人間仙境，是心靈放鬆的秘境。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
-                    <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 白石湖吊橋</h4>
-                    <p class="text-[11px] text-stone-600 leading-relaxed">淡紫色「龍骨吊橋」。全長 116 公尺，是白石湖農業區的象徵，設計上融入了特殊的地理龍形概念。</p>
+                    <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 大崙頭山北面步道</h4>\n                    <p class="text-[11px] text-stone-600 leading-relaxed">由甜水鴛鴦湖下行接大崙頭山北面步道，出步道口後沿產業道路約 0.5 km 到恆光禪寺公車站。</p>
                 </div>
                 <div class="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm card-hover">
-                    <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 碧山巖公車站</h4>
-                    <p class="text-[11px] text-stone-600 leading-relaxed">徒步段終點。位於開漳聖王廟門前，由此可搭乘小 2 區間車迅速返回捷運站，節省下坡體力。</p>
+                    <h4 class="font-black text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span> 恆光禪寺公車站</h4>
+                    <p class="text-[11px] text-stone-600 leading-relaxed">徒步段終點。小2區間車只有往石崁方向會停這站：上車後先到石崁折返，再經觀光草莓園、碧山巖回捷運內湖站。</p>
                 </div>
             </div>
 
@@ -254,30 +247,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- DEEP DIVE SPECIAL 2: SAKURA TUNNEL -->
-            <div class="bg-stone-900 text-white p-10 rounded-[3rem] shadow-2xl border border-stone-800 relative overflow-hidden">
-                <div class="flex flex-col lg:flex-row gap-12 relative z-10 text-left">
-                    <div class="lg:w-3/5 space-y-8">
-                        <div class="inline-block px-3 py-1 accent-fill rounded text-[10px] font-black tracking-widest uppercase">人文與花卉專題</div>
-                        <h3 class="text-4xl font-black tracking-tighter leading-tight">清風亭櫻花隧道：<br><span class="accent-text-inv">460 階粉紅石階的芬芳饗宴</span></h3>
-                        <div class="space-y-6 text-stone-400 leading-relaxed text-sm">
-                            <p><strong class="text-white">【品種之魂：椿寒櫻的幽香】</strong><br>
-                            這段被譽為全台最美「櫻花隧道」的路徑，是由早期碧山巖廟方細心照料的「椿寒櫻」構成。這種品種是櫻桃與寒櫻的天然雜交種，花簇密集且呈粉白色。最迷人之處在於其特有的清雅幽香，每年二月下旬滿開時，整段石階都籠罩在淡淡的花香與粉紅迷霧中。</p>
-                            <p><strong class="text-white">【視覺構圖：台北 101 的櫻花窗框】</strong><br>
-                            站立在清風亭觀景台（H250m），視野與台北 101 幾乎平行。攝影者能透過層層疊疊的櫻花枝枒，將遠方的摩天大樓框入鏡頭中。由於清風亭面向東南方，清晨的側射光能讓櫻花呈現通透質感，是台北少數能完美捕捉宗教古建築與現代化都會交織的地點。</p>
-                        </div>
-                    </div>
-                    <div class="lg:w-2/5 p-8 bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10">
-                        <h4 class="accent-text-inv font-bold mb-4 italic text-sm">賞櫻與攝影指南</h4>
-                        <ul class="space-y-5 text-xs text-stone-300">
-                            <li>🌸 花期精確：2/20 - 3/05 為歷史平均滿開期，建議鎖定這兩週。</li>
-                            <li>📸 鏡頭選擇：長焦段能縮短 101 與櫻花的視覺距離，創造極強的壓縮感。</li>
-                            <li>🚿 設施便利：清風亭旁設有洗手台與休息長椅，是縱走完賽後整理儀容的最佳地點。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="space-y-8 text-left pt-4">
                 <h3 class="text-xl font-black text-stone-800 flex items-center gap-3">
                     <span class="w-2.5 h-8 bg-red-600 rounded-full"></span>
@@ -292,16 +261,6 @@
                             <div class="text-[10px] font-black accent-text uppercase tracking-widest">實境導覽 01</div>
                             <h4 class="font-black text-stone-800 leading-tight group-hover:text-[var(--accent-strong)] transition-colors">內湖連峰縱走：龍船岩、開眼山、碧山實錄</h4>
                             <p class="text-xs text-stone-600">頻道：Celia Lin 山林記錄</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=H_LCBuT86Gc" target="_blank" class="group bg-white rounded-[2.5rem] overflow-hidden border border-stone-100 shadow-sm card-hover transition-all flex flex-col md:flex-row">
-                        <div class="md:w-1/3 bg-stone-900 flex items-center justify-center relative min-h-[160px]">
-                            <svg class="w-12 h-12 text-white group-hover:scale-110 transition-transform z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                        <div class="md:w-2/3 p-8 space-y-2">
-                            <div class="text-[10px] font-black text-red-600 uppercase tracking-widest">實境導覽 02</div>
-                            <h4 class="font-black text-stone-800 leading-tight group-hover:text-red-600 transition-colors">碧山巖櫻花隧道：2月滿開美景與登山攻略</h4>
-                            <p class="text-xs text-stone-600">頻道：胡一刀</p>
                         </div>
                     </a>
                 </div>
@@ -325,42 +284,54 @@
 
 
     <script>
-
+        // ── 行程數據 ──────────────────────────────────────────────
+        // 候選行程，日期未定。航點為隊上標記的 12 點（2026-09-29 提供；恆光禪寺
+        // 公車站座標同日補上），終點在恆光禪寺搭小2區間車回捷運內湖站（接駁，不計
+        // 里程）。小2區間車往石崁方向才停恆光禪寺，到石崁折返後經觀光草莓園、碧山巖
+        // 回內湖（大臺北公車 routeid 0151000220 站序，使用者亦確認）。
+        //
+        // dist：健行筆記 #558、#1356 底下 237 條公開 GPX，每段取「依序經過兩端航點
+        // 30 m 內」的軌跡量測距離的中位數再累加（原始點加總，未校正 GPS 抖動，可能
+        // 略高）。各段樣本數：2／17／46／130／168／143／132／86／23／13／2。
+        // time：依使用者指定，08:00 出發、以每小時 1.5 公里推算，取整到 5 分鐘，未另計
+        // 休息；公車段時間無法估，填「—」。
+        // ele：龍船岩 294、開眼山 401、白石湖山 457、碧山 518 沿用原頁；其他各點為
+        // 經過該點的軌跡在 60 m 內的 GPS 高程中位數，取整到 5 m。
         const schedule = [
-            { lat: 25.083766, lng: 121.594224, time: "08:00", loc: "捷運內湖站 1 號出口", short: "捷運內湖站", dist: 0.00, ele: 30, pos: "起點", 
-              desc: "集合地點。位於內湖核心商業區，建議在此完成最後的物資補給與裝備檢查。", advice: "站內與周邊超商是全程最後的補給點。8 km、爬升 510 m 的路線，水量抓 2 L 起跳。" },
-            { lat: 25.087463, lng: 121.595667, time: "08:24", loc: "梘頭山 (H80m)", dist: 0.60, ele: 80, pos: "熱身", 
-              desc: "緩步爬升的小山頭。路徑開闊且坡度溫和，適合作為縱走初段的調整與熱身。", advice: "坡度溫和的暖身段。真正的爬升從這裡之後才開始，前段別走太快把體力用掉。" },
-            { lat: 25.100548, lng: 121.596898, time: "10:00", loc: "龍船岩 (H294m)", dist: 2.50, ele: 294, pos: "奇觀", 
-              desc: "白色巨大石英砂岩如龍船。因岩層傾斜 45 度，在此可拍出具極限運動視覺感，展望極佳。", advice: "白色石英砂岩傾斜約 45 度，看起來好走但表面雨後極滑。走上去拍照請確認鞋底乾燥。" },
-            { lat: 25.104783, lng: 121.599025, time: "10:43", loc: "開眼山 (H401m)", dist: 3.20, ele: 401, pos: "展望", 
-              desc: "稜線重要高峰。由此可飽覽大湖公園及汐止盆地，林蔭涼爽。", advice: "林蔭涼爽，是前半段最適合大休的地方。可俯瞰大湖公園與汐止盆地。" },
-            { lat: 25.109007, lng: 121.598298, time: "11:15", loc: "白石湖山 (H457m)", dist: 4.00, ele: 457, pos: "森林", 
-              desc: "稜線森林段。環境清幽且原始，可感受內湖山區特有的次生林芬多精。", advice: "稜線森林段，落葉厚且底下有濕滑的樹根。這段沒有展望，專心走路即可。" },
-            { lat: 25.114160, lng: 121.595617, time: "12:15", loc: "碧山 (H518m)", dist: 5.00, ele: 518, pos: "極點", 
-              desc: "本次行程最高標高（518m）。雖然基點無展望，但象徵縱走的挑戰巔峰與體力頂點。", advice: "全程最高點，但基點在林中無展望。安排大休與合照後，接下來一路往甜水鴛鴦湖下降。" },
-            { lat: 25.110812, lng: 121.587821, time: "13:15", loc: "甜水鴛鴦湖 (H430m)", dist: 6.00, ele: 430, pos: "幽境", 
-              desc: "隱身林間的靜謐湖泊。海拔極高且人煙罕至，常有雲霧籠罩，彷彿人間仙境。", advice: "人煙罕至的林間湖泊，常起霧。周邊無指標，離開時要確認往白石湖吊橋的方向。" },
-            { lat: 25.099647, lng: 121.587372, time: "14:15", loc: "白石湖吊橋 (H230m)", dist: 7.50, ele: 230, pos: "文化", 
-              desc: "紫色龍骨吊橋。由此回歸休閒農業區，不僅美觀更能感受當地地靈意象。", advice: "已回到觀光區，紫色龍骨吊橋假日人潮很多。橋上有承重限制，請分批通過。" },
-            { lat: 25.096443, lng: 121.588504, time: "14:35", loc: "碧山巖清風亭 (H250m)", dist: 7.99, ele: 250, pos: "櫻紅",
-              desc: "核心觀景點與 460 階櫻花隧道匯集處。提供無死角台北盆地視野，櫻花季美不勝收。", advice: "460 階櫻花隧道與台北盆地展望都在這裡，是全程最值得久留的一站。櫻花季約在二至三月。" },
-            { lat: 25.09831484836413, lng: 121.58787212936703, time: "14:45", loc: "碧山巖公車站", dist: 8.25, ele: 240, pos: "終點",
-              desc: "徒步行程終點。在此準備接駁回內湖市區。", advice: "小 2 公車由此返回內湖站，班次不密，下山前先查時刻。假日常客滿，可能要等下一班。" },
-            { lat: 25.083766, lng: 121.594224, time: "15:00", loc: "捷運內湖站 (接駁)", short: "捷運內湖站", dist: 8.25, ele: 30, pos: "回程",
-              desc: "搭乘公車回到出發點，完成環型全縱走挑戰。", advice: "回到起點完成環型。內湖站周邊餐廳選擇多，適合安排慶功。" }
+            { lat: 25.083756, lng: 121.594212, time: "08:00", loc: "捷運內湖站 1 號出口", short: "捷運內湖站", dist: 0.00, ele: 15, pos: "起點",
+              desc: "集合地點。位於內湖核心商業區，建議在此完成最後的物資補給與裝備檢查。", advice: "站內與周邊超商是全程最後的補給點。約 8 km、爬升約 500 m 的路線，水量抓 2 L 起跳。" },
+            { lat: 25.089400, lng: 121.592998, time: "08:40", loc: "碧湖步道登山口", dist: 1.00, ele: 40, pos: "入山",
+              desc: "由市區步行約 1 km 接上碧湖步道。累計里程 1.00 km。", advice: "從這裡開始進入步道，碧湖步道一路蜿蜒上行，到新福本坑約 1 km。" },
+            { lat: 25.091061, lng: 121.595800, time: "09:20", loc: "新福本坑", dist: 1.96, ele: 35, pos: "途經",
+              desc: "碧湖步道往龍船岩途中的地點，附近有公開 GPX 標為「葉氏祖廟」的地點。累計里程 1.96 km。", advice: "接下來約 0.9 km 到龍船岩步道登山口，之後才是真正的爬升。" },
+            { lat: 25.096686, lng: 121.595337, time: "09:55", loc: "龍船岩步道登山口", dist: 2.86, ele: 90, pos: "入山",
+              desc: "往龍船岩的步道入口，公開 GPX 路點標為「香柚園北緣」一帶。累計里程 2.86 km。", advice: "由此到龍船岩約 0.7 km、爬升約 200 m，是全程第一段陡上。" },
+            { lat: 25.100552, lng: 121.596931, time: "10:20", loc: "龍船岩 (H294m)", dist: 3.52, ele: 294, pos: "奇觀",
+              desc: "白色巨大石英砂岩如龍船。因岩層傾斜 45 度，在此可拍出具極限運動視覺感，展望極佳。累計里程 3.52 km。", advice: "白色石英砂岩傾斜約 45 度，看起來好走但表面雨後極滑。走上去拍照請確認鞋底乾燥。" },
+            { lat: 25.101149, lng: 121.597283, time: "10:25", loc: "福德正神", dist: 3.60, ele: 295, pos: "信仰",
+              desc: "龍船岩旁的十字岔路口土地公，往開眼山的岔路就在這裡。累計里程 3.60 km。", advice: "十字路口岔路多，認明往開眼山的方向。" },
+            { lat: 25.104864, lng: 121.599105, time: "10:45", loc: "開眼山 (H401m)", dist: 4.12, ele: 401, pos: "展望",
+              desc: "稜線重要高峰。由此可飽覽大湖公園及汐止盆地，林蔭涼爽。累計里程 4.12 km。", advice: "林蔭涼爽，是前半段最適合大休的地方。可俯瞰大湖公園與汐止盆地。" },
+            { lat: 25.109030, lng: 121.598320, time: "11:10", loc: "白石湖山 (H457m)", dist: 4.80, ele: 457, pos: "森林",
+              desc: "稜線森林段。環境清幽且原始，可感受內湖山區特有的次生林芬多精。累計里程 4.80 km。", advice: "稜線森林段，落葉厚且底下有濕滑的樹根。這段沒有展望，專心走路即可。" },
+            { lat: 25.114275, lng: 121.595605, time: "11:45", loc: "碧山 (H518m)", dist: 5.65, ele: 518, pos: "極點",
+              desc: "本次行程最高標高（518m）。雖然基點無展望，但象徵縱走的挑戰巔峰與體力頂點。累計里程 5.65 km。", advice: "全程最高點，但基點在林中無展望。安排大休與合照後，接下來一路往甜水鴛鴦湖下降。" },
+            { lat: 25.110834, lng: 121.587910, time: "12:40", loc: "甜水鴛鴦湖", dist: 6.99, ele: 420, pos: "幽境",
+              desc: "隱身林間的靜謐湖泊，人煙罕至，常有雲霧籠罩。累計里程 6.99 km。", advice: "人煙罕至的林間湖泊，常起霧。周邊無指標，離開時要確認往大崙頭山北面步道的方向。" },
+            { lat: 25.108135, lng: 121.588579, time: "13:00", loc: "大崙頭山北面步道登山口", dist: 7.45, ele: 355, pos: "出山",
+              desc: "甜水鴛鴦湖下方大崙頭山北面步道的登山口，附近有公開 GPX 標為「黃家古厝」的地點。累計里程 7.45 km。", advice: "出了步道口接產業道路，往恆光禪寺公車站約 0.5 km。" },
+            { lat: 25.105686, lng: 121.589641, time: "13:20", loc: "恆光禪寺公車站", dist: 7.97, ele: 300, pos: "終點",
+              desc: "徒步行程終點，全程步行約 7.97 km。在此搭小2區間車回捷運內湖站。", advice: "這一站只有往石崁方向的車會停：上車後公車先到石崁折返，再經觀光草莓園、碧山巖回捷運內湖站。班次不密，下山前先查動態。" },
+            { lat: 25.083756, lng: 121.594212, time: "—", loc: "捷運內湖站 (接駁)", short: "捷運內湖站", dist: 7.97, ele: 15, pos: "回程",
+              desc: "搭乘小2區間車回到出發點。", advice: "回到起點。內湖站周邊餐廳選擇多，適合安排慶功。" }
         ];
     // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
     const ACCENT      = PaPaDetail.cssVar('--accent');
-    const ACCENT_FILL = PaPaDetail.cssVar('--accent-fill');
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
-      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "極點",
-        // 清風亭是這條路線的賞櫻點，本頁把它標出來（原本只有地圖有，
-        // 現在圖表與時間軸也一致）
-        extra: { "櫻紅": ACCENT_FILL } });
+      const PAL = PaPaDetail.palette({ accent: ACCENT, isPeak: wp => wp.pos === "極點" });
 
     PaPaDetail.init({
       schedule,
@@ -374,7 +345,7 @@
         preferCanvas: true,
         center: [25.100, 121.595], zoom: 14,
         // 只畫步行段，末尾的接駁不畫
-        track: { slice: [0, 10], weight: 4, opacity: 0.7, dashArray: '8, 8' },
+        track: { slice: [0, 12], weight: 4, opacity: 0.7, dashArray: '8, 8' },
 selected: true
       },
 
