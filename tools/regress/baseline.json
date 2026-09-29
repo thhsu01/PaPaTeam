@@ -3244,8 +3244,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#d97706;"
     },
-    "text": "07:00🅿️ 集合起點陽明山第二停車場 (H585m)行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#d97706;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🅿️ 集合起點</span></div><div class=\"font-bold text-stone-800\">陽明山第二停車場 (H585m)</div><div class=\"text-xs text-stone-600 mt-0.5\">行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。</div>"
+    "text": "07:00🅿️ 集合起點陽明山第二停車場行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#d97706;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🅿️ 集合起點</span></div><div class=\"font-bold text-stone-800\">陽明山第二停車場</div><div class=\"text-xs text-stone-600 mt-0.5\">行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3253,8 +3253,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "07:35🚌 公車站鞍部站 (H829m)108 遊園公車鞍部站下車。站旁有廁所設施可使用，這是入山前最後機會。步行約 5 分鐘即達大屯山連峰登山口。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚌 公車站</span></div><div class=\"font-bold text-stone-800\">鞍部站 (H829m)</div><div class=\"text-xs text-stone-600 mt-0.5\">108 遊園公車鞍部站下車。站旁有廁所設施可使用，這是入山前最後機會。步行約 5 分鐘即達大屯山連峰登山口。</div>"
+    "text": "07:35🚌 公車站鞍部公車站108 遊園公車鞍部站下車（公車段不計里程）。站旁有廁所設施可使用，這是入山前最後機會。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚌 公車站</span></div><div class=\"font-bold text-stone-800\">鞍部公車站</div><div class=\"text-xs text-stone-600 mt-0.5\">108 遊園公車鞍部站下車（公車段不計里程）。站旁有廁所設施可使用，這是入山前最後機會。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3262,8 +3262,35 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "07:40🥾 入山口鞍部登山口 (H829m)停車場對面即是大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">鞍部登山口 (H829m)</div><div class=\"text-xs text-stone-600 mt-0.5\">停車場對面即是大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。</div>"
+    "text": "07:40🥾 入山口大屯山鞍部登山口大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。累計里程 0.09 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">07:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🥾 入山口</span></div><div class=\"font-bold text-stone-800\">大屯山鞍部登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。累計里程 0.09 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "08:05⛱️ 涼亭大屯山車道展望涼亭主峰步道約 0.6K 處、緊鄰大屯山車道（柏油路）的涼亭。累計里程 0.79 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">大屯山車道展望涼亭</div><div class=\"text-xs text-stone-600 mt-0.5\">主峰步道約 0.6K 處、緊鄰大屯山車道（柏油路）的涼亭。累計里程 0.79 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "08:30↔️ 轉換路段往大屯山觀景臺途中往大屯山觀景臺途中的步道點，附近約 80–90 m 有民航局基石與通往軍營的柏油路口，公開 GPX 標為「0.9K 高點」「營口」。這個點沒有正式地名。累計里程 1.30 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">往大屯山觀景臺途中</div><div class=\"text-xs text-stone-600 mt-0.5\">往大屯山觀景臺途中的步道點，附近約 80–90 m 有民航局基石與通往軍營的柏油路口，公開 GPX 標為「0.9K 高點」「營口」。這個點沒有正式地名。累計里程 1.30 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "08:35🏙️ 展望台大屯山觀景臺大屯連峰的觀景平台，以夕陽、雲海、秋芒聞名。累計里程 1.67 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏙️ 展望台</span></div><div class=\"font-bold text-stone-800\">大屯山觀景臺</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯連峰的觀景平台，以夕陽、雲海、秋芒聞名。累計里程 1.67 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3271,8 +3298,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52; border-color:#a16207; border-width:3px;"
     },
-    "text": "08:40🏔️ 最高點⭐ 小百岳 #1大屯山主峰 (H1,092m)台灣小百岳 #001！觀景台以夕陽、雲海、秋芒聞名。大縱走木樁為一般遊客的登頂標的。大屯主峰步道自鞍部登山口全長 1.6 km、一路上坡，官方步行時間 60 分。累計里程 1.7 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #1</span></div><div class=\"font-bold text-stone-800\">大屯山主峰 (H1,092m)</div><div class=\"text-xs text-stone-600 mt-0.5\">台灣小百岳 #001！觀景台以夕陽、雲海、秋芒聞名。大縱走木樁為一般遊客的登頂標的。大屯主峰步道自鞍部登山口全長 1.6 km、一路上坡，官方步行時間 60 分。累計里程 1.7 km。</div>"
+    "text": "08:55🏔️ 最高點⭐ 小百岳 #1大屯山（助航台觀景臺）(H1,092m)台灣小百岳 #001！三角點位於民航局助航站內不開放，山友拍照、標「大屯山牌柱」的位置就在這座觀景臺。大屯主峰步道自鞍部登山口官方指標 1.6 km、步行 60 分。累計里程 2.10 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #1</span></div><div class=\"font-bold text-stone-800\">大屯山（助航台觀景臺）(H1,092m)</div><div class=\"text-xs text-stone-600 mt-0.5\">台灣小百岳 #001！三角點位於民航局助航站內不開放，山友拍照、標「大屯山牌柱」的位置就在這座觀景臺。大屯主峰步道自鞍部登山口官方指標 1.6 km、步行 60 分。累計里程 2.10 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3280,8 +3307,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:35⛰️ 副峰大屯山南峰 (H959m)大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段。官方分段為主峰→大屯坪 0.6 km、大屯坪→南峰 0.6 km，各 20 分。累計里程 2.9 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">大屯山南峰 (H959m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段。官方分段為主峰→大屯坪 0.6 km、大屯坪→南峰 0.6 km，各 20 分。累計里程 2.9 km。</div>"
+    "text": "09:50⛰️ 副峰大屯山南峰 (H959m)大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段（官方指標主峰→大屯坪→南峰各 0.6 km）。累計里程 3.26 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">大屯山南峰 (H959m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段（官方指標主峰→大屯坪→南峰各 0.6 km）。累計里程 3.26 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3289,8 +3316,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "10:25⛰️ 副峰大屯山西峰 (H985m)大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。這 0.6 km 官方給 40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.5 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:25</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">大屯山西峰 (H985m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。這 0.6 km 官方給 40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.5 km。</div>"
+    "text": "10:30⛰️ 副峰大屯山西峰 (H985m)大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。官方指標 0.6 km、40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.78 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛰️ 副峰</span></div><div class=\"font-bold text-stone-800\">大屯山西峰 (H985m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。官方指標 0.6 km、40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.78 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3298,8 +3325,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "11:10↔️ 轉換路段面天坪涼亭 (H810m)面天坪的涼亭，是西峰下山後銜接面天山的節點，提供遮陰休憩空間。西峰至此 0.8 km（連峰步道西峰→清天宮 2.4 km 扣掉面天坪→清天宮 1.6 km）。累計里程 4.3 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">面天坪涼亭 (H810m)</div><div class=\"text-xs text-stone-600 mt-0.5\">面天坪的涼亭，是西峰下山後銜接面天山的節點，提供遮陰休憩空間。西峰至此 0.8 km（連峰步道西峰→清天宮 2.4 km 扣掉面天坪→清天宮 1.6 km）。累計里程 4.3 km。</div>"
+    "text": "11:00⛱️ 涼亭面天坪涼亭西峰下山後的涼亭與岔路口，可往面天山、二子坪。本行程不上面天山，直接往二子坪。累計里程 4.46 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">面天坪涼亭</div><div class=\"text-xs text-stone-600 mt-0.5\">西峰下山後的涼亭與岔路口，可往面天山、二子坪。本行程不上面天山，直接往二子坪。累計里程 4.46 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3307,8 +3334,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "11:30🗻 山頂面天山 (H977m)標準鐘狀火山體，山頂兩座民航導航反射板為特色地標，有三角點。本次路線第四座、最後一座山頭。累計里程 4.9 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🗻 山頂</span></div><div class=\"font-bold text-stone-800\">面天山 (H977m)</div><div class=\"text-xs text-stone-600 mt-0.5\">標準鐘狀火山體，山頂兩座民航導航反射板為特色地標，有三角點。本次路線第四座、最後一座山頭。累計里程 4.9 km。</div>"
+    "text": "11:05🌿 景觀亮點梓園面天坪往二子坪途中的地點。累計里程 4.81 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 景觀亮點</span></div><div class=\"font-bold text-stone-800\">梓園</div><div class=\"text-xs text-stone-600 mt-0.5\">面天坪往二子坪途中的地點。累計里程 4.81 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3316,8 +3343,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:00↔️ 轉換路段面天坪石屋群 (H800m)面天坪附近的石屋遺跡，往二子坪方向下山。累計里程 5.5 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">↔️ 轉換路段</span></div><div class=\"font-bold text-stone-800\">面天坪石屋群 (H800m)</div><div class=\"text-xs text-stone-600 mt-0.5\">面天坪附近的石屋遺跡，往二子坪方向下山。累計里程 5.5 km。</div>"
+    "text": "11:35🌿 景觀亮點二子坪遊憩區二子坪步道西端的遊憩區，有荷塘與人工生態池、解說牌。累計里程 5.72 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:35</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 景觀亮點</span></div><div class=\"font-bold text-stone-800\">二子坪遊憩區</div><div class=\"text-xs text-stone-600 mt-0.5\">二子坪步道西端的遊憩區，有荷塘與人工生態池、解說牌。累計里程 5.72 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3325,8 +3352,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "12:50🏪 補給點二子坪遊客服務站 (H820m)巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏪 補給點</span></div><div class=\"font-bold text-stone-800\">二子坪遊客服務站 (H820m)</div><div class=\"text-xs text-stone-600 mt-0.5\">巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。</div>"
+    "text": "11:50⛱️ 涼亭二子坪步道第一涼亭二子坪步道上的涼亭。累計里程 6.45 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">二子坪步道第一涼亭</div><div class=\"text-xs text-stone-600 mt-0.5\">二子坪步道上的涼亭。累計里程 6.45 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -3334,15 +3361,15 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#d97706;"
     },
-    "text": "13:17🏁 終點鞍部登山口 (H829m)O 型完成！回到鞍部起點。全程 8.9 km，四峰連走大功告成！",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#d97706;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">13:17</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏁 終點</span></div><div class=\"font-bold text-stone-800\">鞍部登山口 (H829m)</div><div class=\"text-xs text-stone-600 mt-0.5\">O 型完成！回到鞍部起點。全程 8.9 km，四峰連走大功告成！</div>"
+    "text": "12:05🏁 終點二子坪公車站縱走完成！二子坪遊客服務區旁的公車站，設有廁所。全程步行 7.47 km，大屯三峰連走完成。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#d97706;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:05</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏁 終點</span></div><div class=\"font-bold text-stone-800\">二子坪公車站</div><div class=\"text-xs text-stone-600 mt-0.5\">縱走完成！二子坪遊客服務區旁的公車站，設有廁所。全程步行 7.47 km，大屯三峰連走完成。</div>"
    }
   ],
   "markers": [
    {
     "latlng": [
-     25.162,
-     121.5368
+     25.155322,
+     121.545852
     ],
     "options": {
      "radius": 9,
@@ -3353,12 +3380,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>陽明山第二停車場 (H585m)</strong><br>⏱ 07:00<br>📏 0.00 km<br>⛰ 585 m"
+    "popup": "<strong>陽明山第二停車場</strong><br>⏱ 07:00<br>📏 0.00 km<br>⛰ 540 m"
    },
    {
     "latlng": [
-     25.18285941068266,
-     121.52997666567207
+     25.182805,
+     121.529993
     ],
     "options": {
      "radius": 6,
@@ -3369,12 +3396,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鞍部站 (H829m)</strong><br>⏱ 07:35<br>📏 0.00 km<br>⛰ 829 m"
+    "popup": "<strong>鞍部公車站</strong><br>⏱ 07:35<br>📏 0.00 km<br>⛰ 830 m"
    },
    {
     "latlng": [
-     25.18328804343731,
-     121.52923236366492
+     25.183198,
+     121.529209
     ],
     "options": {
      "radius": 6,
@@ -3385,12 +3412,60 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鞍部登山口 (H829m)</strong><br>⏱ 07:40<br>📏 0.10 km<br>⛰ 829 m"
+    "popup": "<strong>大屯山鞍部登山口</strong><br>⏱ 07:40<br>📏 0.09 km<br>⛰ 830 m"
    },
    {
     "latlng": [
-     25.176904760689496,
-     121.52229613112243
+     25.181543,
+     121.524039
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>大屯山車道展望涼亭</strong><br>⏱ 08:05<br>📏 0.79 km<br>⛰ 985 m"
+   },
+   {
+    "latlng": [
+     25.178749,
+     121.522026
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>往大屯山觀景臺途中</strong><br>⏱ 08:30<br>📏 1.30 km<br>⛰ 1085 m"
+   },
+   {
+    "latlng": [
+     25.176145,
+     121.521329
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>大屯山觀景臺</strong><br>⏱ 08:35<br>📏 1.67 km<br>⛰ 1075 m"
+   },
+   {
+    "latlng": [
+     25.174867,
+     121.522681
     ],
     "options": {
      "radius": 8,
@@ -3401,12 +3476,12 @@
      "weight": 3
     },
     "last": null,
-    "popup": "<strong>大屯山主峰 (H1,092m)</strong><br>⏱ 08:40<br>📏 1.70 km<br>⛰ 1092 m<br>⭐ 小百岳 #1"
+    "popup": "<strong>大屯山（助航台觀景臺）(H1,092m)</strong><br>⏱ 08:55<br>📏 2.10 km<br>⛰ 1092 m<br>⭐ 小百岳 #1"
    },
    {
     "latlng": [
-     25.16982601248628,
-     121.51773670163752
+     25.169842,
+     121.517727
     ],
     "options": {
      "radius": 6,
@@ -3417,12 +3492,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>大屯山南峰 (H959m)</strong><br>⏱ 09:35<br>📏 2.90 km<br>⛰ 959 m"
+    "popup": "<strong>大屯山南峰 (H959m)</strong><br>⏱ 09:50<br>📏 3.26 km<br>⛰ 959 m"
    },
    {
     "latlng": [
-     25.171144305366195,
-     121.5135565447623
+     25.17115,
+     121.513576
     ],
     "options": {
      "radius": 6,
@@ -3433,12 +3508,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>大屯山西峰 (H985m)</strong><br>⏱ 10:25<br>📏 3.50 km<br>⛰ 985 m"
+    "popup": "<strong>大屯山西峰 (H985m)</strong><br>⏱ 10:30<br>📏 3.78 km<br>⛰ 985 m"
    },
    {
     "latlng": [
-     25.17149446519928,
-     121.50834467297422
+     25.170846,
+     121.508129
     ],
     "options": {
      "radius": 6,
@@ -3449,12 +3524,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>面天坪涼亭 (H810m)</strong><br>⏱ 11:10<br>📏 4.30 km<br>⛰ 810 m"
+    "popup": "<strong>面天坪涼亭</strong><br>⏱ 11:00<br>📏 4.46 km<br>⛰ 785 m"
    },
    {
     "latlng": [
-     25.17434154889929,
-     121.50502186028781
+     25.173788,
+     121.509334
     ],
     "options": {
      "radius": 6,
@@ -3465,12 +3540,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>面天山 (H977m)</strong><br>⏱ 11:30<br>📏 4.90 km<br>⛰ 977 m"
+    "popup": "<strong>梓園</strong><br>⏱ 11:05<br>📏 4.81 km<br>⛰ 760 m"
    },
    {
     "latlng": [
-     25.175985710874873,
-     121.50944021723677
+     25.178127,
+     121.514238
     ],
     "options": {
      "radius": 6,
@@ -3481,12 +3556,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>面天坪石屋群 (H800m)</strong><br>⏱ 12:00<br>📏 5.50 km<br>⛰ 800 m"
+    "popup": "<strong>二子坪遊憩區</strong><br>⏱ 11:35<br>📏 5.72 km<br>⛰ 815 m"
    },
    {
     "latlng": [
-     25.186061545440257,
-     121.525259272697
+     25.183155,
+     121.516573
     ],
     "options": {
      "radius": 6,
@@ -3497,12 +3572,12 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>二子坪遊客服務站 (H820m)</strong><br>⏱ 12:50<br>📏 8.30 km<br>⛰ 820 m"
+    "popup": "<strong>二子坪步道第一涼亭</strong><br>⏱ 11:50<br>📏 6.45 km<br>⛰ 830 m"
    },
    {
     "latlng": [
-     25.18328804343731,
-     121.52923236366492
+     25.186019,
+     121.525525
     ],
     "options": {
      "radius": 9,
@@ -3513,18 +3588,18 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>鞍部登山口 (H829m)</strong><br>⏱ 13:17<br>📏 8.90 km<br>⛰ 829 m"
+    "popup": "<strong>二子坪公車站</strong><br>⏱ 12:05<br>📏 7.47 km<br>⛰ 835 m"
    }
   ],
   "polyline": {
-   "n": 11,
+   "n": 14,
    "first": [
-    25.162,
-    121.5368
+    25.155322,
+    121.545852
    ],
    "last": [
-    25.18328804343731,
-    121.52923236366492
+    25.186019,
+    121.525525
    ],
    "options": {
     "color": "#f59e0b",
@@ -3537,38 +3612,47 @@
    "data": {
     "labels": [
      "陽明山第二停車場",
-     "鞍部站",
-     "鞍部登山口",
-     "大屯山主峰",
+     "鞍部公車站",
+     "大屯山鞍部登山口",
+     "大屯山車道展望涼亭",
+     "往大屯山觀景臺途中",
+     "大屯山觀景臺",
+     "大屯山（助航台觀景臺）",
      "大屯山南峰",
      "大屯山西峰",
      "面天坪涼亭",
-     "面天山",
-     "面天坪石屋群",
-     "二子坪遊客服務站",
-     "鞍部登山口"
+     "梓園",
+     "二子坪遊憩區",
+     "二子坪步道第一涼亭",
+     "二子坪公車站"
     ],
     "datasets": [
      {
       "label": "海拔 (m)",
       "data": [
-       585,
-       829,
-       829,
+       540,
+       830,
+       830,
+       985,
+       1085,
+       1075,
        1092,
        959,
        985,
-       810,
-       977,
-       800,
-       820,
-       829
+       785,
+       760,
+       815,
+       830,
+       835
       ],
       "borderColor": "#d97706",
       "borderWidth": 2.5,
       "pointRadius": 5,
       "pointBackgroundColor": [
        "#d97706",
+       "#a09080",
+       "#a09080",
+       "#a09080",
        "#a09080",
        "#a09080",
        "#7c9e52",
@@ -3584,6 +3668,9 @@
        "#d97706",
        "#d97706",
        "#d97706",
+       "#d97706",
+       "#d97706",
+       "#d97706",
        "#a16207",
        "#d97706",
        "#d97706",
@@ -3594,6 +3681,9 @@
        "#d97706"
       ],
       "pointBorderWidth": [
+       2.5,
+       2.5,
+       2.5,
        2.5,
        2.5,
        2.5,
@@ -3651,102 +3741,129 @@
   "card": [
    {
     "wp-pos-label": "集合起點",
-    "wp-title": "陽明山第二停車場 (H585m)",
+    "wp-title": "陽明山第二停車場",
     "wp-time": "07:00",
     "wp-dist": "0.00",
-    "wp-ele": "585",
+    "wp-ele": "540",
     "wp-desc": "行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。",
     "wp-advice": "備好悠遊卡搭 108 公車，班次約 15–20 分鐘一班，行前確認時刻表。手套是今天的必備裝備。"
    },
    {
     "wp-pos-label": "公車站",
-    "wp-title": "鞍部站 (H829m)",
+    "wp-title": "鞍部公車站",
     "wp-time": "07:35",
     "wp-dist": "0.00",
-    "wp-ele": "829",
-    "wp-desc": "108 遊園公車鞍部站下車。站旁有廁所設施可使用，這是入山前最後機會。步行約 5 分鐘即達大屯山連峰登山口。",
-    "wp-advice": "確認所有裝備整備完畢，手套備好。鞍部站附近有停車場，若自行開車也可停於此。"
+    "wp-ele": "830",
+    "wp-desc": "108 遊園公車鞍部站下車（公車段不計里程）。站旁有廁所設施可使用，這是入山前最後機會。",
+    "wp-advice": "確認所有裝備整備完畢，手套備好。登山口就在公路對面，約 90 m。"
    },
    {
     "wp-pos-label": "入山口",
-    "wp-title": "鞍部登山口 (H829m)",
+    "wp-title": "大屯山鞍部登山口",
     "wp-time": "07:40",
-    "wp-dist": "0.10",
-    "wp-ele": "829",
-    "wp-desc": "停車場對面即是大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。",
+    "wp-dist": "0.09",
+    "wp-ele": "830",
+    "wp-desc": "大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。累計里程 0.09 km。",
     "wp-advice": "確認路標往大屯主峰方向起登。石階路段注意步伐，箭竹夾道風大時格外涼爽但也要注意保暖。"
    },
    {
+    "wp-pos-label": "涼亭",
+    "wp-title": "大屯山車道展望涼亭",
+    "wp-time": "08:05",
+    "wp-dist": "0.79",
+    "wp-ele": "985",
+    "wp-desc": "主峰步道約 0.6K 處、緊鄰大屯山車道（柏油路）的涼亭。累計里程 0.79 km。",
+    "wp-advice": "第一段上坡的歇腳點；臺北大縱走集章任務的其中一顆寶石在這一帶。"
+   },
+   {
+    "wp-pos-label": "轉換路段",
+    "wp-title": "往大屯山觀景臺途中",
+    "wp-time": "08:30",
+    "wp-dist": "1.30",
+    "wp-ele": "1085",
+    "wp-desc": "往大屯山觀景臺途中的步道點，附近約 80–90 m 有民航局基石與通往軍營的柏油路口，公開 GPX 標為「0.9K 高點」「營口」。這個點沒有正式地名。累計里程 1.30 km。",
+    "wp-advice": "營區為軍事管制區，請勿靠近大門；沿步道續行往觀景臺。"
+   },
+   {
+    "wp-pos-label": "展望台",
+    "wp-title": "大屯山觀景臺",
+    "wp-time": "08:35",
+    "wp-dist": "1.67",
+    "wp-ele": "1075",
+    "wp-desc": "大屯連峰的觀景平台，以夕陽、雲海、秋芒聞名。累計里程 1.67 km。",
+    "wp-advice": "可遠眺七星山、淡水河口及台北盆地，拍照後續往助航台觀景臺。"
+   },
+   {
     "wp-pos-label": "最高點 ⭐ 小百岳 #1",
-    "wp-title": "大屯山主峰 (H1,092m)",
-    "wp-time": "08:40",
-    "wp-dist": "1.70",
+    "wp-title": "大屯山（助航台觀景臺）(H1,092m)",
+    "wp-time": "08:55",
+    "wp-dist": "2.10",
     "wp-ele": "1092",
-    "wp-desc": "台灣小百岳 #001！觀景台以夕陽、雲海、秋芒聞名。大縱走木樁為一般遊客的登頂標的。大屯主峰步道自鞍部登山口全長 1.6 km、一路上坡，官方步行時間 60 分。累計里程 1.7 km。",
-    "wp-advice": "三角點位於民航局助航站內不開放，以觀景台前大縱走木樁打卡即可。可遠眺七星山、淡水河口及台北盆地。休息後往南峰方向陡降。"
+    "wp-desc": "台灣小百岳 #001！三角點位於民航局助航站內不開放，山友拍照、標「大屯山牌柱」的位置就在這座觀景臺。大屯主峰步道自鞍部登山口官方指標 1.6 km、步行 60 分。累計里程 2.10 km。",
+    "wp-advice": "以牌柱打卡即可。休息後往南峰方向陡降——接下來是全程最陡峭的拉繩段，手套先戴好。"
    },
    {
     "wp-pos-label": "副峰",
     "wp-title": "大屯山南峰 (H959m)",
-    "wp-time": "09:35",
-    "wp-dist": "2.90",
+    "wp-time": "09:50",
+    "wp-dist": "3.26",
     "wp-ele": "959",
-    "wp-desc": "大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段。官方分段為主峰→大屯坪 0.6 km、大屯坪→南峰 0.6 km，各 20 分。累計里程 2.9 km。",
+    "wp-desc": "大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段（官方指標主峰→大屯坪→南峰各 0.6 km）。累計里程 3.26 km。",
     "wp-advice": "⚠️ 務必使用繩索並戴手套！雨後濕滑非常危險，請謹慎踩穩每一步。通過後往西峰方向前進。"
    },
    {
     "wp-pos-label": "副峰",
     "wp-title": "大屯山西峰 (H985m)",
-    "wp-time": "10:25",
-    "wp-dist": "3.50",
+    "wp-time": "10:30",
+    "wp-dist": "3.78",
     "wp-ele": "985",
-    "wp-desc": "大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。這 0.6 km 官方給 40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.5 km。",
+    "wp-desc": "大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。官方指標 0.6 km、40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.78 km。",
     "wp-advice": "西峰是最後的拉繩段！通過後地形趨緩。建議在西峰稍作大休，補充能量，後半段相對輕鬆。"
    },
    {
-    "wp-pos-label": "轉換路段",
-    "wp-title": "面天坪涼亭 (H810m)",
-    "wp-time": "11:10",
-    "wp-dist": "4.30",
-    "wp-ele": "810",
-    "wp-desc": "面天坪的涼亭，是西峰下山後銜接面天山的節點，提供遮陰休憩空間。西峰至此 0.8 km（連峰步道西峰→清天宮 2.4 km 扣掉面天坪→清天宮 1.6 km）。累計里程 4.3 km。",
-    "wp-advice": "最難的拉繩段已全部過了！由此涼亭取右上坡往面天山（官方指標 0.6 km），是今天的最後一座山頭。"
+    "wp-pos-label": "涼亭",
+    "wp-title": "面天坪涼亭",
+    "wp-time": "11:00",
+    "wp-dist": "4.46",
+    "wp-ele": "785",
+    "wp-desc": "西峰下山後的涼亭與岔路口，可往面天山、二子坪。本行程不上面天山，直接往二子坪。累計里程 4.46 km。",
+    "wp-advice": "最難的拉繩段已全部過了！在涼亭休息後，確認路標往二子坪方向前進。"
    },
    {
-    "wp-pos-label": "山頂",
-    "wp-title": "面天山 (H977m)",
-    "wp-time": "11:30",
-    "wp-dist": "4.90",
-    "wp-ele": "977",
-    "wp-desc": "標準鐘狀火山體，山頂兩座民航導航反射板為特色地標，有三角點。本次路線第四座、最後一座山頭。累計里程 4.9 km。",
-    "wp-advice": "四峰全制霸！山頂可清楚辨認大屯連峰群山輪廓。拍照後原路返回面天坪，接二子坪方向下山。"
+    "wp-pos-label": "景觀亮點",
+    "wp-title": "梓園",
+    "wp-time": "11:05",
+    "wp-dist": "4.81",
+    "wp-ele": "760",
+    "wp-desc": "面天坪往二子坪途中的地點。累計里程 4.81 km。",
+    "wp-advice": "從這裡到二子坪遊憩區約 0.9 km，之後就是平緩好走的二子坪步道。"
    },
    {
-    "wp-pos-label": "轉換路段",
-    "wp-title": "面天坪石屋群 (H800m)",
-    "wp-time": "12:00",
-    "wp-dist": "5.50",
-    "wp-ele": "800",
-    "wp-desc": "面天坪附近的石屋遺跡，往二子坪方向下山。累計里程 5.5 km。",
-    "wp-advice": "確認路標往二子坪方向前進，接下來進入平緩好走的二子坪步道，輕鬆下山收尾。"
+    "wp-pos-label": "景觀亮點",
+    "wp-title": "二子坪遊憩區",
+    "wp-time": "11:35",
+    "wp-dist": "5.72",
+    "wp-ele": "815",
+    "wp-desc": "二子坪步道西端的遊憩區，有荷塘與人工生態池、解說牌。累計里程 5.72 km。",
+    "wp-advice": "接下來沿二子坪步道東行約 1.8 km（官方指標）到公車站，全段平緩的無障礙步道。"
    },
    {
-    "wp-pos-label": "補給點",
-    "wp-title": "二子坪遊客服務站 (H820m)",
-    "wp-time": "12:50",
-    "wp-dist": "8.30",
-    "wp-ele": "820",
-    "wp-desc": "巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。",
-    "wp-advice": "補充飲水，使用廁所。接巴拉卡公路人車分道往鞍部登山口只剩 0.6 km 緩上坡，約 12 分鐘。"
+    "wp-pos-label": "涼亭",
+    "wp-title": "二子坪步道第一涼亭",
+    "wp-time": "11:50",
+    "wp-dist": "6.45",
+    "wp-ele": "830",
+    "wp-desc": "二子坪步道上的涼亭。累計里程 6.45 km。",
+    "wp-advice": "距二子坪公車站約 1 km，平緩步道約 20 分鐘可到。"
    },
    {
     "wp-pos-label": "終點",
-    "wp-title": "鞍部登山口 (H829m)",
-    "wp-time": "13:17",
-    "wp-dist": "8.90",
-    "wp-ele": "829",
-    "wp-desc": "O 型完成！回到鞍部起點。全程 8.9 km，四峰連走大功告成！",
-    "wp-advice": "恭喜完成大屯山四峰 O 型！在鞍部站搭 108 公車返回陽明山第二停車場（約 35 分鐘）。"
+    "wp-title": "二子坪公車站",
+    "wp-time": "12:05",
+    "wp-dist": "7.47",
+    "wp-ele": "835",
+    "wp-desc": "縱走完成！二子坪遊客服務區旁的公車站，設有廁所。全程步行 7.47 km，大屯三峰連走完成。",
+    "wp-advice": "在此搭公車返回陽明山第二停車場。"
    }
   ],
   "trip": [],
@@ -3757,7 +3874,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 8.9 KM O型環走 · 小百岳 #001 大屯群峰連走 大屯山四峰 O 型縱走 搭乘 108 公車上鞍部，沿大屯連峰步道依序攻克主峰、南峰、西峰與面天山四座火山峰頭，下至二子坪後循巴拉卡人車分道 O 型回到鞍部。台北郊山中最完整的火山連峰體驗。 🧤 重要：南峰、西峰拉繩段請務必攜帶手套 主峰往南峰的下坡為全程最陡峭危險路段，多段拉繩輔助。雨後濕滑請勿前往。建議於晴天多天後的清爽天氣出行。 🚌 交通提醒：請備好悠遊卡搭乘 108 遊園公車 07:00 於陽明山第二停車場集合後，步行至附近 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。回程同樣於鞍部站搭 108 返回第二停車場。 集合地點 陽明山第二停車場 搭 108 公車至鞍部站後步行至登山口（約 35 分鐘車程） 集合時間 07:00（日期未定） 請提前 10 分鐘抵達 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至陽明山第二停車場 8.9 總里程 km（官方指標） 5.5 目標耗時 hr（含停留） ~690 預計爬升 m 1,092 最高海拔 m（小百岳 #001） 里程改採陽明山國家公園步道指標（2026-08-03 更正）：大屯主峰步道 1.6 km、主峰→大屯坪→南峰各 0.6 km、 南峰→西峰 0.6 km、西峰→面天坪 0.8 km、面天坪↔面天山各 0.6 km、面天坪→二子坪遊憩區 1.0 km、 二子坪步道 1.8 km、百拉卡人車分道 0.6 km。原本頁面寫 7.9 km，其中四段比兩點間的直線距離還短， 物理上不成立。行走時間亦採官方步道時間（合計 4H27M），另明列停留 70 分。 爬升 690 m 為含起伏的估計；航點淨爬升合計為 485 m。來源見文末「參考資料」。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。黃色圓點為山頂高點。 集合起點<陽明山第二停車場 (H585m)>預計時間 07:00累計里程 0.00 km海拔 585 m行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。隊友建議備好悠遊卡搭 108 公車，班次約 15–20 分鐘一班，行前確認時刻表。手套是今天的必備裝備。 參考資源 🔗 大屯主峰連峰步道資料（健行筆記） 🔗 大屯山連峰四峰 O 型路線紀錄（7.9 km） 📝 大屯山 O 型詳細路線（拉拉桑旅遊足跡） 🌿 陽明山國家公園大屯山系官方步道資訊 海拔高度剖面圖 火山群峰亮點導覽 鞍部登山口 (H829m) 位於百拉卡公路，108 公車鞍部站下車後跨越公路即達。有廁所設施，是大屯山連峰最主要的登山口。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。 大屯山主峰 (H1,092m) 台灣小百岳 No.1！二等三角點所在，但三角點位於民航局助航站內不開放，一般遊客以大縱走木樁作為登頂標的。觀景台以夕陽、雲海、秋芒景觀聞名，是大台北賞夕陽的聖地。 大屯山南峰 (H959m) 錐形火山體外型顯著的大屯第二峰。由主峰陡降至南峰有多段拉繩輔助路段，是全程最具挑戰性的地形，需手腳並用攀繩下降。建議佩戴手套並謹慎踩穩每一步。 大屯山西峰 (H985m) 大屯連峰第三峰，南峰至西峰間仍有拉繩路段，通過後地形趨緩。視野遼闊，可遠眺北海岸線。西峰是拉繩段的最後一峰，過後地形變得友善，是全程轉折的心理分水嶺。 面天山 (H977m) 外型圓潤的標準鐘狀火山體，山頂設有兩座民航導航反射板為特色，遠從台北市區便可辨認。有三角點，是本次路線第四座、也是最後一座山頭，意義非凡。 二子坪遊客服務站 (H820m) 全台首個山野型無障礙步道的遊客服務站，設有人工生態池、廁所、涼亭與解說牌。從面天坪下山後接此平緩步道，是 O 型路線收尾前最舒適的緩衝段，可在此補充最後的水分。 本次行程亮點 陽明山大屯火山群：台北最完整的高山火山連峰體驗 【大屯火山地質】大屯山約在 70 萬年前的噴發形成了今日的主峰、西峰和南峰三峰，是台灣仍具噴發潛力的活火山群。大屯山四峰 O 型路線串連四座大屯火山群山頭，完整體驗這片火山地形的壯麗與多樣——從主峰箭竹芒草的蒼涼北坡，到南峰、西峰的陡峭岩稜，再到面天山的鐘形火山體，最後在二子坪的平緩生態池結束，每一段都有完全不同的地景風貌。 【賞景最佳季節】秋季（10–12 月）芒草盛開時為最推薦的造訪時機，山頂觀景台一望無際的金黃芒海是台北最知名的秋景之一。春季天氣清朗時展望最佳，夏季需特別注意午後雷陣雨。 行程四大特色 • 台灣小百岳 #001 大屯山主峰，大台北最佳夕陽觀景點 • 四座火山峰頭連走：主峰→南峰→西峰→面天山 • O 型路線：去程攀稜，回程繞二子坪，景色完全不重複 • 充分體驗大屯火山群的多元地質地貌 預計行程進度（健行段 5H37M，含停留 70 分） 候選行程，日期未定。不含搭乘公車前往鞍部的時間（約 35 分鐘）。 07:00🅿️ 集合起點陽明山第二停車場 (H585m)行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。07:35🚌 公車站鞍部站 (H829m)108 遊園公車鞍部站下車。站旁有廁所設施可使用，這是入山前最後機會。步行約 5 分鐘即達大屯山連峰登山口。07:40🥾 入山口鞍部登山口 (H829m)停車場對面即是大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。08:40🏔️ 最高點⭐ 小百岳 #1大屯山主峰 (H1,092m)台灣小百岳 #001！觀景台以夕陽、雲海、秋芒聞名。大縱走木樁為一般遊客的登頂標的。大屯主峰步道自鞍部登山口全長 1.6 km、一路上坡，官方步行時間 60 分。累計里程 1.7 km。09:35⛰️ 副峰大屯山南峰 (H959m)大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段。官方分段為主峰→大屯坪 0.6 km、大屯坪→南峰 0.6 km，各 20 分。累計里程 2.9 km。10:25⛰️ 副峰大屯山西峰 (H985m)大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。這 0.6 km 官方給 40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.5 km。11:10↔️ 轉換路段面天坪涼亭 (H810m)面天坪的涼亭，是西峰下山後銜接面天山的節點，提供遮陰休憩空間。西峰至此 0.8 km（連峰步道西峰→清天宮 2.4 km 扣掉面天坪→清天宮 1.6 km）。累計里程 4.3 km。11:30🗻 山頂面天山 (H977m)標準鐘狀火山體，山頂兩座民航導航反射板為特色地標，有三角點。本次路線第四座、最後一座山頭。累計里程 4.9 km。12:00↔️ 轉換路段面天坪石屋群 (H800m)面天坪附近的石屋遺跡，往二子坪方向下山。累計里程 5.5 km。12:50🏪 補給點二子坪遊客服務站 (H820m)巴拉卡公路旁的服務站，設有廁所。自面天坪走到這裡有 2.8 km：先 1.0 km 到二子坪遊憩區，再沿二子坪步道 1.8 km 東行。人工生態池與解說牌在遊憩區那一端，中途會經過。累計里程 8.3 km。13:17🏁 終點鞍部登山口 (H829m)O 型完成！回到鞍部起點。全程 8.9 km，四峰連走大功告成！ 參考資料 · 大屯主峰－連峰步道 — 健行筆記：鞍部登山口→主峰 1.6 km／60 分、主峰→大屯坪 0.6 km／20 分、大屯坪→南峰 0.6 km／20 分、南峰→西峰 0.6 km／40 分、西峰→清天宮登山口 2.4 km／90 分。 · 面天山－向天山步道 — 健行筆記：面天坪↔面天山 0.6 km、面天坪→清天宮登山口 1.6 km。西峰→面天坪的 0.8 km 由這兩筆相減得出。 · 二子坪步道 — 健行筆記：遊客服務站→二子坪遊憩區單程 1.8 km（現地指標標 1.6 km，登山 App 量到 1.7 km，本頁採官方 1.8）。 · 百拉卡公路人車分道 — 健行筆記：全長約 2.0 km，其中巴拉卡鞍部登山口→二子坪遊客中心 0.6 km。原頁面此段寫 2.2 km，高估近四倍。 · 陽明山國家公園 — 大屯山系步道：步道系統與里程的官方出處。 · 大屯山連峰四峰 O 型路線紀錄 — Yao 帶你週末爬山趣：本頁原始參考，總里程記為 7.9 km。該數字與官方分段指標相加（8.9 km）不符，且會使四個路段短於兩點間的直線距離，故改採官方指標。 面天坪→二子坪遊憩區的 1.0 km 出自「面天山－向天山步道由二子坪遊憩區進入，前行約 1 公里抵達面天山登山口」的描述，是本頁唯一非直接引自指標的段長；實走後應以 GPS 為準。 © 爬爬小隊候選行程 ｜ 大屯山連峰四峰 O 型 8.9 KM ｜ 日期未定",
+  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 7.5 KM 單向縱走 · 小百岳 #001 大屯群峰連走 大屯三峰縱走：鞍部 → 二子坪 搭乘 108 公車上鞍部，沿大屯連峰步道依序攻克大屯山、南峰、西峰三座火山峰頭，經面天坪下到二子坪，再從二子坪公車站搭公車返回。單向縱走、頭尾搭公車，不走回頭路。 🧤 重要：南峰、西峰拉繩段請務必攜帶手套 主峰往南峰的下坡為全程最陡峭危險路段，多段拉繩輔助。雨後濕滑請勿前往。建議於晴天多天後的清爽天氣出行。 🚌 交通提醒：請備好悠遊卡搭乘 108 遊園公車 07:00 於陽明山第二停車場集合後，步行至附近 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。回程於二子坪公車站搭公車返回第二停車場。 集合地點 陽明山第二停車場 搭 108 公車至鞍部站後步行至登山口（約 35 分鐘車程） 集合時間 07:00（日期未定） 請提前 10 分鐘抵達 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至陽明山第二停車場 7.5 總里程 km（步行段） 4.5 目標耗時 hr（步行段，含停留） ~500 預計爬升 m 1,092 最高海拔 m（小百岳 #001） 里程與時刻讀自健行筆記公開 GPX #5012764（2025/09/27，鞍部登山口 → 二子坪），第二停車場↔鞍部、二子坪→第二停車場兩段搭公車，不計里程。 分段與官方步道指標相符：主峰→南峰 1.16 km（指標 1.2）、南峰→西峰 0.51 km（0.6）、西峰→面天坪 0.69 km（0.8）、二子坪步道 1.75 km（1.8）。 爬升約 500 m 為同一條軌跡的 GPS 推估。來源見文末「參考資料」。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。黃色圓點為山頂高點。 集合起點<陽明山第二停車場>預計時間 07:00累計里程 0.00 km海拔 540 m行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。隊友建議備好悠遊卡搭 108 公車，班次約 15–20 分鐘一班，行前確認時刻表。手套是今天的必備裝備。 參考資源 🔗 大屯主峰連峰步道資料（健行筆記） 🔗 大屯山連峰四峰 O 型路線紀錄（7.9 km） 📝 大屯山 O 型詳細路線（拉拉桑旅遊足跡） 🌿 陽明山國家公園大屯山系官方步道資訊 海拔高度剖面圖 火山群峰亮點導覽 鞍部登山口 (H830m) 位於百拉卡公路，108 公車鞍部站下車後跨越公路即達。有廁所設施，是大屯山連峰最主要的登山口。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。 大屯山（助航台觀景臺）(H1,092m) 台灣小百岳 No.1！二等三角點所在，但三角點位於民航局助航站內不開放，山友以助航台觀景臺的「大屯山」牌柱作為登頂標的。觀景台以夕陽、雲海、秋芒景觀聞名，是大台北賞夕陽的聖地。 大屯山南峰 (H959m) 錐形火山體外型顯著的大屯第二峰。由主峰陡降至南峰有多段拉繩輔助路段，是全程最具挑戰性的地形，需手腳並用攀繩下降。建議佩戴手套並謹慎踩穩每一步。 大屯山西峰 (H985m) 大屯連峰第三峰，南峰至西峰間仍有拉繩路段，通過後地形趨緩。視野遼闊，可遠眺北海岸線。西峰是拉繩段的最後一峰，過後地形變得友善，是全程轉折的心理分水嶺。 面天坪涼亭 西峰下山後的涼亭與岔路口，可往面天山或二子坪。本行程不上面天山，由此直接往二子坪；拉繩段到這裡全部結束，後半段地形平緩。 二子坪遊憩區與二子坪步道 全台首個山野型無障礙步道，遊憩區一端有荷塘與人工生態池、解說牌。從面天坪下來後接這條平緩步道東行約 1.8 km，到二子坪遊客服務區旁的公車站結束，設有廁所，在此搭公車返回第二停車場。 本次行程亮點 陽明山大屯火山群：台北最完整的高山火山連峰體驗 【大屯火山地質】大屯山約在 70 萬年前的噴發形成了今日的主峰、西峰和南峰三峰，是台灣仍具噴發潛力的活火山群。這條縱走正好把三峰一次走完——從主峰箭竹芒草的蒼涼北坡，到南峰、西峰的陡峭岩稜，最後在二子坪的平緩生態池結束，每一段都有完全不同的地景風貌。 【賞景最佳季節】秋季（10–12 月）芒草盛開時為最推薦的造訪時機，山頂觀景台一望無際的金黃芒海是台北最知名的秋景之一。春季天氣清朗時展望最佳，夏季需特別注意午後雷陣雨。 行程四大特色 • 台灣小百岳 #001 大屯山主峰，大台北最佳夕陽觀景點 • 三座火山峰頭連走：主峰→南峰→西峰 • 單向縱走：鞍部上、二子坪下，頭尾搭公車，不走回頭路 • 充分體驗大屯火山群的多元地質地貌 預計行程進度（步行段約 4H25M） 候選行程，日期未定。時刻依 GPX #5012764 當天的步調推算（含停留）；不含搭公車往返的時間。 07:00🅿️ 集合起點陽明山第二停車場行程集合點。07:00 集合後步行至 108 公車站，搭乘 108 遊園公車至鞍部站（約 35 分鐘）。07:35🚌 公車站鞍部公車站108 遊園公車鞍部站下車（公車段不計里程）。站旁有廁所設施可使用，這是入山前最後機會。07:40🥾 入山口大屯山鞍部登山口大屯山連峰登山口，正式起登。石階步道兩側箭竹夾道，東北季風吹拂時格外壯觀。累計里程 0.09 km。08:05⛱️ 涼亭大屯山車道展望涼亭主峰步道約 0.6K 處、緊鄰大屯山車道（柏油路）的涼亭。累計里程 0.79 km。08:30↔️ 轉換路段往大屯山觀景臺途中往大屯山觀景臺途中的步道點，附近約 80–90 m 有民航局基石與通往軍營的柏油路口，公開 GPX 標為「0.9K 高點」「營口」。這個點沒有正式地名。累計里程 1.30 km。08:35🏙️ 展望台大屯山觀景臺大屯連峰的觀景平台，以夕陽、雲海、秋芒聞名。累計里程 1.67 km。08:55🏔️ 最高點⭐ 小百岳 #1大屯山（助航台觀景臺）(H1,092m)台灣小百岳 #001！三角點位於民航局助航站內不開放，山友拍照、標「大屯山牌柱」的位置就在這座觀景臺。大屯主峰步道自鞍部登山口官方指標 1.6 km、步行 60 分。累計里程 2.10 km。09:50⛰️ 副峰大屯山南峰 (H959m)大屯連峰第二峰，錐形火山體外型顯著。主峰至南峰多段拉繩輔助路段，為全程最陡峭危險段（官方指標主峰→大屯坪→南峰各 0.6 km）。累計里程 3.26 km。10:30⛰️ 副峰大屯山西峰 (H985m)大屯連峰第三峰，南峰至西峰間仍有拉繩路段。視野遼闊可遠眺北海岸線。官方指標 0.6 km、40 分——距離短但全是拉繩，是全程最慢的一段。累計里程 3.78 km。11:00⛱️ 涼亭面天坪涼亭西峰下山後的涼亭與岔路口，可往面天山、二子坪。本行程不上面天山，直接往二子坪。累計里程 4.46 km。11:05🌿 景觀亮點梓園面天坪往二子坪途中的地點。累計里程 4.81 km。11:35🌿 景觀亮點二子坪遊憩區二子坪步道西端的遊憩區，有荷塘與人工生態池、解說牌。累計里程 5.72 km。11:50⛱️ 涼亭二子坪步道第一涼亭二子坪步道上的涼亭。累計里程 6.45 km。12:05🏁 終點二子坪公車站縱走完成！二子坪遊客服務區旁的公車站，設有廁所。全程步行 7.47 km，大屯三峰連走完成。 參考資料 · 大屯主峰－連峰步道 — 健行筆記：鞍部登山口→主峰 1.6 km／60 分、主峰→大屯坪 0.6 km／20 分、大屯坪→南峰 0.6 km／20 分、南峰→西峰 0.6 km／40 分、西峰→清天宮登山口 2.4 km／90 分。 · 面天山－向天山步道 — 健行筆記：面天坪↔面天山 0.6 km、面天坪→清天宮登山口 1.6 km。西峰→面天坪的 0.8 km 由這兩筆相減得出。 · 二子坪步道 — 健行筆記：遊客服務站→二子坪遊憩區單程 1.8 km（現地指標標 1.6 km，登山 App 量到 1.7 km，本頁採官方 1.8）。 · 百拉卡公路人車分道 — 健行筆記：全長約 2.0 km，其中巴拉卡鞍部登山口→二子坪遊客中心 0.6 km。原頁面此段寫 2.2 km，高估近四倍。 · 陽明山國家公園 — 大屯山系步道：步道系統與里程的官方出處。 · 大屯山連峰四峰 O 型路線紀錄 — Yao 帶你週末爬山趣：本頁原始參考，總里程記為 7.9 km。該數字與官方分段指標相加（8.9 km）不符，且會使四個路段短於兩點間的直線距離，故改採官方指標。 © 爬爬小隊候選行程 ｜ 大屯三峰縱走 7.5 KM ｜ 日期未定",
   "errors": []
  },
  "dinghu": {
