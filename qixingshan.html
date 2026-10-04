@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="七星山主東峰苗圃 O 型計畫。自苗圃登山口起登，直攻七星山主峰（1,120m），連走東峰後繞七星公園回程。">
+  <meta name="description" content="七星山主東峰苗圃 O 型計畫行程（2026/11/8 週日）。自苗圃登山口起登，直攻七星山主峰（1,120m），連走東峰後繞七星公園回程。">
   <title>七星山主東峰苗圃O型 — 爬爬小隊</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,7 +51,7 @@
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
       <div class="max-w-4xl mx-auto w-full">
         <div class="mb-4">
-          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 6.4 KM O型環走</span>
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">計畫行程 · 2026/11/08（日）· 6.4 KM O型環走</span>
         </div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           登七星而小台北<br>
@@ -75,7 +75,7 @@
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">集合時間</div>
-            <div class="font-bold text-stone-800">07:00（日期未定）</div>
+            <div class="font-bold text-stone-800">2026/11/08（日）07:00</div>
             <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
@@ -197,19 +197,19 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           預計行程進度（約 4H15M）
         </h2>
-        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。時刻以每小時 1.5 公里推算（未另計休息），供規劃參考。</p>
+        <p class="text-sm text-stone-600 mb-8">2026/11/08（日）07:00 陽明山第二停車場集合。時刻以每小時 1.5 公里推算（未另計休息），供規劃參考。</p>
         <div data-widget="timeline"></div>
       </div>
     </section>
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 七星山主東峰苗圃 O 型 6.4 KM ｜ 日期未定</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊計畫行程 ｜ 七星山主東峰苗圃 O 型 6.4 KM ｜ 2026/11/08</p>
   </footer>
 
   <script>
     // ── 行程數據 ──────────────────────────────────────────────
-    // 候選行程，日期未定。航點為隊上標記的 12 點（2026-09-29 提供；冷水坑步道
+    // 計畫行程：2026-11-08（日）07:00 陽明山第二停車場集合。航點為隊上標記的 12 點（2026-09-29 提供；冷水坑步道
     // 觀景台同日更正座標）。健行筆記 #1169 底下的公開 GPX 逐一比對，只有
     // #5998473（2026-09-19，6.45 km）有繞到觀景台，其餘都在冷水坑岔口直接轉
     // 公園線；12 點離它都在 25 m 內，七星公園除外（63 m，軌跡從公園旁經過）。
@@ -245,11 +245,12 @@
       const PAL = PaPaDetail.palette({ accent: ACCENT });
 
     PaPaDetail.init({
+      trip: { date: '2026-11-08' },   // 計畫頁：只給日期不給 km，天氣卡查行程日預報
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [25.163,121.552],
       weather: { lat: 25.1708, lng: 121.5535,
-                 subText: '七星山頂今日參考' },
+                 subText: '七星山頂' },
 
       map: {
         setView: [[25.163, 121.552], 14],
