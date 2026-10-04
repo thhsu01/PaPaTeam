@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-09-29 11:46",
+  "generated": "2026-10-04 19:26",
   "generated_tz": "UTC+8",
-  "commit": "439da3e707f185b2bee1a2cc30885662f2ffab4d",
+  "commit": "4f2ac5354cd9d05618dc3ad5b4f000703d18408f",
   "file_count": 70,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 12149,
-      "sha": "b19a07780fb5b0b924cf93ffcb8005661107e11c"
+      "size": 12220,
+      "sha": "7334ffe647ba27e4f48fc36631d4360cec7c3613"
     },
     {
       "path": "SNIPPETS.md",
@@ -185,8 +185,8 @@
     },
     {
       "path": "datongshan.html",
-      "size": 27962,
-      "sha": "c6251eeee4a00d714e6a73413016fc1a51ef8f86"
+      "size": 28793,
+      "sha": "16bb0d4bd8d24de5dd8db28c11b67928d97e5cff"
     },
     {
       "path": "datunshan.html",
@@ -225,8 +225,8 @@
     },
     {
       "path": "index.html",
-      "size": 25950,
-      "sha": "bbea02ad8a8f57b5ce443ab80e885baca7458813"
+      "size": 26014,
+      "sha": "ddd8afda7ab8a21953ef08668890a598a70876e7"
     },
     {
       "path": "jiantanshan.html",
@@ -245,8 +245,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 36933,
-      "sha": "a015b8cfb73fde409ada44b004675cc72d9b1894"
+      "size": 36929,
+      "sha": "80e5e048791884da334147b1fc172c1975cc59e4"
     },
     {
       "path": "meihuashan.html",
@@ -270,8 +270,8 @@
     },
     {
       "path": "qixingshan.html",
-      "size": 21690,
-      "sha": "2bc8915ae540fe8c03085c503abb61a271953864"
+      "size": 21965,
+      "sha": "48a04ad98a2102dcb8c58f451c14a82667d672cc"
     },
     {
       "path": "shanying.html",
@@ -330,13 +330,13 @@
     },
     {
       "path": "tools/redteam.py",
-      "size": 9587,
-      "sha": "77599b9be182e826796d37c14814b7e2568b836c"
+      "size": 9819,
+      "sha": "85e128f55316dc36c9d3546b434a453ce06f680a"
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 774834,
-      "sha": "3e2dddfcc11ff149ded7d9abb12887b0c065c97c"
+      "size": 775145,
+      "sha": "312c6e20bec300613427f6d13f09a47a7d86f19b"
     },
     {
       "path": "tools/regress/check.js",
