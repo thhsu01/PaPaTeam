@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>樹林山佳縱走：大同山‧青龍嶺‧大棟山 — 爬爬小隊</title>
-  <meta name="description" content="候選行程：自台鐵樹林站起登，經大同山、青龍嶺至小百岳大棟山（405m），於台鐵山佳站結束。單程約 10.0 公里。">
+  <meta name="description" content="計畫行程（2026/10/11 週日）：08:00 台鐵樹林站後站出口集合，經大同山、青龍嶺至小百岳大棟山（405m），於台鐵山佳站結束。單程約 10.0 公里。">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -56,7 +56,7 @@
     <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-rose-50 via-orange-50 to-stone-100">
       <div class="max-w-4xl mx-auto w-full">
         <div class="mb-4">
-          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 10.0 KM · 小百岳</span>
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">計畫行程 · 2026/10/11（日）· 約 10.0 KM · 小百岳</span>
         </div>
         <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
           雙鐵一線走稜線<br>
@@ -72,7 +72,7 @@
           </div>
         </div>
 
-        <!-- 候選行程的數字都還是估計值，說清楚比含糊帶過好 -->
+        <!-- 行前頁的數字都還是估計值，說清楚比含糊帶過好 -->
         <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
           <span class="text-2xl mt-0.5">📐</span>
           <div>
@@ -90,8 +90,16 @@
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">集合時間</div>
-            <div class="font-bold text-stone-800">08:00（暫定，日期未定）</div>
+            <div class="font-bold text-stone-800">2026/10/11（日）08:00</div>
             <div class="text-xs text-stone-600 mt-1">請提前 10 分鐘抵達</div>
+            <!-- 台鐵開放資料 2026-10-11 時刻表（2026-10-04 發布），08:00 前到樹林站的末三班；
+                 南下 4107 次以樹林為終點、07:36 到，是倒數第四班。 -->
+            <div class="text-xs text-stone-600 mt-2 pt-2 border-t border-stone-100 leading-relaxed">
+              <div class="font-medium text-stone-800 mb-1">🚆 08:00 前到樹林站末三班</div>
+              <div><span class="accent-text font-medium">南下</span> 07:39 區間快 2007・07:45 區間 1127・07:51 區間 1129</div>
+              <div><span class="accent-text font-medium">北上</span> 07:28 區間 4152・07:38 區間 1132・07:52 區間 4154</div>
+              <div class="mt-1">依台鐵 10/4 發布時刻表，搭乘前請再確認</div>
+            </div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
@@ -130,7 +138,7 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           互動路線圖與航點切換
         </h2>
-        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。候選行程尚無實走 GPS，地圖上的線為航點直線連接；航點座標為隊上標記的位置，已對照公開 GPX #4688462，都在軌跡 20 m 內（樹林站除外）。</p>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接；航點座標為隊上標記的位置，已對照公開 GPX #4688462，都在軌跡 20 m 內（樹林站除外）。</p>
         <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
         <div data-widget="wp-card"></div>
         <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
@@ -216,19 +224,19 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           預計行程進度（約 6H40M）
         </h2>
-        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。里程讀自公開 GPX #4688462，時間以每小時 1.5 公里推算，08:00 出發、約 14:40 抵達山佳站，實際以走過的資料為準。</p>
+        <p class="text-sm text-stone-600 mb-8">2026/10/11（日）08:00 樹林站後站出口集合。里程讀自公開 GPX #4688462，時間以每小時 1.5 公里推算，08:00 出發、約 14:40 抵達山佳站，實際以走過的資料為準。</p>
         <div data-widget="timeline"></div>
       </div>
     </section>
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 樹林山佳縱走 約 10.0 KM ｜ 日期未定</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊計畫行程 ｜ 樹林山佳縱走 約 10.0 KM ｜ 2026/10/11</p>
   </footer>
 
   <script>
     // ── 行程數據 ──────────────────────────────────────────────
-    // 候選行程，日期未定。本隊尚未實走。
+    // 計畫行程：2026-10-11（日）08:00 樹林站後站出口集合。本隊尚未實走。
     //
     // 航點：隊上標記的 18 點（2026-09-28 提供，依官方方向倒過來排）＋台鐵樹林站。
     // 逐點對照健行筆記 GPX #4688462（2025-07-05，樹林站→山佳站，#2073 底下 148 條
@@ -237,7 +245,7 @@
     // 先前大同山、青龍嶺的座標與標記點差了數百公尺，已一併更正。
     //
     // dist：軌跡累計距離 × 10.03 ÷ 10.34（健行筆記標示值 ÷ 原始點加總）。
-    // time：依使用者指定，08:00 出發（暫定），以每小時 1.5 公里推算：
+    // time：依使用者指定，08:00 出發，以每小時 1.5 公里推算：
     // 08:00 ＋ dist ÷ 1.5 小時，取整到 5 分鐘，未另計休息；是規劃值，不是實測。
     // （參考：#4688462 當天實走 3 小時 27 分。）
     //
@@ -252,7 +260,7 @@
     // （補給站、飲水機、公廁、涼亭、石碑、山佳岔……）；查不到的就只寫位置。
     const schedule = [
       { lat: 24.991196, lng: 121.423730, time: "08:00", loc: "台鐵樹林站後站出口", dist: 0.00, ele: 15, pos: "集合起點",
-        desc: "行程集合點，暫定 08:00 在樹林站後站出口集合出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。",
+        desc: "行程集合點，08:00 在樹林站後站出口集合出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。",
         advice: "確認悠遊卡與登山裝備；到登山口約 0.8 km 是市區路段。" },
 
       { lat: 24.992341, lng: 121.417566, time: "08:30", loc: "大同山登山步道口", dist: 0.79, ele: 15, pos: "入山口",
@@ -334,17 +342,17 @@
 
     // ── 本頁設定 ──────────────────────────────────────────────
     // 機制在 assets/detail.js，此處只描述差異。
-    // 候選行程沒有 trip.date：日期未定就不要編一個出來，天氣以
-    // forecast_days=1 顯示今日參考即可（見 ARCHITECTURE 的腳本規格）。
+    // 計畫頁：trip 只給日期不給里程（沒有 km 就仍是行前頁），天氣卡查行程日的預報。
       // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
       const PAL = PaPaDetail.palette({ accent: ACCENT, extra: { "展望台": "#f59e0b" } });
 
     PaPaDetail.init({
+      trip: { date: '2026-10-11' },
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [24.991196, 121.423730],
       weather: { lat: 24.995788, lng: 121.384208,
-                 subText: '大棟山頂今日參考' },
+                 subText: '大棟山頂' },
 
       map: {
         setView: [[24.992, 121.404], 13],
