@@ -96,9 +96,17 @@
                  南下 4107 次以樹林為終點、07:36 到，是倒數第四班。 -->
             <div class="text-xs text-stone-600 mt-2 pt-2 border-t border-stone-100 leading-relaxed">
               <div class="font-medium text-stone-800 mb-1">🚆 08:00 前到樹林站末三班</div>
-              <div><span class="accent-text font-medium">南下</span> 07:39 區間快 2007・07:45 區間 1127・07:51 區間 1129</div>
-              <div><span class="accent-text font-medium">北上</span> 07:28 區間 4152・07:38 區間 1132・07:52 區間 4154</div>
-              <div class="mt-1">依台鐵 10/4 發布時刻表，搭乘前請再確認</div>
+              <!-- 用 table 讓三班的到站時刻與車次上下對齊；時刻一列、車次一列，卡片窄也不會擠。 -->
+              <table class="w-full tabular-nums">
+                <caption class="sr-only">樹林站 08:00 前到站列車</caption>
+                <tbody>
+                  <tr><th scope="row" rowspan="2" class="text-left align-top font-medium accent-text pr-2">南下</th><td>07:39</td><td>07:45</td><td>07:51</td></tr>
+                  <tr><td class="pb-1">2007快</td><td class="pb-1">1127</td><td class="pb-1">1129</td></tr>
+                  <tr><th scope="row" rowspan="2" class="text-left align-top font-medium accent-text pr-2">北上</th><td>07:28</td><td>07:38</td><td>07:52</td></tr>
+                  <tr><td>4152</td><td>1132</td><td>4154</td></tr>
+                </tbody>
+              </table>
+              <div class="mt-1">上列到站時刻、下列車次；「快」為區間快，其餘為區間車。依台鐵 10/4 發布時刻表，搭乘前請再確認</div>
             </div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
