@@ -80,8 +80,10 @@ CASES = [
      '"title": "虎山親山步道",\n      "status": "candidate"',
      'spec_sweep', 'status 是 candidate，但有軌跡檔'),
     # 計畫頁＝沒有軌跡檔、trip 只給日期。候選頁補上日期就成了計畫頁，manifest 還寫 candidate 要紅
-    # （第一版拿 shanying 的計畫日期來拔，它 9/27 走完轉成紀錄頁後這列就對不到東西了）
-    ('manifest status（計畫）', 'datongshan.html', 'PaPaDetail.init({',
+    # （第一版拿 shanying 的計畫日期來拔，它 9/27 走完轉成紀錄頁後這列就對不到東西了；
+    # 第二版注入 datongshan，它 2026-10 定了 10/11 出發、本身就是計畫頁，又失效一次。
+    # 改用 shiqiulinling：這列的前提是「注入對象必須仍是候選頁」，換對象時記得檢查）
+    ('manifest status（計畫）', 'shiqiulinling.html', 'PaPaDetail.init({',
      "PaPaDetail.init({ trip: { date: '2026-10-01' },",
      'spec_sweep', 'status 是 candidate，但沒有軌跡檔、頁面 trip 有日期'),
     ('README 檔案樹', 'README.md', '├── index.html', '├── index-x.html',
