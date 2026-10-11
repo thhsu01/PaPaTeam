@@ -86,7 +86,8 @@ PaPaTeam/
 ├── hushan.html                  # 虎山親山步道（2024-04-20）
 │   計畫（一頁）
 ├── qixingshan.html              # 七星山主東峰 苗圃O型（2026-11-08 出發）
-│   候選（三頁）
+│   候選（四頁）
+├── yuanshan.html                # 微笑山線 鳶山彩壁 O 型：三峽 → 鳶尾山
 ├── datunshan.html               # 大屯三峰縱走：鞍部 → 二子坪
 ├── bishan.html                  # 碧山 + 白石湖山：原始縱走
 ├── shiqiulinling.html           # 獅球嶺砲台：基隆歷史古蹟
@@ -130,7 +131,7 @@ PaPaTeam/
 │   │   ├── tw.css               # 本地建置的 Tailwind（建置產物）
 │   │   └── build-css.sh         # 重建 tw.css（改完 HTML 要跑）
 │   └── regress/                 # detail.js 的執行期基準（改 detail.js 後跑；需 Playwright）
-│       ├── check.js             # 量 22 頁的時間軸／標記／海拔圖／航點卡，逐欄比對基準
+│       ├── check.js             # 量 23 頁的時間軸／標記／海拔圖／航點卡，逐欄比對基準
 │       ├── record.js            # 錄下 detail.js 交給 Leaflet 與 Chart.js 的東西
 │       └── baseline.json        # 基準。只有 --update 會寫，git diff 它就是審查面
 │
@@ -181,12 +182,12 @@ node tools/contrast/check.js --all
 忘了重建也不會靜靜量錯——`check.js` 會比對頁面用到的 utility，缺了就中止並提示。
 
 改到 `assets/detail.js` 時跑執行期基準。它只穿過 `PaPaDetail.init(cfg)`，量另一側的結果
-——22 頁的時間軸 DOM、地圖標記樣式、海拔圖設定、航點卡欄位——逐欄與
+——23 頁的時間軸 DOM、地圖標記樣式、海拔圖設定、航點卡欄位——逐欄與
 `tools/regress/baseline.json` 比對：
 
 ```bash
 python3 -m http.server 8099 &
-node tools/regress/check.js             # 沒打算改畫面的改動：22 頁必須零變動
+node tools/regress/check.js             # 沒打算改畫面的改動：23 頁必須零變動
 node tools/regress/check.js --update    # 打算改畫面：重寫基準，git diff 它，一起提交
 ```
 
@@ -203,7 +204,7 @@ python3 tools/bump_assets.py     # 23 頁的 ?v= 換成新的內容雜湊
 導覽列等區塊由 `detail.js` 產生，新版 HTML 配上快取裡的舊版 JS 會讓整條導覽列不見
 （2026-09-07 正式站發生過）。URL 帶內容雜湊就不會抓到舊檔；忘了跑，`spec_sweep` 會紅。
 
-二十二個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
+二十三個詳情頁不各自實作地圖與圖表——那些機制都在 `assets/detail.js`，各頁只寫自己的
 `schedule` 陣列與 `PaPaDetail.init({...})` 設定。**動任何頁面前先讀 `ARCHITECTURE.md`**，
 它規定了詳情頁只能有五個段落、id 與順序固定，以及色彩一律走 `--accent` token。
 

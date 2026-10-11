@@ -16,7 +16,7 @@
   ├─ 歷史紀錄 (completed)
   └─ 頁腳 (footer)
 
-詳情頁 (22 頁，正規規格見下)
+詳情頁 (23 頁，正規規格見下)
   ├─ skip link
   ├─ 導覽列 (fixed 頂部，站徽 + 5 顆藥丸)
   ├─ main#main-content
@@ -109,7 +109,7 @@ const data = {
 深底、`#7c9e52` 的山頂綠等）仍是行內十六進位值，未納入 `--accent` 層。那是刻意的
 ——理由見文末「尚未收斂的一件事」。主色本身早已收成 token，複製時照抄無妨。
 
-收斂已完成，22 頁的結構現在都符合本規格；仍未補齊的內容缺口見文末「尚未收斂的一件事」。
+收斂已完成，23 頁的結構現在都符合本規格；仍未補齊的內容缺口見文末「尚未收斂的一件事」。
 
 ### 段落規格
 
@@ -229,7 +229,7 @@ id、順序、導覽文字三者都是規格的一部分，不可自由發揮。
 ```
 
 `detail.js` 的 `WIDGETS` 表在 DOMContentLoaded 填入正規 markup。2026-09 之前這六個區塊
-22 頁各自手寫，量下來分別有 5／3／7／9／3／1 種寫法，而 `spec_sweep.py` 用十來條規則
+當時 22 頁各自手寫，量下來分別有 5／3／7／9／3／1 種寫法，而 `spec_sweep.py` 用十來條規則
 在防它們漂移——檢查器在做模組該做的事。現在寫法只有一份，規則剩「掃載點在、手寫的不在」。
 
 兩條規則：
@@ -318,7 +318,7 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 地圖那份，同一個航點在地圖上是端點色、在圖表上卻是一般色。同日量測發現「三處共用」
 這句話當時只有海拔圖做到（18/18），地圖標記與時間軸各只有 6/18——`datunshan`、
 `qixingshan`、`shanying` 的最高點在海拔圖上是綠、在地圖與時間軸上是琥珀。
-**22 頁三個介面現已全部收斂，並由 `tools/spec_sweep.py` 逐區塊檢查**：`chart`、`marker`、
+**23 頁三個介面現已全部收斂，並由 `tools/spec_sweep.py` 逐區塊檢查**：`chart`、`marker`、
 `timeline` 三個區塊都必須真的引用 `palette`，光在頁首宣告 `PAL` 不算。
 
 **時間軸**：`timeline` 區塊產生 `#timeline-container` 與裡面的 `.timeline-line`，
@@ -329,7 +329,7 @@ PaPaDetail.init({ schedule, palette: PAL, map: {…}, chart: {…}, timeline: {�
 各頁不寫時間軸的 HTML 樣板，只說要顯示哪些欄位：
 
 ```javascript
-timeline: { emoji: true }                                                 // 行列式，16 頁
+timeline: { emoji: true }                                                 // 行列式，17 頁
 timeline: { layout: 'card', fields: ['dist', 'ele'] }                     // 卡片式，6 頁
 ```
 
@@ -378,7 +378,7 @@ const schedule = [
 
 **`xbaiyue`** 標記這個航點是台灣小百岳：`xbaiyue: 13` 顯示「⭐ 小百岳 #13」，
 查不到編號時寫 `xbaiyue: true` 顯示「⭐ 小百岳」——不要編一個號碼出來。
-它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站七座裡有五座就是），
+它**不能**寫進 `pos`：一座山可以同時是最高點與小百岳（全站八座裡有六座就是），
 `pos` 只能有一個值，塞進去就會逼出假的二選一（見 `CONTEXT.md`「小百岳」）。
 表現全部由 `detail.js` 負責，各頁只加這個欄位。`tools/spec_sweep.py` 會擋兩件事：
 `pos` 含「小百岳」、以及 `desc`／`advice` 宣稱是小百岳卻沒有這個欄位。
@@ -575,7 +575,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 
 ### 收斂狀態
 
-22 頁已全數符合本規格的結構部分（2026-08-02 起新增的 `hushan`、`nangangshan`、
+23 頁已全數符合本規格的結構部分（2026-08-02 起新增的 `hushan`、`nangangshan`、
 `datongshan`、`shanying`，以及 2026-08-03/04 補建的 `jiantanshan`、`jinmianshan`、
 `caolingguidao`、`henglingguidao`、`zhongzhengshan`、`daluntouweishan`、`daqitou`、`eweishan` 是照本規格從零建起、而非事後收斂的）。以瀏覽器
 實測逐項確認（2026-08-04 重跑）：
@@ -632,7 +632,7 @@ canvas 不解析 CSS 變數。必須先取出實際值再傳給 Leaflet / Chart.
 
 **內容缺口**（不是結構問題，需要實地資料才能補）
 
-目前**沒有內容缺口**。`advice` 全部 22 頁、每個航點都有（定義見下）。
+目前**沒有內容缺口**。`advice` 全部 23 頁、每個航點都有（定義見下）。
 
 **里程、時間、海拔不得編造。** 這三個是量測值，缺就留空，不要挑一個看起來合理的數字
 填進去；座標對不上時同樣如實留著疑點，等走過的人確認。`nanshijiao` 的國旗嶺就是這樣

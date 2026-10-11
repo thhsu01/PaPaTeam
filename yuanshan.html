@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="鳶山彩壁 O 型候選行程。自三峽國小公車站出發，經鳶峰路、光復紀念鐘、鳶山岩登小百岳鳶山，往返鳶山彩壁後經鳶山東峰、鳶尾山下到三峽老街，步行約 8.6 公里。">
+  <title>微笑山線 鳶山彩壁 O 型：三峽 → 鳶尾山 — 爬爬小隊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
+      --chart-max-w: 800px;
+      --chart-h: 320px;
+      --waypoint-transition: all 0.3s ease;
+      --map-h: 420px;
+      --map-radius: 12px;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #7e22ce, #d8b4fe);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f8f7f4。
+         紫色系全站還沒有頁面用過；每頁主色是刻意的辨識設計，撞色就失去作用。 */
+      --accent-fill:            #7e22ce;                    /* 實心底（白字 6.98:1） */
+      --accent-border-deep:     #e9d5ff;                    /* purple-200 */
+      --accent:                 #9333ea;                    /* 裝飾：圓點、軌跡、圖表線（5.02:1） */
+      --accent-deep:            #7e22ce;                    /* purple-700 */
+      --accent-soft:            #f3e8ff;                    /* purple-100 */
+      --accent-strong:          #7e22ce;                    /* 淺底上的文字（6.52:1） */
+      --accent-strong-deep:     #6b21a8;                    /* 淡底卡片上的內文（8.13:1） */
+      --accent-strong-deeper:   #581c87;                    /* 再深一階（10.14:1） */
+      --accent-tint:            #faf5ff;                    /* 淡底 */
+      --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線 */
+    }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css?v=478767d5">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
+</head>
+<body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav data-widget="nav"></nav>
+
+  <main id="main-content" class="pt-14">
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-amber-50">
+      <div class="max-w-4xl mx-auto w-full">
+        <div class="mb-4">
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 8.6 KM O 型 · 小百岳 #19</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          老街出發、老街解散<br>
+          <span class="accent-text">鳶山彩壁 O 型</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從三峽國小公車站出發，沿鳶峰路上到光復紀念鐘，經鳶山岩、長春嶺登上小百岳鳶山（福德坑山），往返鳶山彩壁後轉往鳶山東峰、鳶尾山，下山到三峽老街解散。只有長春嶺到彩壁這段要原路來回（單程約 1.4 km），其餘不走回頭路，頭尾都是三峽市區。</p>
+
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">🧤</span>
+          <div>
+            <div class="font-bold text-amber-800 text-base mb-1">鳶峰路很陡、鳶山岩前要拉繩</div>
+            <p class="text-sm text-amber-700 leading-relaxed">一篇公開評論提到：前段鳶峰路的柏油坡很耗體力，從市區到登山口約 40 分鐘到 1 小時；登鳶山岩前的路要拉繩，石頭又滑又陡，建議帶手套或登山杖；之後的環狀步道多是原始山徑，要注意樹根與土石。健行筆記 2026-07-17 有一則「倒木擋路」回報（未註明路段），之後 8/3、9/2 的回報為好走、良好，出發前請再查一次。</p>
+          </div>
+        </div>
+
+        <!-- 候選頁的數字都還是估計值，說清楚比含糊帶過好 -->
+        <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold accent-text-deeper text-base mb-1">里程與時刻都還是估計值</div>
+            <p class="text-sm accent-text-deep leading-relaxed">本隊尚未實走，地圖上的線是航點之間的直線。里程讀自同路線的公開 GPX #5780173，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起點</div>
+            <div class="font-bold text-stone-800">三峽國小公車站</div>
+            <div class="text-xs text-stone-600 mt-1">702、802、885、908、910、916 可到</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 解散<br>三峽老街南口</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
+            <div class="font-bold text-stone-800">日期未定</div>
+            <div class="text-xs text-stone-600 mt-1">時間軸以 08:00 出發試算</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:opacity-90 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至三峽國小公車站">
+              🗺️ 導航至三峽國小公車站
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">8.6</div>
+            <div class="text-xs text-stone-600">總里程 km（估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">5.7</div>
+            <div class="text-xs text-stone-600">目標耗時 hr（未含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">~480</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black accent-text">321</div>
+            <div class="text-xs text-stone-600">最高海拔 m（鳶山，小百岳）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">鳶山 321 m 為三等三角點 1103 號的公開標高（健行筆記）。總里程讀自健行筆記 GPX #5780173（2026/07/20，由三峽國小站繞一圈回到三峽國小站，健行筆記標示 9.15 km），本頁在三峽老街南口結束，取到該點的 8.56 km。爬升取健行筆記 #2075 底下 13 條同樣「鳶峰路上、鳶尾山下」的 O 型 GPX 的中位數（482 m）。其餘各點海拔為 GPS 推估，誤差約 ±25 m。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          互動路線圖與航點切換
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接。航點座標取自公開 GPX 的路點標記，都在 GPX #5780173 軌跡 9 m 內。長春嶺到彩壁是去回同一條路；回程實際經鳶山、長春嶺再到東峰，地圖上的直線則直接連起彩壁與東峰。</p>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+        <div data-widget="wp-card"></div>
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=2075" target="_blank" class="text-sm accent-text hover:underline">🔗 微笑山線：【鳶山山系】鳶山彩壁段（健行筆記官方路線，單程 4.47 km、原路折返）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=118" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 鳶山（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=famous-list&id=2&page=2" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 台灣小百岳一覽第 2 頁（健行筆記，鳶山列第 19）</a>
+          </div>
+          <div class="text-xs font-medium text-stone-600 mt-4 mb-3">路線軌跡來源（健行筆記公開 GPX）</div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5780173" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 微笑山線【鳶山山系】鳶山彩壁段</a>
+              <span class="block text-xs text-stone-600">#5780173・記錄 2026/07/20・9.15 km・本頁里程的依據</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=4768162" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 微笑山線鳶山山系鳶山彩壁段</a>
+              <span class="block text-xs text-stone-600">#4768162・記錄 2025/07/20・9.71 km・同樣的 O 型，用來對照分段里程</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          海拔高度剖面圖
+        </h2>
+        <div data-widget="chart"></div>
+        <p class="text-xs text-stone-600 mt-3 text-center">從三峽市區沿鳶峰路一路爬到光復紀念鐘，上稜後在鳶山達全程最高，往返彩壁後經東峰、鳶尾山一路下降回市區。鳶山為公開標高，其餘各點為 GPX #5780173 的 GPS 讀數。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          鳶山山列亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列，內容整理自健行筆記 #2075 與鳶山山岳頁。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>光復紀念鐘</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">民國 74 年為紀念台灣光復四十週年而建，重達 6 噸以上，號稱全台最大的銅鐘，但年久失修已無法敲響。平台有三面展望。開車可直接到這裡的停車場，但假日難會車、難停車。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>鳶山岩與鳶山勝蹟碑</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">山頂遍布沉積裸岩，可遙望七星山系、觀音山，俯瞰大漢溪沖積平原，也是看落日與夜景的熱門地點。途中的鳶山勝蹟碑是三峽詩社民國 65 年所立，記載鳶山地名由來，以及鄭成功砲擊鳶精、鶯歌精的傳說。</p>
+          </div>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 accent-mark rounded-full"></span>鳶山（福德坑山）321m ⭐ 小百岳</h3>
+            <p class="text-sm accent-text-deep leading-relaxed">台灣小百岳 #19，三等三角點 1103 號，別名福德坑山。三峽鳶山依傍大漢溪，因山形酷似展翅飛翔的鳶而得名，海拔雖只有三百多公尺，卻名列三峽五景之一。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>鳶山彩壁</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">大片裸露的彩色岩壁，條紋絢麗，健行筆記形容堪與屏東哈尤溪彩壁媲美，是攝影師常來的地點。這是本行程最遠的一點，從鳶山來回約 1.3 km。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>鳶尾山步道</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">春夏之交是螢火蟲繁殖高峰，步道上可觀察到黃緣螢、雲南扁螢、台灣窗螢等多種螢火蟲。整條鳶山步道沿途有將近七十種植物，近年也是 5 月賞油桐花的熱門景點。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-500 rounded-full"></span>三峽老街（解散點）</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">從鳶尾山登山口走市區道路約 0.9 km 到老街南口解散，可順逛老街用餐。回三峽國小站搭公車約再走 0.6 km（同一條軌跡量測）。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">為什麼選這條</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">O 型取代原路折返：<span class="font-normal accent-text">多兩座小山頭，回頭路只剩長春嶺到彩壁</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【跟官方路線的差別】</strong><br>健行筆記的官方路線是三峽國小→彩壁後原路折返。本頁改成從彩壁回到長春嶺後轉往鳶山東峰、鳶尾山下山，終點移到三峽老街，省掉鳶峰路的回程柏油坡。健行筆記 #2075 底下 86 條公開 GPX 裡，有 13 條是這種走法，標示里程 8.50–10.91 km（中位數 9.56，含走回三峽國小站）。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【其他走法】</strong><br>同一批 GPX 裡，原路折返的中位數 8.41 km；從光復紀念鐘停車場出發繞東峰、鳶尾山的 O 型中位數 6.14 km（省掉鳶峰路的柏油坡，但要開車或叫車上山）；只走大鐘到彩壁來回的中位數 4.32 km。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text-deep space-y-1">
+            <li>• 台灣小百岳 #19 鳶山（福德坑山），三等三角點</li>
+            <li>• 鳶山彩壁的彩色岩壁，與鳶山岩的展望</li>
+            <li>• 頭尾都在三峽市區，搭公車即可，解散後可逛老街</li>
+            <li>• 春夏可在鳶尾山步道賞螢，5 月鳶山步道賞油桐花</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          預計行程進度（約 5H40M）
+        </h2>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。以 08:00 自三峽國小公車站出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 13:40 抵達三峽老街南口。</p>
+        <div data-widget="timeline"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 鳶山彩壁 O 型 約 8.6 KM ｜ 日期未定</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 候選行程，日期未定。2026-10-11 依使用者選定的方案 C 建立：三峽國小站→鳶峰路→
+    // 鳶山→彩壁→（回到長春嶺）→鳶山東峰→鳶尾山→三峽老街。
+    //
+    // 路線選擇：健行筆記 #2075 底下 86 條公開 GPX 依起終點與經過的山頭分群，這種
+    // 「鳶峰路上、鳶尾山下」的 O 型有 13 條。採其中起訖都在三峽國小站的 #5780173
+    // （2026-07-20，健行筆記標示 9.15 km），12 個航點都在軌跡 9 m 內；另一條同型的
+    // #4768162（2025-07-20，9.71 km）用來對照，兩條在鳶尾山登山口之前的分段相差
+    // 最多 0.07 km，之後走的市區街道不同。
+    //
+    // 座標：各點取公開 GPX 的路點標記（同一地名有多筆時取中位數），三峽國小公車站、
+    // 鳶峰路口、三峽老街南口取 #5780173 自己的路點。
+    //
+    // dist：#5780173 軌跡累計距離 × 9.15 ÷ 9.43（健行筆記標示值 ÷ 原始點加總），
+    // 本頁在三峽老街南口結束（8.56 km），不走回三峽國小站。每段都長於兩點直線距離。
+    // time：08:00 出發（試算用，集合時間未定），以每小時 1.5 公里推算：
+    // 08:00 ＋ dist ÷ 1.5 小時，取整到 5 分鐘，未另計休息；是規劃值，不是實測。
+    //
+    // ele：
+    //   鳶山 321 —— 三等三角點 1103 號的公開標高（健行筆記鳶山山岳頁與 #2075）。
+    //     小百岳編號 #19 取自健行筆記「台灣小百岳一覽」第 2 頁（南勢角山 16、
+    //     二格山 17、天上山 18、鳶山 19），與公開 GPX 路點「鳶山，NO,19」一致。
+    //   其他各點 —— #5780173 前後 60 m 內的 GPS 高程中位數，取整到 5 m，±25 m 的
+    //     估計，所以 loc 不加 (H___m)。鳶山岩、鳶山東峰、鳶尾山查無公開標高。
+    //
+    // 各點的 desc／advice 取自 #2075 官方說明、鳶山山岳頁、公開 GPX 的路點名稱，
+    // 以及 #2075 頁面上的一篇評論（鳶峰路陡、鳶山岩前拉繩）；查不到的就只寫位置。
+    const schedule = [
+      { lat: 24.93608, lng: 121.36915, time: "08:00", loc: "三峽國小公車站", dist: 0.00, ele: 40, pos: "集合起點",
+        desc: "微笑山線鳶山彩壁段的官方出發點。依健行筆記，可搭 702（板橋公車站）、802／885（捷運新埔站）、910（府中站）、916（永寧站）、908（景安站）到「三峽國小」站。",
+        advice: "公車路線行前再確認。開車的話，健行筆記建議停在山下路邊停車格或三峽老街周邊停車場再步行上山。" },
+
+      { lat: 24.93321, lng: 121.36758, time: "08:30", loc: "鳶峰路口", dist: 0.74, ele: 70, pos: "入山口",
+        desc: "公開 GPX #5780173 標為「鳶峰路」的位置，由此沿鳶峰路上山。健行筆記說明循仁愛街（31 號附近）可抵鳶峰路登山口。累計 0.74 km。",
+        advice: "接下來到光復紀念鐘約 1.65 km 都是柏油上坡，一篇評論說這段很陡很耗體力，放慢步調。" },
+
+      { lat: 24.93248, lng: 121.35854, time: "09:20", loc: "鳶峰亭", dist: 1.99, ele: 195, pos: "涼亭",
+        desc: "鳶峰路上山途中的亭子，健行筆記官方路線經過的點。累計 1.99 km。",
+        advice: "再約 0.4 km 到光復紀念鐘，柏油坡快結束了。" },
+
+      { lat: 24.93130, lng: 121.35537, time: "09:35", loc: "光復紀念鐘", dist: 2.39, ele: 240, pos: "地標",
+        desc: "民國 74 年為紀念台灣光復四十週年而建，重 6 噸以上，號稱全台最大銅鐘，已無法敲響；平台三面展望，旁有停車場。累計 2.39 km。",
+        advice: "從這裡進步道，到鳶山岩約 5 分鐘。登鳶山岩前要拉繩，石頭又滑又陡，手套先戴好。" },
+
+      { lat: 24.93120, lng: 121.35368, time: "09:45", loc: "鳶山岩", dist: 2.58, ele: 265, pos: "展望岩",
+        desc: "沉積裸岩的展望點，可遙望七星山系、觀音山，俯瞰大漢溪；途中經過民國 65 年三峽詩社所立的鳶山勝蹟碑。累計 2.58 km。",
+        advice: "之後的稜線步道多是原始山徑，注意樹根與土石。" },
+
+      { lat: 24.92800, lng: 121.35050, time: "10:05", loc: "長春嶺", dist: 3.14, ele: 290, pos: "休憩點",
+        desc: "稜線上的休息區與岔路口，公開 GPX 路點標為「長春嶺休息區叉路口」。累計 3.14 km。",
+        advice: "記住這個岔路：從彩壁回來時要在這裡轉往鳶山東峰。" },
+
+      { lat: 24.92663, lng: 121.34509, time: "10:35", loc: "鳶山（福德坑山）(H321m)", dist: 3.86, ele: 321, pos: "最高點", xbaiyue: 19,
+        desc: "台灣小百岳 #19，全程最高點，三等三角點 1103 號，別名福德坑山。因山形酷似展翅飛翔的鳶而得名，名列三峽五景之一。累計 3.86 km。",
+        advice: "往彩壁約 0.7 km 是去回同一條路，回程會再經過這裡。" },
+
+      { lat: 24.92317, lng: 121.34087, time: "11:00", loc: "鳶山彩壁", dist: 4.52, ele: 265, pos: "地質奇觀",
+        desc: "大片裸露的彩色岩壁，健行筆記形容堪與屏東哈尤溪彩壁媲美，是本行程最遠的一點。累計 4.52 km。",
+        advice: "拍照後原路回到鳶山、長春嶺，再轉往鳶山東峰。" },
+
+      { lat: 24.92618, lng: 121.35262, time: "12:10", loc: "鳶山東峰", dist: 6.31, ele: 215, pos: "副峰",
+        desc: "從彩壁原路回到鳶山、長春嶺後轉往東峰（彩壁到這裡約 1.8 km）。公開 GPX 路點記為「鳶山東峰，美滿亭」。累計 6.31 km。",
+        advice: "從這裡往鳶尾山一路下降，約 0.9 km。" },
+
+      { lat: 24.92757, lng: 121.36015, time: "12:45", loc: "鳶尾山", dist: 7.18, ele: 150, pos: "副峰",
+        desc: "鳶尾山步道春夏之交是螢火蟲繁殖高峰，可見黃緣螢、台灣窗螢等。累計 7.18 km。",
+        advice: "從這裡下到鳶尾山登山口約 0.5 km，下坡注意腳步。" },
+
+      { lat: 24.92600, lng: 121.36300, time: "13:05", loc: "鳶尾山登山口", dist: 7.65, ele: 50, pos: "出山口",
+        desc: "公開 GPX 路點標為「鳶尾山登山步道口」。健行筆記註明鳶尾山登山口至三峽國小站 1.8 km。累計 7.65 km。",
+        advice: "出山後走市區道路往三峽老街，約 0.9 km。" },
+
+      { lat: 24.93188, lng: 121.36873, time: "13:40", loc: "三峽老街南口", dist: 8.56, ele: 40, pos: "終點解散",
+        desc: "行程終點，可順逛三峽老街用餐。回三峽國小站約再走 0.6 km（同一條軌跡量測）。累計 8.56 km。",
+        advice: "回程從三峽國小站搭公車，路線同去程。" }
+    ];
+
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const ACCENT = PaPaDetail.cssVar('--accent-deep');
+
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    PaPaDetail.init({
+      schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
+      nav: [24.93608, 121.36915],
+      weather: { lat: 24.92663, lng: 121.34509,
+                 subText: '鳶山山頂今日參考' },
+
+      map: {
+        setView: [[24.9295, 121.3555], 14],
+        track: { weight: 4, opacity: 0.85 },
+        popup: true
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationMax: 360, lineColor: '--accent-deep' },
+
+      timeline: { emoji: { '集合起點': '🚌', '終點解散': '🏮' }, hover: 'darken' }
+    });
+  </script>
+</body>
+</html>

@@ -90,8 +90,8 @@ CASES = [
      'spec_sweep', 'README.md 的檔案樹跟 manifest.json 不一致'),
     ('文件數量',   'ARCHITECTURE.md', '// 卡片式，6 頁', '// 卡片式，7 頁',
      'spec_sweep', '卡片式的頁數'),
-    ('ADR 數量',   'docs/adr/0001-chartjs-behind-the-seam.md', '目前 22 頁都沒用到它',
-     '目前 21 頁都沒用到它', 'spec_sweep', 'advanced 未使用的頁數'),
+    ('ADR 數量',   'docs/adr/0001-chartjs-behind-the-seam.md', '目前 23 頁都沒用到它',
+     '目前 22 頁都沒用到它', 'spec_sweep', 'advanced 未使用的頁數'),
     ('山頂綠',     'assets/detail.js', "PEAK = '#7c9e52'", "PEAK = '#000000'",
      'spec_sweep', '山頂綠'),
     # ── fact_check ──────────────────────────────────────────
