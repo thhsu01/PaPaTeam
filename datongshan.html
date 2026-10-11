@@ -79,7 +79,7 @@
           <span class="text-2xl mt-0.5">🛰️</span>
           <div>
             <div class="font-bold accent-text-deeper text-base mb-1">時刻與里程取自當天的 GPS 軌跡</div>
-            <p class="text-sm accent-text-deep leading-relaxed">從樹林站後站出口步行出發，但一開始忘了開 GPS，08:03 才在西方約 0.46 km 處起錄。這段 0.48 km 依行前頁的同路線公開 GPX #4688462 補估，其餘里程以簡化到 5 m 的當天軌跡計算，算到 11:37 抵達大棟山三角點；耗時從 08:00 算到 12:47 離開山頂。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。</p>
+            <p class="text-sm accent-text-deep leading-relaxed">從樹林站後站出口步行出發，但一開始忘了開 GPS，08:03 才在西方約 0.46 km 處起錄。這段 0.48 km 依行前頁的同路線公開 GPX #4688462 補估，其餘里程以簡化到 5 m 的當天軌跡計算，算到 11:37 抵達大棟山三角點；耗時從約 07:57 出發算到 12:47 離開山頂。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。</p>
           </div>
         </div>
 
@@ -87,13 +87,13 @@
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">集合地點</div>
             <div class="font-bold text-stone-800">台鐵樹林站（後站出口）</div>
-            <div class="text-xs text-stone-600 mt-1">08:00 集合，步行至大同山登山步道口</div>
+            <div class="text-xs text-stone-600 mt-1">預定 08:00 集合，約 07:57 出發步行至登山口</div>
             <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 結束<br>大棟山 405 三角點，搭車下山</div>
           </div>
           <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
             <div class="text-xs text-stone-600 mb-1">實際時間</div>
-            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 08:00–12:47</div>
-            <div class="text-xs text-stone-600 mt-1">08:00 樹林站集合出發（GPS 08:03 起錄）至離開大棟山</div>
+            <div class="font-bold text-stone-800"><span data-trip="date:md"></span> 07:57–12:47</div>
+            <div class="text-xs text-stone-600 mt-1">約 07:57 樹林站出發（GPS 08:03 起錄）至離開大棟山</div>
             <!-- 台鐵開放資料 2026-10-11 時刻表（2026-10-04 發布），08:00 前到樹林站的末三班；
                  南下 4107 次以樹林為終點、07:36 到，是倒數第四班。 -->
             <div class="text-xs text-stone-600 mt-2 pt-2 border-t border-stone-100 leading-relaxed">
@@ -235,7 +235,7 @@
           <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
           實走時間軸
         </h2>
-        <p class="text-sm text-stone-600 mb-2">08:00 樹林站出發 · 11:37 抵達大棟山 · 12:47 離開山頂 · 全程 <span data-trip="duration:zh"></span></p>
+        <p class="text-sm text-stone-600 mb-2">07:57 樹林站出發 · 11:37 抵達大棟山 · 12:47 離開山頂 · 全程 <span data-trip="duration:zh"></span></p>
         <p class="text-xs text-stone-600 mb-8">時刻、座標與里程取自 GPS 軌跡（樹林站到起錄點的 0.48 km 為補估）；「原估」是行前規劃的時刻。三個休息點沒有地名，以停留順序命名。標「未走」的五點是行前規劃的下山段，這次沒有走，只留原估時刻。</p>
         <div data-widget="timeline"></div>
       </div>
@@ -243,12 +243,12 @@
   </main>
 
   <footer class="text-center py-12 border-t border-stone-200">
-    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 ｜ 樹林大棟山縱走 ｜ <span data-trip="date:zh"></span> · 08:00–12:47 · <span data-trip="km"></span> km</p>
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊實走紀錄 ｜ 樹林大棟山縱走 ｜ <span data-trip="date:zh"></span> · 07:57–12:47 · <span data-trip="km"></span> km</p>
   </footer>
 
   <script>
     // ── 行程數據 ──────────────────────────────────────────────
-    // 2026-10-11 實走紀錄。08:00 樹林站後站出口集合，11:37 抵達大棟山 405 三角點，
+    // 2026-10-11 實走紀錄。樹林站後站出口集合，約 07:57 出發，11:37 抵達大棟山 405 三角點，
     // 在山頂停留到 12:47 後搭車下山（依使用者說明：行程在大棟山結束）。
     //
     // 軌跡：Geo Tracker（Android）匯出的 GPX（669 點，約 21 秒一點），簡化後放在
@@ -266,9 +266,8 @@
     // plan 是行前頁排的時刻（08:00 起以每小時 1.5 公里推算）。
     // 座標：走過的航點取軌跡在抵達時刻的位置（隊上行前標記的點都在 17 m 內）；
     // 樹林站後站出口不在軌跡上，沿用行前座標。
-    // 耗時 4:45：08:00 樹林站出發到 12:47 離開山頂（4:47，依使用者裁定含山頂停留），取整到
-    // 5 分鐘。實際離站時刻沒有紀錄，以集合時間 08:00 計；08:03 起錄時已走了約 0.48 km，可見
-    // 離站可能早於 08:00，這裡不推測。
+    // 耗時 4:50：約 07:57 樹林站出發（使用者提供；GPS 沒有這段）到 12:47 離開山頂（依使用者
+    // 裁定含山頂停留）。07:57 → 08:03 走 0.48 km，約每小時 4.8 公里的市區步行速度。
     //
     // 停留 5 分鐘以上（30 m 內）共 9 處：大同山福德宮、青龍嶺、青龍亭（兩段）、迴音亭、
     // 大棟山各有地名；其餘 3 處收為第一～第三休息點（conventions.unnamed_stops）。
@@ -286,8 +285,8 @@
     //     461／438／407 m。本檔約 21 秒一點，取 15 點（約 5 分鐘，與 shanying 的 31 點
     //     × 12 秒相當）。航點高程相加的下限約 424 m，31 點的 407 m 已低於下限。應視為推估。
     const schedule = [
-      { lat: 24.991196, lng: 121.423730, time: "08:00", loc: "台鐵樹林站後站出口", dist: 0.00, ele: 15, pos: "集合起點",
-        desc: "08:00 在樹林站後站出口集合，由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。",
+      { lat: 24.991196, lng: 121.423730, time: "07:57", plan: "08:00", loc: "台鐵樹林站後站出口", dist: 0.00, ele: 15, pos: "集合起點",
+        desc: "預定 08:00 在樹林站後站出口集合，實際約 07:57 由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。",
         advice: "確認悠遊卡與登山裝備；到登山口是市區路段。" },
 
       { lat: 24.992658, lng: 121.419457, time: "08:03", loc: "GPS 起錄點", dist: 0.48, ele: 30, pos: "起點",
@@ -389,7 +388,7 @@
       const PAL = PaPaDetail.palette({ accent: ACCENT, extra: { "展望台": "#f59e0b" } });
 
     PaPaDetail.init({
-      trip: { date: "2026-10-11", km: 6.77, duration: "4:45", gain: 461, summit: 405 },
+      trip: { date: "2026-10-11", km: 6.77, duration: "4:50", gain: 461, summit: 405 },
       schedule,
       palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
       nav: [24.991196, 121.423730],
