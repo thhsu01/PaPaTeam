@@ -3529,13 +3529,13 @@
   ],
   "widgets": {
    "nav": "<nav data-widget=\"nav\" class=\"fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50\" aria-label=\"頁面導覽\"><div class=\"max-w-7xl mx-auto px-6 h-14 flex items-center justify-between\"><a class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\" aria-label=\"爬爬小隊首頁\"><span class=\"w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0\"></span><span class=\"font-bold text-stone-800 tracking-tight text-lg\"></span><span class=\"text-stone-600 text-xs hidden sm:inline font-medium\"><span></span></span></a><div class=\"flex gap-1 overflow-x-auto\"><button onclick=\"document.getElementById('overview').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到行程總覽\"></button><button onclick=\"document.getElementById('map-section').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到路線圖\"></button><button onclick=\"document.getElementById('elevation').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到海拔剖面\"></button><button onclick=\"document.getElementById('spots').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到景點介紹\"></button><button onclick=\"document.getElementById('timeline').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到實走紀錄\"></button></div></div></nav>",
-   "notice": "<div data-widget=\"notice\" class=\"hidden mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3\" id=\"trip-past-notice\"><span class=\"text-2xl mt-0.5\"></span><div><div class=\"font-bold text-stone-800 text-base mb-1\"></div><p class=\"text-sm text-stone-700 leading-relaxed\"><span></span></p></div></div>",
+   "notice": "<div data-widget=\"notice\" class=\"mb-6 max-w-2xl bg-stone-100 border-l-4 border-stone-400 rounded-xl px-5 py-4 flex items-start gap-3\" id=\"trip-past-notice\"><span class=\"text-2xl mt-0.5\"></span><div><div class=\"font-bold text-stone-800 text-base mb-1\"></div><p class=\"text-sm text-stone-700 leading-relaxed\"><span></span></p></div></div>",
    "weather": "<div class=\"bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm\" data-widget=\"weather\"><div class=\"text-xs text-stone-600 mb-1\" id=\"weather-label\"></div><div class=\"font-bold text-stone-800\" id=\"weather-main\"></div><div class=\"text-xs text-stone-600 mt-1\" id=\"weather-sub\"></div></div>",
    "wp-card": "<div data-widget=\"wp-card\" class=\"bg-stone-50 rounded-2xl p-6 border border-stone-100\" id=\"wp-card\"><div class=\"text-xs text-stone-600 uppercase tracking-widest mb-3\" id=\"wp-pos-label\"></div><div class=\"flex items-center gap-3 mb-3\"><button onclick=\"prevWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"上一個航點\"></button><h3 class=\"text-lg font-bold text-stone-900 flex-1\" id=\"wp-title\"></h3><button onclick=\"nextWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"下一個航點\"></button></div><div class=\"flex gap-4 mb-3 text-sm text-stone-600\"><span><strong class=\"text-stone-800\" id=\"wp-time\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-dist\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-ele\"></strong></span></div><p class=\"text-base text-stone-700 mb-3\" id=\"wp-desc\"></p><div class=\"rounded-xl p-3 accent-box\"><div class=\"text-xs font-medium mb-1 accent-text\"></div><p class=\"text-xs accent-text\" id=\"wp-advice\"></p></div></div>",
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊2026/10/11 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 10月11日 實走紀錄 · 6.77 KM · 4 小時 50 分 · 小百岳 #15 🗂️此行程已完成時刻與里程來自 2026/10/11 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 沿稜線一路往上 樹林 → 大棟山 從台鐵樹林站後站出口集合，由大同山登山步道口起登，沿稜線依序走過大同山、青龍嶺兩處展望點，經青龍亭、迴音亭、鎮遠山、秋壇山，登上林口台地稜脈最高峰、台灣小百岳大棟山（405m）。在山頂停留約 70 分鐘後搭車下山，原規劃下到台鐵山佳站的路段這次沒有走。 🥾 大棟山往山佳的下山段這次未走 本次在大棟山 405 三角點結束、搭車下山。時間軸末端標「未走」的五點是行前規劃的下山路線，只保留原估時刻供下次參考；那一段依公開資料多為水泥／柏油產業道路，路程較長，建議備好登山杖分攤膝蓋負擔。 🛰️ 時刻與里程取自當天的 GPS 軌跡 從樹林站後站出口步行出發，但一開始忘了開 GPS，08:03 才在西方約 0.46 km 處起錄。這段 0.48 km 依行前頁的同路線公開 GPX #4688462 補估，其餘里程以簡化到 5 m 的當天軌跡計算，算到 11:37 抵達大棟山三角點；耗時從約 07:57 出發算到 12:47 離開山頂。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。 集合地點 台鐵樹林站（後站出口） 預定 08:00 集合，約 07:57 出發步行至登山口 🏁 結束大棟山 405 三角點，搭車下山 實際時間 10月11日 07:57–12:47 約 07:57 樹林站出發（GPS 08:03 起錄）至離開大棟山 🚆 當天 08:00 前到樹林站末三班 樹林站 08:00 前到站列車 南下07:3907:4507:51 2007快11271129 北上07:2807:3807:52 415211324154 上列到站時刻、下列車次；「快」為區間快，其餘為區間車。依台鐵 10/4 發布時刻表（行前整理） 天氣預報天氣資料暫無法取得請稍後再試 🗺️ 導航至樹林站後站出口 6.77 實走里程 km 4:50 實走耗時（含休息） 461 累計上升 m（GPS 推估） 405 最高海拔 m（大棟山，小百岳） 山頭海拔：大同山 237、青龍嶺 256、大棟山 405 m 為基點公開標高；秋壇山 359、鎮遠山 325 m 依隊上提供（無基石可對）。其餘地點由當天軌跡推估，誤差約 ±25 m；當天 GPS 在三座有基點的山頭讀數比公開標高高 10–24 m。 互動路線圖與航點切換 地圖上的線是 10/11 當天的 GPS 軌跡（08:03 起錄、到大棟山為止），不是航點之間的直線；樹林站到起錄點那 0.48 km 忘了記錄，地圖上這段是依同路線公開 GPX #4688462 模擬補畫的。點擊標記可切換各航點細節，走過的航點座標取自軌跡在抵達時刻的位置；標「未走」的五點是行前規劃的下山路線，沒有軌跡。 集合起點<台鐵樹林站後站出口>實際時間 07:57累計里程 0.00 km海拔 15 m預定 08:00 在樹林站後站出口集合，實際約 07:57 由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。隊友建議確認悠遊卡與登山裝備；到登山口是市區路段。 參考資源 🔗 樹林大棟山、青龍嶺、大同山步道（健行筆記） 🔗 微笑山線：【大棟山系】405高地段（健行筆記官方路線，9.6 km） 🔗 大同山（健行筆記） 🔗 青龍嶺（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務-Ep.01【大棟山系】405高地（YouTube・踏青生活選） 海拔高度剖面圖 自樹林緩升上稜，經大同山、青龍嶺，再沿鎮遠山、秋壇山的稜線登上大棟山達全程最高。圖中大棟山之後的下坡是行前規劃、這次未走的下山段。山頭海拔出處見總覽，其餘各點由當天軌跡推估；未走的各點沿用行前頁的 GPX #4688462 讀數。 山系亮點導覽 依 10/11 的抵達順序排列。 大同山登山步道口（大安路側） 當天 08:07 經過，是大同山三條登山口之一。沿途會經過海拔僅 75 公尺的樹林山（設台北縣政府三角點，行進中順走通過），是全程最平易近人的起登段。 大同山 (H237m) 又名九茶山、狗蹄山，山上曾發現新石器時代陶器與石器遺址，基點為台灣省地政處精密導線點。山頂設有觀景平台與涼亭，天氣晴朗時可眺望雙北天際線與高鐵列車穿梭市區的畫面，是樹林區居民口中的「後花園」。 青龍嶺 (H256m) 位在大同山西北稜上，是樹林區公認展望最遼闊的稜線高點，可俯瞰樹林、新莊市區與蜿蜒的大漢溪，晴天還能看見高鐵列車如長龍般劃過谷地。也是熱門的夜景地點，山頂設有台北縣政府三角點。 青德宮（途中補給點） 青龍嶺南側約 100 m 的宮廟，多份公開 GPX 的路點標為補給站，附近有飲水機與公廁，是全程最確定能補水、上廁所的據點。往大棟山還有約 2.9 km 稜線路，水在這裡裝滿。 大棟山 405m ⭐ 小百岳 又名龜崙山、橫坑仔山，位於新北樹林與桃園龜山交界，是林口台地稜脈最高峰，設有一等三角點及土地調查局圖根點，名列台灣小百岳。山頂視野極佳，可環視林口台地、觀音山、大屯山系與雙北天際線。本次 11:37 抵達，在山頂停留到 12:47 後搭車下山。 台鐵山佳站（原規劃終點，未走） 行前規劃由大棟山循產業道路下山的終點站，這次在大棟山結束、沒有走到。穿過站內地下道即達月台。山佳一帶舊稱「山仔腳」，昔日為煤礦聚落，站後方仍留有蓋淡坑遺址等礦業歷史痕跡可順遊。 本次行程亮點 從車站走上小百岳：樹林站出站就能起登 【一次收集一座小百岳】大棟山是林口台地稜脈最高峰，擁有一等三角點，名列台灣小百岳。全程另可順走大同山、青龍嶺兩座知名展望點，三段風景層次分明——大同山林蔭茂密、青龍嶺視野開闊、大棟山制高遠眺，一趟走完新北樹林郊山的精華。 【交通省心的郊山路線】起點台鐵樹林站，出站步行就能到登山口，不需開車或轉乘公車。原規劃從大棟山循產業道路下到同屬縱貫線的山佳站，這次在大棟山結束、搭車下山，下山段留待下次。每年 5 月油桐花沿途散落，秋季則可賞芒，四季皆宜造訪。 行程四大特色 • 台灣小百岳大棟山（405m），林口台地稜脈最高峰 • 三段展望層次分明：大同山、青龍嶺、大棟山一次走完 • 起點為台鐵樹林站，步行即可起登 • 沿途廟宇補給點多，適合新手與親子入門郊山 實走時間軸 07:57 樹林站出發 · 11:37 抵達大棟山 · 12:47 離開山頂 · 全程 4 小時 50 分 時刻、座標與里程取自 GPS 軌跡（樹林站到起錄點的 0.48 km 為補估）；「原估」是行前規劃的時刻。三個休息點沒有地名，以停留順序命名。標「未走」的五點是行前規劃的下山段，這次沒有走，只留原估時刻。 07:57(原估 08:00)🚉 集合起點台鐵樹林站後站出口預定 08:00 在樹林站後站出口集合，實際約 07:57 由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。08:03🛰️ 起點GPS 起錄點GPS 於 08:03 在此開始記錄，位於後站出口西方約 0.46 km（直線）、大同山登山步道口前約 0.25 km，這個點沒有地名。之前的 0.48 km 為補估，之後的里程取自軌跡。累計 0.48 km。08:07(原估 08:30)🥾 入山口大同山登山步道口大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計 0.73 km。08:31(原估 09:10)🙏 信仰地標南寮福德宮大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計 1.78 km。08:43🌳 休息點第一休息點南寮福德宮往大同山的上坡途中，08:43–08:48 停留約 5 分鐘。這個點沒有地名，以停留順序命名。累計 2.03 km。09:02(原估 09:35)🙏 信仰地標大同山福德宮大同山頂旁的土地公廟，與大同山基點相距不到 30 m；08:59–09:06 在這一帶停留約 7 分鐘。累計 2.38 km。09:07(原估 09:35)🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計 2.40 km。09:14(原估 09:45)⛱️ 涼亭泗水亭大同山往青龍嶺途中的一座亭子。累計 2.74 km。09:17🌳 休息點第二休息點泗水亭往青龍嶺的路上，09:17–09:24 停留約 7 分鐘。這個點沒有地名，以停留順序命名。累計 2.82 km。09:32🌳 休息點第三休息點青龍嶺山頂前約 0.1 km，09:32–09:41 停留約 9 分鐘。這個點沒有地名，以停留順序命名。累計 3.26 km。09:42(原估 10:05)🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪；09:42–09:48 停留約 6 分鐘。累計 3.36 km。09:49(原估 10:10)🏪 補給點青德宮青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計 3.47 km。09:58(原估 10:20)🚪 步道口大棟山登山步道由青德宮一帶轉入往大棟山的步道入口。累計 3.88 km。10:04(原估 10:30)⛱️ 涼亭青龍亭往大棟山稜線上的涼亭；10:03–10:08、10:17–10:29 兩度在這一帶停留，共約 18 分鐘。累計 4.12 km。10:50(原估 11:10)⛱️ 涼亭迴音亭稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石；10:50–11:04 停留約 14 分鐘。累計 5.37 km。11:07(原估 11:15)🌿 山頭鎮遠山 (H325m)無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計 5.59 km。11:26(原估 11:45)🌿 山頭秋壇山 (H359m)山頭有石碑標示。累計 6.22 km。11:37(原估 12:05)🏔️ 最高點⭐ 小百岳 #15大棟山405三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。11:37 抵達，在山頂停留到 12:47，之後搭車下山，本次行程在此結束。累計 6.77 km。—(原估 12:10)🙏 信仰地標普世禪寺（未走）行前規劃的下山路線，這次未走（在大棟山結束、搭車下山）。大棟山山頂南側約 100 m 的寺院，原規劃由此開始下山。—(原估 12:30)🙏 信仰地標福山五路財神廟（未走）行前規劃的下山路線，這次未走。大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。—(原估 13:20)🔀 岔路口山佳岔（未走）行前規劃的下山路線，這次未走。往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。—(原估 14:00)↔️ 轉換路段正安宮（未走）行前規劃的下山路線，這次未走。德和街旁的宮廟，距山佳站約 1 km。—(原估 14:40)🚉 終點台鐵山佳站（未走）行前規劃的終點，這次未走。原規劃沿德和街下山抵達山佳站，穿過站旁地下道即達月台。 © 爬爬小隊實走紀錄 ｜ 樹林大棟山縱走 ｜ 2026 年 10 月 11 日 · 07:57–12:47 · 6.77 km",
+  "text": "跳至主要內容 爬爬爬小隊2026/10/11 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 10月11日 實走紀錄 · 6.77 KM · 4 小時 50 分 · 小百岳 #15 🗂️此行程已完成時刻與里程來自 2026/10/11 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 沿稜線一路往上 樹林 → 大棟山 從台鐵樹林站後站出口集合，由大同山登山步道口起登，沿稜線依序走過大同山、青龍嶺兩處展望點，經青龍亭、迴音亭、鎮遠山、秋壇山，登上林口台地稜脈最高峰、台灣小百岳大棟山（405m）。在山頂停留約 70 分鐘後搭車下山，原規劃下到台鐵山佳站的路段這次沒有走。 🥾 大棟山往山佳的下山段這次未走 本次在大棟山 405 三角點結束、搭車下山。時間軸末端標「未走」的五點是行前規劃的下山路線，只保留原估時刻供下次參考；那一段依公開資料多為水泥／柏油產業道路，路程較長，建議備好登山杖分攤膝蓋負擔。 🛰️ 時刻與里程取自當天的 GPS 軌跡 從樹林站後站出口步行出發，但一開始忘了開 GPS，08:03 才在西方約 0.46 km 處起錄。這段 0.48 km 依行前頁的同路線公開 GPX #4688462 補估，其餘里程以簡化到 5 m 的當天軌跡計算，算到 11:37 抵達大棟山三角點；耗時從約 07:57 出發算到 12:47 離開山頂。時間軸上的「休息點」是停留 5 分鐘以上、沒有地名的地方。 集合地點 台鐵樹林站（後站出口） 預定 08:00 集合，約 07:57 出發步行至登山口 🏁 結束大棟山 405 三角點，搭車下山 實際時間 10月11日 07:57–12:47 約 07:57 樹林站出發（GPS 08:03 起錄）至離開大棟山 🚆 當天 08:00 前到樹林站末三班 樹林站 08:00 前到站列車 南下07:3907:4507:51 2007快11271129 北上07:2807:3807:52 415211324154 上列到站時刻、下列車次；「快」為區間快，其餘為區間車。依台鐵 10/4 發布時刻表（行前整理） 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至樹林站後站出口 6.77 實走里程 km 4:50 實走耗時（含休息） 461 累計上升 m（GPS 推估） 405 最高海拔 m（大棟山，小百岳） 山頭海拔：大同山 237、青龍嶺 256、大棟山 405 m 為基點公開標高；秋壇山 359、鎮遠山 325 m 依隊上提供（無基石可對）。其餘地點由當天軌跡推估，誤差約 ±25 m；當天 GPS 在三座有基點的山頭讀數比公開標高高 10–24 m。 互動路線圖與航點切換 地圖上的線是 10/11 當天的 GPS 軌跡（08:03 起錄、到大棟山為止），不是航點之間的直線；樹林站到起錄點那 0.48 km 忘了記錄，地圖上這段是依同路線公開 GPX #4688462 模擬補畫的。點擊標記可切換各航點細節，走過的航點座標取自軌跡在抵達時刻的位置；標「未走」的五點是行前規劃的下山路線，沒有軌跡。 集合起點<台鐵樹林站後站出口>實際時間 07:57累計里程 0.00 km海拔 15 m預定 08:00 在樹林站後站出口集合，實際約 07:57 由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。隊友建議確認悠遊卡與登山裝備；到登山口是市區路段。 參考資源 🔗 樹林大棟山、青龍嶺、大同山步道（健行筆記） 🔗 微笑山線：【大棟山系】405高地段（健行筆記官方路線，9.6 km） 🔗 大同山（健行筆記） 🔗 青龍嶺（健行筆記） 🎬 2025微笑山線大縱走尋寶集章任務-Ep.01【大棟山系】405高地（YouTube・踏青生活選） 海拔高度剖面圖 自樹林緩升上稜，經大同山、青龍嶺，再沿鎮遠山、秋壇山的稜線登上大棟山達全程最高。圖中大棟山之後的下坡是行前規劃、這次未走的下山段。山頭海拔出處見總覽，其餘各點由當天軌跡推估；未走的各點沿用行前頁的 GPX #4688462 讀數。 山系亮點導覽 依 10/11 的抵達順序排列。 大同山登山步道口（大安路側） 當天 08:07 經過，是大同山三條登山口之一。沿途會經過海拔僅 75 公尺的樹林山（設台北縣政府三角點，行進中順走通過），是全程最平易近人的起登段。 大同山 (H237m) 又名九茶山、狗蹄山，山上曾發現新石器時代陶器與石器遺址，基點為台灣省地政處精密導線點。山頂設有觀景平台與涼亭，天氣晴朗時可眺望雙北天際線與高鐵列車穿梭市區的畫面，是樹林區居民口中的「後花園」。 青龍嶺 (H256m) 位在大同山西北稜上，是樹林區公認展望最遼闊的稜線高點，可俯瞰樹林、新莊市區與蜿蜒的大漢溪，晴天還能看見高鐵列車如長龍般劃過谷地。也是熱門的夜景地點，山頂設有台北縣政府三角點。 青德宮（途中補給點） 青龍嶺南側約 100 m 的宮廟，多份公開 GPX 的路點標為補給站，附近有飲水機與公廁，是全程最確定能補水、上廁所的據點。往大棟山還有約 2.9 km 稜線路，水在這裡裝滿。 大棟山 405m ⭐ 小百岳 又名龜崙山、橫坑仔山，位於新北樹林與桃園龜山交界，是林口台地稜脈最高峰，設有一等三角點及土地調查局圖根點，名列台灣小百岳。山頂視野極佳，可環視林口台地、觀音山、大屯山系與雙北天際線。本次 11:37 抵達，在山頂停留到 12:47 後搭車下山。 台鐵山佳站（原規劃終點，未走） 行前規劃由大棟山循產業道路下山的終點站，這次在大棟山結束、沒有走到。穿過站內地下道即達月台。山佳一帶舊稱「山仔腳」，昔日為煤礦聚落，站後方仍留有蓋淡坑遺址等礦業歷史痕跡可順遊。 本次行程亮點 從車站走上小百岳：樹林站出站就能起登 【一次收集一座小百岳】大棟山是林口台地稜脈最高峰，擁有一等三角點，名列台灣小百岳。全程另可順走大同山、青龍嶺兩座知名展望點，三段風景層次分明——大同山林蔭茂密、青龍嶺視野開闊、大棟山制高遠眺，一趟走完新北樹林郊山的精華。 【交通省心的郊山路線】起點台鐵樹林站，出站步行就能到登山口，不需開車或轉乘公車。原規劃從大棟山循產業道路下到同屬縱貫線的山佳站，這次在大棟山結束、搭車下山，下山段留待下次。每年 5 月油桐花沿途散落，秋季則可賞芒，四季皆宜造訪。 行程四大特色 • 台灣小百岳大棟山（405m），林口台地稜脈最高峰 • 三段展望層次分明：大同山、青龍嶺、大棟山一次走完 • 起點為台鐵樹林站，步行即可起登 • 沿途廟宇補給點多，適合新手與親子入門郊山 實走時間軸 07:57 樹林站出發 · 11:37 抵達大棟山 · 12:47 離開山頂 · 全程 4 小時 50 分 時刻、座標與里程取自 GPS 軌跡（樹林站到起錄點的 0.48 km 為補估）；「原估」是行前規劃的時刻。三個休息點沒有地名，以停留順序命名。標「未走」的五點是行前規劃的下山段，這次沒有走，只留原估時刻。 07:57(原估 08:00)🚉 集合起點台鐵樹林站後站出口預定 08:00 在樹林站後站出口集合，實際約 07:57 由此步行出發。依官方說明，出站後穿越中山路直行樹德街，路底左轉沿水溝前行到登山口。這段一開始忘了開 GPS，到起錄點的 0.48 km 依同路線公開 GPX #4688462 補估。08:03🛰️ 起點GPS 起錄點GPS 於 08:03 在此開始記錄，位於後站出口西方約 0.46 km（直線）、大同山登山步道口前約 0.25 km，這個點沒有地名。之前的 0.48 km 為補估，之後的里程取自軌跡。累計 0.48 km。08:07(原估 08:30)🥾 入山口大同山登山步道口大安路 312 巷的登山口，入口有一座宮廟牌坊，由此正式起登。累計 0.73 km。08:31(原估 09:10)🙏 信仰地標南寮福德宮大同山東側山腰的土地公廟，也是大同山、青龍嶺另一個常用的登山口，入口有牌坊。累計 1.78 km。08:43🌳 休息點第一休息點南寮福德宮往大同山的上坡途中，08:43–08:48 停留約 5 分鐘。這個點沒有地名，以停留順序命名。累計 2.03 km。09:02(原估 09:35)🙏 信仰地標大同山福德宮大同山頂旁的土地公廟，與大同山基點相距不到 30 m；08:59–09:06 在這一帶停留約 7 分鐘。累計 2.38 km。09:07(原估 09:35)🏙️ 展望台大同山 (H237m)又名九茶山、狗蹄山，基點為台灣省地政處精密導線點（237 m），山頂設觀景平台與涼亭，可眺望雙北天際線與高鐵。累計 2.40 km。09:14(原估 09:45)⛱️ 涼亭泗水亭大同山往青龍嶺途中的一座亭子。累計 2.74 km。09:17🌳 休息點第二休息點泗水亭往青龍嶺的路上，09:17–09:24 停留約 7 分鐘。這個點沒有地名，以停留順序命名。累計 2.82 km。09:32🌳 休息點第三休息點青龍嶺山頂前約 0.1 km，09:32–09:41 停留約 9 分鐘。這個點沒有地名，以停留順序命名。累計 3.26 km。09:42(原估 10:05)🏙️ 展望台青龍嶺 (H256m)大同山西北稜上的稜線高點，設台北縣政府三角點（編號 253004），可俯瞰樹林、新莊與大漢溪；09:42–09:48 停留約 6 分鐘。累計 3.36 km。09:49(原估 10:10)🏪 補給點青德宮青龍嶺南側約 100 m 的宮廟，多份 GPX 路點標為補給站，附近有飲水機與公廁。累計 3.47 km。09:58(原估 10:20)🚪 步道口大棟山登山步道由青德宮一帶轉入往大棟山的步道入口。累計 3.88 km。10:04(原估 10:30)⛱️ 涼亭青龍亭往大棟山稜線上的涼亭；10:03–10:08、10:17–10:29 兩度在這一帶停留，共約 18 分鐘。累計 4.12 km。10:50(原估 11:10)⛱️ 涼亭迴音亭稜線上的亭子，附近約 70 m 處有大青坑崙的礦務課基石；10:50–11:04 停留約 14 分鐘。累計 5.37 km。11:07(原估 11:15)🌿 山頭鎮遠山 (H325m)無基石，山頭旁有涼亭。海拔 325 m 依使用者提供，另有 GPX 路點記為 329 m。累計 5.59 km。11:26(原估 11:45)🌿 山頭秋壇山 (H359m)山頭有石碑標示。累計 6.22 km。11:37(原估 12:05)🏔️ 最高點⭐ 小百岳 #15大棟山405三角點 (H405m)全程最高點，台灣小百岳，設一等三角點及土地調查局圖根點，山頂有涼亭。11:37 抵達，在山頂停留到 12:47，之後搭車下山，本次行程在此結束。累計 6.77 km。—(原估 12:10)🙏 信仰地標普世禪寺（未走）行前規劃的下山路線，這次未走（在大棟山結束、搭車下山）。大棟山山頂南側約 100 m 的寺院，原規劃由此開始下山。—(原估 12:30)🙏 信仰地標福山五路財神廟（未走）行前規劃的下山路線，這次未走。大棟山往山佳的產業道路旁，官方路線說明「經五路財神廟可至大棟山」。—(原估 13:20)🔀 岔路口山佳岔（未走）行前規劃的下山路線，這次未走。往山佳站的岔路，是微笑山線 405 高地段與百年大榕樹段的分段點。—(原估 14:00)↔️ 轉換路段正安宮（未走）行前規劃的下山路線，這次未走。德和街旁的宮廟，距山佳站約 1 km。—(原估 14:40)🚉 終點台鐵山佳站（未走）行前規劃的終點，這次未走。原規劃沿德和街下山抵達山佳站，穿過站旁地下道即達月台。 © 爬爬小隊實走紀錄 ｜ 樹林大棟山縱走 ｜ 2026 年 10 月 11 日 · 07:57–12:47 · 6.77 km",
   "errors": []
  },
  "datunshan": {
@@ -14100,6 +14100,531 @@
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
   "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 8.6 KM O 型 · 小百岳 #19 老街出發、老街解散 鳶山彩壁 O 型 從三峽國小公車站出發，沿鳶峰路上到光復紀念鐘，經鳶山岩、長春嶺登上小百岳鳶山（福德坑山），往返鳶山彩壁後轉往鳶山東峰、鳶尾山，下山到三峽老街解散。只有長春嶺到彩壁這段要原路來回（單程約 1.4 km），其餘不走回頭路，頭尾都是三峽市區。 🧤 鳶峰路很陡、鳶山岩前要拉繩 一篇公開評論提到：前段鳶峰路的柏油坡很耗體力，從市區到登山口約 40 分鐘到 1 小時；登鳶山岩前的路要拉繩，石頭又滑又陡，建議帶手套或登山杖；之後的環狀步道多是原始山徑，要注意樹根與土石。健行筆記 2026-07-17 有一則「倒木擋路」回報（未註明路段），之後 8/3、9/2 的回報為好走、良好，出發前請再查一次。 📐 里程與時刻都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。里程讀自同路線的公開 GPX #5780173，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。 起點 三峽國小公車站 702、802、885、908、910、916 可到 🏁 解散三峽老街南口 集合時間 日期未定 時間軸以 08:00 出發試算 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至三峽國小公車站 8.6 總里程 km（估） 5.7 目標耗時 hr（未含休息） ~480 預計爬升 m 321 最高海拔 m（鳶山，小百岳） 鳶山 321 m 為三等三角點 1103 號的公開標高（健行筆記）。總里程讀自健行筆記 GPX #5780173（2026/07/20，由三峽國小站繞一圈回到三峽國小站，健行筆記標示 9.15 km），本頁在三峽老街南口結束，取到該點的 8.56 km。爬升取健行筆記 #2075 底下 13 條同樣「鳶峰路上、鳶尾山下」的 O 型 GPX 的中位數（482 m）。其餘各點海拔為 GPS 推估，誤差約 ±25 m。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接。航點座標取自公開 GPX 的路點標記，都在 GPX #5780173 軌跡 9 m 內。長春嶺到彩壁是去回同一條路；回程實際經鳶山、長春嶺再到東峰，地圖上的直線則直接連起彩壁與東峰。 集合起點<三峽國小公車站>預計時間 08:00累計里程 0.00 km海拔 40 m微笑山線鳶山彩壁段的官方出發點。依健行筆記，可搭 702（板橋公車站）、802／885（捷運新埔站）、910（府中站）、916（永寧站）、908（景安站）到「三峽國小」站。隊友建議公車路線行前再確認。開車的話，健行筆記建議停在山下路邊停車格或三峽老街周邊停車場再步行上山。 參考資源 🔗 微笑山線：【鳶山山系】鳶山彩壁段（健行筆記官方路線，單程 4.47 km、原路折返） 🔗 鳶山（健行筆記） 🔗 台灣小百岳一覽第 2 頁（健行筆記，鳶山列第 19） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 微笑山線【鳶山山系】鳶山彩壁段 #5780173・記錄 2026/07/20・9.15 km・本頁里程的依據 🛰️ 微笑山線鳶山山系鳶山彩壁段 #4768162・記錄 2025/07/20・9.71 km・同樣的 O 型，用來對照分段里程 海拔高度剖面圖 從三峽市區沿鳶峰路一路爬到光復紀念鐘，上稜後在鳶山達全程最高，往返彩壁後經東峰、鳶尾山一路下降回市區。鳶山為公開標高，其餘各點為 GPX #5780173 的 GPS 讀數。 鳶山山列亮點導覽 依預計的抵達順序排列，內容整理自健行筆記 #2075 與鳶山山岳頁。 光復紀念鐘 民國 74 年為紀念台灣光復四十週年而建，重達 6 噸以上，號稱全台最大的銅鐘，但年久失修已無法敲響。平台有三面展望。開車可直接到這裡的停車場，但假日難會車、難停車。 鳶山岩與鳶山勝蹟碑 山頂遍布沉積裸岩，可遙望七星山系、觀音山，俯瞰大漢溪沖積平原，也是看落日與夜景的熱門地點。途中的鳶山勝蹟碑是三峽詩社民國 65 年所立，記載鳶山地名由來，以及鄭成功砲擊鳶精、鶯歌精的傳說。 鳶山（福德坑山）321m ⭐ 小百岳 台灣小百岳 #19，三等三角點 1103 號，別名福德坑山。三峽鳶山依傍大漢溪，因山形酷似展翅飛翔的鳶而得名，海拔雖只有三百多公尺，卻名列三峽五景之一。 鳶山彩壁 大片裸露的彩色岩壁，條紋絢麗，健行筆記形容堪與屏東哈尤溪彩壁媲美，是攝影師常來的地點。這是本行程最遠的一點，從鳶山來回約 1.3 km。 鳶尾山步道 春夏之交是螢火蟲繁殖高峰，步道上可觀察到黃緣螢、雲南扁螢、台灣窗螢等多種螢火蟲。整條鳶山步道沿途有將近七十種植物，近年也是 5 月賞油桐花的熱門景點。 三峽老街（解散點） 從鳶尾山登山口走市區道路約 0.9 km 到老街南口解散，可順逛老街用餐。回三峽國小站搭公車約再走 0.6 km（同一條軌跡量測）。 為什麼選這條 O 型取代原路折返：多兩座小山頭，回頭路只剩長春嶺到彩壁 【跟官方路線的差別】健行筆記的官方路線是三峽國小→彩壁後原路折返。本頁改成從彩壁回到長春嶺後轉往鳶山東峰、鳶尾山下山，終點移到三峽老街，省掉鳶峰路的回程柏油坡。健行筆記 #2075 底下 86 條公開 GPX 裡，有 13 條是這種走法，標示里程 8.50–10.91 km（中位數 9.56，含走回三峽國小站）。 【其他走法】同一批 GPX 裡，原路折返的中位數 8.41 km；從光復紀念鐘停車場出發繞東峰、鳶尾山的 O 型中位數 6.14 km（省掉鳶峰路的柏油坡，但要開車或叫車上山）；只走大鐘到彩壁來回的中位數 4.32 km。 行程四大特色 • 台灣小百岳 #19 鳶山（福德坑山），三等三角點 • 鳶山彩壁的彩色岩壁，與鳶山岩的展望 • 頭尾都在三峽市區，搭公車即可，解散後可逛老街 • 春夏可在鳶尾山步道賞螢，5 月鳶山步道賞油桐花 預計行程進度（約 5H40M） 候選行程，日期未定。以 08:00 自三峽國小公車站出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 13:40 抵達三峽老街南口。 08:00🚌 集合起點三峽國小公車站微笑山線鳶山彩壁段的官方出發點。依健行筆記，可搭 702（板橋公車站）、802／885（捷運新埔站）、910（府中站）、916（永寧站）、908（景安站）到「三峽國小」站。08:30🥾 入山口鳶峰路口公開 GPX #5780173 標為「鳶峰路」的位置，由此沿鳶峰路上山。健行筆記說明循仁愛街（31 號附近）可抵鳶峰路登山口。累計 0.74 km。09:20⛱️ 涼亭鳶峰亭鳶峰路上山途中的亭子，健行筆記官方路線經過的點。累計 1.99 km。09:35🏛️ 地標光復紀念鐘民國 74 年為紀念台灣光復四十週年而建，重 6 噸以上，號稱全台最大銅鐘，已無法敲響；平台三面展望，旁有停車場。累計 2.39 km。09:45🌄 展望岩鳶山岩沉積裸岩的展望點，可遙望七星山系、觀音山，俯瞰大漢溪；途中經過民國 65 年三峽詩社所立的鳶山勝蹟碑。累計 2.58 km。10:05⛱️ 休憩點長春嶺稜線上的休息區與岔路口，公開 GPX 路點標為「長春嶺休息區叉路口」。累計 3.14 km。10:35🏔️ 最高點⭐ 小百岳 #19鳶山（福德坑山）(H321m)台灣小百岳 #19，全程最高點，三等三角點 1103 號，別名福德坑山。因山形酷似展翅飛翔的鳶而得名，名列三峽五景之一。累計 3.86 km。11:00🪨 地質奇觀鳶山彩壁大片裸露的彩色岩壁，健行筆記形容堪與屏東哈尤溪彩壁媲美，是本行程最遠的一點。累計 4.52 km。12:10⛰️ 副峰鳶山東峰從彩壁原路回到鳶山、長春嶺後轉往東峰（彩壁到這裡約 1.8 km）。公開 GPX 路點記為「鳶山東峰，美滿亭」。累計 6.31 km。12:45⛰️ 副峰鳶尾山鳶尾山步道春夏之交是螢火蟲繁殖高峰，可見黃緣螢、台灣窗螢等。累計 7.18 km。13:05🚶 出山口鳶尾山登山口公開 GPX 路點標為「鳶尾山登山步道口」。健行筆記註明鳶尾山登山口至三峽國小站 1.8 km。累計 7.65 km。13:40🏮 終點解散三峽老街南口行程終點，可順逛三峽老街用餐。回三峽國小站約再走 0.6 km（同一條軌跡量測）。累計 8.56 km。 © 爬爬小隊候選行程 ｜ 鳶山彩壁 O 型 約 8.6 KM ｜ 日期未定",
+  "errors": []
+ },
+ "junjianyan": {
+  "timeline": [
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#b91c1c;"
+    },
+    "text": "08:00🚇 集合起點捷運唭哩岸站捷運淡水信義線唭哩岸站，由此步行往奇岩山。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#b91c1c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚇 集合起點</span></div><div class=\"font-bold text-stone-800\">捷運唭哩岸站</div><div class=\"text-xs text-stone-600 mt-0.5\">捷運淡水信義線唭哩岸站，由此步行往奇岩山。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "08:30🌿 山頭奇岩山稜線上的第一座小山頭。公開 GPX 路點記為 91 m、北市地測精幹點 292 號（另有 93、95 m 的寫法）。累計 0.78 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 山頭</span></div><div class=\"font-bold text-stone-800\">奇岩山</div><div class=\"text-xs text-stone-600 mt-0.5\">稜線上的第一座小山頭。公開 GPX 路點記為 91 m、北市地測精幹點 292 號（另有 93、95 m 的寫法）。累計 0.78 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "08:55🌿 山頭唭哩岸山公開 GPX 路點記為 163 m、聯勤三等三角點補點 8201（另有 165 m 的寫法），有展望。累計 1.42 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 山頭</span></div><div class=\"font-bold text-stone-800\">唭哩岸山</div><div class=\"text-xs text-stone-600 mt-0.5\">公開 GPX 路點記為 163 m、聯勤三等三角點補點 8201（另有 165 m 的寫法），有展望。累計 1.42 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#7c9e52;"
+    },
+    "text": "09:15🏔️ 最高點軍艦岩 (H188m)大屯火山系最南端的山嶺，別名豬哥石，北市鋼標基點 481 號。雪白砂岩的山頭可 360 度展望大屯火山群、五指山系、觀音山與台北盆地。累計 1.91 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:15</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">軍艦岩 (H188m)</div><div class=\"text-xs text-stone-600 mt-0.5\">大屯火山系最南端的山嶺，別名豬哥石，北市鋼標基點 481 號。雪白砂岩的山頭可 360 度展望大屯火山群、五指山系、觀音山與台北盆地。累計 1.91 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:30⛱️ 涼亭打印台軍艦岩往照明寺途中的涼亭，官方路線的中途點，公開 GPX 也記為八角亭、拓印台。累計 2.22 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">⛱️ 涼亭</span></div><div class=\"font-bold text-stone-800\">打印台</div><div class=\"text-xs text-stone-600 mt-0.5\">軍艦岩往照明寺途中的涼亭，官方路線的中途點，公開 GPX 也記為八角亭、拓印台。累計 2.22 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:10🙏 信仰地標照明寺官方路線上的照明禪寺。一筆公開 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。累計 3.22 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🙏 信仰地標</span></div><div class=\"font-bold text-stone-800\">照明寺</div><div class=\"text-xs text-stone-600 mt-0.5\">官方路線上的照明禪寺。一筆公開 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。累計 3.22 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:30🏺 歷史遺跡大師岩公開 GPX 也記為湯海岩，附近有弘法大師紀念碑、不動明王、台灣幸福石等路點。往丹鳳山與往熱海登山口在這一帶分路。累計 3.76 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏺 歷史遺跡</span></div><div class=\"font-bold text-stone-800\">大師岩</div><div class=\"text-xs text-stone-600 mt-0.5\">公開 GPX 也記為湯海岩，附近有弘法大師紀念碑、不動明王、台灣幸福石等路點。往丹鳳山與往熱海登山口在這一帶分路。累計 3.76 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:45🌿 山頭丹鳳山 (H117m)舊名松葉山，北市三角點 13 號，石壁上寫著大大的「丹鳳」；日治時期供奉弘法大師與不動明王，周邊留有參道、石燈基座、石碑等遺跡。累計 4.07 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:45</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 山頭</span></div><div class=\"font-bold text-stone-800\">丹鳳山 (H117m)</div><div class=\"text-xs text-stone-600 mt-0.5\">舊名松葉山，北市三角點 13 號，石壁上寫著大大的「丹鳳」；日治時期供奉弘法大師與不動明王，周邊留有參道、石燈基座、石碑等遺跡。累計 4.07 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "11:10🚶 出山口熱海登山口公開 GPX 記為「丹鳳山步道熱海飯店登山口」。累計 4.78 km（含丹鳳山回到大師岩的 0.31 km）。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚶 出山口</span></div><div class=\"font-bold text-stone-800\">熱海登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">公開 GPX 記為「丹鳳山步道熱海飯店登山口」。累計 4.78 km（含丹鳳山回到大師岩的 0.31 km）。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "11:25🌿 景觀亮點地熱谷公開 GPX 路點「地熱谷入口」的位置。累計 5.08 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:25</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 景觀亮點</span></div><div class=\"font-bold text-stone-800\">地熱谷</div><div class=\"text-xs text-stone-600 mt-0.5\">公開 GPX 路點「地熱谷入口」的位置。累計 5.08 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#b91c1c;"
+    },
+    "text": "11:55🚇 終點解散捷運新北投站行程終點，捷運新北投支線新北投站。累計 5.87 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#b91c1c;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🚇 終點解散</span></div><div class=\"font-bold text-stone-800\">捷運新北投站</div><div class=\"text-xs text-stone-600 mt-0.5\">行程終點，捷運新北投支線新北投站。累計 5.87 km。</div>"
+   }
+  ],
+  "markers": [
+   {
+    "latlng": [
+     25.12088,
+     121.50684
+    ],
+    "options": {
+     "radius": 9,
+     "fillColor": "#b91c1c",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>捷運唭哩岸站</strong><br>⏱ 08:00<br>📏 0.00 km<br>⛰ 10 m"
+   },
+   {
+    "latlng": [
+     25.1242,
+     121.51015
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>奇岩山</strong><br>⏱ 08:30<br>📏 0.78 km<br>⛰ 90 m"
+   },
+   {
+    "latlng": [
+     25.12623,
+     121.51565
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>唭哩岸山</strong><br>⏱ 08:55<br>📏 1.42 km<br>⛰ 160 m"
+   },
+   {
+    "latlng": [
+     25.1273,
+     121.51873
+    ],
+    "options": {
+     "radius": 8,
+     "fillColor": "#7c9e52",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>軍艦岩 (H188m)</strong><br>⏱ 09:15<br>📏 1.91 km<br>⛰ 188 m"
+   },
+   {
+    "latlng": [
+     25.12968,
+     121.51947
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>打印台</strong><br>⏱ 09:30<br>📏 2.22 km<br>⛰ 200 m"
+   },
+   {
+    "latlng": [
+     25.13186,
+     121.51399
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>照明寺</strong><br>⏱ 10:10<br>📏 3.22 km<br>⛰ 150 m"
+   },
+   {
+    "latlng": [
+     25.13407,
+     121.50969
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>大師岩</strong><br>⏱ 10:30<br>📏 3.76 km<br>⛰ 140 m"
+   },
+   {
+    "latlng": [
+     25.13194,
+     121.50822
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>丹鳳山 (H117m)</strong><br>⏱ 10:45<br>📏 4.07 km<br>⛰ 117 m"
+   },
+   {
+    "latlng": [
+     25.1363,
+     121.50942
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>熱海登山口</strong><br>⏱ 11:10<br>📏 4.78 km<br>⛰ 55 m"
+   },
+   {
+    "latlng": [
+     25.13728,
+     121.51067
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>地熱谷</strong><br>⏱ 11:25<br>📏 5.08 km<br>⛰ 40 m"
+   },
+   {
+    "latlng": [
+     25.13698,
+     121.50346
+    ],
+    "options": {
+     "radius": 9,
+     "fillColor": "#b91c1c",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>捷運新北投站</strong><br>⏱ 11:55<br>📏 5.87 km<br>⛰ 20 m"
+   }
+  ],
+  "polyline": {
+   "n": 11,
+   "first": [
+    25.12088,
+    121.50684
+   ],
+   "last": [
+    25.13698,
+    121.50346
+   ],
+   "options": {
+    "color": "#dc2626",
+    "weight": 4,
+    "opacity": 0.85
+   }
+  },
+  "chart": {
+   "type": "line",
+   "data": {
+    "labels": [
+     "捷運唭哩岸站",
+     "奇岩山",
+     "唭哩岸山",
+     "軍艦岩",
+     "打印台",
+     "照明寺",
+     "大師岩",
+     "丹鳳山",
+     "熱海登山口",
+     "地熱谷",
+     "捷運新北投站"
+    ],
+    "datasets": [
+     {
+      "label": "海拔 (m)",
+      "data": [
+       10,
+       90,
+       160,
+       188,
+       200,
+       150,
+       140,
+       117,
+       55,
+       40,
+       20
+      ],
+      "borderColor": "#b91c1c",
+      "borderWidth": 2.5,
+      "pointRadius": 5,
+      "pointBackgroundColor": [
+       "#b91c1c",
+       "#a09080",
+       "#a09080",
+       "#7c9e52",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#a09080",
+       "#b91c1c"
+      ],
+      "pointBorderColor": [
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c",
+       "#b91c1c"
+      ],
+      "pointBorderWidth": [
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5,
+       2.5
+      ],
+      "fill": true,
+      "backgroundColor": "rgba(220, 38, 38, 0.1)",
+      "tension": 0.35
+     }
+    ]
+   },
+   "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "plugins": {
+     "legend": {
+      "display": false
+     },
+     "tooltip": {
+      "callbacks": {}
+     }
+    },
+    "scales": {
+     "y": {
+      "title": {
+       "display": true,
+       "text": "海拔 (m)"
+      },
+      "grid": {
+       "color": "#f0ede8"
+      },
+      "min": 0,
+      "max": 240
+     },
+     "x": {
+      "ticks": {
+       "maxRotation": 35,
+       "font": {
+        "size": 10
+       }
+      },
+      "grid": {
+       "display": false
+      }
+     }
+    }
+   }
+  },
+  "card": [
+   {
+    "wp-pos-label": "集合起點",
+    "wp-title": "捷運唭哩岸站",
+    "wp-time": "08:00",
+    "wp-dist": "0.00",
+    "wp-ele": "10",
+    "wp-desc": "捷運淡水信義線唭哩岸站，由此步行往奇岩山。",
+    "wp-advice": "出發前先上廁所、補水；沿途確定有補給的地方要到照明寺。"
+   },
+   {
+    "wp-pos-label": "山頭",
+    "wp-title": "奇岩山",
+    "wp-time": "08:30",
+    "wp-dist": "0.78",
+    "wp-ele": "90",
+    "wp-desc": "稜線上的第一座小山頭。公開 GPX 路點記為 91 m、北市地測精幹點 292 號（另有 93、95 m 的寫法）。累計 0.78 km。",
+    "wp-advice": "往唭哩岸山約 0.64 km，一路上坡。"
+   },
+   {
+    "wp-pos-label": "山頭",
+    "wp-title": "唭哩岸山",
+    "wp-time": "08:55",
+    "wp-dist": "1.42",
+    "wp-ele": "160",
+    "wp-desc": "公開 GPX 路點記為 163 m、聯勤三等三角點補點 8201（另有 165 m 的寫法），有展望。累計 1.42 km。",
+    "wp-advice": "再約 0.5 km 到軍艦岩。"
+   },
+   {
+    "wp-pos-label": "最高點",
+    "wp-title": "軍艦岩 (H188m)",
+    "wp-time": "09:15",
+    "wp-dist": "1.91",
+    "wp-ele": "188",
+    "wp-desc": "大屯火山系最南端的山嶺，別名豬哥石，北市鋼標基點 481 號。雪白砂岩的山頭可 360 度展望大屯火山群、五指山系、觀音山與台北盆地。累計 1.91 km。",
+    "wp-advice": "岩面裸露，拍照時注意腳下與邊緣。"
+   },
+   {
+    "wp-pos-label": "涼亭",
+    "wp-title": "打印台",
+    "wp-time": "09:30",
+    "wp-dist": "2.22",
+    "wp-ele": "200",
+    "wp-desc": "軍艦岩往照明寺途中的涼亭，官方路線的中途點，公開 GPX 也記為八角亭、拓印台。累計 2.22 km。",
+    "wp-advice": "往照明寺約 1 km。"
+   },
+   {
+    "wp-pos-label": "信仰地標",
+    "wp-title": "照明寺",
+    "wp-time": "10:10",
+    "wp-dist": "3.22",
+    "wp-ele": "150",
+    "wp-desc": "官方路線上的照明禪寺。一筆公開 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。累計 3.22 km。",
+    "wp-advice": "沿途最確定能補給的地方，水可以在這裡補。"
+   },
+   {
+    "wp-pos-label": "歷史遺跡",
+    "wp-title": "大師岩",
+    "wp-time": "10:30",
+    "wp-dist": "3.76",
+    "wp-ele": "140",
+    "wp-desc": "公開 GPX 也記為湯海岩，附近有弘法大師紀念碑、不動明王、台灣幸福石等路點。往丹鳳山與往熱海登山口在這一帶分路。累計 3.76 km。",
+    "wp-advice": "先往丹鳳山（單程約 0.3 km），回到這裡再往熱海登山口下山。"
+   },
+   {
+    "wp-pos-label": "山頭",
+    "wp-title": "丹鳳山 (H117m)",
+    "wp-time": "10:45",
+    "wp-dist": "4.07",
+    "wp-ele": "117",
+    "wp-desc": "舊名松葉山，北市三角點 13 號，石壁上寫著大大的「丹鳳」；日治時期供奉弘法大師與不動明王，周邊留有參道、石燈基座、石碑等遺跡。累計 4.07 km。",
+    "wp-advice": "原路回到大師岩，再往熱海登山口。"
+   },
+   {
+    "wp-pos-label": "出山口",
+    "wp-title": "熱海登山口",
+    "wp-time": "11:10",
+    "wp-dist": "4.78",
+    "wp-ele": "55",
+    "wp-desc": "公開 GPX 記為「丹鳳山步道熱海飯店登山口」。累計 4.78 km（含丹鳳山回到大師岩的 0.31 km）。",
+    "wp-advice": "出山後往地熱谷約 0.3 km。"
+   },
+   {
+    "wp-pos-label": "景觀亮點",
+    "wp-title": "地熱谷",
+    "wp-time": "11:25",
+    "wp-dist": "5.08",
+    "wp-ele": "40",
+    "wp-desc": "公開 GPX 路點「地熱谷入口」的位置。累計 5.08 km。",
+    "wp-advice": "從這裡到新北投站約 0.8 km。"
+   },
+   {
+    "wp-pos-label": "終點解散",
+    "wp-title": "捷運新北投站",
+    "wp-time": "11:55",
+    "wp-dist": "5.87",
+    "wp-ele": "20",
+    "wp-desc": "行程終點，捷運新北投支線新北投站。累計 5.87 km。",
+    "wp-advice": "搭新北投支線到北投站可轉淡水信義線。"
+   }
+  ],
+  "trip": [],
+  "widgets": {
+   "nav": "<nav data-widget=\"nav\" class=\"fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-stone-200/50\" aria-label=\"頁面導覽\"><div class=\"max-w-7xl mx-auto px-6 h-14 flex items-center justify-between\"><a class=\"flex items-center gap-2 hover:opacity-80 transition-opacity\" aria-label=\"爬爬小隊首頁\"><span class=\"w-9 h-9 rounded-full bg-emerald-700 flex items-center justify-center text-white font-bold text-base flex-shrink-0\"></span><span class=\"font-bold text-stone-800 tracking-tight text-lg\"></span></a><div class=\"flex gap-1 overflow-x-auto\"><button onclick=\"document.getElementById('overview').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到行程總覽\"></button><button onclick=\"document.getElementById('map-section').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到路線圖\"></button><button onclick=\"document.getElementById('elevation').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到海拔剖面\"></button><button onclick=\"document.getElementById('spots').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到景點介紹\"></button><button onclick=\"document.getElementById('timeline').scrollIntoView({behavior:'smooth'})\" class=\"nav-btn text-xs px-3 py-1.5 rounded-full text-stone-600 hover:bg-stone-200 whitespace-nowrap\" aria-label=\"滾動到預估進度\"></button></div></div></nav>",
+   "weather": "<div class=\"bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm\" data-widget=\"weather\"><div class=\"text-xs text-stone-600 mb-1\" id=\"weather-label\"></div><div class=\"font-bold text-stone-800\" id=\"weather-main\"></div><div class=\"text-xs text-stone-600 mt-1\" id=\"weather-sub\"></div></div>",
+   "wp-card": "<div data-widget=\"wp-card\" class=\"bg-stone-50 rounded-2xl p-6 border border-stone-100\" id=\"wp-card\"><div class=\"text-xs text-stone-600 uppercase tracking-widest mb-3\" id=\"wp-pos-label\"></div><div class=\"flex items-center gap-3 mb-3\"><button onclick=\"prevWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"上一個航點\"></button><h3 class=\"text-lg font-bold text-stone-900 flex-1\" id=\"wp-title\"></h3><button onclick=\"nextWaypoint()\" class=\"w-10 h-10 rounded-full bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-sm min-w-[44px] min-h-[44px]\" aria-label=\"下一個航點\"></button></div><div class=\"flex gap-4 mb-3 text-sm text-stone-600\"><span><strong class=\"text-stone-800\" id=\"wp-time\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-dist\"></strong></span><span><strong class=\"text-stone-800\" id=\"wp-ele\"></strong></span></div><p class=\"text-base text-stone-700 mb-3\" id=\"wp-desc\"></p><div class=\"rounded-xl p-3 accent-box\"><div class=\"text-xs font-medium mb-1 accent-text\"></div><p class=\"text-xs accent-text\" id=\"wp-advice\"></p></div></div>",
+   "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
+   "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
+  },
+  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 5.9 KM 捷運接捷運 北投郊山小縱走 唭哩岸 → 新北投 從捷運唭哩岸站出發，沿稜線走過奇岩山、唭哩岸山，登上雪白砂岩的軍艦岩，經打印台、照明寺到大師岩，往返丹鳳山後由熱海登山口下山，經地熱谷走到捷運新北投站。起訖都是捷運站，只有大師岩到丹鳳山這一小段要原路來回。 🪵 近期有倒木、斷樹回報 健行筆記的路況回報：2026-09-13「倒木」、2026-07-13「有斷樹」（都沒註明路段），2026-08-29 則是「一切良好」並提到沿途會經過墓地。官方標示路面為石階、水泥路與原始路徑，出發前請再查一次回報。 📐 里程與時刻都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。里程取健行筆記 #74 底下公開 GPX 的分段中位數相加，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。 起點 捷運唭哩岸站 淡水信義線 🏁 解散捷運新北投站（新北投支線） 集合時間 日期未定 時間軸以 08:00 出發試算 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至唭哩岸站 5.9 總里程 km（估） 3.9 目標耗時 hr（未含休息） ~340 預計爬升 m 188 最高山頭 m（軍艦岩） 軍艦岩 188 m（北市鋼標基點 481 號）、丹鳳山 117 m（北市三角點 13 號）為健行筆記的公開標高。總里程是健行筆記 #74 底下 590 條公開 GPX 逐段量測的中位數相加（5.87 km）；實際照這個走法、從唭哩岸站走到新北投站的 GPX #5441385 標示 6.83 km、爬升 335 m，多出來的主要是在地熱谷一帶的走動。打印台一帶的 GPS 讀數約 200 m，略高於軍艦岩，屬 ±25 m 的推估誤差範圍。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接。航點座標取自公開 GPX 的路點標記（同一地名有多筆時取中位數）。大師岩到丹鳳山是去回同一條路，地圖上的直線則直接連起丹鳳山與熱海登山口。 集合起點<捷運唭哩岸站>預計時間 08:00累計里程 0.00 km海拔 10 m捷運淡水信義線唭哩岸站，由此步行往奇岩山。隊友建議出發前先上廁所、補水；沿途確定有補給的地方要到照明寺。 參考資源 🔗 軍艦岩、丹鳳山親山步道（健行筆記，官方路線 5.7 km，唭哩岸站 → 奇岩站） 🔗 軍艦岩（健行筆記） 🔗 丹鳳山（健行筆記） 同走法的公開 GPX（健行筆記） 🛰️ 軍艦岩普濟寺 #5441385・6.83 km・爬升 335 m・唭哩岸站經奇岩山、唭哩岸山、軍艦岩、丹鳳山、地熱谷到新北投站 🛰️ 軍艦丹鳳湯守 #5353350・6.79 km・爬升 304 m・前段改走陽明大學登山口，其餘相同 海拔高度剖面圖 從唭哩岸站一路爬上奇岩山、唭哩岸山到軍艦岩與打印台，之後經照明寺、大師岩、丹鳳山一路下降到新北投。軍艦岩、丹鳳山為公開標高，其餘各點為公開 GPX 的 GPS 讀數中位數。 北投郊山亮點導覽 依預計的抵達順序排列，內容整理自健行筆記 #74、軍艦岩與丹鳳山山岳頁，以及公開 GPX 的路點名稱。 奇岩山與唭哩岸山 唭哩岸站往軍艦岩的稜線上兩座小山頭。公開 GPX 的路點記奇岩山 91 m（北市地測精幹點 292 號）、唭哩岸山 163 m（聯勤三等三角點補點 8201），另有 165 m 的寫法。與走陽明大學登山口的官方上法距離相近，多了兩座山頭。 軍艦岩 188m 大屯火山系最南端的山嶺，別名豬哥石。山頭雪白的巨岩像一艘凌駕在綠樹上的軍艦，可北望大屯火山群、東望五指山系、西眺觀音山、南瞰台北盆地。岩層是 2000 多萬年前沉積的古老地層，可見砂岩、砂頁岩交錯層與彩色風化紋。 打印台與照明寺 打印台是軍艦岩往照明寺途中的涼亭（公開 GPX 也記為八角亭、拓印台）。照明寺是官方路線的中途點；一筆 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。 丹鳳山與弘法大師遺跡 丹鳳山舊名松葉山，117 m，北市三角點 13 號，石壁上寫著大大的「丹鳳」。日治時期日本人在此供奉弘法大師與不動明王，附近留有弘法大師紀念碑、參道遺跡、不動明王神龕、石燈基座與石碑等遺跡。大師岩一帶的公開 GPX 路點也記有湯海岩、不動明王、台灣幸福石。 軍艦岩的生態 稜線上的厚層砂岩土壤淺薄，桃金孃、野牡丹、車桑子等耐旱植物是優勢樹種。渡邊氏東方蠟蟬、無霸勾蜓等法定保育類昆蟲在此有穩定族群。5 月相思樹開花，一片金黃。 熱海登山口到新北投站 丹鳳山步道在熱海飯店旁的登山口出山，經地熱谷入口走到捷運新北投站，約 1.1 km。直接從熱海登山口走到新北投站約 0.8 km，經地熱谷多約 0.3 km。 為什麼這樣走 稜線上、新北投下：跟官方路線的兩處不同 【前段：稜線取代陽明大學登山口】健行筆記官方路線是唭哩岸站經陽明大學登山口上軍艦岩。#74 底下的公開 GPX 裡，走奇岩山、唭哩岸山稜線上軍艦岩的有 118 條，走陽明大學的有 20 條，兩者分段中位數都是 1.99 km，稜線多兩座山頭。 【後段：新北投取代奇岩站】官方路線從丹鳳山經福安宮下到奇岩站。本頁改從大師岩往熱海登山口下山、經地熱谷到新北投站；丹鳳山因此變成從大師岩往返的支線（單程約 0.3 km）。 行程四大特色 • 軍艦岩的雪白砂岩與 360 度展望 • 丹鳳山與大師岩的日治時期弘法大師遺跡 • 起訖都是捷運站，不需接駁 • 半天行程，終點在新北投溫泉區 預計行程進度（約 3H55M） 候選行程，日期未定。以 08:00 自捷運唭哩岸站出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 11:55 抵達捷運新北投站。 08:00🚇 集合起點捷運唭哩岸站捷運淡水信義線唭哩岸站，由此步行往奇岩山。08:30🌿 山頭奇岩山稜線上的第一座小山頭。公開 GPX 路點記為 91 m、北市地測精幹點 292 號（另有 93、95 m 的寫法）。累計 0.78 km。08:55🌿 山頭唭哩岸山公開 GPX 路點記為 163 m、聯勤三等三角點補點 8201（另有 165 m 的寫法），有展望。累計 1.42 km。09:15🏔️ 最高點軍艦岩 (H188m)大屯火山系最南端的山嶺，別名豬哥石，北市鋼標基點 481 號。雪白砂岩的山頭可 360 度展望大屯火山群、五指山系、觀音山與台北盆地。累計 1.91 km。09:30⛱️ 涼亭打印台軍艦岩往照明寺途中的涼亭，官方路線的中途點，公開 GPX 也記為八角亭、拓印台。累計 2.22 km。10:10🙏 信仰地標照明寺官方路線上的照明禪寺。一筆公開 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。累計 3.22 km。10:30🏺 歷史遺跡大師岩公開 GPX 也記為湯海岩，附近有弘法大師紀念碑、不動明王、台灣幸福石等路點。往丹鳳山與往熱海登山口在這一帶分路。累計 3.76 km。10:45🌿 山頭丹鳳山 (H117m)舊名松葉山，北市三角點 13 號，石壁上寫著大大的「丹鳳」；日治時期供奉弘法大師與不動明王，周邊留有參道、石燈基座、石碑等遺跡。累計 4.07 km。11:10🚶 出山口熱海登山口公開 GPX 記為「丹鳳山步道熱海飯店登山口」。累計 4.78 km（含丹鳳山回到大師岩的 0.31 km）。11:25🌿 景觀亮點地熱谷公開 GPX 路點「地熱谷入口」的位置。累計 5.08 km。11:55🚇 終點解散捷運新北投站行程終點，捷運新北投支線新北投站。累計 5.87 km。 © 爬爬小隊候選行程 ｜ 軍艦岩 × 丹鳳山 約 5.9 KM ｜ 日期未定",
   "errors": []
  }
 }
