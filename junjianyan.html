@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="軍艦岩 × 丹鳳山候選行程。自捷運唭哩岸站出發，沿稜線經奇岩山、唭哩岸山到軍艦岩，續經打印台、照明寺、大師岩上丹鳳山，再由熱海登山口下山經地熱谷到捷運新北投站，步行約 5.9 公里。">
+  <title>軍艦岩 × 丹鳳山：唭哩岸 → 新北投 — 爬爬小隊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
+      --chart-max-w: 800px;
+      --chart-h: 320px;
+      --waypoint-transition: all 0.3s ease;
+      --map-h: 420px;
+      --map-radius: 12px;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #b91c1c, #fca5a5);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度，底色為頁底 #f8f7f4。
+         取「丹鳳」的丹：紅色系全站還沒有頁面當主色用過。警示地形的 #ef4444 是
+         另一個全站語意色，主色刻意避開它，用更深的 red-600／700。 */
+      --accent-fill:            #b91c1c;                    /* 實心底（白字 6.47:1） */
+      --accent-border-deep:     #fecaca;                    /* red-200 */
+      --accent:                 #dc2626;                    /* 裝飾：圓點、軌跡、圖表線（4.51:1） */
+      --accent-deep:            #b91c1c;                    /* red-700 */
+      --accent-soft:            #fee2e2;                    /* red-100 */
+      --accent-strong:          #b91c1c;                    /* 淺底上的文字（6.04:1） */
+      --accent-strong-deep:     #991b1b;                    /* 淡底卡片上的內文（7.60:1） */
+      --accent-strong-deeper:   #7f1d1d;                    /* 再深一階（9.16:1） */
+      --accent-tint:            #fef2f2;                    /* 淡底 */
+      --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線 */
+    }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css?v=a1108bf6">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
+</head>
+<body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav data-widget="nav"></nav>
+
+  <main id="main-content" class="pt-14">
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-red-50 via-orange-50 to-stone-100">
+      <div class="max-w-4xl mx-auto w-full">
+        <div class="mb-4">
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 5.9 KM 捷運接捷運</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          北投郊山小縱走<br>
+          <span class="accent-text">唭哩岸 → 新北投</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從捷運唭哩岸站出發，沿稜線走過奇岩山、唭哩岸山，登上雪白砂岩的軍艦岩，經打印台、照明寺到大師岩，往返丹鳳山後由熱海登山口下山，經地熱谷走到捷運新北投站。起訖都是捷運站，只有大師岩到丹鳳山這一小段要原路來回。</p>
+
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">🪵</span>
+          <div>
+            <div class="font-bold text-amber-800 text-base mb-1">近期有倒木、斷樹回報</div>
+            <p class="text-sm text-amber-700 leading-relaxed">健行筆記的路況回報：2026-09-13「倒木」、2026-07-13「有斷樹」（都沒註明路段），2026-08-29 則是「一切良好」並提到沿途會經過墓地。官方標示路面為石階、水泥路與原始路徑，出發前請再查一次回報。</p>
+          </div>
+        </div>
+
+        <!-- 候選頁的數字都還是估計值，說清楚比含糊帶過好 -->
+        <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold accent-text-deeper text-base mb-1">里程與時刻都還是估計值</div>
+            <p class="text-sm accent-text-deep leading-relaxed">本隊尚未實走，地圖上的線是航點之間的直線。里程取健行筆記 #74 底下公開 GPX 的分段中位數相加，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起點</div>
+            <div class="font-bold text-stone-800">捷運唭哩岸站</div>
+            <div class="text-xs text-stone-600 mt-1">淡水信義線</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 解散<br>捷運新北投站（新北投支線）</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
+            <div class="font-bold text-stone-800">日期未定</div>
+            <div class="text-xs text-stone-600 mt-1">時間軸以 08:00 出發試算</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:opacity-90 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至捷運唭哩岸站">
+              🗺️ 導航至唭哩岸站
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">5.9</div>
+            <div class="text-xs text-stone-600">總里程 km（估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">3.9</div>
+            <div class="text-xs text-stone-600">目標耗時 hr（未含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">~340</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black accent-text">188</div>
+            <div class="text-xs text-stone-600">最高山頭 m（軍艦岩）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">軍艦岩 188 m（北市鋼標基點 481 號）、丹鳳山 117 m（北市三角點 13 號）為健行筆記的公開標高。總里程是健行筆記 #74 底下 590 條公開 GPX 逐段量測的中位數相加（5.87 km）；實際照這個走法、從唭哩岸站走到新北投站的 GPX #5441385 標示 6.83 km、爬升 335 m，多出來的主要是在地熱谷一帶的走動。打印台一帶的 GPS 讀數約 200 m，略高於軍艦岩，屬 ±25 m 的推估誤差範圍。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          互動路線圖與航點切換
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接。航點座標取自公開 GPX 的路點標記（同一地名有多筆時取中位數）。大師岩到丹鳳山是去回同一條路，地圖上的直線則直接連起丹鳳山與熱海登山口。</p>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+        <div data-widget="wp-card"></div>
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=74" target="_blank" class="text-sm accent-text hover:underline">🔗 軍艦岩、丹鳳山親山步道（健行筆記，官方路線 5.7 km，唭哩岸站 → 奇岩站）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=232" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 軍艦岩（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=234" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 丹鳳山（健行筆記）</a>
+          </div>
+          <div class="text-xs font-medium text-stone-600 mt-4 mb-3">同走法的公開 GPX（健行筆記）</div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5441385" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 軍艦岩普濟寺</a>
+              <span class="block text-xs text-stone-600">#5441385・6.83 km・爬升 335 m・唭哩岸站經奇岩山、唭哩岸山、軍艦岩、丹鳳山、地熱谷到新北投站</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5353350" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 軍艦丹鳳湯守</a>
+              <span class="block text-xs text-stone-600">#5353350・6.79 km・爬升 304 m・前段改走陽明大學登山口，其餘相同</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          海拔高度剖面圖
+        </h2>
+        <div data-widget="chart"></div>
+        <p class="text-xs text-stone-600 mt-3 text-center">從唭哩岸站一路爬上奇岩山、唭哩岸山到軍艦岩與打印台，之後經照明寺、大師岩、丹鳳山一路下降到新北投。軍艦岩、丹鳳山為公開標高，其餘各點為公開 GPX 的 GPS 讀數中位數。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          北投郊山亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列，內容整理自健行筆記 #74、軍艦岩與丹鳳山山岳頁，以及公開 GPX 的路點名稱。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>奇岩山與唭哩岸山</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">唭哩岸站往軍艦岩的稜線上兩座小山頭。公開 GPX 的路點記奇岩山 91 m（北市地測精幹點 292 號）、唭哩岸山 163 m（聯勤三等三角點補點 8201），另有 165 m 的寫法。與走陽明大學登山口的官方上法距離相近，多了兩座山頭。</p>
+          </div>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 accent-mark rounded-full"></span>軍艦岩 188m</h3>
+            <p class="text-sm accent-text-deep leading-relaxed">大屯火山系最南端的山嶺，別名豬哥石。山頭雪白的巨岩像一艘凌駕在綠樹上的軍艦，可北望大屯火山群、東望五指山系、西眺觀音山、南瞰台北盆地。岩層是 2000 多萬年前沉積的古老地層，可見砂岩、砂頁岩交錯層與彩色風化紋。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>打印台與照明寺</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">打印台是軍艦岩往照明寺途中的涼亭（公開 GPX 也記為八角亭、拓印台）。照明寺是官方路線的中途點；一筆 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>丹鳳山與弘法大師遺跡</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">丹鳳山舊名松葉山，117 m，北市三角點 13 號，石壁上寫著大大的「丹鳳」。日治時期日本人在此供奉弘法大師與不動明王，附近留有弘法大師紀念碑、參道遺跡、不動明王神龕、石燈基座與石碑等遺跡。大師岩一帶的公開 GPX 路點也記有湯海岩、不動明王、台灣幸福石。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>軍艦岩的生態</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">稜線上的厚層砂岩土壤淺薄，桃金孃、野牡丹、車桑子等耐旱植物是優勢樹種。渡邊氏東方蠟蟬、無霸勾蜓等法定保育類昆蟲在此有穩定族群。5 月相思樹開花，一片金黃。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-500 rounded-full"></span>熱海登山口到新北投站</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">丹鳳山步道在熱海飯店旁的登山口出山，經地熱谷入口走到捷運新北投站，約 1.1 km。直接從熱海登山口走到新北投站約 0.8 km，經地熱谷多約 0.3 km。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">為什麼這樣走</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">稜線上、新北投下：<span class="font-normal accent-text">跟官方路線的兩處不同</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【前段：稜線取代陽明大學登山口】</strong><br>健行筆記官方路線是唭哩岸站經陽明大學登山口上軍艦岩。#74 底下的公開 GPX 裡，走奇岩山、唭哩岸山稜線上軍艦岩的有 118 條，走陽明大學的有 20 條，兩者分段中位數都是 1.99 km，稜線多兩座山頭。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【後段：新北投取代奇岩站】</strong><br>官方路線從丹鳳山經福安宮下到奇岩站。本頁改從大師岩往熱海登山口下山、經地熱谷到新北投站；丹鳳山因此變成從大師岩往返的支線（單程約 0.3 km）。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text-deep space-y-1">
+            <li>• 軍艦岩的雪白砂岩與 360 度展望</li>
+            <li>• 丹鳳山與大師岩的日治時期弘法大師遺跡</li>
+            <li>• 起訖都是捷運站，不需接駁</li>
+            <li>• 半天行程，終點在新北投溫泉區</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          預計行程進度（約 3H55M）
+        </h2>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。以 08:00 自捷運唭哩岸站出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 11:55 抵達捷運新北投站。</p>
+        <div data-widget="timeline"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 軍艦岩 × 丹鳳山 約 5.9 KM ｜ 日期未定</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 候選行程，日期未定。2026-10-16 依使用者選定的走法建立：唭哩岸站→奇岩山→唭哩岸山→
+    // 軍艦岩→打印台→照明寺→大師岩→丹鳳山→（回大師岩）→熱海登山口→地熱谷→新北投站。
+    //
+    // 資料：健行筆記 #74「軍艦岩、丹鳳山親山步道」底下 590 條公開 GPX。
+    // 座標：各點取公開 GPX 的路點標記，同一地名多筆時取中位數；唭哩岸站取 234 條從站旁
+    // 出發的軌跡起點中位數，新北投站取三筆「新北投（車站）」路點的中位數。
+    //
+    // dist：沒有一條軌跡剛好照這個順序走完又不繞路（#5441385 最接近，但在地熱谷一帶多走
+    // 了約 0.8 km），所以逐段量：每條軌跡在兩點之間的距離 × 健行筆記標示值 ÷ 原始點加總，
+    // 取中位數相加。各段樣本數：唭哩岸站→奇岩山 128、奇岩山→唭哩岸山 219、唭哩岸山→
+    // 軍艦岩 197、軍艦岩→打印台 245、打印台→照明寺 139、照明寺→大師岩 104、大師岩↔
+    // 丹鳳山 171／85、大師岩→熱海登山口 45、熱海登山口→地熱谷 21、地熱谷→新北投站 8。
+    // 熱海登山口的 dist 含丹鳳山回到大師岩的 0.31 km。每段都長於兩點直線距離。
+    // time：08:00 出發（試算用，集合時間未定），以每小時 1.5 公里推算：
+    // 08:00 ＋ dist ÷ 1.5 小時，取整到 5 分鐘，未另計休息；是規劃值，不是實測。
+    //
+    // ele：
+    //   軍艦岩 188（北市鋼標基點 481 號）、丹鳳山 117（北市三角點 13 號）—— 健行筆記
+    //     山岳頁的公開標高。
+    //   其他各點 —— 每條軌跡在該點 40 m 內的高程中位數，再取全部軌跡的中位數，取整到
+    //     5 m，±25 m 的估計，所以 loc 不加 (H___m)。奇岩山、唭哩岸山的路點雖有基石標高
+    //     的寫法（91 m；163／165 m），說法不一，寫在 desc 不當公開標高。
+    //   打印台的 GPS 中位數 199 m 略高於軍艦岩 188 m，pos「最高點」仍給有公開標高的
+    //     軍艦岩。
+    const schedule = [
+      { lat: 25.12088, lng: 121.50684, time: "08:00", loc: "捷運唭哩岸站", dist: 0.00, ele: 10, pos: "集合起點",
+        desc: "捷運淡水信義線唭哩岸站，由此步行往奇岩山。",
+        advice: "出發前先上廁所、補水；沿途確定有補給的地方要到照明寺。" },
+
+      { lat: 25.12420, lng: 121.51015, time: "08:30", loc: "奇岩山", dist: 0.78, ele: 90, pos: "山頭",
+        desc: "稜線上的第一座小山頭。公開 GPX 路點記為 91 m、北市地測精幹點 292 號（另有 93、95 m 的寫法）。累計 0.78 km。",
+        advice: "往唭哩岸山約 0.64 km，一路上坡。" },
+
+      { lat: 25.12623, lng: 121.51565, time: "08:55", loc: "唭哩岸山", dist: 1.42, ele: 160, pos: "山頭",
+        desc: "公開 GPX 路點記為 163 m、聯勤三等三角點補點 8201（另有 165 m 的寫法），有展望。累計 1.42 km。",
+        advice: "再約 0.5 km 到軍艦岩。" },
+
+      { lat: 25.12730, lng: 121.51873, time: "09:15", loc: "軍艦岩 (H188m)", dist: 1.91, ele: 188, pos: "最高點",
+        desc: "大屯火山系最南端的山嶺，別名豬哥石，北市鋼標基點 481 號。雪白砂岩的山頭可 360 度展望大屯火山群、五指山系、觀音山與台北盆地。累計 1.91 km。",
+        advice: "岩面裸露，拍照時注意腳下與邊緣。" },
+
+      { lat: 25.12968, lng: 121.51947, time: "09:30", loc: "打印台", dist: 2.22, ele: 200, pos: "涼亭",
+        desc: "軍艦岩往照明寺途中的涼亭，官方路線的中途點，公開 GPX 也記為八角亭、拓印台。累計 2.22 km。",
+        advice: "往照明寺約 1 km。" },
+
+      { lat: 25.13186, lng: 121.51399, time: "10:10", loc: "照明寺", dist: 3.22, ele: 150, pos: "信仰地標",
+        desc: "官方路線上的照明禪寺。一筆公開 GPX 路點記錄寺旁涼亭休息區有公廁、飲水機與飲料販售，並註明先消費才能上廁所。累計 3.22 km。",
+        advice: "沿途最確定能補給的地方，水可以在這裡補。" },
+
+      { lat: 25.13407, lng: 121.50969, time: "10:30", loc: "大師岩", dist: 3.76, ele: 140, pos: "歷史遺跡",
+        desc: "公開 GPX 也記為湯海岩，附近有弘法大師紀念碑、不動明王、台灣幸福石等路點。往丹鳳山與往熱海登山口在這一帶分路。累計 3.76 km。",
+        advice: "先往丹鳳山（單程約 0.3 km），回到這裡再往熱海登山口下山。" },
+
+      { lat: 25.13194, lng: 121.50822, time: "10:45", loc: "丹鳳山 (H117m)", dist: 4.07, ele: 117, pos: "山頭",
+        desc: "舊名松葉山，北市三角點 13 號，石壁上寫著大大的「丹鳳」；日治時期供奉弘法大師與不動明王，周邊留有參道、石燈基座、石碑等遺跡。累計 4.07 km。",
+        advice: "原路回到大師岩，再往熱海登山口。" },
+
+      { lat: 25.13630, lng: 121.50942, time: "11:10", loc: "熱海登山口", dist: 4.78, ele: 55, pos: "出山口",
+        desc: "公開 GPX 記為「丹鳳山步道熱海飯店登山口」。累計 4.78 km（含丹鳳山回到大師岩的 0.31 km）。",
+        advice: "出山後往地熱谷約 0.3 km。" },
+
+      { lat: 25.13728, lng: 121.51067, time: "11:25", loc: "地熱谷", dist: 5.08, ele: 40, pos: "景觀亮點",
+        desc: "公開 GPX 路點「地熱谷入口」的位置。累計 5.08 km。",
+        advice: "從這裡到新北投站約 0.8 km。" },
+
+      { lat: 25.13698, lng: 121.50346, time: "11:55", loc: "捷運新北投站", dist: 5.87, ele: 20, pos: "終點解散",
+        desc: "行程終點，捷運新北投支線新北投站。累計 5.87 km。",
+        advice: "搭新北投支線到北投站可轉淡水信義線。" }
+    ];
+
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const ACCENT = PaPaDetail.cssVar('--accent-deep');
+
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    PaPaDetail.init({
+      schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
+      nav: [25.12088, 121.50684],
+      weather: { lat: 25.12730, lng: 121.51873,
+                 subText: '軍艦岩今日參考' },
+
+      map: {
+        setView: [[25.1295, 121.5105], 15],
+        track: { weight: 4, opacity: 0.85 },
+        popup: true
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationMax: 240, lineColor: '--accent-deep' },
+
+      timeline: { emoji: { '集合起點': '🚇', '終點解散': '🚇' }, hover: 'darken' }
+    });
+  </script>
+</body>
+</html>
