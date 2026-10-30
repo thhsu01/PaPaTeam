@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """全站規格掃描。ARCHITECTURE.md 的段落規格表寫了卻沒人檢查，導覽文字與 <h2>
 因此長期漂移（2026-08-04 的雙軸審查才發現）。這支腳本把那張表變成可執行的檢查。"""
-import re, glob, math, sys, os, functools
+import re, glob, math, sys, os, functools, json
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from papa_common import chdir_root, schedule_objects, page_state   # 四支工具共用：根目錄、切航點物件、行程三態
@@ -625,6 +625,11 @@ def check_live_counts():
     c = site_counts()
     n, n_tracks, n_card = c['n'], c['n_tracks'], c['n_card']
     live = {n, n + 1, n_tracks, n - n_tracks, n_card, n - n_card}
+    # README 檔案樹的「計畫（N頁）」「候選（N頁）」由 manifest_tree.py 依 manifest 的 status 產生，
+    # 按定義就是現況。n - n_tracks 把計畫頁也算成候選，兩者不一定相等：2026-10-30 加第七個
+    # 候選頁時，產生器寫出「候選（七頁）」卻被這條擋下——先前六頁能過，只是剛好等於卡片式的 6。
+    statuses = [pg.get('status') for pg in json.load(open('manifest.json', encoding='utf-8'))['pages']]
+    live |= {statuses.count('candidate'), statuses.count('planned')}
     CN = manifest_tree.CN
 
     def cn2int(t):

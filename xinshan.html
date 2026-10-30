@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="五指山古道 × 新山 × 夢湖 O 型候選行程。自汐止柯子林天然泳池登山口出發，走五指山古道前段後轉上新山西南稜，登新山後下到夢湖，再循溪谷步道回到登山口，步行約 5.5 公里。">
+  <title>五指山古道 × 新山 × 夢湖 O 型 — 爬爬小隊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
+      --chart-max-w: 800px;
+      --chart-h: 320px;
+      --waypoint-transition: all 0.3s ease;
+      --map-h: 420px;
+      --map-radius: 12px;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #5c6b12, #c9d48a);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         橄欖綠：全站還沒有頁面用過（lime-800 的 henglingguidao 偏黃綠、亮度也不同）。
+         每頁主色是刻意的辨識設計，撞色就失去作用。
+         括號內是實測對比度（WCAG 公式），底色為頁底 #f8f7f4，另註明者除外；
+         node tools/contrast/check.js --all 全頁 0 處不合格（2026-10-30）。 */
+      --accent:                 #6b7a1a;                    /* 裝飾：色條、圓點、軌跡、圖表線（4.43:1，不當文字用） */
+      --accent-deep:            #5c6b12;                    /* 段落色條、圖表線（5.50:1） */
+      --accent-fill:            #4f5c10;                    /* 實心底（白字 7.32:1） */
+      --accent-strong:          #4f5c10;                    /* 淺底上的文字（6.83:1；淡底 #f8faeb 6.92:1） */
+      --accent-strong-deep:     #414b0d;                    /* 淡底卡片上的內文（淡底 8.88:1） */
+      --accent-strong-deeper:   #333b0a;                    /* 再深一階（淡底 11.22:1） */
+      --accent-soft:            #eef2d4;                    /* 標籤淡底（其上 accent-strong 6.37:1） */
+      --accent-tint:            #f8faeb;                    /* 淡底 */
+      --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線 */
+      --accent-border-deep:     #dce3b0;                    /* 深一階的框線 */
+    }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css?v=c8d0680e">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
+</head>
+<body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav data-widget="nav"></nav>
+
+  <main id="main-content" class="pt-14">
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-lime-50 via-yellow-50 to-stone-100">
+      <div class="max-w-4xl mx-auto w-full">
+        <div class="mb-4">
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 5.5 KM O 型</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          古道進、岩稜上、湖邊下<br>
+          <span class="accent-text">五指山古道 × 新山 × 夢湖</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從汐止柯子林天然泳池旁的登山口出發，走五指山古道前段約 0.5 km 後右轉，沿新山西南稜一路上攀登頂新山（499m），再下到山腳的夢湖，最後循溪谷步道繞回登山口。除了古道起頭那一小段，其餘都不走回頭路。</p>
+
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">🧤</span>
+          <div>
+            <div class="font-bold text-amber-800 text-base mb-1">西南稜要拉繩，雨後不要走</div>
+            <p class="text-sm text-amber-700 leading-relaxed">往新山的路上有一小段要拉繩攀岩，有點裸露感（健行筆記 2026-08-21 路況回報）。新山步道多青苔石、樹根與泥土，遊記提到青苔石壁上拉繩是全程最危險的地方，雨天或雨後都不建議前往。本頁走法是<strong>由西南稜上攀、從夢湖下山</strong>，技術路段用爬的上去，不用倒著下。</p>
+          </div>
+        </div>
+
+        <!-- 候選頁的數字都還是估計值，說清楚比含糊帶過好 -->
+        <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold accent-text-deeper text-base mb-1">里程與時刻都還是估計值</div>
+            <p class="text-sm accent-text-deep leading-relaxed">本隊尚未實走，地圖上的線是航點之間的直線。里程取自三條同走法的公開 GPX（#6061507、#5708472、#5016103）的中位數，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">起點</div>
+            <div class="font-bold text-stone-800">柯子林天然泳池登山口</div>
+            <div class="text-xs text-stone-600 mt-1">柯子林茶莊（汐萬路三段 306 號）後方，步行 1～2 分鐘</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 終點<br>回到同一個登山口</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
+            <div class="font-bold text-stone-800">日期未定</div>
+            <div class="text-xs text-stone-600 mt-1">時間軸以 08:00 出發試算</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:opacity-90 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至柯子林天然泳池登山口">
+              🗺️ 導航至柯子林登山口
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">5.5</div>
+            <div class="text-xs text-stone-600">總里程 km（估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">3.7</div>
+            <div class="text-xs text-stone-600">目標耗時 hr（未含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">~455</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black accent-text">499</div>
+            <div class="text-xs text-stone-600">最高海拔 m（新山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-2xl">新山 499 m 為健行筆記新山山岳頁的公開標高（野牛 2 號基石）。總里程與爬升取三條同走法公開 GPX 的健行筆記標示值中位數（里程 4.90／5.47／5.49 km、爬升 444／455／501 m）；三人實際耗時 3 小時 32 分到 4 小時 41 分（含休息）。其餘各點海拔為 GPS 推估，誤差約 ±25 m。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          互動路線圖與航點切換
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接，不是步道的實際走向——尤其夢湖回登山口那段，實際是往南下溪谷再向西接回，比直線長一倍。航點座標取三條公開 GPX 在該地點最近軌跡點的中位數。</p>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+        <div data-widget="wp-card"></div>
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=140" target="_blank" class="text-sm accent-text hover:underline">🔗 新山夢湖登山步道（健行筆記，2.1 km、海拔 290～499 m）</a>
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=137" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 五指山古道（健行筆記，單程 2.1 km、海拔 76～376 m）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=529" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 新山（健行筆記山岳頁）</a>
+            <a href="https://supertaste.tvbs.com.tw/asia/338110" target="_blank" class="text-sm text-blue-600 hover:underline">📝 柯子林天然泳池（食尚玩家，停車與路況）</a>
+            <a href="https://today.line.me/tw/v3/article/29n70O" target="_blank" class="text-sm text-blue-600 hover:underline">📝 新山夢湖步道遊記（LINE TODAY，拉繩路段與濕滑）</a>
+          </div>
+          <div class="text-xs font-medium text-stone-600 mt-4 mb-3">路線軌跡來源（健行筆記公開 GPX）</div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5708472" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 柯子林天然泳池上新山夢湖O繞</a>
+              <span class="block text-xs text-stone-600">#5708472・記錄 2026/07/02・5.47 km・4 小時 41 分</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=6061507" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 柯子林天然泳池上新山夢湖O型線</a>
+              <span class="block text-xs text-stone-600">#6061507・記錄 2026/10/02・4.90 km・3 小時 32 分</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5016103" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 新山O型（柯子林登山口）</a>
+              <span class="block text-xs text-stone-600">#5016103・記錄 2025/09/28・5.49 km・3 小時 46 分</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          海拔高度剖面圖
+        </h2>
+        <div data-widget="chart"></div>
+        <p class="text-xs text-stone-600 mt-3 text-center">古道前段幾乎是平的，過岔路後沿西南稜在 1.3 km 內爬升約 400 m，是全程最吃力的一段；過新山後一路下降，經夢湖回到溪谷。新山為公開標高，其餘各點為三條公開 GPX 的 GPS 讀數中位數。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          新山夢湖亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列，內容整理自健行筆記新山夢湖、五指山古道兩條官方路線與公開遊記。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>柯子林天然泳池</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">五指山古道的登山口就在泳池旁，多數山友從柯子林茶莊走一小段產業道路過來。泳池不收門票，夏天回程可以在這裡或重柔橋下的溪水消暑。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-lime-600 rounded-full"></span>五指山古道</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">早年頂坪、半嶺、下坪居民往返汐止的聯絡道，汐萬公路開通後沒落，近年由區公所與地方人士整理重現。竹林、流水、青苔石階與駁坎都還在，本頁只走它最前面約 0.5 km。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>新山西南稜</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">從古道岔路一路陡上到新山頂，有大型岩塊與固定繩索，沿途視野開闊。健行筆記形容新山的巨石稜線頗有大山氣勢；這也是全程唯一需要手腳並用的路段。</p>
+          </div>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 accent-mark rounded-full"></span>新山 499m 🏔 全程制高</h3>
+            <p class="text-sm accent-text-deep leading-relaxed">野牛 2 號基石，高度不到五百公尺，山頂視野卻很開闊：五指山、友蚋山、汐止、七堵的山林盡收眼底，天氣晴朗時能望見北海岸與基隆嶼。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-lime-600 rounded-full"></span>夢湖</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">新山腳下群山環繞的小埤塘，冬季午後湖面常起薄霧，因此得名；繞湖一圈不到十分鐘。湖中有食蟲植物黃花狸藻與保育魚類台灣細鯿。近年遊記提到湖畔的咖啡店與拍照設施已少人管理，不要指望在這裡補給。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-500 rounded-full"></span>夢湖下柯子林的溪谷步道</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">從夢湖往南下到溪谷，再向西接回泳池。舊遊記提到這段有涉溪、舊橋損壞處與電塔，植被茂密、蜘蛛網多；三條公開 GPX 的回程都走這條，約 2.7 km。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">為什麼選這條</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">古道前段＋西南稜：<span class="font-normal accent-text">最短的新山 O 型，技術段用上攀的</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【走法怎麼選出來】</strong><br>健行筆記新山夢湖步道底下列出的 160 條公開 GPX（2024-09 至 2026-10）裡，26 條經過柯子林或五指山古道。逐條比對軌跡經過的地標後，本頁採用的走法有 3 條，上山段 100% 重疊，岔路都落在古道約 0.5 km 處，回程也走同一條溪谷步道。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【另一種走法】</strong><br>把五指山古道走完全段，經友蚋山南峰（舊稱過火埔）沿稜線接新山，再下夢湖回泳池，約 7.9 km、實際耗時約 5 小時 40 分，比本頁多約 2.4 km，還要再爬一次友蚋山南峰。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text-deep space-y-1">
+            <li>• 新山 499 m 的巨石稜線與 360° 展望</li>
+            <li>• 五指山古道的竹林、青苔石階與駁坎</li>
+            <li>• 夢湖的湖光山色，冬季午後常有薄霧</li>
+            <li>• 起終點同一處，回程可在柯子林天然泳池消暑</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          預計行程進度（約 3H40M）
+        </h2>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。以 08:00 自柯子林天然泳池登山口出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 11:40 回到登山口。</p>
+        <div data-widget="timeline"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 五指山古道 × 新山 × 夢湖 O 型 約 5.5 KM ｜ 日期未定</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 候選行程，日期未定。2026-10-30 依使用者選定的走法 A 建立：柯子林天然泳池登山口→
+    // 五指山古道前段→岔路右轉→新山西南稜（上攀）→新山→夢湖→溪谷步道→回到登山口。
+    //
+    // 路線選擇：健行筆記新山夢湖登山步道（#140）底下 160 條公開 GPX，26 條標題含柯子林
+    // 或五指山古道。下載其中 8 條逐條比對經過的地標，實際只有兩種走法：
+    //   A（本頁）古道前段＋西南稜：#6061507、#5708472、#5016103，上山段兩兩 100% 重疊，
+    //     夢湖之後的回程 85–100% 重疊，岔路三條都在 (25.1203, 121.6312) 附近。
+    //   C 古道全段＋友蚋山南峰：#3929691 等，約 7.9 km。
+    //   先前依標題以為「五指山古道 + 新山」是一群，比對軌跡後發現那幾條其實是 C。
+    //
+    // 座標：三條 GPX 各自在該地點的最近軌跡點，取緯度與經度的中位數。
+    // 起點與終點是同一個登山口（三條的共同起錄點）。柯子林茶莊的確切位置從軌跡上
+    // 判斷不出來，所以不另立集合點。
+    //
+    // dist：三條各自的「軌跡累計距離 × 健行筆記標示值 ÷ 原始點加總」（縮放 0.82–0.94），
+    // 每個航點再取三條的中位數。每段都長於兩點直線距離（0.52>0.42、1.33>1.10、
+    // 0.88>0.39、2.74>1.33 km）。
+    // time：08:00 出發（試算用，集合時間未定），08:00 ＋ dist ÷ 1.5 小時，取整到
+    // 5 分鐘，未另計休息；是規劃值，不是實測。
+    //
+    // ele：
+    //   新山 499 —— 健行筆記新山山岳頁的公開標高（野牛 2 號基石）。三條 GPX 在山頂
+    //     讀到 494／502／497 m，看不出系統性偏差。
+    //   其他各點 —— 三條 GPX 在該點 50 m 內的 GPS 高程中位數，取整到 5 m，±25 m 的
+    //     估計，所以 loc 不加 (H___m)。夢湖、古道岔路、登山口查無公開標高。
+    //
+    // 拉繩段的確切位置從 GPX 看不出來，只寫在古道岔路與新山的 advice，不另立航點。
+    const schedule = [
+      { lat: 25.116484, lng: 121.631323, time: "08:00", loc: "柯子林天然泳池登山口", short: "柯子林登山口", dist: 0.00, ele: 85, pos: "集合起點",
+        desc: "五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。",
+        advice: "茶莊到泳池是窄山路，難會車。假日建議停茶莊外路邊再走進來；泳池旁停車場的現況未確認，共乘盡量壓到一兩台。" },
+
+      { lat: 25.120269, lng: 121.631196, time: "08:20", loc: "五指山古道岔路（往新山）", short: "古道岔路", dist: 0.52, ele: 100, pos: "岔路口",
+        desc: "沿五指山古道走約 0.5 km 後的岔路，三條公開 GPX 都在這裡離開古道。右轉往新山西南稜，直行則續走五指山古道往友蚋山南峰。累計 0.52 km。",
+        advice: "右轉後開始陡上，並有一小段拉繩攀岩。手套先戴好、登山杖收起來，雨後不要走。" },
+
+      { lat: 25.129981, lng: 121.633307, time: "09:15", loc: "新山 (H499m)", dist: 1.85, ele: 499, pos: "最高點",
+        desc: "全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。從岔路到這裡爬升約 400 m。累計 1.85 km。",
+        advice: "往夢湖是一路陡下的原始路徑，多青苔石與樹根。下坡比上坡容易滑，放慢速度。" },
+
+      { lat: 25.127598, lng: 121.636084, time: "09:50", loc: "夢湖", dist: 2.73, ele: 305, pos: "湖泊",
+        desc: "新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 2.73 km。",
+        advice: "湖畔咖啡店與設施據遊記已少人管理，不要指望補給。往柯子林的溪谷路要涉溪，鞋子防水較安心。" },
+
+      { lat: 25.116484, lng: 121.631323, time: "11:40", loc: "柯子林天然泳池登山口（回到起點）", short: "柯子林登山口", dist: 5.47, ele: 85, pos: "終點",
+        desc: "從夢湖往南下到溪谷，再向西接回登山口。這段約 2.7 km，比地圖上的直線長一倍。累計 5.47 km。",
+        advice: "回程有涉溪、舊橋損壞處與茂密植被，長袖長褲可擋蜘蛛網。夏天收尾可在泳池或重柔橋下的溪水泡腳。" }
+    ];
+
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const ACCENT = PaPaDetail.cssVar('--accent-deep');
+
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      const PAL = PaPaDetail.palette({ accent: ACCENT });
+
+    PaPaDetail.init({
+      schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
+      nav: [25.116484, 121.631323],
+      weather: { lat: 25.129981, lng: 121.633307,
+                 subText: '新山山頂今日參考' },
+
+      map: {
+        setView: [[25.1235, 121.6335], 15],
+        track: { weight: 4, opacity: 0.85 },
+        popup: true
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationMax: 550, lineColor: '--accent-deep' },
+
+      timeline: { emoji: { '集合起點': '🏊', '湖泊': '💧' }, hover: 'darken' }
+    });
+  </script>
+</body>
+</html>
