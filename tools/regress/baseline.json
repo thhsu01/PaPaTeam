@@ -15277,8 +15277,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#5c6b12;"
     },
-    "text": "08:00🏊 集合起點柯子林天然泳池登山口五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#5c6b12;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏊 集合起點</span></div><div class=\"font-bold text-stone-800\">柯子林天然泳池登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。</div>"
+    "text": "08:00🏊 集合起點柯子林天然泳池登山口五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#5c6b12;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏊 集合起點</span></div><div class=\"font-bold text-stone-800\">柯子林天然泳池登山口</div><div class=\"text-xs text-stone-600 mt-0.5\">五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -15286,8 +15286,26 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "08:20🔀 岔路口五指山古道岔路（往新山）沿五指山古道走約 0.5 km 後的岔路，三條公開 GPX 都在這裡離開古道。右轉往新山西南稜，直行則續走五指山古道往友蚋山南峰。累計 0.52 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🔀 岔路口</span></div><div class=\"font-bold text-stone-800\">五指山古道岔路（往新山）</div><div class=\"text-xs text-stone-600 mt-0.5\">沿五指山古道走約 0.5 km 後的岔路，三條公開 GPX 都在這裡離開古道。右轉往新山西南稜，直行則續走五指山古道往友蚋山南峰。累計 0.52 km。</div>"
+    "text": "08:20🔀 岔路口五指山古道岔路（往新山西南稜）沿古道走約 0.5 km 後的岔路，右轉是往新山的西南稜。本頁直行，續走五指山古道。累計 0.45 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">08:20</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🔀 岔路口</span></div><div class=\"font-bold text-stone-800\">五指山古道岔路（往新山西南稜）</div><div class=\"text-xs text-stone-600 mt-0.5\">沿古道走約 0.5 km 後的岔路，右轉是往新山的西南稜。本頁直行，續走五指山古道。累計 0.45 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "09:10🗻 山頂友蚋山南峰 (H340m)又名新山西嶺，昔稱過火埔，鑛務課基石 NO.261。古道再走約十分鐘會到汐萬路三段 380 巷出口，本頁由此轉上稜線往新山。累計 1.81 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:10</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🗻 山頂</span></div><div class=\"font-bold text-stone-800\">友蚋山南峰 (H340m)</div><div class=\"text-xs text-stone-600 mt-0.5\">又名新山西嶺，昔稱過火埔，鑛務課基石 NO.261。古道再走約十分鐘會到汐萬路三段 380 巷出口，本頁由此轉上稜線往新山。累計 1.81 km。</div>"
+   },
+   {
+    "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
+    "dot": {
+     "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
+     "style": "background:#a09080;"
+    },
+    "text": "10:00🌿 稜線山頭南峰往新山的稜線高點友蚋山南峰往新山途中稜線西段的最高處，這個點在公開 GPX 上沒有地名，海拔是四條軌跡的 GPS 推估。累計 2.97 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:00</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🌿 稜線山頭</span></div><div class=\"font-bold text-stone-800\">南峰往新山的稜線高點</div><div class=\"text-xs text-stone-600 mt-0.5\">友蚋山南峰往新山途中稜線西段的最高處，這個點在公開 GPX 上沒有地名，海拔是四條軌跡的 GPS 推估。累計 2.97 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -15295,8 +15313,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#7c9e52;"
     },
-    "text": "09:15🏔️ 最高點新山 (H499m)全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。從岔路到這裡爬升約 400 m。累計 1.85 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:15</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">新山 (H499m)</div><div class=\"text-xs text-stone-600 mt-0.5\">全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。從岔路到這裡爬升約 400 m。累計 1.85 km。</div>"
+    "text": "10:30🏔️ 最高點新山 (H499m)全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。累計 3.74 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#7c9e52;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:30</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏔️ 最高點</span></div><div class=\"font-bold text-stone-800\">新山 (H499m)</div><div class=\"text-xs text-stone-600 mt-0.5\">全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。累計 3.74 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -15304,8 +15322,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#a09080;"
     },
-    "text": "09:50💧 湖泊夢湖新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 2.73 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">09:50</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">💧 湖泊</span></div><div class=\"font-bold text-stone-800\">夢湖</div><div class=\"text-xs text-stone-600 mt-0.5\">新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 2.73 km。</div>"
+    "text": "10:55💧 湖泊夢湖新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 4.37 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#a09080;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">10:55</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">💧 湖泊</span></div><div class=\"font-bold text-stone-800\">夢湖</div><div class=\"text-xs text-stone-600 mt-0.5\">新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 4.37 km。</div>"
    },
    {
     "cls": "relative mb-8 waypoint-card cursor-pointer p-3 rounded-xl transition-all hover:bg-stone-100",
@@ -15313,8 +15331,8 @@
      "cls": "absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm",
      "style": "background:#5c6b12;"
     },
-    "text": "11:40🏁 終點柯子林天然泳池登山口（回到起點）從夢湖往南下到溪谷，再向西接回登山口。這段約 2.7 km，比地圖上的直線長一倍。累計 5.47 km。",
-    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#5c6b12;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">11:40</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏁 終點</span></div><div class=\"font-bold text-stone-800\">柯子林天然泳池登山口（回到起點）</div><div class=\"text-xs text-stone-600 mt-0.5\">從夢湖往南下到溪谷，再向西接回登山口。這段約 2.7 km，比地圖上的直線長一倍。累計 5.47 km。</div>"
+    "text": "12:25🏁 終點柯子林天然泳池登山口（回到起點）從夢湖往南下到溪谷，再向西接回登山口，這段約 2.2 km。累計 6.58 km。",
+    "html": "<div class=\"absolute -left-8 top-1 w-4 h-4 rounded-full border-2 border-white shadow-sm\" style=\"background:#5c6b12;\"></div><div class=\"flex items-center gap-2 mb-1 flex-wrap\"><span class=\"font-mono font-bold text-sm accent-text\">12:25</span><span class=\"text-xs text-stone-600 bg-stone-100 px-2 py-0.5 rounded-full\">🏁 終點</span></div><div class=\"font-bold text-stone-800\">柯子林天然泳池登山口（回到起點）</div><div class=\"text-xs text-stone-600 mt-0.5\">從夢湖往南下到溪谷，再向西接回登山口，這段約 2.2 km。累計 6.58 km。</div>"
    }
   ],
   "markers": [
@@ -15348,7 +15366,39 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>五指山古道岔路（往新山）</strong><br>⏱ 08:20<br>📏 0.52 km<br>⛰ 100 m"
+    "popup": "<strong>五指山古道岔路（往新山西南稜）</strong><br>⏱ 08:20<br>📏 0.45 km<br>⛰ 105 m"
+   },
+   {
+    "latlng": [
+     25.1293812,
+     121.6255617
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>友蚋山南峰 (H340m)</strong><br>⏱ 09:10<br>📏 1.81 km<br>⛰ 340 m"
+   },
+   {
+    "latlng": [
+     25.133963,
+     121.62956
+    ],
+    "options": {
+     "radius": 6,
+     "fillColor": "#a09080",
+     "opacity": 1,
+     "fillOpacity": 0.92,
+     "color": "#fff",
+     "weight": 2
+    },
+    "last": null,
+    "popup": "<strong>南峰往新山的稜線高點</strong><br>⏱ 10:00<br>📏 2.97 km<br>⛰ 485 m"
    },
    {
     "latlng": [
@@ -15364,7 +15414,7 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>新山 (H499m)</strong><br>⏱ 09:15<br>📏 1.85 km<br>⛰ 499 m"
+    "popup": "<strong>新山 (H499m)</strong><br>⏱ 10:30<br>📏 3.74 km<br>⛰ 499 m"
    },
    {
     "latlng": [
@@ -15380,7 +15430,7 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>夢湖</strong><br>⏱ 09:50<br>📏 2.73 km<br>⛰ 305 m"
+    "popup": "<strong>夢湖</strong><br>⏱ 10:55<br>📏 4.37 km<br>⛰ 305 m"
    },
    {
     "latlng": [
@@ -15396,11 +15446,11 @@
      "weight": 2
     },
     "last": null,
-    "popup": "<strong>柯子林天然泳池登山口（回到起點）</strong><br>⏱ 11:40<br>📏 5.47 km<br>⛰ 85 m"
+    "popup": "<strong>柯子林天然泳池登山口（回到起點）</strong><br>⏱ 12:25<br>📏 6.58 km<br>⛰ 85 m"
    }
   ],
   "polyline": {
-   "n": 5,
+   "n": 7,
    "first": [
     25.116484,
     121.631323
@@ -15421,6 +15471,8 @@
     "labels": [
      "柯子林登山口",
      "古道岔路",
+     "友蚋山南峰",
+     "稜線高點",
      "新山",
      "夢湖",
      "柯子林登山口"
@@ -15430,7 +15482,9 @@
       "label": "海拔 (m)",
       "data": [
        85,
-       100,
+       105,
+       340,
+       485,
        499,
        305,
        85
@@ -15441,6 +15495,8 @@
       "pointBackgroundColor": [
        "#5c6b12",
        "#a09080",
+       "#a09080",
+       "#a09080",
        "#7c9e52",
        "#a09080",
        "#5c6b12"
@@ -15450,9 +15506,13 @@
        "#5c6b12",
        "#5c6b12",
        "#5c6b12",
+       "#5c6b12",
+       "#5c6b12",
        "#5c6b12"
       ],
       "pointBorderWidth": [
+       2.5,
+       2.5,
        2.5,
        2.5,
        2.5,
@@ -15509,43 +15569,61 @@
     "wp-time": "08:00",
     "wp-dist": "0.00",
     "wp-ele": "85",
-    "wp-desc": "五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。",
+    "wp-desc": "五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。",
     "wp-advice": "茶莊到泳池是窄山路，難會車。假日建議停茶莊外路邊再走進來；泳池旁停車場的現況未確認，共乘盡量壓到一兩台。"
    },
    {
     "wp-pos-label": "岔路口",
-    "wp-title": "五指山古道岔路（往新山）",
+    "wp-title": "五指山古道岔路（往新山西南稜）",
     "wp-time": "08:20",
-    "wp-dist": "0.52",
-    "wp-ele": "100",
-    "wp-desc": "沿五指山古道走約 0.5 km 後的岔路，三條公開 GPX 都在這裡離開古道。右轉往新山西南稜，直行則續走五指山古道往友蚋山南峰。累計 0.52 km。",
-    "wp-advice": "右轉後開始陡上，並有一小段拉繩攀岩。手套先戴好、登山杖收起來，雨後不要走。"
+    "wp-dist": "0.45",
+    "wp-ele": "105",
+    "wp-desc": "沿古道走約 0.5 km 後的岔路，右轉是往新山的西南稜。本頁直行，續走五指山古道。累計 0.45 km。",
+    "wp-advice": "這裡直行不要右轉。之後古道坡度漸升，過三板橋後是陡峭的青苔舊石階，濕滑時要小心。"
+   },
+   {
+    "wp-pos-label": "山頂",
+    "wp-title": "友蚋山南峰 (H340m)",
+    "wp-time": "09:10",
+    "wp-dist": "1.81",
+    "wp-ele": "340",
+    "wp-desc": "又名新山西嶺，昔稱過火埔，鑛務課基石 NO.261。古道再走約十分鐘會到汐萬路三段 380 巷出口，本頁由此轉上稜線往新山。累計 1.81 km。",
+    "wp-advice": "從這裡轉往新山，不要繼續往 380 巷出口走。之後是稜線上的原始山徑，約 1.2 km 再爬升約 150 m。"
+   },
+   {
+    "wp-pos-label": "稜線山頭",
+    "wp-title": "南峰往新山的稜線高點",
+    "wp-time": "10:00",
+    "wp-dist": "2.97",
+    "wp-ele": "485",
+    "wp-desc": "友蚋山南峰往新山途中稜線西段的最高處，這個點在公開 GPX 上沒有地名，海拔是四條軌跡的 GPS 推估。累計 2.97 km。",
+    "wp-advice": "接下來先下到約 420 m 的鞍部再爬上新山。往新山的路上有一小段拉繩攀岩，手套先戴好。"
    },
    {
     "wp-pos-label": "最高點",
     "wp-title": "新山 (H499m)",
-    "wp-time": "09:15",
-    "wp-dist": "1.85",
+    "wp-time": "10:30",
+    "wp-dist": "3.74",
     "wp-ele": "499",
-    "wp-desc": "全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。從岔路到這裡爬升約 400 m。累計 1.85 km。",
+    "wp-desc": "全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。累計 3.74 km。",
     "wp-advice": "往夢湖是一路陡下的原始路徑，多青苔石與樹根。下坡比上坡容易滑，放慢速度。"
    },
    {
     "wp-pos-label": "湖泊",
     "wp-title": "夢湖",
-    "wp-time": "09:50",
-    "wp-dist": "2.73",
+    "wp-time": "10:55",
+    "wp-dist": "4.37",
     "wp-ele": "305",
-    "wp-desc": "新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 2.73 km。",
+    "wp-desc": "新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 4.37 km。",
     "wp-advice": "湖畔咖啡店與設施據遊記已少人管理，不要指望補給。往柯子林的溪谷路要涉溪，鞋子防水較安心。"
    },
    {
     "wp-pos-label": "終點",
     "wp-title": "柯子林天然泳池登山口（回到起點）",
-    "wp-time": "11:40",
-    "wp-dist": "5.47",
+    "wp-time": "12:25",
+    "wp-dist": "6.58",
     "wp-ele": "85",
-    "wp-desc": "從夢湖往南下到溪谷，再向西接回登山口。這段約 2.7 km，比地圖上的直線長一倍。累計 5.47 km。",
+    "wp-desc": "從夢湖往南下到溪谷，再向西接回登山口，這段約 2.2 km。累計 6.58 km。",
     "wp-advice": "回程有涉溪、舊橋損壞處與茂密植被，長袖長褲可擋蜘蛛網。夏天收尾可在泳池或重柔橋下的溪水泡腳。"
    }
   ],
@@ -15557,7 +15635,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-12\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 5.5 KM O 型 古道進、岩稜上、湖邊下 五指山古道 × 新山 × 夢湖 從汐止柯子林天然泳池旁的登山口出發，走五指山古道前段約 0.5 km 後右轉，沿新山西南稜一路上攀登頂新山（499m），再下到山腳的夢湖，最後循溪谷步道繞回登山口。除了古道起頭那一小段，其餘都不走回頭路。 🧤 西南稜要拉繩，雨後不要走 往新山的路上有一小段要拉繩攀岩，有點裸露感（健行筆記 2026-08-21 路況回報）。新山步道多青苔石、樹根與泥土，遊記提到青苔石壁上拉繩是全程最危險的地方，雨天或雨後都不建議前往。本頁走法是由西南稜上攀、從夢湖下山，技術路段用爬的上去，不用倒著下。 📐 里程與時刻都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。里程取自三條同走法的公開 GPX（#6061507、#5708472、#5016103）的中位數，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。 起點 柯子林天然泳池登山口 柯子林茶莊（汐萬路三段 306 號）後方，步行 1～2 分鐘 🏁 終點回到同一個登山口 集合時間 日期未定 時間軸以 08:00 出發試算 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至柯子林登山口 5.5 總里程 km（估） 3.7 目標耗時 hr（未含休息） ~455 預計爬升 m 499 最高海拔 m（新山） 新山 499 m 為健行筆記新山山岳頁的公開標高（野牛 2 號基石）。總里程與爬升取三條同走法公開 GPX 的健行筆記標示值中位數（里程 4.90／5.47／5.49 km、爬升 444／455／501 m）；三人實際耗時 3 小時 32 分到 4 小時 41 分（含休息）。其餘各點海拔為 GPS 推估，誤差約 ±25 m。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接，不是步道的實際走向——尤其夢湖回登山口那段，實際是往南下溪谷再向西接回，比直線長一倍。航點座標取三條公開 GPX 在該地點最近軌跡點的中位數。 集合起點<柯子林天然泳池登山口>預計時間 08:00累計里程 0.00 km海拔 85 m五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。隊友建議茶莊到泳池是窄山路，難會車。假日建議停茶莊外路邊再走進來；泳池旁停車場的現況未確認，共乘盡量壓到一兩台。 參考資源 🔗 新山夢湖登山步道（健行筆記，2.1 km、海拔 290～499 m） 🔗 五指山古道（健行筆記，單程 2.1 km、海拔 76～376 m） 🔗 新山（健行筆記山岳頁） 📝 柯子林天然泳池（食尚玩家，停車與路況） 📝 新山夢湖步道遊記（LINE TODAY，拉繩路段與濕滑） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 柯子林天然泳池上新山夢湖O繞 #5708472・記錄 2026/07/02・5.47 km・4 小時 41 分 🛰️ 柯子林天然泳池上新山夢湖O型線 #6061507・記錄 2026/10/02・4.90 km・3 小時 32 分 🛰️ 新山O型（柯子林登山口） #5016103・記錄 2025/09/28・5.49 km・3 小時 46 分 海拔高度剖面圖 古道前段幾乎是平的，過岔路後沿西南稜在 1.3 km 內爬升約 400 m，是全程最吃力的一段；過新山後一路下降，經夢湖回到溪谷。新山為公開標高，其餘各點為三條公開 GPX 的 GPS 讀數中位數。 新山夢湖亮點導覽 依預計的抵達順序排列，內容整理自健行筆記新山夢湖、五指山古道兩條官方路線與公開遊記。 柯子林天然泳池 五指山古道的登山口就在泳池旁，多數山友從柯子林茶莊走一小段產業道路過來。泳池不收門票，夏天回程可以在這裡或重柔橋下的溪水消暑。 五指山古道 早年頂坪、半嶺、下坪居民往返汐止的聯絡道，汐萬公路開通後沒落，近年由區公所與地方人士整理重現。竹林、流水、青苔石階與駁坎都還在，本頁只走它最前面約 0.5 km。 新山西南稜 從古道岔路一路陡上到新山頂，有大型岩塊與固定繩索，沿途視野開闊。健行筆記形容新山的巨石稜線頗有大山氣勢；這也是全程唯一需要手腳並用的路段。 新山 499m 🏔 全程制高 野牛 2 號基石，高度不到五百公尺，山頂視野卻很開闊：五指山、友蚋山、汐止、七堵的山林盡收眼底，天氣晴朗時能望見北海岸與基隆嶼。 夢湖 新山腳下群山環繞的小埤塘，冬季午後湖面常起薄霧，因此得名；繞湖一圈不到十分鐘。湖中有食蟲植物黃花狸藻與保育魚類台灣細鯿。近年遊記提到湖畔的咖啡店與拍照設施已少人管理，不要指望在這裡補給。 夢湖下柯子林的溪谷步道 從夢湖往南下到溪谷，再向西接回泳池。舊遊記提到這段有涉溪、舊橋損壞處與電塔，植被茂密、蜘蛛網多；三條公開 GPX 的回程都走這條，約 2.7 km。 為什麼選這條 古道前段＋西南稜：最短的新山 O 型，技術段用上攀的 【走法怎麼選出來】健行筆記新山夢湖步道底下列出的 160 條公開 GPX（2024-09 至 2026-10）裡，26 條經過柯子林或五指山古道。逐條比對軌跡經過的地標後，本頁採用的走法有 3 條，上山段 100% 重疊，岔路都落在古道約 0.5 km 處，回程也走同一條溪谷步道。 【另一種走法】把五指山古道走完全段，經友蚋山南峰（舊稱過火埔）沿稜線接新山，再下夢湖回泳池，約 7.9 km、實際耗時約 5 小時 40 分，比本頁多約 2.4 km，還要再爬一次友蚋山南峰。 行程四大特色 • 新山 499 m 的巨石稜線與 360° 展望 • 五指山古道的竹林、青苔石階與駁坎 • 夢湖的湖光山色，冬季午後常有薄霧 • 起終點同一處，回程可在柯子林天然泳池消暑 預計行程進度（約 3H40M） 候選行程，日期未定。以 08:00 自柯子林天然泳池登山口出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 11:40 回到登山口。 08:00🏊 集合起點柯子林天然泳池登山口五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。三條公開 GPX 都由此起錄。08:20🔀 岔路口五指山古道岔路（往新山）沿五指山古道走約 0.5 km 後的岔路，三條公開 GPX 都在這裡離開古道。右轉往新山西南稜，直行則續走五指山古道往友蚋山南峰。累計 0.52 km。09:15🏔️ 最高點新山 (H499m)全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。從岔路到這裡爬升約 400 m。累計 1.85 km。09:50💧 湖泊夢湖新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 2.73 km。11:40🏁 終點柯子林天然泳池登山口（回到起點）從夢湖往南下到溪谷，再向西接回登山口。這段約 2.7 km，比地圖上的直線長一倍。累計 5.47 km。 © 爬爬小隊候選行程 ｜ 五指山古道 × 新山 × 夢湖 O 型 約 5.5 KM ｜ 日期未定",
+  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 候選行程 · 日期未定 · 約 6.6 KM O 型 古道走到底、稜線接新山 五指山古道 × 新山 × 夢湖 從汐止柯子林天然泳池旁的登山口出發，先把五指山古道走到友蚋山南峰（340m），接新山步道沿稜線往東登頂新山（499m），再走新山夢湖步道下到夢湖，最後循溪谷步道繞回登山口。全程不走回頭路。 🧤 新山一帶要拉繩，雨後不要走 往新山的路上有一小段要拉繩攀岩，有點裸露感（健行筆記 2026-08-21 路況回報）；確切在哪一段，公開軌跡看不出來。新山步道多青苔石、樹根與泥土，遊記提到青苔石壁上拉繩是全程最危險的地方，雨天或雨後都不建議前往。新山到夢湖是一路陡下的原始路徑，下坡比上坡更容易滑。 📐 里程與時刻都還是估計值 本隊尚未實走，地圖上的線是航點之間的直線。公開 GPX 裡沒有一條剛好照這個順序走完，所以里程是逐段取七條公開 GPX 的中位數再相加；時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。 起點 柯子林天然泳池登山口 柯子林茶莊（汐萬路三段 306 號）後方，步行 1～2 分鐘 🏁 終點回到同一個登山口 集合時間 日期未定 時間軸以 08:00 出發試算 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 導航至柯子林登山口 6.6 總里程 km（估） 4.4 目標耗時 hr（未含休息） ~480 預計爬升 m 499 最高海拔 m（新山） 新山 499 m（野牛 2 號基石）與友蚋山南峰 340 m（鑛務課基石 NO.261）為健行筆記的公開標高。總里程為六段各自的公開 GPX 中位數相加（6.58 km）。爬升是推估：依航點海拔加上南峰到新山之間鞍部（GPS 約 420 m）的起伏相加約 480 m；直接平滑軌跡高程會因取樣密度不同落在 380～550 m，所以不採用。其餘各點海拔為 GPS 推估，誤差約 ±25 m。 互動路線圖與航點切換 點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接，不是步道的實際走向——古道沿溪谷蜿蜒、夢湖回登山口要先往南下溪谷，實際都比直線長。航點座標取公開 GPX 在該地點最近軌跡點的中位數；友蚋山南峰取公開 GPX 標記的路點。 集合起點<柯子林天然泳池登山口>預計時間 08:00累計里程 0.00 km海拔 85 m五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。隊友建議茶莊到泳池是窄山路，難會車。假日建議停茶莊外路邊再走進來；泳池旁停車場的現況未確認，共乘盡量壓到一兩台。 參考資源 🔗 五指山古道（健行筆記，單程 2.1 km、海拔 76～376 m） 🔗 新山夢湖登山步道（健行筆記，2.1 km、海拔 290～499 m） 🔗 新山（健行筆記山岳頁） 📝 柯子林天然泳池（食尚玩家，停車與路況） 📝 五指山古道＋友蚋山南峰遊記（LINE TODAY，古道路況） 📝 新山夢湖步道遊記（LINE TODAY，拉繩路段與濕滑） 路線軌跡來源（健行筆記公開 GPX） 🛰️ 五指山古道_新山_大金剛岩_新山夢湖步道 #3929691・記錄 2024/10/14・7.91 km・古道→南峰→新山→夢湖，另繞大金剛岩 🛰️ 五指山古道連走新山 #6145885・記錄 2026/10/20・5.71 km・古道→南峰→新山，由西南稜下山 🛰️ 20241015-五指山古道,新山,夢湖,保線路 #3933183・記錄 2024/10/15・8.82 km・古道→南峰→新山→夢湖，由保線路下山 🛰️ 新山步道-五指山古道 #4822283・記錄 2025/08/09・5.44 km・反向：西南稜上新山→南峰→古道下山 🛰️ 柯子林天然泳池上新山夢湖O繞 #5708472・記錄 2026/07/02・5.47 km・新山→夢湖→溪谷回登山口這兩段的依據 🛰️ 柯子林天然泳池上新山夢湖O型線 #6061507・記錄 2026/10/02・4.90 km・同上 🛰️ 新山O型（柯子林登山口） #5016103・記錄 2025/09/28・5.49 km・同上 海拔高度剖面圖 古道過岔路後才開始爬升，到友蚋山南峰累積約 250 m；接著沿稜線再上到約 485 m 的高點，下到約 420 m 的鞍部（圖上未標）後登新山。過新山後一路下降，經夢湖回到溪谷。新山與友蚋山南峰為公開標高，其餘各點為公開 GPX 的 GPS 讀數中位數。 新山夢湖亮點導覽 依預計的抵達順序排列，內容整理自健行筆記五指山古道、新山夢湖兩條官方路線與公開遊記。 柯子林天然泳池 五指山古道的登山口就在泳池旁，多數山友從柯子林茶莊走一小段產業道路過來。泳池不收門票，夏天回程可以在這裡或重柔橋下的溪水消暑。 五指山古道 早年頂坪、半嶺、下坪居民往返汐止的聯絡道，汐萬公路開通後沒落，近年由區公所與地方人士整理重現。沿途有竹林、流水、五福宮原址、駁坎、青苔石階與古橋，還會經過柯子林石磐瀑布。 友蚋山南峰 340m 又名新山西嶺，昔日稱作「過火埔」，有鑛務課基石。古道在這裡再走約十分鐘會到汐萬路三段 380 巷的出口；本頁不出古道，由此轉上稜線往新山。 新山 499m 🏔 全程制高 野牛 2 號基石，高度不到五百公尺，山頂視野卻很開闊：五指山、友蚋山、汐止、七堵的山林盡收眼底，天氣晴朗時能望見北海岸與基隆嶼。健行筆記形容它的巨石稜線頗有大山氣勢。 夢湖 新山腳下群山環繞的小埤塘，冬季午後湖面常起薄霧，因此得名；繞湖一圈不到十分鐘。湖中有食蟲植物黃花狸藻與保育魚類台灣細鯿。近年遊記提到湖畔的咖啡店與拍照設施已少人管理，不要指望在這裡補給。 夢湖下柯子林的溪谷步道 從夢湖往南下到溪谷，再向西接回泳池。舊遊記提到這段有涉溪、舊橋損壞處與電塔，植被茂密、蜘蛛網多；三條公開 GPX 的回程都走這條，約 2.2 km。 為什麼選這條 先古道、後新山：古道、稜線、湖泊一次走完，不走回頭路 【走法怎麼組出來】健行筆記新山夢湖步道底下列出的 160 條公開 GPX（2024-09 至 2026-10）裡，26 條經過柯子林或五指山古道。古道全段接新山的有 #3929691、#6145885、#3933183 三條，加上反向走的 #4822283，用來算登山口到新山的四段；新山經夢湖回登山口這兩段，取三條同走法 GPX（#6061507、#5708472、#5016103）。登山口到稜線高點，四條軌跡 97% 以上重疊；稜線高點到新山只有 #3933183 多繞了新山東側，其餘三條同路。 【另一種走法】古道只走前段約 0.5 km，在岔路右轉沿新山西南稜直上新山，再下夢湖回登山口，約 5.5 km。少走友蚋山南峰與一段稜線，但西南稜是陡上加拉繩，強度集中在 1.3 km 內。 行程四大特色 • 五指山古道全段：竹林、駁坎、青苔石階與石磐瀑布 • 友蚋山南峰與新山兩座有基石的山頭 • 新山 499 m 的巨石稜線與展望，夢湖的湖光山色 • 起終點同一處，回程可在柯子林天然泳池消暑 預計行程進度（約 4H25M） 候選行程，日期未定。以 08:00 自柯子林天然泳池登山口出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 12:25 回到登山口。 08:00🏊 集合起點柯子林天然泳池登山口五指山古道的登山口，在柯子林天然泳池旁、柯子林茶莊（汐萬路三段 306 號）後方，從茶莊步行約 1～2 分鐘。08:20🔀 岔路口五指山古道岔路（往新山西南稜）沿古道走約 0.5 km 後的岔路，右轉是往新山的西南稜。本頁直行，續走五指山古道。累計 0.45 km。09:10🗻 山頂友蚋山南峰 (H340m)又名新山西嶺，昔稱過火埔，鑛務課基石 NO.261。古道再走約十分鐘會到汐萬路三段 380 巷出口，本頁由此轉上稜線往新山。累計 1.81 km。10:00🌿 稜線山頭南峰往新山的稜線高點友蚋山南峰往新山途中稜線西段的最高處，這個點在公開 GPX 上沒有地名，海拔是四條軌跡的 GPS 推估。累計 2.97 km。10:30🏔️ 最高點新山 (H499m)全程最高點，野牛 2 號基石。山頂可看五指山、友蚋山、汐止與七堵，晴天遠眺北海岸與基隆嶼。累計 3.74 km。10:55💧 湖泊夢湖新山腳下的小埤塘，冬季午後常起薄霧，繞湖一圈不到十分鐘。湖中可觀察黃花狸藻與台灣細鯿。累計 4.37 km。12:25🏁 終點柯子林天然泳池登山口（回到起點）從夢湖往南下到溪谷，再向西接回登山口，這段約 2.2 km。累計 6.58 km。 © 爬爬小隊候選行程 ｜ 五指山古道 × 新山 × 夢湖 O 型 約 6.6 KM ｜ 日期未定",
   "errors": []
  }
 }
