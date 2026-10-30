@@ -116,7 +116,7 @@ git push origin feature/你的功能名稱
 
 - 詳情頁共用樣式在 `assets/detail.css`，全站共用在 `assets/site.css`
 - 各頁 `<style>` 只放該頁的 `:root` 變數與少數專屬規則
-- **改了 `assets/` 的共用檔就跑 `python3 tools/bump_assets.py`**，讓 24 頁的 `?v=` 換成
+- **改了 `assets/` 的共用檔就跑 `python3 tools/bump_assets.py`**，讓 25 頁的 `?v=` 換成
   新的內容雜湊——不然正式站的快取會拿舊 JS 配新 HTML，導覽列整條不見。忘了會被
   `spec_sweep` 擋下來
 - **新增或刪除檔案只改 `manifest.json`**（條目的 `short` 是檔案樹上那一句），然後跑
