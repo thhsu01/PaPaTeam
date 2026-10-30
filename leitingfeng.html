@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="雷霆峰（基隆山東峰）× 基隆山候選行程。自九份隔頂站停車場出發，經山尖古道、基隆山東峰登山口陡上稜線，登雷霆峰後沿黃金一稜拉繩上 485 峰與小百岳基隆山，再走石階下到基隆山登山步道登山口、回到停車場，步行約 3.3 公里。">
+  <title>雷霆峰 × 基隆山：隔頂 O 型（黃金一稜上攀） — 爬爬小隊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+    :root {
+      --page-bg: #f8f7f4;
+      --page-fg: #44403c;
+      --chart-max-w: 800px;
+      --chart-h: 320px;
+      --waypoint-transition: all 0.3s ease;
+      --map-h: 420px;
+      --map-radius: 12px;
+      --timeline-left: 20px;
+      --timeline-bg: linear-gradient(to bottom, #1e3a8a, #93c5fd);
+
+      /* 本頁主色。用途與對比度規則見 assets/detail.css 的「主色語意層」。
+         要換主色只需改這一段，markup 與腳本都不必動。
+         括號內是實測對比度（WCAG 相對亮度公式，2026-10-30 以 python 計算），底色為頁底 #f8f7f4。
+         取「雷霆」的暴雨天色：深藍 blue-800／900。全站藍色系既有 caolingguidao 的 #2563eb
+         （blue-600，明亮天藍），本頁刻意壓到兩階更深的海軍藍，並在 hero 改配 indigo 淡色調，
+         兩頁並排時不會被看成同一色。 */
+      --accent-fill:            #1e40af;                    /* 實心底（白字 8.72:1） */
+      --accent-border-deep:     #bfdbfe;                    /* blue-200 */
+      --accent:                 #1e40af;                    /* 裝飾：圓點、軌跡、圖表線（8.14:1） */
+      --accent-deep:            #1e3a8a;                    /* blue-900（9.67:1） */
+      --accent-soft:            #dbeafe;                    /* blue-100（主色字壓在上面 7.15:1） */
+      --accent-strong:          #1e40af;                    /* 淺底上的文字（8.14:1） */
+      --accent-strong-deep:     #1e3a8a;                    /* 淡底卡片上的內文（#eff6ff 上 9.52:1） */
+      --accent-strong-deeper:   #172554;                    /* 再深一階（#eff6ff 上 13.50:1） */
+      --accent-tint:            #eff6ff;                    /* 淡底 */
+      --accent-border: color-mix(in srgb, var(--accent) 25%, white);  /* 淡框線 */
+    }
+  </style>
+  <link rel="stylesheet" href="assets/detail.css?v=ceb20307">
+  <link rel="stylesheet" href="assets/site.css?v=498319ba">
+  <script src="assets/site.js?v=01982b47"></script>
+  <script src="assets/detail.js?v=ec099c0f"></script>
+</head>
+<body class="text-stone-800 antialiased">
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <!-- NAV -->
+  <nav data-widget="nav"></nav>
+
+  <main id="main-content" class="pt-14">
+    <!-- ═══ HERO / OVERVIEW ═══ -->
+    <section id="overview" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-stone-100">
+      <div class="max-w-4xl mx-auto w-full">
+        <div class="mb-4">
+          <span class="text-xs font-medium tracking-widest accent-text uppercase accent-soft px-3 py-1 rounded-full">候選行程 · 日期未定 · 約 3.3 KM O 型 · 有拉繩攀爬段</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-4">
+          黃金一稜上攀<br>
+          <span class="accent-text">雷霆峰 × 基隆山</span>
+        </h1>
+        <p class="text-lg text-stone-600 mb-6 max-w-2xl">從九份隔頂站停車場出發，經山尖路觀光步道登山口往下走山尖古道到基隆山東峰登山口，陡上稜線登雷霆峰（基隆山東峰），再沿黃金一稜拉繩上 485 峰、登小百岳基隆山，最後走基隆山步道的石階下到登山步道登山口，再走回停車場。拉繩與陡坡都排在上坡，下山是整備完善的石階。</p>
+
+        <div class="mb-8 max-w-2xl bg-amber-50 border-l-4 border-amber-400 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm">
+          <span class="text-2xl mt-0.5">⚠️</span>
+          <div>
+            <div class="font-bold text-amber-800 text-base mb-1">有拉繩攀爬段，雨後不要走</div>
+            <p class="text-sm text-amber-700 leading-relaxed">健行筆記把這條步道列為「小有難度且稍危險」，山友回報基隆山到東峰的稜線大半需要拉繩、繩索新舊不一，路面濕了很滑。建議至少三人同行、戴手套，挑連續晴天後再走。2026-07 的路況回報提到草長、有虎頭蜂，山尖路出口一帶有崩塌土石與消防單位拉的封鎖線；沿途沒有確定的補給點，出發前請再查一次回報。</p>
+          </div>
+        </div>
+
+        <!-- 候選頁的數字都還是估計值，說清楚比含糊帶過好 -->
+        <div class="mb-8 max-w-2xl accent-tint border-l-4 rounded-xl px-5 py-4 flex items-start gap-3 shadow-sm accent-line-bold">
+          <span class="text-2xl mt-0.5">📐</span>
+          <div>
+            <div class="font-bold accent-text-deeper text-base mb-1">里程與時刻都還是估計值</div>
+            <p class="text-sm accent-text-deep leading-relaxed">本隊尚未實走，地圖上的線是航點之間的直線。航點是隊上標記的 11 點（未給座標的五點沿用健行筆記 GPX #5285916 的路點）；里程取 28 條同方向公開 GPX 的分段中位數相加，時刻以 08:00 出發、每小時 1.5 公里試算（未另計休息），集合時間尚未決定。這 28 條的實際耗時中位數約 3 小時 38 分，拉繩處排隊會再拉長，安排時請抓 4 小時。</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合地點</div>
+            <div class="font-bold text-stone-800">九份隔頂站停車場</div>
+            <div class="text-xs text-stone-600 mt-1">縣道 102 號隔頂公車站旁</div>
+            <div class="text-xs mt-2 pt-2 border-t border-stone-100 accent-text">🏁 解散<br>同一地點（O 型）</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm">
+            <div class="text-xs text-stone-600 mb-1">集合時間</div>
+            <div class="font-bold text-stone-800">日期未定</div>
+            <div class="text-xs text-stone-600 mt-1">時間軸以 08:00 出發試算</div>
+          </div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm" data-widget="weather"></div>
+          <div class="bg-white/80 rounded-2xl p-4 border border-stone-100 shadow-sm flex items-center justify-center">
+            <button onclick="openNavigation()" class="w-full accent-fill hover:opacity-90 text-white font-medium text-sm py-2 px-4 rounded-xl transition-colors" aria-label="在地圖應用中導航至九份隔頂站停車場">
+              🗺️ 導航至隔頂站停車場
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">3.3</div>
+            <div class="text-xs text-stone-600">總里程 km（估）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">2.2</div>
+            <div class="text-xs text-stone-600">目標耗時 hr（未含休息）</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black text-stone-900">~380</div>
+            <div class="text-xs text-stone-600">預計爬升 m</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-black accent-text">588</div>
+            <div class="text-xs text-stone-600">最高海拔 m（基隆山）</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mt-3 max-w-3xl">山頭海拔：基隆山 588 m（三等三角點 1109 號）、485 峰 485 m（台陽四號基石）為健行筆記的公開標高；雷霆峰 466 m 依隊上提供；其餘各點沒有公開標高，取公開 GPX 在該點 50 m 內的 GPS 高程中位數、取整到 5 m。總里程是 28 條同方向公開 GPX 逐段量測的中位數相加，短於兩點直線的三段與登山口走回停車場的一段改用直線距離（3.25 km）。爬升取同樣 28 條軌跡的高程移動中位數累加，三種視窗分別得 419、380、362 m，取中間值。</p>
+      </div>
+    </section>
+
+    <!-- ═══ MAP ═══ -->
+    <section id="map-section" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          互動路線圖與航點切換
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">點擊地圖標記查看各航點細節。本隊尚未實走，地圖上的線為航點直線連接。航點座標是隊上標記的位置；山尖路叉、雷霆峰、黃金一稜拉繩段、485 峰、基隆山五點隊上未給座標，沿用健行筆記 GPX #5285916 的路點，其中三座山頭另與其他公開 GPX 的同名路點比對過，差距都在 5 m 內。除停車場外，每點離同方向公開軌跡的中位數都在 7 m 內。</p>
+        <div id="map" class="mb-6 shadow-md" role="region" aria-label="互動式登山路線地圖"></div>
+        <div data-widget="wp-card"></div>
+        <div class="mt-4 bg-stone-50 rounded-2xl p-5 border border-stone-100">
+          <div class="text-xs font-medium text-stone-600 mb-3">參考資源</div>
+          <div class="flex flex-col gap-2">
+            <a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=600" target="_blank" class="text-sm accent-text hover:underline">🔗 雷霆峰步道（基隆山東峰、黃金一稜）（健行筆記，官方路線 3.2 km 環狀）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=detail&id=105" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 基隆山（健行筆記）</a>
+            <a href="https://hiking.biji.co/index.php?q=mountain&act=famous-list&id=2" target="_blank" class="text-sm text-emerald-700 hover:underline">🔗 台灣小百岳一覽（健行筆記）</a>
+          </div>
+          <div class="text-xs font-medium text-stone-600 mt-4 mb-3">公開 GPX（健行筆記）</div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5285916" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 20260115基隆山主東峰</a>
+              <span class="block text-xs text-stone-600">#5285916・3.25 km・本頁稜線五個航點的來源，但走向相反（先上基隆山，拉繩段與陡坡都是下坡）</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5193954" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 基隆山東峰(雷霆峰)主峰O型</a>
+              <span class="block text-xs text-stone-600">#5193954・3.04 km・2025-11-30・與本頁同方向</span>
+            </div>
+            <div>
+              <a href="https://hiking.biji.co/index.php?q=trail&act=gpx_detail&id=5154478" target="_blank" class="text-sm text-emerald-700 hover:underline">🛰️ 基隆山東峰(隔頂進)</a>
+              <span class="block text-xs text-stone-600">#5154478・3.02 km・2025-11-16・與本頁同方向</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ELEVATION ═══ -->
+    <section id="elevation" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          海拔高度剖面圖
+        </h2>
+        <div data-widget="chart"></div>
+        <p class="text-xs text-stone-600 mt-3 text-center">從隔頂先下降到基隆山東峰登山口，接著約 0.7 km 陡上近 190 m 到稜線，登雷霆峰後沿黃金一稜續升到基隆山，再一路石階下到登山步道登山口。山頭海拔的出處見總覽。</p>
+      </div>
+    </section>
+
+    <!-- ═══ SPOTS ═══ -->
+    <section id="spots" class="py-16 px-6 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-800 mb-6 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          黃金一稜亮點導覽
+        </h2>
+        <p class="text-sm text-stone-600 mb-6">依預計的抵達順序排列，內容整理自健行筆記的步道頁、基隆山山岳頁，以及公開 GPX 的路點名稱。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-600 rounded-full"></span>山尖古道與基隆山東峰登山口</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">從隔頂的山尖路觀光步道登山口往下約 0.7 km，經往水圳橋的岔路到基隆山東峰登山口。之後約 0.7 km 陡上近 190 m 到稜線岔路，公開 GPX 中這段是同方向軌跡耗時最長的一段。</p>
+          </div>
+          <div class="p-6 rounded-2xl border shadow-sm accent-tint accent-line-deep">
+            <h3 class="font-bold mb-2 flex items-center gap-2 accent-text"><span class="w-2 h-2 accent-mark rounded-full"></span>雷霆峰（基隆山東峰）</h3>
+            <p class="text-sm accent-text-deep leading-relaxed">又稱石尪山，地勢險峻。健行筆記描述山頂可遠眺深澳、和平島，俯瞰十三層遺址與水湳洞陰陽海，前望基隆山。濂洞國小那一側的近垂直岩壁是另一條路線，本頁不走。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-amber-500 rounded-full"></span>黃金一稜</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">基隆山到東峰這段稜線在東北角頗富盛名，健行筆記稱它是黃金十稜中的第一稜。過基隆山後坡陡、芒草叢生，拉繩處要一次一人、逐條試拉。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-stone-500 rounded-full"></span>485 峰與台陽基石</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">健行筆記列出這條稜線上的兩顆基石：台陽二號基石與 485 峰的台陽四號基石。485 峰在拉繩處西側約 35 m。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 accent-mark rounded-full"></span>基隆山 588m</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">台灣小百岳第 6 座，三等三角點 1109 號，別名雞籠山、大肚美人山、基隆富士山，是九份的地標。下山走的基隆山步道主線是陡峭的石階，沿途有觀景平台與涼亭。</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+            <h3 class="font-bold text-stone-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full"></span>下山後的九份</h3>
+            <p class="text-sm text-stone-600 leading-relaxed">健行筆記提到下山後可就近到九份老街，或前往金瓜石的黃金博物園區、水湳洞一帶。</p>
+          </div>
+        </div>
+
+        <div class="mt-8 accent-tint p-6 rounded-2xl border accent-line-deep">
+          <div class="text-xs font-medium accent-text mb-2">為什麼這樣走</div>
+          <h3 class="text-lg font-bold accent-text-deeper mb-3">把難的都排在上坡：<span class="font-normal accent-text">跟參考 GPX 反方向</span></h3>
+          <p class="text-sm accent-text-deep leading-relaxed mb-3"><strong>【參考 GPX 的走法】</strong><br>GPX #5285916 先從隔頂上基隆山，再沿黃金一稜往東下到雷霆峰，最後從山尖路陡降。同走法的 29 條公開 GPX 裡，雷霆峰到山尖路這段中位數要 54 分鐘才下降約 0.84 km，是全程最慢的一段。</p>
+          <p class="text-sm accent-text-deep leading-relaxed"><strong>【本頁的走法】</strong><br>反過來從山尖路上稜線，拉繩處與陡坡都變成上坡，下山改走基隆山步道的石階。健行筆記上同方向的公開 GPX 有 28 條，數量與原方向相當。</p>
+          <h4 class="font-bold accent-text-deep mt-4 mb-2">行程四大特色</h4>
+          <ul class="text-sm accent-text-deep space-y-1">
+            <li>• 一趟登雷霆峰與小百岳 #6 基隆山</li>
+            <li>• 走黃金十稜中的第一稜</li>
+            <li>• 雷霆峰頂俯瞰陰陽海與十三層遺址</li>
+            <li>• O 型路線，開車或搭公車都能回到原點</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <section id="timeline" class="py-16 px-6 bg-stone-50">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-black text-stone-900 mb-2 flex items-center gap-3">
+          <span class="w-2.5 h-8 accent-mark-deep rounded-full"></span>
+          預計行程進度（約 2H10M）
+        </h2>
+        <p class="text-sm text-stone-600 mb-8">候選行程，日期未定。以 08:00 自九份隔頂站停車場出發試算，時刻以每小時 1.5 公里推算（未另計休息），約 10:10 回到停車場。拉繩段的實際耗時通常比這長得多，見總覽說明。</p>
+        <div data-widget="timeline"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center py-12 border-t border-stone-200">
+    <p class="text-stone-600 text-sm font-medium tracking-wide">© 爬爬小隊候選行程 ｜ 雷霆峰 × 基隆山 約 3.3 KM ｜ 日期未定</p>
+  </footer>
+
+  <script>
+    // ── 行程數據 ──────────────────────────────────────────────
+    // 候選行程，日期未定。2026-10-30 建立，依使用者選定的「隔頂 O 逆」走法：
+    // 隔頂停車場 → 山尖古道 → 基隆山東峰登山口 → 雷霆峰 → 黃金一稜 → 485 峰 → 基隆山 → 石階下到基隆山登山步道登山口 → 走回停車場。
+    //
+    // 座標：隊上標記的 11 點（2026-10-30 提供）。其中山尖路叉、雷霆峰、黃金一稜拉繩段、485 峰、
+    // 基隆山五點隊上未給座標，沿用健行筆記 GPX #5285916（2026-01-15，反方向走）上傳者標的路點；
+    // 雷霆峰、485 峰、基隆山再以健行筆記「雷霆峰」搜尋結果 315 筆 GPX 的同名路點中位數
+    // （33、12、19 個）校正，與上傳者的點差 1–4 m。
+    // 逐點比對 28 條同方向軌跡（最近點距離中位數／60 m 內經過的條數）：停車場 62 m／10、
+    // 觀光步道登山口 4／26、水圳橋岔路 5／26、東峰登山口 3／28、山尖路叉 1／28、雷霆峰 2／28、
+    // 拉繩段 2／28、485 峰 3／28、基隆山 2／28、涼亭 6／19、登山步道登山口 7／28。
+    // 停車場本來就不在步道上（集合點），其餘都在軌跡上。
+    //
+    // 分群：315 筆依經過 隔頂／山尖路登山口／雷霆峰／485 峰／基隆山 的順序分群（50 m 內算經過），
+    // 「隔頂起訖、先山尖路再雷霆峰再基隆山、全長 6 km 以下」的有 28 條，即本頁的樣本。
+    //
+    // dist：28 條軌跡逐段量測（依序找第一次通過該點 60 m 內的位置），每段 × 健行筆記標示里程 ÷
+    // 原始點加總，取中位數相加。樣本數：觀光步道登山口→水圳橋岔路 20、→東峰登山口 20、
+    // →山尖路叉 20、→雷霆峰 20、→拉繩段 20、→485 峰 20、→基隆山 20、→涼亭 11、
+    // →登山步道登山口 11（其餘軌跡下山沒經過涼亭 60 m 內）。
+    // 三段的中位數短於兩點直線，改用直線距離（取整進位）：停車場→觀光步道登山口（中位數 0.02，
+    // 直線 0.063，停車場不在軌跡上，量不準）、基隆山→涼亭（0.296／0.299）、
+    // 涼亭→登山步道登山口（0.477／0.508）。
+    // 登山步道登山口→停車場（終點）：沒有軌跡走到停車場，用直線 0.090（使用者 2026-10-30 指示終點延伸到停車場）。
+    // time：08:00 出發（試算用，集合時間未定），以每小時 1.5 公里推算：
+    // 08:00 ＋ dist ÷ 1.5 小時，取整到 5 分鐘，未另計休息；是規劃值，不是實測。
+    // 對照：28 條軌跡的實際耗時中位數 218 分鐘（137–319），比試算的 130 分鐘長很多。
+    //
+    // ele（專案規則：有公開標高用公開標高，其次用隊上提供，都沒有才用 GPS）：
+    //   公開標高 —— 基隆山 588（三等三角點 1109 號）、485 峰 485（台陽四號基石），出處健行筆記。
+    //   隊上提供 —— 雷霆峰 466。公開 GPX 的軌跡中位數 439、路點中位數 460，記在這裡備查。
+    //   GPS —— 其餘各點，同方向軌跡在該點 50 m 內的高程中位數，再取全部軌跡的中位數，取整到 5 m，
+    //     ±25 m 的估計，所以 loc 不加 (H___m)。停車場只有 2 條軌跡進到 50 m 內（332 m），
+    //     樣本最少。
+    //   系統偏差查過但不一致：同一批軌跡在基隆山讀 582（公開 588，−6）、在 485 峰讀 461（公開 485，
+    //     −24），沒有單一修正量可套，依 manifest conventions.elevation_source 不硬套修正。
+    const schedule = [
+      { lat: 25.111535, lng: 121.84829, time: "08:00", loc: "九份隔頂站停車場", dist: 0.00, ele: 330, pos: "集合地點",
+        short: "隔頂停車場",
+        desc: "縣道 102 號隔頂公車站旁的停車場，行程集合點；健行筆記列出基隆客運 788 與臺北客運 965 停靠隔頂。",
+        advice: "沿途沒有確定的補給點，飲水在出發前備足。先走約 60 m 到山尖路觀光步道登山口。" },
+
+      { lat: 25.112052, lng: 121.848043, time: "08:05", loc: "山尖路觀光步道登山口", dist: 0.07, ele: 320, pos: "入山口",
+        short: "觀光步道口",
+        desc: "往山尖古道的步道入口，在停車場北側約 60 m。累計 0.07 km。",
+        advice: "一開始是往下走山尖古道，下降約 75 m，回程不會再走這段。" },
+
+      { lat: 25.112821, lng: 121.85083, time: "08:15", loc: "山尖古道水圳橋岔路", dist: 0.36, ele: 245, pos: "岔路口",
+        short: "水圳橋岔路",
+        desc: "山尖古道上往水圳橋的岔路，參考 GPX 的上傳者記為往水圳橋的叉路。累計 0.36 km。",
+        advice: "往基隆山東峰登山口方向走，不要轉往水圳橋。" },
+
+      { lat: 25.115381, lng: 121.852724, time: "08:30", loc: "基隆山東峰登山口", dist: 0.78, ele: 235, pos: "入山口",
+        short: "東峰登山口",
+        desc: "往雷霆峰稜線的登山口，參考 GPX 記為山尖路登山口。健行筆記 2026-07 的路況回報提到山尖路出口一帶有崩塌土石、草長與消防單位的封鎖線。累計 0.78 km。",
+        advice: "接下來約 0.7 km 陡上近 190 m，是全程最喘的一段；進山前先確認封鎖線是否還在。" },
+
+      { lat: 25.12000, lng: 121.85458, time: "09:00", loc: "山尖路叉", dist: 1.47, ele: 420, pos: "岔路口",
+        desc: "登上稜線後的岔路，往東約 70 m 是雷霆峰，往西沿黃金一稜接 485 峰與基隆山。累計 1.47 km。",
+        advice: "雷霆峰是短程折返，登頂後回到這裡再往西走稜線。" },
+
+      { lat: 25.120138, lng: 121.85529, time: "09:05", loc: "雷霆峰（基隆山東峰）", dist: 1.59, ele: 466, pos: "山頭",
+        short: "雷霆峰",
+        desc: "基隆山東峰，又稱石尪山。健行筆記描述可遠眺深澳、和平島，俯瞰十三層遺址與水湳洞陰陽海。海拔 466 m 依隊上提供。累計 1.59 km。",
+        advice: "往濂洞國小方向是近垂直的岩壁路線，不在本行程內，不要從那一側下。" },
+
+      { lat: 25.11991, lng: 121.85317, time: "09:15", loc: "黃金一稜拉繩段", dist: 1.84, ele: 460, pos: "拉繩",
+        short: "拉繩段",
+        desc: "這個點沒有地名，是參考 GPX 上傳者標記「攀繩」的位置，在 485 峰東側約 35 m。山友回報基隆山到東峰的稜線大半需要拉繩。累計 1.84 km。",
+        advice: "繩索新舊不一，逐條試拉後再施力，一次一人上；戴手套，雨後不要走。" },
+
+      { lat: 25.119836, lng: 121.852823, time: "09:15", loc: "485峰 (H485m)", dist: 1.89, ele: 485, pos: "山頭",
+        desc: "黃金一稜上的小山頭，有台陽四號基石（健行筆記基點）。累計 1.89 km。",
+        advice: "往基隆山主峰約 0.46 km，仍是起伏的稜線與芒草路。" },
+
+      { lat: 25.118819, lng: 121.849148, time: "09:35", loc: "基隆山 (H588m)", dist: 2.35, ele: 588, pos: "最高點", xbaiyue: 6,
+        desc: "全程最高點，三等三角點 1109 號，台灣小百岳第 6 座；別名雞籠山、大肚美人山、基隆富士山。累計 2.35 km。",
+        advice: "由此起下山全是陡峭石階，膝蓋不好的人準備登山杖。" },
+
+      { lat: 25.116326, lng: 121.848035, time: "09:45", loc: "基隆山涼亭", dist: 2.65, ele: 480, pos: "涼亭",
+        desc: "基隆山步道主線上的涼亭，在山頂下方約 0.3 km。累計 2.65 km。",
+        advice: "可在這裡歇腳；再沿石階下約 0.5 km 到登山步道登山口。" },
+
+      { lat: 25.11179, lng: 121.847443, time: "10:05", loc: "基隆山登山步道登山口", dist: 3.16, ele: 325, pos: "出山口",
+        short: "登山步道口",
+        desc: "基隆山步道的隔頂端入口，下山的出口；離集合的停車場直線約 90 m。累計 3.16 km。",
+        advice: "出山後再走約 90 m（直線）就回到集合的停車場。" },
+
+      { lat: 25.111535, lng: 121.84829, time: "10:10", loc: "九份隔頂站停車場", dist: 3.25, ele: 330, pos: "終點解散",
+        short: "隔頂停車場",
+        desc: "回到集合的停車場，O 型行程結束。累計 3.25 km。",
+        advice: "健行筆記提到下山後可就近到九份老街補給；搭公車的人在隔頂搭 788 或 965。" }
+    ];
+
+    // 顏色最終進到 canvas，那裡不解析 CSS 變數，故先取實際值。
+    const ACCENT = PaPaDetail.cssVar('--accent-deep');
+
+
+    // ── 本頁設定 ──────────────────────────────────────────────
+    // 機制在 assets/detail.js，此處只描述差異。
+      // 航點配色：地圖標記、圖表資料點、時間軸圓點共用同一個決定。
+      // 拉繩段用全站的警示地形紅（PaPaDetail.WARN），時間軸會脈動提示。
+      const PAL = PaPaDetail.palette({ accent: ACCENT, extra: { "拉繩": PaPaDetail.WARN } });
+
+    PaPaDetail.init({
+      schedule,
+      palette: PAL,          // 地圖標記、海拔圖資料點、時間軸圓點共用
+      nav: [25.111535, 121.84829],
+      weather: { lat: 25.118819, lng: 121.849148,
+                 subText: '基隆山今日參考' },
+
+      map: {
+        setView: [[25.1170, 121.8513], 16],
+        track: { weight: 4, opacity: 0.85 },
+        popup: true
+      },
+
+      // 海拔圖只給領域旋鈕，Chart.js 的設定由 detail.js 組出（見 docs/adr/0001）
+      chart: { elevationFloor: 200, elevationMax: 600, lineColor: '--accent-deep' },
+
+      timeline: { emoji: { '集合地點': '🅿️', '終點解散': '🅿️', '拉繩': '🧗' }, hover: 'darken' }
+    });
+  </script>
+</body>
+</html>
