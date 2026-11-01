@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-10-31 07:36",
+  "generated": "2026-11-01 16:50",
   "generated_tz": "UTC+8",
-  "commit": "4931a3467749e9f636f5d86c1aa219aa9a51f462",
+  "commit": "3d674bf7f39b806118332f3560e0fa9120901454",
   "file_count": 75,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 12633,
-      "sha": "c8233bf81589ee4d39a5890b71e2333033ecb331"
+      "size": 12636,
+      "sha": "10ff8822bfb022b0db2f8a6669cb094f06e85f77"
     },
     {
       "path": "SNIPPETS.md",
@@ -230,8 +230,8 @@
     },
     {
       "path": "index.html",
-      "size": 28127,
-      "sha": "1358d7e11ef9af4385bb8c7dda33e1280fecb0f4"
+      "size": 28154,
+      "sha": "e65c2531b7c43c09eeb7c6106a6c5c39548fd45e"
     },
     {
       "path": "jiantanshan.html",
@@ -260,8 +260,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 37931,
-      "sha": "5eba57ddd14ccfe68bb88f45c8c7b05e721c692b"
+      "size": 37934,
+      "sha": "48ab728cb554ffc9930105cd54f3ada20b36c692"
     },
     {
       "path": "meihuashan.html",
@@ -285,8 +285,8 @@
     },
     {
       "path": "qixingshan.html",
-      "size": 21965,
-      "sha": "13b8c0a435f62d35885d1d4c94f1ea0320f06b88"
+      "size": 23976,
+      "sha": "0515fd4d2a933ce5197f8733eb74141a7d07d64c"
     },
     {
       "path": "shanying.html",
@@ -350,8 +350,8 @@
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 930296,
-      "sha": "cd8011ac47b004cbd2b7fefe9a1dac5e1ad6c46c"
+      "size": 933911,
+      "sha": "ebf751036bbf2ca3e96ae1d3f13513785a8cf594"
     },
     {
       "path": "tools/regress/check.js",
