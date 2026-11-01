@@ -85,7 +85,7 @@ PaPaTeam/
 ├── nangangshan.html             # 南港山 + 九五峰 + 象山縱走（2024-06-30）
 ├── hushan.html                  # 虎山親山步道（2024-04-20）
 │   計畫（一頁）
-├── qixingshan.html              # 七星山主東峰 苗圃O型（2026-11-08 出發）
+├── qixingshan.html              # 七星山主東峰 冷水坑O型（2026-11-08 出發）
 │   候選（七頁）
 ├── leitingfeng.html             # 雷霆峰 × 基隆山：隔頂 O 型（黃金一稜上攀）
 ├── junjianyan.html              # 軍艦岩 × 丹鳳山：唭哩岸 → 新北投
