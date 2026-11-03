@@ -286,7 +286,7 @@
     },
     {
       "path": "tools/spec_sweep.py",
-      "purpose": "全站規格掃描：把 ARCHITECTURE.md 的規格變成可執行的檢查——五個段落的 id 與順序（不多不少）、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、共用區塊只放掃載點、init(cfg) 的設定鍵與 palette() 的選項都是 detail.js 認得的、行程事實槽的名稱與格式、時間軸 emoji 覆蓋、小百岳放在 xbaiyue 欄位而非 pos、<title> 格式與 meta description、頁面不自寫 getComputedStyle、detail.css 擁有的 class 不在頁內重定義、共用資產的 ?v= 內容雜湊、以及文件宣稱的數量與 manifest／README 檔案樹是否與倉庫一致。改完任何頁面或文件都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
+      "purpose": "全站規格掃描：把 ARCHITECTURE.md 的規格變成可執行的檢查——五個段落的 id 與順序（不多不少）、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、共用區塊只放掃載點、init(cfg) 的設定鍵與 palette() 的選項都是 detail.js 認得的、行程事實槽的名稱與格式、時間軸 emoji 覆蓋、小百岳放在 xbaiyue 欄位而非 pos、時間軸 h2 跟頁面狀態走、行前頁時刻照 1.5 km/h 公式、括號標高只收 (H___m) 且小百岳必帶、（未走）航點不給 dist（2026-11-03 加，規則在 docs/PLANNING_RULES.md）、<title> 格式與 meta description、頁面不自寫 getComputedStyle、detail.css 擁有的 class 不在頁內重定義、共用資產的 ?v= 內容雜湊、以及文件宣稱的數量與 manifest／README 檔案樹是否與倉庫一致。改完任何頁面或文件都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
       "short": "全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）"
     },
     {

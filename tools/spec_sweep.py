@@ -6,6 +6,8 @@ import re, glob, math, sys, os, functools, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from papa_common import chdir_root, schedule_objects, page_state   # 四支工具共用：根目錄、切航點物件、行程三態
 chdir_root()
+TRACKED_PAGES = {re.match(r'assets/tracks/(.+)-\d{4}-\d{2}-\d{2}\.js$', t).group(1)
+                 for t in glob.glob('assets/tracks/*.js')}      # 有軌跡檔的頁名：page_state() 的第二個參數
 import bump_assets                       # 共用資產的版本號：同一個雜湊函式，不另抄一份
 import manifest_tree                     # manifest 條目與中文數字：README 檔案樹用的同一份
 ASSET_HASHES = {a: bump_assets.asset_hash(a) for a in bump_assets.ASSETS if os.path.exists(a)}
@@ -34,6 +36,18 @@ POS_EMOJI = pos_emoji_table()
 SECTIONS = ['overview', 'map-section', 'elevation', 'spots', 'timeline']
 H2 = {'map-section': '互動路線圖', 'elevation': '海拔高度剖面圖'}
 H2_TIMELINE = ('預計行程進度', '實走時間軸')     # 主詞須為其一，容許括號後綴
+# 哪一個不是喜好：行前頁（候選、計畫）用前者，已完成頁用後者（ARCHITECTURE §段落規格、
+# PLANNING_RULES §四）。2026-11-03 之前只查「是其中之一」，所以候選頁掛「實走時間軸」也會綠。
+H2_BY_STATE = {'candidate': '預計行程進度', 'planned': '預計行程進度', 'completed': '實走時間軸'}
+
+# 行前頁的時刻公式（PLANNING_RULES §三）：從出發時刻起，距離 ÷ 1.5 km/h，取整到 5 分鐘。
+# 接駁段（段長 0）之後以該點的時刻重新起算。容差 5 分鐘：逐段取整後再累加，與直接拿累計距離算
+# 會差一格。2026-11-03 加這條時 shiqiulinling 自訂了分段配速，比公式慢 35–60 分鐘，依裁示改回。
+PACE_KMH, STEP_MIN, TOL_MIN = 1.5, 5, 5
+
+# 括號標高只有一種寫法：(H155m)、(H1,092m)。半形括號、H 開頭、四位以上加千分位、m 結尾。
+# 2026-11-03 加這條時 mochashan 七處寫「(標高 65m)」，依裁示統一成這個格式。
+H_SUFFIX = re.compile(r'\(H(\d{1,3}(?:,\d{3})*)m\)')
 H2_SPOTS = ('導覽', '亮點')                      # 規格表：自由，但要含其一
 SLATE_HEX = ('#f8fafc', '#334155', '#e2e8f0', '#f1f5f9', '#64748b')
 PEAK = '#7c9e52'
@@ -102,7 +116,7 @@ XBAIYUE = {
     '大棟山': 15,         # 新北樹林／桃園龜山交界，405 m
     '南勢角山': 16,       # 新北中和，302 m
     '鳶山': 19,           # 新北三峽，321 m（別名福德坑山）。2026-10-11 查健行筆記小百岳一覽補上
-    '火炎山': 35,         # 苗栗三義。官方名單標 596 m，本站的航點採地形圖 601 m
+    '火炎山': 35,         # 苗栗三義，596 m（官方名單；2026-11-03 起航點改用它，不再用地形圖 601）
 }
 
 
@@ -295,8 +309,12 @@ def check(f):
         if h is None or not h.startswith(want):
             p.append('#%s 的 h2「%s」主詞應為「%s」' % (sec, h, want))
     h = h2_of(s, 'timeline')
+    state, _ = page_state(f, TRACKED_PAGES)
     if h is None or not h.startswith(H2_TIMELINE):
         p.append('#timeline 的 h2「%s」主詞應為 %s 之一' % (h, '／'.join(H2_TIMELINE)))
+    elif not h.startswith(H2_BY_STATE[state]):
+        p.append('#timeline 的 h2「%s」——這是%s頁，主詞應為「%s」'
+                 % (h, {'candidate': '候選', 'planned': '計畫', 'completed': '已完成'}[state], H2_BY_STATE[state]))
     # spots 的標題是自由的，規格表只要求看得出「這段是導覽」。20 頁寫「X亮點導覽」，
     # 漏網的兩頁寫成「百科」——讀者點進去看到的是同一種東西，標題卻自成一格。
     h = h2_of(s, 'spots')
@@ -486,6 +504,59 @@ def check(f):
         seg = wps[i][1] - wps[i - 1][1]
         if seg != 0 and seg + 0.005 < sl and sl > 0.03:   # seg==0 為交通接駁段，豁免
             p.append('段短於直線 %s（%.2f < %.2f）' % (wps[i][0], seg, sl))
+
+    # ── 括號標高的寫法與小百岳必帶標高 ──────────────────────
+    # 名稱裡括號內有數字的，只能是 (H___m)（PLANNING_RULES §三「海拔」）。小百岳都有公開標高，
+    # 一律要帶；其他山頭有沒有公開標高不是從頁面看得出來的事，所以只查格式、不強制。
+    # 標高與 ele 相不相等由 fact_check 查，這裡不重複。
+    for o in schedule_objects(s):
+        loc = re.search(r'loc:\s*"([^"]*)"', o)
+        if not loc:
+            continue
+        name = loc.group(1)
+        for br in re.findall(r'[（(][^)）]*[)）]', name):
+            if re.search(r'\d', br) and not H_SUFFIX.fullmatch(br):
+                p.append('%s 的括號標高寫法不對——只收 (H155m)、(H1,092m) 這種寫法' % name)
+        if 'xbaiyue' in o and not H_SUFFIX.search(name):
+            p.append('%s 是小百岳卻沒有 (H___m)——小百岳都有公開標高，名稱要帶' % name)
+
+    # ── 有規劃但沒走到的航點 ───────────────────────────────
+    # 名稱帶「（未走）」的航點：time 寫 —、只留 plan、不給 dist（PLANNING_RULES §四）。
+    # 給了 dist 會被算進里程與直線下限，等於宣稱走到了。
+    for o in schedule_objects(s):
+        loc = re.search(r'loc:\s*"([^"]*)"', o)
+        if not loc or '未走' not in loc.group(1):
+            continue
+        t = re.search(r'\btime:\s*"([^"]*)"', o)
+        if not t or t.group(1) != '—':
+            p.append('%s 沒走到，time 要寫 —' % loc.group(1))
+        if not re.search(r'\bplan:\s*"\d{1,2}:\d{2}"', o):
+            p.append('%s 沒走到，要留 plan（行前預估時刻）' % loc.group(1))
+        if re.search(r'\bdist:\s*[\d.]', o):
+            p.append('%s 沒走到，不能給 dist' % loc.group(1))
+
+    # ── 行前頁的時刻要照公式 ───────────────────────────────
+    # 候選頁與計畫頁的 time 是推估，不是量測：從出發時刻起，距離 ÷ 1.5 km/h，取整到 5 分鐘
+    # （PLANNING_RULES §三「時間」）。已完成頁的 time 是軌跡抵達時刻，不套。
+    # 接駁段（段長 0）之後以該點的時刻重新起算；時間不是 HH:MM 的航點（「—」）跳過。
+    if state != 'completed':
+        timed = []
+        for o in schedule_objects(s):
+            loc = re.search(r'loc:\s*"([^"]*)"', o)
+            t = re.search(r'\btime:\s*"(\d{1,2}):(\d{2})"', o)
+            d = re.search(r'\bdist:\s*([\d.]+)', o)
+            if loc and t and d:
+                timed.append((loc.group(1), int(t.group(1)) * 60 + int(t.group(2)), float(d.group(1))))
+        anchor = timed[0] if timed else None
+        for i in range(1, len(timed)):
+            loc, t, d = timed[i]
+            if d - timed[i - 1][2] == 0:
+                anchor = timed[i]
+                continue
+            want = anchor[1] + STEP_MIN * round((d - anchor[2]) / PACE_KMH * 60 / STEP_MIN)
+            if abs(t - want) > TOL_MIN:
+                p.append('%s 的時刻 %02d:%02d 不是公式算的 %02d:%02d（%.1f km/h，自 %s 起算）'
+                         % (loc, t // 60, t % 60, want // 60, want % 60, PACE_KMH, anchor[0]))
     return len(wps), p
 
 
