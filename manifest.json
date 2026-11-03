@@ -285,6 +285,21 @@
       "short": "Python 工具共用：根目錄、切航點物件"
     },
     {
+      "path": "tools/papa_gpx.py",
+      "purpose": "gpx_cluster.py 與 trip_from_gpx.py 共用的 GPX 幾何：讀 GPX（https 命名空間、UTC→台灣時間）、Haversine、累計距離、Douglas–Peucker 簡化、移動中位數爬升（15/31/61 點）、航點附近的 GPS 高程中位數。2026-11-03 收成一份，之前每次評估路線都在對話裡重寫",
+      "short": "GPX 幾何共用：讀檔、距離、DP 簡化、爬升中位數"
+    },
+    {
+      "path": "tools/gpx_cluster.py",
+      "purpose": "評估新路線（PLANNING_RULES §二、§三）：把公開 GPX 依起訖點與經過的錨點分群，列樣本數、距離中位數（範圍）、爬升、他人耗時、本隊 1.5 km/h 預估；--segments 模式對一串航點算各段中位數、直線下限與行前頁 time，有依序走完的軌跡時另給照標示值縮放的里程",
+      "short": "評估新路線：GPX 分群比較、段距中位數與行前時刻"
+    },
+    {
+      "path": "tools/trip_from_gpx.py",
+      "purpose": "走完後依當天 GPX 重算已完成頁（PLANNING_RULES §四）：DP 簡化 5 m 寫 assets/tracks/<頁名>-<日期>.js、各航點抵達時刻與簡化軌跡累計里程、離軌跡 40 m 以上的航點提示（未走）、30 m 內停 5 分鐘以上的無名休息點、三視窗爬升推估、最高點、耗時；--from 自指定時刻起算",
+      "short": "走完後依 GPX 重算：軌跡檔、抵達時刻、里程、休息點、爬升"
+    },
+    {
       "path": "tools/spec_sweep.py",
       "purpose": "全站規格掃描：把 ARCHITECTURE.md 的規格變成可執行的檢查——五個段落的 id 與順序（不多不少）、三個 h2 主詞、灰階、最高點語意色、總里程、advice 覆蓋率、里程單調性與直線下限、共用區塊只放掃載點、init(cfg) 的設定鍵與 palette() 的選項都是 detail.js 認得的、行程事實槽的名稱與格式、時間軸 emoji 覆蓋、小百岳放在 xbaiyue 欄位而非 pos、時間軸 h2 跟頁面狀態走、行前頁時刻照 1.5 km/h 公式、括號標高只收 (H___m) 且小百岳必帶、（未走）航點不給 dist（2026-11-03 加，規則在 docs/PLANNING_RULES.md）、<title> 格式與 meta description、頁面不自寫 getComputedStyle、detail.css 擁有的 class 不在頁內重定義、共用資產的 ?v= 內容雜湊、以及文件宣稱的數量與 manifest／README 檔案樹是否與倉庫一致。改完任何頁面或文件都該跑；全過回傳 0。2026-08-04 的雙軸審查發現規格表有兩項掛著 ✅ 卻不成立，就是因為只有文字沒有檢查",
       "short": "全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）"
@@ -442,6 +457,30 @@
     {
       "path": "docs/",
       "short": "文件：路線規劃規則、架構決策記錄"
+    }
+  ],
+  "skills": [
+    {
+      "path": "skills/papateam-route-eval/SKILL.md",
+      "purpose": "Claude 技能：評估新路線到建候選頁的操作順序（找資料、gpx_cluster 分群、推薦與選單、建頁、檢查、推分支、回報），規則本體在 docs/PLANNING_RULES.md。裝到 claude.ai 用；版本與工具同一個倉庫",
+      "short": "Claude 技能：評估新路線 → 候選頁"
+    },
+    {
+      "path": "skills/papateam-trip-complete/SKILL.md",
+      "purpose": "Claude 技能：走完後依 GPX 轉已完成頁的操作順序（抄航點、trip_from_gpx 重算、改頁面與同步首頁／manifest、檢查、推分支、回報）",
+      "short": "Claude 技能：GPX → 已完成頁"
+    },
+    {
+      "path": "skills/",
+      "short": "Claude 技能（操作順序；規則在 docs/）"
+    },
+    {
+      "path": "skills/papateam-route-eval/",
+      "short": "評估新路線 → 候選頁"
+    },
+    {
+      "path": "skills/papateam-trip-complete/",
+      "short": "GPX → 已完成頁"
     }
   ],
   "open_items": [],
