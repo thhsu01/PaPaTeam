@@ -122,6 +122,9 @@ PaPaTeam/
 │
 ├── tools/
 │   ├── papa_common.py           # Python 工具共用：根目錄、切航點物件
+│   ├── papa_gpx.py              # GPX 幾何共用：讀檔、距離、DP 簡化、爬升中位數
+│   ├── gpx_cluster.py           # 評估新路線：GPX 分群比較、段距中位數與行前時刻
+│   ├── trip_from_gpx.py         # 走完後依 GPX 重算：軌跡檔、抵達時刻、里程、休息點、爬升
 │   ├── spec_sweep.py            # 全站規格掃描（改完 schedule 或版面就跑一次；全過回傳 0）
 │   ├── fact_check.py            # 事實一致性：同一個日期／里程在頁內各處是否相符
 │   ├── bump_assets.py           # 共用資產的 ?v= 內容雜湊（改了 assets/ 的共用檔就跑）
@@ -153,8 +156,18 @@ PaPaTeam/
 ├── SNIPPETS.md                  # 元件片段快速參考
 ├── CONTRIBUTING.md              # 貢獻指南：編輯清單與代碼風格
 ├── README.md                    # 本檔案
-└── docs/adr/                    # 架構決策記錄
-    └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
+├── docs/adr/                    # 架構決策記錄
+│   └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
+│
+├── docs/                        # 文件：路線規劃規則、架構決策記錄
+│   ├── PLANNING_RULES.md        # 路線規劃規則：評估流程、數字算法、頁面狀態、合併與回報
+│   └── adr/                     # 架構決策記錄
+│       └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
+└── skills/                      # Claude 技能（操作順序；規則在 docs/）
+    ├── papateam-route-eval/     # 評估新路線 → 候選頁
+    │   └── SKILL.md             # Claude 技能：評估新路線 → 候選頁
+    └── papateam-trip-complete/  # GPX → 已完成頁
+        └── SKILL.md             # Claude 技能：GPX → 已完成頁
 ```
 <!-- manifest-tree:end -->
 

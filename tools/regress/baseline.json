@@ -5903,8 +5903,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#7c9e52; border-color:#a16207; border-width:3px;"
     },
-    "text": "10:07最高點⭐ 小百岳 #35火炎山三角點累計 3.84 km · 海拔 601 m",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:07</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #35</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">火炎山三角點</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 3.84 km · 海拔 601 m</div></div>"
+    "text": "10:07最高點⭐ 小百岳 #35火炎山三角點 (H596m)累計 3.84 km · 海拔 596 m",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#7c9e52; border-color:#a16207; border-width:3px;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:07</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">最高點</span><span class=\"text-xs font-bold px-2 py-0.5 rounded-full\" style=\"color:#a16207; background:rgba(161, 98, 7, 0.12);\">⭐ 小百岳 #35</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">火炎山三角點 (H596m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 3.84 km · 海拔 596 m</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -6125,7 +6125,7 @@
        195,
        265,
        565,
-       601,
+       596,
        565,
        517,
        251,
@@ -6236,11 +6236,11 @@
    },
    {
     "wp-pos-label": "最高點 ⭐ 小百岳 #35",
-    "wp-title": "火炎山三角點",
+    "wp-title": "火炎山三角點 (H596m)",
     "wp-time": "10:07",
     "wp-dist": "3.84",
-    "wp-ele": "601",
-    "wp-desc": "累計 3.84 km。標高 601m，設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。",
+    "wp-ele": "596",
+    "wp-desc": "累計 3.84 km。標高 596 m（健行筆記小百岳一覽的公開標高；地形圖讀 601 m），設有三等三角點。這裡是整段行程的物理最高點，標誌性的立牌是登頂證明。",
     "wp-advice": "三等三角點與標高牌都在林間，沒有展望——真正的風景在後面的大峽谷，不必在這裡久留。"
    },
    {
@@ -6323,7 +6323,7 @@
    },
    {
     "slot": "summit",
-    "text": "601"
+    "text": "596"
    },
    {
     "slot": "date:slash",
@@ -6342,7 +6342,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-6\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊2025/12/13 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 Mission Accomplished 任務完成 火炎山、北鞍古道 O 走 🗂️此行程已完成時刻與里程來自 2025/12/13 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。 GPS 實測 8.34 公里 集合起點 正松泉收費停車場 全程 8.34 公里 / 方便停車 活動日期 2025 年 12 月 13 日 全程費時：5 小時 7 分 高度落差 405.5 m 落差 今日天氣天氣資料暫無法取得請稍後再試 GPS 實測總里程 8.34km 實際總耗時 5小時7分鐘 累計上升（GPS 推估） 440m 最高標高 601m 里程與耗時取自 12/13 的 GPS 軌跡。累計上升原本寫 406 m，那其實是最高與最低點的落差（601−195），不是累計爬升；改為由軌跡推估，依平滑程度介於 395 至 440 m。各航點海拔仍採地形圖數值。 互動路線圖 點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。 起點<正松泉收費停車場>實際時間 08:10累計里程 0.00 km海拔 195 m這裡是火炎山最著名的私人收費停車場。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。隊友建議私人停車場，需付費，有簡易洗手間——這是全程唯一的廁所。火炎山稜線上沒有水源，夏天每人至少 2 L。 海拔高度剖面圖 各景點深度導覽 穿越礫岩惡地，探索火炎山的地理密碼 Featured Highlight 重點導覽 火炎山大峽谷 (Canyon Deep Dive) 火炎山不僅是一座山，更是一座持續變動的「地質博物館」。 地質血脈： 火炎山主要由「頭嵙山層」的礫岩組成。這些礫石在數百萬年前隨河流堆積，因含鐵量高，在空氣中氧化後呈現出獨特的鐵鏽紅。由於礫石間的膠結力弱，每當豪雨過後，山體就會因劇烈侵蝕而產生大規模剝落。 惡地景觀： 這種地形在地理學上稱為「惡地 (Badlands)」。由於植物難以在陡峭且鬆動的礫岩坡面上紮根，形成了銳利的鋸齒狀稜線與深不見底的紅土溝壑，這正是大峽谷驚心動魄的視覺來源。 📸 攝影與觀察指南 黃金時刻： 選擇清靈或傍晚，低角度光線能勾勒出溝壑的陰影層次。 微觀觀察： 仔細看山壁，你會發現圓潤的礫石，那是古代大漢溪流域的河床遺跡。 安全警戒： 崖邊地質極不穩定，切勿跨越拉繩，避免因重力導致的邊坡坍塌。 ⚠️ 地質警告： 火炎山平均每年退縮約 1-3 公分，這意味著您今年看到的風景，與明年將完全不同。 1 正松泉與起點區 位於三義與后里的交界，這裡是進入火炎山自然保留區最重要的補給站。除了充足的車位，沿線的私人茶園與田野風光提供了極佳的緩衝，讓登山者在起登前能先調整呼吸。 2 南鞍線與北鞍古道 相對於險峻的稜線，這兩條古道隱沒在茂密的闊葉林中。北鞍古道坡度平緩，是昔日先民往返三義與大甲的聯絡孔道，環境幽靜，常可見到台灣獼猴出沒。 3 三粒石土地公廟 這座由簡單三塊巨石搭建而成的土地公，象徵著對土地的謙卑與崇敬。這裡是山友的重要中繼點，廟前的小廣場提供了絕佳的陰涼處，讓疲憊的雙腳能在此得到短暫舒緩。 4 火炎山主峰 (三角點) 標高 601 公尺，雖然高度在苗栗群山中不算突出，但其作為地理屏障的功能顯著。登頂後的三角點不只是打卡點，更是全方位俯視台中與苗栗交界流域的制高點。 實走時間軸 2025/12/13 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。航點座標與累計里程皆取自軌跡在該時刻的位置。 08:10起點正松泉收費停車場累計 0.00 km · 海拔 195 m08:42古道起點南鞍線登山口累計 1.16 km · 海拔 265 m09:50信仰點三粒石土地公累計 3.53 km · 海拔 565 m10:07最高點⭐ 小百岳 #35火炎山三角點累計 3.84 km · 海拔 601 m10:36大休息區山頂休息區累計 4.08 km · 海拔 565 m11:47深度導覽區火炎山大峽谷累計 5.61 km · 海拔 517 m13:08景點南火炎山累計 7.77 km · 海拔 251 m13:27終點火炎山登山口 (返抵)累計 8.34 km · 海拔 205 m © 2025 爬爬小隊 | 戶外活動視覺化平台",
+  "text": "跳至主要內容 爬爬爬小隊2025/12/13 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 Mission Accomplished 任務完成 火炎山、北鞍古道 O 走 🗂️此行程已完成時刻與里程來自 2025/12/13 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 本路線結合了紅土惡地與翠綠山徑，上攀壯闊大峽谷，下行優美古道。這是一段關於礫岩侵蝕與山林美學的經典旅程。 GPS 實測 8.34 公里 集合起點 正松泉收費停車場 全程 8.34 公里 / 方便停車 活動日期 2025 年 12 月 13 日 全程費時：5 小時 7 分 高度落差 405.5 m 落差 今日天氣天氣資料暫無法取得請稍後再試 GPS 實測總里程 8.34km 實際總耗時 5小時7分鐘 累計上升（GPS 推估） 440m 最高標高 596m 里程與耗時取自 12/13 的 GPS 軌跡。累計上升原本寫 406 m，那其實是最高與最低點的落差（601−195），不是累計爬升；改為由軌跡推估，依平滑程度介於 395 至 440 m。各航點海拔仍採地形圖數值。 互動路線圖 點擊地圖上的標記或時間軸以查看地點介紹與深度導覽。 起點<正松泉收費停車場>實際時間 08:10累計里程 0.00 km海拔 195 m這裡是火炎山最著名的私人收費停車場。空間寬敞且設有簡單的洗手間，是整裝出發與下山休息的絕佳基地。隊友建議私人停車場，需付費，有簡易洗手間——這是全程唯一的廁所。火炎山稜線上沒有水源，夏天每人至少 2 L。 海拔高度剖面圖 各景點深度導覽 穿越礫岩惡地，探索火炎山的地理密碼 Featured Highlight 重點導覽 火炎山大峽谷 (Canyon Deep Dive) 火炎山不僅是一座山，更是一座持續變動的「地質博物館」。 地質血脈： 火炎山主要由「頭嵙山層」的礫岩組成。這些礫石在數百萬年前隨河流堆積，因含鐵量高，在空氣中氧化後呈現出獨特的鐵鏽紅。由於礫石間的膠結力弱，每當豪雨過後，山體就會因劇烈侵蝕而產生大規模剝落。 惡地景觀： 這種地形在地理學上稱為「惡地 (Badlands)」。由於植物難以在陡峭且鬆動的礫岩坡面上紮根，形成了銳利的鋸齒狀稜線與深不見底的紅土溝壑，這正是大峽谷驚心動魄的視覺來源。 📸 攝影與觀察指南 黃金時刻： 選擇清靈或傍晚，低角度光線能勾勒出溝壑的陰影層次。 微觀觀察： 仔細看山壁，你會發現圓潤的礫石，那是古代大漢溪流域的河床遺跡。 安全警戒： 崖邊地質極不穩定，切勿跨越拉繩，避免因重力導致的邊坡坍塌。 ⚠️ 地質警告： 火炎山平均每年退縮約 1-3 公分，這意味著您今年看到的風景，與明年將完全不同。 1 正松泉與起點區 位於三義與后里的交界，這裡是進入火炎山自然保留區最重要的補給站。除了充足的車位，沿線的私人茶園與田野風光提供了極佳的緩衝，讓登山者在起登前能先調整呼吸。 2 南鞍線與北鞍古道 相對於險峻的稜線，這兩條古道隱沒在茂密的闊葉林中。北鞍古道坡度平緩，是昔日先民往返三義與大甲的聯絡孔道，環境幽靜，常可見到台灣獼猴出沒。 3 三粒石土地公廟 這座由簡單三塊巨石搭建而成的土地公，象徵著對土地的謙卑與崇敬。這裡是山友的重要中繼點，廟前的小廣場提供了絕佳的陰涼處，讓疲憊的雙腳能在此得到短暫舒緩。 4 火炎山主峰 (三角點) 標高 596 公尺，雖然高度在苗栗群山中不算突出，但其作為地理屏障的功能顯著。登頂後的三角點不只是打卡點，更是全方位俯視台中與苗栗交界流域的制高點。 實走時間軸 2025/12/13 08:10 於停車場集合，GPS 08:21 起錄、13:27 收錄。航點座標與累計里程皆取自軌跡在該時刻的位置。 08:10起點正松泉收費停車場累計 0.00 km · 海拔 195 m08:42古道起點南鞍線登山口累計 1.16 km · 海拔 265 m09:50信仰點三粒石土地公累計 3.53 km · 海拔 565 m10:07最高點⭐ 小百岳 #35火炎山三角點 (H596m)累計 3.84 km · 海拔 596 m10:36大休息區山頂休息區累計 4.08 km · 海拔 565 m11:47深度導覽區火炎山大峽谷累計 5.61 km · 海拔 517 m13:08景點南火炎山累計 7.77 km · 海拔 251 m13:27終點火炎山登山口 (返抵)累計 8.34 km · 海拔 205 m © 2025 爬爬小隊 | 戶外活動視覺化平台",
   "errors": []
  },
  "hushan": {
@@ -8786,8 +8786,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#16a34a;"
     },
-    "text": "07:57集合起點五峰旗停車場 (標高 65m)累計 0.00 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#16a34a;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">07:57</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">集合起點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">五峰旗停車場 (標高 65m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 0.00 km</div></div>"
+    "text": "07:57集合起點五峰旗停車場 (H65m)累計 0.00 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#16a34a;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">07:57</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">集合起點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">五峰旗停車場 (H65m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 0.00 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8795,8 +8795,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "08:36入山點登山口 (標高 108m)累計 1.43 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:36</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">入山點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">登山口 (標高 108m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 1.43 km</div></div>"
+    "text": "08:36入山點登山口 (H108m)累計 1.43 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:36</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">入山點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">登山口 (H108m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 1.43 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8804,8 +8804,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "08:42文化景觀五峰旗聖母堂 (標高 155m)累計 1.80 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:42</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">文化景觀</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">五峰旗聖母堂 (標高 155m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 1.80 km</div></div>"
+    "text": "08:42文化景觀五峰旗聖母堂 (H155m)累計 1.80 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:42</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">文化景觀</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">五峰旗聖母堂 (H155m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 1.80 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8813,8 +8813,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "08:56休息點桂林峰休息站 (標高 229m)累計 2.58 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:56</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休息點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">桂林峰休息站 (標高 229m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 2.58 km</div></div>"
+    "text": "08:56休息點桂林峰休息站 (H229m)累計 2.58 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">08:56</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休息點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">桂林峰休息站 (H229m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 2.58 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8822,8 +8822,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "09:09休息點一水休息站 (標高 289m)累計 2.98 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:09</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休息點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">一水休息站 (標高 289m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 2.98 km</div></div>"
+    "text": "09:09休息點一水休息站 (H289m)累計 2.98 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:09</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休息點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">一水休息站 (H289m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 2.98 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8831,8 +8831,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "09:50階梯起點通天橋休息區 (標高 449m)累計 4.92 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:50</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">階梯起點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">通天橋休息區 (標高 449m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 4.92 km</div></div>"
+    "text": "09:50階梯起點通天橋休息區 (H449m)累計 4.92 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:50</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">階梯起點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">通天橋休息區 (H449m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 4.92 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -8840,8 +8840,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "10:16體力點0.7K休息亭 (標高 568m)累計 5.54 km",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:16</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">體力點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">0.7K休息亭 (標高 568m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 5.54 km</div></div>"
+    "text": "10:16體力點0.7K休息亭 (H568m)累計 5.54 km",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:16</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">體力點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">0.7K休息亭 (H568m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">累計 5.54 km</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -9391,7 +9391,7 @@
   "card": [
    {
     "wp-pos-label": "集合起點",
-    "wp-title": "五峰旗停車場 (標高 65m)",
+    "wp-title": "五峰旗停車場 (H65m)",
     "wp-time": "07:57",
     "wp-dist": "0.00",
     "wp-ele": "65",
@@ -9400,7 +9400,7 @@
    },
    {
     "wp-pos-label": "入山點",
-    "wp-title": "登山口 (標高 108m)",
+    "wp-title": "登山口 (H108m)",
     "wp-time": "08:36",
     "wp-dist": "1.43",
     "wp-ele": "108",
@@ -9409,7 +9409,7 @@
    },
    {
     "wp-pos-label": "文化景觀",
-    "wp-title": "五峰旗聖母堂 (標高 155m)",
+    "wp-title": "五峰旗聖母堂 (H155m)",
     "wp-time": "08:42",
     "wp-dist": "1.80",
     "wp-ele": "155",
@@ -9418,7 +9418,7 @@
    },
    {
     "wp-pos-label": "休息點",
-    "wp-title": "桂林峰休息站 (標高 229m)",
+    "wp-title": "桂林峰休息站 (H229m)",
     "wp-time": "08:56",
     "wp-dist": "2.58",
     "wp-ele": "229",
@@ -9427,7 +9427,7 @@
    },
    {
     "wp-pos-label": "休息點",
-    "wp-title": "一水休息站 (標高 289m)",
+    "wp-title": "一水休息站 (H289m)",
     "wp-time": "09:09",
     "wp-dist": "2.98",
     "wp-ele": "289",
@@ -9436,7 +9436,7 @@
    },
    {
     "wp-pos-label": "階梯起點",
-    "wp-title": "通天橋休息區 (標高 449m)",
+    "wp-title": "通天橋休息區 (H449m)",
     "wp-time": "09:50",
     "wp-dist": "4.92",
     "wp-ele": "449",
@@ -9445,7 +9445,7 @@
    },
    {
     "wp-pos-label": "體力點",
-    "wp-title": "0.7K休息亭 (標高 568m)",
+    "wp-title": "0.7K休息亭 (H568m)",
     "wp-time": "10:16",
     "wp-dist": "5.54",
     "wp-ele": "568",
@@ -9584,7 +9584,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-6\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊2026/03/14 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 Mission Accomplished 任務完成 聖母步道：抹茶山春季挑戰 🗂️此行程已完成時刻與里程來自 2026/03/14 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 挑戰抹茶色的視覺盛宴。 集合地點 五峰旗停車場 （標高 65m） 出發時間 08:00 （往返預計約 8H） 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 開啟導航至五峰旗停車場 GPS 實測總里程 14.02km 實際總耗時 8小時17分鐘 累計上升（GPS 推估） 900m 最高標高 885m 互動路線圖 GPS 實測往返 14.02 km，07:57–16:14 共 8 小時 17 分。航點座標與累計里程皆取自軌跡在該時刻的位置，去程與回程各取一次通過。 集合起點<五峰旗停車場 (標高 65m)>實際時間 07:57累計里程 0.00 km海拔 65 m行程開始。GPS 於 07:57 起錄，07:57–08:11 整裝 14 分鐘。隊友建議停車場有洗手間與商家，是最後的補給點。步道沿途只有山莊有水，來回 14 km 請帶足。 參考資源 🔗 參考路線詳情 (健行筆記) 海拔高度剖面圖 抹茶山深度導覽 1. 五峰旗停車場 標高 65m。行程的起終點，設有大型停車場與完善的衛浴設施，是整裝的最佳場域。 3. 通天橋休息區 標高 449m。這裡是從產業道路轉入原始步道的轉折點，接下來將面臨 1.6km 的階梯陡升挑戰。 4. 0.7K 休息亭 標高 568m。階梯段的中間點。隨著海拔提升，林相會逐漸由林蔭轉變為箭竹灌木林。 5. 抹茶山景觀台 (峰點) 海拔 885m。著名的視覺盛宴所在地，翠綠山稜起伏如抹茶般誘人。本次行程將在此大休 130 分鐘。 6. 聖母山莊與水池 避難山屋與聖母像所在地。此處氣氛寧靜，池水映襯山影，是登山者心靈的安息之所。 7. 耶穌十字架 位於景觀台正後方最高處。標誌著信仰與攀登的精神終點，在山頂薄霧中更顯肅穆。 重點景點・顯靈奇蹟與宗教建築 五峰旗聖母堂 【1980 聖母顯靈奇蹟】 1980 年 11 月 9 日深夜，任其剛等五名「台北市天主教教友登山隊」隊員，自聖母山莊下山時於第二層瀑布上方受困於濃霧與黑暗中。在生死交關之際，隊員跪地祈求聖母保佑。 據傳當時聖母瑪利亞顯現出一道慈祥的白色身影，手持明燈指引路徑，引領五人平安脫險抵達現址。為感念此神蹟，各界教友集資於顯靈處興建此堂。 【全台唯一天壇設計】 此建築最顯著的特色是其圓形的天壇造型，乃仿效北京天壇祈年殿設計，象徵「天圓地方」與上主之圓滿。在綠意環繞的山腹中，這座白色神聖殿宇更顯靜謐脫俗。 【朝聖與視野】 堂前廣大的半圓形平台展望極佳，可將蘭陽平原甚至是龜山島盡收眼底。這裡是登山客進入 1.6km 陡升段前的精神加油站。 實走時間軸 GPS 實測總里程 13.14 km。 07:57集合起點五峰旗停車場 (標高 65m)累計 0.00 km08:36入山點登山口 (標高 108m)累計 1.43 km08:42文化景觀五峰旗聖母堂 (標高 155m)累計 1.80 km08:56休息點桂林峰休息站 (標高 229m)累計 2.58 km09:09休息點一水休息站 (標高 289m)累計 2.98 km09:50階梯起點通天橋休息區 (標高 449m)累計 4.92 km10:16體力點0.7K休息亭 (標高 568m)累計 5.54 km11:22最高點聖母山莊觀景台 (抵達)累計 6.73 km13:48開始下山離開觀景台累計 8.48 km14:14下山段0.7K休息亭 (回程)累計 9.05 km14:35下山段通天橋休息區 (回程)累計 9.66 km15:24下山段一水休息站 (回程)累計 11.83 km15:30下山段桂林峰休息站 (回程)累計 12.28 km15:37下山段五峰旗聖母堂 (回程)累計 12.68 km15:52下山段登山口 (回程)累計 13.11 km16:14圓滿結束五峰旗停車場 (終點)累計 14.02 km © 2026 爬爬小隊 | 聖母步道 2026/03/14 活動紀錄",
+  "text": "跳至主要內容 爬爬爬小隊2026/03/14 活動紀錄行程總覽路線圖海拔剖面景點介紹實走紀錄 Mission Accomplished 任務完成 聖母步道：抹茶山春季挑戰 🗂️此行程已完成時刻與里程來自 2026/03/14 當天的 GPS 軌跡，地圖上的線就是實際走過的路。天氣卡顯示的是今日天氣，不是當天的。 挑戰抹茶色的視覺盛宴。 集合地點 五峰旗停車場 （標高 65m） 出發時間 08:00 （往返預計約 8H） 今日天氣天氣資料暫無法取得請稍後再試 🗺️ 開啟導航至五峰旗停車場 GPS 實測總里程 14.02km 實際總耗時 8小時17分鐘 累計上升（GPS 推估） 900m 最高標高 885m 互動路線圖 GPS 實測往返 14.02 km，07:57–16:14 共 8 小時 17 分。航點座標與累計里程皆取自軌跡在該時刻的位置，去程與回程各取一次通過。 集合起點<五峰旗停車場 (H65m)>實際時間 07:57累計里程 0.00 km海拔 65 m行程開始。GPS 於 07:57 起錄，07:57–08:11 整裝 14 分鐘。隊友建議停車場有洗手間與商家，是最後的補給點。步道沿途只有山莊有水，來回 14 km 請帶足。 參考資源 🔗 參考路線詳情 (健行筆記) 海拔高度剖面圖 抹茶山深度導覽 1. 五峰旗停車場 標高 65m。行程的起終點，設有大型停車場與完善的衛浴設施，是整裝的最佳場域。 3. 通天橋休息區 標高 449m。這裡是從產業道路轉入原始步道的轉折點，接下來將面臨 1.6km 的階梯陡升挑戰。 4. 0.7K 休息亭 標高 568m。階梯段的中間點。隨著海拔提升，林相會逐漸由林蔭轉變為箭竹灌木林。 5. 抹茶山景觀台 (峰點) 海拔 885m。著名的視覺盛宴所在地，翠綠山稜起伏如抹茶般誘人。本次行程將在此大休 130 分鐘。 6. 聖母山莊與水池 避難山屋與聖母像所在地。此處氣氛寧靜，池水映襯山影，是登山者心靈的安息之所。 7. 耶穌十字架 位於景觀台正後方最高處。標誌著信仰與攀登的精神終點，在山頂薄霧中更顯肅穆。 重點景點・顯靈奇蹟與宗教建築 五峰旗聖母堂 【1980 聖母顯靈奇蹟】 1980 年 11 月 9 日深夜，任其剛等五名「台北市天主教教友登山隊」隊員，自聖母山莊下山時於第二層瀑布上方受困於濃霧與黑暗中。在生死交關之際，隊員跪地祈求聖母保佑。 據傳當時聖母瑪利亞顯現出一道慈祥的白色身影，手持明燈指引路徑，引領五人平安脫險抵達現址。為感念此神蹟，各界教友集資於顯靈處興建此堂。 【全台唯一天壇設計】 此建築最顯著的特色是其圓形的天壇造型，乃仿效北京天壇祈年殿設計，象徵「天圓地方」與上主之圓滿。在綠意環繞的山腹中，這座白色神聖殿宇更顯靜謐脫俗。 【朝聖與視野】 堂前廣大的半圓形平台展望極佳，可將蘭陽平原甚至是龜山島盡收眼底。這裡是登山客進入 1.6km 陡升段前的精神加油站。 實走時間軸 GPS 實測總里程 13.14 km。 07:57集合起點五峰旗停車場 (H65m)累計 0.00 km08:36入山點登山口 (H108m)累計 1.43 km08:42文化景觀五峰旗聖母堂 (H155m)累計 1.80 km08:56休息點桂林峰休息站 (H229m)累計 2.58 km09:09休息點一水休息站 (H289m)累計 2.98 km09:50階梯起點通天橋休息區 (H449m)累計 4.92 km10:16體力點0.7K休息亭 (H568m)累計 5.54 km11:22最高點聖母山莊觀景台 (抵達)累計 6.73 km13:48開始下山離開觀景台累計 8.48 km14:14下山段0.7K休息亭 (回程)累計 9.05 km14:35下山段通天橋休息區 (回程)累計 9.66 km15:24下山段一水休息站 (回程)累計 11.83 km15:30下山段桂林峰休息站 (回程)累計 12.28 km15:37下山段五峰旗聖母堂 (回程)累計 12.68 km15:52下山段登山口 (回程)累計 13.11 km16:14圓滿結束五峰旗停車場 (終點)累計 14.02 km © 2026 爬爬小隊 | 聖母步道 2026/03/14 活動紀錄",
   "errors": []
  },
  "nangangshan": {
@@ -12748,8 +12748,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "09:23出發獅球嶺步道登山口出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:23</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">出發</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺步道登山口</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。</div></div>"
+    "text": "10:00出發獅球嶺步道登山口出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:00</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">出發</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺步道登山口</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12757,8 +12757,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "09:32山頭三角洲嶺北峰登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:32</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">山頭</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">三角洲嶺北峰</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。</div></div>"
+    "text": "10:15山頭三角洲嶺北峰登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:15</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">山頭</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">三角洲嶺北峰</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12766,8 +12766,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "09:50休閒獅球長壽公園稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">09:50</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休閒</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球長壽公園</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。</div></div>"
+    "text": "10:30休閒獅球長壽公園稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:30</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">休閒</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球長壽公園</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12775,8 +12775,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#7c9e52;"
     },
-    "text": "10:02最高點獅球嶺山（東砲台山）(H155m)全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#7c9e52;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:02</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">最高點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺山（東砲台山）(H155m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。</div></div>"
+    "text": "10:40最高點獅球嶺山（東砲台山）(H155m)全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#7c9e52;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:40</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">最高點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺山（東砲台山）(H155m)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12784,8 +12784,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "10:20古蹟獅球嶺砲台（中央砲台）本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:20</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">古蹟</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺砲台（中央砲台）</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。</div></div>"
+    "text": "11:00古蹟獅球嶺砲台（中央砲台）本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">11:00</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">古蹟</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺砲台（中央砲台）</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12793,8 +12793,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "10:43稜線獅球嶺北峰有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">10:43</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">稜線</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺北峰</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。</div></div>"
+    "text": "11:05稜線獅球嶺北峰有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">11:05</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">稜線</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">獅球嶺北峰</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12802,8 +12802,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#a09080;"
     },
-    "text": "11:01古蹟劉銘傳隧道基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">11:01</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">古蹟</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">劉銘傳隧道</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。</div></div>"
+    "text": "11:40古蹟劉銘傳隧道基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#a09080;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">11:40</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">古蹟</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">劉銘傳隧道</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。</div></div>"
    },
    {
     "cls": "relative flex items-start mb-8 group cursor-pointer pl-8",
@@ -12811,8 +12811,8 @@
      "cls": "w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all",
      "style": "background:#0284c7;"
     },
-    "text": "12:00終點基隆車站 (解散)抵達基隆港邊。可前往廟口夜市享用慶功午餐。",
-    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#0284c7;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">12:00</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">終點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">基隆車站 (解散)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">抵達基隆港邊。可前往廟口夜市享用慶功午餐。</div></div>"
+    "text": "13:00終點基隆車站 (解散)抵達基隆港邊。可前往廟口夜市享用慶功午餐。",
+    "html": "<div class=\"absolute left-0 w-12 flex justify-center z-[1001] pt-1\"><div class=\"w-4 h-4 rounded-full border-2 border-white group-hover:scale-125 transition-all\" style=\"background:#0284c7;\"></div></div><div class=\"w-full bg-white p-5 rounded-2xl border border-stone-200 card-hover transition-all text-left\"><div class=\"flex flex-wrap justify-between items-center gap-2 mb-1\"><span class=\"text-lg font-black text-stone-800\">13:00</span><span class=\"text-[10px] font-black text-stone-600 bg-stone-100 px-2 py-0.5 rounded uppercase\">終點</span></div><h4 class=\"font-bold text-stone-700 text-sm mb-1\">基隆車站 (解散)</h4><div class=\"text-[11px] text-stone-600 leading-relaxed\">抵達基隆港邊。可前往廟口夜市享用慶功午餐。</div></div>"
    }
   ],
   "markers": [
@@ -13124,7 +13124,7 @@
    {
     "wp-pos-label": "出發",
     "wp-title": "獅球嶺步道登山口",
-    "wp-time": "09:23",
+    "wp-time": "10:00",
     "wp-dist": "1.54",
     "wp-ele": "32",
     "wp-desc": "出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。",
@@ -13133,7 +13133,7 @@
    {
     "wp-pos-label": "山頭",
     "wp-title": "三角洲嶺北峰",
-    "wp-time": "09:32",
+    "wp-time": "10:15",
     "wp-dist": "1.85",
     "wp-ele": "115",
     "wp-desc": "登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。",
@@ -13142,7 +13142,7 @@
    {
     "wp-pos-label": "休閒",
     "wp-title": "獅球長壽公園",
-    "wp-time": "09:50",
+    "wp-time": "10:30",
     "wp-dist": "2.25",
     "wp-ele": "110",
     "wp-desc": "稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。",
@@ -13151,7 +13151,7 @@
    {
     "wp-pos-label": "最高點",
     "wp-title": "獅球嶺山（東砲台山）(H155m)",
-    "wp-time": "10:02",
+    "wp-time": "10:40",
     "wp-dist": "2.55",
     "wp-ele": "155",
     "wp-desc": "全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。",
@@ -13160,7 +13160,7 @@
    {
     "wp-pos-label": "古蹟",
     "wp-title": "獅球嶺砲台（中央砲台）",
-    "wp-time": "10:20",
+    "wp-time": "11:00",
     "wp-dist": "2.95",
     "wp-ele": "125",
     "wp-desc": "本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。",
@@ -13169,7 +13169,7 @@
    {
     "wp-pos-label": "稜線",
     "wp-title": "獅球嶺北峰",
-    "wp-time": "10:43",
+    "wp-time": "11:05",
     "wp-dist": "3.10",
     "wp-ele": "110",
     "wp-desc": "有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。",
@@ -13178,7 +13178,7 @@
    {
     "wp-pos-label": "古蹟",
     "wp-title": "劉銘傳隧道",
-    "wp-time": "11:01",
+    "wp-time": "11:40",
     "wp-dist": "3.95",
     "wp-ele": "50",
     "wp-desc": "基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。",
@@ -13187,7 +13187,7 @@
    {
     "wp-pos-label": "終點",
     "wp-title": "基隆車站 (解散)",
-    "wp-time": "12:00",
+    "wp-time": "13:00",
     "wp-dist": "5.95",
     "wp-ele": "10",
     "wp-desc": "抵達基隆港邊。可前往廟口夜市享用慶功午餐。",
@@ -13202,7 +13202,7 @@
    "chart": "<div data-widget=\"chart\" class=\"chart-container bg-white rounded-2xl p-4 shadow-sm border border-stone-100\" role=\"region\" aria-label=\"海拔高度剖面圖\"><canvas id=\"elevation-chart\" role=\"img\" aria-label=\"顯示登山路線的海拔變化\"></canvas></div>",
    "timeline": "<div data-widget=\"timeline\" class=\"relative pl-6\" id=\"timeline-container\"><div class=\"timeline-line\"></div></div>"
   },
-  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 5.95 KM · 含停留約 3 小時 | 深度歷史縱走 串聯八堵，俯瞰基隆獅球嶺稜線歷史全紀錄 從八堵車站出發，越過守護港城的獅球嶺要塞，最後穿梭劉銘傳隧道的百年時光。 活動日期 日期待定 建議挑選涼爽多雲日 集合地點 八堵車站 出口大廳處 下山地點 基隆車站 步行解散 路線等級 ⛰️ 輕鬆休閒 適合全齡、喜愛古蹟者 5.95 總里程 km（估） 3 目標耗時 hr（含停留） ~150 預計爬升 m 155 最高海拔 m（獅球嶺山／東砲台山） 今日天氣天氣資料暫無法取得請稍後再試 海拔採基石與圖根點數值。航點淨爬升合計 136 m，稜線小起伏未計入，故以 150 m 估。 里程與時刻皆為推估，非實走紀錄——來源見文末「參考資料」。 互動路線圖 全程 5.95 km、累計爬升約 150 m。時刻採分段配速推估，非實走紀錄。 < > 起點<八堵車站>預計時間 09:00累計里程 0.00 km海拔 24 m行程起點。位於基隆河谷交通要衝，建議在此整理裝備。隊友建議唯一的補給點。過了尚仁橋就沒有商店，水和行動糧在此備齊。 海拔高度剖面圖 行程亮點導覽 八堵車站 鐵道咽喉重鎮，見證清領至現代的交通演進，是縱走故事的起點。 三角洲嶺北峰 標高 115 m，有一顆台灣省政府圖根補點，基石藏在小廟後方。是捕捉基隆河 U 型蜿蜒地形的絕佳攝影位。 獅球長壽公園 充滿在地人情味的社區公園，設有涼亭與石桌椅，適合在此調節呼吸。 深度專題 01 獅球嶺砲台：基隆門戶的視覺衝擊 這裡是全基隆最具指標性的攝影點。站在海拔 125 公尺的台上，你可以直視中山高速公路從大業隧道鑽出，像銀帶般延伸進基隆港。這份視覺動感結合了後方的基隆嶼與入港巨輪，交織出台灣絕無僅有的工業與港灣景觀。 📷 最佳取景：國道車流長曝 🧭 方位：正北面向港口 💡 歷史小知識 這裡不只是景觀點，更是清代軍事要塞。由於扼守台北與基隆間的唯一缺口，在中法戰爭期間，劉銘傳曾在此親自指揮軍隊抵抗法軍。砲台遺址至今仍靜靜守護著這片港景。 🗺️ 三座砲台別搞混 獅球嶺一帶共有西砲台（砲台山）、中央砲台、東砲台山三處。一般說的「獅球嶺砲台」古蹟指的是中央砲台，也就是這裡；東砲台山才是全程最高的獅球嶺山（155 m，又稱三坑山）。 🏗️ 建築工法 隧道全長 235 公尺，有趣的是南北兩端的高度不一，這導致了施工時的銜接困難。隧道頂部設有獨特的排煙井，在蒸汽機車時代負責排煙，現在則是觀察蝙蝠與通風的重要設施。 深度專題 02 劉銘傳隧道：穿越百年的鐵道殘影 又名「獅球嶺隧道」，是台灣首座鐵路隧道，也是清領時期唯一僅存的一座。這座隧道見證了清朝時期劉銘傳推動現代化的雄心。穿過隧道時，你可以觀察到混和了紅磚、石塊與日治時期修補的痕跡，每一塊磚石都刻劃著台灣交通近代化的辛酸史。 • 1887年動工，1890年完工，前後耗時 30 個月。 • 列為基隆市定古蹟，近期甫完成結構修復。 • 內部涼爽，是夏日避暑的天然冷氣房。 • 東方一公里處的「竹仔寮隧道」是另一條隧道，日治時期為改善本隧道缺點而建，1898 年完工，兩者常被混為一談。 ⚠️ 排行程務必避開週一。隧道週一公休，開放時間 09:00–17:00。不參加導覽可自由進入、人數不限；定時導覽為週五至週日 10:00 與 14:00，每梯 30 人。蝙蝠棲息季節隧道內另有分段總量管制。 獅球嶺北峰 標高 110 m（另一說 109 m），有台灣省政府圖根補點。環境原始且清幽，常有猛禽在此盤旋上升。 基隆車站 現代化的終點站。走出車站即是海港，為歷史縱走劃下現代感的句點。 預計行程進度 配速依據 市區與河濱平路 4.0–4.2 km/hr、陡上水泥階 2.0、稜線 2.6–3.0、步道下行 2.8。 合計行走 105 分、停留 75 分，全程約 3 小時，含停留均速約 2.0 km/hr。 此為推估值，非實走紀錄。實走過後會依 GPS 軌跡改寫。 09:00起點八堵車站行程起點。位於基隆河谷交通要衝，建議在此整理裝備。09:23出發獅球嶺步道登山口出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。09:32山頭三角洲嶺北峰登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。09:50休閒獅球長壽公園稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。10:02最高點獅球嶺山（東砲台山）(H155m)全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。10:20古蹟獅球嶺砲台（中央砲台）本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。10:43稜線獅球嶺北峰有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。11:01古蹟劉銘傳隧道基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。12:00終點基隆車站 (解散)抵達基隆港邊。可前往廟口夜市享用慶功午餐。 參考資料 · 獅球嶺砲台步道 — 健行筆記：分段里程與時間（八堵車站→五十人公祠 1.2 km、→登山口 0.34 km）。 · 三角洲嶺北峰＋獅球嶺出三坑火車站 — 健行筆記：實走 10:05–12:21，2 小時 16 分，是本頁配速的對照基準。 · 獅球嶺山 — 健行筆記：標高 155 m，又稱東砲台山、三坑山；都主 09 與高速圖根點 A024 兩顆基石。 · 基隆「三八縱走」（三坑車站～八堵車站）— Tony 的遊記／旅聯網：八堵起登越嶺獅球嶺的路線定名。 · 劉銘傳隧道（獅球嶺隧道）— 基隆旅遊網：市定古蹟、全長 235 m、開放時間與導覽場次。 · 劉銘傳隧道（獅球嶺隧道）— 基隆市政府：週一公休、蝙蝠季總量管制。 · 2024/04/27 獅球湖－獅球嶺砲台群－劉銘傳隧道：與本頁最接近的實走走法（八堵起登、經隧道下基隆市區）。 尚仁國小通學步道與尚仁橋的路徑細節出自上列健行筆記路線說明；三角洲嶺北峰 115 m、獅球嶺北峰 110 m 為圖根補點數值。 © 爬爬小隊行程計畫 | 獅球稜線全導覽",
+  "text": "跳至主要內容 爬爬爬小隊行程總覽路線圖海拔剖面景點介紹預估進度 5.95 KM · 約 4 小時 | 深度歷史縱走 串聯八堵，俯瞰基隆獅球嶺稜線歷史全紀錄 從八堵車站出發，越過守護港城的獅球嶺要塞，最後穿梭劉銘傳隧道的百年時光。 活動日期 日期待定 建議挑選涼爽多雲日 集合地點 八堵車站 出口大廳處 下山地點 基隆車站 步行解散 路線等級 ⛰️ 輕鬆休閒 適合全齡、喜愛古蹟者 5.95 總里程 km（估） 4 預估耗時 hr（不計休息） ~150 預計爬升 m 155 最高海拔 m（獅球嶺山／東砲台山） 今日天氣天氣資料暫無法取得請稍後再試 海拔採基石與圖根點數值。航點淨爬升合計 136 m，稜線小起伏未計入，故以 150 m 估。 里程與時刻皆為推估，非實走紀錄——來源見文末「參考資料」。 互動路線圖 全程 5.95 km、累計爬升約 150 m。時刻以每小時 1.5 公里推估、不另計休息，非實走紀錄。 < > 起點<八堵車站>預計時間 09:00累計里程 0.00 km海拔 24 m行程起點。位於基隆河谷交通要衝，建議在此整理裝備。隊友建議唯一的補給點。過了尚仁橋就沒有商店，水和行動糧在此備齊。 海拔高度剖面圖 行程亮點導覽 八堵車站 鐵道咽喉重鎮，見證清領至現代的交通演進，是縱走故事的起點。 三角洲嶺北峰 標高 115 m，有一顆台灣省政府圖根補點，基石藏在小廟後方。是捕捉基隆河 U 型蜿蜒地形的絕佳攝影位。 獅球長壽公園 充滿在地人情味的社區公園，設有涼亭與石桌椅，適合在此調節呼吸。 深度專題 01 獅球嶺砲台：基隆門戶的視覺衝擊 這裡是全基隆最具指標性的攝影點。站在海拔 125 公尺的台上，你可以直視中山高速公路從大業隧道鑽出，像銀帶般延伸進基隆港。這份視覺動感結合了後方的基隆嶼與入港巨輪，交織出台灣絕無僅有的工業與港灣景觀。 📷 最佳取景：國道車流長曝 🧭 方位：正北面向港口 💡 歷史小知識 這裡不只是景觀點，更是清代軍事要塞。由於扼守台北與基隆間的唯一缺口，在中法戰爭期間，劉銘傳曾在此親自指揮軍隊抵抗法軍。砲台遺址至今仍靜靜守護著這片港景。 🗺️ 三座砲台別搞混 獅球嶺一帶共有西砲台（砲台山）、中央砲台、東砲台山三處。一般說的「獅球嶺砲台」古蹟指的是中央砲台，也就是這裡；東砲台山才是全程最高的獅球嶺山（155 m，又稱三坑山）。 🏗️ 建築工法 隧道全長 235 公尺，有趣的是南北兩端的高度不一，這導致了施工時的銜接困難。隧道頂部設有獨特的排煙井，在蒸汽機車時代負責排煙，現在則是觀察蝙蝠與通風的重要設施。 深度專題 02 劉銘傳隧道：穿越百年的鐵道殘影 又名「獅球嶺隧道」，是台灣首座鐵路隧道，也是清領時期唯一僅存的一座。這座隧道見證了清朝時期劉銘傳推動現代化的雄心。穿過隧道時，你可以觀察到混和了紅磚、石塊與日治時期修補的痕跡，每一塊磚石都刻劃著台灣交通近代化的辛酸史。 • 1887年動工，1890年完工，前後耗時 30 個月。 • 列為基隆市定古蹟，近期甫完成結構修復。 • 內部涼爽，是夏日避暑的天然冷氣房。 • 東方一公里處的「竹仔寮隧道」是另一條隧道，日治時期為改善本隧道缺點而建，1898 年完工，兩者常被混為一談。 ⚠️ 排行程務必避開週一。隧道週一公休，開放時間 09:00–17:00。不參加導覽可自由進入、人數不限；定時導覽為週五至週日 10:00 與 14:00，每梯 30 人。蝙蝠棲息季節隧道內另有分段總量管制。 獅球嶺北峰 標高 110 m（另一說 109 m），有台灣省政府圖根補點。環境原始且清幽，常有猛禽在此盤旋上升。 基隆車站 現代化的終點站。走出車站即是海港，為歷史縱走劃下現代感的句點。 預計行程進度（約 4H） 09:00起點八堵車站行程起點。位於基隆河谷交通要衝，建議在此整理裝備。10:00出發獅球嶺步道登山口出八堵車站往左穿越鐵路涵洞，過尚仁橋後沿溪畔的尚仁國小通學步道緩行，約 1.5 km 才接上登山口。這段全程是市區與河濱平路，不是山徑。10:15山頭三角洲嶺北峰登山口一上來就是陡上水泥階，0.31 km 爬升 83 m，是全程唯一吃力的一段。峰頂有台灣省政府圖根補點，基石藏在小廟後方的草叢旁。視野可完整看到基隆河的蛇行。10:30休閒獅球長壽公園稜線上的核心休息區，設有涼亭與石桌椅，兩側皆有豐富的次生林生態。10:40最高點獅球嶺山（東砲台山）(H155m)全程最高點，又稱東砲台山、三坑山。附近有兩顆基石：基隆市府的都主 09 與高速圖根點 A024。這裡是東砲台的位置，中法戰爭的砲台古蹟則在後面的中央砲台。11:00古蹟獅球嶺砲台（中央砲台）本行程的招牌。中法戰爭古戰場，劉銘傳曾在此指揮抵抗法軍。砲台平台正對基隆港，可看中山高從大業隧道鑽出、延伸進港區。11:05稜線獅球嶺北峰有台灣省政府圖根補點，另一說標高 109 m。延續觀景視角，是進入下行段前的最後高地。11:40古蹟劉銘傳隧道基隆市定古蹟，又名獅球嶺隧道，全長 235 公尺，是台灣第一座鐵路隧道，也是清領時期唯一僅存的一座。13:00終點基隆車站 (解散)抵達基隆港邊。可前往廟口夜市享用慶功午餐。 參考資料 · 獅球嶺砲台步道 — 健行筆記：分段里程與時間（八堵車站→五十人公祠 1.2 km、→登山口 0.34 km）。 · 三角洲嶺北峰＋獅球嶺出三坑火車站 — 健行筆記：實走 10:05–12:21，2 小時 16 分，可對照本頁以 1.5 km/h 推估的 4 小時。 · 獅球嶺山 — 健行筆記：標高 155 m，又稱東砲台山、三坑山；都主 09 與高速圖根點 A024 兩顆基石。 · 基隆「三八縱走」（三坑車站～八堵車站）— Tony 的遊記／旅聯網：八堵起登越嶺獅球嶺的路線定名。 · 劉銘傳隧道（獅球嶺隧道）— 基隆旅遊網：市定古蹟、全長 235 m、開放時間與導覽場次。 · 劉銘傳隧道（獅球嶺隧道）— 基隆市政府：週一公休、蝙蝠季總量管制。 · 2024/04/27 獅球湖－獅球嶺砲台群－劉銘傳隧道：與本頁最接近的實走走法（八堵起登、經隧道下基隆市區）。 尚仁國小通學步道與尚仁橋的路徑細節出自上列健行筆記路線說明；三角洲嶺北峰 115 m、獅球嶺北峰 110 m 為圖根補點數值。 © 爬爬小隊行程計畫 | 獅球稜線全導覽",
   "errors": []
  },
  "zhongzhengshan": {
