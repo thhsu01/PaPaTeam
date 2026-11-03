@@ -59,6 +59,8 @@ git push origin feature/你的功能名稱
 
 > **動任何頁面前先讀 `ARCHITECTURE.md`。** 它是規範權威，規定了詳情頁只能有五個段落、
 > id 與順序固定、色彩一律走 `--accent` token。片段速查見 `SNIPPETS.md`。
+> 評估新路線與算航點數字（距離、時間、海拔、小百岳）的規則在 `docs/PLANNING_RULES.md`，
+> 候選頁與計畫頁的時刻要套那裡的 1.5 km/h 公式——`spec_sweep` 會擋。
 
 ### 新增登山路線
 

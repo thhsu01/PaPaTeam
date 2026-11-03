@@ -153,8 +153,13 @@ PaPaTeam/
 ├── SNIPPETS.md                  # 元件片段快速參考
 ├── CONTRIBUTING.md              # 貢獻指南：編輯清單與代碼風格
 ├── README.md                    # 本檔案
-└── docs/adr/                    # 架構決策記錄
-    └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
+├── docs/adr/                    # 架構決策記錄
+│   └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
+│
+└── docs/                        # 文件：路線規劃規則、架構決策記錄
+    ├── PLANNING_RULES.md        # 路線規劃規則：評估流程、數字算法、頁面狀態、合併與回報
+    └── adr/                     # 架構決策記錄
+        └── 0001-chartjs-behind-the-seam.md # 決策紀錄：Chart.js 藏在接縫後面
 ```
 <!-- manifest-tree:end -->
 

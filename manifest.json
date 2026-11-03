@@ -5,7 +5,7 @@
   "branch": "main",
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
-  "manifest_updated": "2026-09-08",
+  "manifest_updated": "2026-11-03",
   "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
@@ -17,6 +17,11 @@
     {
       "path": "CONTEXT.md",
       "why": "領域語彙：行程、航點、pos 是標籤不是詞彙、最高點 vs 山頂、行程事實、共用區塊。動任何頁面前先讀，名詞不一致的代價在本專案發生過好幾次。"
+    },
+    {
+      "path": "docs/PLANNING_RULES.md",
+      "why": "評估新路線、航點數字的算法（距離、時間 1.5 km/h、海拔 (H___m)、小百岳）、三態頁面的同步清單、合併與回報流程。規劃或改航點資料前先讀；能被 spec_sweep 擋的規則標〔擋〕。",
+      "short": "路線規劃規則：評估流程、數字算法、頁面狀態、合併與回報"
     },
     {
       "path": "READABILITY_AUDIT.md",
@@ -411,6 +416,11 @@
       "short": "領域語彙：行程、航點、pos、最高點 vs 山頂、行程事實、共用區塊（動任何頁面前先讀）"
     },
     {
+      "path": "docs/PLANNING_RULES.md",
+      "purpose": "路線規劃規則：評估新路線的流程、航點數字（距離／時間／海拔／小百岳）的算法、三態頁面的同步清單、改完要跑的檢查、合併與回報方式。2026-11-03 自 Claude 專案指令搬入，讓檢查器與 CI 讀得到",
+      "short": "路線規劃規則：評估流程、數字算法、頁面狀態、合併與回報"
+    },
+    {
       "path": "docs/adr/0001-chartjs-behind-the-seam.md",
       "purpose": "決策紀錄：Chart.js 藏在接縫後面，各頁不直接設定它。含重開此決策前該先做的量測",
       "short": "決策紀錄：Chart.js 藏在接縫後面"
@@ -428,6 +438,10 @@
     {
       "path": "docs/adr/",
       "short": "架構決策記錄"
+    },
+    {
+      "path": "docs/",
+      "short": "文件：路線規劃規則、架構決策記錄"
     }
   ],
   "open_items": [],
