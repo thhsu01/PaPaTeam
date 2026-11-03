@@ -58,7 +58,7 @@ TRA 開放資料並註明時刻表發布日期）；點對點路線以**上**技
    都沒有 → GPS 中位數（`gpx_cluster` 沒印的話用 `papa_gpx.ele_median_near`），不加 `(H)`。
    小百岳：`xbaiyue: <編號>`，新的一座補進 `tools/spec_sweep.py` 的 `XBAIYUE`。
 4. 複製 `nanshijiao.html`，照 `ARCHITECTURE.md` §建立新詳情頁 改：`<title>`、`<h1>`、
-   `<meta description>`、`:root` 主色（不與 `conventions.accent_tokens` 列的各頁撞色，對比度實測寫註解）、
+   `<meta description>`、`:root` 主色（`grep -h "^\s*--accent:" *.html` 列出各頁現有主色，不撞色；對比度實測寫註解）、
    `schedule`（每點 `desc`＋`advice`）、`init` 的 `nav`／`weather`／`map.setView`；
    候選頁**沒有 `trip`**、不放 `notice` 掃載點、`#timeline` h2 主詞「預計行程進度」。
    資料來源列在頁面「參考資料」，算法寫在 `schedule` 上方的註解。
