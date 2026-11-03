@@ -99,8 +99,8 @@
 
 - 新頁一律複製 `nanshijiao.html`（`ARCHITECTURE.md` §正規頁）。五個段落 id 固定為
   `overview → map-section → elevation → spots → timeline`。
-- 每頁主色不與其他頁撞色（`conventions.accent_tokens` 列了各頁的主色），
-  對比度要實測後寫進 `:root` 的註解。
+- 每頁主色不與其他頁撞色——沒有現成清單，用 `grep -h "^\s*--accent:" *.html` 把各頁 `:root` 的
+  `--accent` 列出來比；對比度要實測（`tools/contrast/check.js`）後寫進 `:root` 的註解。
 - 每個航點都要有 `desc` 與 `advice`；資料來源列在頁面上，計算方法寫在程式註解裡。
 
 ## 六、改完要跑
