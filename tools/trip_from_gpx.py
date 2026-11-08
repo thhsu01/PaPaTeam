@@ -16,7 +16,8 @@
     --from HH:MM     只從這個時刻起算（例：shanying 出發前在車站繞了一圈，自 08:35 起算）
     --drop HH:MM:SS-HH:MM:SS  剔除這段時間的原始點（GPS 飄移；可重複給）。只在看得出是飄移時用——
                      短時間衝出去又跳回原處、步速不可能（例：qixingshan 2026-11-08 七星公園旁
-                     07:53:43–07:54:03 往北衝出 60 m，段速 3–6 m/s）。剔除的時段會寫進軌跡檔檔頭
+                     07:53:43–07:54:03 往北衝出 60 m，段速 3–6 m/s），或在觀景台站著時 GPS 原地來回晃、
+                     把停留算成走路（同日兩個觀景台，保留抵達那一點）。剔除的時段會寫進軌跡檔檔頭
     --write          真的寫 assets/tracks/<頁名>-<日期>.js（沒給就只印）
     --json           另印一份 JSON（schedule 的草稿）
 
@@ -78,7 +79,7 @@ def main():
         pts = [p for p in pts if not (p[3] and lo <= p[3].strftime('%H:%M:%S') <= hi)]
         dropped.append('%s–%s（%d 點）' % (lo, hi, before - len(pts)))
     if dropped:
-        print('剔除 GPS 飄移：' + '、'.join(dropped))
+        print('剔除 GPS 飄移或停留時的原地晃動：' + '、'.join(dropped))
     if len(pts) < 3:
         print('軌跡點不夠', file=sys.stderr)
         return 2
@@ -157,7 +158,7 @@ def main():
           '   ============================================================ */\n'
           'window.PaPaTracks = window.PaPaTracks || {};\n'
           "window.PaPaTracks['%s'] = [\n%s\n];\n") % (a.page, a.date, len(pts), a.tol, len(simp), total_km,
-             ('   已剔除 GPS 飄移（原始點數為剔除後）：%s。\n' % '、'.join(dropped)) if dropped else '',
+             ('   已剔除 GPS 飄移或停留時的原地晃動（原始點數為剔除後）：%s。\n' % '、'.join(dropped)) if dropped else '',
              key, body)
     if a.write:
         os.makedirs(os.path.dirname(js_path), exist_ok=True)

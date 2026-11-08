@@ -203,7 +203,7 @@
     },
     {
       "path": "assets/tracks/qixingshan-2026-11-08.js",
-      "purpose": "七星山主東峰 11/8 實走 GPS 軌跡（Geo Tracker KML 轉 GPX，剔除七星公園旁 07:53:43–07:54:03 的 6 個 GPS 飄移點後，Douglas–Peucker 簡化至 142 點，自 07:05 起錄於冷水坑 1 號停車場起算），供地圖畫實際路線"
+      "purpose": "七星山主東峰 11/8 實走 GPS 軌跡（Geo Tracker KML 轉 GPX，剔除七星公園旁 07:53:43–07:54:03 的 GPS 飄移，以及冷水坑步道觀景台 07:33:59–07:40:14、夢幻湖觀景臺 10:12:59–10:17:54 停留時的原地晃動，共 18 點，Douglas–Peucker 簡化至 136 點，自 07:05 起錄於冷水坑 1 號停車場起算），供地圖畫實際路線"
     },
     {
       "path": "assets/tracks/shanying-2026-09-27.js",
