@@ -119,6 +119,29 @@ def nearest(pts, lat, lng):
     return bi, best
 
 
+def nearest_pass(pts, lat, lng, start=0, snap=40.0):
+    """依序比對：從索引 start 往後找第一次進入 snap 公尺內的那一趟，回傳該趟最近點 (索引, 距離)。
+    O 型或來回路線同一個航點會經過兩次（停車場、登山口、分岔口），全軌跡找最近點會配到錯的那一趟、
+    時刻與里程倒退（2026-11-08 qixingshan 實例）；所以航點一律照 schedule 順序往後找。
+    「離開這一趟」要超過 2 × snap 才算（遲滯）：在航點旁停留時 GPS 會在 snap 邊緣進出，
+    qixingshan 2026-11-08 在稜線分岔口下方 37 m 停了 13 分鐘、中途跳到 44 m，沒有遲滯就把
+    這一趟切斷，抵達時刻配到停留中途而不是真正經過分岔口（3 m）的那一刻。
+    start 之後都沒進入 snap 範圍：退回 start 之後的最近點（呼叫端會標「離軌跡」要人確認）。"""
+    best, bi, inside = float('inf'), -1, False
+    for i in range(start, len(pts)):
+        d = hav(pts[i][0], pts[i][1], lat, lng)
+        if d <= snap:
+            inside = True
+            if d < best:
+                best, bi = d, i
+        elif inside and d > 2 * snap:
+            break
+    if bi >= 0:
+        return bi, best
+    j, d = nearest(pts[start:], lat, lng)
+    return start + j, d
+
+
 def ele_median_near(pts, lat, lng, radius=50.0):
     """該點 radius 公尺內的 GPS 高程中位數，取整到 5 m；沒有就 None（PLANNING_RULES §三「海拔」）。"""
     es = [p[2] for p in pts if p[2] is not None and hav(p[0], p[1], lat, lng) <= radius]
