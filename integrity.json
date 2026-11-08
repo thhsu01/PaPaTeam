@@ -2,10 +2,10 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-11-04 07:33",
+  "generated": "2026-11-08 11:53",
   "generated_tz": "UTC+8",
-  "commit": "99dbd7a0016183776813fdcac08b0a44ddf52819",
-  "file_count": 81,
+  "commit": "914cda1e296a7f7ba594ce20a6e5ab8f6d745248",
+  "file_count": 82,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
     {
@@ -50,8 +50,8 @@
     },
     {
       "path": "README.md",
-      "size": 13750,
-      "sha": "9cbd4fec432ab3ad7b5b392b2d96bddfb05077f4"
+      "size": 13763,
+      "sha": "b74c75102de8eece8cf45ea8974cc4d267229874"
     },
     {
       "path": "SNIPPETS.md",
@@ -159,6 +159,11 @@
       "sha": "c07d03df4da421b010c40ec9a3e630bc30510c86"
     },
     {
+      "path": "assets/tracks/qixingshan-2026-11-08.js",
+      "size": 3929,
+      "sha": "028653c9eda4732ff680fe25f4ac20830f94405d"
+    },
+    {
       "path": "assets/tracks/shanying-2026-09-27.js",
       "size": 6342,
       "sha": "9d7602c8c27b5234e72f90b49e8de9e0f62d5506"
@@ -235,8 +240,8 @@
     },
     {
       "path": "index.html",
-      "size": 28154,
-      "sha": "e65c2531b7c43c09eeb7c6106a6c5c39548fd45e"
+      "size": 28241,
+      "sha": "d580e1e88c5a7b4a5d863786c8020d66ee63c43d"
     },
     {
       "path": "jiantanshan.html",
@@ -265,8 +270,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 41614,
-      "sha": "c184f20844a2da4f302da678efcfde380958c990"
+      "size": 42048,
+      "sha": "1fcec5c02ce329926d105d652720e200ad1f883d"
     },
     {
       "path": "meihuashan.html",
@@ -290,8 +295,8 @@
     },
     {
       "path": "qixingshan.html",
-      "size": 23976,
-      "sha": "0515fd4d2a933ce5197f8733eb74141a7d07d64c"
+      "size": 29064,
+      "sha": "4145647121ea8474f3d73a7eb11e93dd1f92a582"
     },
     {
       "path": "shanying.html",
@@ -360,8 +365,8 @@
     },
     {
       "path": "tools/papa_gpx.py",
-      "size": 5269,
-      "sha": "8f25068bdafcf0074638478b0822d66fa3f45103"
+      "size": 6584,
+      "sha": "c9aa6d262454c91a20161d81b3f87b8a07a07ffd"
     },
     {
       "path": "tools/pw-env.js",
@@ -375,8 +380,8 @@
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 933606,
-      "sha": "5bd91570554b3b3241c79d9ead7e0ea2385e08d1"
+      "size": 947676,
+      "sha": "b661e72832cb85ed137235a820186eaddabf4979"
     },
     {
       "path": "tools/regress/check.js",
@@ -395,8 +400,8 @@
     },
     {
       "path": "tools/trip_from_gpx.py",
-      "size": 9114,
-      "sha": "21f00ccf9008dc3560a41affc151dd41d7322ca3"
+      "size": 9674,
+      "sha": "aaf12c6f956c3e5fe455eb43c0226c12f96198b9"
     },
     {
       "path": "xinshan.html",
