@@ -14,6 +14,9 @@
     --stop-min 5     停留幾分鐘以上算休息點
     --stop-radius 30 停留的範圍（公尺）
     --from HH:MM     只從這個時刻起算（例：shanying 出發前在車站繞了一圈，自 08:35 起算）
+    --drop HH:MM:SS-HH:MM:SS  剔除這段時間的原始點（GPS 飄移；可重複給）。只在看得出是飄移時用——
+                     短時間衝出去又跳回原處、步速不可能（例：qixingshan 2026-11-08 七星公園旁
+                     07:53:43–07:54:03 往北衝出 60 m，段速 3–6 m/s）。剔除的時段會寫進軌跡檔檔頭
     --write          真的寫 assets/tracks/<頁名>-<日期>.js（沒給就只印）
     --json           另印一份 JSON（schedule 的草稿）
 
@@ -58,6 +61,7 @@ def main():
     ap.add_argument('--stop-min', type=float, default=5.0)
     ap.add_argument('--stop-radius', type=float, default=30.0)
     ap.add_argument('--from', dest='from_t')
+    ap.add_argument('--drop', action='append', default=[])
     ap.add_argument('--write', action='store_true')
     ap.add_argument('--json', action='store_true')
     a = ap.parse_args()
@@ -67,6 +71,14 @@ def main():
     if a.from_t:
         h, m = map(int, a.from_t.split(':'))
         pts = [p for p in pts if p[3] and (p[3].hour, p[3].minute) >= (h, m)] or pts
+    dropped = []
+    for win in a.drop:
+        lo, hi = win.split('-')
+        before = len(pts)
+        pts = [p for p in pts if not (p[3] and lo <= p[3].strftime('%H:%M:%S') <= hi)]
+        dropped.append('%s–%s（%d 點）' % (lo, hi, before - len(pts)))
+    if dropped:
+        print('剔除 GPS 飄移：' + '、'.join(dropped))
     if len(pts) < 3:
         print('軌跡點不夠', file=sys.stderr)
         return 2
@@ -140,10 +152,13 @@ def main():
           '   來源：GPX（原始 %d 點）。以 Douglas–Peucker 簡化，容許偏差 %.0f 公尺，\n'
           '   作法見 nanshijiao-2026-08-02.js 的說明；只留經緯度（高程不放，見\n'
           '   manifest.json 的 conventions.elevation_source）。簡化後 %d 點、%.2f km。\n'
+          '%s'
           '   由 tools/trip_from_gpx.py 產生。\n'
           '   ============================================================ */\n'
           'window.PaPaTracks = window.PaPaTracks || {};\n'
-          "window.PaPaTracks['%s'] = [\n%s\n];\n") % (a.page, a.date, len(pts), a.tol, len(simp), total_km, key, body)
+          "window.PaPaTracks['%s'] = [\n%s\n];\n") % (a.page, a.date, len(pts), a.tol, len(simp), total_km,
+             ('   已剔除 GPS 飄移（原始點數為剔除後）：%s。\n' % '、'.join(dropped)) if dropped else '',
+             key, body)
     if a.write:
         os.makedirs(os.path.dirname(js_path), exist_ok=True)
         open(js_path, 'w', encoding='utf-8').write(js)
