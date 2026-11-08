@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-11-08 12:14",
+  "generated": "2026-11-08 13:20",
   "generated_tz": "UTC+8",
-  "commit": "4d9f8c51a56e53f54ed7f2d4bd466427e37dee7d",
+  "commit": "268d777416ccf561dc45cb406826a5bc8699bd34",
   "file_count": 82,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -160,8 +160,8 @@
     },
     {
       "path": "assets/tracks/qixingshan-2026-11-08.js",
-      "size": 3929,
-      "sha": "9b2fa0b80032fb812e4f7e6cbc7c72b3ce951533"
+      "size": 3886,
+      "sha": "0d60eb1f48800261120b359c3140ca2fa43af7a8"
     },
     {
       "path": "assets/tracks/shanying-2026-09-27.js",
@@ -241,7 +241,7 @@
     {
       "path": "index.html",
       "size": 28241,
-      "sha": "9c7e158497e3bd634abe908d0ef58d9a399d0688"
+      "sha": "39c39ec8c52242761c2c9952950993ec77270755"
     },
     {
       "path": "jiantanshan.html",
@@ -270,8 +270,8 @@
     },
     {
       "path": "manifest.json",
-      "size": 42119,
-      "sha": "e4a6aedba0e408d04b92e4aafec41dc240605771"
+      "size": 42239,
+      "sha": "1cea4cbde4e396c8ab395c430debdc33945509c2"
     },
     {
       "path": "meihuashan.html",
@@ -295,8 +295,8 @@
     },
     {
       "path": "qixingshan.html",
-      "size": 29300,
-      "sha": "07ba208a58d24b1b171bdb20672d5b725ca08203"
+      "size": 29552,
+      "sha": "ddfdda29b53de49bb792ae26417f59c2ccdfebf1"
     },
     {
       "path": "shanying.html",
@@ -381,7 +381,7 @@
     {
       "path": "tools/regress/baseline.json",
       "size": 947676,
-      "sha": "2b9c1490ed9e26abd30317941576a1aab4c51954"
+      "sha": "4c4f9d46b61753a8efe2ca09be9f0a4e4dbee546"
     },
     {
       "path": "tools/regress/check.js",
@@ -400,8 +400,8 @@
     },
     {
       "path": "tools/trip_from_gpx.py",
-      "size": 10594,
-      "sha": "ea2ef26b8dec8a2d88ce5a2e1bf8b3c2044efa98"
+      "size": 10792,
+      "sha": "90cf0697e691fb4b51d30ea445eaeba29f3e12a0"
     },
     {
       "path": "xinshan.html",
