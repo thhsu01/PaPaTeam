@@ -26,7 +26,7 @@ import statistics
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from papa_gpx import read_gpx, cum_dist, douglas_peucker, gain_estimate, hav, nearest, ele_median_near, fmt_hm  # noqa: E402
+from papa_gpx import read_gpx, cum_dist, douglas_peucker, gain_estimate, hav, nearest, nearest_pass, ele_median_near, fmt_hm  # noqa: E402
 
 
 def find_stops(pts, min_minutes, radius, exclude, exclude_radius):
@@ -92,21 +92,29 @@ def main():
     if summit is not None:
         print('GPS 最高高程 %.0f m（對照用；trip.summit 取最高點航點的公開標高）' % summit)
 
-    # 各航點：抵達時刻＝軌跡最近點的時間；里程＝該點在簡化軌跡上的累計距離
+    # 各航點：抵達時刻＝依序比對到的那一趟最近點的時間；里程＝該點在簡化軌跡上的累計距離
+    def km_at(i):
+        # 原始點 i 在簡化軌跡上的累計里程：它之前最近的簡化點，加上到 i 的距離。
+        # 只取「之前的簡化點」會少算一截（qixingshan 第一休息點因此短於與前一航點的直線距離）。
+        si = max(n for n, ki in enumerate(keep) if ki <= i)
+        return (cd_simp[si] + hav(simp[si][0], simp[si][1], pts[i][0], pts[i][1])) / 1000
+
     rows = []
     print('\n| # | 航點 | 時刻 | plan | 累計 km | 離軌跡 m | GPS 高程中位數 | 備註 |')
     print('|--:|---|--:|--:|--:|--:|--:|---|')
+    cursor = 0
     for k, w in enumerate(wps):
-        i, d = nearest(pts, w['lat'], w['lng'])
-        si, _ = nearest(simp, w['lat'], w['lng'])
+        # 照 schedule 順序往後找（O 型路線同一航點會經過兩次），見 papa_gpx.nearest_pass
+        i, d = nearest_pass(pts, w['lat'], w['lng'], cursor, a.snap)
+        cursor = i
         em = ele_median_near(pts, w['lat'], w['lng'])
         note = ''
         if d > a.snap and not w.get('shuttle'):
             note = '離軌跡 %.0f m——沒走到？標「（未走）」、time 寫 —、不給 dist；或是接駁／集合點（dist 維持 0）' % d
-        elif rows and cd_simp[si] / 1000 < rows[-1]['dist']:
+        elif rows and km_at(i) < rows[-1]['dist']:
             note = '里程倒退：軌跡先經過這裡再回頭，或航點順序不對'
         row = {'loc': w['loc'], 'time': pts[i][3].strftime('%H:%M') if pts[i][3] else '—',
-               'plan': w.get('plan'), 'dist': round(cd_simp[si] / 1000, 2), 'off_m': round(d),
+               'plan': w.get('plan'), 'dist': round(km_at(i), 2), 'off_m': round(d),
                'ele_gps': em, 'idx': i, 'note': note}
         rows.append(row)
         print('| %d | %s | %s | %s | %.2f | %d | %s | %s |' % (
@@ -117,10 +125,9 @@ def main():
     if stops:
         print('\n沒有地名的停留點（%.0f m 內停 %.0f 分鐘以上、附近沒有航點）——命名「第N休息點」，desc 寫明「這個點沒有地名」：' % (a.stop_radius, a.stop_min))
         for n, (i, j, la, ln) in enumerate(stops, 1):
-            si, _ = nearest(simp, la, ln)
             print('  第%d休息點  %s–%s（%d 分）  lat %.6f lng %.6f  累計 %.2f km  GPS 高程 %s' % (
                 n, pts[i][3].strftime('%H:%M'), pts[j][3].strftime('%H:%M'),
-                int((pts[j][3] - pts[i][3]).total_seconds() // 60), la, ln, cd_simp[si] / 1000,
+                int((pts[j][3] - pts[i][3]).total_seconds() // 60), la, ln, km_at(i),  # 停留起點，不用全軌跡最近點（O 型會配錯趟）
                 ele_median_near(pts, la, ln) or '—'))
 
     js_path = 'assets/tracks/%s-%s.js' % (a.page, a.date)
