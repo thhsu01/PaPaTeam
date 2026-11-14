@@ -5,6 +5,9 @@ description: 爬爬小隊（thhsu01/PaPaTeam）走完一條路線後，依當天
 
 # 爬爬小隊：GPX → 已完成頁
 
+> 本檔是正本。claude.ai 上安裝的同名技能只是薄殼（觸發描述＋「clone 後讀本檔照做」），
+> 要改流程只改這裡，不必重裝技能。
+
 規則在倉庫的 `docs/PLANNING_RULES.md` §四「已完成頁」與 §三；`manifest.json` 的
 `conventions.elevation_gain`、`waypoint_coords`、`unnamed_stops`、`meeting_point`、`trip_facts`
 寫了每條規則的來龍去脈。本技能是操作順序。**不編造、有疑點先問、不開 PR、不合併。**
@@ -41,6 +44,10 @@ python3 tools/trip_from_gpx.py <GPX> --page <頁名> --date YYYY-MM-DD --waypoin
 - **起算點**：集合點與 GPS 起錄點不同時（出發前繞行、在車站等人），用 `--from HH:MM` 自起算時刻切，
   並在軌跡檔檔頭與 `manifest.json` 條目的 `purpose` 寫明；有走但沒錄到的路段，用同路線公開 GPX
   補估距離並標「補估」，補畫的軌跡標「模擬」。
+- **GPS 雜訊（寫軌跡檔前一定要看）**：飄移（幾十秒內衝出去又跳回、段速 3 m/s 以上）與停留時的
+  原地晃動（休息點、觀景台的停留時段內仍累積距離）。逐一列出時段與多算的距離，用
+  `--drop HH:MM:SS-HH:MM:SS`（可重複）剔除後重跑，回報寫明剔除前後的里程；拿不準是不是雜訊先問。
+  里程定案後才 `--write`——事後補剔等於再合併一次（qixingshan 2026-11-08 補了兩次）。
 - **離軌跡超過 40 m 的航點**：先問 TH——沒走到（標「（未走）」，`time` 寫 `—`、只留 `plan`、
   不給 `dist`）、還是接駁／集合點（`dist` 維持 0）。
 - **沒有地名的停留點**（30 m 內停 5 分鐘以上）：加進 `schedule`，命名「第N休息點」，

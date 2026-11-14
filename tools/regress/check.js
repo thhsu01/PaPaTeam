@@ -32,6 +32,7 @@ const { BASE, LAUNCH, CDN } = require('../pw-env');   // 與 contrast/check.js �
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const BASELINE = path.join(__dirname, 'baseline.json');
+const FIXED_NOW = '2099-01-01T04:00:00Z';   // 台灣時間 2099-01-01 12:00；為什麼固定見 capture()
 
 async function capture(browser, name) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
@@ -41,6 +42,12 @@ async function capture(browser, name) {
   await p.addInitScript({ path: path.join(ROOT, 'tools/contrast/stubs.js') });
   await p.addInitScript({ path: path.join(__dirname, 'record.js') });
   for (const u of CDN) await p.route(u, r => r.fulfill({ body: '{}', contentType: 'application/javascript' }));
+  // 時鐘固定在所有行程之後：detail.js 依「今天」與行程日的先後決定天氣卡標題（天氣預報／今日天氣）
+  // 與 trip-past-notice 顯不顯示，基準若用真實日期錄，行程日一過就自己變紅——qixingshan 的基準是
+  // 2026-11-08 行程當天錄的，11-09 起 main 在本機就是紅的，而這支不在 CI 裡，11-14 才被發現。
+  // 代價：行程日還沒到的計畫頁在這裡也被當成「已過」，「天氣預報」那一支不在這份基準的涵蓋範圍。
+  // setFixedTime 只固定 Date，計時器照走，下面的 waitForTimeout 與 card.flash 不受影響。
+  await p.clock.setFixedTime(new Date(FIXED_NOW));
   await p.goto(`${BASE}/${name}.html`, { waitUntil: 'load' });
   // DOMContentLoaded 的 initMap/initChart/renderTimeline 已跑完；等過 card.flash 的 500 ms，
   // 否則 wp-card 骨架會把閃一下的 class 也記進去（三頁有設 flash）
