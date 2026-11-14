@@ -635,6 +635,10 @@ def tracked_files():
         return out
 
 
+# read_first 的任務標記：always 每次都讀；route 評估路線；page 建頁、改航點、轉已完成頁；
+# design 改版面、顏色、共用資產；tooling 改工具、文件、檢查器。說明在 manifest.json 的 _how_to_use。
+READ_WHEN = {'always', 'route', 'page', 'design', 'tooling'}
+
 def check_manifest():
     """manifest.json 是專案索引（給人也給 AI 的入口），必須跟倉庫一一對應：
     倉庫裡的檔案都要有條目，條目指的檔案也都要存在。2026-09 的架構檢視發現
@@ -685,6 +689,16 @@ def check_manifest():
     if track_dates and updated < max(track_dates):
         p.append('manifest.json 的 manifest_updated 是 %s，早於最新的軌跡檔 %s——改 manifest 時一併更新'
                  % (updated or '（空）', max(track_dates)))
+    # read_first 每一項都要標 when（哪種任務才要讀）。2026-11-14 檢視時六份加起來 123 KB，
+    # 評估一條路線也整套讀完；改成依任務讀之後，漏標的那一份等於沒有人會讀，所以這裡擋。
+    for e in json.load(open('manifest.json', encoding='utf-8')).get('read_first', []):
+        w = e.get('when')
+        if not isinstance(w, list) or not w:
+            p.append('read_first 的 %s 缺 when（哪種任務要讀）' % e.get('path'))
+        elif set(w) - READ_WHEN:
+            p.append('read_first 的 %s 的 when 有不認得的任務：%s' % (e.get('path'), '、'.join(sorted(set(w) - READ_WHEN))))
+        elif 'always' in w and len(w) > 1:
+            p.append('read_first 的 %s 的 when 寫了 always 就不必再列其他任務' % e.get('path'))
     # README 的檔案樹必須是 manifest 印出來的那一份
     if manifest_tree.readme_block() != manifest_tree.render():
         p.append('README.md 的檔案樹跟 manifest.json 不一致——跑 python3 tools/manifest_tree.py --write')

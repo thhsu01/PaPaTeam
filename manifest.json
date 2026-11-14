@@ -6,35 +6,41 @@
   "site_url": "https://thhsu01.github.io/PaPaTeam/",
   "raw_base": "https://raw.githubusercontent.com/thhsu01/PaPaTeam/main/",
   "manifest_updated": "2026-11-14",
-  "_how_to_use": "本檔是進入本專案的入口。先讀 read_first 列出的文件，再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
+  "_how_to_use": "本檔是進入本專案的入口。read_first 依任務讀，不必整套讀：每一項的 when 標了哪種任務要讀——always 每次都讀；route 評估路線；page 建頁、改航點、轉已完成頁；design 改版面、顏色、共用資產；tooling 改工具、文件、檢查器。一件事跨兩類就兩類都讀，拿不準算哪一類就全讀。讀完再依 open_items 確認待辦。檔案是否存在以 integrity.json 為準（自動產生），本檔負責說明各檔案的意義。",
   "integrity": "integrity.json",
   "read_first": [
     {
       "path": "ARCHITECTURE.md",
+      "when": ["page", "design"],
       "why": "詳情頁只能有 5 個段落且 id 與順序固定；色彩一律走 --accent token；命名慣例。動任何頁面前先讀。",
       "short": "架構指南（規範權威）：段落規格、色彩 token、腳本規格"
     },
     {
       "path": "CONTEXT.md",
+      "when": ["always"],
       "why": "領域語彙：行程、航點、pos 是標籤不是詞彙、最高點 vs 山頂、行程事實、共用區塊。動任何頁面前先讀，名詞不一致的代價在本專案發生過好幾次。"
     },
     {
       "path": "docs/PLANNING_RULES.md",
+      "when": ["always"],
       "why": "評估新路線、航點數字的算法（距離、時間 1.5 km/h、海拔 (H___m)、小百岳）、三態頁面的同步清單、合併與回報流程。規劃或改航點資料前先讀；能被 spec_sweep 擋的規則標〔擋〕。",
       "short": "路線規劃規則：評估流程、數字算法、頁面狀態、合併與回報"
     },
     {
       "path": "READABILITY_AUDIT.md",
+      "when": ["design"],
       "why": "九輪對比度審計與踩過的坑。改任何顏色前必讀第六、七輪：「同一 token 同時出現於淺底與深底」不可全域替換；text-stone-500 只在白底安全，小字一律 text-stone-600 起跳。",
       "short": "可讀性與對比度審計紀錄（改顏色前必讀）"
     },
     {
       "path": "SNIPPETS.md",
+      "when": ["design"],
       "why": "新增元件時複製既有片段，不要自己發明結構。",
       "short": "元件片段快速參考"
     },
     {
       "path": "CONTRIBUTING.md",
+      "when": ["page", "design", "tooling"],
       "why": "編輯清單與代碼風格。",
       "short": "貢獻指南：編輯清單與代碼風格"
     }
