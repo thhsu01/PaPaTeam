@@ -2,9 +2,9 @@
   "manifest_version": "D-integrity",
   "repo": "thhsu01/PaPaTeam",
   "branch": "main",
-  "generated": "2026-11-08 13:20",
+  "generated": "2026-11-14 18:11",
   "generated_tz": "UTC+8",
-  "commit": "268d777416ccf561dc45cb406826a5bc8699bd34",
+  "commit": "3995f98300745b54c03b8a81cd48e77496f4252c",
   "file_count": 82,
   "note": "本檔由 GitHub Action 自動產生，請勿手動編輯。sha 為 git blob SHA-1，不含 integrity.json 自身。",
   "files": [
@@ -210,8 +210,8 @@
     },
     {
       "path": "docs/PLANNING_RULES.md",
-      "size": 8487,
-      "sha": "b45d63c84856a913e86fecad790f832b8e2df0ec"
+      "size": 8988,
+      "sha": "3525b9b5654b3fc9ed7a32a5fdd2a596701c2b9a"
     },
     {
       "path": "docs/adr/0001-chartjs-behind-the-seam.md",
@@ -271,7 +271,7 @@
     {
       "path": "manifest.json",
       "size": 42239,
-      "sha": "1cea4cbde4e396c8ab395c430debdc33945509c2"
+      "sha": "5cc4878fb54d8783125ba2d7d34a64b8f9acd809"
     },
     {
       "path": "meihuashan.html",
@@ -310,13 +310,13 @@
     },
     {
       "path": "skills/papateam-route-eval/SKILL.md",
-      "size": 5379,
-      "sha": "ae960e9d1907cafd79c5f00f594e3f7a34f74278"
+      "size": 5552,
+      "sha": "412ade0f5c60d0ceea425d40607a0dd5704c8387"
     },
     {
       "path": "skills/papateam-trip-complete/SKILL.md",
-      "size": 4785,
-      "sha": "e95df6d58cfc76e1cf9bfb6c68475fdfaa746a7c"
+      "size": 5454,
+      "sha": "60cc599af8c4604de6d201c71ecb9bb68d6bc922"
     },
     {
       "path": "tools/bump_assets.py",
@@ -370,23 +370,23 @@
     },
     {
       "path": "tools/pw-env.js",
-      "size": 1455,
-      "sha": "d6f8e0bf2ea0670fccf897dd697bbd6ff9c5585b"
+      "size": 1936,
+      "sha": "629bf9099568ce2fa50bb65f9dd04dd0738385ca"
     },
     {
       "path": "tools/redteam.py",
-      "size": 11727,
-      "sha": "28145fc972e73ebcf8aa5a0384fc305eb5bf9312"
+      "size": 11888,
+      "sha": "23a7f5e280a1b0b0dfd246e120c55f5afdaac2e5"
     },
     {
       "path": "tools/regress/baseline.json",
-      "size": 947676,
-      "sha": "4c4f9d46b61753a8efe2ca09be9f0a4e4dbee546"
+      "size": 947669,
+      "sha": "2d85a16587d6ae74f052ccc5f468ca133d448ff9"
     },
     {
       "path": "tools/regress/check.js",
-      "size": 8960,
-      "sha": "041bf4b0de53f1b519a08a377aa623f28923a1fb"
+      "size": 9768,
+      "sha": "4b46f2577965466fcaa26131844f5d7e9835c84c"
     },
     {
       "path": "tools/regress/record.js",
@@ -395,8 +395,8 @@
     },
     {
       "path": "tools/spec_sweep.py",
-      "size": 49028,
-      "sha": "ca9fa144b989691f08aba641d90da51453efa802"
+      "size": 49890,
+      "sha": "9a3f68147e288864c98a4c87d8bd8db376388b9b"
     },
     {
       "path": "tools/trip_from_gpx.py",
