@@ -76,6 +76,8 @@ CASES = [
      'spec_sweep', '版本號不是現在的內容'),
     ('manifest 條目', 'manifest.json', '"path": "tools/spec_sweep.py"', '"path": "tools/spec_sweep_x.py"',
      'spec_sweep', '倉庫有 tools/spec_sweep.py'),
+    ('manifest 日期', 'manifest.json', '"manifest_updated": "2026-11-14"', '"manifest_updated": "2020-01-01"',
+     'spec_sweep', '早於最新的軌跡檔'),
     ('manifest status', 'manifest.json', '"title": "虎山親山步道",\n      "status": "completed"',
      '"title": "虎山親山步道",\n      "status": "candidate"',
      'spec_sweep', 'status 是 candidate，但有軌跡檔'),

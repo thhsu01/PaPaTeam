@@ -676,6 +676,15 @@ def check_manifest():
             continue
         if not e.get('short'):
             p.append('%s 的條目缺 short（檔案樹上那一句）' % path)
+    # manifest_updated 不得早於最新一份軌跡檔的日期：轉已完成頁一定會動 manifest（status、
+    # assets/tracks 條目），日期卻是手打的——2026-11-14 檢視時它還停在 11-03，而 11-08 的
+    # qixingshan 已經併進 main。不用 git log 比：CI 是深度 1 的淺層取出，查不到檔案的最後修改日。
+    track_dates = [m.group(1) for m in (re.search(r'-(\d{4}-\d{2}-\d{2})\.js$', t)
+                                        for t in glob.glob('assets/tracks/*.js')) if m]
+    updated = json.load(open('manifest.json', encoding='utf-8')).get('manifest_updated', '')
+    if track_dates and updated < max(track_dates):
+        p.append('manifest.json 的 manifest_updated 是 %s，早於最新的軌跡檔 %s——改 manifest 時一併更新'
+                 % (updated or '（空）', max(track_dates)))
     # README 的檔案樹必須是 manifest 印出來的那一份
     if manifest_tree.readme_block() != manifest_tree.render():
         p.append('README.md 的檔案樹跟 manifest.json 不一致——跑 python3 tools/manifest_tree.py --write')

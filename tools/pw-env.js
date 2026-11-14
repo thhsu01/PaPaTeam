@@ -11,8 +11,15 @@ module.exports = {
   // 路徑不存在就不指定 executablePath，讓 Playwright 用自己的——先前寫死本機路徑，
   // CI 上會找不到執行檔（該 workflow 當時只掛 PR，所以沒被觸發過）。
   LAUNCH: (() => {
-    const def = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
-    const chrome = process.env.PW_CHROME || (fs.existsSync(def) ? def : null);
+    // 版號與子目錄名會隨沙箱更新而變（1194/chrome-linux → 1243/chrome-linux64），寫死一個就得靠
+    // 人記得設 PW_CHROME；改成掃 /opt/pw-browsers 取版號最大的那份。
+    const root = '/opt/pw-browsers';
+    const found = (fs.existsSync(root) ? fs.readdirSync(root) : [])
+      .filter((d) => /^chromium-\d+$/.test(d))
+      .sort((a, b) => Number(b.split('-')[1]) - Number(a.split('-')[1]))
+      .flatMap((d) => ['chrome-linux64', 'chrome-linux'].map((s) => `${root}/${d}/${s}/chrome`))
+      .find((p) => fs.existsSync(p));
+    const chrome = process.env.PW_CHROME || found || null;
     return chrome ? { executablePath: chrome } : {};
   })(),
 
